@@ -43,7 +43,7 @@ Preserve all official splits. Choose configurations using development results, n
 
 The ranker's difficulty margin 0.02, context weight 0.03, and full pipeline's difficulty cutoff 0.30 are initial heuristic choices. Only the context-fit threshold is development-tuned. TSAR supplies target words, so its table does not evaluate difficult-word detection. The report's authored examples exercise the full detector and one-edit pipeline.
 
-Do not retrain to improve the displayed test scores. Use new development evidence and independent human review for the next iteration. Sentence restructuring, an ordinal CEFR model, comprehensive jargon detection, phrase replacement, and general meaning verification are not implemented.
+Do not retrain to improve the displayed test scores. Use new development evidence and independent human review for the next iteration. The initial pipeline has no sentence restructuring or phrase replacement. The experiment below adds limited rules. An ordinal CEFR model, comprehensive jargon detection, and general meaning verification are not implemented.
 
 ## Artifacts
 
@@ -53,3 +53,9 @@ Do not retrain to improve the displayed test scores. Use new development evidenc
 - `work/`: browser QA screenshots and temporary verification files.
 
 The HTML works offline. Ratings are stored locally in the reviewer's browser and exported as JSON. They do not automatically retrain models. Review examples contain attributed public dataset text; source licenses are listed in the report. Do not redistribute the datasets under a blanket project license.
+
+## Context and phrase experiment
+
+The separate context_pipeline.py adds static-vector context features, a trained candidate checker, ten authored phrase pairs ranked by a CompLex word/phrase regressor, and two narrow syntax rules. The current checker abstains from all word substitutions. It does not fix word meaning reliably. Phrase and structural examples are demonstrations, not an accuracy estimate. Longer phrases extrapolate beyond the predominantly two-word training targets.
+
+Run scripts/train_context_v2.py, scripts/train_phrases.py, then scripts/review_context_v2.py with .venv/bin/python. Prerequisite: the initial training and lexical evaluation have run. Inference: scripts/predict_context.py TEXT. Tests: pytest tests -q, scripts/verify_context_v2.py, and scripts/verify_context_report.py. The report is outputs/context-model-review.html and experiment artifacts are in runs/context-20260924. The older pipeline and report remain unchanged.

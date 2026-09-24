@@ -8,6 +8,7 @@ tar -xzf .tools/uv.tar.gz -C .tools
 .tools/uv-x86_64-unknown-linux-gnu/uv venv --python 3.12 .venv
 .tools/uv-x86_64-unknown-linux-gnu/uv pip install --python .venv/bin/python numpy pandas scipy scikit-learn nltk wordfreq spacy lemminflect pytest playwright
 .tools/uv-x86_64-unknown-linux-gnu/uv pip install --python .venv/bin/python https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
+.tools/uv-x86_64-unknown-linux-gnu/uv pip install --python .venv/bin/python https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl
 .venv/bin/python -m nltk.downloader wordnet omw-1.4 cmudict brown stopwords
 .tools/uv-x86_64-unknown-linux-gnu/uv pip freeze --python .venv/bin/python > requirements-lock.txt
 printf 'SETUP_COMPLETE\n'
