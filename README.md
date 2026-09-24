@@ -59,3 +59,9 @@ The HTML works offline. Ratings are stored locally in the reviewer's browser and
 The separate context_pipeline.py adds static-vector context features, a trained candidate checker, ten authored phrase pairs ranked by a CompLex word/phrase regressor, and two narrow syntax rules. The current checker abstains from all word substitutions. It does not fix word meaning reliably. Phrase and structural examples are demonstrations, not an accuracy estimate. Longer phrases extrapolate beyond the predominantly two-word training targets.
 
 Run scripts/train_context_v2.py, scripts/train_phrases.py, then scripts/review_context_v2.py with .venv/bin/python. Prerequisite: the initial training and lexical evaluation have run. Inference: scripts/predict_context.py TEXT. Tests: pytest tests -q, scripts/verify_context_v2.py, and scripts/verify_context_report.py. The report is outputs/context-model-review.html and experiment artifacts are in runs/context-20260924. The older pipeline and report remain unchanged.
+
+## SemCor sense experiment
+
+The separate SenseClearText pipeline learns word meanings from SemCor and filters WordNet candidates to the chosen sense. It restores word edits, while the v2 conservative checker remains available unchanged. Custom held-out SemCor accuracy is 69.1% versus 67.7% for a training-frequency baseline. On reused TSAR data, reference matches among edited cases rise from 43.4% to 53.6%, but total correct replacements fall from 85 to 52. This is an experimental precision/coverage tradeoff, not an overall win.
+
+Run scripts/train_semcor.py, scripts/evaluate_semcor_pipeline.py, scripts/verify_semcor.py, and scripts/build_semcor_report.py using .venv/bin/python. Inference uses scripts/predict_sense.py TEXT, with --full to add earlier phrase and structure rules. The report is outputs/semcor-model-review.html. Artifacts are in runs/semcor-20260924. SemCor is installed by scripts/setup.sh.
