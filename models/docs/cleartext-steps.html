@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClearText, step by step</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-0: #f6f5f2;
+    --surface-1: #fcfcfb;
+    --line: #e4e2dc;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #85837d;
+    --series-1: #2a78d6;
+    --series-1-soft: #e3eefb;
+    --neutral: #c9c7c0;
+    --good: #0a7a3d;
+    --bad: #c23b3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-0: #121211;
+      --surface-1: #1a1a19;
+      --line: #2e2e2c;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #8f8e86;
+      --series-1: #3987e5;
+      --series-1-soft: #1c2c40;
+      --neutral: #4a4945;
+      --good: #4cc27f;
+      --bad: #e66767;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .viz-root {
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+  }
+  main { max-width: 760px; margin: 0 auto; padding: 96px 28px 140px; }
+  header { margin-bottom: 110px; }
+  .eyebrow { color: var(--text-muted); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  h1 { font-size: 42px; line-height: 1.15; margin: 14px 0 18px; font-weight: 650; letter-spacing: -.01em; }
+  .lede { color: var(--text-secondary); font-size: 19px; max-width: 600px; margin: 0; }
+
+  section.step { display: grid; grid-template-columns: 64px 1fr; gap: 0 28px; margin-bottom: 120px; }
+  .num {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--surface-1); border: 1px solid var(--line);
+    font-weight: 650; font-size: 20px; color: var(--series-1);
+  }
+  .step h2 { font-size: 26px; line-height: 1.3; margin: 8px 0 14px; font-weight: 620; }
+  .step p { margin: 0 0 22px; color: var(--text-secondary); }
+  .step p strong { color: var(--text-primary); font-weight: 600; }
+
+  dl.facts { display: grid; grid-template-columns: 110px 1fr; gap: 10px 20px; margin: 26px 0 30px; }
+  dl.facts dt { color: var(--text-muted); font-size: 14px; padding-top: 2px; }
+  dl.facts dd { margin: 0; }
+
+  .result {
+    background: var(--surface-1); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 22px; display: flex; flex-direction: column; gap: 2px;
+  }
+  .result.pair { flex-direction: row; flex-wrap: wrap; gap: 20px 40px; }
+  .result.pair > div { flex: 1 1 200px; }
+  .result .big { font-size: 30px; font-weight: 620; }
+  .result .small { color: var(--text-secondary); font-size: 15px; }
+  .tag { display: inline-block; font-size: 13px; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--text-secondary); margin-top: 16px; }
+  .tag.good::before { content: "✓ "; color: var(--good); }
+  .tag.bad::before { content: "✕ "; color: var(--bad); }
+
+  /* Pipeline strip: the block this step adds is filled. */
+  .strip { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 26px; }
+  .strip span {
+    font-size: 12.5px; padding: 5px 11px; border-radius: 6px;
+    border: 1px solid var(--line); color: var(--text-muted); background: transparent;
+  }
+  .strip span.on { background: var(--series-1-soft); color: var(--text-primary); border-color: var(--series-1); }
+  .strip span.new { background: var(--series-1); color: #fff; border-color: var(--series-1); }
+
+  .example { font-size: 16px; margin: 0 0 8px; color: var(--text-secondary); }
+  .example b { color: var(--text-primary); font-weight: 600; }
+  .example s { color: var(--text-muted); }
+
+  /* Final pipeline */
+  .flow { display: grid; gap: 10px; margin: 30px 0 10px; }
+  .flow .row { display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: center; }
+  .flow .box { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--series-1); border-radius: 8px; padding: 12px 16px; font-weight: 600; font-size: 15px; }
+  .flow .desc { color: var(--text-secondary); font-size: 15px; }
+  .flow .arrow { color: var(--text-muted); padding-left: 80px; font-size: 14px; line-height: 1; }
+
+  /* Charts */
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 34px 0 20px; }
+  .chart { background: var(--surface-1); border: 1px solid var(--line); border-radius: 12px; padding: 20px 20px 14px; }
+  .chart h3 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  .chart .sub { font-size: 13px; color: var(--text-muted); margin: 0 0 14px; }
+  .chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart text { font: 12px system-ui, sans-serif; fill: var(--text-secondary); font-variant-numeric: tabular-nums; }
+  .chart text.value { fill: var(--text-primary); font-weight: 600; }
+  .chart .bar { fill: var(--neutral); }
+  .chart .bar.hi { fill: var(--series-1); }
+  .chart .hit { fill: transparent; cursor: default; }
+  .chart .base { stroke: var(--line); stroke-width: 1; }
+  #tip {
+    position: fixed; pointer-events: none; opacity: 0; transition: opacity .12s;
+    background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--line);
+    border-radius: 8px; padding: 8px 12px; font-size: 13px; box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  }
+  details { margin-top: 10px; color: var(--text-secondary); font-size: 14px; }
+  table { border-collapse: collapse; margin-top: 10px; width: 100%; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var(--line); font-weight: normal; }
+  th { color: var(--text-muted); font-size: 13px; }
+
+  .note { color: var(--text-muted); font-size: 14px; margin-top: 70px; border-top: 1px solid var(--line); padding-top: 26px; }
+
+  @media (max-width: 640px) {
+    main { padding: 64px 20px 100px; }
+    h1 { font-size: 32px; }
+    section.step { grid-template-columns: 1fr; }
+    .num { margin-bottom: 10px; }
+    dl.facts { grid-template-columns: 1fr; gap: 2px; }
+    dl.facts dd { margin-bottom: 10px; }
+    .charts { grid-template-columns: 1fr; }
+    .flow .row { grid-template-columns: 1fr; gap: 4px; }
+    .flow .arrow { padding-left: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="viz-root">
+<main>
+
+<header>
+  <div class="eyebrow">CS 4701 · ClearText · Josh's models</div>
+  <h1>How we simplify a sentence without an LLM, step by step</h1>
+  <p class="lede">Each step adds one block. Every block is its own small model or rule, trained on existing public data. At the end, the blocks vote together.</p>
+</header>
+
+<!-- 1 -->
+<section class="step">
+  <div class="num">1</div>
+  <div>
+    <h2>We start by detecting difficult words</h2>
+    <div class="strip"><span class="new">Word difficulty</span><span>Sentence difficulty</span><span>Candidates</span><span>Safety checks</span><span>Context</span><span>Phrases &amp; structure</span><span>Meaning</span><span>Ensemble</span></div>
+    <p>Every word gets a difficulty score from 0 (easy) to 1 (hard).</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>CompLex: words in real sentences, rated by people. 7,662 train · 421 dev · 917 test.</dd>
+      <dt>Features</dt><dd>How common the word is (wordfreq), syllables (CMUdict), length.</dd>
+      <dt>Model</dt><dd>Tried 9 models on dev. Gradient boosting won.</dd>
+    </dl>
+    <div class="result"><span class="big">0.070</span><span class="small">average error on the 0–1 scale (test). Adding sentence context gave 0.069, not a clear gain.</span></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="step">
+  <div class="num">2</div>
+  <div>
+    <h2>Then we score whole sentences</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="new">Sentence difficulty</span><span>Candidates</span><span>Safety checks</span><span>Context</span><span>Phrases &amp; structure</span><span>Meaning</span><span>Ensemble</span></div>
+    <p>A sentence gets a reading level from A1 to C2. This block measures; it doesn't rewrite.</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>CEFR-SP: sentences leveled by two English teachers. 7,178 train · 1,366 dev · 1,460 test.</dd>
+      <dt>Features</dt><dd>Word difficulty from step 1, sentence length, grammar depth, clauses, passives.</dd>
+      <dt>Model</dt><dd>Gradient boosting again, picked on dev.</dd>
+    </dl>
+    <div class="result"><span class="big">0.46</span><span class="small">levels off on average (test), on a 6-level scale.</span></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="step">
+  <div class="num">3</div>
+  <div>
+    <h2>We look up replacements</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="new">Candidates</span><span>Safety checks</span><span>Context</span><span>Phrases &amp; structure</span><span>Meaning</span><span>Ensemble</span></div>
+    <p>For a hard word, we list its synonyms and put them in the right form (utilize → <b>uses</b>, not "use").</p>
+    <dl class="facts">
+      <dt>Source</dt><dd>WordNet synonyms, matched to the word's part of speech.</dd>
+      <dt>Grammar</dt><dd>lemminflect re-inflects each synonym to match tense and number.</dd>
+      <dt>Baseline</dt><dd>Pick the most common synonym.</dd>
+    </dl>
+    <div class="result"><span class="big">26%</span><span class="small">of TSAR test words got a human-approved replacement with this baseline.</span></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="step">
+  <div class="num">4</div>
+  <div>
+    <h2>We add safety checks</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="new">Safety checks</span><span>Context</span><span>Phrases &amp; structure</span><span>Meaning</span><span>Ensemble</span></div>
+    <p>Handwritten rules block edits that change the facts.</p>
+    <dl class="facts">
+      <dt>Checks</dt><dd>Numbers, negation ("not"), certainty ("may" vs "will"), names, who-did-what, technical terms.</dd>
+      <dt>Test</dt><dd>8 deliberately wrong rewrites, 2 correct ones.</dd>
+    </dl>
+    <div class="result"><span class="big">6 of 8</span><span class="small">bad rewrites caught; both correct ones allowed. Missed an antonym and a loss of detail.</span></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="step">
+  <div class="num">5</div>
+  <div>
+    <h2>We try to check if a synonym fits the sentence</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="new">Context</span><span>Phrases &amp; structure</span><span>Meaning</span><span>Ensemble</span></div>
+    <p>"Bank" means different things near "river" and near "money". This block tries to tell.</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>SWORDS: people judged whether a substitute fits a specific sentence.</dd>
+      <dt>Features</dt><dd>Word vectors, dictionary definitions, word-pair frequency.</dd>
+      <dt>Model</dt><dd>Gradient boosting classifier.</dd>
+    </dl>
+    <div class="result"><span class="big">0.66</span><span class="small">AUC (0.5 is guessing). Too weak to trust alone: at a safe setting it blocked every edit.</span></div>
+    <span class="tag bad">Too weak on its own</span>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="step">
+  <div class="num">6</div>
+  <div>
+    <h2>We add phrases and sentence structure</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="on">Context</span><span class="new">Phrases &amp; structure</span><span>Meaning</span><span>Ensemble</span></div>
+    <p class="example"><s>in the event that</s> → <b>if</b></p>
+    <p class="example"><s>The report was published by the committee.</s> → <b>The committee published the report.</b></p>
+    <dl class="facts">
+      <dt>Phrase score</dt><dd>A difficulty model for multi-word phrases, trained on CompLex phrases (0.084 error on 184 test phrases).</dd>
+      <dt>Rewrites</dt><dd>10 handwritten phrase pairs and 2 grammar rules: split joined clauses, passive → active.</dd>
+    </dl>
+    <span class="tag">Demonstration only, not measured for accuracy</span>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="step">
+  <div class="num">7</div>
+  <div>
+    <h2>We teach it word meanings</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="on">Context</span><span class="on">Phrases &amp; structure</span><span class="new">Meaning</span><span>Ensemble</span></div>
+    <p>Pick which dictionary meaning the word has here, then keep only synonyms with that meaning.</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>SemCor: 141,689 words tagged with their exact dictionary meaning.</dd>
+      <dt>Model</dt><dd>How often each meaning appears + nearby words + average word vectors.</dd>
+    </dl>
+    <div class="result"><span class="big">69.1%</span><span class="small">right meaning (vs 67.7% by always guessing the most frequent).</span></div>
+    <p style="margin-top:22px">As a strict filter, it threw out too much: correct replacements fell from 85 to 52. And it still wrote:</p>
+    <p class="example">The medication <s>alleviates</s> → <b>facilitates</b> pain. <span class="tag bad">Wrong meaning</span></p>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="step">
+  <div class="num">8</div>
+  <div>
+    <h2>We turn the blocks into an ensemble</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="on">Context</span><span class="on">Phrases &amp; structure</span><span class="on">Meaning</span><span class="new">Ensemble</span></div>
+    <p>Instead of each block saying yes or no, each gives a probability, and a small model learns how much to trust each one.</p>
+    <dl class="facts">
+      <dt>Meaning</dt><dd>SemCor + dictionary definitions. SemCor counts less when it has few examples ("alleviate" had one).</dd>
+      <dt>Fit</dt><dd>9 signals (meaning, context checker, vectors, grammar links, word pairs) combined by logistic regression on SWORDS.</dd>
+      <dt>Decision</dt><dd>Edit only if <b>fit × how much simpler &gt; (1 − fit) × cost of a wrong meaning</b>.</dd>
+    </dl>
+    <div class="result"><span class="big">87</span><span class="small">correct replacements (was 52), 48% of edits right.</span></div>
+    <p class="example" style="margin-top:22px">The medication <s>alleviates</s> → <b>relieves</b> pain. <span class="tag good">Fixed</span></p>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="step">
+  <div class="num">9</div>
+  <div>
+    <h2>We widen the search for replacements</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="new">Candidates</span><span class="on">Safety checks</span><span class="new">Context</span><span class="on">Phrases &amp; structure</span><span class="on">Meaning</span><span class="new">Ensemble</span></div>
+    <p>Most misses happened because the right word was never on the list.</p>
+    <dl class="facts">
+      <dt>More words</dt><dd>Broader words (hypernyms), "similar to" words, and multi-word synonyms from WordNet.</dd>
+      <dt>Tagger fix</dt><dd>If the grammar tagger guesses wrong, try the other parts of speech.</dd>
+      <dt>More data</dt><dd>Retrained the context checker in 5 parts so all SWORDS dev data can train the ensemble.</dd>
+      <dt>Rule</dt><dd>Prefer true synonyms; use broader words only as a fallback. Fix "a"/"an".</dd>
+    </dl>
+    <div class="result pair">
+      <div><span class="big">196 → 310</span><div class="small">sentences where the right answer is on the list</div></div>
+      <div><span class="big">84 → 10</span><div class="small">sentences with no options at all</div></div>
+    </div>
+    <p class="example" style="margin-top:22px">The contract <s>stipulates</s> → <b>specifies</b> that payment is due. <span class="tag good">Fixed</span></p>
+    <p class="example">It was <s>an auspicious</s> → <b>a bright</b> start. <span class="tag good">New</span></p>
+  </div>
+</section>
+
+
+<!-- 10 -->
+<section class="step">
+  <div class="num">10</div>
+  <div>
+    <h2>We train the final decision on the actual task</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="on">Context</span><span class="on">Phrases &amp; structure</span><span class="on">Meaning</span><span class="new">Ensemble</span></div>
+    <p>Until now every threshold was tuned on SWORDS, which asks "does this word fit?", not "is this a good simpler word?". We found a dataset that asks exactly that.</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>BenchLS: 929 sentences, each with a hard word and simpler replacements ranked by people. Split by word: 424 to tune, 505 held back as a fresh test.</dd>
+      <dt>Model</dt><dd>Logistic regression on top of every earlier signal, plus how common and how short each option is, and how it compares with the other options.</dd>
+      <dt>Tried, dropped</dt><dd>Gradient boosting, looser safety checks, a "word already in the sentence" rule. None helped on the tuning half.</dd>
+    </dl>
+    <div class="result pair">
+      <div><span class="big">52% → 57%</span><div class="small">edits right on the fresh BenchLS test</div></div>
+      <div><span class="big">114 → 193</span><div class="small">correct replacements there</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="step">
+  <div class="num">11</div>
+  <div>
+    <h2>We fix how hard words are found</h2>
+    <div class="strip"><span class="new">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="on">Context</span><span class="on">Phrases &amp; structure</span><span class="on">Meaning</span><span class="on">Ensemble</span></div>
+    <p>The benchmarks always handed us the hard word, so step 1 was never really tested. On real sentences it missed most hard words and sometimes picked "is" or "at".</p>
+    <dl class="facts">
+      <dt>Data</dt><dd>CWI 2018: news and Wikipedia sentences where 20 people marked every word they found hard. 23,562 train · 2,884 dev · 3,701 test.</dd>
+      <dt>Model</dt><dd>Gradient boosting over both step-1 difficulty scores and word features. Only nouns, verbs, adjectives and adverbs can be edited.</dd>
+    </dl>
+    <div class="result pair">
+      <div><span class="big">0.38 → 0.78</span><div class="small">F1 finding hard words (CWI test)</div></div>
+      <div><span class="big">24% → 78%</span><div class="small">of hard words found</div></div>
+    </div>
+    <p class="example" style="margin-top:22px">The technician will <s>commence</s> → <b>begin</b> the installation. <span class="tag good">New</span></p>
+    <p class="example">The company <s>purchased</s> → <b>bought</b> new equipment. <span class="tag good">New</span></p>
+  </div>
+</section>
+
+
+<!-- 12 -->
+<section class="step">
+  <div class="num">12</div>
+  <div>
+    <h2>We teach it to notice lost detail</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="on">Sentence difficulty</span><span class="on">Candidates</span><span class="on">Safety checks</span><span class="on">Context</span><span class="on">Phrases &amp; structure</span><span class="on">Meaning</span><span class="new">Ensemble</span></div>
+    <p>"Deposited → gave" is simpler but vaguer. WordNet files words in a tree, so we can count how much broader a replacement is.</p>
+    <dl class="facts">
+      <dt>Signal</dt><dd>How many meanings sit under the replacement's sense, compared with the original's. "Give" covers far more than "deposit".</dd>
+      <dt>Model</dt><dd>Average of logistic regression and a small boosted model, trained on all of BenchLS.</dd>
+      <dt>Check</dt><dd>With only 424 tuning cases the results were too noisy to decide, so all 929 BenchLS cases now tune, and TSAR only reports.</dd>
+    </dl>
+    <div class="result pair">
+      <div><span class="big">54% → 63%</span><div class="small">edits right on TSAR</div></div>
+      <div><span class="big">125 → 114</span><div class="small">correct replacements (fewer, but far fewer wrong)</div></div>
+    </div>
+    <p class="example" style="margin-top:22px">She deposited the money at the bank. <span class="tag good">Left alone now</span></p>
+    <p class="example">Heavy rainfall may exacerbate the flooding. <span class="tag good">Left alone now</span></p>
+  </div>
+</section>
+
+
+<!-- 13 -->
+<section class="step">
+  <div class="num">13</div>
+  <div>
+    <h2>We tune every block, and keep only what beats the noise</h2>
+    <div class="strip"><span class="on">Word difficulty</span><span class="new">Sentence difficulty</span><span class="on">Candidates</span><span class="new">Safety checks</span><span class="new">Context</span><span class="on">Phrases &amp; structure</span><span class="on">Meaning</span><span class="new">Ensemble</span></div>
+    <p>Twelve more small experiments. A change stays only if it helps by more than the tuning numbers wobble between repeat runs.</p>
+    <dl class="facts">
+      <dt>Kept</dt><dd>More training data for the context checker (SWORDS test pairs). The word's part of speech in the final decision. Hard-word scores inside the sentence model. Choosing which word to edit by both "good replacement" and "hard word", with nouns needing to be clearly hard. No "a/an" before words like "information".</dd>
+      <dt>Dropped</dt><dd>More SemCor data, retuned model settings, a reading-level check, an antonym check (never fires), two edits per sentence as the default.</dd>
+    </dl>
+    <div class="result pair">
+      <div><span class="big">114 → 152</span><div class="small">correct replacements on TSAR (63.6% right)</div></div>
+      <div><span class="big">0.46 → 0.43</span><div class="small">reading-level error (CEFR test)</div></div>
+    </div>
+    <p class="example" style="margin-top:22px">Heavy rainfall may <s>exacerbate</s> → <b>worsen</b> the flooding. <span class="tag good">Fixed</span></p>
+    <p class="example">The senator <s>attempted</s> → <b>tried</b> to persuade voters. <span class="tag good">Better word chosen</span></p>
+  </div>
+</section>
+
+<!-- Results -->
+<section class="step">
+  <div class="num">✓</div>
+  <div>
+    <h2>Where we are now</h2>
+    <p>Same 373 TSAR test sentences for every version. Blue is the current ensemble (v5). Dict. is the step-3 dictionary baseline; Filter is the step-7 meaning filter.</p>
+    <div class="charts">
+      <div class="chart">
+        <h3>Correct replacements</h3>
+        <p class="sub">out of 373 sentences</p>
+        <svg id="c1" viewBox="0 0 300 200" role="img" aria-label="Correct replacements: dictionary 85, meaning filter 52, ensemble v1 87, ensemble v2 119, ensemble v3 125, ensemble v4 114, ensemble v5 152"></svg>
+      </div>
+      <div class="chart">
+        <h3>Edits that were right</h3>
+        <p class="sub">share of edits matching a human answer</p>
+        <svg id="c2" viewBox="0 0 300 200" role="img" aria-label="Precision: dictionary 43.4%, meaning filter 53.6%, ensemble v1 48.3%, ensemble v2 53.4%, ensemble v3 54.3%, ensemble v4 63.3%, ensemble v5 63.6%"></svg>
+      </div>
+    </div>
+    <details>
+      <summary>Show as a table</summary>
+      <table>
+        <tr><th>Version</th><th>Edits</th><th>Correct</th><th>Right share</th></tr>
+        <tr><td>Dictionary (step 3)</td><td>196</td><td>85</td><td>43.4%</td></tr>
+        <tr><td>Meaning filter (step 7)</td><td>97</td><td>52</td><td>53.6%</td></tr>
+        <tr><td>Ensemble v1 (step 8)</td><td>180</td><td>87</td><td>48.3%</td></tr>
+        <tr><td>Ensemble v2 (step 9)</td><td>223</td><td>119</td><td>53.4%</td></tr>
+        <tr><td>Ensemble v3 (steps 10–11)</td><td>230</td><td>125</td><td>54.3%</td></tr>
+        <tr><td>Ensemble v4 (step 12)</td><td>180</td><td>114</td><td>63.3%</td></tr>
+        <tr><td>Ensemble v5 (step 13)</td><td>239</td><td>152</td><td>63.6%</td></tr>
+      </table>
+    </details>
+
+    <h2 style="margin-top:70px">The full pipeline</h2>
+    <div class="flow">
+      <div class="row"><div class="box">Input sentence</div><div class="desc">Parsed into words and grammar.</div></div>
+      <div class="arrow">↓</div>
+      <div class="row"><div class="box">Structure &amp; phrases</div><div class="desc">Optional rules from step 6.</div></div>
+      <div class="arrow">↓</div>
+      <div class="row"><div class="box">Find hard words</div><div class="desc">Hard-word detector trained on CWI (step 11); nouns must be clearly hard (step 13).</div></div>
+      <div class="arrow">↓</div>
+      <div class="row"><div class="box">List replacements</div><div class="desc">WordNet synonyms, then broader words, step 9.</div></div>
+      <div class="arrow">↓</div>
+      <div class="row"><div class="box">Score each one</div><div class="desc">Meaning + context + vectors (step 8), then a decision model trained on BenchLS that also checks lost detail (steps 10, 12).</div></div>
+      <div class="arrow">↓</div>
+      <div class="row"><div class="box">Worth it?</div><div class="desc">Likely enough to be a good simpler word, and passes the safety checks.</div></div>
+      <div class="arrow">↓</div>
+      <div class="row"><div class="box">Output sentence</div><div class="desc">At most one word edit, with the reading level before and after (step 13).</div></div>
+    </div>
+
+    <h2 style="margin-top:70px">Still wrong</h2>
+    <p class="example">The algorithm identifies redundant entries in the <s>database</s> → <b>information</b>.</p>
+    <p class="example">The <s>scientist</s> → <b>individual</b> investigated the unusual results.</p>
+    <p class="example">The gene <s>encodes</s> → <b>converts</b> a protein.</p>
+    <p>Each is a broader word that the tuning data still rates as a fine replacement.</p>
+  </div>
+</section>
+
+<p class="note">TSAR and SWORDS test sets were used in earlier experiments, so these numbers are exploratory, not final. No model was trained or tuned on them. No new human ratings were collected. CWI test was never used for tuning; BenchLS was fully used for tuning from step 12, so TSAR is the report-only check. Built September 24–28, 2026.</p>
+
+</main>
+<div id="tip" role="tooltip"></div>
+</div>
+
+<script>
+const data = [
+  { short: 'Dict.', label: 'Dictionary', correct: 85, edits: 196 },
+  { short: 'Filter', label: 'Meaning filter', correct: 52, edits: 97 },
+  { short: 'v1', label: 'Ensemble v1', correct: 87, edits: 180 },
+  { short: 'v2', label: 'Ensemble v2', correct: 119, edits: 223 },
+  { short: 'v3', label: 'Ensemble v3', correct: 125, edits: 230 },
+  { short: 'v4', label: 'Ensemble v4', correct: 114, edits: 180 },
+  { short: 'v5', label: 'Ensemble v5', correct: 152, edits: 239, current: true },
+];
+const tip = document.getElementById('tip');
+const NS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  parent.appendChild(n); return n;
+}
+// Vertical bars from a shared baseline; top corners rounded 4px, value label above each bar.
+function bars(svg, value, max, fmt) {
+  const W = 300, H = 200, top = 22, bottom = 34, gap = 8;
+  const bw = (W - gap * (data.length - 1)) / data.length;
+  const scale = v => (H - top - bottom) * v / max;
+  data.forEach((d, i) => {
+    const x = i * (bw + gap), h = scale(value(d)), y = H - bottom - h, r = 4;
+    el('path', { class: 'bar' + (d.current ? ' hi' : ''),
+      d: `M${x},${H - bottom} V${y + r} Q${x},${y} ${x + r},${y} H${x + bw - r} Q${x + bw},${y} ${x + bw},${y + r} V${H - bottom} Z` }, svg);
+    el('text', { x: x + bw / 2, y: y - 7, 'text-anchor': 'middle', class: 'value' }, svg).textContent = fmt(value(d));
+    el('text', { x: x + bw / 2, y: H - bottom + 16, 'text-anchor': 'middle' }, svg).textContent = d.short;
+    const hit = el('rect', { class: 'hit', x: x - gap / 2, y: 0, width: bw + gap, height: H }, svg);
+    hit.addEventListener('mousemove', e => {
+      tip.innerHTML = `<b>${d.label}</b><br>${d.correct} correct of ${d.edits} edits<br>${(100 * d.correct / d.edits).toFixed(1)}% right`;
+      tip.style.left = (e.clientX + 14) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; tip.style.opacity = 1;
+    });
+    hit.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
+  });
+  el('line', { class: 'base', x1: 0, x2: W, y1: H - bottom, y2: H - bottom }, svg);
+}
+bars(document.getElementById('c1'), d => d.correct, 170, v => v);
+bars(document.getElementById('c2'), d => 100 * d.correct / d.edits, 70, v => v.toFixed(1) + '%');
+</script>
+</body>
+</html>
