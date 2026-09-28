@@ -6,7 +6,7 @@ import numpy as np
 from nltk.corpus import wordnet as wn
 from nltk.stem import SnowballStemmer
 from .lexical import POS,synsets,stop
-from .semantics import vectors
+from .semantics import vectors,gloss
 from .data import ROOT
 
 stemmer=SnowballStemmer('english')
@@ -35,7 +35,9 @@ def word_pos(pos):return 'a' if pos=='s' else pos
 class SenseModel:
     def __init__(self):
         self.counts={};self.words={};self.totals={};self.vocab={};self.centroids={}
-        self.params={'nb':0.,'vector':0.}
+        self.sums={}
+        # alpha and shrink default to the original behavior so older pickles rank identically.
+        self.params={'nb':0.,'vector':0.,'alpha':.5,'shrink':0.}
     def fit(self,records):
         counts=defaultdict(Counter);words=defaultdict(lambda:defaultdict(Counter))
         sums={};voc=defaultdict(set)
@@ -52,14 +54,24 @@ class SenseModel:
         self.totals={k:{s:sum(v.values()) for s,v in d.items()} for k,d in self.words.items()}
         self.vocab=dict(voc)
         self.centroids={k:(v/np.linalg.norm(v)).astype(np.float32) if np.linalg.norm(v) else v.astype(np.float32) for k,v in sums.items()}
+        self.sums={k:v.astype(np.float32) for k,v in sums.items()}
         return self
-    def components(self,words,index,lemma,pos):
+    def centroid(self,key,name,shrink):
+        # Pseudo-examples pull sparse senses toward their WordNet gloss. Unseen senses use the gloss
+        # alone instead of scoring zero, which previously favored any sense with a single example.
+        if not shrink:return self.centroids.get((key,name))
+        v=self.sums.get((key,name))
+        v=(np.zeros(300,dtype=np.float32) if v is None else v)+shrink*gloss(name)
+        n=np.linalg.norm(v)
+        return v/n if n else None
+    def components(self,words,index,lemma,pos,shrinks=None):
         key=(lemma.lower(),word_pos(pos));senses=synsets(*key)
         if not senses:return []
         counts=self.counts.get(key,{});n=sum(counts.values())
         features=context_features(words,index)
         known={f:c for f,c in features.items() if f in self.vocab.get(key,set())}
         x=context_embedding(words,index);V=max(1,len(self.vocab.get(key,set())))
+        shrinks=[self.params.get('shrink',0.)] if shrinks is None else shrinks
         out=[]
         for sense in senses:
             name=sense.name();prior=math.log((counts.get(name,0)+.5)/(n+.5*len(senses)))
@@ -68,14 +80,21 @@ class SenseModel:
             nb=sum(c*math.log((wc.get(f,0)+.5)/(total+.5*V)) for f,c in known.items())
             # Average evidence prevents longer sentences from overwhelming the prior.
             nb/=max(1,sum(known.values()))
-            centroid=self.centroids.get((key,name))
-            cos=float(x@centroid) if centroid is not None else 0.
-            out.append({'sense':name,'prior':prior,'nb':nb,'vector':cos,
-                        'training_examples':counts.get(name,0),'lemma_examples':n})
+            cos={}
+            for k in shrinks:
+                centroid=self.centroid(key,name,k)
+                cos[k]=float(x@centroid) if centroid is not None else 0.
+            out.append({'sense':name,'prior':prior,'nb':nb,'vector':cos[shrinks[0]],'vectors':cos,
+                        'training_examples':counts.get(name,0),'lemma_examples':n,'lemma_senses':len(senses)})
         return out
     def rank_components(self,rows,params=None):
         params=params or self.params
-        scored=[{**r,'score':r['prior']+params['nb']*r['nb']+params['vector']*r['vector']} for r in rows]
+        alpha=params.get('alpha',.5);shrink=params.get('shrink',0.)
+        def prior(r):
+            if alpha==.5 or 'lemma_senses' not in r:return r['prior']
+            return math.log((r['training_examples']+alpha)/(r['lemma_examples']+alpha*r['lemma_senses']))
+        vector=lambda r:r.get('vectors',{}).get(shrink,r['vector'])
+        scored=[{**r,'score':prior(r)+params['nb']*r['nb']+params['vector']*vector(r)} for r in rows]
         return sorted(scored,key=lambda r:-r['score'])
     def predict(self,words,index,lemma,pos):
         rows=self.rank_components(self.components(words,index,lemma,pos))

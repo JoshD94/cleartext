@@ -67,3 +67,24 @@ def tsar_data(split):
         fields=line.split('\t')
         rows.append({'id':f'tsar-{split}-{i}','text':fields[0],'target':fields[1],'gold':[x.lower().strip() for x in fields[2:] if x.strip()]})
     return rows
+
+BENCHLS_URL='https://zenodo.org/api/records/2552393/files/BenchLS.zip/content'
+BENCHLS_SHA256='3299fd8113e3da65d149c9327c56bc53bab44fd891cc167e0ed85546f9cb653a'  # Zenodo record 2552393
+
+def benchls_data():
+    """BenchLS (Paetzold & Specia 2016, CC BY 4.0): 929 sentences, a target word, and simpler substitutes
+    ranked by annotators. Split 50/50 by target lemma into dev and holdout, so no target word crosses."""
+    import zipfile,io,random
+    path=fetch(BENCHLS_URL,RAW/'BenchLS.zip')
+    digest=hashlib.sha256(path.read_bytes()).hexdigest();assert digest==BENCHLS_SHA256,digest
+    (RAW/'benchls.manifest.json').write_text(json.dumps({'url':BENCHLS_URL,'sha256':digest,'license':'CC BY 4.0'},indent=2))
+    text=zipfile.ZipFile(path).read('BenchLS/BenchLS.txt').decode('utf8')
+    rows=[]
+    for i,line in enumerate(text.splitlines()):
+        f=line.split('\t')
+        subs=[(int(x.split(':',1)[0]),x.split(':',1)[1].strip()) for x in f[3:] if ':' in x]
+        rows.append({'id':f'benchls-{i}','text':f[0],'target':f[1],'index':int(f[2]),
+                     'gold':[w.lower() for r,w in sorted(subs) if w.lower()!=f[1].lower()]})
+    lemmas=sorted({r['target'].lower() for r in rows});random.Random(4701).shuffle(lemmas)
+    dev=set(lemmas[:len(lemmas)//2])
+    return {'dev':[r for r in rows if r['target'].lower() in dev],'holdout':[r for r in rows if r['target'].lower() not in dev]}
