@@ -13,12 +13,14 @@ Built with [spaCy](https://spacy.io) and the [SimplePPDB++](https://github.com/m
 
 | File | Purpose |
 |------|---------|
-| `pos_tagger.py` | `pos_tag(sentence)`: tags each word |
+| `pos_tag.py` | `pos_tag(sentence)`: tags each word |
 | `phrase_finder.py` | `find_complex_phrases(sentence)`: finds complex phrases |
 | `manual_phrases.csv` | Hand-written phrase list |
 | `build_phrase_list.py` | Builds `simpleppdb_phrases.csv` from SimplePPDB++ (run once) |
 | `simpleppdb_phrases.csv` | Phrase list from SimplePPDB++ (generated, optional) |
 | `test_phrase_finder.py` | Shows detected phrases and the changed sentences |
+| `evaluate.py` | Scores the phrase finder against labeled sentences |
+| `eval_sentences.csv` | Labeled test sentences used by `evaluate.py` |
 
 Keep all files in the same folder.
 
@@ -37,7 +39,7 @@ Optional, to add the SimplePPDB++ phrases:
 ## Try it
 
 ```
-python pos_tagger.py            # tag sentences interactively
+python pos_tag.py            # tag sentences interactively
 python phrase_finder.py         # find phrases interactively
 python test_phrase_finder.py    # before/after on example sentences
 ```
@@ -53,7 +55,7 @@ Example from `test_phrase_finder.py`:
 ## Usage
 
 ```python
-from pos_tagger import pos_tag
+from pos_tag import pos_tag
 from phrase_finder import find_complex_phrases
 
 tokens = pos_tag("The board made a decision prior to the merger.")
@@ -99,14 +101,31 @@ Look up any tag with `spacy.explain("VBD")`.
 
 - **`manual_phrases.csv`**: about 25 hand-checked phrases. Add more as `complex,simple` lines.
 - **Verb patterns** in `phrase_finder.py` (`FLEXIBLE_PATTERNS`): phrases whose verb changes form, like "make / made / makes a decision".
-- **`simpleppdb_phrases.csv`**: about 80,000 multi-word phrases filtered from SimplePPDB++. The build script keeps pairs that are clearly simpler (`--min-complexity`, default 1.0) and close in meaning (`--min-ppdb`, default 4.0), and drops contraction fragments, foreign words, and one-word swaps.
+- **`simpleppdb_phrases.csv`**: about 80,000 multi-word phrases filtered from SimplePPDB++. The build script keeps pairs that are clearly simpler (`--min-complexity`, default 1.0) and close in meaning (`--min-ppdb`, default 4.0), and drops contraction fragments, foreign words, one-word swaps, and padded pairs that share a first or last word ("prior to the" → "before the").
 
-If the same phrase is in both lists, the manual entry wins. If two phrases overlap in a sentence, the longer one wins.
+If phrases overlap in a sentence, a manual phrase always wins over a SimplePPDB phrase. Between phrases from the same list, the longer one wins.
+
+## Evaluation
+
+```
+python evaluate.py
+```
+
+Runs the phrase finder on `eval_sentences.csv` and reports precision (how many detections were correct), recall (how many expected phrases were found), F1, and suggestion accuracy, overall and per source. It also lists every miss, false alarm, and wrong suggestion.
+
+Each row of `eval_sentences.csv` is a sentence plus the phrases that should be detected:
+
+```
+"Prior to the exam, we studied.",prior to => before
+"Due to the fact that we were unable to go, we stayed.",due to the fact that => because ; were unable to => could not | couldn't
+The cat sat on the mat.,
+```
+
+Use `=>` before the acceptable replacements, `|` between alternatives, `;` between phrases, and leave the second column empty when nothing should be detected.
 
 ## Known limitations
 
 - **SimplePPDB++ is noisy.** It was built automatically, so some suggestions change the meaning (e.g. "were unable to" → "could be"). Override bad ones by adding the phrase to `manual_phrases.csv`.
-- **Padded duplicates.** SimplePPDB++ contains phrases with an extra word attached ("prior to the" → "before the"). Because longer matches win, these can replace a manual match.
 - **No grammar fixing.** Suggestions are base forms; adjusting tense and agreement is the replacement step's job.
 - **Coverage.** Phrases not in either list are not detected.
 

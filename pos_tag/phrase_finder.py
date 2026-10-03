@@ -4,8 +4,8 @@ Complex phrase finder for the sentence simplification project.
 Finds wordy or complex phrases (e.g. "to what extent", "in order to",
 "made a decision") and suggests simpler replacements.
 
-Setup: same as pos_tagger.py (spaCy + en_core_web_sm). This file must be
-in the same folder as pos_tagger.py, because it reuses the loaded model.
+Setup: same as pos_tag.py (spaCy + en_core_web_sm). This file must be
+in the same folder as pos_tag.py, because it reuses the loaded model.
 
 Phrase lists are read from manual_phrases.csv and (if present)
 simpleppdb_phrases.csv in the same folder. See build_phrase_list.py.
@@ -21,7 +21,7 @@ from pathlib import Path
 from spacy.matcher import Matcher, PhraseMatcher
 from spacy.util import filter_spans
 
-from pos_tag import nlp  # reuse the model that pos_tagger already loaded
+from pos_tag import nlp  # reuse the model that pos_tag already loaded
 
 # ---------------------------------------------------------------------------
 # Phrase lists (loaded from CSV files in the same folder as this script)
@@ -85,6 +85,58 @@ FLEXIBLE_PATTERNS = [
      [{"LEMMA": "carry"}, {"LOWER": "out"}]),
 ]
 
+# ---------------------------------------------------------------------------
+# "in a ___ way" -> "___ly"
+# A general rule: "in a theatrical way" -> "theatrically",
+# "in decisive ways" -> "decisively", "in a very careful manner" -> "very carefully".
+# The suggestion is built from the adjective, so one rule covers many phrases.
+# ---------------------------------------------------------------------------
+
+WAY_PATTERN_NAME = "in a ___ way"
+WAY_PATTERN = [
+    {"LOWER": "in"},
+    {"LOWER": {"IN": ["a", "an"]}, "OP": "?"},
+    {"POS": "ADV", "OP": "?"},                       # optional "very", "highly", ...
+    {"POS": "ADJ"},
+    {"LOWER": {"IN": ["way", "ways", "manner", "fashion"]}},
+]
+
+# Adjectives with an irregular adverb, or whose "-ly" form means something else
+ADVERB_EXCEPTIONS = {"good": "well", "public": "publicly", "whole": "wholly"}
+NO_ADVERB = {"new", "big", "small", "old", "similar", "same", "certain", "real",
+             "hard", "short", "late", "high", "fast", "different", "major", "minor"}
+
+
+def to_adverb(adjective):
+    """Turn an adjective into its adverb: careful -> carefully. None if no good form."""
+    adj = adjective.lower()
+    if adj in ADVERB_EXCEPTIONS:
+        return ADVERB_EXCEPTIONS[adj]
+    if adj in NO_ADVERB or adj.endswith("ly"):      # "timely", "friendly" have no -ly form
+        return None
+    if adj.endswith("ic"):
+        return adj + "ally"                          # dramatic -> dramatically
+    if adj.endswith("le") and len(adj) > 3:
+        return adj[:-1] + "y"                        # simple -> simply
+    if adj.endswith("ue"):
+        return adj[:-1] + "ly"                       # true -> truly
+    if adj.endswith("ll"):
+        return adj + "y"                             # full -> fully
+    if adj.endswith("y") and len(adj) > 2 and adj[-2] not in "aeiou":
+        return adj[:-1] + "ily"                      # happy -> happily
+    return adj + "ly"                                # careful -> carefully
+
+
+def _way_suggestion(span):
+    """Build "very carefully" from "in a very careful way"."""
+    adj = [t for t in span if t.pos_ == "ADJ"][-1]
+    adverb = to_adverb(adj.text)
+    if adverb is None:
+        return None
+    modifiers = [t.text.lower() for t in span if t.pos_ == "ADV"]
+    return " ".join(modifiers + [adverb])
+
+
 # Build the matchers once.
 _phrase_matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
 _phrase_matcher.add("FIXED", list(nlp.tokenizer.pipe(FIXED_PHRASES.keys())))
@@ -94,6 +146,7 @@ _matcher = Matcher(nlp.vocab)
 for name, suggestion, pattern in FLEXIBLE_PATTERNS:
     _matcher.add(name, [pattern])
     _suggestions[name] = suggestion
+_matcher.add(WAY_PATTERN_NAME, [WAY_PATTERN])
 
 
 def find_complex_phrases(sentence):
@@ -120,25 +173,48 @@ def find_complex_phrases(sentence):
                          useful for inflecting verb suggestions ("made a decision" -> "decided")
         sentence_start - True if the phrase starts a sentence (capitalize the replacement)
 
-    If two matches overlap, only the longest one is kept.
+    If two matches overlap, a manual phrase always beats a SimplePPDB phrase;
+    between phrases from the same source, the longer one wins.
     """
     doc = nlp(sentence)
 
-    spans = []
+    # Collect every match, with its suggestion and source
+    matches = []
     for match_id, start, end in list(_phrase_matcher(doc)) + list(_matcher(doc)):
         span = doc[start:end]
-        span.label_ = nlp.vocab.strings[match_id]
-        spans.append(span)
+        label = nlp.vocab.strings[match_id]
+        if label == "FIXED":
+            pattern = " ".join(t.lower_ for t in span)
+            suggestion, source = FIXED_PHRASES[pattern]
+        else:
+            if label == WAY_PATTERN_NAME:
+                suggestion = _way_suggestion(span)
+                if suggestion is None:
+                    continue                 # e.g. "in a timely way": no good adverb
+            else:
+                suggestion = _suggestions[label]
+            pattern, source = label, "manual"
+        matches.append((span, pattern, suggestion, source))
+
+    # Resolve overlaps: manual phrases always win over SimplePPDB phrases.
+    # Within each source, the longest match wins.
+    info = {}
+    taken = set()          # word positions already covered by a chosen phrase
+    chosen = []
+    for source in ("manual", "simpleppdb"):
+        spans = []
+        for span, pattern, suggestion, src_name in matches:
+            if src_name == source:
+                info[(span.start, span.end)] = (pattern, suggestion, src_name)
+                spans.append(span)
+        for span in filter_spans(spans):
+            if not taken.intersection(range(span.start, span.end)):
+                chosen.append(span)
+                taken.update(range(span.start, span.end))
 
     results = []
-    for span in sorted(filter_spans(spans), key=lambda s: s.start):
-        if span.label_ == "FIXED":
-            key = " ".join(t.lower_ for t in span)
-            suggestion, source = FIXED_PHRASES[key]
-            pattern = key
-        else:
-            suggestion, source = _suggestions[span.label_], "manual"
-            pattern = span.label_
+    for span in sorted(chosen, key=lambda s: s.start):
+        pattern, suggestion, source = info[(span.start, span.end)]
         results.append({
             "text": span.text,
             "pattern": pattern,

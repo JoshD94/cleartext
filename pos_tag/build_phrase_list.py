@@ -31,6 +31,11 @@ import statistics
 
 IGNORABLE = {"a", "an", "the"}
 
+# Forms of "be". If the replacement adds one that the original doesn't have,
+# it can't fit in the same spot: "diplomatic relations" -> "diplomacy is",
+# "a largely" -> "is mostly".
+BE_WORDS = {"is", "are", "was", "were", "be", "been", "being", "am", "'s", "'re", "'m"}
+
 
 # Pieces of contractions ("I'd" -> "I" + "'d"). Phrases starting or ending
 # with one are leftover fragments, not real expressions.
@@ -105,6 +110,12 @@ def keep(complex_p, simple_p, complexity, ppdb, args):
         return False
     if set(c_words) - IGNORABLE == set(s_words) - IGNORABLE:
         return False                      # only dropped "the"/"a"
+    if (set(s_words) & BE_WORDS) - set(c_words):
+        return False                      # replacement adds "is"/"are"/...: breaks grammar
+    if c_words[0] == s_words[0] or c_words[-1] == s_words[-1]:
+        return False                      # padded copy of a shorter rule:
+                                          # "prior to the" -> "before the",
+                                          # "attend the conference" -> "attend"
     c_only, s_only = set(c_words) - set(s_words), set(s_words) - set(c_words)
     if len(c_only) <= 1 and len(s_only) <= 1:
         return False                      # really a one-word swap inside a
