@@ -1,0 +1,71 @@
+{
+  "features": [
+    "neg_zipf",
+    "word_len",
+    "syllables",
+    "context",
+    "concreteness",
+    "aoa"
+  ],
+  "model": "HistGradientBoostingRegressor",
+  "params": {
+    "random_state": 0,
+    "max_iter": 300,
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 20
+  },
+  "train": "CompLex",
+  "train_n": 7662,
+  "ablation": {
+    "linear/base4/CompLex": {
+      "complex_trial": 0.6808,
+      "cwi_dev": 0.3008
+    },
+    "gbm/base4/CompLex": {
+      "complex_trial": 0.715,
+      "cwi_dev": 0.3067
+    },
+    "linear/base6/CompLex": {
+      "complex_trial": 0.7514,
+      "cwi_dev": 0.3238
+    },
+    "gbm/base6/CompLex": {
+      "complex_trial": 0.808,
+      "cwi_dev": 0.2658
+    },
+    "linear/base4/CWI": {
+      "complex_trial": 0.3575,
+      "cwi_dev": 0.4909
+    },
+    "gbm/base4/CWI": {
+      "complex_trial": 0.3694,
+      "cwi_dev": 0.6432
+    },
+    "linear/base6/CWI": {
+      "complex_trial": 0.4673,
+      "cwi_dev": 0.5083
+    },
+    "gbm/base6/CWI": {
+      "complex_trial": 0.3677,
+      "cwi_dev": 0.7565
+    },
+    "linear/base4/+CWI": {
+      "complex_trial": 0.4687,
+      "cwi_dev": 0.475
+    },
+    "gbm/base4/+CWI": {
+      "complex_trial": 0.5889,
+      "cwi_dev": 0.5932
+    },
+    "linear/base6/+CWI": {
+      "complex_trial": 0.5756,
+      "cwi_dev": 0.4912
+    },
+    "gbm/base6/+CWI": {
+      "complex_trial": 0.5862,
+      "cwi_dev": 0.7323
+    }
+  },
+  "best": "gbm/base6/CompLex"
+}
