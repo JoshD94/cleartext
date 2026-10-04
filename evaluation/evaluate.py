@@ -29,6 +29,10 @@ DEFAULT_TECHNICAL_TERMS = {
     "latency", "mitochondria", "photosynthesis", "regression", "variance",
 }
 
+# FIX (2026-10-04): words with C(w,s) above this count as "complex" for the
+# threshold-based S_lex. Mirrors the sigmoid midpoint.
+COMPLEXITY_THRESHOLD = 0.5
+
 
 def clamp(value: float) -> float:
     return max(0.0, min(1.0, value))
@@ -52,6 +56,22 @@ def sigmoid(value: float) -> float:
     return 1 / (1 + math.exp(-value))
 
 
+def _default_zipf(word: str) -> float:
+    """Zipf frequency for a word.
+
+    FIX (2026-10-04): was a length-based proxy (6.0 - len/2) whenever the
+    caller passed no zipf_frequency -- but weight training fits B against
+    *real* Zipf values from wordfreq, so deployment disagreed with training
+    (train/serve skew). Now uses wordfreq when installed, keeping the proxy
+    only as a dependency-free fallback.
+    """
+    try:
+        from wordfreq import zipf_frequency as _zipf
+    except ImportError:
+        return 6.0 - len(word) / 2
+    return _zipf(word, "en")
+
+
 def word_complexity(
     word: str,
     context: Iterable[str] = (),
@@ -62,14 +82,14 @@ def word_complexity(
 ) -> float:
     """Calculate C(w,s), using supplied Zipf/POS values when available.
 
-    The fallback frequency is a transparent length-based proxy for this
-    dependency-free baseline; production evaluation should provide Zipf data.
+    When no Zipf value is supplied, falls back to wordfreq's Zipf frequency
+    (or a transparent length-based proxy if wordfreq is not installed).
     """
     weights = {
         "A": 0.0, "B": 1.0, "C": 0.08, "D": 0.25, "E": 0.2, "F": 0.1,
         **(weights or {}),
     }
-    frequency = zipf_frequency if zipf_frequency is not None else 6.0 - len(word) / 2
+    frequency = zipf_frequency if zipf_frequency is not None else _default_zipf(word)
     context = list(context)
     context_complexity = (
         sum(len(item) + syllables(item) for item in context) / len(context)
@@ -84,6 +104,49 @@ def word_complexity(
         + weights["F"] * pos
     )
     return sigmoid(value)
+
+
+# FIX (2026-10-04): E-term context fix. word_complexity() was called with empty
+# context in evaluate_record, which zeroed the E (context complexity) term the
+# Week 1 formula specifies. This helper passes the word's sentence as context
+# (excluding the word itself, consistent with weight training).
+def word_complexity_in_context(
+    word: str,
+    sentence_words: list[str],
+    word_weights: dict[str, float] | None = None,
+) -> float:
+    context = [w for w in sentence_words if w != word]
+    return word_complexity(word, context, weights=word_weights)
+
+
+# FIX (2026-10-04): S_lex redefinition. Was clamp(mean_C(before) - mean_C(after)),
+# which barely tracks human simplicity (test r=0.05: humans rate the simplified
+# sentence absolutely, not as an improvement). Now threshold-based, mirroring
+# S_jargon: normalized reduction in the *count* of complex words.
+def lexical_simplicity(
+    before_words: list[str],
+    after_words: list[str],
+    word_weights: dict[str, float] | None = None,
+) -> float:
+    before = sum(
+        word_complexity_in_context(w, before_words, word_weights) > COMPLEXITY_THRESHOLD
+        for w in before_words
+    )
+    after = sum(
+        word_complexity_in_context(w, after_words, word_weights) > COMPLEXITY_THRESHOLD
+        for w in after_words
+    )
+    return normalized_reduction(before, after)
+
+
+def jargon_simplicity(
+    before_words: list[str],
+    after_words: list[str],
+    technical_terms: set[str],
+) -> float:
+    before = sum(word in technical_terms for word in before_words)
+    after = sum(word in technical_terms for word in after_words)
+    return normalized_reduction(before, after)
 
 
 def readability(text: str) -> dict[str, float]:
@@ -177,13 +240,22 @@ def evaluate_record(record: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(original, str) or not isinstance(simplified, str):
         raise ValueError("each record requires string 'original' and 'simplified' fields")
     technical_terms = set(record.get("technical_terms", DEFAULT_TECHNICAL_TERMS))
+    # FIX (2026-10-04): accept trained word weights (e.g. from train_weights.py);
+    # defaults to PR #1's heuristic weights when absent.
+    word_weights = record.get("word_weights")
     before_words, after_words = words(original), words(simplified)
-    before_complexity = sum(word_complexity(w) for w in before_words) / max(1, len(before_words))
-    after_complexity = sum(word_complexity(w) for w in after_words) / max(1, len(after_words))
-    lexical = clamp(before_complexity - after_complexity)
-    jargon_before = sum(word in technical_terms for word in before_words)
-    jargon_after = sum(word in technical_terms for word in after_words)
-    jargon = normalized_reduction(jargon_before, jargon_after)
+    # FIX (2026-10-04): pass sentence context so the E term is live (was zeroed).
+    before_complexity = sum(
+        word_complexity_in_context(w, before_words, word_weights)
+        for w in before_words
+    ) / max(1, len(before_words))
+    after_complexity = sum(
+        word_complexity_in_context(w, after_words, word_weights)
+        for w in after_words
+    ) / max(1, len(after_words))
+    # FIX (2026-10-04): S_lex is now threshold-based (see lexical_simplicity).
+    lexical = lexical_simplicity(before_words, after_words, word_weights)
+    jargon = jargon_simplicity(before_words, after_words, technical_terms)
     read_before, read_after = readability_score(original), readability_score(simplified)
     readability_simplicity = clamp(read_after - read_before + 0.5)
     components = {"S_lex": lexical, "S_read": readability_simplicity, "S_jargon": jargon}
@@ -251,7 +323,9 @@ Metric definitions:
   word_complexity_before/after
       Average word-level complexity before and after simplification.
   S_lex
-      Lexical simplicity improvement from reduced word complexity.
+      Lexical simplicity: normalized reduction in the COUNT of complex words
+      (C(w,s) > 0.5) from original to simplified. Threshold-based since
+      2026-10-04; previously the mean-complexity difference.
   S_read
       Readability simplicity score based on Flesch, grade, Fog, SMOG,
       sentence length, and word length.
