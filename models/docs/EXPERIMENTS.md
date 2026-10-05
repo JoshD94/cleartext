@@ -118,3 +118,52 @@ Adoption rule from round 11 on: a change must beat run-to-run noise on dev, mean
 v5 on TSAR test (report only): 152 correct of 239 edits (63.6%), versus 114 of 180 for v4 and 125 of 230 for v3. Word choice on CWI test (report only): share of edits on words most annotators marked hard 0.24 -> 0.32. The sentence block is now wired into the pipeline and reports reading_level_before/after. Safety checks run lazily (identical selections; TSAR in 29 s instead of minutes). v6 is kept on disk but is not the default.
 
 No labelled data exists here for the phrases and structure block, so it was not changed. The word difficulty block was not refit: its only downstream uses are features the decision model already weights, and round 8 showed further difficulty-style features add nothing.
+
+## Context fixes after the "sentence" / "convoluted" review (September 28)
+
+Review case: "Although this sentence is convoluted, the main idea is simple." The meaning model already favored the right sense of "sentence" (68%), but that sense has no WordNet synonyms, so every candidate came from the prison senses. "convoluted" was tagged as a passive verb, so only verb senses ("turned", "twisted") were offered.
+
+| Change | Result | Kept? |
+|---|---|---|
+| Meaning floor: reject candidates with meaning match < 0.10 | BenchLS dev net 162.7 -> 168.7 (all three CV repeats up); TSAR 152/239 -> 152/238 | yes (meaning_floor in config) |
+| Higher floors (0.15 to 0.40) | no further gain; 0.40 hurts | no |
+| Adjective reading for every agentless "be + participle" | dev net -4 (noise); read real passives ("is diverted") as adjectives | no |
+| Adjective reading only when WordNet counts favor the adjective or the base verb is rare (zipf < 2.5) | changes 1 of 929 BenchLS targets; TSAR identical (152/238); "were convoluted" -> "complex", "was assassinated" still -> "killed" | yes |
+
+The floor at 0.10 does not block "prison term" (meaning match 0.14); at default strictness the decision model already rejects it. BERT side test (scripts/experiments/bert_*.py, separate .venv-bert): combined with our sense ensemble, held-out SemCor sense accuracy rises from 62.9% to 66.9% (mix weight tuned on the other half of a 1,500-annotation sample); BERT alone 58.7%.
+BERT fit benchmark (bert_benchmark.py part A, bert_compare.py): BERT-base slot log-probability for all 29,462 SWORDS dev + generated test pairs, 2.5 hours on 4 CPU threads. Alone it reaches AUC 0.666 on generated pairs; as two extra stacker columns (slot score and score relative to the original word) the cross-validated fit rises from AUC 0.779 to 0.800 and log-loss from 0.388 to 0.374, well past the noise bar. Not added to the pipeline yet: it needs the team's decision on using a pretrained encoder, and about half a second to a second per hard word on CPU.
+
+## Ensemble v7: BERT as a meaning and fit member (September 28)
+
+BERT-base (uncased, 110M parameters, CPU) added as two members; everything else unchanged. `cleartext/contextual.py` loads it; `scripts/train_bert_senses.py`, `scripts/train_fit_v7.py`, `scripts/train_ensemble_v7.py` build it.
+
+| Stage | v5 | v7 | Data |
+|---|---|---|---|
+| Meaning (mix weight 0.2 chosen on SemCor dev by log-likelihood) | 61.8% | 67.6% (BERT alone 65.0%) | 3,000 fresh SemCor test words |
+| Fit stacker (+ BERT meaning; + BERT slot score and slot score relative to the original) | AUC 0.779 | 0.791; 0.808 | SWORDS dev + test, grouped 5-fold CV |
+| Decision (same model, meaning floor 0.10) | net 168.7, log-loss 0.2627 | net 243.7, log-loss 0.2405 | BenchLS, 10-fold x3 |
+| TSAR test (report only) | 152 / 238 (63.9%) | 158 / 219 (72.1%) | 373 sentences |
+
+Sense vectors: mean BERT vector (last four layers) of every SemCor train example for 19,102 senses; the other 98,557 WordNet senses use the lemma read inside its own definition. The round-trip member keeps the SemCor/gloss ensemble (a BERT pass per candidate would be too slow). Caveat: BERT was pretrained on Wikipedia and books, and BenchLS sentences come from Wikipedia, so BERT may have seen those sentences (not their labels) during pretraining; TSAR's gain is smaller but in the same direction.
+
+## Subsequent work, October 2 to 3
+
+These experiments keep v7 as the library and demo default. All BenchLS cases are now reused development data, including the historical holdout. SWORDS historical dev and test were used in fitting; TSAR remains reused reporting data. Scores below do not establish independent held-out accuracy or sentence-level meaning preservation.
+
+| Change | Result and deployment status | Detailed report |
+| --- | --- | --- |
+| Attributed domain audit and baselines | Fixed ungraded inputs with sources, candidate reasons, identity and dictionary baselines | [Domain audit](DOMAIN_AUDIT.md) |
+| Nine relation features | Mean net gain 27.33 at a fixed threshold over v7, saved as an opt-in 48-feature ranker | [Relation decision](RELATION_DECISION.md) |
+| Target-centered BERT meaning windows | Retains targets beyond the old cutoff; short BenchLS inputs do not measure the repair | [Context window](CONTEXT_WINDOW.md) |
+| Noun phrase-head inflection | Repairs plural forms, but decision refitting and frozen comparisons missed the gain requirement | [Noun inflection](NOUN_INFLECTION.md) |
+| Complete BERT slot scoring | Retains every candidate piece with bounded batches; no selection gain in the comparison | [Complete slot](COMPLETE_SLOT.md) |
+| Three BERT proposal-support features | Mean net gain 110.33 over the relation ranker; candidates remain WordNet proposals | [Prompted relations](PROMPTED_RELATIONS.md) |
+| Full-span replacement similarity | Mean net gain nine, log-loss decrease 0.00818; saved opt-in 52-feature ranker | [Context similarity](CONTEXT_SIMILARITY.md) |
+| Detail evidence and technical terms | Learned detail extension rejected; rule-based term protection and graph reports retained as opt-in blocks | [Detail preservation](DETAIL_PRESERVATION.md) |
+| All six inspection blocks | Grammar, explanations, consistency and quality reports added; final grammar ablation had zero selection change | [Building blocks](BUILDING_BLOCKS.md) |
+| Real-text diagnostic extension | Twelve attributed Europarl sentences from reused CompLex component data, with no correctness labels | [Parliament audit](PARLIAMENT_AUDIT.md) |
+| Replacement-sense contrasts | Two variants missed the development acceptance bar; no promotion | [Sense contrast](SENSE_CONTRAST.md) |
+| Novel candidate validation | Dictionary and provenance checks distinguish proposal coverage from accepted edits | [Candidate limits](CANDIDATE_LIMITS.md) |
+| Novel context validators | Latest full-span similarity shadow gains 14.67 net but loses 3.34 precision points; no calibrated threshold qualifies, so safe novel edits stay disabled | [Novel context](NOVEL_CONTEXT.md) |
+
+Each report retains its original protocol, comparison, failures, saved output paths and source fingerprints. Test counts in those reports describe the suite at that stage. The current suite is documented in the PR validation.

@@ -8,3 +8,4 @@ logs/
 work/
 outputs/
 .pytest_cache/
+.venv-bert/
