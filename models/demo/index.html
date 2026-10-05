@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClearText demo</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f6f5f2; --card: #fcfcfb; --line: #e4e2dc; --soft: #efede8;
+    --ink: #0b0b0b; --ink-2: #52514e; --muted: #85837d;
+    --accent: #2a78d6; --accent-soft: #e3eefb;
+    --syn: #2a78d6; --hyp: #eb6834; --sim: #1baf7a;
+    --good: #0a7a3d; --good-soft: #e3f3e9; --bad: #c23b3a; --bad-soft: #fbe7e6;
+    --h0: 227,238,251; --h1: 42,120,214;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --bg: #121211; --card: #1a1a19; --line: #2e2e2c; --soft: #232322;
+      --ink: #ffffff; --ink-2: #c3c2b7; --muted: #8f8e86;
+      --accent: #3987e5; --accent-soft: #1c2c40;
+      --syn: #3987e5; --hyp: #d95926; --sim: #199e70;
+      --good: #4cc27f; --good-soft: #16301f; --bad: #e66767; --bad-soft: #3a1b1b;
+      --h0: 36,48,64; --h1: 57,135,229;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 56px 24px 120px; }
+  h1 { font-size: 30px; margin: 0 0 4px; font-weight: 650; }
+  .sub { color: var(--ink-2); margin: 0 0 28px; }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; }
+  textarea { width: 100%; min-height: 76px; resize: vertical; border: 0; outline: none; background: transparent; color: var(--ink); font-family: inherit; font-size: 19px; line-height: 1.5; padding: 0; }
+  .examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chipbtn { font: inherit; font-size: 12.5px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink-2); cursor: pointer; }
+  .chipbtn:hover { border-color: var(--accent); color: var(--ink); }
+  .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; margin: 18px 0 8px; font-size: 14px; color: var(--ink-2); }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-left: 8px; vertical-align: middle; }
+  .seg button { font: inherit; border: 0; background: var(--card); color: var(--ink-2); padding: 4px 11px; cursor: pointer; }
+  .seg button.on { background: var(--accent); color: #fff; }
+  .bar input[type=range] { width: 120px; vertical-align: middle; accent-color: var(--accent); margin: 0 6px; }
+  .bar input[type=checkbox] { accent-color: var(--accent); margin-right: 5px; }
+  .bar b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  details.more { font-size: 14px; color: var(--ink-2); margin-bottom: 18px; }
+  details.more summary { cursor: pointer; color: var(--muted); }
+  details.more .bar { margin-top: 10px; }
+  .go { font: inherit; font-weight: 600; padding: 10px 24px; border-radius: 10px; border: 0; cursor: pointer; background: var(--accent); color: #fff; }
+  .go:disabled { opacity: .6; }
+  .status { color: var(--muted); font-size: 13px; margin-left: 12px; }
+  .result { margin: 34px 0 44px; }
+  .output { font-size: 24px; line-height: 1.45; }
+  mark { background: var(--accent-soft); color: var(--ink); border-bottom: 2px solid var(--accent); padding: 0 3px; border-radius: 3px; }
+  .orig { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .levels { display: flex; gap: 34px; margin-top: 16px; }
+  .levels .v { font-size: 20px; font-weight: 620; }
+  .levels .l { font-size: 12.5px; color: var(--ink-2); }
+  .steps-title { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+  .step { display: grid; grid-template-columns: 34px 1fr; gap: 0 14px; margin-bottom: 14px; }
+  .n { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 650; color: var(--accent); background: var(--card); border: 1px solid var(--line); margin-top: 16px; }
+  .step .box { padding: 16px 20px; }
+  .step h3 { margin: 0; font-size: 16.5px; font-weight: 620; }
+  .step .what { color: var(--muted); font-size: 13px; margin: 2px 0 12px; }
+  .off { color: var(--muted); font-size: 14px; }
+  .target { margin-top: 12px; }
+  .target:first-of-type { margin-top: 0; }
+  .tw { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  .tw .h { font-weight: 400; color: var(--muted); font-size: 12.5px; margin-left: 6px; }
+  /* 3: words */
+  .sentence { line-height: 2.3; font-size: 17px; }
+  .tok { padding: 2px 5px; border-radius: 5px; cursor: default; }
+  .tok.skip { color: var(--muted); }
+  .tok.flag { outline: 2px solid var(--ink); outline-offset: 1px; font-weight: 600; }
+  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; font-size: 12.5px; color: var(--ink-2); margin-top: 10px; }
+  .ramp { width: 120px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, rgb(var(--h0)), rgb(var(--h1))); display: inline-block; vertical-align: middle; margin: 0 6px; }
+  .key { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  /* rows with bars */
+  .row { display: grid; grid-template-columns: 150px 1fr 64px; gap: 10px; align-items: center; font-size: 14px; padding: 3px 0; }
+  .row .w { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row .val { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+  .track { position: relative; height: 10px; background: var(--soft); border-radius: 3px; }
+  .fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--accent); }
+  .fill.good { background: var(--good); } .fill.bad { background: var(--bad); } .fill.muted { background: var(--muted); }
+  .thr { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink); }
+  .mid { position: absolute; top: -3px; bottom: -3px; left: 50%; width: 1px; background: var(--muted); }
+  .def { font-size: 13px; color: var(--ink-2); grid-column: 1 / -1; margin: -2px 0 4px; }
+  .srcdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 13px; margin: 0 6px 6px 0; border: 1px solid var(--line); }
+  .pill.synonym { border-color: var(--syn); } .pill.hypernym { border-color: var(--hyp); } .pill.similar { border-color: var(--sim); }
+  .ok { color: var(--good); } .no { color: var(--bad); }
+  .badge { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 999px; margin-left: 6px; white-space: nowrap; }
+  .step > .box { min-width: 0; }
+  .badge.ok { background: var(--good-soft); } .badge.no { background: var(--bad-soft); }
+  .grid { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .grid th { font-weight: normal; color: var(--muted); font-size: 11.5px; padding: 0 4px 6px; text-align: center; white-space: nowrap; }
+  .grid th:first-child, .grid td:first-child { text-align: left; padding-left: 0; }
+  .grid td { text-align: center; padding: 5px 4px; border-top: 1px solid var(--line); }
+  .grid td.cell-ok { color: var(--good); } .grid td.cell-no { color: var(--bad); background: var(--bad-soft); font-weight: 700; }
+  .scroll { overflow-x: auto; }
+  .more-c { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .members { font-size: 12px; color: var(--muted); grid-column: 1 / -1; margin: -2px 0 4px; }
+  .rank { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: baseline; font-size: 14px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .rank:last-child { border-bottom: 0; }
+  .error { color: var(--bad); }
+  #tip { position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s; max-width: 280px; background: var(--card); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; box-shadow: 0 4px 16px rgba(0,0,0,.14); z-index: 9; }
+  @media (max-width: 640px) {
+    main { padding: 36px 16px 80px; } .output { font-size: 20px; }
+    .row { grid-template-columns: 100px 1fr 52px; } .step { grid-template-columns: 1fr; } .n { margin: 0 0 6px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>ClearText</h1>
+  <p class="sub">Simplify a sentence with our own small models, then see what every building block did.</p>
+
+  <div class="box">
+    <textarea id="text" spellcheck="false">The technician will commence the installation subsequently.</textarea>
+    <div class="examples" id="examples"></div>
+  </div>
+
+  <div class="bar">
+    <span>Words to replace<span class="seg" id="edits"></span></span>
+    <span>Strictness<input id="strict" type="range" min="0.1" max="0.9" step="0.05" value="0.4"><b id="strict-v"></b></span>
+    <label><input id="phrases" type="checkbox">Phrase rules</label>
+    <label><input id="structure" type="checkbox">Structure rules</label>
+  </div>
+  <details class="more"><summary>More options</summary>
+    <div class="bar">
+      <span>Hard-word cutoff<input id="hard" type="range" min="0.1" max="0.9" step="0.01" value="0.39"><b id="hard-v"></b></span>
+      <span>Noun cutoff<input id="noun" type="range" min="0" max="1" step="0.05" value="0.8"><b id="noun-v"></b></span>
+      <button class="chipbtn" id="reset">Reset</button>
+    </div>
+  </details>
+  <button class="go" id="go">Simplify</button><span class="status" id="status">⌘/Ctrl + Enter</span>
+
+  <div id="out"></div>
+</main>
+<div id="tip"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const f2 = v => v == null ? '–' : (+v).toFixed(2);
+const SRC = { synonym: ['Synonym', 'var(--syn)'], hypernym: ['Broader word', 'var(--hyp)'], similar: ['Similar to', 'var(--sim)'] };
+const EXAMPLES = [
+  'The technician will commence the installation subsequently.',
+  'The medication alleviates pain but can cause drowsiness.',
+  'Heavy rainfall may exacerbate the flooding.',
+  'The contract stipulates that payment is due within thirty days.',
+  'Prior to the meeting, a large number of residents submitted complaints.',
+  'The report was published by the committee.',
+];
+const DEFAULTS = { edits: 1, strict: 0.4, hard: 0.39, noun: 0.8 };
+let edits = DEFAULTS.edits;
+
+EXAMPLES.forEach(t => { const b = document.createElement('button'); b.className = 'chipbtn'; b.textContent = t.length > 38 ? t.slice(0, 36) + '…' : t; b.title = t; b.onclick = () => { $('text').value = t; run(); }; $('examples').appendChild(b); });
+for (let i = 0; i <= 3; i++) { const b = document.createElement('button'); b.textContent = i; b.onclick = () => { edits = i; seg(); }; $('edits').appendChild(b); }
+const seg = () => [...$('edits').children].forEach((b, i) => b.classList.toggle('on', i === edits));
+seg();
+for (const k of ['strict', 'hard', 'noun']) { const show = () => $(k + '-v').textContent = f2($(k).value); $(k).addEventListener('input', show); show(); }
+$('reset').onclick = () => { edits = DEFAULTS.edits; seg(); for (const k of ['strict', 'hard', 'noun']) { $(k).value = DEFAULTS[k]; $(k).dispatchEvent(new Event('input')); } };
+$('go').onclick = run;
+$('text').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); run(); } });
+
+// Tooltips for anything with data-tip.
+document.addEventListener('mousemove', e => {
+  const el = e.target.closest('[data-tip]'), tip = $('tip');
+  if (!el) { tip.style.opacity = 0; return; }
+  tip.innerHTML = el.dataset.tip; tip.style.opacity = 1;
+  tip.style.left = Math.min(e.clientX + 14, innerWidth - 300) + 'px'; tip.style.top = (e.clientY + 14) + 'px';
+});
+
+async function run() {
+  const text = $('text').value.trim(); if (!text) return;
+  $('go').disabled = true; $('status').textContent = 'Working…';
+  try {
+    const res = await fetch('/api/simplify', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, max_edits: edits, strictness: +$('strict').value, hard: +$('hard').value, noun: +$('noun').value,
+        phrases: $('phrases').checked, structure: $('structure').checked }) });
+    render(await res.json());
+  } catch (err) { $('out').innerHTML = '<p class="error">Could not reach the model server: ' + esc(err.message) + '</p>'; $('status').textContent = ''; }
+  finally { $('go').disabled = false; }
+}
+
+// ---------- helpers ----------
+const heat = h => { // hardness 0..1 -> background on the blue ramp, ink that stays readable
+  const a = getComputedStyle(document.documentElement).getPropertyValue('--h0').split(',').map(Number);
+  const b = getComputedStyle(document.documentElement).getPropertyValue('--h1').split(',').map(Number);
+  const c = a.map((x, i) => Math.round(x + (b[i] - x) * h));
+  return `background:rgb(${c});color:${h > 0.55 ? '#fff' : 'var(--ink)'}`;
+};
+const bar = (v, cls = '', thr = null) => `<div class="track"><div class="fill ${cls}" style="width:${Math.max(0, Math.min(1, v)) * 100}%"></div>${thr == null ? '' : `<div class="thr" style="left:${thr * 100}%"></div>`}</div>`;
+const step = (n, title, what, body) => `<div class="step"><div class="n">${n}</div><div class="box"><h3>${title}</h3><p class="what">${what}</p>${body}</div></div>`;
+const srcDot = s => SRC[s] ? `<span class="srcdot" style="background:${SRC[s][1]}"></span>` : '';
+const perTarget = (targets, fn) => targets.length ? targets.map(t => `<div class="target"><div class="tw">${esc(t.word)}<span class="h">hardness ${f2(t.hardness)}</span></div>${fn(t)}</div>`).join('') : '<p class="off">No word was hard enough to work on.</p>';
+const LIMIT = 8;
+const firstN = (list) => list.slice(0, LIMIT);
+const moreNote = (list) => list.length > LIMIT ? `<div class="more-c">+ ${list.length - LIMIT} lower-ranked options not shown</div>` : '';
+const cefr = v => v == null ? '–' : ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'][Math.min(5, Math.max(0, Math.round(v) - 1))];
+
+function highlight(output, edits) {
+  let html = esc(output);
+  for (const e of edits) {
+    if (e.stage === 'structure' || !e.to) continue;
+    const re = new RegExp('(^|[^\\w>])(' + esc(e.to).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?![\\w<])', 'i');
+    html = html.replace(re, `$1<mark data-tip="was: ${esc(e.from)}">$2</mark>`);
+  }
+  return html;
+}
+
+// ---------- render ----------
+function render(r) {
+  if (r.error) { $('out').innerHTML = '<p class="error">' + esc(r.error) + '</p>'; $('status').textContent = ''; return; }
+  $('status').textContent = 'Done in ' + r.seconds + ' s';
+  const S = r.steps, T = S.targets, thr = S.decision_threshold;
+  const changed = r.output !== r.original;
+  let h = `<div class="result box"><div class="output">${changed ? highlight(r.output, r.edits) : esc(r.output)}</div>
+    <div class="orig">${changed ? 'Original: ' + esc(r.original) : 'No change: nothing passed every step at these settings.'}</div>
+    <div class="levels"><div><div class="v">${r.edits.length}</div><div class="l">edits</div></div>
+    <div><div class="v">${cefr(r.level_before)} → ${cefr(r.level_after)}</div><div class="l">reading level (${f2(r.level_before)} → ${f2(r.level_after)}, scale 1–6)</div></div></div></div>
+    <p class="steps-title">How the model got there</p>`;
+
+  // 1 Structure
+  h += step(1, 'Sentence structure', 'Two handwritten grammar rules: split two joined clauses, or turn a simple passive into active voice.',
+    !S.structure.on ? '<p class="off">Off. Turn on "Structure rules" to use it.</p>' :
+    S.structure.changed ? `<p><span class="ok">✓ ${esc(S.structure.rule)}</span></p><p class="orig">${esc(S.structure.before)}<br>→ <b style="color:var(--ink)">${esc(S.structure.after)}</b></p>` :
+    '<p class="off">No rule matched. They only fire on two full clauses joined by ", and" or on a passive with "by".</p>');
+
+  // 2 Phrases
+  const P = S.phrases;
+  h += step(2, 'Phrases', `Checks the sentence against ${P.inventory} wordy phrases. A difficulty model (trained on CompLex phrases) must rate the short version as easier.`,
+    !P.matches.length ? `<p class="off">None of the ${P.inventory} phrases appear${P.on ? '' : ' (and phrase rules are off)'}.</p>` :
+    P.matches.map(m => `<div class="row"><div class="w">${esc(m.phrase)} → ${esc(m.replacement)}</div>
+      <div class="track"><div class="mid"></div><div class="fill ${m.gain > 0 ? 'good' : 'bad'}" style="left:${m.gain >= 0 ? 50 : 50 + m.gain * 100}%;width:${Math.abs(m.gain) * 100}%"></div></div>
+      <div class="val">${m.gain > 0 ? '+' : ''}${f2(m.gain)}</div></div>
+      <div class="def">${!P.on ? 'Phrase rules are off.' : m.applied ? '<span class="ok">✓ applied</span>' : m.gain > 0.02 ? 'Another phrase gained more.' : '<span class="no">✕ not simpler by the model</span>'} Difficulty ${f2(m.before)} → ${f2(m.after)}.</div>`).join(''));
+
+  // 3 Hard words
+  const D = S.detect;
+  h += step(3, 'Hard-word detection', 'Each content word gets a hardness score from a detector trained on CWI 2018 (20 readers marked hard words), on top of our CompLex word-difficulty model. Outlined words go on to the next steps.',
+    `<div class="sentence">${D.tokens.map(t => {
+      const tip = t.skip ? `Skipped: ${esc(t.skip)}` : `Hardness ${f2(t.hardness)} · word difficulty ${f2(t.complex)}<br>${t.flagged ? '<b>Hard: goes to the next steps</b>' : esc(t.why)}`;
+      return `<span class="tok ${t.skip ? 'skip' : ''} ${t.flagged ? 'flag' : ''}" style="${t.skip ? '' : heat(t.hardness)}" data-tip="${tip}">${esc(t.text)}</span>${t.ws ? ' ' : ''}`;
+    }).join('')}</div>
+    <div class="legend"><span>easy<span class="ramp"></span>hard</span><span>Outlined: hardness ≥ ${f2(D.threshold)} (nouns ≥ ${f2(D.noun_threshold)})</span><span>Grey: skipped (names, function words); hover to see why</span></div>`);
+
+  // 4 Meaning
+  h += step(4, 'Word meaning', 'Guesses which dictionary meaning the word has here: SemCor (words tagged with their exact meaning), dictionary definitions, and BERT comparing this sentence with examples of each meaning.',
+    perTarget(T, t => t.senses.length ? t.senses.map((s, i) => `<div class="row"><div class="w" data-tip="${esc(s.lemmas.join(', '))}">${i ? '' : '<b>'}${esc(s.lemmas[0])} <span style="color:var(--muted)">(${esc(s.sense.split('.').slice(-2).join('.'))})</span>${i ? '' : '</b>'}</div>${bar(s.prob, i ? 'muted' : '')}<div class="val">${Math.round(s.prob * 100)}%</div><div class="def">${esc(s.definition)}</div></div>`).join('') : '<p class="off">No WordNet meanings.</p>'));
+
+  // 5 Candidates
+  h += step(5, 'Finding replacements', 'Every word WordNet links to that meaning: synonyms first, then broader words and "similar to" words, put in the right form (tense, plural).',
+    perTarget(T, t => t.candidates.length ? t.candidates.map(c => `<span class="pill ${c.source}" data-tip="${SRC[c.source]?.[0] || ''}">${srcDot(c.source)}${esc(c.word)}</span>`).join('') + `<div class="more-c">${t.candidates.length} options</div>` : '<p class="off">WordNet has no replacements for this word.</p>') +
+    `<div class="legend">${Object.values(SRC).map(([l, c]) => `<span><span class="key" style="background:${c}"></span>${l}</span>`).join('')}</div>`);
+
+  // 6 Context fit
+  h += step(6, 'Does it fit this sentence?', 'Signals from several models (meaning match, a context checker trained on SWORDS, BERT reading the word in this exact sentence, word vectors) combined into one fit score.',
+    perTarget(T, t => firstN([...t.candidates].sort((a, b) => b.fit - a.fit)).map(c => {
+      const m = Object.entries(c.members).map(([k, v]) => `${esc(k)}: ${f2(v)}`).join('<br>');
+      return `<div class="row"><div class="w" data-tip="${m}">${srcDot(c.source)}${esc(c.word)}</div>${bar(c.fit)}<div class="val">${f2(c.fit)}</div></div>`;
+    }).join('') + moreNote(t.candidates) + '<div class="more-c">Hover a word for its individual signals.</div>'));
+
+  // 7 Simpler
+  h += step(7, 'Is it simpler?', 'Our CompLex word-difficulty model scores the replacement against the original word. Green means easier.',
+    perTarget(T, t => firstN([...t.candidates].sort((a, b) => b.gain - a.gain)).map(c => `<div class="row"><div class="w">${srcDot(c.source)}${esc(c.word)}</div>
+      <div class="track"><div class="mid"></div><div class="fill ${c.gain > 0 ? 'good' : 'bad'}" style="left:${c.gain >= 0 ? 50 : 50 + Math.max(-.5, c.gain)* 100}%;width:${Math.min(.5, Math.abs(c.gain)) * 100}%"></div></div>
+      <div class="val">${c.gain > 0 ? '+' : ''}${f2(c.gain)}</div></div>`).join('') + moreNote(t.candidates) +
+      `<div class="more-c">Original word difficulty ${f2(t.difficulty)}. Bar shows how much easier (right) or harder (left).</div>`));
+
+  // 8 Decision
+  h += step(8, 'Decision', `A model trained on BenchLS (people ranked simpler replacements) weighs fit, simplicity, meaning and part of speech into one acceptance score. It must reach ${f2(thr)} (black line).`,
+    perTarget(T, t => firstN(t.candidates).map(c => `<div class="row"><div class="w">${c.passed ? '<span class="ok">✓</span>' : '<span class="no">✕</span>'} ${esc(c.word)}</div>${bar(c.accept, c.passed ? 'good' : 'muted', thr)}<div class="val">${f2(c.accept)}</div></div>`).join('') + moreNote(t.candidates)));
+
+  // 9 Safety
+  const CH = S.checks;
+  h += step(9, 'Safety checks', 'Handwritten rules on the rewritten sentence. Every replacement that passed the decision must pass all of them. Hover a column for what it checks.',
+    perTarget(T, t => {
+      const passed = t.candidates.filter(c => c.passed);
+      if (!passed.length) return '<p class="off">Nothing passed the decision, so nothing to check.</p>';
+      return `<div class="scroll"><table class="grid"><tr><th>Replacement</th>${CH.map(c => `<th data-tip="${esc(c.full)}">${esc(c.short)}</th>`).join('')}<th>Result</th></tr>` +
+        passed.map(c => { const ok = Object.fromEntries(c.checks.map(x => [x.key, x.ok]));
+          return `<tr><td><b>${esc(c.word)}</b></td>${CH.map(k => k.key in ok ? `<td class="${ok[k.key] ? 'cell-ok' : 'cell-no'}" data-tip="${esc(k.full)}">${ok[k.key] ? '✓' : '✕'}</td>` : '<td>–</td>').join('')}
+            <td><span class="badge ${c.safe ? 'ok' : 'no'}">${c.safe ? '✓ safe' : '✕ blocked'}</span></td></tr>`; }).join('') + '</table></div>';
+    }));
+
+  // 10 Choice
+  const C = S.choice;
+  h += step(10, 'Picking the edit', `Each hard word's best safe replacement is scored by acceptance × hardness<sup>${C.alpha}</sup>, so harder words go first. Up to ${C.max_edits} ${C.max_edits === 1 ? 'edit is' : 'edits are'} applied.`,
+    C.ranked.length ? C.ranked.map((x, i) => `<div class="rank"><div style="color:var(--muted)">${i + 1}</div><div><b>${esc(x.word)}</b> → ${esc(x.best)}
+      <span style="color:var(--muted);font-size:12.5px">${f2(x.accept)} × ${f2(x.hardness)}<sup>${C.alpha}</sup> = ${f2(x.score)}</span></div>
+      <div>${x.chosen ? '<span class="badge ok">✓ applied</span>' : '<span class="badge no" data-tip="Over the edit limit, or dropped by the combined check">not applied</span>'}</div></div>`).join('')
+    : '<p class="off">No word had a replacement that passed every step.</p>');
+
+  // 11 Reading level
+  h += step(11, 'Reading level', 'A sentence-difficulty model trained on CEFR-SP (sentences leveled by English teachers) scores the sentence before and after, on a 1 (A1) to 6 (C2) scale.',
+    `<div class="row"><div class="w">Before · ${cefr(r.level_before)}</div>${bar((r.level_before - 1) / 5, 'muted')}<div class="val">${f2(r.level_before)}</div></div>
+     <div class="row"><div class="w">After · ${cefr(r.level_after)}</div>${bar((r.level_after - 1) / 5, r.level_after < r.level_before ? 'good' : 'muted')}<div class="val">${f2(r.level_after)}</div></div>`);
+
+  $('out').innerHTML = h;
+}
+run();
+</script>
+</body>
+</html>
