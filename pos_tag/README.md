@@ -20,7 +20,11 @@ Built with [spaCy](https://spacy.io) and the [SimplePPDB++](https://github.com/m
 | `simpleppdb_phrases.csv` | Phrase list from SimplePPDB++ (generated, optional) |
 | `test_phrase_finder.py` | Shows detected phrases and the changed sentences |
 | `evaluate.py` | Scores the phrase finder against labeled sentences |
-| `eval_sentences.csv` | Labeled test sentences used by `evaluate.py` |
+| `eval_sentences.csv` | Hand-made labeled sentences (quick checks) |
+| `eval_dev.csv` | Labeled real-text sentences for finding problems and tuning (10 paragraphs) |
+| `eval_test.csv` | Labeled real-text sentences for the final score only (5 paragraphs) |
+| `review_simpleppdb.py` | Lists SimplePPDB phrases found in development text, for review |
+| `verified_phrases.csv` | SimplePPDB phrases you reviewed and marked good (generated) |
 
 Keep all files in the same folder.
 
@@ -101,7 +105,8 @@ Look up any tag with `spacy.explain("VBD")`.
 
 - **`manual_phrases.csv`**: about 25 hand-checked phrases. Add more as `complex,simple` lines.
 - **Verb patterns** in `phrase_finder.py` (`FLEXIBLE_PATTERNS`): phrases whose verb changes form, like "make / made / makes a decision".
-- **`simpleppdb_phrases.csv`**: about 80,000 multi-word phrases filtered from SimplePPDB++. The build script keeps pairs that are clearly simpler (`--min-complexity`, default 1.0) and close in meaning (`--min-ppdb`, default 4.0), and drops contraction fragments, foreign words, one-word swaps, and padded pairs that share a first or last word ("prior to the" → "before the").
+- **"in a ___ way" rule** in `phrase_finder.py`: turns "in a theatrical way" → "theatrically", "in decisive ways" → "decisively", "in a very careful manner" → "very carefully". The adverb is built from the adjective, so one rule covers many phrases. Adjectives with no good adverb ("timely", "new") are skipped; edit `NO_ADVERB` and `ADVERB_EXCEPTIONS` to adjust.
+- **`simpleppdb_phrases.csv`**: about 80,000 multi-word phrases filtered from SimplePPDB++. The build script keeps pairs that are clearly simpler (`--min-complexity`, default 1.0) and close in meaning (`--min-ppdb`, default 4.0), and drops contraction fragments, foreign words, one-word swaps, replacements that add a form of "be" ("diplomatic relations" → "diplomacy is"), and padded pairs that share a first or last word ("prior to the" → "before the").
 
 If phrases overlap in a sentence, a manual phrase always wins over a SimplePPDB phrase. Between phrases from the same list, the longer one wins.
 
@@ -122,6 +127,30 @@ The cat sat on the mat.,
 ```
 
 Use `=>` before the acceptable replacements, `|` between alternatives, `;` between phrases, and leave the second column empty when nothing should be detected.
+
+### Development and test sets
+
+`eval_dev.csv` and `eval_test.csv` come from 15 paragraphs of real articles, split by article so no source appears in both. Use the development set freely to find problems. Use the test set only for the final comparison, and never add its phrases to the lists; otherwise the score no longer measures how the tool does on new text.
+
+### Reviewing SimplePPDB
+
+```
+python review_simpleppdb.py collect eval_dev.csv   # lists SimplePPDB phrases that match
+# fill in the "verdict" column of simpleppdb_review.csv with good / bad
+python review_simpleppdb.py apply                   # writes verified_phrases.csv
+```
+
+`apply` also prints SimplePPDB's precision on the reviewed phrases.
+
+### Comparing setups
+
+```
+python evaluate.py eval_test.csv --lists manual
+python evaluate.py eval_test.csv --lists manual,verified
+python evaluate.py eval_test.csv --lists manual,simpleppdb
+```
+
+When phrases overlap, the priority is manual > verified > simpleppdb.
 
 ## Known limitations
 

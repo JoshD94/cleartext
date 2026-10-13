@@ -5,6 +5,9 @@ Usage:
     python evaluate.py                      # uses eval_sentences.csv
     python evaluate.py my_sentences.csv     # use a different labeled file
     python evaluate.py --all                # also list sentences with no errors
+    python evaluate.py eval_test.csv --lists manual,verified
+                                            # use only some phrase lists
+                                            # (manual, verified, simpleppdb)
 
 Labeled file format (CSV with two columns):
     sentence,expected
@@ -27,10 +30,9 @@ Scores:
 """
 
 import csv
+import os
 import sys
 from collections import Counter
-
-from phrase_finder import find_complex_phrases
 
 
 def parse_expected(text):
@@ -104,7 +106,7 @@ def evaluate(path, show_all=False):
     print(f"F1:                  {f1:6.1%}")
     print(f"Suggestion accuracy: {sugg_acc:6.1%}  ({good_suggestion}/{tp})")
     print("\nBy source:")
-    for source in ("manual", "simpleppdb"):
+    for source in ("manual", "verified", "simpleppdb"):
         c, w = by_source[(source, "correct")], by_source[(source, "wrong")]
         if c + w:
             print(f"  {source:<11} {c} correct, {w} wrong  (precision {c / (c + w):.1%})")
@@ -115,5 +117,12 @@ def evaluate(path, show_all=False):
 
 
 if __name__ == "__main__":
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    argv = sys.argv[1:]
+    if "--lists" in argv:
+        i = argv.index("--lists")
+        os.environ["PHRASE_LISTS"] = argv[i + 1]
+        del argv[i:i + 2]
+    # Imported here so --lists takes effect before the phrase lists load
+    from phrase_finder import find_complex_phrases
+    args = [a for a in argv if not a.startswith("--")]
     evaluate(args[0] if args else "eval_sentences.csv", show_all="--all" in sys.argv)

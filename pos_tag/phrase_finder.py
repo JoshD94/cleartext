@@ -8,7 +8,12 @@ Setup: same as pos_tag.py (spaCy + en_core_web_sm). This file must be
 in the same folder as pos_tag.py, because it reuses the loaded model.
 
 Phrase lists are read from manual_phrases.csv and (if present)
-simpleppdb_phrases.csv in the same folder. See build_phrase_list.py.
+verified_phrases.csv and simpleppdb_phrases.csv in the same folder.
+See build_phrase_list.py and review_simpleppdb.py.
+
+To use only some lists, set the PHRASE_LISTS environment variable, e.g.
+    PHRASE_LISTS=manual,verified python test_phrase_finder.py
+(evaluate.py has a --lists option that does this for you.)
 
 Usage from your teammate's code:
     from phrase_finder import find_complex_phrases
@@ -16,6 +21,7 @@ Usage from your teammate's code:
 """
 
 import csv
+import os
 from pathlib import Path
 
 from spacy.matcher import Matcher, PhraseMatcher
@@ -27,17 +33,19 @@ from pos_tag import nlp  # reuse the model that pos_tag already loaded
 # Phrase lists (loaded from CSV files in the same folder as this script)
 #
 #   manual_phrases.csv     - hand-written phrases (edit this to add your own)
+#   verified_phrases.csv   - SimplePPDB phrases you reviewed and marked good,
+#                            created by review_simpleppdb.py (optional)
 #   simpleppdb_phrases.csv - phrases from the SimplePPDB++ dataset, created by
 #                            running build_phrase_list.py (optional)
 #
-# If a phrase appears in both, the manual entry wins.
+# Priority when phrases overlap: manual > verified > simpleppdb.
 # ---------------------------------------------------------------------------
 
 HERE = Path(__file__).resolve().parent
-PHRASE_FILES = [
-    ("manual", HERE / "manual_phrases.csv"),
-    ("simpleppdb", HERE / "simpleppdb_phrases.csv"),
-]
+SOURCES = ("manual", "verified", "simpleppdb")      # in priority order
+ACTIVE = [s.strip() for s in os.environ.get("PHRASE_LISTS", ",".join(SOURCES)).split(",")
+          if s.strip()]
+PHRASE_FILES = [(s, HERE / f"{s}_phrases.csv") for s in SOURCES if s in ACTIVE]
 
 
 def _normalize(text):
@@ -180,7 +188,8 @@ def find_complex_phrases(sentence):
 
     # Collect every match, with its suggestion and source
     matches = []
-    for match_id, start, end in list(_phrase_matcher(doc)) + list(_matcher(doc)):
+    flexible = list(_matcher(doc)) if "manual" in ACTIVE else []
+    for match_id, start, end in list(_phrase_matcher(doc)) + flexible:
         span = doc[start:end]
         label = nlp.vocab.strings[match_id]
         if label == "FIXED":
@@ -201,7 +210,7 @@ def find_complex_phrases(sentence):
     info = {}
     taken = set()          # word positions already covered by a chosen phrase
     chosen = []
-    for source in ("manual", "simpleppdb"):
+    for source in SOURCES:
         spans = []
         for span, pattern, suggestion, src_name in matches:
             if src_name == source:
