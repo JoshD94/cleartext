@@ -106,7 +106,7 @@ def evaluate(path, show_all=False):
     print(f"F1:                  {f1:6.1%}")
     print(f"Suggestion accuracy: {sugg_acc:6.1%}  ({good_suggestion}/{tp})")
     print("\nBy source:")
-    for source in ("manual", "verified", "simpleppdb"):
+    for source in ("manual", "verified", "model", "simpleppdb"):
         c, w = by_source[(source, "correct")], by_source[(source, "wrong")]
         if c + w:
             print(f"  {source:<11} {c} correct, {w} wrong  (precision {c / (c + w):.1%})")

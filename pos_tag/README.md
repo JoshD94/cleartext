@@ -25,6 +25,12 @@ Built with [spaCy](https://spacy.io) and the [SimplePPDB++](https://github.com/m
 | `eval_test.csv` | Labeled real-text sentences for the final score only (5 paragraphs) |
 | `review_simpleppdb.py` | Lists SimplePPDB phrases found in development text, for review |
 | `verified_phrases.csv` | SimplePPDB phrases you reviewed and marked good (generated) |
+| `build_asset_data.py` | Builds training data for the phrase detector from ASSET |
+| `train_crf.py` | Trains the CRF phrase detector and compares it with baselines |
+| `phrase_model.py` | `detect(sentence)`: finds complex phrases with the trained CRF |
+| `phrase_replacer.py` | Suggests a replacement for a detected phrase: learned table, then BERT |
+| `review_replacements.py` | Collects the tool's replacements for you to judge, then tunes BERT's confidence filter |
+| `learned_replacements.csv` | Phrase replacements people made in ASSET's training sentences (generated) |
 
 Keep all files in the same folder.
 
@@ -152,6 +158,96 @@ python evaluate.py eval_test.csv --lists manual,simpleppdb
 
 When phrases overlap, the priority is manual > verified > simpleppdb.
 
+## Trained phrase detector
+
+A CRF model that learns which phrases people simplify, from the ASSET dataset (2,357 sentences, each rewritten by 10 people). A phrase counts as complex when at least 3 of the 10 people replaced it with shorter wording, such as "prior to" → "before" or "provided assistance to" → "helped".
+
+### Setup
+
+```
+pip install python-crfsuite wordfreq
+git clone https://github.com/facebookresearch/asset.git
+python build_asset_data.py asset      # about 30 seconds
+python train_crf.py                   # about 2 minutes
+```
+
+`build_asset_data.py` writes `asset_phrases.jsonl` (sentences with B/I/O labels, split into train / dev / test) and `learned_replacements.csv`. `train_crf.py` tunes the model on dev, saves `phrase_crf.crfsuite` and `phrase_crf.json`, and reports test scores.
+
+### Use
+
+```python
+from phrase_model import detect
+detect("The meeting took place prior to the election.")
+# [{'start_index': 2, 'end_index': 4, 'text': 'took place'},
+#  {'start_index': 4, 'end_index': 6, 'text': 'prior to'}]
+```
+
+`detect(sentence, threshold=0.3)` makes it stricter (fewer, more reliable phrases); a lower threshold finds more.
+
+### How it works
+
+Each word gets a label: B (starts a complex phrase), I (inside one), or O. Features for each word include the word and its lemma, suffix, POS tag, dependency role (from `pos_tag.py`'s spaCy model), word frequency, and the neighbouring words. Instead of taking only the single most likely labeling, the model marks words whose probability of being in a complex phrase is above a threshold tuned on the dev split.
+
+### Results (ASSET test split, 359 sentences, 141 labeled phrases)
+
+| Detector | Exact F1 | Overlap P | Overlap R | Overlap F1 |
+|---|---|---|---|---|
+| Manual list + rules | 0.0% | 50.0% | 2.1% | 4.1% |
+| Learned table (lookup of training phrases) | 7.6% | 26.3% | 17.7% | 21.2% |
+| **CRF model** | 6.3% | 27.7% | 22.7% | **24.9%** |
+| One human vs. the other 9 (ceiling) | 16.7% | 35.0% | 32.7% | 33.7% |
+
+"Exact" requires the same phrase boundaries; "overlap" counts a prediction as correct if it overlaps a labeled phrase. People often disagree about which phrases to simplify, so even a single human only reaches 33.7% overlap F1 against the others; the CRF reaches about three-quarters of that. Your numbers may differ slightly after retraining.
+
+## Replacement stage
+
+When the trained model finds a phrase that the manual list doesn't cover, `phrase_replacer.py` picks a replacement:
+
+1. **Learned table**: if people replaced this exact phrase in ASSET's training sentences, use their most common replacement ("took place" → "happened"). When BERT is installed, the suggestion is used only if BERT agrees: for this exact sentence, BERT must rank it among its own top 10 guesses (`AGREE_TOP`) and it must keep the meaning. "out of" → "from" is right in general but wrong in "out of service", so there BERT should disagree and the phrase falls through to step 2. The review file shows each rejected table suggestion in the `rejected_table` column.
+2. **BERT**: otherwise, hide the phrase and let BERT propose 1–2 words that fit the gap. BERT sees the original sentence too, so it stays close to the meaning. Candidates are kept only if they are shorter, use common words, and keep the sentence's meaning (similarity ≥ 0.80 with a sentence-embedding model). The survivors are ranked by BERT's confidence, meaning similarity and word frequency together, following the LSBert method.
+
+3. **Fluency check**: for the chosen replacement (from either step), BERT reads the area around the change, three words on each side, in the original and the rewritten sentence, with nothing hidden. If the rewrite reads much less naturally ("By the mid the 20th century"), it's rejected and the next BERT candidate is tried (up to 5). The allowed drop is tuned from your judgments.
+
+If no candidate passes, the phrase is left alone: it's better to keep a wordy phrase than to replace it with something wrong.
+
+Setup (downloads about 0.5 GB of models the first time):
+
+```
+pip install torch transformers sentence-transformers
+python phrase_replacer.py          # demo on a few sentences
+```
+
+Without these packages, everything still works; model-detected phrases just use the learned table only.
+
+`find_complex_phrases` now uses the sources `manual`, `verified` and `model` by default (SimplePPDB is off; add it with `PHRASE_LISTS` or `--lists`). For model phrases, `source` is `"model"` and `pattern` is `"model (learned)"` or `"model (bert)"`. The pipeline uses a stricter detector threshold (0.3, `MODEL_THRESHOLD` in `phrase_finder.py`) than training picked (0.1), because 0.1 flagged too many wrong phrases on real articles.
+
+### Judging replacements by hand
+
+The labeled sets only credit phrases someone labeled in advance, but the tool can also make good replacements nobody anticipated ("a single place" → "one place"). So judge its actual output:
+
+```
+python review_replacements.py collect eval_dev.csv   # every replacement, before/after
+# mark each row of replacements_review.csv as good or bad
+python review_replacements.py apply                  # precision per source + tunes the filter
+```
+
+`apply` prints the share of good replacements for each source (manual, learned, bert). For two scores, BERT confidence and fluency drop, it picks the cutoff that keeps the most good replacements while rejecting the most bad ones, or none if no cutoff helps. It saves this in `replacer_settings.json`, which `phrase_replacer.py` reads automatically. Each cutoff is placed in the middle of the gap between the last value it keeps and the first it rejects, for some margin.
+
+To see what the tool really outputs with the tuned filters on, and get the precision number for your report:
+
+```
+python review_replacements.py collect --final eval_dev.csv   # writes replacements_final.csv
+# mark any rows without a verdict
+python review_replacements.py apply --final                  # precision only; filters unchanged
+```
+
+Compare on your real-text sets:
+
+```
+python evaluate.py eval_dev.csv --lists manual
+python evaluate.py eval_dev.csv --lists manual,model
+```
+
 ## Known limitations
 
 - **SimplePPDB++ is noisy.** It was built automatically, so some suggestions change the meaning (e.g. "were unable to" → "could be"). Override bad ones by adding the phrase to `manual_phrases.csv`.
@@ -159,6 +255,9 @@ When phrases overlap, the priority is manual > verified > simpleppdb.
 - **Coverage.** Phrases not in either list are not detected.
 
 ## References
+
+- Qiang, J. et al. (2020). LSBert: A Simple Framework for Lexical Simplification. *arXiv:2006.14939*.
+- Alva-Manchego, F. et al. (2020). ASSET: A Dataset for Tuning and Evaluation of Sentence Simplification Models with Multiple Rewriting Transformations. *ACL*. (CC BY-NC 4.0)
 
 - Maddela, M. & Xu, W. (2018). A Word-Complexity Lexicon and A Neural Readability Ranking Model for Lexical Simplification. *EMNLP*.
 - Pavlick, E. & Callison-Burch, C. (2016). Simple PPDB: A Paraphrase Database for Simplification. *ACL*.

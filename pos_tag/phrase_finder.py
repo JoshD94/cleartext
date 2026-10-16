@@ -7,12 +7,15 @@ Finds wordy or complex phrases (e.g. "to what extent", "in order to",
 Setup: same as pos_tag.py (spaCy + en_core_web_sm). This file must be
 in the same folder as pos_tag.py, because it reuses the loaded model.
 
-Phrase lists are read from manual_phrases.csv and (if present)
-verified_phrases.csv and simpleppdb_phrases.csv in the same folder.
-See build_phrase_list.py and review_simpleppdb.py.
+Phrases come from these sources, in priority order:
+    manual      manual_phrases.csv + rules (always reliable)
+    verified    verified_phrases.csv (reviewed SimplePPDB phrases, if any)
+    model       the trained CRF detector (phrase_model.py) with replacements
+                from the learned table or BERT (phrase_replacer.py)
+    simpleppdb  simpleppdb_phrases.csv (off by default: it tested at 0% precision)
 
-To use only some lists, set the PHRASE_LISTS environment variable, e.g.
-    PHRASE_LISTS=manual,verified python test_phrase_finder.py
+To choose sources, set the PHRASE_LISTS environment variable, e.g.
+    PHRASE_LISTS=manual,model python test_phrase_finder.py
 (evaluate.py has a --lists option that does this for you.)
 
 Usage from your teammate's code:
@@ -42,10 +45,12 @@ from pos_tag import nlp  # reuse the model that pos_tag already loaded
 # ---------------------------------------------------------------------------
 
 HERE = Path(__file__).resolve().parent
-SOURCES = ("manual", "verified", "simpleppdb")      # in priority order
-ACTIVE = [s.strip() for s in os.environ.get("PHRASE_LISTS", ",".join(SOURCES)).split(",")
+SOURCES = ("manual", "verified", "model", "simpleppdb")   # in priority order
+DEFAULT_SOURCES = "manual,verified,model"
+ACTIVE = [s.strip() for s in os.environ.get("PHRASE_LISTS", DEFAULT_SOURCES).split(",")
           if s.strip()]
-PHRASE_FILES = [(s, HERE / f"{s}_phrases.csv") for s in SOURCES if s in ACTIVE]
+PHRASE_FILES = [(s, HERE / f"{s}_phrases.csv") for s in SOURCES
+                if s in ACTIVE and s != "model"]
 
 
 def _normalize(text):
@@ -157,6 +162,46 @@ for name, suggestion, pattern in FLEXIBLE_PATTERNS:
 _matcher.add(WAY_PATTERN_NAME, [WAY_PATTERN])
 
 
+_model_status = None      # None = not tried yet, True = ready, False = unavailable
+
+# Confidence the CRF needs before a phrase is replaced. train_crf.py picks 0.1
+# to score best on ASSET, but on real articles (eval_dev.csv) that flagged 28
+# phrases with only 4 right; 0.3 flagged 10 with 3 right. Replacing text calls
+# for fewer, more reliable phrases, so the pipeline uses 0.3.
+MODEL_THRESHOLD = 0.3
+_CLITICS = {"'d", "'s", "n't", "'re", "'ve", "'ll", "'m"}
+
+
+def _plausible(span):
+    """Skip spans that can't be a replaceable phrase: names, numbers, punctuation, "'d been"."""
+    if span[0].lower_ in _CLITICS:
+        return False
+    return not any(t.is_punct or t.pos_ == "PROPN" or t.like_num for t in span)
+
+
+def _model_matches(doc):
+    """Complex phrases found by the trained CRF (empty if it isn't trained yet)."""
+    global _model_status
+    if _model_status is False:
+        return []
+    try:
+        from phrase_model import detect_doc
+        spans = [doc[a:b] for a, b in detect_doc(doc, MODEL_THRESHOLD)]
+        spans = [s for s in spans if _plausible(s)]
+        _model_status = True
+        return spans
+    except (FileNotFoundError, ImportError) as e:
+        print(f"[phrase_finder] model source skipped: {e}")
+        _model_status = False
+        return []
+
+
+def _replace(doc, start, end):
+    """Replacement for a model-detected phrase: learned table, then BERT."""
+    from phrase_replacer import suggest_for_doc
+    return suggest_for_doc(doc, start, end)
+
+
 def find_complex_phrases(sentence):
     """
     Find wordy or complex phrases that could be replaced with simpler ones.
@@ -172,7 +217,8 @@ def find_complex_phrases(sentence):
         pattern        - which rule matched (the phrase from a CSV file, or a
                          FLEXIBLE_PATTERNS name)
         suggestion     - a simpler replacement (base form; may need inflecting)
-        source         - where the phrase came from: "manual" or "simpleppdb"
+        source         - where the phrase came from: "manual", "verified",
+                         "model" or "simpleppdb"
         start_index    - index of the first word (same numbering as pos_tag)
         end_index      - index just AFTER the last word (like Python slicing)
         start_char     - character position where the phrase begins
@@ -181,8 +227,10 @@ def find_complex_phrases(sentence):
                          useful for inflecting verb suggestions ("made a decision" -> "decided")
         sentence_start - True if the phrase starts a sentence (capitalize the replacement)
 
-    If two matches overlap, a manual phrase always beats a SimplePPDB phrase;
-    between phrases from the same source, the longer one wins.
+    If two matches overlap, the higher-priority source wins
+    (manual > verified > model > simpleppdb); within a source, the longer one wins.
+    For "model" phrases, "pattern" says how the replacement was found:
+    "model (learned)" or "model (bert)".
     """
     doc = nlp(sentence)
 
@@ -205,25 +253,33 @@ def find_complex_phrases(sentence):
             pattern, source = label, "manual"
         matches.append((span, pattern, suggestion, source))
 
-    # Resolve overlaps: manual phrases always win over SimplePPDB phrases.
+    # Resolve overlaps in priority order (manual > verified > model > simpleppdb).
     # Within each source, the longest match wins.
-    info = {}
+    model_matches = _model_matches(doc) if "model" in ACTIVE else []
     taken = set()          # word positions already covered by a chosen phrase
-    chosen = []
+    chosen = []            # (span, pattern, suggestion, source)
     for source in SOURCES:
-        spans = []
+        if source == "model":
+            # model phrases are only looked up where nothing else matched
+            for span in model_matches:
+                if not taken.intersection(range(span.start, span.end)):
+                    suggestion, method = _replace(doc, span.start, span.end)
+                    if suggestion:
+                        chosen.append((span, f"model ({method})", suggestion, "model"))
+                        taken.update(range(span.start, span.end))
+            continue
+        by_span = {}
         for span, pattern, suggestion, src_name in matches:
             if src_name == source:
-                info[(span.start, span.end)] = (pattern, suggestion, src_name)
-                spans.append(span)
-        for span in filter_spans(spans):
+                by_span[(span.start, span.end)] = (pattern, suggestion)
+        for span in filter_spans([doc[a:b] for a, b in by_span]):
             if not taken.intersection(range(span.start, span.end)):
-                chosen.append(span)
+                pattern, suggestion = by_span[(span.start, span.end)]
+                chosen.append((span, pattern, suggestion, source))
                 taken.update(range(span.start, span.end))
 
     results = []
-    for span in sorted(chosen, key=lambda s: s.start):
-        pattern, suggestion, source = info[(span.start, span.end)]
+    for span, pattern, suggestion, source in sorted(chosen, key=lambda c: c[0].start):
         results.append({
             "text": span.text,
             "pattern": pattern,
