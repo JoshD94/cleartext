@@ -208,12 +208,14 @@ When the trained model finds a phrase that the manual list doesn't cover, `phras
 
 3. **Fluency check**: for the chosen replacement (from either step), BERT reads the area around the change, three words on each side, in the original and the rewritten sentence, with nothing hidden. If the rewrite reads much less naturally ("By the mid the 20th century"), it's rejected and the next BERT candidate is tried (up to 5). The allowed drop is tuned from your judgments.
 
+4. **Meaning check**: an NLI (natural language inference) model, `cross-encoder/nli-deberta-v3-small`, reads the original and rewritten sentences in both directions and gives the probability that they mean the same thing. This catches rewrites that are grammatical but wrong ("remained in orbit" → "left orbit"). The minimum is tuned from your judgments, among the replacements that pass the fluency check.
+
 If no candidate passes, the phrase is left alone: it's better to keep a wordy phrase than to replace it with something wrong.
 
 Setup (downloads about 0.5 GB of models the first time):
 
 ```
-pip install torch transformers sentence-transformers
+pip install torch transformers sentence-transformers sentencepiece protobuf
 python phrase_replacer.py          # demo on a few sentences
 ```
 

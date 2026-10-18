@@ -37,7 +37,7 @@ HERE = Path(__file__).resolve().parent
 REVIEW_FILE = HERE / "replacements_review.csv"
 FINAL_FILE = HERE / "replacements_final.csv"
 FIELDS = ["source", "method", "phrase", "suggestion", "bert", "similarity",
-          "fluency_drop", "bert_rank", "rejected_table", "before", "after", "verdict"]
+          "fluency_drop", "entailment", "bert_rank", "rejected_table", "before", "after", "verdict"]
 
 
 def read_sentences(path, nlp):
@@ -61,6 +61,7 @@ def collect(paths, final=False):
     if not final:
         phrase_replacer.MIN_BERT_SCORE = None      # see everything, so the cutoffs can be chosen
         phrase_replacer.MAX_FLUENCY_DROP = None
+        phrase_replacer.MIN_ENTAILMENT = None
     from phrase_finder import find_complex_phrases
     from pos_tag import nlp
 
@@ -84,6 +85,7 @@ def collect(paths, final=False):
                     "phrase": p["text"], "suggestion": p["suggestion"],
                     "bert": d.get("bert", ""), "similarity": d.get("similarity", ""),
                     "fluency_drop": d.get("fluency_drop", ""),
+                    "entailment": d.get("entailment", ""),
                     "bert_rank": d.get("bert_rank", ""),
                     "rejected_table": d.get("rejected_table", ""),
                     "before": sentence, "after": apply_one(sentence, p),
@@ -137,14 +139,26 @@ def apply(final=False):
         print("\n(--final: filters were not changed.)")
         return
 
+    # BERT confidence is shown for reference only. On the development text it did
+    # not separate good from bad replacements, and tuning a cutoff for it on top of
+    # the fluency cutoff removed good replacements, so it is never used as a filter.
+    choose_cutoff(judged, "bert", keep_high=True,
+                  title="BERT confidence (for reference only; not used as a filter)")
     settings = {
-        "min_bert_score": choose_cutoff(
-            judged, "bert", keep_high=True,
-            title="BERT confidence (higher = BERT finds the word a better fit for the gap)"),
+        "min_bert_score": None,
         "max_fluency_drop": choose_cutoff(
             judged, "fluency_drop", keep_high=False,
             title="fluency drop (higher = the rewrite reads less naturally)"),
     }
+    # The meaning check is tuned on the replacements the fluency cutoff keeps,
+    # because in the tool it only ever sees those.
+    fd = settings["max_fluency_drop"]
+    survivors = [r for r in judged if fd is None or r["fluency_drop"] == ""
+                 or float(r["fluency_drop"]) <= fd]
+    settings["min_entailment"] = choose_cutoff(
+        survivors, "entailment", keep_high=True,
+        title="entailment, among replacements that pass the fluency check "
+              "(higher = more surely means the same)")
     (HERE / "replacer_settings.json").write_text(json.dumps(settings))
     print("\nSaved to replacer_settings.json (phrase_replacer.py reads it automatically):")
     print(f"  {settings}")

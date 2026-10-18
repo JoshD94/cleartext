@@ -13,6 +13,12 @@ Finally, a fluency check: BERT reads the area around the change (a few words on
 each side) in the original and in the rewritten sentence, with nothing hidden.
 If the rewrite reads much less naturally ("By the mid the 20th century"), it is
 rejected. The allowed drop is tuned from your judgments by review_replacements.py.
+
+And a meaning check: an NLI (natural language inference) model reads the original
+and the rewritten sentence in both directions: does the rewrite still say what
+the original said, and does it say nothing new? This catches grammatical
+rewrites that change the meaning ("remained in orbit" -> "left orbit"). The
+minimum entailment is also tuned from your judgments.
   2. BERT: hide the phrase and let a language model propose words that fit
      there, then keep only candidates that
        - are shorter than the phrase,
@@ -46,6 +52,7 @@ from pos_tag import nlp
 HERE = Path(__file__).resolve().parent
 BERT_MODEL = "bert-base-uncased"
 SIMILARITY_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+NLI_MODEL = "cross-encoder/nli-deberta-v3-small"
 
 TOP_K = 20               # BERT guesses per hidden position
 MIN_SIMILARITY = 0.80    # how close the new sentence must stay to the original (0-1)
@@ -57,12 +64,15 @@ SETTINGS_FILE = Path(__file__).resolve().parent / "replacer_settings.json"
 MIN_BERT_SCORE = None
 # Largest allowed fluency drop (how much less natural the rewrite reads). None = no limit.
 MAX_FLUENCY_DROP = None
+# Smallest allowed entailment (0-1: how surely the rewrite means the same). None = no limit.
+MIN_ENTAILMENT = None
 if SETTINGS_FILE.exists():
     _settings = json.loads(SETTINGS_FILE.read_text())
     MIN_BERT_SCORE = _settings.get("min_bert_score")
     MAX_FLUENCY_DROP = _settings.get("max_fluency_drop")
+    MIN_ENTAILMENT = _settings.get("min_entailment")
 FLUENCY_WINDOW = 3       # words on each side of the change that the fluency check reads
-MAX_TRIES = 5            # BERT candidates to try before giving up on a phrase
+MAX_TRIES = 1            # BERT candidates to try before giving up on a phrase
 
 # Details of the most recent suggestions (scores etc.), used by review_replacements.py
 DETAILS = {}
@@ -283,6 +293,42 @@ def _fluent(drop):
     return MAX_FLUENCY_DROP is None or drop <= MAX_FLUENCY_DROP
 
 
+_nli = None
+
+
+def entailment(original, rewritten):
+    """
+    How surely the two sentences mean the same thing (0-1).
+
+    The NLI model gives the probability that one sentence follows from the other.
+    It is checked both ways, original -> rewritten (nothing new or wrong was
+    added) and rewritten -> original (nothing important was lost), and the
+    lower of the two is returned.
+    """
+    global _nli
+    import numpy as np
+    if _nli is None:
+        from sentence_transformers import CrossEncoder
+        model = CrossEncoder(NLI_MODEL)
+        labels = {i: name.lower() for i, name in model.model.config.id2label.items()}
+        entail_index = next(i for i, name in labels.items() if name.startswith("entail"))
+        _nli = (model, entail_index)
+    model, entail_index = _nli
+    logits = np.asarray(model.predict([(original, rewritten), (rewritten, original)]))
+    probs = np.exp(logits - logits.max(axis=1, keepdims=True))
+    probs = probs / probs.sum(axis=1, keepdims=True)
+    return float(probs[:, entail_index].min())
+
+
+def _same_meaning(ent):
+    return MIN_ENTAILMENT is None or ent >= MIN_ENTAILMENT
+
+
+def _rewrite(doc, start, end, text):
+    space = " " if doc[end - 1].whitespace_ else ""
+    return f"{doc[:start].text_with_ws}{text}{space}{doc[end:].text}"
+
+
 def bert_rank(doc, start, end, text):
     """Where BERT ranks `text` among its own guesses for the hidden phrase (1 = best), or None."""
     words = text.lower().split()
@@ -311,25 +357,31 @@ def suggest_for_doc(doc, start, end):
             DETAILS[key] = {"method": "learned"}
             return suggestion, "learned"
         drop = fluency_drop(doc, start, end, suggestion)
-        if rank is not None and rank <= AGREE_TOP and _passes(score, similarity) and _fluent(drop):
+        ent = entailment(doc.text, _rewrite(doc, start, end, suggestion))
+        if (rank is not None and rank <= AGREE_TOP and _passes(score, similarity)
+                and _fluent(drop) and _same_meaning(ent)):
             DETAILS[key] = {"method": "learned", "bert": round(score, 3),
                             "similarity": round(similarity, 3), "bert_rank": rank,
-                            "fluency_drop": round(drop, 3)}
+                            "fluency_drop": round(drop, 3), "entailment": round(ent, 3)}
             return suggestion, "learned"
-        # BERT doesn't think the table's answer fits this sentence
+        # the table's answer doesn't fit this sentence
         reason = (f"BERT rank {rank or f'>{AGREE_TOP}'}" if not (rank and rank <= AGREE_TOP)
-                  else f"fluency drop {drop:.2f}" if not _fluent(drop) else "low score")
+                  else f"fluency drop {drop:.2f}" if not _fluent(drop)
+                  else f"entailment {ent:.2f}" if not _same_meaning(ent) else "low score")
         rejected = f"{suggestion} ({reason})"
     try:
         ranked = bert_candidates(doc, start, end)
     except ImportError:
         return None, None                                # BERT not installed
-    for candidate in ranked[:MAX_TRIES]:           # best-ranked candidate that reads naturally
+    for candidate in ranked[:MAX_TRIES]:   # best-ranked candidate that reads naturally and keeps the meaning
         drop = fluency_drop(doc, start, end, candidate["text"])
-        if _fluent(drop):
+        if not _fluent(drop):
+            continue
+        ent = entailment(doc.text, _rewrite(doc, start, end, candidate["text"]))
+        if _same_meaning(ent):
             DETAILS[key] = {"method": "bert", "bert": candidate["bert"],
                             "similarity": candidate["similarity"], "fluency_drop": round(drop, 3),
-                            "rejected_table": rejected}
+                            "entailment": round(ent, 3), "rejected_table": rejected}
             return candidate["text"], "bert"
     if rejected:
         DETAILS[key] = {"method": "none", "rejected_table": rejected}
