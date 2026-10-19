@@ -160,6 +160,7 @@ def gather():
             ("Dates kept", "preservation", "dates_preserved"),
             ("Entities kept", "preservation", "entities_preserved"),
             ("Negations kept", "preservation", "negations_preserved"),
+            ("Tense kept", "preservation", "tenses_preserved"),
         ]:
             v = mean("rule_based", *keys)
             if v is not None:
@@ -378,7 +379,7 @@ def render(data) -> str:
     <strong>Score three dimensions.</strong> S<sub>lex</sub>: did the count of complex
     words drop? S<sub>read</sub>: Flesch / FKGL / Fog / SMOG. S<sub>jargon</sub>:
     technical-term proxy. Guardrails run alongside: TF-IDF, embedding cosine, NLI
-    entailment both ways, and explicit number/date/entity/negation checks &mdash;
+    entailment both ways, and explicit number/date/entity/negation/tense checks &mdash;
     readability gains must not come from deleting meaning.
     <span class="fdim"><code>evaluate_base.py</code> &middot; <code>readability.py</code>
     &middot; <code>preservation.py</code></span></div></div>

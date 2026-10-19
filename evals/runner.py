@@ -168,6 +168,7 @@ def to_markdown_table(results, metrics=None):
             "preservation.nli_backward.mean",
             "preservation.entities_preserved.mean",
             "preservation.negations_preserved.mean",
+            "preservation.tenses_preserved.mean",
         ]
         # Only show metrics actually computed (embedding/NLI are optional).
         have = set()
