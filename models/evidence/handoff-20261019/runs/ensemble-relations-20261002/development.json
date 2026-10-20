@@ -1,0 +1,127 @@
+{
+  "scope": "All BenchLS is reused development, including historical holdout. Candidate labels do not measure retained full-sentence detail.",
+  "repeats": [
+    {
+      "seed": 0,
+      "v7": {
+        "edits": 619,
+        "correct": 433,
+        "wrong": 186,
+        "net": 247,
+        "precision": 0.7,
+        "n": 929,
+        "coverage": 0.6663078579117331,
+        "log_loss": 0.24073964805555856
+      },
+      "relations": {
+        "edits": 621,
+        "correct": 445,
+        "wrong": 176,
+        "net": 269,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6684607104413348,
+        "log_loss": 0.2381956401436071
+      },
+      "net_delta": 22,
+      "log_loss_delta": -0.002544007911951446
+    },
+    {
+      "seed": 1,
+      "v7": {
+        "edits": 611,
+        "correct": 425,
+        "wrong": 186,
+        "net": 239,
+        "precision": 0.696,
+        "n": 929,
+        "coverage": 0.6576964477933261,
+        "log_loss": 0.24078268886274615
+      },
+      "relations": {
+        "edits": 607,
+        "correct": 435,
+        "wrong": 172,
+        "net": 263,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6533907427341227,
+        "log_loss": 0.23839762866438458
+      },
+      "net_delta": 24,
+      "log_loss_delta": -0.0023850601983615716
+    },
+    {
+      "seed": 2,
+      "v7": {
+        "edits": 614,
+        "correct": 418,
+        "wrong": 196,
+        "net": 222,
+        "precision": 0.681,
+        "n": 929,
+        "coverage": 0.6609257265877287,
+        "log_loss": 0.240001627909375
+      },
+      "relations": {
+        "edits": 612,
+        "correct": 435,
+        "wrong": 177,
+        "net": 258,
+        "precision": 0.711,
+        "n": 929,
+        "coverage": 0.658772874058127,
+        "log_loss": 0.23706902061464788
+      },
+      "net_delta": 36,
+      "log_loss_delta": -0.0029326072947271076
+    }
+  ],
+  "mean_net_delta": 27.333333333333332,
+  "mean_log_loss_delta": -0.0026205584683467085,
+  "noise_bar_passed": true,
+  "noise_bar": "net +5 or log-loss -0.001",
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "new_feature_names": [
+    "same_sense_fraction",
+    "hypernym_fraction",
+    "verb_group_fraction",
+    "similar_fraction",
+    "hypernym_loss_mean",
+    "hypernym_loss_max",
+    "candidate_polysemy",
+    "origin_polysemy",
+    "hypernym_loss_times_sense_fit"
+  ],
+  "shape": {
+    "v7": [
+      14617,
+      39
+    ],
+    "relations": [
+      14617,
+      48
+    ]
+  },
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "runs/ensemble-v7-20260928/config.json": "46c34f06768b67a1589de057444ab8febe3f1dd949b1d1fc6697d5f097b514a0"
+  },
+  "source_sha256": {
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/generation.py": "4682379732fb3a3b8ba9904dbfe2c2bff0b6a063fb66fe1a812d78d4c19e8065",
+    "src/cleartext/ensemble_pipeline.py": "11f0f00b98e893a15ba85cd8afe71b3f9528ce1394e9cb5e6e5bf87e13a117cc"
+  },
+  "packages": {
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "nltk": "3.10.3"
+  },
+  "tsar_gold_used": false,
+  "default_changed": false,
+  "fitted_run": "runs/ensemble-relations-20261002"
+}

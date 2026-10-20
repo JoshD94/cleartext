@@ -1,0 +1,243 @@
+{
+  "members": [
+    "sense_fit",
+    "round_trip",
+    "first_sense",
+    "candidate_sense_rank",
+    "swords_checker",
+    "context_vector",
+    "argument_fit",
+    "bigram",
+    "wordnet_member",
+    "source=hypernym",
+    "source=similar",
+    "multiword=True",
+    "pos_fallback=True"
+  ],
+  "weights": {
+    "sense_fit": 0.15621615477486034,
+    "round_trip": 0.09412434986347733,
+    "first_sense": 0.1841216745484723,
+    "candidate_sense_rank": 0.11051144827903707,
+    "swords_checker": 0.3596384303211294,
+    "context_vector": 0.07209022867037883,
+    "argument_fit": 0.09955675230111548,
+    "bigram": 0.21457578018117013,
+    "wordnet_member": -0.2843947634635641,
+    "source=hypernym": 0.051162290901462064,
+    "source=similar": 0.05448596911311523,
+    "multiword=True": 0.06345914881642756,
+    "pos_fallback=True": -0.19137664129442053
+  },
+  "C_search": [
+    {
+      "C": 0.03,
+      "auc_generated": 0.7760503188887311
+    },
+    {
+      "C": 0.1,
+      "auc_generated": 0.7761630151680844
+    },
+    {
+      "C": 0.3,
+      "auc_generated": 0.7761431889707907
+    },
+    {
+      "C": 1.0,
+      "auc_generated": 0.7761478846490971
+    },
+    {
+      "C": 3.0,
+      "auc_generated": 0.7761583194897781
+    }
+  ],
+  "operating_point": {
+    "error_cost": 0.05,
+    "tiered": true,
+    "targets": 353,
+    "edits": 42,
+    "correct": 27,
+    "wrong": 15
+  },
+  "curve": [
+    {
+      "error_cost": 0.0,
+      "tiered": false,
+      "targets": 353,
+      "edits": 249,
+      "correct": 85,
+      "wrong": 164
+    },
+    {
+      "error_cost": 0.01,
+      "tiered": false,
+      "targets": 353,
+      "edits": 106,
+      "correct": 55,
+      "wrong": 51
+    },
+    {
+      "error_cost": 0.02,
+      "tiered": false,
+      "targets": 353,
+      "edits": 79,
+      "correct": 40,
+      "wrong": 39
+    },
+    {
+      "error_cost": 0.03,
+      "tiered": false,
+      "targets": 353,
+      "edits": 55,
+      "correct": 30,
+      "wrong": 25
+    },
+    {
+      "error_cost": 0.05,
+      "tiered": false,
+      "targets": 353,
+      "edits": 42,
+      "correct": 26,
+      "wrong": 16
+    },
+    {
+      "error_cost": 0.075,
+      "tiered": false,
+      "targets": 353,
+      "edits": 35,
+      "correct": 20,
+      "wrong": 15
+    },
+    {
+      "error_cost": 0.1,
+      "tiered": false,
+      "targets": 353,
+      "edits": 30,
+      "correct": 18,
+      "wrong": 12
+    },
+    {
+      "error_cost": 0.15,
+      "tiered": false,
+      "targets": 353,
+      "edits": 19,
+      "correct": 13,
+      "wrong": 6
+    },
+    {
+      "error_cost": 0.2,
+      "tiered": false,
+      "targets": 353,
+      "edits": 13,
+      "correct": 8,
+      "wrong": 5
+    },
+    {
+      "error_cost": 0.3,
+      "tiered": false,
+      "targets": 353,
+      "edits": 6,
+      "correct": 4,
+      "wrong": 2
+    },
+    {
+      "error_cost": 0.0,
+      "tiered": true,
+      "targets": 353,
+      "edits": 249,
+      "correct": 84,
+      "wrong": 165
+    },
+    {
+      "error_cost": 0.01,
+      "tiered": true,
+      "targets": 353,
+      "edits": 106,
+      "correct": 55,
+      "wrong": 51
+    },
+    {
+      "error_cost": 0.02,
+      "tiered": true,
+      "targets": 353,
+      "edits": 79,
+      "correct": 40,
+      "wrong": 39
+    },
+    {
+      "error_cost": 0.03,
+      "tiered": true,
+      "targets": 353,
+      "edits": 55,
+      "correct": 30,
+      "wrong": 25
+    },
+    {
+      "error_cost": 0.05,
+      "tiered": true,
+      "targets": 353,
+      "edits": 42,
+      "correct": 27,
+      "wrong": 15
+    },
+    {
+      "error_cost": 0.075,
+      "tiered": true,
+      "targets": 353,
+      "edits": 35,
+      "correct": 21,
+      "wrong": 14
+    },
+    {
+      "error_cost": 0.1,
+      "tiered": true,
+      "targets": 353,
+      "edits": 30,
+      "correct": 19,
+      "wrong": 11
+    },
+    {
+      "error_cost": 0.15,
+      "tiered": true,
+      "targets": 353,
+      "edits": 19,
+      "correct": 14,
+      "wrong": 5
+    },
+    {
+      "error_cost": 0.2,
+      "tiered": true,
+      "targets": 353,
+      "edits": 13,
+      "correct": 9,
+      "wrong": 4
+    },
+    {
+      "error_cost": 0.3,
+      "tiered": true,
+      "targets": 353,
+      "edits": 6,
+      "correct": 4,
+      "wrong": 2
+    }
+  ],
+  "dev_pairs": 22978,
+  "generated_pairs": 3680,
+  "contexts": 370,
+  "by_source": {
+    "synonym": {
+      "pairs": 1964,
+      "positive_rate": 0.18228105906313646
+    },
+    "hypernym": {
+      "pairs": 1255,
+      "positive_rate": 0.12430278884462151
+    },
+    "similar": {
+      "pairs": 461,
+      "positive_rate": 0.2472885032537961
+    }
+  },
+  "checker_crossfit_auc_generated": 0.690206015059562,
+  "criterion": "5-fold grouped CV over all SWORDS dev contexts with a cross-fitted checker; C by generated-pair AUC; error_cost by per-target correct minus wrong edits"
+}

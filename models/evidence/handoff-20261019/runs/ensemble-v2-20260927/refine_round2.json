@@ -1,0 +1,149 @@
+{
+  "results": {
+    "v2 as shipped (cost .05, tiered)": {
+      "benchls_dev": {
+        "edits": 207,
+        "correct": 118,
+        "wrong": 89,
+        "net": 29,
+        "precision": 0.57,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 219,
+        "correct": 114,
+        "wrong": 105,
+        "net": 9,
+        "precision": 0.521,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 223,
+        "correct": 119,
+        "wrong": 104,
+        "net": 15,
+        "precision": 0.534,
+        "n": 373,
+        "reachable": 310
+      }
+    },
+    "utility retuned on BenchLS dev (0.1, True, 'context')": {
+      "benchls_dev": {
+        "edits": 123,
+        "correct": 85,
+        "wrong": 38,
+        "net": 47,
+        "precision": 0.691,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 121,
+        "correct": 61,
+        "wrong": 60,
+        "net": 1,
+        "precision": 0.504,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 154,
+        "correct": 82,
+        "wrong": 72,
+        "net": 10,
+        "precision": 0.532,
+        "n": 373,
+        "reachable": 310
+      }
+    },
+    "accept model on BenchLS dev (0.1, np.float64(0.4), False, 'mean')": {
+      "benchls_dev": {
+        "edits": 223,
+        "correct": 137,
+        "wrong": 86,
+        "net": 51,
+        "precision": 0.614,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 266,
+        "correct": 155,
+        "wrong": 111,
+        "net": 44,
+        "precision": 0.583,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 173,
+        "correct": 96,
+        "wrong": 77,
+        "net": 19,
+        "precision": 0.555,
+        "n": 373,
+        "reachable": 310
+      }
+    },
+    "accept, round-1 features (0.1, np.float64(0.45), False, 'all')": {
+      "benchls_dev": {
+        "edits": 182,
+        "correct": 117,
+        "wrong": 65,
+        "net": 52,
+        "precision": 0.643,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 251,
+        "correct": 158,
+        "wrong": 93,
+        "net": 65,
+        "precision": 0.629,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 147,
+        "correct": 82,
+        "wrong": 65,
+        "net": 17,
+        "precision": 0.558,
+        "n": 373,
+        "reachable": 310
+      }
+    },
+    "accept, + frequency/length (0.1, np.float64(0.35), False, 'all')": {
+      "benchls_dev": {
+        "edits": 267,
+        "correct": 167,
+        "wrong": 100,
+        "net": 67,
+        "precision": 0.625,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 358,
+        "correct": 200,
+        "wrong": 158,
+        "net": 42,
+        "precision": 0.559,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 218,
+        "correct": 111,
+        "wrong": 107,
+        "net": 4,
+        "precision": 0.509,
+        "n": 373,
+        "reachable": 310
+      }
+    }
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "selected": "Gradient boosting",
+  "criterion": "development MAE",
+  "comparisons": [
+    {
+      "name": "Mean",
+      "dev": {
+        "mae": 0.8817095876574225,
+        "rmse": 1.0834133121680698,
+        "pearson": null,
+        "spearman": null
+      },
+      "fit_seconds": 0.077,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "Length",
+      "dev": {
+        "mae": 0.7066955917864262,
+        "rmse": 0.8884769930740449,
+        "pearson": 0.5758613242872392,
+        "spearman": 0.5987542881196607
+      },
+      "fit_seconds": 0.014,
+      "warnings": [],
+      "features": [
+        "length"
+      ]
+    },
+    {
+      "name": "Word average",
+      "dev": {
+        "mae": 0.8110992574737926,
+        "rmse": 1.0256435820836092,
+        "pearson": 0.32503443398099696,
+        "spearman": 0.3084045144983915
+      },
+      "fit_seconds": 0.013,
+      "warnings": [],
+      "features": [
+        "word_mean"
+      ]
+    },
+    {
+      "name": "Lexical ridge",
+      "dev": {
+        "mae": 0.49119949308892696,
+        "rmse": 0.6346765010654754,
+        "pearson": 0.8131440711751858,
+        "spearman": 0.8209677064746979
+      },
+      "fit_seconds": 0.048,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "Ridge",
+      "dev": {
+        "mae": 0.4879448688106767,
+        "rmse": 0.6316105622057966,
+        "pearson": 0.8164090991704163,
+        "spearman": 0.8250168823914028
+      },
+      "fit_seconds": 0.079,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "Elastic net",
+      "dev": {
+        "mae": 0.48798992022997634,
+        "rmse": 0.6316420325539996,
+        "pearson": 0.8163735019405433,
+        "spearman": 0.8249917387843335
+      },
+      "fit_seconds": 0.081,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "Random forest",
+      "dev": {
+        "mae": 0.4670871218785714,
+        "rmse": 0.5991785862131085,
+        "pearson": 0.8387419935731366,
+        "spearman": 0.8378939516019741
+      },
+      "fit_seconds": 0.924,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "Gradient boosting",
+      "dev": {
+        "mae": 0.4603062976229308,
+        "rmse": 0.5880753815941187,
+        "pearson": 0.8446215826020871,
+        "spearman": 0.8406795307826119
+      },
+      "fit_seconds": 0.268,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "SVR",
+      "dev": {
+        "mae": 0.47723749868671655,
+        "rmse": 0.6049947325893346,
+        "pearson": 0.8348638584617236,
+        "spearman": 0.8354465960252636
+      },
+      "fit_seconds": 1.761,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "kNN",
+      "dev": {
+        "mae": 0.4893476852722659,
+        "rmse": 0.627038368527835,
+        "pearson": 0.8266853084854427,
+        "spearman": 0.8270616837161661
+      },
+      "fit_seconds": 0.203,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    },
+    {
+      "name": "Small MLP",
+      "dev": {
+        "mae": 0.47011038081381135,
+        "rmse": 0.6005320744955025,
+        "pearson": 0.8398770392033236,
+        "spearman": 0.8371402539236079
+      },
+      "fit_seconds": 1.051,
+      "warnings": [],
+      "features": [
+        "length",
+        "word_mean",
+        "word_max",
+        "word_p90",
+        "mean_zipf",
+        "rare_fraction",
+        "mean_syllables",
+        "mean_word_length",
+        "max_depth",
+        "mean_dependency_distance",
+        "subclauses",
+        "coordination",
+        "passive",
+        "punctuation",
+        "lexical_density"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "scope": "All 929 BenchLS cases are reused development. Listed-match ceilings are not semantic accuracy.",
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "fitted": false,
+  "tsar_used": false,
+  "default_changed": false,
+  "new_labels": false,
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7",
+    "outputs/bert-candidate-coverage-20261002/summary.json": "e2c6b0eb0016f9ede953d613dceb8f3d19be561e7e704dd644452ffc662876d8",
+    "outputs/detail-preservation-final-20261002/summary.json": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+    "outputs/detail-preservation-final-20261002/feature-keys.json": "c8010a40dab33c313c666ba283a72d7f38dd862deae387f006c82064fc94f061",
+    "outputs/detail-preservation-final-20261002/similarity-seed0.npz": "edc248ec5c942d5fa9588c8b38690481e3725b0032c2c6a50aae4e56dc8faaaf",
+    "outputs/detail-preservation-final-20261002/similarity-seed1.npz": "a03f56a7ecfee53082b4c644aea2a3bc4b779051fc657dbb2cef55cfbfcb8b42",
+    "outputs/detail-preservation-final-20261002/similarity-seed2.npz": "68a2ae0de0ce91a736f0121d69edcc58fb162da7a3419b0f615bfd51912fe38d",
+    "outputs/detail-preservation-final-20261002/similarity-selections-seed0.json": "ceedaef4ba144f3a4bcdd71656b432d373a6794a304fe0c744d7486801b73a5d",
+    "outputs/detail-preservation-final-20261002/similarity-selections-seed1.json": "4751f7a1b4c7e3af6eced6944de5e4bd4b4d9dafdfbbdb99bb7e2e95a2adf08e",
+    "outputs/detail-preservation-final-20261002/similarity-selections-seed2.json": "59f714ff652acfcfc84e8a4cb1672a9e072de64c6574b6235ff8f9b3147aa532"
+  },
+  "source_sha256": {
+    "scripts/experiments/audit_candidate_limits.py": "abfaf4721874737de03a49000f2dfd5f19d917f585630f87dd9875a560aa4f0c",
+    "src/cleartext/candidate_diagnostics.py": "bbca0ec684f513ff2f4491d41d41c66eac9240a2fc554379a198438c8f05ecaf"
+  },
+  "cases": 929,
+  "candidate_rows": 14617,
+  "repeats": [
+    {
+      "seed": 0,
+      "stage_counts": {
+        "generation": 122,
+        "guard": 35,
+        "meaning_floor": 82,
+        "probability": 152,
+        "ranking": 25,
+        "selected_listed": 513
+      },
+      "outcomes": {
+        "listed_edit": 513,
+        "abstained": 287,
+        "unlisted_edit": 129
+      },
+      "listed_match_ceilings": {
+        "generation": 807,
+        "guard": 772,
+        "meaning_floor": 690,
+        "probability": 538
+      }
+    },
+    {
+      "seed": 1,
+      "stage_counts": {
+        "generation": 122,
+        "guard": 35,
+        "meaning_floor": 82,
+        "probability": 156,
+        "ranking": 25,
+        "selected_listed": 509
+      },
+      "outcomes": {
+        "listed_edit": 509,
+        "abstained": 292,
+        "unlisted_edit": 128
+      },
+      "listed_match_ceilings": {
+        "generation": 807,
+        "guard": 772,
+        "meaning_floor": 690,
+        "probability": 534
+      }
+    },
+    {
+      "seed": 2,
+      "stage_counts": {
+        "generation": 122,
+        "guard": 35,
+        "meaning_floor": 82,
+        "probability": 152,
+        "ranking": 24,
+        "selected_listed": 514
+      },
+      "outcomes": {
+        "listed_edit": 514,
+        "abstained": 283,
+        "unlisted_edit": 132
+      },
+      "listed_match_ceilings": {
+        "generation": 807,
+        "guard": 772,
+        "meaning_floor": 690,
+        "probability": 538
+      }
+    }
+  ],
+  "bert_top20_rescued_generation_misses": 88,
+  "bert_top3_rescued_generation_misses": 76,
+  "bert_top20_union_listed_ceiling": 895,
+  "novel_bert_sense_linked_rows": 0,
+  "records_sha256": {
+    "records-seed0.jsonl": "4cbb3feb9b564e703ae4fa8fbcc73556ad121e71ea3fdbca83b898c1d605cc50",
+    "records-seed1.jsonl": "7cd2345f4e149cca87bb258ecd5ff94354975aaa87e2023ab83225de2eee8d18",
+    "records-seed2.jsonl": "69584b65e4328b47a7d28927e4fc728a2acf5731625f3843992cebad96263357"
+  }
+}

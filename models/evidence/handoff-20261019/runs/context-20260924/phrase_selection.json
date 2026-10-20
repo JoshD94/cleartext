@@ -1,0 +1,13 @@
+{
+  "selected": "boosting",
+  "results": [
+    {
+      "name": "ridge",
+      "dev_mae": 0.08141545799787969
+    },
+    {
+      "name": "boosting",
+      "dev_mae": 0.07721978394487007
+    }
+  ]
+}

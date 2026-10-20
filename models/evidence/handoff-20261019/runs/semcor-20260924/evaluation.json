@@ -1,0 +1,64 @@
+{
+  "tsar": [
+    {
+      "name": "basic",
+      "n": 373,
+      "edits": 196,
+      "correct": 85,
+      "top1": 0.22788203753351208,
+      "edit_rate": 0.5254691689008043,
+      "match_among_edits": 0.4336734693877551,
+      "official": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_basic.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_basic_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.2278\n\nMAP@3 = 0.0759\nMAP@5 = 0.0455\nMAP@10 = 0.0227\n\nPotential@3 = 0.2278\nPotential@5 = 0.2278\nPotential@10 = 0.2278\n\nAccuracy@1@top_gold_1 = 0.0938\nAccuracy@2@top_gold_1 = 0.0938\nAccuracy@3@top_gold_1 = 0.0938\n\n________________________________\n"
+    },
+    {
+      "name": "guards_only",
+      "n": 373,
+      "edits": 181,
+      "correct": 78,
+      "top1": 0.20911528150134048,
+      "edit_rate": 0.48525469168900803,
+      "match_among_edits": 0.430939226519337,
+      "official": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_guards_only.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_guards_only_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.2091\n\nMAP@3 = 0.0697\nMAP@5 = 0.0418\nMAP@10 = 0.0209\n\nPotential@3 = 0.2091\nPotential@5 = 0.2091\nPotential@10 = 0.2091\n\nAccuracy@1@top_gold_1 = 0.0804\nAccuracy@2@top_gold_1 = 0.0804\nAccuracy@3@top_gold_1 = 0.0804\n\n________________________________\n"
+    },
+    {
+      "name": "sense_only",
+      "n": 373,
+      "edits": 107,
+      "correct": 55,
+      "top1": 0.14745308310991956,
+      "edit_rate": 0.2868632707774799,
+      "match_among_edits": 0.514018691588785,
+      "official": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_sense_only.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_sense_only_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.1474\n\nMAP@3 = 0.0491\nMAP@5 = 0.0294\nMAP@10 = 0.0147\n\nPotential@3 = 0.1474\nPotential@5 = 0.1474\nPotential@10 = 0.1474\n\nAccuracy@1@top_gold_1 = 0.0643\nAccuracy@2@top_gold_1 = 0.0643\nAccuracy@3@top_gold_1 = 0.0643\n\n________________________________\n"
+    },
+    {
+      "name": "sense_and_guards",
+      "n": 373,
+      "edits": 97,
+      "correct": 52,
+      "top1": 0.13941018766756033,
+      "edit_rate": 0.26005361930294907,
+      "match_among_edits": 0.5360824742268041,
+      "official": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_sense_and_guards.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/semcor-20260924/tsar_sense_and_guards_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.1394\n\nMAP@3 = 0.0464\nMAP@5 = 0.0278\nMAP@10 = 0.0139\n\nPotential@3 = 0.1394\nPotential@5 = 0.1394\nPotential@10 = 0.1394\n\nAccuracy@1@top_gold_1 = 0.0589\nAccuracy@2@top_gold_1 = 0.0589\nAccuracy@3@top_gold_1 = 0.0589\n\n________________________________\n"
+    }
+  ],
+  "swords": [
+    {
+      "name": "any_wordnet_meaning",
+      "n": 45705,
+      "accepted": 3447,
+      "precision": 0.20278503046127067,
+      "recall": 0.15764546684709066,
+      "f1": 0.1773886562618957
+    },
+    {
+      "name": "selected_semcor_meaning",
+      "n": 45705,
+      "accepted": 757,
+      "precision": 0.45970937912813736,
+      "recall": 0.07848443843031123,
+      "f1": 0.1340782122905028
+    }
+  ],
+  "note": "SWORDS and TSAR are reused test benchmarks from prior experiments, not fresh final tests. No labels from either fitted or selected the SemCor model. SWORDS figures measure dictionary candidate membership, not a full simplification pipeline.",
+  "runtime_seconds": 21.74849843978882
+}

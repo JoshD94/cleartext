@@ -1,0 +1,38 @@
+{
+  "v5": {
+    "dev_nets": [
+      175,
+      162,
+      169
+    ],
+    "dev_log_loss": 0.2626647129150934,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 238,
+      "correct": 152,
+      "wrong": 86,
+      "net": 66,
+      "precision": 0.639,
+      "n": 373
+    },
+    "columns": 13
+  },
+  "v7": {
+    "dev_nets": [
+      247,
+      244,
+      240
+    ],
+    "dev_log_loss": 0.24050739572502092,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 219,
+      "correct": 158,
+      "wrong": 61,
+      "net": 97,
+      "precision": 0.721,
+      "n": 373
+    },
+    "columns": 15
+  }
+}

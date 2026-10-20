@@ -1,0 +1,320 @@
+{
+  "results": {
+    "decision probability|0.39": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 393,
+        "on_target": 103,
+        "correct": 75,
+        "correct_rate": 0.177,
+        "on_target_rate": 0.262
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 477,
+        "on_target": 136,
+        "correct": 92,
+        "correct_rate": 0.182,
+        "on_target_rate": 0.285
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 363,
+        "on_target": 106,
+        "correct": 64,
+        "correct_rate": 0.172,
+        "on_target_rate": 0.292
+      }
+    },
+    "decision probability|0.5": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 387,
+        "on_target": 102,
+        "correct": 73,
+        "correct_rate": 0.172,
+        "on_target_rate": 0.264
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 467,
+        "on_target": 136,
+        "correct": 90,
+        "correct_rate": 0.178,
+        "on_target_rate": 0.291
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 359,
+        "on_target": 109,
+        "correct": 65,
+        "correct_rate": 0.174,
+        "on_target_rate": 0.304
+      }
+    },
+    "decision probability|0.6": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 377,
+        "on_target": 100,
+        "correct": 69,
+        "correct_rate": 0.163,
+        "on_target_rate": 0.265
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 461,
+        "on_target": 133,
+        "correct": 87,
+        "correct_rate": 0.172,
+        "on_target_rate": 0.289
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 355,
+        "on_target": 112,
+        "correct": 67,
+        "correct_rate": 0.18,
+        "on_target_rate": 0.315
+      }
+    },
+    "decision probability|0.7": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 366,
+        "on_target": 98,
+        "correct": 67,
+        "correct_rate": 0.158,
+        "on_target_rate": 0.268
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 449,
+        "on_target": 137,
+        "correct": 86,
+        "correct_rate": 0.17,
+        "on_target_rate": 0.305
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 346,
+        "on_target": 118,
+        "correct": 68,
+        "correct_rate": 0.182,
+        "on_target_rate": 0.341
+      }
+    },
+    "detector probability|0.39": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 393,
+        "on_target": 102,
+        "correct": 63,
+        "correct_rate": 0.149,
+        "on_target_rate": 0.26
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 477,
+        "on_target": 141,
+        "correct": 87,
+        "correct_rate": 0.172,
+        "on_target_rate": 0.296
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 363,
+        "on_target": 165,
+        "correct": 88,
+        "correct_rate": 0.236,
+        "on_target_rate": 0.455
+      }
+    },
+    "detector probability|0.5": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 387,
+        "on_target": 102,
+        "correct": 63,
+        "correct_rate": 0.149,
+        "on_target_rate": 0.264
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 467,
+        "on_target": 138,
+        "correct": 84,
+        "correct_rate": 0.166,
+        "on_target_rate": 0.296
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 359,
+        "on_target": 165,
+        "correct": 88,
+        "correct_rate": 0.236,
+        "on_target_rate": 0.46
+      }
+    },
+    "detector probability|0.6": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 377,
+        "on_target": 98,
+        "correct": 60,
+        "correct_rate": 0.142,
+        "on_target_rate": 0.26
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 461,
+        "on_target": 136,
+        "correct": 82,
+        "correct_rate": 0.162,
+        "on_target_rate": 0.295
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 355,
+        "on_target": 165,
+        "correct": 88,
+        "correct_rate": 0.236,
+        "on_target_rate": 0.465
+      }
+    },
+    "detector probability|0.7": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 366,
+        "on_target": 98,
+        "correct": 60,
+        "correct_rate": 0.142,
+        "on_target_rate": 0.268
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 449,
+        "on_target": 131,
+        "correct": 77,
+        "correct_rate": 0.152,
+        "on_target_rate": 0.292
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 346,
+        "on_target": 164,
+        "correct": 87,
+        "correct_rate": 0.233,
+        "on_target_rate": 0.474
+      }
+    },
+    "product|0.39": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 393,
+        "on_target": 107,
+        "correct": 69,
+        "correct_rate": 0.163,
+        "on_target_rate": 0.272
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 477,
+        "on_target": 148,
+        "correct": 95,
+        "correct_rate": 0.188,
+        "on_target_rate": 0.31
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 363,
+        "on_target": 134,
+        "correct": 77,
+        "correct_rate": 0.206,
+        "on_target_rate": 0.369
+      }
+    },
+    "product|0.5": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 387,
+        "on_target": 107,
+        "correct": 69,
+        "correct_rate": 0.163,
+        "on_target_rate": 0.276
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 467,
+        "on_target": 145,
+        "correct": 92,
+        "correct_rate": 0.182,
+        "on_target_rate": 0.31
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 359,
+        "on_target": 134,
+        "correct": 77,
+        "correct_rate": 0.206,
+        "on_target_rate": 0.373
+      }
+    },
+    "product|0.6": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 377,
+        "on_target": 103,
+        "correct": 66,
+        "correct_rate": 0.156,
+        "on_target_rate": 0.273
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 461,
+        "on_target": 142,
+        "correct": 89,
+        "correct_rate": 0.176,
+        "on_target_rate": 0.308
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 355,
+        "on_target": 134,
+        "correct": 77,
+        "correct_rate": 0.206,
+        "on_target_rate": 0.377
+      }
+    },
+    "product|0.7": {
+      "benchls_dev": {
+        "sentences": 424,
+        "edited": 366,
+        "on_target": 103,
+        "correct": 66,
+        "correct_rate": 0.156,
+        "on_target_rate": 0.281
+      },
+      "benchls_holdout": {
+        "sentences": 505,
+        "edited": 449,
+        "on_target": 138,
+        "correct": 84,
+        "correct_rate": 0.166,
+        "on_target_rate": 0.307
+      },
+      "tsar_test": {
+        "sentences": 373,
+        "edited": 346,
+        "on_target": 132,
+        "correct": 74,
+        "correct_rate": 0.198,
+        "on_target_rate": 0.382
+      }
+    }
+  },
+  "chosen": [
+    "decision probability",
+    0.39
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "scope": "Reused BenchLS development, fixed target-word folds/threshold/floor. No TSAR or new labels.",
+  "repeats": [
+    {
+      "seed": 0,
+      "baseline": {
+        "edits": 621,
+        "correct": 445,
+        "wrong": 176,
+        "net": 269,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6684607104413348,
+        "log_loss": 0.23820126810657855
+      },
+      "prompted": {
+        "edits": 638,
+        "correct": 506,
+        "wrong": 132,
+        "net": 374,
+        "precision": 0.793,
+        "n": 929,
+        "coverage": 0.6867599569429494,
+        "log_loss": 0.2220023387021795
+      },
+      "net_delta": 105,
+      "log_loss_delta": -0.016198929404399043
+    },
+    {
+      "seed": 1,
+      "baseline": {
+        "edits": 608,
+        "correct": 436,
+        "wrong": 172,
+        "net": 264,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6544671689989235,
+        "log_loss": 0.23838534738750702
+      },
+      "prompted": {
+        "edits": 647,
+        "correct": 510,
+        "wrong": 137,
+        "net": 373,
+        "precision": 0.788,
+        "n": 929,
+        "coverage": 0.6964477933261571,
+        "log_loss": 0.22207810323087498
+      },
+      "net_delta": 109,
+      "log_loss_delta": -0.01630724415663204
+    },
+    {
+      "seed": 2,
+      "baseline": {
+        "edits": 612,
+        "correct": 435,
+        "wrong": 177,
+        "net": 258,
+        "precision": 0.711,
+        "n": 929,
+        "coverage": 0.658772874058127,
+        "log_loss": 0.23706753588260654
+      },
+      "prompted": {
+        "edits": 653,
+        "correct": 514,
+        "wrong": 139,
+        "net": 375,
+        "precision": 0.787,
+        "n": 929,
+        "coverage": 0.7029063509149623,
+        "log_loss": 0.22122567827000036
+      },
+      "net_delta": 117,
+      "log_loss_delta": -0.015841857612606175
+    }
+  ],
+  "mean_net_delta": 110.33333333333333,
+  "mean_log_loss_delta": -0.01611601039121242,
+  "noise_bar_passed": true,
+  "noise_bar": "net +5 or log-loss -0.001",
+  "feature_shapes": {
+    "baseline": [
+      14617,
+      48
+    ],
+    "prompted": [
+      14617,
+      51
+    ]
+  },
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "default_changed": false,
+  "saved_run": "runs/ensemble-prompted-relations-20261002",
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7",
+    "outputs/bert-candidate-coverage-20261002/summary.json": "e2c6b0eb0016f9ede953d613dceb8f3d19be561e7e704dd644452ffc662876d8",
+    "runs/ensemble-windowed-20261002/config.json": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec"
+  },
+  "source_sha256": {
+    "scripts/experiments/refine_prompted_relations.py": "33bb8a7cb0a454c2d18ff70de992d2cc2d2f0a6a04e2248b3ba3ce8ca18b91ad",
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/bert_candidates.py": "c4e8fd633279a2fcddae26af55fac91aba0a049ed10ba906485a0a3ff2e7b2da",
+    "src/cleartext/prompted_relations.py": "52aa1da10c306cd78de596d7ac59d43ece39e25ed9f8306db3cb19263cb659f3",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/ensemble_pipeline.py": "81cc6f116db2acf4906dca0406a7324fbda6216c14e4a2a592d73a44fa368bc2"
+  }
+}

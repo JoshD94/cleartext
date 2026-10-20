@@ -1,0 +1,54 @@
+{
+  "semcor_params": {
+    "alpha": 1.0,
+    "shrink": 0.0,
+    "nb": 3.0,
+    "vector": 8.0
+  },
+  "semcor_temperature": 2.0,
+  "gloss_temperature": 0.2,
+  "sense_weights": [
+    1.0,
+    0.0
+  ],
+  "sense_evidence": 3.0,
+  "test": {
+    "frequency_baseline": {
+      "accuracy": 0.6773239389810229,
+      "log_likelihood": -0.9432449494030442,
+      "n": 30089
+    },
+    "previous_semcor_model": {
+      "accuracy": 0.6906510684967928,
+      "log_likelihood": -1.1198530388752932,
+      "n": 30089
+    },
+    "semcor_with_backoff": {
+      "accuracy": 0.6917810495529928,
+      "log_likelihood": -0.9452843832065196,
+      "n": 30089
+    },
+    "gloss_only": {
+      "accuracy": 0.3787430622486623,
+      "log_likelihood": -1.566368764680632,
+      "n": 30089
+    },
+    "sense_ensemble": {
+      "accuracy": 0.6782877463524877,
+      "log_likelihood": -0.9043072284925501,
+      "n": 30089
+    },
+    "sense_ensemble_unseen_lemmas": {
+      "accuracy": 0.7480397281756404,
+      "log_likelihood": -0.4642347730639593,
+      "n": 1913
+    },
+    "previous_unseen_lemmas": {
+      "accuracy": 0.9691583899634083,
+      "log_likelihood": -0.47025703472946306,
+      "n": 1913
+    }
+  },
+  "runtime_seconds": 24.04128122329712,
+  "scope": "Custom document-held-out SemCor split, gold lemma/POS supplied. The previous model is reproduced from the same refit counts."
+}

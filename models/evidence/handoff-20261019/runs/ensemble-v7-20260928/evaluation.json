@@ -1,0 +1,15 @@
+{
+  "tsar_table": {
+    "edits": 219,
+    "correct": 158,
+    "wrong": 61,
+    "net": 97,
+    "precision": 0.721,
+    "n": 373
+  },
+  "tsar_pipeline": {
+    "edits": 219,
+    "correct": 158
+  },
+  "threshold": 0.45
+}

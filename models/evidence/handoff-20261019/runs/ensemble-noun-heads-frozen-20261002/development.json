@@ -1,0 +1,99 @@
+{
+  "scope": "All BenchLS is reused development. Candidate grammar and full-sentence meaning are ungraded.",
+  "repeats": [
+    {
+      "seed": 0,
+      "baseline": {
+        "edits": 621,
+        "correct": 445,
+        "wrong": 176,
+        "net": 269,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6684607104413348
+      },
+      "headed": {
+        "edits": 620,
+        "correct": 444,
+        "wrong": 176,
+        "net": 268,
+        "precision": 0.716,
+        "n": 929,
+        "coverage": 0.667384284176534
+      },
+      "net_delta": -1
+    },
+    {
+      "seed": 1,
+      "baseline": {
+        "edits": 608,
+        "correct": 436,
+        "wrong": 172,
+        "net": 264,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6544671689989235
+      },
+      "headed": {
+        "edits": 606,
+        "correct": 435,
+        "wrong": 171,
+        "net": 264,
+        "precision": 0.718,
+        "n": 929,
+        "coverage": 0.6523143164693218
+      },
+      "net_delta": 0
+    },
+    {
+      "seed": 2,
+      "baseline": {
+        "edits": 612,
+        "correct": 435,
+        "wrong": 177,
+        "net": 258,
+        "precision": 0.711,
+        "n": 929,
+        "coverage": 0.658772874058127
+      },
+      "headed": {
+        "edits": 613,
+        "correct": 435,
+        "wrong": 178,
+        "net": 257,
+        "precision": 0.71,
+        "n": 929,
+        "coverage": 0.6598493003229279
+      },
+      "net_delta": -1
+    }
+  ],
+  "mean_net_delta": -0.6666666666666666,
+  "noise_bar_passed": false,
+  "noise_bar": "paired net +5; no calibration claim for different candidate populations",
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "tsar_gold_used": false,
+  "default_changed": false,
+  "decision_training": "Each held-out fold uses a model trained on baseline candidates only. The saved run shares the prior full-data decision weights.",
+  "input_sha256": {
+    "outputs/noun-head-dev-review-20261002/baseline.pkl": "0bbfd82ed55044f4cf1a2aefb55a2006cfaf55c1d54f7cdc2bcec584c9f22763",
+    "outputs/noun-head-dev-review-20261002/headed.pkl": "51bb4f55c073131ee4280940558eccceee9bdbedb8a828a6887597d2ab0d060a",
+    "outputs/noun-head-dev-review-20261002/summary.json": "a6346ab292d6a048c4f295333abe6144f28930c249cbc5497cada3d2625e9825",
+    "runs/ensemble-windowed-20261002/config.json": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec"
+  },
+  "source_sha256": {
+    "scripts/experiments/check_frozen_noun_heads.py": "79c043c9777643dbc1c05d2feeed8f15ebcf4716cdc60f0da06999ae45633393",
+    "scripts/experiments/check_noun_inflection.py": "7fbad5654eadcbd0b5e58faed83fd7069442e89d86946a6905deb9d907e8fe49",
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/noun_inflection.py": "2f32ea56ae95a4b2dee56d1aadee965c8fbd8bf53aebf76acde299b933bc8100",
+    "src/cleartext/generation.py": "710852d038860c35fddae29f0e68f6d2f761877deb9537acf33170e8f3d27882",
+    "src/cleartext/ensemble_pipeline.py": "db8237916c6f02437e073979b6179d796bfca73a3d5b997ed4b34eb790a6e134",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/ensemble.py": "e3b3ec900bc2950d95aeeea8e988d1bf5cc5df915b59dbde7a29b6939fbd8f03",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/context_window.py": "a30d6f6178d18b28d2b5d79dc039a85ef6a36bf630fbaf520ad84949aeae16f8"
+  },
+  "saved_run": "runs/ensemble-noun-heads-frozen-20261002"
+}

@@ -1,0 +1,32 @@
+{
+  "v5": {
+    "dev_nets": [
+      175,
+      162,
+      169
+    ],
+    "tsar": {
+      "edits": 238,
+      "correct": 152,
+      "wrong": 86,
+      "net": 66,
+      "precision": 0.639,
+      "n": 373
+    }
+  },
+  "v5adj": {
+    "dev_nets": [
+      166,
+      150,
+      176
+    ],
+    "tsar": {
+      "edits": 237,
+      "correct": 149,
+      "wrong": 88,
+      "net": 61,
+      "precision": 0.629,
+      "n": 373
+    }
+  }
+}

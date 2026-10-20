@@ -1,0 +1,413 @@
+{
+  "word": {
+    "selected": "Gradient boosting",
+    "results": [
+      {
+        "name": "Mean",
+        "dev": {
+          "mae": 0.10489314402558146,
+          "rmse": 0.1375036097963178,
+          "pearson": null,
+          "spearman": null
+        },
+        "fit_seconds": 0.058,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.09854254444329966,
+          "rmse": 0.1273585355664107,
+          "pearson": null,
+          "spearman": null
+        },
+        "selected": false
+      },
+      {
+        "name": "Frequency",
+        "dev": {
+          "mae": 0.08196495717847803,
+          "rmse": 0.10784113168305492,
+          "pearson": 0.6255864436128801,
+          "spearman": 0.6365927066361856
+        },
+        "fit_seconds": 0.029,
+        "warnings": [],
+        "features": [
+          "zipf"
+        ],
+        "test": {
+          "mae": 0.07676254703079156,
+          "rmse": 0.10166476031052503,
+          "pearson": 0.6032526820228445,
+          "spearman": 0.6295162709141847
+        },
+        "selected": false
+      },
+      {
+        "name": "Ridge",
+        "dev": {
+          "mae": 0.07732991812325127,
+          "rmse": 0.10236874839337695,
+          "pearson": 0.6737160391322206,
+          "spearman": 0.6450008086271595
+        },
+        "fit_seconds": 0.066,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07510094332392286,
+          "rmse": 0.09877640551412722,
+          "pearson": 0.6316239245339186,
+          "spearman": 0.6356786392276876
+        },
+        "selected": false
+      },
+      {
+        "name": "Elastic net",
+        "dev": {
+          "mae": 0.07736696797172926,
+          "rmse": 0.10240905055472961,
+          "pearson": 0.6735555038144385,
+          "spearman": 0.6456376312879097
+        },
+        "fit_seconds": 0.052,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07508859560708556,
+          "rmse": 0.09877115202031463,
+          "pearson": 0.6315964882215392,
+          "spearman": 0.6353002605120576
+        },
+        "selected": false
+      },
+      {
+        "name": "Random forest",
+        "dev": {
+          "mae": 0.0734113984340743,
+          "rmse": 0.097756223719159,
+          "pearson": 0.7034841378683286,
+          "spearman": 0.6634418801446045
+        },
+        "fit_seconds": 0.433,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07041073117113798,
+          "rmse": 0.09128191352803139,
+          "pearson": 0.6987777221073346,
+          "spearman": 0.6537976410021513
+        },
+        "selected": false
+      },
+      {
+        "name": "Gradient boosting",
+        "dev": {
+          "mae": 0.07248574806168076,
+          "rmse": 0.09638175738613196,
+          "pearson": 0.7141805844578095,
+          "spearman": 0.6767642357143321
+        },
+        "fit_seconds": 0.344,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.06960550968690378,
+          "rmse": 0.09057130993164435,
+          "pearson": 0.7036187316032376,
+          "spearman": 0.6736004386387905
+        },
+        "selected": true
+      },
+      {
+        "name": "SVR",
+        "dev": {
+          "mae": 0.07251823468754419,
+          "rmse": 0.09629893121238679,
+          "pearson": 0.7156914228925229,
+          "spearman": 0.6749659813142866
+        },
+        "fit_seconds": 1.985,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.0699916995137724,
+          "rmse": 0.09075356281818896,
+          "pearson": 0.7015697335951049,
+          "spearman": 0.6735899685590334
+        },
+        "selected": false
+      },
+      {
+        "name": "kNN",
+        "dev": {
+          "mae": 0.08081867384711094,
+          "rmse": 0.10471642259951047,
+          "pearson": 0.6617923118087609,
+          "spearman": 0.632268356418248
+        },
+        "fit_seconds": 0.059,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07867603297460089,
+          "rmse": 0.10315306972908261,
+          "pearson": 0.6196862246509294,
+          "spearman": 0.5780492202738183
+        },
+        "selected": false
+      },
+      {
+        "name": "Small MLP",
+        "dev": {
+          "mae": 0.07304865345096104,
+          "rmse": 0.09711608053332459,
+          "pearson": 0.7129605408468214,
+          "spearman": 0.6772711554726524
+        },
+        "fit_seconds": 0.631,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07084956766327395,
+          "rmse": 0.09247334473680194,
+          "pearson": 0.6877759143546175,
+          "spearman": 0.6611847889029221
+        },
+        "selected": false
+      }
+    ],
+    "domains": {
+      "bible": {
+        "mae": 0.07841045639723508,
+        "rmse": 0.10039004995105742,
+        "pearson": 0.6511392037009153,
+        "spearman": 0.6437769972567279
+      },
+      "biomed": {
+        "mae": 0.07418445678317699,
+        "rmse": 0.09764882113269772,
+        "pearson": 0.763603655112583,
+        "spearman": 0.7174355671648671
+      },
+      "europarl": {
+        "mae": 0.05854720351343503,
+        "rmse": 0.07449307668216391,
+        "pearson": 0.6818247067267598,
+        "spearman": 0.666470978869994
+      }
+    },
+    "counts": {
+      "train": 7662,
+      "dev": 421,
+      "test": 917
+    }
+  },
+  "manifest": [
+    {
+      "file": "complex_train.tsv",
+      "url": "https://raw.githubusercontent.com/MMU-TDMLab/CompLex/4b31c2bd34da4c1265f9db3d727d95ee23099f14/train/lcp_single_train.tsv",
+      "sha256": "12142b2653edfbedf27452e9b0e9d14d2808a90950319a013b91245d567379e0",
+      "commit": "4b31c2bd34da4c1265f9db3d727d95ee23099f14"
+    },
+    {
+      "file": "complex_trial.tsv",
+      "url": "https://raw.githubusercontent.com/MMU-TDMLab/CompLex/4b31c2bd34da4c1265f9db3d727d95ee23099f14/trial/lcp_single_trial.tsv",
+      "sha256": "67bb6ef05cb1a690eb78a948592ef8693fbf8f5db451762522ecb02e8e47d9ab",
+      "commit": "4b31c2bd34da4c1265f9db3d727d95ee23099f14"
+    },
+    {
+      "file": "complex_test.tsv",
+      "url": "https://raw.githubusercontent.com/MMU-TDMLab/CompLex/4b31c2bd34da4c1265f9db3d727d95ee23099f14/test-labels/lcp_single_test.tsv",
+      "sha256": "846ef133c72cfa0547a285dc9060e74e87a8e9ad3a0de149e2cf680c12f611ed",
+      "commit": "4b31c2bd34da4c1265f9db3d727d95ee23099f14"
+    },
+    {
+      "file": "cefr_SCoRE_train.tsv",
+      "url": "https://raw.githubusercontent.com/yukiar/CEFR-SP/2ba4a5005fbff68ab0f863891cf977c50fdcda29/CEFR-SP/SCoRE/CEFR-SP_SCoRE_train.txt",
+      "sha256": "d98593b16b6ebaec5e7540aa2757d5ccfb733e35f8a2947a2b5e1066da6be0af",
+      "commit": "2ba4a5005fbff68ab0f863891cf977c50fdcda29"
+    },
+    {
+      "file": "cefr_SCoRE_dev.tsv",
+      "url": "https://raw.githubusercontent.com/yukiar/CEFR-SP/2ba4a5005fbff68ab0f863891cf977c50fdcda29/CEFR-SP/SCoRE/CEFR-SP_SCoRE_dev.txt",
+      "sha256": "693ecb9235eaf0f95f4118722c54d0b0e57f94e94fd962bda3c366a53434f3fe",
+      "commit": "2ba4a5005fbff68ab0f863891cf977c50fdcda29"
+    },
+    {
+      "file": "cefr_SCoRE_test.tsv",
+      "url": "https://raw.githubusercontent.com/yukiar/CEFR-SP/2ba4a5005fbff68ab0f863891cf977c50fdcda29/CEFR-SP/SCoRE/CEFR-SP_SCoRE_test.txt",
+      "sha256": "c272361239443952ab880d1bb7ab1ca8b5debbc5402bf880973b60f5d9fda6bd",
+      "commit": "2ba4a5005fbff68ab0f863891cf977c50fdcda29"
+    },
+    {
+      "file": "cefr_Wiki-Auto_train.tsv",
+      "url": "https://raw.githubusercontent.com/yukiar/CEFR-SP/2ba4a5005fbff68ab0f863891cf977c50fdcda29/CEFR-SP/Wiki-Auto/CEFR-SP_Wikiauto_train.txt",
+      "sha256": "f431fbeae144844c929ddff594ae7a7ac927469478a9b524738d81e7f2759c48",
+      "commit": "2ba4a5005fbff68ab0f863891cf977c50fdcda29"
+    },
+    {
+      "file": "cefr_Wiki-Auto_dev.tsv",
+      "url": "https://raw.githubusercontent.com/yukiar/CEFR-SP/2ba4a5005fbff68ab0f863891cf977c50fdcda29/CEFR-SP/Wiki-Auto/CEFR-SP_Wikiauto_dev.txt",
+      "sha256": "e5aaf45e7cba02ae6785716d12c799c1f73e08942d7e2ee36145fdc4bfb8dcf6",
+      "commit": "2ba4a5005fbff68ab0f863891cf977c50fdcda29"
+    },
+    {
+      "file": "cefr_Wiki-Auto_test.tsv",
+      "url": "https://raw.githubusercontent.com/yukiar/CEFR-SP/2ba4a5005fbff68ab0f863891cf977c50fdcda29/CEFR-SP/Wiki-Auto/CEFR-SP_Wikiauto_test.txt",
+      "sha256": "edefde3a3686e9f6fea9c738fde6628ab8fc26a6b5797f75023a274d76cc278a",
+      "commit": "2ba4a5005fbff68ab0f863891cf977c50fdcda29"
+    },
+    {
+      "file": "tsar_trial.tsv",
+      "url": "https://raw.githubusercontent.com/LaSTUS-TALN-UPF/TSAR-2022-Shared-Task/089c2669380696425d6d088ee3534155997d5dcb/datasets/trial/tsar2022_en_trial_gold.tsv",
+      "sha256": "8c13d40363bb74152beb34f58150af248465c4d25492189f3eeebeb5fb11bd41",
+      "commit": "089c2669380696425d6d088ee3534155997d5dcb"
+    },
+    {
+      "file": "tsar_test.tsv",
+      "url": "https://raw.githubusercontent.com/LaSTUS-TALN-UPF/TSAR-2022-Shared-Task/089c2669380696425d6d088ee3534155997d5dcb/datasets/test/tsar2022_en_test_gold.tsv",
+      "sha256": "57390b78a3e5adc6967865455b8b652e06a1809e62331899fcbef21660bbfaa9",
+      "commit": "089c2669380696425d6d088ee3534155997d5dcb"
+    },
+    {
+      "file": "tsar_eval.py",
+      "url": "https://raw.githubusercontent.com/LaSTUS-TALN-UPF/TSAR-2022-Shared-Task/089c2669380696425d6d088ee3534155997d5dcb/tsar_eval.py",
+      "sha256": "73fb317d7709c09504e9c8caa0391de90d740e3449f639377d79b565d4e1a075",
+      "commit": "089c2669380696425d6d088ee3534155997d5dcb"
+    },
+    {
+      "file": "swords_dev.json.gz",
+      "url": "https://raw.githubusercontent.com/p-lambda/swords/04ca75370d0ce098a7f4db68240fc8e79a4f7b3b/assets/parsed/swords-v1.1_dev.json.gz",
+      "sha256": "bc3570786455a05f11fcb4fc7f54e117642d5fb5e98f19355028c5c7ee00c954",
+      "commit": "04ca75370d0ce098a7f4db68240fc8e79a4f7b3b"
+    },
+    {
+      "file": "swords_test.json.gz",
+      "url": "https://raw.githubusercontent.com/p-lambda/swords/04ca75370d0ce098a7f4db68240fc8e79a4f7b3b/assets/parsed/swords-v1.1_test.json.gz",
+      "sha256": "f94b6b73c52fd4bd549180bc119d44e9f9097ec78240a8b42363add158e58480",
+      "commit": "04ca75370d0ce098a7f4db68240fc8e79a4f7b3b"
+    }
+  ],
+  "alignment": {
+    "train": {
+      "missing": 0,
+      "repeated_target": 44
+    },
+    "dev": {
+      "missing": 0,
+      "repeated_target": 4
+    },
+    "test": {
+      "missing": 0,
+      "repeated_target": 3
+    }
+  },
+  "sentence_overlap_removed": {
+    "train": 0,
+    "dev": 0
+  },
+  "feature_missing": {
+    "train": {
+      "frequency": 1.0,
+      "syllables": 556.0
+    },
+    "dev": {
+      "frequency": 0.0,
+      "syllables": 33.0
+    },
+    "test": {
+      "frequency": 0.0,
+      "syllables": 50.0
+    }
+  },
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "python": "3.12.14",
+  "duration_seconds": 67.99809169769287,
+  "seed": 4701,
+  "word_features": [
+    "zipf",
+    "length",
+    "syllables",
+    "frequency_missing",
+    "syllables_estimated"
+  ],
+  "context_features": [
+    "zipf",
+    "length",
+    "syllables",
+    "frequency_missing",
+    "syllables_estimated",
+    "pos",
+    "dependency",
+    "lemma_zipf",
+    "local_zipf",
+    "sentence_length",
+    "is_entity"
+  ],
+  "sentence_features": [
+    "length",
+    "word_mean",
+    "word_max",
+    "word_p90",
+    "mean_zipf",
+    "rare_fraction",
+    "mean_syllables",
+    "mean_word_length",
+    "max_depth",
+    "mean_dependency_distance",
+    "subclauses",
+    "coordination",
+    "passive",
+    "punctuation",
+    "lexical_density"
+  ],
+  "packages": "annotated-doc==0.0.5\nannotated-types==0.8.0\nanyio==4.15.1\nblis==1.3.3\ncatalogue==2.0.10\ncertifi==2026.7.22\ncharset-normalizer==3.5.1\nclick==8.5.0\ncloudpathlib==0.25.0\ncloudpickle==3.1.2\nconfection==1.3.3\ncymem==2.0.13\ndefusedxml==0.7.1\nen-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl\nftfy==6.3.1\ngreenlet==3.5.6\nh11==0.16.0\nhttpcore==1.0.9\nhttpx==0.28.1\nidna==3.20\niniconfig==2.3.0\njinja2==3.1.6\njoblib==1.6.0\nlangcodes==3.5.1\nlemminflect==0.2.3\nlocate==1.1.1\nmarkdown-it-py==4.2.0\nmarkupsafe==3.0.3\nmdurl==0.1.2\nmsgpack==1.2.2\nmurmurhash==1.0.15\nnarwhals==2.26.0\nnltk==3.10.3\nnumpy==2.5.3\npackaging==26.3\npandas==3.0.6\nplaywright==1.63.0\npluggy==1.6.0\npreshed==3.0.13\npydantic==2.13.5\npydantic-core==2.46.5\npyee==13.0.1\npygments==2.21.0\npytest==9.1.1\npython-dateutil==2.9.0.post0\nregex==2026.9.10\nrequests==2.34.2\nrich==15.0.0\nscikit-learn==1.9.1\nscipy==1.18.1\nsetuptools==84.0.0\nshellingham==1.5.4\nsix==1.17.0\nsmart-open==8.0.1\nspacy==3.8.16\nspacy-legacy==3.0.12\nspacy-loggers==1.0.5\nsrsly==2.5.3\nthinc==8.3.13\nthreadpoolctl==3.7.0\ntqdm==4.70.1\ntyper==0.27.2\ntyping-extensions==4.16.0\ntyping-inspection==0.4.4\nurllib3==2.8.0\nwasabi==1.1.3\nwcwidth==0.9.1\nweasel==1.0.0\nwordfreq==3.1.1\nwrapt==2.4.1\n"
+}

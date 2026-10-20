@@ -1,0 +1,74 @@
+{
+  "v4 features": {
+    "dev_net": 147.33333333333334,
+    "dev_nets": [
+      164,
+      132,
+      146
+    ],
+    "dev_log_loss": 0.2667389868643129,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 181,
+      "correct": 114,
+      "wrong": 67,
+      "net": 47,
+      "precision": 0.63,
+      "n": 373
+    }
+  },
+  "+ detector": {
+    "dev_net": 143.33333333333334,
+    "dev_nets": [
+      154,
+      136,
+      140
+    ],
+    "dev_log_loss": 0.26670726359127744,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 179,
+      "correct": 116,
+      "wrong": 63,
+      "net": 53,
+      "precision": 0.648,
+      "n": 373
+    }
+  },
+  "+ sentence level": {
+    "dev_net": 145.66666666666666,
+    "dev_nets": [
+      151,
+      137,
+      149
+    ],
+    "dev_log_loss": 0.26658453134846327,
+    "threshold": 0.5,
+    "tsar": {
+      "edits": 145,
+      "correct": 94,
+      "wrong": 51,
+      "net": 43,
+      "precision": 0.648,
+      "n": 373
+    }
+  },
+  "+ both": {
+    "dev_net": 144.33333333333334,
+    "dev_nets": [
+      158,
+      136,
+      139
+    ],
+    "dev_log_loss": 0.26663776824010416,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 181,
+      "correct": 114,
+      "wrong": 67,
+      "net": 47,
+      "precision": 0.63,
+      "n": 373
+    }
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "scope": "Ungraded native domain audit. Reused diagnostics and component test text.",
+  "input_sha256": {
+    "diagnostics/domain-audit.jsonl": "c06f5bb53d2fdf1a9ce4bf970fd6d40f1749bc4e765492ee046681307eb01ece",
+    "outputs/parliament-input-20261003/input.jsonl": "96bc5f96dbb070d1aad5e6a0592d0225d407f76f346050626e620fd0c9ae81e8"
+  },
+  "source_sha256": {
+    "src/cleartext/detection.py": "467b7e83cdb62a0bc9e996cd952872c2802c11c34059aaf1d5846206e5b4e72c",
+    "src/cleartext/candidate_validation.py": "67bd5e8c72d749d180d9e8a505c027171f25fbe7cce6bd56b7b166797ba7b6ca",
+    "src/cleartext/phrase_complexity.py": "81c02aed26d6dfc69e27989b7b2566ae588aae9cc79ea99fc1a1a12a18938fe0",
+    "src/cleartext/complete_slot.py": "c1880dbaf7aa78e2619d6a433370d26d3ecfa808a31adb5ba9a759801eaa91cd",
+    "src/cleartext/document_consistency.py": "f749572cc902ee86ac56ecd4fbd9b39b51fa53ae27ab642bda923c75b09c41ab",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/rewrites.py": "7f07db26fcd6a4a72a19e6b832c90c1d8556d73bfb62ca2107289b99e12b4b62",
+    "src/cleartext/models.py": "826dfc903f322f129f20f81123ff9408ef2747053239abbc9ce294a025ff25ce",
+    "src/cleartext/proposal_evidence.py": "1a237845388489bd3a77b167cae3b232ba0f6677694bbbd6e5623b4d5545884c",
+    "src/cleartext/context_window.py": "a30d6f6178d18b28d2b5d79dc039a85ef6a36bf630fbaf520ad84949aeae16f8",
+    "src/cleartext/wsd.py": "ed9c81d9e38642285cfa96105dac5dd2a6599e0ee22dee3d4421525583f60ac7",
+    "src/cleartext/context_pipeline.py": "cdfa9b5fb82f0c7eabd94386bd3a09824a1f1de1f6fb68caaf252ceee72909a8",
+    "src/cleartext/context_similarity.py": "7cb40625caec09c7cf53575c2e34bba3bd5f2cc337571f24db5a7cafb7cb5691",
+    "src/cleartext/sense_contrast.py": "6f967640f309eafd1b3ce0ad3c4b766f44a81aca3e285446cf9c16c7362b28b9",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/edit_quality.py": "3b00e578b4a9086f66ee3f37248aaafa336d28bd5400c51229776cb0acf8f4d1",
+    "src/cleartext/prompted_specificity.py": "dde05b07ffe6ae238996da9ea4738b489de6dbac72ca112f852a8ef1bb1899ac",
+    "src/cleartext/__init__.py": "bee55ecb52af1130d6eba9fa06fe8b3e6b2728867f819a05eb8fa49255833322",
+    "src/cleartext/building_blocks.py": "5766a3b5f0f28c62b71611f678f39e23b48cb34f9c093ba82e6e4150b93f8d30",
+    "src/cleartext/noun_inflection.py": "2f32ea56ae95a4b2dee56d1aadee965c8fbd8bf53aebf76acde299b933bc8100",
+    "src/cleartext/audit.py": "0fe2eb593c4b4bd79b7119da2356b17915560cb215aeabe660c035bc23f6eaed",
+    "src/cleartext/detail_preservation.py": "61550d5df3d07f0c550f677b0eb5a7deed73e48452ed4b3beb8c26430010ee8c",
+    "src/cleartext/lexical.py": "66cf816e96d369b68de74c0d038f6e0d77d32c724fb0ea69b1fc352bab73afe8",
+    "src/cleartext/semantics.py": "2a1d6dfabb928f263a11a2984be9890c291e58eed00474bb975034f01597445a",
+    "scripts/experiments/audit_novel_fallback.py": "79e7697df3241450b9d046bedbb66a86e3e4a4dea225f31ad2378ced28a0c856",
+    "src/cleartext/bert_candidates.py": "c4e8fd633279a2fcddae26af55fac91aba0a049ed10ba906485a0a3ff2e7b2da",
+    "src/cleartext/features.py": "062f03fad04b478ec5fd0b43a5bd1313e516bbc70c314f287b902ddf40b1baf9",
+    "src/cleartext/candidate_diagnostics.py": "bbca0ec684f513ff2f4491d41d41c66eac9240a2fc554379a198438c8f05ecaf",
+    "src/cleartext/jargon_explanations.py": "169d912d3f7ff7a18a3875b3d73a904cfc2fe5c8bb1caebb365e45dff46e89b3",
+    "src/cleartext/sense_pipeline.py": "d1bc22e376358e6e0e67ebf25a63350ed8ceeee75149066284f2b8fd9dfacc16",
+    "src/cleartext/technical_terms.py": "9e17d2cd2616b829f467722def87b00e2f6ad7e611746a59c5e08f108ca70e9d",
+    "src/cleartext/preservation.py": "c12798018b55bd71bffcde18c4574aecaecfa25bee9ff308d64313fdbc32d8b8",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/novel_context.py": "ea86831752d059f0684741b33ec1707d45b47827e02561d85fd8ba575622852a",
+    "src/cleartext/novel_pipeline.py": "4a1bd2f15721dea852f26b42c8b1da98d8f146bdb6425ecc3168244b8e821d67",
+    "src/cleartext/pipeline.py": "b460614793ca9bf7d7ab5b42759e565443abb697a6a74867c7ffdf78c49213fd",
+    "src/cleartext/generation.py": "710852d038860c35fddae29f0e68f6d2f761877deb9537acf33170e8f3d27882",
+    "src/cleartext/ensemble_pipeline.py": "cc2a4fcdd207f13f6b8a6ce073335d3f87cf7a5c4f10395476b6da6b337cffdb",
+    "src/cleartext/data.py": "c23f170c54e5cf36462ff0a57bbb0d4254e49a58be0885d13ed29697ffd19c0e",
+    "src/cleartext/prompted_relations.py": "52aa1da10c306cd78de596d7ac59d43ece39e25ed9f8306db3cb19263cb659f3",
+    "src/cleartext/ensemble.py": "e3b3ec900bc2950d95aeeea8e988d1bf5cc5df915b59dbde7a29b6939fbd8f03",
+    "src/cleartext/grammar_validation.py": "83e96ce4613a04bc013a68597b88beabf003410dd399be34677236cdb991a2f5"
+  },
+  "artifact_sha256": {
+    "runs/ensemble-v5-20260927/sentence_model.pkl": "e42a18dd76ce03006e0aa5fd2a35d57814eed9c77c9c04fdaa72adf72f196656",
+    "outputs/novel-fallback-comparison-20261003/shadow-run/validator.pkl": "669280f8791df2d8602e7b9db0a7831f2abff7fe2ee3bd336e9222b2bcdec15e",
+    "runs/ensemble-v5-20260927/detector.pkl": "13470380c1580b3dd45747fbde4072909a0bd3d8214a3a4cba01f3c2975ba723",
+    "runs/ensemble-v7-20260928/bert_senses.npz": "892b6bdbf6f94820863819f28dbd69f731f844d3202de51ad8f60afd9056c7e9",
+    "outputs/novel-fallback-comparison-20261003/shadow-run/config.json": "8a75e76d883937eb2c10bbf6b808ba789874f447b4262fc13f94575dd8eaf760",
+    "runs/novel-context-boosted-20261003/config.json": "6fd6cc1aeac4841d8c65d51998b2dc70020153341cf64ec68b5c2293e1aa2b14",
+    "runs/novel-context-boosted-20261003/validator.pkl": "669280f8791df2d8602e7b9db0a7831f2abff7fe2ee3bd336e9222b2bcdec15e",
+    "runs/ensemble-building-blocks-20261002/stacker.pkl": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+    "runs/context-20260924/phrase_model.pkl": "1ff8af727be7758586600b2b7a004ce92c4523ceb5c123cc6341e61fed02d854",
+    "runs/initial-20260924/context_model.pkl": "23b1e10392994d7c01fe89565830b160774bcdb42d8208308fd3508bf94c2007",
+    "runs/ensemble-v7-20260928/checker.pkl": "5690cb30bb7f946e983346ac40fb74a6e9b46b94f0df7c593cde531852297af6",
+    "runs/ensemble-building-blocks-20261002/config.json": "68788392c5beea0d15e24034c74f0165139c7015c2f3797a1777c16629dfecba",
+    "runs/ensemble-context-similarity-20261002/decision.pkl": "b377fbffebe09d2ca94c76e0dfaafd1afc3c63669c258b9c917c1e936d621625",
+    "runs/initial-20260924/word_model.pkl": "6ab44804da9e182cd0c749ffef571929943798b9a83f6b86ac24d8dc8a668442",
+    "runs/ensemble-20260927/sense_model.pkl": "4816f89a9b55ef975402d2bfb3b40920e7bd2d4173b5a93a520ca2704fd5c7f5"
+  },
+  "selection": "All 13 existing diagnostics and first 12 existing distinct Europarl sentences.",
+  "missing_real_domain_data": [
+    "computer_science/arXiv",
+    "corporate/SEC10-K",
+    "political/GovInfo"
+  ],
+  "baseline_run": "runs/ensemble-building-blocks-20261002",
+  "safe_config": {
+    "feature_names": [
+      "context_vector",
+      "argument_fit",
+      "bigram",
+      "bert_slot",
+      "bert_slot_relative",
+      "vector_source_candidate",
+      "vector_candidate_missing"
+    ],
+    "context_threshold": null,
+    "candidate_limit": 3,
+    "base_run": "runs/ensemble-building-blocks-20261002",
+    "antonym_support_limit": 0.1,
+    "policy": "Fallback only after WordNet abstains; positive complexity gain, dictionary and mechanical checks required.",
+    "experimental": true,
+    "semantic_certified": false,
+    "estimator": "hist_gradient_boosting",
+    "deployment_enabled": false
+  },
+  "shadow_config": {
+    "feature_names": [
+      "context_vector",
+      "argument_fit",
+      "bigram",
+      "bert_slot",
+      "bert_slot_relative",
+      "vector_source_candidate",
+      "vector_candidate_missing"
+    ],
+    "context_threshold": 0.5,
+    "candidate_limit": 3,
+    "base_run": "runs/ensemble-building-blocks-20261002",
+    "antonym_support_limit": 0.1,
+    "policy": "Fallback only after WordNet abstains; positive complexity gain, dictionary and mechanical checks required.",
+    "experimental": true,
+    "semantic_certified": false,
+    "estimator": "hist_gradient_boosting",
+    "deployment_enabled": false,
+    "shadow_only": true
+  },
+  "shadow_only": true,
+  "max_word_edits": 1,
+  "offline": true,
+  "new_labels": false,
+  "fitting": false,
+  "tsar_used": false,
+  "default_changed": false,
+  "semantic_certified": false,
+  "variants": {
+    "baseline": {
+      "notice": "Ungraded diagnostics. Source and dataset split are recorded per input. Reused component evaluation data is not a fresh test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+      "overall": {
+        "sentences": 25,
+        "changed_sentences": 17,
+        "change_coverage": 0.68,
+        "word_edits": 17,
+        "detected_targets": 55,
+        "scored_candidates": 878,
+        "latency_median_seconds": 2.734935959102586,
+        "latency_max_seconds": 58.53581499995198,
+        "human_precision": null
+      },
+      "baselines": {},
+      "by_domain": {
+        "computer_science": {
+          "sentences": 4,
+          "changed_sentences": 3,
+          "change_coverage": 0.75,
+          "word_edits": 3,
+          "detected_targets": 7,
+          "scored_candidates": 46,
+          "latency_median_seconds": 2.081806875008624,
+          "latency_max_seconds": 10.708699056995101,
+          "human_precision": null
+        },
+        "corporate_communication": {
+          "sentences": 5,
+          "changed_sentences": 4,
+          "change_coverage": 0.8,
+          "word_edits": 4,
+          "detected_targets": 8,
+          "scored_candidates": 184,
+          "latency_median_seconds": 1.9340418450301513,
+          "latency_max_seconds": 11.514782725949772,
+          "human_precision": null
+        },
+        "political_science": {
+          "sentences": 16,
+          "changed_sentences": 10,
+          "change_coverage": 0.625,
+          "word_edits": 10,
+          "detected_targets": 40,
+          "scored_candidates": 648,
+          "latency_median_seconds": 3.8160463360254653,
+          "latency_max_seconds": 58.53581499995198,
+          "human_precision": null
+        }
+      },
+      "source_kinds": [
+        "authored_diagnostic",
+        "corpus",
+        "owner_example"
+      ],
+      "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+    },
+    "safe": {
+      "notice": "Ungraded diagnostics. Source and dataset split are recorded per input. Reused component evaluation data is not a fresh test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+      "overall": {
+        "sentences": 25,
+        "changed_sentences": 17,
+        "change_coverage": 0.68,
+        "word_edits": 17,
+        "detected_targets": 55,
+        "scored_candidates": 878,
+        "latency_median_seconds": 1.9537825839361176,
+        "latency_max_seconds": 39.76622277905699,
+        "human_precision": null
+      },
+      "baselines": {},
+      "by_domain": {
+        "computer_science": {
+          "sentences": 4,
+          "changed_sentences": 3,
+          "change_coverage": 0.75,
+          "word_edits": 3,
+          "detected_targets": 7,
+          "scored_candidates": 46,
+          "latency_median_seconds": 1.3212241709697992,
+          "latency_max_seconds": 1.5098098299931735,
+          "human_precision": null
+        },
+        "corporate_communication": {
+          "sentences": 5,
+          "changed_sentences": 4,
+          "change_coverage": 0.8,
+          "word_edits": 4,
+          "detected_targets": 8,
+          "scored_candidates": 184,
+          "latency_median_seconds": 1.4699983189348131,
+          "latency_max_seconds": 7.695990670006722,
+          "human_precision": null
+        },
+        "political_science": {
+          "sentences": 16,
+          "changed_sentences": 10,
+          "change_coverage": 0.625,
+          "word_edits": 10,
+          "detected_targets": 40,
+          "scored_candidates": 648,
+          "latency_median_seconds": 2.9026162764639594,
+          "latency_max_seconds": 39.76622277905699,
+          "human_precision": null
+        }
+      },
+      "source_kinds": [
+        "authored_diagnostic",
+        "corpus",
+        "owner_example"
+      ],
+      "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+    },
+    "shadow": {
+      "notice": "Ungraded diagnostics. Source and dataset split are recorded per input. Reused component evaluation data is not a fresh test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+      "overall": {
+        "sentences": 25,
+        "changed_sentences": 18,
+        "change_coverage": 0.72,
+        "word_edits": 18,
+        "detected_targets": 55,
+        "scored_candidates": 902,
+        "latency_median_seconds": 2.689728523953818,
+        "latency_max_seconds": 37.04729080304969,
+        "human_precision": null
+      },
+      "baselines": {},
+      "by_domain": {
+        "computer_science": {
+          "sentences": 4,
+          "changed_sentences": 4,
+          "change_coverage": 1.0,
+          "word_edits": 4,
+          "detected_targets": 7,
+          "scored_candidates": 52,
+          "latency_median_seconds": 1.4667329469812103,
+          "latency_max_seconds": 3.1809586939634755,
+          "human_precision": null
+        },
+        "corporate_communication": {
+          "sentences": 5,
+          "changed_sentences": 4,
+          "change_coverage": 0.8,
+          "word_edits": 4,
+          "detected_targets": 8,
+          "scored_candidates": 187,
+          "latency_median_seconds": 1.859668195946142,
+          "latency_max_seconds": 7.1599431650247425,
+          "human_precision": null
+        },
+        "political_science": {
+          "sentences": 16,
+          "changed_sentences": 10,
+          "change_coverage": 0.625,
+          "word_edits": 10,
+          "detected_targets": 40,
+          "scored_candidates": 663,
+          "latency_median_seconds": 3.946672205463983,
+          "latency_max_seconds": 37.04729080304969,
+          "human_precision": null
+        }
+      },
+      "source_kinds": [
+        "authored_diagnostic",
+        "corpus",
+        "owner_example"
+      ],
+      "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+    }
+  },
+  "safe_output_identity_count": 25,
+  "retained_score_maximum_roundoff": 1.1102230246251565e-16,
+  "automatic_failures": {
+    "baseline": 0,
+    "safe": 0,
+    "shadow": 0
+  },
+  "records_sha256": "61a91f264ea6caa7fc67f52f3e77176f2042bed7a33b546d39f0aae47f9110ca",
+  "elapsed_seconds": 511.0345175630646,
+  "human_precision": null,
+  "deployment_enabled": false
+}

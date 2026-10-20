@@ -1,0 +1,164 @@
+{
+  "scope": "All BenchLS is reused development. Existing substitute labels do not grade phrase grammar or full-sentence meaning. No TSAR or new gold.",
+  "statistics": {
+    "reused_candidate_scores": 14307,
+    "scored_new_candidates": 203,
+    "baseline_refresh_candidates": 0,
+    "changed_cases": 103
+  },
+  "repeats": [
+    {
+      "seed": 0,
+      "baseline": {
+        "edits": 621,
+        "correct": 445,
+        "wrong": 176,
+        "net": 269,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6684607104413348,
+        "log_loss": 0.23820126810657855,
+        "candidate_rows": 14617,
+        "cases_with_gold_candidate": 807
+      },
+      "headed": {
+        "edits": 611,
+        "correct": 437,
+        "wrong": 174,
+        "net": 263,
+        "precision": 0.715,
+        "n": 929,
+        "coverage": 0.6576964477933261,
+        "log_loss": 0.2399324830404986,
+        "candidate_rows": 14510,
+        "cases_with_gold_candidate": 807
+      },
+      "net_delta": -6,
+      "log_loss_delta": 0.001731214933920061
+    },
+    {
+      "seed": 1,
+      "baseline": {
+        "edits": 608,
+        "correct": 436,
+        "wrong": 172,
+        "net": 264,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6544671689989235,
+        "log_loss": 0.23838534738750702,
+        "candidate_rows": 14617,
+        "cases_with_gold_candidate": 807
+      },
+      "headed": {
+        "edits": 607,
+        "correct": 431,
+        "wrong": 176,
+        "net": 255,
+        "precision": 0.71,
+        "n": 929,
+        "coverage": 0.6533907427341227,
+        "log_loss": 0.24054608365459468,
+        "candidate_rows": 14510,
+        "cases_with_gold_candidate": 807
+      },
+      "net_delta": -9,
+      "log_loss_delta": 0.002160736267087654
+    },
+    {
+      "seed": 2,
+      "baseline": {
+        "edits": 612,
+        "correct": 435,
+        "wrong": 177,
+        "net": 258,
+        "precision": 0.711,
+        "n": 929,
+        "coverage": 0.658772874058127,
+        "log_loss": 0.23706753588260654,
+        "candidate_rows": 14617,
+        "cases_with_gold_candidate": 807
+      },
+      "headed": {
+        "edits": 612,
+        "correct": 434,
+        "wrong": 178,
+        "net": 256,
+        "precision": 0.709,
+        "n": 929,
+        "coverage": 0.658772874058127,
+        "log_loss": 0.2397152877414998,
+        "candidate_rows": 14510,
+        "cases_with_gold_candidate": 807
+      },
+      "net_delta": -2,
+      "log_loss_delta": 0.002647751858893266
+    }
+  ],
+  "mean_net_delta": -5.666666666666667,
+  "mean_log_loss_delta": 0.0021799010199669935,
+  "cache_score_checks": [
+    {
+      "id": "benchls-0",
+      "word": "parts",
+      "max_fit_feature_error": 3.4570693969726562e-06
+    },
+    {
+      "id": "benchls-1",
+      "word": "deviated",
+      "max_fit_feature_error": 5.077570676803589e-06
+    },
+    {
+      "id": "benchls-2",
+      "word": "owner",
+      "max_fit_feature_error": 0.0
+    },
+    {
+      "id": "benchls-3",
+      "word": "hazards",
+      "max_fit_feature_error": 5.736947059631348e-07
+    },
+    {
+      "id": "benchls-4",
+      "word": "held",
+      "max_fit_feature_error": 4.291534423828125e-06
+    }
+  ],
+  "candidate_order": "Both variants retain cached proposal order by lemma/provenance. New word forms keep their original lemma position for tied listwise ranks.",
+  "noise_bar_passed": false,
+  "noise_bar": "net +5 or log-loss -0.001",
+  "log_loss_caveat": "Candidate populations differ. Log-loss is descriptive; use paired edit outcomes to assess the proposal policy.",
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "default_changed": false,
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "data/raw/BenchLS.zip": "3299fd8113e3da65d149c9327c56bc53bab44fd891cc167e0ed85546f9cb653a",
+    "runs/ensemble-windowed-20261002/config.json": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec"
+  },
+  "source_sha256": {
+    "scripts/experiments/check_noun_inflection.py": "7fbad5654eadcbd0b5e58faed83fd7069442e89d86946a6905deb9d907e8fe49",
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/noun_inflection.py": "2f32ea56ae95a4b2dee56d1aadee965c8fbd8bf53aebf76acde299b933bc8100",
+    "src/cleartext/generation.py": "710852d038860c35fddae29f0e68f6d2f761877deb9537acf33170e8f3d27882",
+    "src/cleartext/ensemble_pipeline.py": "db8237916c6f02437e073979b6179d796bfca73a3d5b997ed4b34eb790a6e134",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/ensemble.py": "e3b3ec900bc2950d95aeeea8e988d1bf5cc5df915b59dbde7a29b6939fbd8f03",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/context_window.py": "a30d6f6178d18b28d2b5d79dc039a85ef6a36bf630fbaf520ad84949aeae16f8"
+  },
+  "packages": {
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "nltk": "3.10.3",
+    "spacy": "3.8.16",
+    "lemminflect": "0.2.3",
+    "wordfreq": "3.1.1",
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0"
+  },
+  "tsar_gold_used": false,
+  "saved_run": "runs/ensemble-noun-heads-review-20261002"
+}

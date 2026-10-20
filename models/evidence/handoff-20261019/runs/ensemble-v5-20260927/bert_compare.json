@@ -1,0 +1,30 @@
+{
+  "meaning": {
+    "n": 1500,
+    "ours": 0.6326666666666667,
+    "bert": 0.5933333333333334,
+    "agree": 0.568,
+    "gold_sense_seen_in_training": {
+      "n": 1395,
+      "ours": 0.6666666666666666,
+      "bert": 0.6200716845878136
+    },
+    "gold_sense_never_seen": {
+      "n": 105,
+      "ours": 0.18095238095238095,
+      "bert": 0.23809523809523808
+    }
+  },
+  "fit_bert_alone": {
+    "auc_generated_score": 0.6661031375172508,
+    "auc_generated_relative": 0.6626751636532956
+  },
+  "current fit": {
+    "auc_generated": 0.778867404384491,
+    "log_loss_generated": 0.38816699620532613
+  },
+  "+ BERT slot scores": {
+    "auc_generated": 0.7998941467959036,
+    "log_loss_generated": 0.37441988827038064
+  }
+}

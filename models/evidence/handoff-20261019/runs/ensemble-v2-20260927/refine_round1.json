@@ -1,0 +1,123 @@
+{
+  "results": {
+    "v2 as shipped (cost .05, tiered)": {
+      "benchls_dev": {
+        "edits": 207,
+        "correct": 118,
+        "wrong": 89,
+        "net": 29,
+        "precision": 0.57,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 219,
+        "correct": 114,
+        "wrong": 105,
+        "net": 9,
+        "precision": 0.521,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 223,
+        "correct": 119,
+        "wrong": 104,
+        "net": 15,
+        "precision": 0.534,
+        "n": 373,
+        "reachable": 310
+      }
+    },
+    "utility retuned on BenchLS dev (0.1, True, 'context')": {
+      "benchls_dev": {
+        "edits": 123,
+        "correct": 85,
+        "wrong": 38,
+        "net": 47,
+        "precision": 0.691,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 121,
+        "correct": 61,
+        "wrong": 60,
+        "net": 1,
+        "precision": 0.504,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 154,
+        "correct": 82,
+        "wrong": 72,
+        "net": 10,
+        "precision": 0.532,
+        "n": 373,
+        "reachable": 310
+      }
+    },
+    "accept model on BenchLS dev (0.1, np.float64(0.4), False, 'mean')": {
+      "benchls_dev": {
+        "edits": 223,
+        "correct": 137,
+        "wrong": 86,
+        "net": 51,
+        "precision": 0.614,
+        "n": 424,
+        "reachable": 369
+      },
+      "benchls_holdout": {
+        "edits": 266,
+        "correct": 155,
+        "wrong": 111,
+        "net": 44,
+        "precision": 0.583,
+        "n": 505,
+        "reachable": 440
+      },
+      "tsar_test": {
+        "edits": 173,
+        "correct": 96,
+        "wrong": 77,
+        "net": 19,
+        "precision": 0.555,
+        "n": 373,
+        "reachable": 310
+      }
+    }
+  },
+  "utility_best": [
+    0.1,
+    true,
+    "context"
+  ],
+  "accept_best": [
+    0.1,
+    0.4,
+    false,
+    "mean"
+  ],
+  "accept_weights": {
+    "sense_fit": 0.5079773357402709,
+    "round_trip": 0.15898234152315457,
+    "first_sense": 0.19378921266980423,
+    "candidate_sense_rank": 0.10022880741774128,
+    "swords_checker": 0.14207035260550832,
+    "context_vector": 0.2640557858820633,
+    "argument_fit": 0.07073630542570977,
+    "bigram": 0.3627961608660095,
+    "wordnet_member": 0.0,
+    "source=hypernym": -0.04724824707745803,
+    "source=similar": 0.0072936009278273956,
+    "multiword=True": -0.7887688305626198,
+    "pos_fallback=True": 0.023790715357034774,
+    "fit": -0.11600923375151982,
+    "gain_word": 0.7355195516645382,
+    "gain_context": 0.26846132233867137,
+    "target_difficulty": -0.4677132735539839,
+    "source=synonym": 0.04084754079947699,
+    "multiword": -0.7887688305626078
+  }
+}

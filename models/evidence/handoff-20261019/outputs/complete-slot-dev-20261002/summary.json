@@ -1,0 +1,96 @@
+{
+  "scope": "Reused BenchLS development. Frozen baseline decision in each target-word fold; no TSAR.",
+  "rescored": [
+    {
+      "id": "benchls-232",
+      "candidates": 91
+    }
+  ],
+  "repeats": [
+    {
+      "seed": 0,
+      "baseline": {
+        "edits": 621,
+        "correct": 445,
+        "wrong": 176,
+        "net": 269,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6684607104413348
+      },
+      "complete": {
+        "edits": 621,
+        "correct": 445,
+        "wrong": 176,
+        "net": 269,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6684607104413348
+      },
+      "changed_choices": 0,
+      "net_delta": 0
+    },
+    {
+      "seed": 1,
+      "baseline": {
+        "edits": 608,
+        "correct": 436,
+        "wrong": 172,
+        "net": 264,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6544671689989235
+      },
+      "complete": {
+        "edits": 608,
+        "correct": 436,
+        "wrong": 172,
+        "net": 264,
+        "precision": 0.717,
+        "n": 929,
+        "coverage": 0.6544671689989235
+      },
+      "changed_choices": 0,
+      "net_delta": 0
+    },
+    {
+      "seed": 2,
+      "baseline": {
+        "edits": 612,
+        "correct": 435,
+        "wrong": 177,
+        "net": 258,
+        "precision": 0.711,
+        "n": 929,
+        "coverage": 0.658772874058127
+      },
+      "complete": {
+        "edits": 612,
+        "correct": 435,
+        "wrong": 177,
+        "net": 258,
+        "precision": 0.711,
+        "n": 929,
+        "coverage": 0.658772874058127
+      },
+      "changed_choices": 0,
+      "net_delta": 0
+    }
+  ],
+  "default_changed": false,
+  "mean_net_delta": 0.0,
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/complete-slot-check-20261002/summary.json": "88c7f2efef685d7a576d3bb2fb06f715000e74a737e1915724e96cef7ba7fd4e",
+    "data/raw/BenchLS.zip": "3299fd8113e3da65d149c9327c56bc53bab44fd891cc167e0ed85546f9cb653a"
+  },
+  "source_sha256": {
+    "scripts/experiments/check_complete_slot_development.py": "ca99d0a2aef901638c7ab650d00111b6e9207d1529618eb3e11b9ab870ab226a",
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/complete_slot.py": "c1880dbaf7aa78e2619d6a433370d26d3ecfa808a31adb5ba9a759801eaa91cd",
+    "src/cleartext/ensemble_pipeline.py": "f084aa39037a881c399908974a54e6c9329fd5289be933ffc2e308a681cc200a"
+  }
+}

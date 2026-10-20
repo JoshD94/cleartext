@@ -1,0 +1,42 @@
+{
+  "selected": "boosting",
+  "results": [
+    {
+      "name": "ridge",
+      "dev_mae": 0.08141545799787969
+    },
+    {
+      "name": "boosting",
+      "dev_mae": 0.07721978394487007
+    }
+  ],
+  "test_mae": 0.07171033285790386,
+  "multiword_test_mae": 0.08377015517836058,
+  "multiword_test_n": 184,
+  "manifest": [
+    {
+      "url": "https://raw.githubusercontent.com/MMU-TDMLab/CompLex/4b31c2bd34da4c1265f9db3d727d95ee23099f14/train/lcp_multi_train.tsv",
+      "sha256": "8bd1e51343ac36e975deed6ee45926d0fd91a3fe2dd0f94cc37272b69441b2df",
+      "split": "train",
+      "multi_count": 1517
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MMU-TDMLab/CompLex/4b31c2bd34da4c1265f9db3d727d95ee23099f14/trial/lcp_multi_trial.tsv",
+      "sha256": "7ebaa82428381458c7e0abcd4c712099ccd435b1c4393c623e7b02bc308810a8",
+      "split": "dev",
+      "multi_count": 99
+    },
+    {
+      "url": "https://raw.githubusercontent.com/MMU-TDMLab/CompLex/4b31c2bd34da4c1265f9db3d727d95ee23099f14/test-labels/lcp_multi_test.tsv",
+      "sha256": "59669b0a546f2bd4cb7b23271e4c8d555e24c862948aae76aaa7b957db736372",
+      "split": "test",
+      "multi_count": 184
+    }
+  ],
+  "counts": {
+    "train": 9179,
+    "dev": 520,
+    "test": 1101
+  },
+  "limitation": "Mostly two-word phrase targets; longer expression scores are extrapolations. Candidate inventory is authored, not learned."
+}

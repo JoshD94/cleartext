@@ -1,0 +1,43 @@
+{
+  "notice": "Ungraded diagnostics, separate from train/dev/test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+  "overall": {
+    "sentences": 6,
+    "changed_sentences": 3,
+    "change_coverage": 0.5,
+    "word_edits": 3,
+    "detected_targets": 8,
+    "scored_candidates": 169,
+    "latency_median_seconds": 1.7489674729877152,
+    "latency_max_seconds": 9.823016611975618,
+    "human_precision": null
+  },
+  "baselines": {},
+  "by_domain": {
+    "cs": {
+      "sentences": 5,
+      "changed_sentences": 3,
+      "change_coverage": 0.6,
+      "word_edits": 3,
+      "detected_targets": 7,
+      "scored_candidates": 161,
+      "latency_median_seconds": 2.6182831689948216,
+      "latency_max_seconds": 9.823016611975618,
+      "human_precision": null
+    },
+    "general": {
+      "sentences": 1,
+      "changed_sentences": 0,
+      "change_coverage": 0.0,
+      "word_edits": 0,
+      "detected_targets": 1,
+      "scored_candidates": 8,
+      "latency_median_seconds": 0.8499438649741933,
+      "latency_max_seconds": 0.8499438649741933,
+      "human_precision": null
+    }
+  },
+  "source_kinds": [
+    "authored_diagnostic"
+  ],
+  "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+}

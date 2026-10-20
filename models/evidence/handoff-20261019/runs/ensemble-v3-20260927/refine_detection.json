@@ -1,0 +1,87 @@
+{
+  "results": {
+    "current: word model >= 0.30, content words": {
+      "dev": {
+        "f1": 0.4309,
+        "precision": 0.9043,
+        "recall": 0.2828,
+        "flagged": 324,
+        "n": 2883
+      },
+      "test": {
+        "f1": 0.3784,
+        "precision": 0.8947,
+        "recall": 0.24,
+        "flagged": 361,
+        "n": 3701
+      }
+    },
+    "word model, threshold 0.22 tuned on CWI dev": {
+      "dev": {
+        "f1": 0.715,
+        "precision": 0.6664,
+        "recall": 0.7712,
+        "flagged": 1199,
+        "n": 2883
+      },
+      "test": {
+        "f1": 0.7253,
+        "precision": 0.6936,
+        "recall": 0.76,
+        "flagged": 1475,
+        "n": 3701
+      }
+    },
+    "context model, threshold 0.22 tuned on CWI dev": {
+      "dev": {
+        "f1": 0.6873,
+        "precision": 0.6421,
+        "recall": 0.7394,
+        "flagged": 1193,
+        "n": 2883
+      },
+      "test": {
+        "f1": 0.6798,
+        "precision": 0.657,
+        "recall": 0.7043,
+        "flagged": 1443,
+        "n": 3701
+      }
+    },
+    "logistic on CWI train (CompLex scores + features), t=0.4": {
+      "dev": {
+        "f1": 0.7476,
+        "precision": 0.7138,
+        "recall": 0.7847,
+        "flagged": 1139,
+        "n": 2883
+      },
+      "test": {
+        "f1": 0.7543,
+        "precision": 0.7342,
+        "recall": 0.7756,
+        "flagged": 1422,
+        "n": 3701
+      }
+    },
+    "gradient boosting on CWI train (CompLex scores + features), t=0.39": {
+      "dev": {
+        "f1": 0.7777,
+        "precision": 0.7564,
+        "recall": 0.8002,
+        "flagged": 1096,
+        "n": 2883
+      },
+      "test": {
+        "f1": 0.784,
+        "precision": 0.7902,
+        "recall": 0.7779,
+        "flagged": 1325,
+        "n": 3701
+      }
+    }
+  },
+  "selected": "gradient boosting",
+  "threshold": 0.39,
+  "label": "CWI 2018 binary (any of 20 annotators)"
+}

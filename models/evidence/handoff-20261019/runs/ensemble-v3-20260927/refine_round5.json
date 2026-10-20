@@ -1,0 +1,48 @@
+{
+  "False": {
+    "dev_nets": [
+      71,
+      70,
+      70
+    ],
+    "benchls_holdout": {
+      "edits": 341,
+      "correct": 193,
+      "wrong": 148,
+      "net": 45,
+      "precision": 0.566,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 218,
+      "correct": 116,
+      "wrong": 102,
+      "net": 14,
+      "precision": 0.532,
+      "n": 373
+    }
+  },
+  "True": {
+    "dev_nets": [
+      72,
+      70,
+      69
+    ],
+    "benchls_holdout": {
+      "edits": 340,
+      "correct": 192,
+      "wrong": 148,
+      "net": 44,
+      "precision": 0.565,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 218,
+      "correct": 117,
+      "wrong": 101,
+      "net": 16,
+      "precision": 0.537,
+      "n": 373
+    }
+  }
+}

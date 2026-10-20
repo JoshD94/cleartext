@@ -1,0 +1,380 @@
+[
+  {
+    "C": 0.01,
+    "leaves": 4,
+    "weight": 0.3,
+    "dev_net": 163.0,
+    "dev_nets": [
+      166,
+      158,
+      165
+    ],
+    "dev_log_loss": 0.26351321608876904,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 242,
+      "correct": 155,
+      "wrong": 87,
+      "net": 68,
+      "precision": 0.64,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.01,
+    "leaves": 4,
+    "weight": 0.5,
+    "dev_net": 161.66666666666666,
+    "dev_nets": [
+      172,
+      149,
+      164
+    ],
+    "dev_log_loss": 0.2632119987920826,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 235,
+      "correct": 150,
+      "wrong": 85,
+      "net": 65,
+      "precision": 0.638,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.01,
+    "leaves": 4,
+    "weight": 0.7,
+    "dev_net": 161.0,
+    "dev_nets": [
+      166,
+      159,
+      158
+    ],
+    "dev_log_loss": 0.2635121857945175,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 224,
+      "correct": 142,
+      "wrong": 82,
+      "net": 60,
+      "precision": 0.634,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.01,
+    "leaves": 8,
+    "weight": 0.3,
+    "dev_net": 156.66666666666666,
+    "dev_nets": [
+      159,
+      153,
+      158
+    ],
+    "dev_log_loss": 0.2627994105126386,
+    "threshold": 0.5,
+    "tsar": {
+      "edits": 171,
+      "correct": 111,
+      "wrong": 60,
+      "net": 51,
+      "precision": 0.649,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.01,
+    "leaves": 8,
+    "weight": 0.5,
+    "dev_net": 160.0,
+    "dev_nets": [
+      162,
+      160,
+      158
+    ],
+    "dev_log_loss": 0.26247240874780103,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 231,
+      "correct": 145,
+      "wrong": 86,
+      "net": 59,
+      "precision": 0.628,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.01,
+    "leaves": 8,
+    "weight": 0.7,
+    "dev_net": 149.33333333333334,
+    "dev_nets": [
+      146,
+      142,
+      160
+    ],
+    "dev_log_loss": 0.26293386560540594,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 227,
+      "correct": 140,
+      "wrong": 87,
+      "net": 53,
+      "precision": 0.617,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.03,
+    "leaves": 4,
+    "weight": 0.3,
+    "dev_net": 163.0,
+    "dev_nets": [
+      165,
+      156,
+      168
+    ],
+    "dev_log_loss": 0.26317843665233415,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 245,
+      "correct": 156,
+      "wrong": 89,
+      "net": 67,
+      "precision": 0.637,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.03,
+    "leaves": 4,
+    "weight": 0.5,
+    "dev_net": 162.66666666666666,
+    "dev_nets": [
+      170,
+      154,
+      164
+    ],
+    "dev_log_loss": 0.26266292376377964,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 239,
+      "correct": 152,
+      "wrong": 87,
+      "net": 65,
+      "precision": 0.636,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.03,
+    "leaves": 4,
+    "weight": 0.7,
+    "dev_net": 157.66666666666666,
+    "dev_nets": [
+      163,
+      155,
+      155
+    ],
+    "dev_log_loss": 0.2627663424099007,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 229,
+      "correct": 147,
+      "wrong": 82,
+      "net": 65,
+      "precision": 0.642,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.03,
+    "leaves": 8,
+    "weight": 0.3,
+    "dev_net": 158.0,
+    "dev_nets": [
+      160,
+      155,
+      159
+    ],
+    "dev_log_loss": 0.2625228655821576,
+    "threshold": 0.5,
+    "tsar": {
+      "edits": 174,
+      "correct": 112,
+      "wrong": 62,
+      "net": 50,
+      "precision": 0.644,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.03,
+    "leaves": 8,
+    "weight": 0.5,
+    "dev_net": 156.33333333333334,
+    "dev_nets": [
+      157,
+      153,
+      159
+    ],
+    "dev_log_loss": 0.26198809991789157,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 232,
+      "correct": 145,
+      "wrong": 87,
+      "net": 58,
+      "precision": 0.625,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.03,
+    "leaves": 8,
+    "weight": 0.7,
+    "dev_net": 149.66666666666666,
+    "dev_nets": [
+      156,
+      144,
+      149
+    ],
+    "dev_log_loss": 0.26224039426979484,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 231,
+      "correct": 142,
+      "wrong": 89,
+      "net": 53,
+      "precision": 0.615,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.1,
+    "leaves": 4,
+    "weight": 0.3,
+    "dev_net": 164.0,
+    "dev_nets": [
+      163,
+      161,
+      168
+    ],
+    "dev_log_loss": 0.26304374812444564,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 244,
+      "correct": 155,
+      "wrong": 89,
+      "net": 66,
+      "precision": 0.635,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.1,
+    "leaves": 4,
+    "weight": 0.5,
+    "dev_net": 156.33333333333334,
+    "dev_nets": [
+      162,
+      149,
+      158
+    ],
+    "dev_log_loss": 0.26245841291471345,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 239,
+      "correct": 153,
+      "wrong": 86,
+      "net": 67,
+      "precision": 0.64,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.1,
+    "leaves": 4,
+    "weight": 0.7,
+    "dev_net": 154.66666666666666,
+    "dev_nets": [
+      157,
+      149,
+      158
+    ],
+    "dev_log_loss": 0.2625124308199052,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 233,
+      "correct": 149,
+      "wrong": 84,
+      "net": 65,
+      "precision": 0.639,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.1,
+    "leaves": 8,
+    "weight": 0.3,
+    "dev_net": 158.0,
+    "dev_nets": [
+      162,
+      155,
+      157
+    ],
+    "dev_log_loss": 0.26241609051045256,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 233,
+      "correct": 143,
+      "wrong": 90,
+      "net": 53,
+      "precision": 0.614,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.1,
+    "leaves": 8,
+    "weight": 0.5,
+    "dev_net": 156.66666666666666,
+    "dev_nets": [
+      160,
+      155,
+      155
+    ],
+    "dev_log_loss": 0.2618148757659566,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 195,
+      "correct": 122,
+      "wrong": 73,
+      "net": 49,
+      "precision": 0.626,
+      "n": 373
+    }
+  },
+  {
+    "C": 0.1,
+    "leaves": 8,
+    "weight": 0.7,
+    "dev_net": 145.0,
+    "dev_nets": [
+      149,
+      138,
+      148
+    ],
+    "dev_log_loss": 0.2620117928697676,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 230,
+      "correct": 142,
+      "wrong": 88,
+      "net": 54,
+      "precision": 0.617,
+      "n": 373
+    }
+  }
+]

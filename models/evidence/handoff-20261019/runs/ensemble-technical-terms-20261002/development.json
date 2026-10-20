@@ -1,0 +1,213 @@
+{
+  "scope": "Reused BenchLS development, three fixed target-word grouped folds. No TSAR or new labels.",
+  "repeats": [
+    {
+      "seed": 0,
+      "similarity": {
+        "edits": 642,
+        "correct": 513,
+        "wrong": 129,
+        "net": 384,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6910656620021528,
+        "log_loss": 0.21387854785812213
+      },
+      "similarity_terms": {
+        "edits": 642,
+        "correct": 513,
+        "wrong": 129,
+        "net": 384,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6910656620021528
+      },
+      "historical_similarity": {
+        "edits": 642,
+        "correct": 514,
+        "wrong": 128,
+        "net": 386,
+        "precision": 0.801,
+        "n": 929,
+        "coverage": 0.6910656620021528
+      },
+      "historical_probability_max_difference": 0.004604529476424424,
+      "detail": {
+        "edits": 642,
+        "correct": 514,
+        "wrong": 128,
+        "net": 386,
+        "precision": 0.801,
+        "n": 929,
+        "coverage": 0.6910656620021528,
+        "log_loss": 0.21399914734904546
+      },
+      "detail_terms": {
+        "edits": 642,
+        "correct": 514,
+        "wrong": 128,
+        "net": 386,
+        "precision": 0.801,
+        "n": 929,
+        "coverage": 0.6910656620021528
+      },
+      "net_delta": 2,
+      "log_loss_delta": 0.00012059949092332878
+    },
+    {
+      "seed": 1,
+      "similarity": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6856835306781486,
+        "log_loss": 0.21363407826181638
+      },
+      "similarity_terms": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6856835306781486
+      },
+      "historical_similarity": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6856835306781486
+      },
+      "historical_probability_max_difference": 0.0060975825040452125,
+      "detail": {
+        "edits": 635,
+        "correct": 507,
+        "wrong": 128,
+        "net": 379,
+        "precision": 0.798,
+        "n": 929,
+        "coverage": 0.6835306781485468,
+        "log_loss": 0.21374999438024014
+      },
+      "detail_terms": {
+        "edits": 635,
+        "correct": 507,
+        "wrong": 128,
+        "net": 379,
+        "precision": 0.798,
+        "n": 929,
+        "coverage": 0.6835306781485468
+      },
+      "net_delta": -2,
+      "log_loss_delta": 0.00011591611842376448
+    },
+    {
+      "seed": 2,
+      "similarity": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.796,
+        "n": 929,
+        "coverage": 0.6953713670613563,
+        "log_loss": 0.21325957671582935
+      },
+      "similarity_terms": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.796,
+        "n": 929,
+        "coverage": 0.6953713670613563
+      },
+      "historical_similarity": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.796,
+        "n": 929,
+        "coverage": 0.6953713670613563
+      },
+      "historical_probability_max_difference": 0.0048067495344084055,
+      "detail": {
+        "edits": 648,
+        "correct": 514,
+        "wrong": 134,
+        "net": 380,
+        "precision": 0.793,
+        "n": 929,
+        "coverage": 0.697524219590958,
+        "log_loss": 0.21325829787894954
+      },
+      "detail_terms": {
+        "edits": 648,
+        "correct": 514,
+        "wrong": 134,
+        "net": 380,
+        "precision": 0.793,
+        "n": 929,
+        "coverage": 0.697524219590958
+      },
+      "net_delta": -2,
+      "log_loss_delta": -1.2788368798088978e-06
+    }
+  ],
+  "mean_net_delta": -0.6666666666666666,
+  "mean_log_loss_delta": 7.841225748909479e-05,
+  "noise_bar_passed": false,
+  "noise_bar": "net +5 or log-loss -0.001",
+  "feature_shapes": {
+    "similarity": [
+      14617,
+      52
+    ],
+    "detail": [
+      14617,
+      57
+    ]
+  },
+  "new_feature_names": [
+    "same_sense_mass",
+    "broader_mass",
+    "unlinked_mass",
+    "expected_specificity_loss",
+    "sense_available"
+  ],
+  "protected_targets": [],
+  "baseline_drift": "Legacy breadth traversal can overshoot 20,000 by hash-dependent sibling counts. Prior probabilities are recorded separately; both compared models share the same frozen 52 columns.",
+  "feature_tables_sha256": "555bf776f9b05e01875f387657fbb9ee9da85e9de2aa941e7fa68aa7b20ea9cc",
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "default_changed": false,
+  "saved_run": null,
+  "source_sha256": {
+    "scripts/experiments/refine_detail_preservation.py": "6346e683c51663ee796489bea573769a9d1ddaf5546570ddbc24017c593a1aef",
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/detail_preservation.py": "61550d5df3d07f0c550f677b0eb5a7deed73e48452ed4b3beb8c26430010ee8c",
+    "src/cleartext/technical_terms.py": "483d8b746edcd6f07a810232dbcd98cefa8fa257b628c1c4dbb9d9c1d6d2575b",
+    "src/cleartext/ensemble_pipeline.py": "ac4ed69113d2cd987bf955ebe9fb3a7be991b97501995b7e882a16e8fededbd2",
+    "src/cleartext/context_similarity.py": "7cb40625caec09c7cf53575c2e34bba3bd5f2cc337571f24db5a7cafb7cb5691",
+    "src/cleartext/prompted_relations.py": "52aa1da10c306cd78de596d7ac59d43ece39e25ed9f8306db3cb19263cb659f3",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/bert_candidates.py": "c4e8fd633279a2fcddae26af55fac91aba0a049ed10ba906485a0a3ff2e7b2da"
+  },
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7",
+    "outputs/context-similarity-cache-review-20261002/records.jsonl": "6c4412716c6d05ea326de2f6f4b1b28ccde972857a2957ff3312cf44402b99fe",
+    "outputs/detail-senses-cache-review-20261002/records.jsonl": "2ac5048ee7b82f16db1d4b105de1d536cf888bba7c05def92abfa2c3150bf717",
+    "outputs/detail-senses-cache-review-20261002/summary.json": "cb6ce1a2b3da5b185396dea3adbe1bde2b18a2cc143e967377b6cf94a5bd1a01"
+  },
+  "term_run": "runs/ensemble-technical-terms-20261002"
+}

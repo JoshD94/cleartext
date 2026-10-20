@@ -1,0 +1,7 @@
+{
+  "semcor": {
+    "train_only_test_accuracy": 0.6917810495529928,
+    "train_dev_test_accuracy": 0.6920469274485692
+  },
+  "runtime_seconds": 34.41445708274841
+}

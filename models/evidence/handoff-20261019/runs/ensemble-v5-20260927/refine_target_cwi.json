@@ -1,0 +1,385 @@
+{
+  "dev": {
+    "('decision', 0.39, 0.0)": {
+      "sentences": 266,
+      "edits": 211,
+      "annotated": 210,
+      "on_hard_word": 0.229,
+      "mean_hardness": 0.277,
+      "hard_edits": 48
+    },
+    "('decision', 0.39, 0.5)": {
+      "sentences": 266,
+      "edits": 210,
+      "annotated": 209,
+      "on_hard_word": 0.234,
+      "mean_hardness": 0.283,
+      "hard_edits": 49
+    },
+    "('decision', 0.39, 0.6)": {
+      "sentences": 266,
+      "edits": 209,
+      "annotated": 208,
+      "on_hard_word": 0.231,
+      "mean_hardness": 0.282,
+      "hard_edits": 48
+    },
+    "('decision', 0.39, 0.7)": {
+      "sentences": 266,
+      "edits": 204,
+      "annotated": 203,
+      "on_hard_word": 0.246,
+      "mean_hardness": 0.293,
+      "hard_edits": 50
+    },
+    "('decision', 0.39, 0.8)": {
+      "sentences": 266,
+      "edits": 200,
+      "annotated": 199,
+      "on_hard_word": 0.266,
+      "mean_hardness": 0.308,
+      "hard_edits": 53
+    },
+    "('decision', 0.5, 0.0)": {
+      "sentences": 266,
+      "edits": 207,
+      "annotated": 207,
+      "on_hard_word": 0.242,
+      "mean_hardness": 0.291,
+      "hard_edits": 50
+    },
+    "('decision', 0.5, 0.5)": {
+      "sentences": 266,
+      "edits": 207,
+      "annotated": 207,
+      "on_hard_word": 0.242,
+      "mean_hardness": 0.291,
+      "hard_edits": 50
+    },
+    "('decision', 0.5, 0.6)": {
+      "sentences": 266,
+      "edits": 206,
+      "annotated": 206,
+      "on_hard_word": 0.238,
+      "mean_hardness": 0.291,
+      "hard_edits": 49
+    },
+    "('decision', 0.5, 0.7)": {
+      "sentences": 266,
+      "edits": 200,
+      "annotated": 200,
+      "on_hard_word": 0.255,
+      "mean_hardness": 0.304,
+      "hard_edits": 51
+    },
+    "('decision', 0.5, 0.8)": {
+      "sentences": 266,
+      "edits": 195,
+      "annotated": 195,
+      "on_hard_word": 0.282,
+      "mean_hardness": 0.323,
+      "hard_edits": 55
+    },
+    "('decision', 0.6, 0.0)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.259,
+      "mean_hardness": 0.307,
+      "hard_edits": 53
+    },
+    "('decision', 0.6, 0.5)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.259,
+      "mean_hardness": 0.307,
+      "hard_edits": 53
+    },
+    "('decision', 0.6, 0.6)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.259,
+      "mean_hardness": 0.307,
+      "hard_edits": 53
+    },
+    "('decision', 0.6, 0.7)": {
+      "sentences": 266,
+      "edits": 199,
+      "annotated": 199,
+      "on_hard_word": 0.271,
+      "mean_hardness": 0.317,
+      "hard_edits": 54
+    },
+    "('decision', 0.6, 0.8)": {
+      "sentences": 266,
+      "edits": 193,
+      "annotated": 193,
+      "on_hard_word": 0.301,
+      "mean_hardness": 0.336,
+      "hard_edits": 58
+    },
+    "('detector', 0.39, 0.0)": {
+      "sentences": 266,
+      "edits": 211,
+      "annotated": 211,
+      "on_hard_word": 0.389,
+      "mean_hardness": 0.394,
+      "hard_edits": 82
+    },
+    "('detector', 0.39, 0.5)": {
+      "sentences": 266,
+      "edits": 210,
+      "annotated": 210,
+      "on_hard_word": 0.39,
+      "mean_hardness": 0.395,
+      "hard_edits": 82
+    },
+    "('detector', 0.39, 0.6)": {
+      "sentences": 266,
+      "edits": 209,
+      "annotated": 209,
+      "on_hard_word": 0.392,
+      "mean_hardness": 0.397,
+      "hard_edits": 82
+    },
+    "('detector', 0.39, 0.7)": {
+      "sentences": 266,
+      "edits": 204,
+      "annotated": 204,
+      "on_hard_word": 0.402,
+      "mean_hardness": 0.398,
+      "hard_edits": 82
+    },
+    "('detector', 0.39, 0.8)": {
+      "sentences": 266,
+      "edits": 200,
+      "annotated": 200,
+      "on_hard_word": 0.405,
+      "mean_hardness": 0.4,
+      "hard_edits": 81
+    },
+    "('detector', 0.5, 0.0)": {
+      "sentences": 266,
+      "edits": 207,
+      "annotated": 207,
+      "on_hard_word": 0.396,
+      "mean_hardness": 0.401,
+      "hard_edits": 82
+    },
+    "('detector', 0.5, 0.5)": {
+      "sentences": 266,
+      "edits": 207,
+      "annotated": 207,
+      "on_hard_word": 0.396,
+      "mean_hardness": 0.401,
+      "hard_edits": 82
+    },
+    "('detector', 0.5, 0.6)": {
+      "sentences": 266,
+      "edits": 206,
+      "annotated": 206,
+      "on_hard_word": 0.398,
+      "mean_hardness": 0.403,
+      "hard_edits": 82
+    },
+    "('detector', 0.5, 0.7)": {
+      "sentences": 266,
+      "edits": 200,
+      "annotated": 200,
+      "on_hard_word": 0.41,
+      "mean_hardness": 0.406,
+      "hard_edits": 82
+    },
+    "('detector', 0.5, 0.8)": {
+      "sentences": 266,
+      "edits": 195,
+      "annotated": 195,
+      "on_hard_word": 0.415,
+      "mean_hardness": 0.409,
+      "hard_edits": 81
+    },
+    "('detector', 0.6, 0.0)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.4,
+      "mean_hardness": 0.405,
+      "hard_edits": 82
+    },
+    "('detector', 0.6, 0.5)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.4,
+      "mean_hardness": 0.405,
+      "hard_edits": 82
+    },
+    "('detector', 0.6, 0.6)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.4,
+      "mean_hardness": 0.405,
+      "hard_edits": 82
+    },
+    "('detector', 0.6, 0.7)": {
+      "sentences": 266,
+      "edits": 199,
+      "annotated": 199,
+      "on_hard_word": 0.412,
+      "mean_hardness": 0.408,
+      "hard_edits": 82
+    },
+    "('detector', 0.6, 0.8)": {
+      "sentences": 266,
+      "edits": 193,
+      "annotated": 193,
+      "on_hard_word": 0.42,
+      "mean_hardness": 0.412,
+      "hard_edits": 81
+    },
+    "('product', 0.39, 0.0)": {
+      "sentences": 266,
+      "edits": 211,
+      "annotated": 211,
+      "on_hard_word": 0.336,
+      "mean_hardness": 0.355,
+      "hard_edits": 71
+    },
+    "('product', 0.39, 0.5)": {
+      "sentences": 266,
+      "edits": 210,
+      "annotated": 210,
+      "on_hard_word": 0.338,
+      "mean_hardness": 0.355,
+      "hard_edits": 71
+    },
+    "('product', 0.39, 0.6)": {
+      "sentences": 266,
+      "edits": 209,
+      "annotated": 209,
+      "on_hard_word": 0.34,
+      "mean_hardness": 0.357,
+      "hard_edits": 71
+    },
+    "('product', 0.39, 0.7)": {
+      "sentences": 266,
+      "edits": 204,
+      "annotated": 204,
+      "on_hard_word": 0.343,
+      "mean_hardness": 0.36,
+      "hard_edits": 70
+    },
+    "('product', 0.39, 0.8)": {
+      "sentences": 266,
+      "edits": 200,
+      "annotated": 200,
+      "on_hard_word": 0.345,
+      "mean_hardness": 0.361,
+      "hard_edits": 69
+    },
+    "('product', 0.5, 0.0)": {
+      "sentences": 266,
+      "edits": 207,
+      "annotated": 207,
+      "on_hard_word": 0.343,
+      "mean_hardness": 0.36,
+      "hard_edits": 71
+    },
+    "('product', 0.5, 0.5)": {
+      "sentences": 266,
+      "edits": 207,
+      "annotated": 207,
+      "on_hard_word": 0.343,
+      "mean_hardness": 0.36,
+      "hard_edits": 71
+    },
+    "('product', 0.5, 0.6)": {
+      "sentences": 266,
+      "edits": 206,
+      "annotated": 206,
+      "on_hard_word": 0.345,
+      "mean_hardness": 0.362,
+      "hard_edits": 71
+    },
+    "('product', 0.5, 0.7)": {
+      "sentences": 266,
+      "edits": 200,
+      "annotated": 200,
+      "on_hard_word": 0.35,
+      "mean_hardness": 0.367,
+      "hard_edits": 70
+    },
+    "('product', 0.5, 0.8)": {
+      "sentences": 266,
+      "edits": 195,
+      "annotated": 195,
+      "on_hard_word": 0.354,
+      "mean_hardness": 0.369,
+      "hard_edits": 69
+    },
+    "('product', 0.6, 0.0)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.346,
+      "mean_hardness": 0.365,
+      "hard_edits": 71
+    },
+    "('product', 0.6, 0.5)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.346,
+      "mean_hardness": 0.365,
+      "hard_edits": 71
+    },
+    "('product', 0.6, 0.6)": {
+      "sentences": 266,
+      "edits": 205,
+      "annotated": 205,
+      "on_hard_word": 0.346,
+      "mean_hardness": 0.365,
+      "hard_edits": 71
+    },
+    "('product', 0.6, 0.7)": {
+      "sentences": 266,
+      "edits": 199,
+      "annotated": 199,
+      "on_hard_word": 0.352,
+      "mean_hardness": 0.369,
+      "hard_edits": 70
+    },
+    "('product', 0.6, 0.8)": {
+      "sentences": 266,
+      "edits": 193,
+      "annotated": 193,
+      "on_hard_word": 0.358,
+      "mean_hardness": 0.372,
+      "hard_edits": 69
+    }
+  },
+  "chosen": [
+    "detector",
+    0.6,
+    0.8
+  ],
+  "test_chosen": {
+    "sentences": 338,
+    "edits": 243,
+    "annotated": 243,
+    "on_hard_word": 0.379,
+    "mean_hardness": 0.405,
+    "hard_edits": 92
+  },
+  "test_current": {
+    "sentences": 338,
+    "edits": 287,
+    "annotated": 283,
+    "on_hard_word": 0.237,
+    "mean_hardness": 0.293,
+    "hard_edits": 67
+  }
+}

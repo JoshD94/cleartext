@@ -1,0 +1,1079 @@
+{
+  "scope": "Inventory of original local run files on Yoga, including weights. Hashes are preservation receipts; these paths are not a remote artifact store. Rebuild instructions are in models/README.md.",
+  "files": [
+    {
+      "path": "runs/context-20260924/checker.pkl",
+      "bytes": 289756,
+      "sha256": "847525582ec8086d2d68ccedcc2227e6392cff2dc56bd231675f94858591ecef",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/context-20260924/metrics.json",
+      "bytes": 20817,
+      "sha256": "0444c6dae4594c5b2ef14ee0118dbc64711c76d654a3c565bc934877f9d3cb25",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/context-20260924/phrase_metrics.json",
+      "bytes": 1384,
+      "sha256": "f97ffdeaae27896a6867c4a3a7b9cd9a8c3f543854e38b65091a2f573530a7bb",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/context-20260924/phrase_model.pkl",
+      "bytes": 274971,
+      "sha256": "1ff8af727be7758586600b2b7a004ce92c4523ceb5c123cc6341e61fed02d854",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/context-20260924/phrase_selection.json",
+      "bytes": 196,
+      "sha256": "388ac3f232036169bf0e5117a8020a79b8ce1d0f9e88bfbd32ea6a05d0e77cf9",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/context-20260924/review.json",
+      "bytes": 136171,
+      "sha256": "98c16a04f61540b8b6aaee1dbf258eeafa003979294300aaeb8183571c57a8a2",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/context-20260924/selection.json",
+      "bytes": 20281,
+      "sha256": "ce6b814c3aa4cd2f0b5a4616f7fbd9639ac2c2163218aebf848fe84767457018",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/config.json",
+      "bytes": 349,
+      "sha256": "9c1b9f15276ece78553a6f2e4639a1ee2d2d07405e25a604ecf3a50a293a5b11",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/evaluation.json",
+      "bytes": 694674,
+      "sha256": "fc0bd8ce93013d0ea4358a6b029259bde21a0732c4dac4fecc06ca1e0b408795",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/fit_selection.json",
+      "bytes": 2816,
+      "sha256": "c74f7f0e9b4ae2d46319aebffd7ab504c5264bec80f91a7f7d50c5307c643663",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/sense_metrics.json",
+      "bytes": 1367,
+      "sha256": "dc94848b00d21ac985511c032ee20dbb8a85f02d614218bfda5a0eac35387431",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/sense_model.pkl",
+      "bytes": 102321006,
+      "sha256": "4816f89a9b55ef975402d2bfb3b40920e7bd2d4173b5a93a520ca2704fd5c7f5",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/sense_selection.json",
+      "bytes": 52799,
+      "sha256": "bde3401633db604cf7a6d6a5e6349a2f888455ee3d337489a5f6510b0e439e26",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/stacker.pkl",
+      "bytes": 1339,
+      "sha256": "901e8cd3e2d1d341cb9a48618cfce4cc69f1fc7de70da9957239e9948e09385d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/tsar_ensemble.tsv",
+      "bytes": 68999,
+      "sha256": "f37d89f92233011e5f7da5a761591cdbcd0437c48f7a47c7b5c1bed95a5561a9",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-20260927/tsar_ensemble_official.txt",
+      "bytes": 666,
+      "sha256": "fbd7ca29768ac09970e0869d8ca27ed6ce6e539ade5caf8307b337def72fe78b",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-building-blocks-20261002/config.json",
+      "bytes": 1203,
+      "sha256": "68788392c5beea0d15e24034c74f0165139c7015c2f3797a1777c16629dfecba",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-building-blocks-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-complete-slot-20261002/config.json",
+      "bytes": 1006,
+      "sha256": "133e2cf8990aeabbf0fe299533ea841c42322e0fb60b5d53de1dcb6364915a2a",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-complete-slot-20261002/development.json",
+      "bytes": 2867,
+      "sha256": "cef38c22ccf36cdaba02e6fab53d096c5e6592d739b771be8b6c6dff2d50056d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-complete-slot-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-complete-slot-20261002/validation.json",
+      "bytes": 2050,
+      "sha256": "88c7f2efef685d7a576d3bb2fb06f715000e74a737e1915724e96cef7ba7fd4e",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-context-similarity-20261002/config.json",
+      "bytes": 995,
+      "sha256": "a5d0f72a4a6e8b7e2c38b30d1445c54c851d9488e74c8e4cdac84ebf11f74cb1",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-context-similarity-20261002/decision.pkl",
+      "bytes": 154073,
+      "sha256": "b377fbffebe09d2ca94c76e0dfaafd1afc3c63669c258b9c917c1e936d621625",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-context-similarity-20261002/development.json",
+      "bytes": 3736,
+      "sha256": "01f83a97c57ea825e5f7dc02303eb379910438f98a974c8bcbee7856d88a3ef6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-context-similarity-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-20261002/config.json",
+      "bytes": 1006,
+      "sha256": "fa98fba8654d4c01316ec11bbc578f4fde2d2d728b6082c555aab30113c108f0",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-20261002/decision.pkl",
+      "bytes": 151446,
+      "sha256": "08feaa03286f72bb49ea7219dc9bd7db473e8e43925211e2fd217451f0e3586f",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-20261002/development.json",
+      "bytes": 5343,
+      "sha256": "89451bd4ba20723735b5603009e25de4010ae854a19cef92ff031dc2bd7dc577",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-frozen-20261002/config.json",
+      "bytes": 1005,
+      "sha256": "9823d2454979dc00425d7eb63d9b9a95b3630db7012e183fb6619aad976a831f",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-frozen-20261002/development.json",
+      "bytes": 3694,
+      "sha256": "861728e192ffe5484c7623faeb3989d4e8b6b39204aeb7f9effd74648a084dd3",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-frozen-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-review-20261002/config.json",
+      "bytes": 1013,
+      "sha256": "524f4333218f7247fde83e0326c12090bbb731f91e1f4b7639daad9355f63cb8",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-review-20261002/decision.pkl",
+      "bytes": 151446,
+      "sha256": "8df876c5855bc3cdbea78f3a902d6f7ecd6be907678ce61cc9391f36af46e924",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-review-20261002/development.json",
+      "bytes": 5513,
+      "sha256": "a6346ab292d6a048c4f295333abe6144f28930c249cbc5497cada3d2625e9825",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-noun-heads-review-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-prompted-relations-20261002/config.json",
+      "bytes": 994,
+      "sha256": "ced20c750adeb42ca3fb9d45f3d8ecfcb6acf93d63fb9b42561e394741d022e3",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-prompted-relations-20261002/decision.pkl",
+      "bytes": 151971,
+      "sha256": "19e082e8789961db93c884f6d465626a588708fbd450a86bc291115130c99ec2",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-prompted-relations-20261002/development.json",
+      "bytes": 3719,
+      "sha256": "ee7381048b1f0b212fc69f716551beea7268913ec5180fe2eeb14f9592f39845",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-prompted-relations-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-20261002/config.json",
+      "bytes": 949,
+      "sha256": "6e52f74dacc9a3741e3ed74c4e1a15432df4ac3755f690e1d4e9d8fc49a805b0",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-20261002/decision.pkl",
+      "bytes": 151311,
+      "sha256": "44a4c9da9db6ee32e46c0b9f20e661e95c2499d9aea13e4985600c1c62531354",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-20261002/development.json",
+      "bytes": 3600,
+      "sha256": "baa51c4342dc69688d9c022c469fce9900f029dd9cf9c2c2baf5cc74b2ec4b77",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-windowed-20261002/config.json",
+      "bytes": 976,
+      "sha256": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-windowed-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-relations-windowed-20261002/window-validation.json",
+      "bytes": 1647,
+      "sha256": "fd23fdbb6ef7b278a91e8c1b11ed4279f0f8e9287c0d2b55992695d91aa7ff90",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-technical-terms-20261002/config.json",
+      "bytes": 1022,
+      "sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-technical-terms-20261002/development.json",
+      "bytes": 6801,
+      "sha256": "b3d87069b9eadcc18080b585035f101b7f06305437e0de8c4342ebb0d5e2deb4",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-technical-terms-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-technical-terms-final-20261002/config.json",
+      "bytes": 1022,
+      "sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-technical-terms-final-20261002/development.json",
+      "bytes": 6939,
+      "sha256": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-technical-terms-final-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-term-replay-20261002/config.json",
+      "bytes": 1022,
+      "sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-term-replay-20261002/development.json",
+      "bytes": 6939,
+      "sha256": "780964a1210cf752f471e8304658cce2ccf7c53eeaa1b219b939156f8ff1f47b",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-term-replay-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/checker.pkl",
+      "bytes": 276142,
+      "sha256": "247b25718a496d12da0ad35f9c3035e29d648cc1df57e52353f4c54c038fba18",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/config.json",
+      "bytes": 451,
+      "sha256": "f2747b885ccc234d7b12a7efd529b2e0588365a94f9fb74098ff8507f0949abe",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/evaluation.json",
+      "bytes": 1644384,
+      "sha256": "745a0476e9077f59a700d2b8590ceb1bc6ee6c75eb54328575f0480375fdd22c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/fit_selection.json",
+      "bytes": 4793,
+      "sha256": "f4092b4aef7939ae1ae488fbf62b9d3b2e2298fe77ebac78fcd3fae0ae3c270c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/refine_round1.json",
+      "bytes": 2840,
+      "sha256": "021cd2fc3024c3c9f4b34c631119e193d43188f3b302ba66b044e78fdcb41cd7",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/refine_round2.json",
+      "bytes": 3219,
+      "sha256": "51bccbb446865034d992cff6895ddecf59b45924a4d89d45a305290207fd8494",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/refine_round3.json",
+      "bytes": 1034,
+      "sha256": "45892ea1b32927435c848e744ca89e3da05b2897c4438f7a0c1ca168dbd96f88",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/refine_round4.json",
+      "bytes": 1515,
+      "sha256": "8665f3291fd474ddaba640a76eff66fab1635c76be114743bbc0407bd38f691d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/stacker.pkl",
+      "bytes": 1501,
+      "sha256": "58b1143d7e6782e35b5f814be172c539ce20ab58ee86795b89bd22a9a5d3ef67",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/tsar_ensemble_v2.tsv",
+      "bytes": 68934,
+      "sha256": "559646ff39657a8bc0f0d333c585dcd35153f45eb6e7038ab5178593581e26ea",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v2-20260927/tsar_ensemble_v2_official.txt",
+      "bytes": 674,
+      "sha256": "374dffc80c1a8257d671e7e6786f930a3e2fff7b88b31fa50b3348c58060f2ee",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/checker.pkl",
+      "bytes": 276142,
+      "sha256": "247b25718a496d12da0ad35f9c3035e29d648cc1df57e52353f4c54c038fba18",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/config.json",
+      "bytes": 593,
+      "sha256": "35771a177700fa6da31eeaaa6531ed07f8a267dab59d4cf43ccb387e8f5d808b",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/decision-dev.pkl",
+      "bytes": 2075,
+      "sha256": "7cfab481ae38eb91eeaed11080222b56b80694ea7ec95f0c230b26bfd4b6f362",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/decision.pkl",
+      "bytes": 2075,
+      "sha256": "ceed79905646c94b3b493132bb4c7ed45798f148de3bd59887db8ea9ff4202cf",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/detector.pkl",
+      "bytes": 560363,
+      "sha256": "cd591ee99d027dfa462d9601372388e8e7c3c1b167da0c135e230d6c61d2f086",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/evaluation.json",
+      "bytes": 73587,
+      "sha256": "ab5c81f6bb8fc0488e66421791ffe78bdf7e23013b8bd24925279c1090e8bbdc",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/refine_detection.json",
+      "bytes": 1899,
+      "sha256": "3f14c24f5b6af9730ba2a61209e3f4f095f3fc2fe038fffc03c0a3be8efb81bc",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/refine_round5.json",
+      "bytes": 739,
+      "sha256": "2e822a31eec6149e6f5bd18b472e8d389fb4d96fcef3fc1926acb8fc2812d903",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/refine_round6.json",
+      "bytes": 737,
+      "sha256": "de05337e7bf550916874b4e33931be5c9d382199e758c009d90c06c167c8e348",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/refine_round7.json",
+      "bytes": 1927,
+      "sha256": "f6701fb3c6de15b74fa2ad22f5998e3b223d8fc76135e277da38b63449549e6c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/refine_target_choice.json",
+      "bytes": 7470,
+      "sha256": "abcec1317f0fbced3681818ca868e7600fdb2436aac4ecd1f9b7ad32433fc5ca",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v3-20260927/stacker.pkl",
+      "bytes": 1501,
+      "sha256": "58b1143d7e6782e35b5f814be172c539ce20ab58ee86795b89bd22a9a5d3ef67",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/checker.pkl",
+      "bytes": 276142,
+      "sha256": "247b25718a496d12da0ad35f9c3035e29d648cc1df57e52353f4c54c038fba18",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/config.json",
+      "bytes": 629,
+      "sha256": "abb0c4aeb2a26da7674268c70ae70030182fc0a1674de2409e9bb420603d9ef2",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/decision.pkl",
+      "bytes": 143368,
+      "sha256": "cc5184d06341f332017d6e0f11db3070de9c458d8fa2365adf062cf685c311fe",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/detector.pkl",
+      "bytes": 560363,
+      "sha256": "cd591ee99d027dfa462d9601372388e8e7c3c1b167da0c135e230d6c61d2f086",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/evaluation.json",
+      "bytes": 39325,
+      "sha256": "eb27c5ba4ebb7d2c8d915c252446855caeac7e0c536822ba08fabc9e7f273652",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/refine_round8.json",
+      "bytes": 1272,
+      "sha256": "3db344b758bddac5e4f656e452d128bd66517e1c7fe4182fd9ef6a05589ea61c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v4-20260927/stacker.pkl",
+      "bytes": 1501,
+      "sha256": "58b1143d7e6782e35b5f814be172c539ce20ab58ee86795b89bd22a9a5d3ef67",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/bert_compare.json",
+      "bytes": 722,
+      "sha256": "a4e8eed7c22bb4cb917068e46eefc655ba3e10295f7b11f2cb770e4b830fb906",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/checker.pkl",
+      "bytes": 235721,
+      "sha256": "5690cb30bb7f946e983346ac40fb74a6e9b46b94f0df7c593cde531852297af6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/config.json",
+      "bytes": 793,
+      "sha256": "fea5252bc4e1b1d768142169113c3a9e3fe78cb0a8532771faac80cedbee4443",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/decision.pkl",
+      "bytes": 143668,
+      "sha256": "d21193e055422312ad9fd8290efb5a680d7620d380cfd40c9bdb8bfc29b51863",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/detector.pkl",
+      "bytes": 638800,
+      "sha256": "13470380c1580b3dd45747fbde4072909a0bd3d8214a3a4cba01f3c2975ba723",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/evaluation.json",
+      "bytes": 39633,
+      "sha256": "3178ba8c9340cbcf6ef2f6c2140d4b5978689025bf729698c5ea04da45716508",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/fit_training.json",
+      "bytes": 888,
+      "sha256": "e1121b8b3e40b41a75f3d00e363f7aad5c8add43a91cc607b79e3147c81a9af8",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_adjective_reading.json",
+      "bytes": 427,
+      "sha256": "d4a6b9eaa2cc22d0413cb90eae60e76c0bf1256a9b8ef1bcbd066743b8fc6913",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_checker.json",
+      "bytes": 6387,
+      "sha256": "79adf5eb8bec373b0cb790d77e81a20059ffa64095e7e0397c9fe220b3338625",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_detector2.json",
+      "bytes": 5605,
+      "sha256": "83c414e4a4d7cf4a4a411265d5085f11ea1f27fa3f86062b386d8e1a0c065d96",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_level_guard.json",
+      "bytes": 1062,
+      "sha256": "cd0d9d79ddb281ffe947bbc54946afdc1e8225ee854455a4eac02d6399d769b5",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_meaning_floor.json",
+      "bytes": 1700,
+      "sha256": "2f511cbd977180a2c02dc4b67511e8006a9fc79d3ce4716e2892bb14d27db755",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_round10.json",
+      "bytes": 638,
+      "sha256": "2ca9f0a7a74adaba9a915d8bcbecdd3602803eeb2dc764dc052c2ed573df2e99",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_round12.json",
+      "bytes": 6255,
+      "sha256": "967e246b0fe9004bc89cddcf0cfdfa0445d382d25bfe76827bc3f67ec76302e0",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_round9.json",
+      "bytes": 607,
+      "sha256": "99bb962826ce2ee817364b88ea9e23aef8b68622e470c53e71c9563126b503d8",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_sentence.json",
+      "bytes": 694,
+      "sha256": "31a6108ea46f4860a14cbbc7e5ae698cfee7ee956aa23ad877c488223a583c38",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_target_choice.json",
+      "bytes": 7477,
+      "sha256": "fca3102a15436975042d31b2323fbc2ef2d5d0282b7192ee728aec05cef381f2",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_target_cwi.json",
+      "bytes": 8883,
+      "sha256": "678458e7f24ceb61108df3ae6daae741b946b259bb4be99d47ff4e94914816aa",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/refine_target_joint.json",
+      "bytes": 13586,
+      "sha256": "bf213ea6d8461e1afa5cb0330a2a9253a64b41ce76c30ec4f9b0828d0210fc80",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/sentence_model.pkl",
+      "bytes": 855831,
+      "sha256": "e42a18dd76ce03006e0aa5fd2a35d57814eed9c77c9c04fdaa72adf72f196656",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v5-20260927/stacker.pkl",
+      "bytes": 1452,
+      "sha256": "e5fc9869d7b1a8e0ad928f2b4dbc911507668a0651d4bddaf33423f6bbba1826",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/checker.pkl",
+      "bytes": 235721,
+      "sha256": "5690cb30bb7f946e983346ac40fb74a6e9b46b94f0df7c593cde531852297af6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/config.json",
+      "bytes": 772,
+      "sha256": "e5c52d50bb41a46fc32cbe2a477bb43b842307f223121eca8f683f85453875b8",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/decision.pkl",
+      "bytes": 143652,
+      "sha256": "7bee75cd02c9661643c4197f68fe3869719988e0e2001d1c7161cc607d0f2dd6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/detector.pkl",
+      "bytes": 638800,
+      "sha256": "13470380c1580b3dd45747fbde4072909a0bd3d8214a3a4cba01f3c2975ba723",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/evaluation.json",
+      "bytes": 39603,
+      "sha256": "6ed3f76618c95caf2f9b00ea83f338aa6712e16a40329d57adeb18219515199c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/meaning_training.json",
+      "bytes": 163,
+      "sha256": "4300c8b3ffebfaadb8bc399eba991720b39234f15476df9a082931c62cf8ec60",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/refine_round11.json",
+      "bytes": 619,
+      "sha256": "eca34eee6545487430d04ef79fe800b690cf7c152f22467d4adff095836dbc1a",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/sense_model.pkl",
+      "bytes": 115467235,
+      "sha256": "aa512876853d8e7c6d6d34e34b5391036db707a6d4164dea9dfd27788af9418d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/sentence_model.pkl",
+      "bytes": 855831,
+      "sha256": "e42a18dd76ce03006e0aa5fd2a35d57814eed9c77c9c04fdaa72adf72f196656",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v6-20260927/stacker.pkl",
+      "bytes": 1452,
+      "sha256": "80561595a1769e57a94d53112f21ccfadc19cdce7391d87f76b51c4ec90834a5",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/bert_sense.json",
+      "bytes": 1408,
+      "sha256": "6a224537dcb55f332094e9e22cdbf11bbe4122cc26f25185750e92bc95f9dc41",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/bert_senses.npz",
+      "bytes": 168046904,
+      "sha256": "892b6bdbf6f94820863819f28dbd69f731f844d3202de51ad8f60afd9056c7e9",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/checker.pkl",
+      "bytes": 235721,
+      "sha256": "5690cb30bb7f946e983346ac40fb74a6e9b46b94f0df7c593cde531852297af6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/config.json",
+      "bytes": 940,
+      "sha256": "46c34f06768b67a1589de057444ab8febe3f1dd949b1d1fc6697d5f097b514a0",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/decision.pkl",
+      "bytes": 147808,
+      "sha256": "8731b39544ad9864351f9d773c5a73bbe2502ad73d322367b1c3f3141edda4dc",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/evaluation.json",
+      "bytes": 39873,
+      "sha256": "633790225e30ebde74152379a6a8072f6478a3fecdb1040decabd91abf8cfefe",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/fit_training.json",
+      "bytes": 962,
+      "sha256": "5f03c80c07835d7ea3bd29ed645b62d7e77aa27ee00a87c50380addd48ff7589",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/refine_bert_decision.json",
+      "bytes": 588,
+      "sha256": "a7ff96f794223ae3856a28303c8de7471ed4c8bb6b26ae06de76b7bae6b6c703",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-v7-20260928/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-windowed-20261002/config.json",
+      "bytes": 976,
+      "sha256": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-windowed-20261002/stacker.pkl",
+      "bytes": 1516,
+      "sha256": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/ensemble-windowed-20261002/window-validation.json",
+      "bytes": 1688,
+      "sha256": "913c3543ee69c27a4301d812078c10f7fe83895d2921bc5b96da481b142f16a6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/basic_examples_20.json",
+      "bytes": 68554,
+      "sha256": "4f0cbed3e411e4d7e0a559a21b9d8cebc3961915f44d4561f1143cf1fafbbe7f",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/context_model.pkl",
+      "bytes": 9597000,
+      "sha256": "23b1e10392994d7c01fe89565830b160774bcdb42d8208308fd3508bf94c2007",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/context_predictions.json",
+      "bytes": 569295,
+      "sha256": "59b8fd9dca5d002fbf2082fe9acfafef1dd17d889008066fdd4c6dbde56cf507",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/context_selection.json",
+      "bytes": 4644,
+      "sha256": "47bd456d88926effb1531b936a4cf5c2fc1bbcb43c3321fe3a2d53d606432797",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/fit_model.pkl",
+      "bytes": 214662,
+      "sha256": "55e06992d1153d04ee67505cce736f3b675ba17d5c9226dd8383c004200faf62",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/fit_selection.json",
+      "bytes": 4094,
+      "sha256": "f14bd41aab9f2dc6c9c0c6994f28f98c635201e18c02cfd10fcd1efdc98e9e54",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/lexical.json",
+      "bytes": 4919662,
+      "sha256": "f9476ccdcdcf3ffddc8582bcbf45b11388533191c8ea01d7a57716c7db815f35",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/pipeline_samples.json",
+      "bytes": 53339,
+      "sha256": "c0a1f0a77fad946f158e00d7909f8f1b03aabdb8d3e8244dbb8211e0c867dad8",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/report_summary.json",
+      "bytes": 233,
+      "sha256": "b52430b6e6b193cc26bd4faceccf915b05fe1b96bd2dd6047be9498c063ccd1a",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/sentence_model.pkl",
+      "bytes": 199562,
+      "sha256": "4ca9e1e4ea1161167dbdab4ba60cd54dbbd6896954f062d1685dde9413e11e1c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/sentence_predictions.json",
+      "bytes": 400773,
+      "sha256": "68171cb232b58884101be3966d3b372fe7ab5ab35f45275a8bef9a28217b48d2",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/sentence_selection.json",
+      "bytes": 6310,
+      "sha256": "59f9383aa33f7ccae3f74f49624d4cd36aaca2fd0ca1dbe126af567c3fab2dfa",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/training.json",
+      "bytes": 1709779,
+      "sha256": "81717e233d9c7023376bf223d21cd1bf9d82e8c3c007a12daff1619586ca6bdd",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/training_partial.json",
+      "bytes": 1070813,
+      "sha256": "53101d43d5cad591aeefa186c56fbd7a3f2a880ab687216463a6ba29029760d8",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_context_official.txt",
+      "bytes": 672,
+      "sha256": "d75109a82ee21684e4f12df0ed4933ba43a6e974d55642130f707455a1156758",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_context_predictions.tsv",
+      "bytes": 70616,
+      "sha256": "532bb64363529107db6fd2cbf0e816c7697fa1494dfb5676df04facbc6b34ae0",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_dictionary_official.txt",
+      "bytes": 677,
+      "sha256": "961671585044b5671a157352f134644d8aa2fc3fa58170ead5ee470854364090",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_dictionary_predictions.tsv",
+      "bytes": 71440,
+      "sha256": "1dcbbf9c1d38fee3d56dd782458010272d2aadfc52f0188406c14f2ea0d14746",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_guarded_official.txt",
+      "bytes": 674,
+      "sha256": "acc4f6edf83688a1895d1efeca7796bb9bff8b44989d4aff7f4facb4f866ae4f",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_guarded_predictions.tsv",
+      "bytes": 68942,
+      "sha256": "a0d6de9aabbf917283d0a496048ad5d074a191c88b1c6c52762e7c6a2eacbd09",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_learned_official.txt",
+      "bytes": 674,
+      "sha256": "49d6947255be35454d6a1b245431cda7a868031bd769c014c5398aaf5f97c3de",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_learned_predictions.tsv",
+      "bytes": 70929,
+      "sha256": "6f38f1dc2da4116aafa263ba9e6b3b03ceedac4daaab3e9ab84421163d3107e7",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_unchanged_official.txt",
+      "bytes": 648,
+      "sha256": "073c44aac8aee2cc75b2ea528b766518317b0d985b7ad019a8736182e445e850",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/tsar_unchanged_predictions.tsv",
+      "bytes": 69271,
+      "sha256": "b476be8392ffbf5c6d8257cfdad2b53dc438a54293a7ebe7406b9705f6fdb3be",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/word_model.pkl",
+      "bytes": 272150,
+      "sha256": "6ab44804da9e182cd0c749ffef571929943798b9a83f6b86ac24d8dc8a668442",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/word_predictions.json",
+      "bytes": 569408,
+      "sha256": "7a22d7bf9a22ebf2120f6fad8e9244e5ed63ac8abd22cb5594dc629f3b9a0be6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/initial-20260924/word_selection.json",
+      "bytes": 3618,
+      "sha256": "1dda72a19bab3101439df300e73c131daab012898b8edf3134ba6a3abf7ec2ab",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-boosted-20261003/config.json",
+      "bytes": 580,
+      "sha256": "6fd6cc1aeac4841d8c65d51998b2dc70020153341cf64ec68b5c2293e1aa2b14",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-boosted-20261003/development.json",
+      "bytes": 3885,
+      "sha256": "a1fb20ef4573a170e5318259598b10c4bf15abd1a6c6c67b2ca44ccba17318bc",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-boosted-20261003/validator.pkl",
+      "bytes": 278636,
+      "sha256": "669280f8791df2d8602e7b9db0a7831f2abff7fe2ee3bd336e9222b2bcdec15e",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-similarity-20261003/config.json",
+      "bytes": 650,
+      "sha256": "29186a7048c4e4d59dbf362d58ee1df29e33ba00ad70f17a9d571fb0437818ae",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-similarity-20261003/development.json",
+      "bytes": 6094,
+      "sha256": "8f8bc773fdd18bd2fb3c32954f0c46b8d94427ee47a2f68d119c96a89f4bcce5",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-similarity-20261003/validator.pkl",
+      "bytes": 281162,
+      "sha256": "11b9a9e1ab2c71e286fa79ace6b85bd0f698d4109bd657e9d5768e345bec6a50",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-validator-20261003/config.json",
+      "bytes": 508,
+      "sha256": "360832fd7c50f2430d729ffbcc78915d46dcd22b54a718654fa8fe1ed745d394",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-validator-20261003/development.json",
+      "bytes": 9150,
+      "sha256": "887d894ccceddc9b3e7d6e471448ea78341d77d413001b09c2023ed3719ce96a",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/novel-context-validator-20261003/validator.pkl",
+      "bytes": 1309,
+      "sha256": "9d9bc4a573ea35000c448343fa66d8803ded04a63b27554461238b1d328a71e6",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/evaluation.json",
+      "bytes": 5011646,
+      "sha256": "3bf7fb54064062797c24d8fe24c418c68849b1ea83005f378fcb584594b30007",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/manifest.json",
+      "bytes": 13141,
+      "sha256": "67c7fdccced58910d9da3d002d2d81281712a909912ea1c83c7df6a52941fe53",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/metrics.json",
+      "bytes": 5428,
+      "sha256": "1ae100a91ea00c66a0f0ef926900921d72b398d235476cc8bc214408fca314ca",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/selection.json",
+      "bytes": 4223,
+      "sha256": "9c53dc37dc7f08ead09b8ce4e320c10440abccacbce11fc7fd2ad05def554940",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/sense_model.pkl",
+      "bytes": 73116114,
+      "sha256": "ad63e7b63739a11b51ae06bf54086bbbf3a29cbea6c2bf9de4529de5521b1842",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_basic.tsv",
+      "bytes": 68926,
+      "sha256": "7ee373752d8a9a60d92ecbe69477641b9ef1bbfa526d5241da474c7eae7afa70",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_basic_official.txt",
+      "bytes": 656,
+      "sha256": "822c85a8d5e793426600baa9efd379ce3486a6f76697b587e4aef24d38316349",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_guards_only.tsv",
+      "bytes": 68948,
+      "sha256": "f2b0e15e9991efdaf10c78199a76a40206ddca283b241bdc18feabd2d4fb8e82",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_guards_only_official.txt",
+      "bytes": 668,
+      "sha256": "f976e106e06a91505cf603f132a8987a4ddf02d3c0b2eb8470518a5c19dd6413",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_sense_and_guards.tsv",
+      "bytes": 69155,
+      "sha256": "0c299901a950db134b0b13b982c66ee1213e2a16d782f5ee142e248ac3b8876d",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_sense_and_guards_official.txt",
+      "bytes": 678,
+      "sha256": "79cefc7de7b1955a0e70248d2ea33b8dbbcfdb74e4e550b9d2b367f178d3788b",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_sense_only.tsv",
+      "bytes": 69124,
+      "sha256": "4118c8a32c257928e3a808d9d8837df82e1043c65d64d0add9aec1c17265714c",
+      "included_as_binary": false
+    },
+    {
+      "path": "runs/semcor-20260924/tsar_sense_only_official.txt",
+      "bytes": 666,
+      "sha256": "7dd1e9be8cfaf131927233eebe5e5c65c8c831cca4326ee4dca497db05309377",
+      "included_as_binary": false
+    }
+  ]
+}

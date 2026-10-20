@@ -1,0 +1,253 @@
+{
+  "word": {
+    "selected": "Gradient boosting",
+    "results": [
+      {
+        "name": "Mean",
+        "dev": {
+          "mae": 0.10489314402558146,
+          "rmse": 0.1375036097963178,
+          "pearson": null,
+          "spearman": null
+        },
+        "fit_seconds": 0.058,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.09854254444329966,
+          "rmse": 0.1273585355664107,
+          "pearson": null,
+          "spearman": null
+        },
+        "selected": false
+      },
+      {
+        "name": "Frequency",
+        "dev": {
+          "mae": 0.08196495717847803,
+          "rmse": 0.10784113168305492,
+          "pearson": 0.6255864436128801,
+          "spearman": 0.6365927066361856
+        },
+        "fit_seconds": 0.029,
+        "warnings": [],
+        "features": [
+          "zipf"
+        ],
+        "test": {
+          "mae": 0.07676254703079156,
+          "rmse": 0.10166476031052503,
+          "pearson": 0.6032526820228445,
+          "spearman": 0.6295162709141847
+        },
+        "selected": false
+      },
+      {
+        "name": "Ridge",
+        "dev": {
+          "mae": 0.07732991812325127,
+          "rmse": 0.10236874839337695,
+          "pearson": 0.6737160391322206,
+          "spearman": 0.6450008086271595
+        },
+        "fit_seconds": 0.066,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07510094332392286,
+          "rmse": 0.09877640551412722,
+          "pearson": 0.6316239245339186,
+          "spearman": 0.6356786392276876
+        },
+        "selected": false
+      },
+      {
+        "name": "Elastic net",
+        "dev": {
+          "mae": 0.07736696797172926,
+          "rmse": 0.10240905055472961,
+          "pearson": 0.6735555038144385,
+          "spearman": 0.6456376312879097
+        },
+        "fit_seconds": 0.052,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07508859560708556,
+          "rmse": 0.09877115202031463,
+          "pearson": 0.6315964882215392,
+          "spearman": 0.6353002605120576
+        },
+        "selected": false
+      },
+      {
+        "name": "Random forest",
+        "dev": {
+          "mae": 0.0734113984340743,
+          "rmse": 0.097756223719159,
+          "pearson": 0.7034841378683286,
+          "spearman": 0.6634418801446045
+        },
+        "fit_seconds": 0.433,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07041073117113798,
+          "rmse": 0.09128191352803139,
+          "pearson": 0.6987777221073346,
+          "spearman": 0.6537976410021513
+        },
+        "selected": false
+      },
+      {
+        "name": "Gradient boosting",
+        "dev": {
+          "mae": 0.07248574806168076,
+          "rmse": 0.09638175738613196,
+          "pearson": 0.7141805844578095,
+          "spearman": 0.6767642357143321
+        },
+        "fit_seconds": 0.344,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.06960550968690378,
+          "rmse": 0.09057130993164435,
+          "pearson": 0.7036187316032376,
+          "spearman": 0.6736004386387905
+        },
+        "selected": true
+      },
+      {
+        "name": "SVR",
+        "dev": {
+          "mae": 0.07251823468754419,
+          "rmse": 0.09629893121238679,
+          "pearson": 0.7156914228925229,
+          "spearman": 0.6749659813142866
+        },
+        "fit_seconds": 1.985,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.0699916995137724,
+          "rmse": 0.09075356281818896,
+          "pearson": 0.7015697335951049,
+          "spearman": 0.6735899685590334
+        },
+        "selected": false
+      },
+      {
+        "name": "kNN",
+        "dev": {
+          "mae": 0.08081867384711094,
+          "rmse": 0.10471642259951047,
+          "pearson": 0.6617923118087609,
+          "spearman": 0.632268356418248
+        },
+        "fit_seconds": 0.059,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07867603297460089,
+          "rmse": 0.10315306972908261,
+          "pearson": 0.6196862246509294,
+          "spearman": 0.5780492202738183
+        },
+        "selected": false
+      },
+      {
+        "name": "Small MLP",
+        "dev": {
+          "mae": 0.07304865345096104,
+          "rmse": 0.09711608053332459,
+          "pearson": 0.7129605408468214,
+          "spearman": 0.6772711554726524
+        },
+        "fit_seconds": 0.631,
+        "warnings": [],
+        "features": [
+          "zipf",
+          "length",
+          "syllables",
+          "frequency_missing",
+          "syllables_estimated"
+        ],
+        "test": {
+          "mae": 0.07084956766327395,
+          "rmse": 0.09247334473680194,
+          "pearson": 0.6877759143546175,
+          "spearman": 0.6611847889029221
+        },
+        "selected": false
+      }
+    ],
+    "domains": {
+      "bible": {
+        "mae": 0.07841045639723508,
+        "rmse": 0.10039004995105742,
+        "pearson": 0.6511392037009153,
+        "spearman": 0.6437769972567279
+      },
+      "biomed": {
+        "mae": 0.07418445678317699,
+        "rmse": 0.09764882113269772,
+        "pearson": 0.763603655112583,
+        "spearman": 0.7174355671648671
+      },
+      "europarl": {
+        "mae": 0.05854720351343503,
+        "rmse": 0.07449307668216391,
+        "pearson": 0.6818247067267598,
+        "spearman": 0.666470978869994
+      }
+    },
+    "counts": {
+      "train": 7662,
+      "dev": 421,
+      "test": 917
+    }
+  }
+}

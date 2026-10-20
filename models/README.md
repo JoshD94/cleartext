@@ -6,6 +6,8 @@ The current default is v7. The stronger 52-feature ranker and six inspection blo
 
 [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) indexes the results and limits of each experiment. [docs/cleartext-steps.html](docs/cleartext-steps.html) and [docs/report.txt](docs/report.txt) describe the earlier pipeline; use the experiment documents for subsequent changes.
 
+[docs/HANDOFF-20261019.md](docs/HANDOFF-20261019.md) covers the merge handoff and remaining Google Doc tasks. [evidence/handoff-20261019/](evidence/handoff-20261019/) preserves historical settings, aggregate results and artifact fingerprints; raw datasets and model binaries remain local.
+
 ## Current stack
 
 1. Parse the input with spaCy. Optional structure and phrase rules run before word selection.

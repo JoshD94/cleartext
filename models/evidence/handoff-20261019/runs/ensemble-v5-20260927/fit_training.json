@@ -1,0 +1,30 @@
+{
+  "comparison": {
+    "dev only": {
+      "auc_generated": 0.7689889503934312,
+      "log_loss_generated": 0.3968383843033458
+    },
+    "dev + test": {
+      "auc_generated": 0.7791308926717868,
+      "log_loss_generated": 0.3875733094264146
+    }
+  },
+  "pairs": 29462,
+  "generated_pairs": 10164,
+  "contexts": 1090,
+  "weights": {
+    "sense_fit": 0.16033501147280596,
+    "round_trip": 0.05860664325530031,
+    "first_sense": 0.3347692622789196,
+    "candidate_sense_rank": 0.13198863140330733,
+    "swords_checker": 0.4210974313322103,
+    "context_vector": 0.09535674235580385,
+    "argument_fit": 0.06547488547519303,
+    "bigram": 0.18998770597002593,
+    "wordnet_member": -0.31456870541102605,
+    "source=hypernym": 0.02808266526030318,
+    "source=similar": 0.017358206012211812,
+    "multiword=True": 0.03738885881164738,
+    "pos_fallback=True": -0.1497499493785676
+  }
+}

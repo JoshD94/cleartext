@@ -1,0 +1,45 @@
+{
+  "notice": "Ungraded diagnostics. Source and dataset split are recorded per input. Reused component evaluation data is not a fresh test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+  "overall": {
+    "sentences": 12,
+    "changed_sentences": 7,
+    "change_coverage": 0.5833333333333334,
+    "word_edits": 7,
+    "detected_targets": 31,
+    "scored_candidates": 529,
+    "latency_median_seconds": 5.991241600946523,
+    "latency_max_seconds": 41.43600469001103,
+    "human_precision": null
+  },
+  "baselines": {
+    "dictionary": {
+      "sentences": 12,
+      "changed_sentences": 2,
+      "change_coverage": 0.16666666666666666,
+      "human_precision": null
+    },
+    "identity": {
+      "sentences": 12,
+      "changed_sentences": 0,
+      "change_coverage": 0.0,
+      "human_precision": null
+    }
+  },
+  "by_domain": {
+    "political_science": {
+      "sentences": 12,
+      "changed_sentences": 7,
+      "change_coverage": 0.5833333333333334,
+      "word_edits": 7,
+      "detected_targets": 31,
+      "scored_candidates": 529,
+      "latency_median_seconds": 5.991241600946523,
+      "latency_max_seconds": 41.43600469001103,
+      "human_precision": null
+    }
+  },
+  "source_kinds": [
+    "corpus"
+  ],
+  "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+}

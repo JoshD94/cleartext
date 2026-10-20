@@ -1,0 +1,14 @@
+{
+  "initial model (dev)": 0.4603062976229308,
+  "base features leaves=15 lr=0.03 (dev)": 0.4614156285495188,
+  "base features leaves=15 lr=0.1 (dev)": 0.4621312601238809,
+  "base features leaves=31 lr=0.03 (dev)": 0.4624000174146845,
+  "base features leaves=31 lr=0.1 (dev)": 0.46255648622180934,
+  "+ detector summaries leaves=15 lr=0.03 (dev)": 0.43191621801452545,
+  "+ detector summaries leaves=15 lr=0.1 (dev)": 0.43338315415286777,
+  "+ detector summaries leaves=31 lr=0.03 (dev)": 0.4314133070524198,
+  "+ detector summaries leaves=31 lr=0.1 (dev)": 0.4335316280582705,
+  "selected": "+ detector summaries",
+  "selected_test": 0.43221105820045835,
+  "initial_test": 0.4572652713418319
+}

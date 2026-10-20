@@ -1,0 +1,148 @@
+{
+  "scope": "SWORDS dev and test were already used in fitting. This grouped split is reused development, not fresh test.",
+  "label": "At least half of existing SWORDS votes are TRUE. Context appropriateness, not simplification or full detail retention.",
+  "features": [
+    "context_vector",
+    "argument_fit",
+    "bigram",
+    "bert_slot",
+    "bert_slot_relative",
+    "vector_source_candidate",
+    "vector_candidate_missing"
+  ],
+  "pairs": 15270,
+  "positive_pairs": 1145,
+  "train_pairs": 12625,
+  "calibration_pairs": 2645,
+  "context_groups": 370,
+  "exclusions": {
+    "dev": {
+      "overlapping_benchls_rows": 0,
+      "outside_single_word_non_generated_scope": 7708
+    },
+    "test": {
+      "overlapping_benchls_rows": 0,
+      "outside_single_word_non_generated_scope": 6484
+    }
+  },
+  "estimator": "hist_gradient_boosting",
+  "calibration_auc": 0.7610234944639481,
+  "calibration_log_loss": 0.25888790552669183,
+  "context_threshold": null,
+  "threshold_curve": [
+    {
+      "threshold": 0.5,
+      "accepted": 8,
+      "precision": 0.125
+    },
+    {
+      "threshold": 0.525,
+      "accepted": 4,
+      "precision": 0.25
+    },
+    {
+      "threshold": 0.55,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.575,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.6,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.625,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.65,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.675,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.7,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.725,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.75,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.775,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.8,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.825,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.85,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.875,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.9,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.925,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.95,
+      "accepted": 0,
+      "precision": null
+    },
+    {
+      "threshold": 0.975,
+      "accepted": 0,
+      "precision": null
+    }
+  ],
+  "source_sha256": {
+    "scripts/experiments/train_novel_context_boosted.py": "7b2d4af38e6e33025d4671488153ed2bd01fc4429894c96e0372cebd9a0694ac",
+    "src/cleartext/novel_context.py": "ea86831752d059f0684741b33ec1707d45b47827e02561d85fd8ba575622852a"
+  },
+  "input_sha256": {
+    "outputs/novel-context-training-20261003/training-arrays.npz": "3106707ed21069fa3ee6ca1217fafaf3d0ea1bbe451aa1ea2ac33b8251a440a4",
+    "outputs/novel-context-training-20261003/summary.json": "887d894ccceddc9b3e7d6e471448ea78341d77d413001b09c2023ed3719ce96a"
+  },
+  "validator_sha256": "669280f8791df2d8602e7b9db0a7831f2abff7fe2ee3bd336e9222b2bcdec15e",
+  "saved_run": "runs/novel-context-boosted-20261003",
+  "default_changed": false,
+  "new_labels": false,
+  "tsar_used": false,
+  "native_checks_reused_from": "outputs/novel-context-training-20261003"
+}
