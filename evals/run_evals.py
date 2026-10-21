@@ -44,18 +44,34 @@ def main():
     ap.add_argument("--nli-model", default=None,
                     help="transformers MNLI model for NLI entailment scores "
                          "(optional dependency)")
+    ap.add_argument("--model-run", default=None,
+                    help="Path to a trained models/runs/<run> directory for "
+                         "the 'full_pipeline' system (default: models' v7 run)")
+    ap.add_argument("--model-url", default=None,
+                    help="Base URL of a running models demo server "
+                         "(e.g. http://127.0.0.1:8770); 'full_pipeline' is "
+                         "then served over HTTP instead of a local import")
     args = ap.parse_args()
 
     base = Path(__file__).resolve().parent
     passages = json.loads((base / args.passages).read_text(encoding="utf-8"))
     system_names = [s.strip() for s in args.systems.split(",") if s.strip()]
 
-    # --- Team hook: register implemented pipeline variants here. ---
-    # Example:
-    #   from cleartext.lexical import LexicalPipeline
-    #   register_system("lexical_only", LexicalPipeline().simplify)
-    # The full 7-way ladder from the proposal is:
-    #   default_ablation_order()
+    # --- Team hook: the model pipeline registers here. ---
+    # Asking for 'full_pipeline' loads Joshua's EnsembleClearText through
+    # evals/model_adapter.py (local import, or the demo server when
+    # --model-url / CLEARTEXT_DEMO_URL is given). Other ladder variants
+    # (lexical_only, structural_only, ...) register the same way once
+    # implemented; see default_ablation_order().
+    if "full_pipeline" in system_names:
+        from evals.model_adapter import ModelUnavailable, register_model_pipeline
+        try:
+            transport = register_model_pipeline(
+                run=args.model_run, url=args.model_url)
+            print(f"full_pipeline registered via {transport} transport")
+        except ModelUnavailable as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            sys.exit(2)
     _ = default_ablation_order  # keep import used / documented
 
     results = run_evaluation(system_names, passages,
