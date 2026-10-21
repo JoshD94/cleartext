@@ -58,6 +58,26 @@ python run_evals.py --embedding-model all-MiniLM-L6-v2 \
 Outputs: `results/eval_results.json` (per-passage + aggregates) and
 `results/eval_results.md` (results table).
 
+## Scoring the model pipeline (`full_pipeline`)
+
+`model_adapter.py` connects Joshua's `EnsembleClearText` (in `models/`) to
+the runner as the `full_pipeline` system. Two transports:
+
+```bash
+# Local import: needs the trained artifacts under models/runs/ (git-excluded;
+# copy them from a teammate or rebuild per models/README.md)
+python run_evals.py --systems original,rule_based,full_pipeline
+
+# Demo server: run models/demo/server.py on a machine with the artifacts,
+# then point evals at it (no local model deps needed)
+python run_evals.py --systems original,rule_based,full_pipeline \
+    --model-url http://127.0.0.1:8770
+```
+
+`--model-run <path>` selects a different run directory. Evals stays
+modular: the adapter is the only evals module that knows about models/,
+and the import is lazy, so the baselines above run without it.
+
 ## Ablation study (proposal Section 3.2)
 
 The 7-way ladder — original, rule-based, lexical-only, structural-only,
