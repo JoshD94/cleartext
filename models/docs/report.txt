@@ -1,0 +1,104 @@
+ClearText models: how each building block was made
+
+Overview
+- Goal: simplify one sentence at a time without an LLM, using small models trained on public data.
+- Each step below adds or improves one building block. The blocks are separate models that the final ensemble combines.
+- Everything was trained and checked on existing datasets. We did not collect new human ratings.
+- Benchmarks: TSAR 2022 (373 sentences, report only) is the main end-to-end check. Other test sets are listed in each step.
+
+1. Word difficulty
+- Scores every word from 0 (easy) to 1 (hard).
+- Data: CompLex, words in real sentences rated by people. 7,662 train, 421 dev, 917 test.
+- Features: how common the word is (wordfreq), syllables (CMUdict), length.
+- Model: compared 9 models on dev. Gradient boosting won.
+- Result: average error 0.070 on the 0 to 1 scale. A version that also looks at the sentence gave 0.069, not a clear gain.
+
+2. Sentence difficulty
+- Gives a sentence a reading level from A1 to C2. It measures; it does not rewrite.
+- Data: CEFR-SP, sentences leveled by two English teachers. 7,178 train, 1,366 dev, 1,460 test.
+- Features: word difficulty from step 1, sentence length, grammar depth, clauses, passives.
+- Model: gradient boosting.
+- Result: 0.46 levels off on average (test).
+- Later improvement (step 13): added hard-word scores from the detector in step 11. Error fell to 0.43. The pipeline now reports the reading level before and after each rewrite.
+
+3. Replacement candidates
+- For a hard word, list replacements and put them in the right form (utilizes becomes uses, not use).
+- Source: WordNet synonyms, matched to the word's part of speech. lemminflect fixes tense and number.
+- Baseline: pick the most common synonym. 26% of TSAR words got a human-approved replacement.
+- Later improvement (step 9): also broader words (hypernyms), "similar to" words and multiword synonyms. If the grammar tagger guesses the part of speech wrong, try the others. The right answer is now on the list for 310 of 373 TSAR sentences (was 196).
+
+4. Safety checks
+- Handwritten rules that block edits which change the facts.
+- Checks: numbers, negation ("not"), certainty ("may" vs "will"), names, who did what, technical terms.
+- Test: 8 deliberately wrong rewrites and 2 correct ones. Caught 6 of 8 and allowed both correct ones. Missed an antonym and a loss of detail.
+- Later: "a/an" is fixed to match the new word, and mass nouns like "information" are never placed after "a/an".
+
+5. Context check
+- Asks whether a replacement fits this particular sentence ("bank" near "river" versus near "money").
+- Data: SWORDS, people judged whether a substitute fits a specific sentence.
+- Features: word vectors, dictionary definitions, word-pair frequency. Model: gradient boosting classifier.
+- First result: AUC 0.66 (0.5 is guessing). Too weak on its own.
+- Later improvement (step 13): trained on SWORDS dev and test together. It is now one input to the ensemble, not a filter.
+
+6. Phrases and sentence structure
+- Phrase difficulty model trained on CompLex multiword phrases (0.084 error on 184 test phrases).
+- 10 handwritten phrase pairs (for example "in the event that" becomes "if").
+- 2 grammar rules: split two joined clauses, and passive to active ("The report was published by the committee" becomes "The committee published the report").
+- These are demonstrations. We have no labelled data to measure them, so they were not tuned further.
+
+7. Word meaning
+- Picks which dictionary meaning a word has in this sentence, so replacements keep the meaning.
+- Data: SemCor, 141,689 words tagged with their exact WordNet meaning.
+- Model: how often each meaning appears, nearby words, and averaged word vectors.
+- Result: 69.1% right meaning, versus 67.7% for always guessing the most common meaning.
+- Used as a strict filter it rejected too much: correct TSAR replacements fell from 85 to 52, and it still wrote "The medication facilitates pain".
+
+8. Ensemble
+- Instead of each block saying yes or no, each gives a probability, and a small model learns how much to trust each one.
+- Meaning: SemCor plus dictionary definitions. SemCor counts for less when it has few examples ("alleviate" had one).
+- Fit: 9 signals (meaning, context check, word vectors, grammar links, word pairs) combined by logistic regression trained on SWORDS.
+- Result: 87 correct TSAR replacements (was 52). "alleviates" now becomes "relieves".
+
+9. Wider search for replacements
+- See step 3. Most misses happened because the right word was never on the list.
+- Synonyms come first; broader words are used only as a fallback.
+- Result: 119 correct TSAR replacements, 53% of edits right.
+
+10. Final decision trained on the actual task
+- Until then every threshold was tuned on SWORDS, which asks "does this word fit?", not "is this a good simpler word?".
+- Data: BenchLS, 929 sentences, each with a hard word and simpler replacements ranked by people.
+- Model: logistic regression on top of every earlier signal, plus how common and how short each option is and how it compares with the other options.
+- Result on a held-back half of BenchLS: 52% of edits right became 57%, and correct replacements went from 114 to 193.
+
+11. Finding hard words
+- The benchmarks always handed us the hard word, so step 1 was never really tested. On real sentences it missed most hard words and sometimes picked "is" or "at".
+- Data: CWI 2018, news and Wikipedia sentences where 20 people marked every word they found hard. 23,562 train, 2,884 dev, 3,701 test.
+- Model: gradient boosting over both word difficulty scores and word features. Only nouns, verbs, adjectives and adverbs can be edited.
+- Result: F1 for finding hard words went from 0.38 to 0.78 (CWI test). It now finds 78% of hard words, up from 24%.
+
+12. Noticing lost detail
+- "deposited" becoming "gave" is simpler but vaguer. WordNet files words in a tree, so we count how much broader a replacement is than the original.
+- The final decision is now the average of logistic regression and a small boosted model, trained on all of BenchLS.
+- Result: 63% of TSAR edits right (was 54%). "deposited" and "exacerbate" are left alone instead of being changed badly.
+
+13. Tuning every block
+- A change was kept only if it helped by more than the random variation between repeated test runs.
+- Kept: more training data for the context check, the word's part of speech in the final decision, hard-word scores in the sentence model, and a better rule for which word gets edited (nouns must be clearly hard).
+- Dropped: more SemCor data, retuned model settings, a reading-level check, an antonym check (never triggers), and two edits per sentence as the default (the second edits were often wrong).
+- Result: 152 correct TSAR replacements with 63.6% of edits right.
+- Examples: "exacerbate" becomes "worsen", "attempted" becomes "tried", "stipulates" becomes "specifies".
+
+Results on TSAR test (373 sentences)
+- Dictionary baseline: 85 correct of 196 edits (43%).
+- Meaning filter: 52 of 97 (54%).
+- Ensemble v1: 87 of 180 (48%).
+- Ensemble v2: 119 of 223 (53%).
+- Ensemble v3: 125 of 230 (54%).
+- Ensemble v4: 114 of 180 (63%).
+- Ensemble v5 (current): 152 of 239 (64%).
+- TSAR was reused many times while building, so these numbers are exploratory, not a final test.
+
+Still wrong
+- "database" becomes "information", "scientist" becomes "individual", "encodes" becomes "converts".
+- Each is a broader word that our tuning data still rates as a fine replacement.
+- Fixing this needs data that judges whole-sentence edits, for example a small set of our outputs graded by the team.
