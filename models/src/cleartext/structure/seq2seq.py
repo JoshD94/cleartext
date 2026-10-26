@@ -194,6 +194,7 @@ def train_seq2seq(
     }
     write_json(run / "seq2seq_config.json", configuration)
     start, last_check, step, best, history = time.monotonic(), 0.0, 0, math.inf, []
+    examples_seen = 0
 
     def validate(current_model):
         current_model.eval()
@@ -236,6 +237,7 @@ def train_seq2seq(
                 )
             optimizer.step()
             step += 1
+            examples_seen += len(group)
             if step == 1 or step % 20 == 0:
                 elapsed = time.monotonic() - start
                 progress = {
@@ -271,8 +273,7 @@ def train_seq2seq(
     result = {
         **configuration,
         "steps_completed": step,
-        "training_examples_seen": (epoch * len(train))
-        + min(len(train), offset + effective_batch),
+        "training_examples_seen": examples_seen,
         "history": history,
         "selected": json.loads((run / "seq2seq" / "selection.json").read_text()),
         "elapsed_seconds": time.monotonic() - start,

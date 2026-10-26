@@ -253,7 +253,8 @@ def test_accumulated_training_saves_a_reloadable_checkpoint(
         huggingface_hub, "model_info", lambda *a, **k: SimpleNamespace(sha="local-test")
     )
     monkeypatch.setattr(seq2seq, "capacity_check", lambda _: None)
-    data = {"train": rows * 2, "dev": rows}
+    # Stop before the epoch ends, so an unprocessed next batch cannot count.
+    data = {"train": rows * 3, "dev": rows}
     run = tmp_path / "run"
     run.mkdir()
     result = seq2seq.train_seq2seq(
