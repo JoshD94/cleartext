@@ -1,0 +1,13 @@
+# Optional experiments. Install in a separate environment; v7 needs no changes.
+numpy>=2,<3
+scikit-learn>=1.6,<2
+spacy>=3.8,<3.9
+lemminflect==0.2.3
+wordfreq==3.1.1
+nltk>=3.9,<4
+sacremoses>=0.1,<0.3
+sklearn-crfsuite==0.5.0
+torch>=2.6,<3
+transformers>=4.48,<5
+sentencepiece>=0.2,<0.3
+pytest>=8,<10
