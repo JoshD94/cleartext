@@ -3,6 +3,9 @@
 These experiments compare three approaches on the same bounded WikiSplit sample.
 They run through a separate CLI and do not change the v7 demo or its artifacts.
 
+The [October 26 pilot record](../evidence/structure-20261026/README.md) contains
+the actual training budgets, aggregate results, environment and model hashes.
+
 The rewrite ranker is a gradient boosting regressor. Its candidates include the
 existing structural rules and broader punctuation/conjunction split proposals,
 with optional subject copying. It learns candidate preferences from the change
@@ -21,7 +24,7 @@ monotonic edits, not arbitrary clause reordering. Training reference components
 also supply identity examples as copy regularization. No synthetic simplification
 gold or new human ratings are created.
 
-The encoder–decoder is the 60-million-parameter T5-small checkpoint, fine-tuned
+The encoder-decoder is the 60-million-parameter T5-small checkpoint, fine-tuned
 locally with a sentence-splitting prefix. It can rewrite more freely. Its best
 checkpoint is selected by development teacher-forced loss. This generative model
 is a new experimental branch of the architecture; it does not use a hosted API.

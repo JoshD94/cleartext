@@ -1,0 +1,34 @@
+{
+  "training_pairs": 526,
+  "available_pairs": 2000,
+  "representable_fraction": 0.263,
+  "copy_regularization_examples": 131,
+  "selection": [
+    {
+      "threshold": 0.0,
+      "dev_sari": 37.53894465029825
+    },
+    {
+      "threshold": 0.5,
+      "dev_sari": 36.72324056789326
+    },
+    {
+      "threshold": 0.7,
+      "dev_sari": 33.62684389280711
+    },
+    {
+      "threshold": 0.85,
+      "dev_sari": 32.759463027362244
+    },
+    {
+      "threshold": 0.95,
+      "dev_sari": 30.966920717174624
+    }
+  ],
+  "selected": {
+    "threshold": 0.0,
+    "dev_sari": 37.53894465029825
+  },
+  "limitations": "Monotonic edits and bounded train-derived insertions; no arbitrary clause reordering; alignment is weak supervision",
+  "insertion_vocabulary_size": 85
+}

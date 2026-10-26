@@ -1,0 +1,418 @@
+{
+  "metrics": {
+    "dev": {
+      "identity": {
+        "n": 128,
+        "sari": 30.50649800934784,
+        "changed": 0,
+        "change_rate": 0.0,
+        "split_rate": 0.015625,
+        "max_sentence_words": 27.453125,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false
+      },
+      "existing_rules": {
+        "n": 128,
+        "sari": 32.03170296163998,
+        "changed": 4,
+        "change_rate": 0.03125,
+        "split_rate": 0.046875,
+        "max_sentence_words": 27.15625,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false
+      },
+      "ranker_raw": {
+        "n": 128,
+        "sari": 51.39669691162254,
+        "changed": 117,
+        "change_rate": 0.9140625,
+        "split_rate": 0.9296875,
+        "max_sentence_words": 17.078125,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.5234375,
+        "content_recall": 0.998415069152661,
+        "check_failures": {
+          "complete_clauses": 39,
+          "argument_roles": 28,
+          "numbers": 1,
+          "logical_connectives": 5,
+          "content_retained": 4,
+          "no_new_content": 1
+        },
+        "semantic_certified": false
+      },
+      "ranker": {
+        "n": 128,
+        "sari": 45.18391080815118,
+        "changed": 70,
+        "change_rate": 0.546875,
+        "split_rate": 0.5625,
+        "max_sentence_words": 21.234375,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.031131083494983613,
+        "latency_p95_seconds": 0.0647494125063531,
+        "sari_delta_vs_identity": {
+          "mean_delta": 14.677412798803342,
+          "ci95": [
+            11.250158045875326,
+            17.94515797164989
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 13.152207846511198,
+          "ci95": [
+            10.068953257159345,
+            16.487055269672073
+          ],
+          "resamples": 1000
+        }
+      },
+      "editor_raw": {
+        "n": 128,
+        "sari": 43.55335715002522,
+        "changed": 55,
+        "change_rate": 0.4296875,
+        "split_rate": 0.4296875,
+        "max_sentence_words": 22.90625,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.7421875,
+        "content_recall": 0.9991536458333333,
+        "check_failures": {
+          "argument_roles": 16,
+          "complete_clauses": 16,
+          "logical_connectives": 7,
+          "entities": 2,
+          "content_retained": 2,
+          "no_new_content": 1
+        },
+        "semantic_certified": false
+      },
+      "editor": {
+        "n": 128,
+        "sari": 37.53894465029825,
+        "changed": 26,
+        "change_rate": 0.203125,
+        "split_rate": 0.203125,
+        "max_sentence_words": 25.40625,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.004633791395463049,
+        "latency_p95_seconds": 0.007980891887564212,
+        "sari_delta_vs_identity": {
+          "mean_delta": 7.032446640950407,
+          "ci95": [
+            4.451486914492148,
+            9.962247671988756
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 5.507241688658263,
+          "ci95": [
+            3.1208308933527715,
+            8.300792891361393
+          ],
+          "resamples": 1000
+        }
+      },
+      "seq2seq_raw": {
+        "n": 128,
+        "sari": 57.33777041960787,
+        "changed": 107,
+        "change_rate": 0.8359375,
+        "split_rate": 0.8359375,
+        "max_sentence_words": 17.75,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.5546875,
+        "content_recall": 0.9892219080490052,
+        "check_failures": {
+          "logical_connectives": 7,
+          "argument_roles": 29,
+          "entities": 9,
+          "content_retained": 13,
+          "no_new_content": 9,
+          "complete_clauses": 14,
+          "numbers": 1
+        },
+        "semantic_certified": false
+      },
+      "seq2seq": {
+        "n": 128,
+        "sari": 45.595275294000565,
+        "changed": 55,
+        "change_rate": 0.4296875,
+        "split_rate": 0.4453125,
+        "max_sentence_words": 22.625,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.5767154381610453,
+        "latency_p95_seconds": 0.9356721498887054,
+        "sari_delta_vs_identity": {
+          "mean_delta": 15.088777284652721,
+          "ci95": [
+            11.667889673710397,
+            19.032270987173632
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 13.563572332360577,
+          "ci95": [
+            10.00411549960428,
+            17.256398683517876
+          ],
+          "resamples": 1000
+        }
+      }
+    },
+    "test": {
+      "identity": {
+        "n": 128,
+        "sari": 30.219199495839938,
+        "changed": 0,
+        "change_rate": 0.0,
+        "split_rate": 0.0546875,
+        "max_sentence_words": 27.5,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false
+      },
+      "existing_rules": {
+        "n": 128,
+        "sari": 30.345783539692007,
+        "changed": 2,
+        "change_rate": 0.015625,
+        "split_rate": 0.0703125,
+        "max_sentence_words": 27.34375,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false
+      },
+      "ranker_raw": {
+        "n": 128,
+        "sari": 52.53211053590362,
+        "changed": 115,
+        "change_rate": 0.8984375,
+        "split_rate": 0.953125,
+        "max_sentence_words": 17.1328125,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.5703125,
+        "content_recall": 0.9983085064249252,
+        "check_failures": {
+          "argument_roles": 21,
+          "complete_clauses": 33,
+          "content_retained": 4,
+          "no_new_content": 2,
+          "entities": 2,
+          "logical_connectives": 4,
+          "numbers": 3,
+          "operator_scope": 1
+        },
+        "semantic_certified": false
+      },
+      "ranker": {
+        "n": 128,
+        "sari": 45.54337541306167,
+        "changed": 70,
+        "change_rate": 0.546875,
+        "split_rate": 0.6015625,
+        "max_sentence_words": 20.8828125,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.02704187494236976,
+        "latency_p95_seconds": 0.052323672699276354,
+        "sari_delta_vs_identity": {
+          "mean_delta": 15.324175917221725,
+          "ci95": [
+            12.154092823719154,
+            18.955139668278715
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 15.197591873369655,
+          "ci95": [
+            12.006829452841448,
+            18.780779111383772
+          ],
+          "resamples": 1000
+        }
+      },
+      "editor_raw": {
+        "n": 128,
+        "sari": 42.813843594138056,
+        "changed": 55,
+        "change_rate": 0.4296875,
+        "split_rate": 0.453125,
+        "max_sentence_words": 22.9765625,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.8125,
+        "content_recall": 0.9994791666666667,
+        "check_failures": {
+          "argument_roles": 8,
+          "complete_clauses": 14,
+          "logical_connectives": 5,
+          "sentence_count": 1,
+          "no_new_content": 2,
+          "entities": 1,
+          "content_retained": 1
+        },
+        "semantic_certified": false
+      },
+      "editor": {
+        "n": 128,
+        "sari": 38.392970692502956,
+        "changed": 34,
+        "change_rate": 0.265625,
+        "split_rate": 0.3203125,
+        "max_sentence_words": 24.4453125,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.9609375,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 5
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.004327666596509516,
+        "latency_p95_seconds": 0.0059314436744898535,
+        "sari_delta_vs_identity": {
+          "mean_delta": 8.173771196663012,
+          "ci95": [
+            5.660309252981753,
+            11.084282107412092
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 8.047187152810942,
+          "ci95": [
+            5.584405647076763,
+            10.987203336143397
+          ],
+          "resamples": 1000
+        }
+      },
+      "seq2seq_raw": {
+        "n": 128,
+        "sari": 57.42903900261706,
+        "changed": 107,
+        "change_rate": 0.8359375,
+        "split_rate": 0.859375,
+        "max_sentence_words": 17.7265625,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.5546875,
+        "content_recall": 0.9934301307245387,
+        "check_failures": {
+          "argument_roles": 37,
+          "content_retained": 10,
+          "entities": 5,
+          "no_new_content": 2,
+          "logical_connectives": 4,
+          "complete_clauses": 16,
+          "operator_scope": 1,
+          "numbers": 1
+        },
+        "semantic_certified": false
+      },
+      "seq2seq": {
+        "n": 128,
+        "sari": 43.71691308593117,
+        "changed": 52,
+        "change_rate": 0.40625,
+        "split_rate": 0.4453125,
+        "max_sentence_words": 22.765625,
+        "source_words": 27.9375,
+        "check_pass_rate": 0.96875,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 4
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.5667728340486065,
+        "latency_p95_seconds": 0.7875268977601081,
+        "sari_delta_vs_identity": {
+          "mean_delta": 13.49771359009123,
+          "ci95": [
+            10.36443341712402,
+            17.11061278843199
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 13.371129546239159,
+          "ci95": [
+            10.259840040897656,
+            16.880905009117978
+          ],
+          "resamples": 1000
+        }
+      }
+    }
+  },
+  "host": "dhcp-vl2041-56205.eduroam.cornell.edu",
+  "python": "3.12.13",
+  "limitations": [
+    "Bounded general-domain WikiSplit pilot, not technical-domain validation",
+    "Single-reference overlap scores do not establish meaning or fluency",
+    "Checks are parser-dependent and conservative; raw and filtered outputs both reported",
+    "No model automatically adopted into the v7 demo",
+    "Pretraining contamination not ruled out"
+  ],
+  "evaluation_context": {
+    "classic_device": "cpu",
+    "seq2seq_device": "mps",
+    "latency_note": "Wall time on a shared monitored Mac, including initialization effects and any SIGSTOP memory-pressure pauses; not an isolated serving benchmark",
+    "frozen_before_test": true
+  },
+  "posthoc_frozen_model_comparison": {
+    "ranker_minus_seq2seq_test_sari": {
+      "mean_delta": 1.8264623271304963,
+      "ci95": [
+        -1.5914264490311005,
+        5.330105501013352
+      ],
+      "resamples": 1000
+    },
+    "note": "Descriptive paired comparison after frozen evaluation; no test-driven model changes"
+  }
+}

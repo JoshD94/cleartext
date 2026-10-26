@@ -1,0 +1,49 @@
+{
+  "model": "google-t5/t5-small",
+  "revision": "df1b051c49625cf57a3d0d8d3863ed4d13564fe4",
+  "device": "cpu",
+  "seed": 4701,
+  "max_steps": 400,
+  "batch_size": 2,
+  "optimizer": "adafactor",
+  "learning_rate": 0.001,
+  "warmup_steps": 40,
+  "accumulation_steps": 2,
+  "effective_batch_size": 4,
+  "max_source_tokens": 192,
+  "max_target_tokens": 256,
+  "training_pairs": 2000,
+  "length_filtered_training_pairs": 0,
+  "dev_pairs": 128,
+  "selection": "Lowest token-weighted dev teacher-forced loss; test not used",
+  "prefix": "split sentence: ",
+  "trainable_parameters": 60506624,
+  "steps_completed": 400,
+  "training_examples_seen": 1600,
+  "history": [
+    {
+      "step": 100,
+      "dev_loss": 0.6442072028464904
+    },
+    {
+      "step": 200,
+      "dev_loss": 0.6049268552703038
+    },
+    {
+      "step": 300,
+      "dev_loss": 0.5994047563919574
+    },
+    {
+      "step": 400,
+      "dev_loss": 0.6076591524112439
+    }
+  ],
+  "selected": {
+    "step": 300,
+    "dev_loss": 0.5994047563919574
+  },
+  "elapsed_seconds": 1222.4499608341139,
+  "original_reported_training_examples_seen": 1604,
+  "selected_checkpoint_examples_seen": 1200,
+  "measurement_correction": "The original offset-based counter reported 1604 by counting an unprocessed next batch at the step limit. Actual completed groups: 400 x 4 = 1600. Reporting fix does not change training or model weights. Original JSON preserved in the local run."
+}
