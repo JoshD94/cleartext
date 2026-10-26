@@ -127,6 +127,8 @@ def test_mac_warning_stops_own_training(monkeypatch, tmp_path):
 
     from cleartext.structure import seq2seq
 
+    monkeypatch.delenv("CLEARTEXT_WAIT_FOR_CAPACITY", raising=False)
+
     monkeypatch.setattr(seq2seq.platform, "system", lambda: "Darwin")
     monkeypatch.setattr(
         seq2seq.shutil, "disk_usage", lambda _: SimpleNamespace(free=10 * 1024**3)
@@ -136,6 +138,32 @@ def test_mac_warning_stops_own_training(monkeypatch, tmp_path):
     )
     with pytest.raises(RuntimeError, match="pressure is not normal"):
         seq2seq.capacity_check(tmp_path)
+
+
+def test_mac_warning_can_pause_and_resume_without_losing_training_state(
+    monkeypatch, tmp_path
+):
+    from types import SimpleNamespace
+
+    from cleartext.structure import seq2seq
+
+    monkeypatch.setenv("CLEARTEXT_WAIT_FOR_CAPACITY", "1")
+    monkeypatch.setattr(seq2seq.platform, "system", lambda: "Darwin")
+    monkeypatch.setattr(
+        seq2seq.shutil, "disk_usage", lambda _: SimpleNamespace(free=10 * 1024**3)
+    )
+    replies = iter(["2\n", "1\n", "System-wide memory free percentage: 50%"])
+    monkeypatch.setattr(
+        seq2seq.subprocess, "run", lambda *a, **k: SimpleNamespace(stdout=next(replies))
+    )
+    sleeps = []
+    monkeypatch.setattr(seq2seq.time, "sleep", sleeps.append)
+    seq2seq.capacity_check(tmp_path)
+    assert sleeps == [30]
+    assert (
+        json.loads((tmp_path / "capacity_status.json").read_text())["state"]
+        == "running"
+    )
 
 
 @pytest.fixture

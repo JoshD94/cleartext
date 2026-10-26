@@ -3,6 +3,7 @@
 import gc
 import json
 import math
+import os
 import platform
 import random
 import shutil
@@ -33,17 +34,35 @@ def capacity_check(run):
     if shutil.disk_usage(run).free < 2 * 1024**3:
         raise RuntimeError("Stopping own experiment: less than 2 GiB disk free")
     if platform.system() == "Darwin":
-        pressure = subprocess.run(
-            ["sysctl", "-n", "kern.memorystatus_vm_pressure_level"],
-            check=True,
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
-        if pressure.stdout.strip() != "1":
-            raise RuntimeError(
-                "Stopping own experiment: Mac memory pressure is not normal"
+        while True:
+            pressure = subprocess.run(
+                ["sysctl", "-n", "kern.memorystatus_vm_pressure_level"],
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=10,
+            ).stdout.strip()
+            if pressure == "1":
+                write_json(Path(run) / "capacity_status.json", {"state": "running"})
+                break
+            if pressure != "2" or os.environ.get("CLEARTEXT_WAIT_FOR_CAPACITY") != "1":
+                raise RuntimeError(
+                    "Stopping own experiment: Mac memory pressure is not normal"
+                )
+            write_json(
+                Path(run) / "capacity_status.json",
+                {
+                    "state": "paused",
+                    "reason": "Mac warning pressure; training state retained",
+                },
             )
+            print(
+                "Training paused for Mac memory pressure; rechecking in 30 seconds",
+                flush=True,
+            )
+            time.sleep(30)
+            if shutil.disk_usage(run).free < 2 * 1024**3:
+                raise RuntimeError("Stopping own experiment: less than 2 GiB disk free")
         result = subprocess.run(
             ["memory_pressure", "-Q"],
             check=True,

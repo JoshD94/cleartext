@@ -84,6 +84,10 @@ download cache and one saved T5 checkpoint. Check actual usage during the run.
 The script checks capacity during training and limits MPS allocation. It uses four
 CPU threads. CUDA, MPS or CPU is selected automatically, or use `--device`.
 Mac training stops if the system reports warning or critical memory pressure.
+For an attended or monitored tmux job, `CLEARTEXT_WAIT_FOR_CAPACITY=1` pauses
+training on warning pressure and checks every 30 seconds until normal pressure
+returns. Optimizer and training state stay in memory. Critical pressure still
+stops the job. `capacity_status.json` records this separate from training progress.
 The default optimizer is Adafactor with a fixed target learning rate of 0.001,
 10% warm-up and internal update clipping. `--optimizer adamw` uses 0.0003 with
 gradient clipping. A lower-memory CPU configuration uses `--device cpu
