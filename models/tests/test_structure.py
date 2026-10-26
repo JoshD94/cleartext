@@ -22,7 +22,12 @@ from cleartext.structure.corpus import (
     read_pair,
     select_pairs,
 )
-from cleartext.structure.learning import edit_alignment, render_tags, token_features
+from cleartext.structure.learning import (
+    RewriteRanker,
+    edit_alignment,
+    render_tags,
+    token_features,
+)
 
 
 def test_sari_operations_and_identity():
@@ -51,6 +56,9 @@ def test_checks_allow_splits_without_token_index_comparison():
         "Which stores the records.",
         "Each of which is independently protected using the traffic keys.",
         "Some of whom are employed by the university.",
+        "The teams their predictions are evaluated using a hidden dataset.",
+        "He he gives the manuscript to the publisher.",
+        "Is one of the diseases of the bone marrow.",
     ],
 )
 def test_embedded_verbs_and_participles_do_not_complete_a_main_clause(text):
@@ -73,6 +81,7 @@ def test_embedded_verbs_and_participles_do_not_complete_a_main_clause(text):
         "Each of the records is independently protected using the traffic keys.",
         "The server which stores the records is independently protected.",
         "The researcher knows which protocol the server uses.",
+        "Alice and Bob reviewed the report.",
     ],
 )
 def test_finite_predicates_auxiliaries_and_copulas_complete_main_clauses(text):
@@ -197,6 +206,88 @@ def test_candidate_pool_always_includes_identity_and_is_bounded():
     assert rows[0]["output"] == source
     assert 1 < len(rows) <= 26
     assert len({normalize(r["output"]) for r in rows}) == len(rows)
+
+
+@pytest.mark.parametrize(
+    "source,expected",
+    [
+        (
+            "The server checks each request and sends a response to the client.",
+            "The server checks each request. The server sends a response to the client.",
+        ),
+        (
+            "The server checks each request, and the client sends each response.",
+            "The server checks each request. The client sends each response.",
+        ),
+        (
+            "The researcher reviewed the report, and she published the findings.",
+            "The researcher reviewed the report. She published the findings.",
+        ),
+        (
+            "The gateway uses Diffie-Hellman keys; the client stores each response.",
+            "The gateway uses Diffie-Hellman keys. The client stores each response.",
+        ),
+    ],
+)
+def test_split_candidates_keep_own_subjects_and_original_spelling(source, expected):
+    rows = candidate_pool(source)
+    assert expected in [r["output"] for r in rows]
+    assert all(structure_checks(source, r["output"])["pass"] for r in rows[1:])
+    if expected.split(". ")[1].startswith(("The client", "She")):
+        assert not any(r["kind"] == "copy_subject" for r in rows)
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "The researcher visited her father and mother before the meeting.",
+        "The researcher, who studies networks and designs protocols, reviewed the report.",
+        "The report was prepared by Alice and approved by Bob.",
+        "The server is checking each request and sending a response.",
+        "The server may check each request and send a response.",
+        "The server checks each request but discards every invalid response.",
+        "If the server checks each request, the client records each response.",
+        "Alice buys and sells cars.",
+        "The researcher reviewed the report, a detailed account of the findings.",
+        "The researcher who designed the protocol checks requests and sends responses.",
+    ],
+)
+def test_splitter_abstains_on_lists_embedded_clauses_and_shared_scope(source):
+    assert candidate_pool(source) == [{"output": source, "kind": "identity"}]
+
+
+@pytest.mark.parametrize(
+    "source,output",
+    [
+        (
+            "The track is a song included on Alice's album.",
+            "The track is a song. The track included on Alice's album.",
+        ),
+        (
+            "The water tower is being developed, giving residents a safer water source.",
+            "The water tower is being developed. The water tower a safer water source.",
+        ),
+    ],
+)
+def test_split_cannot_promote_a_noun_or_nonfinite_modifier_to_a_finite_verb(
+    source, output
+):
+    failed = structure_checks(source, output)["failed"]
+    assert {"finite_predicates", "complete_clauses"} & set(failed)
+
+
+def test_passive_to_active_remains_a_valid_candidate():
+    source = "The report was reviewed by the committee."
+    assert "The committee reviewed the report." in [
+        r["output"] for r in candidate_pool(source)
+    ]
+
+
+def test_ranker_requires_refitting_after_candidate_and_check_changes():
+    ranker = RewriteRanker(None)
+    del ranker.feature_version  # Artifact from before the feature-version field.
+    with pytest.raises(ValueError, match="Refit the ranker"):
+        ranker.predict("The server checks each request and sends each response.")
 
 
 class FixedRewrite:

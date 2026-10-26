@@ -167,13 +167,55 @@ def complete_clause(sentence):
         if token.tag_ in {"WDT", "WP", "WP$", "WRB"}:
             return False
         pending.extend(token.children)
-    if not any(t.dep_ in {"nsubj", "nsubjpass", "expl"} for t in children):
+    subjects = [t for t in children if t.dep_ in {"nsubj", "nsubjpass"}]
+    expletives = [t for t in children if t.dep_ == "expl"]
+    # Coordination has one subject head. Two direct subjects often mean that a
+    # copied subject was prepended to a clause which already had one.
+    if len(subjects) > 1 or not (subjects or expletives):
+        return False
+    if any(
+        t.dep_ == "dep" and t.pos_ in {"NOUN", "PROPN", "PRON"} and t.i < root.i
+        for t in children
+    ):
+        return False
+    # This stage produces declarative prose. A post-verbal subject without an
+    # expletive can be a parser's repair of a fragment such as "Is one of ...".
+    if not expletives and subjects[0].i > root.i:
         return False
     predicates = [root] + [t for t in children if t.dep_ in {"aux", "auxpass", "cop"}]
     return any(
         t.pos_ in {"VERB", "AUX"} and "Fin" in t.morph.get("VerbForm")
         for t in predicates
     )
+
+
+def _finite_predicates(doc):
+    """Predicates with their own or a coordinated finite auxiliary.
+
+    Splitting must not turn a noun or an unattached participle into a newly
+    finite verb just because the parser assigns it a different tag afterward.
+    This is a source-relative diagnostic, not an independent grammar judgment.
+    """
+    result = set()
+    for token in doc:
+        if token.pos_ not in {"VERB", "AUX", "ADJ"}:
+            continue
+        current, seen = token, set()
+        while current.i not in seen:
+            seen.add(current.i)
+            predicates = [current] + [
+                c for c in current.children if c.dep_ in {"aux", "auxpass", "cop"}
+            ]
+            if any(
+                p.pos_ in {"VERB", "AUX"} and "Fin" in p.morph.get("VerbForm")
+                for p in predicates
+            ):
+                result.add(token.lemma_.lower())
+                break
+            if current.dep_ != "conj":
+                break
+            current = current.head
+    return result
 
 
 def structure_checks(source, output, source_doc=None, output_doc=None):
@@ -200,6 +242,7 @@ def structure_checks(source, output, source_doc=None, output_doc=None):
         "no_new_content": not (b.keys() - a.keys()),
         "argument_roles": _arguments(old) <= _arguments(new),
         "operator_scope": _operators(old) == _operators(new),
+        "finite_predicates": _finite_predicates(new) <= _finite_predicates(old),
         "logical_connectives": all(
             oc[k] == nc[k]
             for k in (
@@ -230,37 +273,100 @@ def structure_checks(source, output, source_doc=None, output_doc=None):
     }
 
 
-def candidate_pool(text, doc=None):
-    """Bounded rule candidates for the learned ranker, including identity.
+def _split_text(text, boundary, right_start, prefix=""):
+    # Slice the original characters. Detokenization can damage protocol names,
+    # hyphens and apostrophes even when a split itself needs no word changes.
+    left = text[:boundary].rstrip().rstrip(",;").rstrip()
+    right = text[right_start:].lstrip()
+    if not left or not right:
+        return text
+    right = prefix + right
+    return left + ". " + right[:1].upper() + right[1:]
 
-    Broad punctuation/conjunction proposals deliberately include bad splits.
-    The ranker learns preferences from reference overlap; checks reject fragments.
+
+def _split_candidates(text, doc):
+    """Offer independent clauses or a finite main-verb coordination.
+
+    Never copy a subject into a clause with its own subject, into a noun list,
+    or into an embedded clause. Shared auxiliaries and logical conditions
+    abstain rather than guessing how to distribute their scope.
     """
+    if not text.rstrip().endswith(".") or any(t.is_quote for t in doc):
+        return
+    if any(
+        t.dep_ == "mark"
+        or t.lower_ in NEG | MODAL | {"but", "however", "otherwise", "therefore"}
+        for t in doc
+    ):
+        return
+    root = list(doc.sents)[0].root
+    for token in doc:
+        if token.text == ";":
+            # Each side must already stand on its own; semicolons never need a
+            # copied subject. Re-parsing below also handles parser attachment
+            # differences between a semicolon and two separate sentences.
+            yield _split_text(text, token.idx, token.idx + 1), "boundary"
+            continue
+        if token.lower_ != "and" or token.dep_ != "cc" or token.head != root:
+            continue
+        conjuncts = [
+            c
+            for c in root.children
+            if c.dep_ == "conj" and c.pos_ in {"VERB", "AUX"}
+        ]
+        if len(conjuncts) != 1:
+            continue
+        predicate = conjuncts[0]
+        right_start = token.i + 1
+        if predicate.i < right_start:
+            continue
+        subtree = {t.i for t in predicate.subtree}
+        # No argument/modifier may cross the proposed boundary. In particular,
+        # a trailing shared modifier attached to the first predicate stays put.
+        if any(
+            not t.is_punct and (t.i in subtree) != (t.i >= right_start)
+            for t in doc
+        ):
+            continue
+        subjects = [
+            c for c in predicate.children if c.dep_ in {"nsubj", "nsubjpass", "expl"}
+        ]
+        if subjects:
+            yield _split_text(text, token.idx, doc[right_start].idx), "boundary"
+            continue
+        if "Fin" not in predicate.morph.get("VerbForm") or any(
+            c.dep_ in {"aux", "auxpass", "neg"} for c in root.children
+        ):
+            continue
+        subjects = [c for c in root.children if c.dep_ == "nsubj"]
+        if len(subjects) != 1:
+            continue
+        subject = subjects[0]
+        tokens = list(subject.subtree)
+        if any(t.dep_ in {"relcl", "acl", "appos", "conj"} for t in tokens):
+            continue
+        if tokens[-1].i >= root.i or len(tokens) != tokens[-1].i - tokens[0].i + 1:
+            continue
+        # "Buys and sells cars" may share the right-hand object. Do not turn it
+        # into "Buys. Sells cars" by silently changing the first predicate.
+        objects = lambda p: any(c.dep_ in {"dobj", "obj", "attr"} for c in p.children)
+        if objects(root) != objects(predicate):
+            continue
+        prefix = doc[tokens[0].i : tokens[-1].i + 1].text + " "
+        yield _split_text(text, token.idx, doc[right_start].idx, prefix), "copy_subject"
+
+
+def candidate_pool(text, doc=None):
+    """Bounded, checked proposals for the learned ranker, including identity."""
     doc = doc if doc is not None else nlp()(text)
     rows = [{"output": text, "kind": "identity"}]
     out, edits = structural(text)
-    if edits:
+    if edits and structure_checks(text, out, doc)["pass"]:
         rows.append({"output": out, "kind": "existing_rule"})
     if len(list(doc.sents)) != 1:
         return rows
-    subject = subject_tokens(doc)
-    for i, token in enumerate(doc):
-        if token.text not in {",", ";"} and token.lower_ not in {"and", "but"}:
-            continue
-        left = [t.text for t in doc[:i]]
-        right = [t.text for t in doc[i + 1 :]]
-        while left and left[-1] in {",", ";"}:
-            left.pop()
-        if right and right[0].lower() in {"and", "but"}:
-            right = right[1:]
-        if sum(w.isalpha() for w in left) < 4 or sum(w.isalpha() for w in right) < 4:
-            continue
-        for prefix, kind in [([], "boundary"), (subject, "copy_subject")]:
-            if kind == "copy_subject" and not prefix:
-                continue
-            tokens = left + ["."] + prefix + right
-            out = detokenize(tokens)
-            out = re.sub(r"([.!?]\s+)([a-z])", lambda m: m[1] + m[2].upper(), out)
+    for out, kind in _split_candidates(text, doc):
+        if structure_checks(text, out, doc)["pass"]:
             rows.append({"output": out, "kind": kind})
         if len(rows) >= 25:
             break

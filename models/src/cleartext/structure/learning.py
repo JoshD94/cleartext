@@ -24,6 +24,8 @@ from .common import (
 )
 from .corpus import write_json
 
+RANKER_FEATURE_VERSION = 2
+
 
 def parse_sources(data):
     return {
@@ -35,8 +37,14 @@ def parse_sources(data):
 class RewriteRanker:
     def __init__(self, model, threshold=0.0):
         self.model, self.threshold = model, threshold
+        self.feature_version = RANKER_FEATURE_VERSION
 
     def predict(self, source, doc=None):
+        if getattr(self, "feature_version", None) != RANKER_FEATURE_VERSION:
+            raise ValueError(
+                "Ranker candidate/check features changed. Refit the ranker with this "
+                "source version, or use the original artifact's frozen source."
+            )
         doc = doc if doc is not None else nlp()(source)
         candidates = candidate_pool(source, doc)
         features = [candidate_features(source, c, doc) for c in candidates]
@@ -117,6 +125,7 @@ def train_ranker(data, docs, run):
     with (Path(run) / "ranker.pkl").open("wb") as stream:
         pickle.dump(ranker, stream)
     result = {
+        "feature_version": RANKER_FEATURE_VERSION,
         "training_candidates": len(labels),
         "training_pairs": len(data["train"]),
         "label": "Single-reference SARI(candidate) minus SARI(identity), not human quality",
