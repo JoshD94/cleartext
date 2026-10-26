@@ -48,15 +48,15 @@ def prepare_inputs(cache, output):
         paragraphs = re.split(r"\n\s*\n", cleaned)
         selected = []
         for paragraph in paragraphs:
-            if (
-                not paragraph.strip()
-                or paragraph.strip().endswith(":")
-                or paragraph.strip().startswith(("-", "*"))
-            ):
+            if not paragraph.strip():
                 continue
             for sentence in nlp()(" ".join(paragraph.split())).sents:
                 value = sentence.text.strip()
-                if 20 <= len(value.split()) <= 70 and value.endswith("."):
+                if (
+                    20 <= len(value.split()) <= 70
+                    and value.endswith(".")
+                    and not value.startswith(("-", "*"))
+                ):
                     selected.append(value)
                     if len(selected) == 6:
                         break
