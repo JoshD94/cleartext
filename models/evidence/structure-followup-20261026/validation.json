@@ -1,0 +1,74 @@
+{
+  "focused_tests": {
+    "command": "OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2 PYTHONPATH=models/src models/.venv/bin/python -m pytest models/tests/test_structure.py models/tests/test_invariants.py models/tests/test_ensemble.py models/tests/test_technical_terms.py models/tests/test_preservation.py -q",
+    "passed": 83,
+    "seconds": 7.56,
+    "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b"
+  },
+  "integration_cases": [
+    {
+      "case": "split",
+      "source": "The server checks each request and sends a response to the client.",
+      "output": "The server checks each request. The server sends a response to the client.",
+      "structure_backend": "ranker",
+      "structure_changed": true,
+      "exact_stage_trace": true,
+      "word_edits": 0,
+      "phrases": false
+    },
+    {
+      "case": "relative",
+      "source": "The researcher is a professor at the university, where she studies neural networks.",
+      "output": "The researcher is a professor at the university, where she studies neural networks.",
+      "structure_backend": "ranker",
+      "structure_changed": false,
+      "exact_stage_trace": true,
+      "word_edits": 0,
+      "phrases": false
+    },
+    {
+      "case": "scope",
+      "source": "The company may reduce spending, but it will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "structure_backend": "ranker",
+      "structure_changed": false,
+      "exact_stage_trace": true,
+      "word_edits": 0,
+      "phrases": false
+    }
+  ],
+  "browser": {
+    "kind": "T3 browser interaction",
+    "url": "Private Yoga demo, port 8770",
+    "steps": [
+      "Confirmed grammar rules preferred and structure initially off",
+      "Selected experimental ranker, enabled structure, selected zero word edits",
+      "Entered authored server sentence and clicked Simplify",
+      "Confirmed expected split and no visible errors or horizontal overflow",
+      "Closed own preview tab"
+    ],
+    "result": {
+      "output": "The server checks each request. The server sends a response to the client.",
+      "backend": "ranker",
+      "structure": true,
+      "defaultOption": "Grammar rules",
+      "errors": [],
+      "overflow": false
+    }
+  },
+  "limits": "Authored regression and integration examples, separate from scored general-domain data and ungraded technical transfer inputs.",
+  "demo_source_commit": "22e765b",
+  "standalone_bundle_smoke": {
+    "only_weight_file_present": "ranker.pkl",
+    "source": "The server checks each request and sends a response to the client.",
+    "output": "The server checks each request. The server sends a response to the client.",
+    "checks_pass": true,
+    "training_data_present": false,
+    "other_model_weights_present": false,
+    "seconds": 2.98,
+    "model_sha256": "27d72896884446b558ded44120cc441310c2f6723cb77d1d549cbbdf154b3e1b"
+  },
+  "redactions": [
+    "Private demo IP omitted; original browser receipt retained locally"
+  ]
+}

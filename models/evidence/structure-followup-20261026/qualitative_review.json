@@ -1,0 +1,638 @@
+{
+  "kind": "Qualitative agent inspection, no human ratings or scored correctness labels",
+  "selection": "First 20 normalized changed outputs per learned model in deterministic fresh-test order; all 12 fixed technical inputs for every system, including raw rejected proposals.",
+  "limits": "General review is a diagnostic subset, not a representative quality estimate. Plausibility observations do not certify meaning, fluency or source factuality. No model, guard or threshold was tuned after this inspection.",
+  "general": {
+    "ranker": {
+      "reviewed": 20,
+      "rows": [
+        {
+          "id": "wikisplit-validation-2009",
+          "observation": "Copies an extra subject before an already explicit subject, producing a malformed second clause."
+        },
+        {
+          "id": "wikisplit-validation-922",
+          "observation": "Plausible split of two complete passive clauses; modal should is retained."
+        },
+        {
+          "id": "wikisplit-validation-3847",
+          "observation": "Plausible shared-subject split; the named subject is repeated before the second action."
+        },
+        {
+          "id": "wikisplit-validation-1179",
+          "observation": "Plausible shared-subject split. Historical claims and quoted source wording are retained."
+        },
+        {
+          "id": "wikisplit-validation-4926",
+          "observation": "Plausible action split, but the opening while clause no longer explicitly governs the warning in the second sentence. Temporal scope needs review."
+        },
+        {
+          "id": "wikisplit-validation-892",
+          "observation": "Duplicates the long subject before an existing they, creating malformed grammar."
+        },
+        {
+          "id": "wikisplit-validation-4772",
+          "observation": "Duplicates It before an existing contracted subject and auxiliary."
+        },
+        {
+          "id": "wikisplit-validation-3467",
+          "observation": "Split retains inherited source grammar errors in the description of the fight. It does not repair them."
+        },
+        {
+          "id": "wikisplit-validation-1384",
+          "observation": "Copied possessive subject collides with the second possessive phrase, corrupting the father/mother name relation."
+        },
+        {
+          "id": "wikisplit-validation-4742",
+          "observation": "Splits inside the coordinated objects nieces and nephews, producing an invalid second clause."
+        },
+        {
+          "id": "wikisplit-validation-1662",
+          "observation": "Split leaves citation-like debris inherited from the source. No new words are added."
+        },
+        {
+          "id": "wikisplit-validation-2799",
+          "observation": "Split separates the final consequence from a preceding causal construction. Discourse scope across sentences needs review."
+        },
+        {
+          "id": "wikisplit-validation-1703",
+          "observation": "Duplicates He before an explicit he in the second clause."
+        },
+        {
+          "id": "wikisplit-validation-1016",
+          "observation": "Copies Abdullah into a clause concerning Bashir and retains a detached to-which phrase, corrupting participant attachment."
+        },
+        {
+          "id": "wikisplit-validation-1351",
+          "observation": "Plausible shared-subject split; dates, institutions and roles are retained."
+        },
+        {
+          "id": "wikisplit-validation-2751",
+          "observation": "Second sentence begins with a subjectless copula. The parser check accepts this despite the missing declarative subject."
+        },
+        {
+          "id": "wikisplit-validation-4488",
+          "observation": "Second sentence is a noun phrase without a valid main predicate, despite passing the parser checks."
+        },
+        {
+          "id": "wikisplit-validation-2920",
+          "observation": "Plausible semicolon split; the existing pronoun and descriptive list are retained."
+        },
+        {
+          "id": "wikisplit-validation-3830",
+          "observation": "Moves the final-twist modifier onto the first claim, changing its attachment."
+        },
+        {
+          "id": "wikisplit-validation-47",
+          "observation": "Second clause lacks the passive auxiliary and makes the song appear to perform the inclusion action."
+        }
+      ]
+    },
+    "editor": {
+      "reviewed": 20,
+      "rows": [
+        {
+          "id": "wikisplit-validation-922",
+          "observation": "Plausible split of two complete passive clauses; modal should is retained."
+        },
+        {
+          "id": "wikisplit-validation-4772",
+          "observation": "Plausible semicolon split with the existing contracted subject retained."
+        },
+        {
+          "id": "wikisplit-validation-1384",
+          "observation": "Changes a dash to a comma, leaving independent clauses joined by a comma. No sentence-length simplification."
+        },
+        {
+          "id": "wikisplit-validation-1662",
+          "observation": "Plausible split, with malformed citation-like material inherited from the source."
+        },
+        {
+          "id": "wikisplit-validation-2799",
+          "observation": "Introduces adjacent comma and period punctuation and removes explicit causal linking words."
+        },
+        {
+          "id": "wikisplit-validation-1703",
+          "observation": "Plausible split, preserving the second explicit subject and the first clause negation."
+        },
+        {
+          "id": "wikisplit-validation-1351",
+          "observation": "Plausible shared-subject split with dates and residency roles retained."
+        },
+        {
+          "id": "wikisplit-validation-2920",
+          "observation": "Plausible semicolon split; descriptive detail and uncertainty are retained."
+        },
+        {
+          "id": "wikisplit-validation-3830",
+          "observation": "Plausible split retaining the contrast marker and the final-twist attachment."
+        },
+        {
+          "id": "wikisplit-validation-4809",
+          "observation": "Only inserts a comma before the relative clause. This counts as a benchmark change but does not shorten the sentence."
+        },
+        {
+          "id": "wikisplit-validation-4530",
+          "observation": "Plausible split; the device pronoun and prescription restriction are retained."
+        },
+        {
+          "id": "wikisplit-validation-3962",
+          "observation": "Date phrase becomes attached explicitly to the second event. The original comma-spliced sentence is ambiguous, so event timing needs review."
+        },
+        {
+          "id": "wikisplit-validation-4296",
+          "observation": "Plausible semicolon split, retaining the source duplicate having rather than introducing it."
+        },
+        {
+          "id": "wikisplit-validation-769",
+          "observation": "Plausible release-date split; malformed source quotation punctuation remains."
+        },
+        {
+          "id": "wikisplit-validation-3957",
+          "observation": "Plausible semicolon split preserving the above-ground/buried contrast."
+        },
+        {
+          "id": "wikisplit-validation-4459",
+          "observation": "Plausible split preserving the name and its geographic derivation."
+        },
+        {
+          "id": "wikisplit-validation-3961",
+          "observation": "Plausible semicolon split preserving the exception and likely modality."
+        },
+        {
+          "id": "wikisplit-validation-3515",
+          "observation": "Strands but due to the addiction at the end of the first sentence and weakens its attachment to the firing event."
+        },
+        {
+          "id": "wikisplit-validation-958",
+          "observation": "Plausible semicolon split retaining the quantity and only restriction."
+        },
+        {
+          "id": "wikisplit-validation-2327",
+          "observation": "Changes the attachment of writing to an ambiguous It and an added progressive construction, creating an agency and fluency problem."
+        }
+      ]
+    },
+    "seq2seq": {
+      "reviewed": 20,
+      "rows": [
+        {
+          "id": "wikisplit-validation-2009",
+          "observation": "Plausible split, retaining the explicit predictions subject rather than copying teams."
+        },
+        {
+          "id": "wikisplit-validation-922",
+          "observation": "Plausible split of complete passive clauses with the modal retained."
+        },
+        {
+          "id": "wikisplit-validation-1179",
+          "observation": "Changes the subordinate description into present-tense refers after past-tense historical events. Tense relation is not preserved exactly."
+        },
+        {
+          "id": "wikisplit-validation-892",
+          "observation": "Plausible split using they for the previously named plural group."
+        },
+        {
+          "id": "wikisplit-validation-4772",
+          "observation": "Plausible semicolon split retaining the source contracted pronoun."
+        },
+        {
+          "id": "wikisplit-validation-1662",
+          "observation": "Plausible split retaining citation-like debris inherited from the source."
+        },
+        {
+          "id": "wikisplit-validation-1703",
+          "observation": "Plausible split retaining negation, the named recipient and the second event."
+        },
+        {
+          "id": "wikisplit-validation-3667",
+          "observation": "Plausible relative/action split using It for the named path; route locations remain."
+        },
+        {
+          "id": "wikisplit-validation-1351",
+          "observation": "Plausible shared-subject split preserving dates, institutions and roles."
+        },
+        {
+          "id": "wikisplit-validation-3906",
+          "observation": "Plausible split at the source dash boundary; the location and both groups remain."
+        },
+        {
+          "id": "wikisplit-validation-2751",
+          "observation": "Plausible copular split supplying It is in the second sentence."
+        },
+        {
+          "id": "wikisplit-validation-4307",
+          "observation": "Retains inherited agreement and awkward wording from the source. The pronoun refers to the preceding language description."
+        },
+        {
+          "id": "wikisplit-validation-2920",
+          "observation": "Plausible semicolon split retaining uncertainty and descriptive detail."
+        },
+        {
+          "id": "wikisplit-validation-3830",
+          "observation": "Drops the explicit contrast marker however. The broad claims remain but their discourse relation is weakened."
+        },
+        {
+          "id": "wikisplit-validation-1903",
+          "observation": "Plausible event-to-consequence split using This; agent and date remain."
+        },
+        {
+          "id": "wikisplit-validation-4786",
+          "observation": "Splits the opening location statement, but a comma splice remains in the second sentence from the source."
+        },
+        {
+          "id": "wikisplit-validation-3630",
+          "observation": "Plausible split preserving negation, contrast and the non-violence term."
+        },
+        {
+          "id": "wikisplit-validation-4234",
+          "observation": "Plausible semicolon split preserving both superlatives and place names."
+        },
+        {
+          "id": "wikisplit-validation-3140",
+          "observation": "Plausible location split using It for the hamlet and retaining the county identifier."
+        },
+        {
+          "id": "wikisplit-validation-4809",
+          "observation": "Plausible possessive-relative split using Its roots, retaining date, founder and place."
+        }
+      ]
+    }
+  },
+  "technical": [
+    {
+      "id": "rfc9110-section2-0",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities",
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw second sentence is a detached participial fragment. Technical name token spacing also differs."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Identity proposal and output; no simplification."
+        },
+        "seq2seq": {
+          "changed": true,
+          "raw_check_failures": [],
+          "observation": "Accepted split produces a second clause with a missing passive auxiliary and an unclear actor for extended. This is a grammar and attachment failure that passed the checks."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc9110-section2-1",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles"
+          ],
+          "observation": "Rejected raw split uses demonstrative That for the extension. It is a plausible local rewrite, but the role check rejects it. Source punctuation and hyphen spacing also change."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles"
+          ],
+          "observation": "Raw split uses It ambiguously for the extension; rejected by argument-role check."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles"
+          ],
+          "observation": "Raw split uses It ambiguously for the extension and is rejected by the argument-role check."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc9110-section2-2",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities",
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw split cuts the protocol token list into a sentence fragment and changes technical token spacing."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "numbers",
+            "entities"
+          ],
+          "observation": "Raw proposal deletes the RFC reference and damages technical token spelling; rejected by number/entity checks."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "numbers",
+            "entities",
+            "content_retained"
+          ],
+          "observation": "Raw generation drops protocol tokens and mispairs HEXDIG with a decimal definition; rejected by number, entity and content checks."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc9110-section2-3",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw split detaches proxies, gateways and caches from the requirements predicate."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Identity output; even the unchanged source fails the parser completeness check."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Identity proposal and output; unchanged source fails parser completeness, showing a false rejection on source text."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc9110-section2-4",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw split detaches protocol element registrations from the placed-on predicate; final output is unchanged."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Identity proposal and output; no simplification."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Identity proposal and output; no simplification."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc9110-section2-5",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw second sentence The verb rather than an implementation has no finite main predicate and misattaches the comparison."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Identity proposal and output; no simplification."
+        },
+        "seq2seq": {
+          "changed": true,
+          "raw_check_failures": [],
+          "observation": "Accepted split supplies a vague This is rather than construction, obscuring the comparison between creating and forwarding implementations."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc8446-section2-0",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles",
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw second sentence begins Select cryptographic algorithms without preserving peers as the argument of allows."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles",
+            "complete_clauses"
+          ],
+          "observation": "Raw split strands subjectless coordinated actions and loses their peers argument; rejected."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles",
+            "complete_clauses"
+          ],
+          "observation": "Raw proposal strands subjectless coordinated actions; rejected by clause and role checks."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc8446-section2-1",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw proposal repeats failure as subject before optionally preceded and lacks a finite main predicate. It also obscures the alert's attachment."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Identity proposal and output; no simplification."
+        },
+        "seq2seq": {
+          "changed": true,
+          "raw_check_failures": [],
+          "observation": "Accepted split uses It with an ambiguous antecedent among failure, termination and connection. Alert timing needs human review."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc8446-section2-2",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities",
+            "content_retained",
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw split detaches an Either phrase inside the ClientHello list. Technical spelling and tokenization change."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities",
+            "content_retained",
+            "argument_roles",
+            "complete_clauses"
+          ],
+          "observation": "Raw proposal damages the message/contains clause and detaches a list item; rejected."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities",
+            "content_retained",
+            "complete_clauses"
+          ],
+          "observation": "Raw generation omits parts of the key-share list and creates a malformed prepositional fragment; rejected."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc8446-section2-3",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities"
+          ],
+          "observation": "Plausible semicolon split retains the conditional, MUST and server/client shares. Rejected only by literal entity preservation after Diffie-Hellman spacing changes. No final-set tuning applied."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "entities",
+            "complete_clauses"
+          ],
+          "observation": "Raw split strands an If condition and changes name spacing; rejected."
+        },
+        "seq2seq": {
+          "changed": true,
+          "raw_check_failures": [],
+          "observation": "Accepted semicolon split appears locally plausible and preserves If, MUST and the share comparison. Conditional scope across the sentence boundary still needs human review."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc8446-section2-4",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Rejected raw split strands the If condition as a separate sentence."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Raw split strands an If condition; rejected."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "argument_roles"
+          ],
+          "observation": "Raw split gives the extension an It pronoun; rejected by the role check, which can reject a plausible reference resolution."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    },
+    {
+      "id": "rfc8446-section2-5",
+      "systems": {
+        "ranker": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Original protocol list item lacks a complete main clause. Rejected raw second sentence is another detached relative fragment. Input is retained in the fixed denominator."
+        },
+        "editor": {
+          "changed": false,
+          "raw_check_failures": [
+            "content_retained",
+            "no_new_content",
+            "complete_clauses"
+          ],
+          "observation": "Raw split detaches the label from the source list fragment; rejected."
+        },
+        "seq2seq": {
+          "changed": false,
+          "raw_check_failures": [
+            "complete_clauses"
+          ],
+          "observation": "Raw split creates another relative fragment from an already incomplete list item; rejected."
+        },
+        "existing_rules": {
+          "changed": false,
+          "raw_check_failures": [],
+          "observation": "Output is unchanged."
+        }
+      }
+    }
+  ],
+  "report_general_review": "T5 has the highest final SARI on this sample. Its point score exceeds the\nranker by 3.42; that is a reference-overlap observation, not a fluency ranking.\n\nAgent inspection covered the first 20 changed outputs from each learned model\nin deterministic test order. The ranker still duplicates subjects, splits inside\nnoun coordination and accepts fragments or wrongly attached participants. The\nCRF can introduce invalid punctuation and detach a causal modifier. T5 produces\nmore plausible local splits in this inspected subset, but also changes tense\nand drops a discourse contrast. Some awkward wording and citation debris are\ninherited from the noisy sources. These are diagnostic observations, without\nhuman ratings or a representative quality estimate. Per-row notes are in\n`qualitative_review.json`.\n\nThe new checks close the specific finite-predicate and relative-fragment gaps\ncovered by the regressions. They do not solve general grammaticality. Even the\nunchanged baseline fails 22 parser completeness checks. The learned ranker stays\nan explicitly experimental demo option, with structure off and rules preferred.\nT5 remains a CLI comparison model. Its CPU/MPS serving costs and residual errors\nhave not been validated for replacing the live default.",
+  "report_technical_review": "T5 changes 4 of the 12 technical inputs. Inspection finds a missing passive\nauxiliary, a vague comparison attachment and an ambiguous alert-timing pronoun\nin three of those outputs. The fourth is a plausible semicolon split retaining\nthe conditional and MUST, with cross-sentence scope still requiring human review.\nPassing the checks therefore does not make those four successful simplifications.\nCRF and rules also leave all 12 unchanged. Rejected raw generations include\nmissing protocol tokens, altered definitions, broken lists and detached conditions.\n\nA next development iteration should repair subject-copy candidate construction,\nvalidate declarative grammar beyond parser predicate tags, and preserve modifier,\npronoun and discourse scope. It needs separate development material and a new\nreserved evaluation set. These final evaluation inputs now serve as error-analysis\nevidence rather than another reusable untouched test."
+}

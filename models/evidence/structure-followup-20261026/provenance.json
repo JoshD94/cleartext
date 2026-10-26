@@ -1,0 +1,89 @@
+{
+  "frozen": {
+    "files": {
+      "ranker.pkl": "27d72896884446b558ded44120cc441310c2f6723cb77d1d549cbbdf154b3e1b",
+      "editor.pkl": "0177c2c8d81d06e27155259aa12ff44e8f2d8544bfb94ef321f6f65343067581",
+      "seq2seq/model.safetensors": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+      "data.json": "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+      "technical_inputs.json": "79d3e3664add53227aacd7321033dd32f2202bf0bcdd15864adb6e8d356ea93b"
+    },
+    "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b",
+    "note": "Written after fitting on unchanged train/dev and before fresh evaluation or technical predictions."
+  },
+  "stages": [
+    {
+      "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+        "common.py": "85431fffaf9e86d741b8b8fd0a51fd6b95d0bfd37a918390dbf92cd711a7a079",
+        "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+        "experiment.py": "0025361ff30ec9e7bd45a2799edcdb177606dfe72ede5628e955210d1112e81b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "6c101b6c0b517c65e8c421cbd7c69244ce3317c52bc3f4b93f8b1e081aa11d14",
+        "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072"
+      },
+      "data_sha256": "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+      "stage": "prepare-followup",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    },
+    {
+      "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+        "common.py": "85431fffaf9e86d741b8b8fd0a51fd6b95d0bfd37a918390dbf92cd711a7a079",
+        "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+        "experiment.py": "0025361ff30ec9e7bd45a2799edcdb177606dfe72ede5628e955210d1112e81b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "6c101b6c0b517c65e8c421cbd7c69244ce3317c52bc3f4b93f8b1e081aa11d14",
+        "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072"
+      },
+      "data_sha256": "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+      "stage": "train-ranker",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    },
+    {
+      "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+        "common.py": "85431fffaf9e86d741b8b8fd0a51fd6b95d0bfd37a918390dbf92cd711a7a079",
+        "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+        "experiment.py": "0025361ff30ec9e7bd45a2799edcdb177606dfe72ede5628e955210d1112e81b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "6c101b6c0b517c65e8c421cbd7c69244ce3317c52bc3f4b93f8b1e081aa11d14",
+        "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072"
+      },
+      "data_sha256": "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+      "stage": "evaluate",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    },
+    {
+      "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+        "common.py": "85431fffaf9e86d741b8b8fd0a51fd6b95d0bfd37a918390dbf92cd711a7a079",
+        "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+        "experiment.py": "0025361ff30ec9e7bd45a2799edcdb177606dfe72ede5628e955210d1112e81b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "6c101b6c0b517c65e8c421cbd7c69244ce3317c52bc3f4b93f8b1e081aa11d14",
+        "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072"
+      },
+      "data_sha256": "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+      "stage": "technical-audit",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    }
+  ],
+  "artifact_bundle": {
+    "path": "cleartext-structure-ranker-20261026.tar.gz",
+    "bytes": 100538,
+    "sha256": "8fb81b3748a6c04f150d15ee4ac3cf7b328aed5ec3a5967a2a2eff594e7cb37f",
+    "source_commit": "842abe3549a213cff2cd71535a266ba689f07f7b",
+    "ranker_sha256": "27d72896884446b558ded44120cc441310c2f6723cb77d1d549cbbdf154b3e1b"
+  },
+  "original_pilot": "../structure-20261026/README.md",
+  "evaluation_split": "Fresh 256-pair sample from official WikiSplit validation.tsv; original train/dev unchanged",
+  "review_kind": "Qualitative agent inspection, no human ratings"
+}

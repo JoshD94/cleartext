@@ -1,0 +1,23 @@
+{
+  "n": 12,
+  "input_file_sha256": "79d3e3664add53227aacd7321033dd32f2202bf0bcdd15864adb6e8d356ea93b",
+  "label_status": "Ungraded technical transfer audit; changed counts and parser checks are not quality ratings",
+  "systems": {
+    "ranker": {
+      "changed": 0,
+      "changed_with_failed_checks": 0
+    },
+    "editor": {
+      "changed": 0,
+      "changed_with_failed_checks": 0
+    },
+    "seq2seq": {
+      "changed": 4,
+      "changed_with_failed_checks": 0
+    },
+    "existing_rules": {
+      "changed": 0,
+      "changed_with_failed_checks": 0
+    }
+  }
+}

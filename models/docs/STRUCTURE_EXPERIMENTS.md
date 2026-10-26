@@ -129,9 +129,21 @@ CLEARTEXT_STRUCTURE_RANKER=/path/to/followup/ranker.pkl \
   .venv/bin/python demo/server.py --host 127.0.0.1 --port 8770
 ```
 
+The fitted ranker can also run by itself. Extract its bundle into a new folder
+and point `--run` at that folder. This command needs no training data, CRF/T5
+checkpoint or v7 word-model artifacts:
+
+```sh
+/path/to/structure-venv/bin/python models/scripts/structure_experiment.py predict \
+  --run /path/to/extracted-ranker --model ranker \
+  --text 'The server checks each request and sends a response to the client.'
+```
+
 Turn on "Simplify structure" and choose "Learned splitter (experimental)".
 Structure starts off, and grammar rules remain the preferred method. Without
 an artifact, only grammar rules are available.
+The fresh output review still found duplicated subjects, fragments and meaning
+risks after the checks. Treat this option as a prototype and review every rewrite.
 The word strictness slider does not change the structural threshold selected
 on development data. Inputs exceeding one sentence or 70 words are preserved
 by the learned stage. The adapter rechecks the selected output before the

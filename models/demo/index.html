@@ -231,7 +231,7 @@ function render(r) {
 
   // 1 Structure
   h += step(1, 'Sentence structure', S.structure.backend === 'ranker'
-    ? 'An experimental ranker trained on 2,000 general-domain WikiSplit pairs chooses among possible splits. It keeps the original when no candidate passes its fixed threshold and grammar/content checks. Coverage on technical text is limited, and these checks can miss meaning changes.'
+    ? 'An experimental ranker trained on 2,000 general-domain WikiSplit pairs chooses among possible splits. It keeps the original when no candidate passes its fixed threshold and grammar/content checks. It can still duplicate a subject, produce a sentence fragment or change meaning. Review every rewrite. Coverage on technical text is limited.'
     : 'Two handwritten grammar rules: split two joined clauses, or turn a simple passive into active voice.',
     !S.structure.on ? '<p class="off">Off. Turn on "Simplify structure" to use it.</p>' :
     S.structure.changed ? `<p><span class="ok">✓ ${esc(S.structure.rule)}</span></p><p class="orig">${esc(S.structure.before)}<br>→ <b style="color:var(--ink)">${esc(S.structure.after)}</b></p>` :

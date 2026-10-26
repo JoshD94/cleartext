@@ -1,0 +1,7 @@
+{
+  "exit_code": 143,
+  "stopped_stage": "evaluate dev, last progress 33/128",
+  "test_outputs_exist": false,
+  "reason": "Authored demo diagnostic exposed detached finite relative clause. Stop before fresh test, revise guard on diagnostic, refit ranker, rerun identical fresh slice.",
+  "old_ranker_sha256": "c48c2aa58826f7b6f00355d2798203663a99b2d0f23fc46b5c73002920df5704"
+}

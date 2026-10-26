@@ -1,0 +1,7 @@
+{
+  "stage": "evaluate dev 1/128, no completed dev/test output file",
+  "reason": "Development technical input revealed a partitive relative, each of which, with WH word inside main subject phrase. Extend clause check through main-argument dependencies, skipping embedded clause boundaries.",
+  "fresh_general_slice_scored": false,
+  "technical_development_inputs": "Original 12 section-1 RFC inputs now development evidence",
+  "fresh_technical_audit": "New fixed first-six eligible section-2 inputs from each RFC; no predictions inspected before code freeze."
+}
