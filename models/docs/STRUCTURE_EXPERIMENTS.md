@@ -6,6 +6,8 @@ ranker as an optional structural stage before the existing v7 word models.
 
 The [October 26 pilot record](../evidence/structure-20261026/README.md) contains
 the actual training budgets, aggregate results, environment and model hashes.
+The [follow-up record](../evidence/structure-followup-20261026/README.md) tracks
+the revised checks, fresh validation slice, technical audit and demo decision.
 
 The rewrite ranker is a gradient boosting regressor. Its candidates include the
 existing structural rules and broader punctuation/conjunction split proposals,
@@ -34,8 +36,8 @@ is a new experimental branch of the architecture; it does not use a hosted API.
 
 The downloader pins WikiSplit to commit
 `80f5bddf42d1a68201b7b107ee4b8d86d82e9fde` and records downloaded file hashes.
-It uses official train, tune as development, and test files. The separate
-validation file is unused. All eligible development/test sources and full targets
+The initial pilot uses official train, tune as development, and test files.
+It leaves the separate validation file unused for the follow-up. All eligible development/test sources and full targets
 are excluded from the bounded training pool by normalized exact match. Development
 also excludes eligible test matches. Sampling uses deterministic source hashes.
 The default training pool is the first 50,000 released training rows, with 2,000
@@ -72,7 +74,10 @@ The revised completeness check requires a finite main predicate and its own
 subject. An embedded relative-clause verb cannot complete a noun phrase, and a
 participle needs a finite auxiliary. For example, "The detector emitting a
 signal" fails, while "The detector is emitting a signal" passes this check.
-Standalone subordinate clauses and imperatives abstain conservatively.
+Standalone subordinate clauses and imperatives abstain conservatively. The
+relative-word check follows the main subject and argument phrases, so "some
+of whom" cannot pass as a complete subject in a detached relative. It skips
+embedded clause boundaries to preserve valid relative clauses inside a sentence.
 
 ## Follow-up evaluation
 
@@ -95,8 +100,10 @@ Reuse the unchanged editor and selected T5 checkpoint by copying or linking
 `editor.pkl` and `seq2seq/` into the new run. Freeze model, code, data and input
 hashes before running `evaluate`. Keep the original pilot immutable.
 
-The technical audit selects the first six eligible 20..70-word sentences from
-each of the HTTP and TLS RFC introductions. Selection precedes predictions.
+The initial technical development audit selects the first six eligible
+20..70-word sentences from each HTTP and TLS RFC introduction. Once those
+inputs inform grammar fixes, reserve a fresh audit from section 2 of each RFC
+with `--section 2`. Selection precedes predictions.
 It records source URLs and document/input hashes. There are no reference
 simplifications or invented quality ratings. Review every changed output for
 fluency, meaning, conditions, quantities and terminology, and identify that
@@ -104,7 +111,7 @@ review as agent inspection unless people actually supplied ratings.
 
 ```sh
 PYTHONPATH=models/src python -m cleartext.structure.technical prepare \
-  --cache /path/to/cache --inputs /path/to/technical_inputs.json
+  --cache /path/to/cache --inputs /path/to/technical_inputs.json --section 2
 PYTHONPATH=models/src python -m cleartext.structure.technical audit \
   --run /path/to/followup --inputs /path/to/technical_inputs.json --device mps
 ```
@@ -184,3 +191,5 @@ Run any of the three models explicitly:
 - [T5-small model card](https://huggingface.co/google-t5/t5-small)
 - [Adafactor configuration and memory use](https://huggingface.co/docs/transformers/main_classes/optimizer_schedules#transformers.Adafactor)
 - [BiSECT, a separate dataset for a later transfer evaluation](https://aclanthology.org/2021.emnlp-main.500/)
+- [RFC 9110, HTTP semantics, technical audit input](https://www.rfc-editor.org/rfc/rfc9110.html)
+- [RFC 8446, TLS 1.3, technical audit input](https://www.rfc-editor.org/rfc/rfc8446.html)

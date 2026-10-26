@@ -49,6 +49,8 @@ def test_checks_allow_splits_without_token_index_comparison():
         "Where she studies neural networks.",
         "Who studies neural networks.",
         "Which stores the records.",
+        "Each of which is independently protected using the traffic keys.",
+        "Some of whom are employed by the university.",
     ],
 )
 def test_embedded_verbs_and_participles_do_not_complete_a_main_clause(text):
@@ -68,6 +70,9 @@ def test_embedded_verbs_and_participles_do_not_complete_a_main_clause(text):
         "The detector works because the signal is strong.",
         "The detector works. The signal was detected.",
         "The detector operates where the researcher works.",
+        "Each of the records is independently protected using the traffic keys.",
+        "The server which stores the records is independently protected.",
+        "The researcher knows which protocol the server uses.",
     ],
 )
 def test_finite_predicates_auxiliaries_and_copulas_complete_main_clauses(text):

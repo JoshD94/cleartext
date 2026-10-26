@@ -159,8 +159,14 @@ def complete_clause(sentence):
         return False
     # A detached relative such as "Where she studies networks." still has a
     # finite root and subject. Keep embedded relatives attached to their noun.
-    if any(t.tag_ in {"WDT", "WP", "WP$", "WRB"} for t in children):
-        return False
+    pending = list(children)
+    while pending:
+        token = pending.pop()
+        if token.dep_ in {"relcl", "advcl", "acl", "ccomp", "xcomp", "csubj"}:
+            continue
+        if token.tag_ in {"WDT", "WP", "WP$", "WRB"}:
+            return False
+        pending.extend(token.children)
     if not any(t.dep_ in {"nsubj", "nsubjpass", "expl"} for t in children):
         return False
     predicates = [root] + [t for t in children if t.dep_ in {"aux", "auxpass", "cop"}]

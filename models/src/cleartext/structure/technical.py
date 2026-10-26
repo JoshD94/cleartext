@@ -15,8 +15,8 @@ from .corpus import write_json
 from .experiment import source_provenance
 
 
-def prepare_inputs(cache, output):
-    """First six 20..70-word sentences in each RFC introduction.
+def prepare_inputs(cache, output, section=1):
+    """First six 20..70-word sentences in each selected RFC section.
 
     Select before model predictions. Keep source receipts and input hashes.
     Only whitespace and RFC page furniture are removed. No gold or ratings.
@@ -33,16 +33,16 @@ def prepare_inputs(cache, output):
             with urllib.request.urlopen(url, timeout=60) as response:
                 path.write_bytes(response.read())
         text = path.read_text(encoding="utf-8-sig")
-        start = re.search(r"(?m)^1\. +Introduction\s*$", text)
+        start = re.search(rf"(?m)^{section}\. +[^\n]+$", text)
         if start is None:
-            raise ValueError(f"Missing RFC {number} introduction")
+            raise ValueError(f"Missing RFC {number} section {section}")
         text = text[start.end() :]
-        end = re.search(r"(?m)^2\. +", text)
+        end = re.search(rf"(?m)^{section + 1}\. +", text)
         text = text[: end.start()] if end else text
         lines = [
             line.strip()
             for line in text.splitlines()
-            if not re.search(r"\[Page \d+\]|^RFC \d+|^1\.\d+\.", line.strip())
+            if not re.search(rf"\[Page \d+\]|^RFC \d+|^{section}\.\d+\.", line.strip())
         ]
         cleaned = re.sub(r"(?<=\w)-\n(?=\w)", "-", "\n".join(lines))
         paragraphs = re.split(r"\n\s*\n", cleaned)
@@ -67,10 +67,10 @@ def prepare_inputs(cache, output):
         for i, value in enumerate(selected):
             rows.append(
                 {
-                    "id": f"rfc{number}-intro-{i}",
+                    "id": f"rfc{number}-section{section}-{i}",
                     "source": value,
                     "source_url": url,
-                    "section": "1. Introduction, including subsections",
+                    "section": f"{section}, including subsections",
                     "document_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
                     "input_sha256": hashlib.sha256(value.encode()).hexdigest(),
                     "label_status": "Real technical text, no reference simplification or human rating",
@@ -145,11 +145,14 @@ def main():
     parser.add_argument("--cache", type=Path)
     parser.add_argument("--run", type=Path)
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--section", type=int, default=1)
     args = parser.parse_args()
     if args.stage == "prepare":
         if args.cache is None:
             parser.error("--cache is required")
-        prepare_inputs(args.cache, args.inputs)
+        if args.section < 1:
+            parser.error("--section must be positive")
+        prepare_inputs(args.cache, args.inputs, args.section)
     else:
         if args.run is None:
             parser.error("--run is required")
