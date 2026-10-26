@@ -1,7 +1,8 @@
 # Learned sentence structure experiments
 
 These experiments compare three approaches on the same bounded WikiSplit sample.
-They run through a separate CLI and do not change the v7 demo or its artifacts.
+Training and comparison run through a separate CLI. The demo can load a checked
+ranker as an optional structural stage before the existing v7 word models.
 
 The [October 26 pilot record](../evidence/structure-20261026/README.md) contains
 the actual training budgets, aggregate results, environment and model hashes.
@@ -66,6 +67,67 @@ on coordinated verbs. Counting the words alone would miss a rewrite that changes
 "may check and send" into "may check. Sends." Logical connective counts are also
 preserved conservatively.
 No automatic metric result promotes a model into the demo.
+
+The revised completeness check requires a finite main predicate and its own
+subject. An embedded relative-clause verb cannot complete a noun phrase, and a
+participle needs a finite auxiliary. For example, "The detector emitting a
+signal" fails, while "The detector is emitting a signal" passes this check.
+Standalone subordinate clauses and imperatives abstain conservatively.
+
+## Follow-up evaluation
+
+After inspecting the first pilot's test failures, that test set becomes
+development evidence. Use `prepare-followup` for a separate evaluation slice
+from the previously unused official `validation.tsv`. It preserves the original
+training and development rows and excludes normalized sources and full targets
+from every previously selected split. It records the previous data hash and
+the new file hash. Near duplicates and pretraining overlap remain possible.
+
+```sh
+python models/scripts/structure_experiment.py prepare-followup \
+  --run /path/to/followup --previous-run /path/to/pilot \
+  --cache /path/to/cache --test-size 256
+python models/scripts/structure_experiment.py train-ranker --run /path/to/followup
+```
+
+The ranker must be refit because clause-check results are inference features.
+Reuse the unchanged editor and selected T5 checkpoint by copying or linking
+`editor.pkl` and `seq2seq/` into the new run. Freeze model, code, data and input
+hashes before running `evaluate`. Keep the original pilot immutable.
+
+The technical audit selects the first six eligible 20..70-word sentences from
+each of the HTTP and TLS RFC introductions. Selection precedes predictions.
+It records source URLs and document/input hashes. There are no reference
+simplifications or invented quality ratings. Review every changed output for
+fluency, meaning, conditions, quantities and terminology, and identify that
+review as agent inspection unless people actually supplied ratings.
+
+```sh
+PYTHONPATH=models/src python -m cleartext.structure.technical prepare \
+  --cache /path/to/cache --inputs /path/to/technical_inputs.json
+PYTHONPATH=models/src python -m cleartext.structure.technical audit \
+  --run /path/to/followup --inputs /path/to/technical_inputs.json --device mps
+```
+
+## Demo integration
+
+Use the existing demo environment with the structural dependencies installed.
+Load only a trusted local ranker artifact, with the same sklearn version used
+for fitting. Weights stay outside Git. To start from `models/`:
+
+```sh
+CLEARTEXT_STRUCTURE_RANKER=/path/to/followup/ranker.pkl \
+  .venv/bin/python demo/server.py --host 127.0.0.1 --port 8770
+```
+
+Turn on "Simplify structure" and choose "Learned splitter". Grammar rules remain
+available for comparison. Without an artifact, only grammar rules are available.
+The word strictness slider does not change the structural threshold selected
+on development data. Inputs exceeding one sentence or 70 words are preserved
+by the learned stage. The adapter rechecks the selected output before the
+pipeline applies phrase and word edits. Detected technical terms retain the
+pipeline's existing protection. The structural trace uses the actual pipeline
+result, including abstention, rather than running a second prediction.
 
 ## Run
 

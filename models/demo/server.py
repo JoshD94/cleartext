@@ -1,27 +1,39 @@
-"""ClearText demo: simplify a sentence with the default v7 model and show each step.
+"""ClearText demo with v7 word models and an optional learned structural stage.
 
 Run from models/:  .venv/bin/python demo/server.py --host 127.0.0.1 --port 8770
 Standard library HTTP server; the model loads once at startup. Requests run one at a time.
 
-The final output always comes from EnsembleClearText.analyze; the trace below re-runs the same library calls
-stage by stage so each building block can be shown on its own.
+The structural trace comes from the actual pipeline result. The lexical trace
+re-runs the scoring calls so each building block can be inspected.
 """
 
-import sys, re, json, argparse, time
-from http.server import HTTPServer, BaseHTTPRequestHandler
+import argparse
+import json
+import os
+import pickle
+import re
+import sys
+import time
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "src"))
-from nltk.corpus import wordnet as wn
-from cleartext.ensemble_pipeline import EnsembleClearText, LATEST
 from cleartext.detection import CONTENT
+from cleartext.ensemble_pipeline import LATEST, EnsembleClearText
 from cleartext.features import nlp
-from cleartext.lexical import guardrails, PROTECTED
-from cleartext.rewrites import structural, PHRASES
+from cleartext.lexical import PROTECTED, guardrails
+from cleartext.rewrites import PHRASES
+from nltk.corpus import wordnet as wn
 
 print("Loading model...", flush=True)
 PIPE = EnsembleClearText.load(LATEST)
+RANKER_PATH = os.environ.get("CLEARTEXT_STRUCTURE_RANKER")
+RANKER = None
+if RANKER_PATH:
+    # Trusted local artifact only. Never deserialize an uploaded/request-supplied path.
+    with Path(RANKER_PATH).open("rb") as stream:
+        RANKER = pickle.load(stream)
 PIPE.analyze(
     "The technician will commence the installation.", structure=False, phrases=False
 )  # warm caches
@@ -80,27 +92,20 @@ def skip_reason(t, spans):
     return None
 
 
-def trace(text, opts):
+def trace(text, opts, structure_details):
     """Every building block's view of the sentence, in pipeline order."""
     out = {}
     current = text
     # 1. Sentence structure
-    if opts["structure"]:
-        new, changes = structural(current)
-        out["structure"] = {
-            "on": True,
-            "changed": bool(changes),
-            "rule": changes[0]["rule"] if changes else None,
-            "before": current,
-            "after": new,
-        }
-        current = new
-    else:
-        out["structure"] = {"on": False}
+    out["structure"] = structure_details
+    if structure_details["on"]:
+        current = structure_details["after"]
     # 2. Phrases: every inventory match, its difficulty before/after, and which one was applied
     matches = []
     for src, tgt in PHRASES:
-        for m in re.finditer(r"(?<!\w)" + re.escape(src) + r"(?!\w)", current, re.I):
+        for m in re.finditer(
+            r"(?<!\w)" + re.escape(src) + r"(?!\w)", current, re.IGNORECASE
+        ):
             a, b = PIPE.complexity(src), PIPE.complexity(tgt)
             matches.append(
                 {
@@ -128,7 +133,9 @@ def trace(text, opts):
     spans = [
         (m.start(), m.end())
         for p in PROTECTED
-        for m in re.finditer(r"(?<!\w)" + re.escape(p) + r"(?!\w)", current, re.I)
+        for m in re.finditer(
+            r"(?<!\w)" + re.escape(p) + r"(?!\w)", current, re.IGNORECASE
+        )
     ]
     words = [t for t in doc if skip_reason(t, spans) is None]
     hard = dict(zip([t.i for t in words], PIPE.hardness(doc, words)))
@@ -244,6 +251,13 @@ def simplify(req):
         "structure": bool(req.get("structure")),
         "phrases": bool(req.get("phrases")),
     }
+    backend = req.get("structure_backend", "rules")
+    if backend not in {"rules", "ranker"}:
+        return {"error": "Choose rules or the learned ranker for sentence structure."}
+    if opts["structure"] and backend == "ranker" and RANKER is None:
+        return {
+            "error": "The learned splitter is unavailable on this server. Choose grammar rules."
+        }
     PIPE.decision_threshold = clamp(
         req.get("strictness"), 0.05, 0.95, DEFAULTS["decision"]
     )
@@ -256,8 +270,9 @@ def simplify(req):
             structure=opts["structure"],
             phrases=opts["phrases"],
             max_word_edits=opts["max_edits"],
+            structure_rewriter=RANKER if backend == "ranker" else None,
         )
-        steps = trace(text, opts)
+        steps = trace(text, opts, r["structure"])
         steps["decision_threshold"] = PIPE.decision_threshold
     finally:
         PIPE.decision_threshold, PIPE.detector["threshold"], PIPE.noun_threshold = (
@@ -317,6 +332,20 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
+        if self.path == "/api/config":
+            return self.send(
+                200,
+                json.dumps(
+                    {
+                        "structure_backends": ["rules"]
+                        + (["ranker"] if RANKER is not None else []),
+                        "preferred_structure_backend": "ranker"
+                        if RANKER is not None
+                        else "rules",
+                    }
+                ).encode(),
+                "application/json",
+            )
         if self.path in ("/", "/index.html"):
             return self.send(200, PAGE.read_bytes(), "text/html; charset=utf-8")
         self.send(404, b"Not found", "text/plain")
@@ -330,12 +359,12 @@ class Handler(BaseHTTPRequestHandler):
                 or b"{}"
             )
             out = simplify(req)
-        except Exception as e:  # report to the page instead of dropping the connection
+        except Exception as e:  # noqa: BLE001, report errors at the HTTP boundary
             out = {"error": f"{type(e).__name__}: {e}"}
         self.send(200, json.dumps(out, default=float).encode(), "application/json")
 
     def log_message(self, fmt, *args):
-        sys.stderr.write("%s %s\n" % (self.log_date_time_string(), fmt % args))
+        sys.stderr.write(f"{self.log_date_time_string()} {fmt % args}\n")
 
 
 if __name__ == "__main__":

@@ -123,7 +123,8 @@
     <span>Words to replace<span class="seg" id="edits"></span></span>
     <span>Strictness<input id="strict" type="range" min="0.1" max="0.9" step="0.05" value="0.4"><b id="strict-v"></b></span>
     <label><input id="phrases" type="checkbox">Phrase rules</label>
-    <label><input id="structure" type="checkbox">Structure rules</label>
+    <label><input id="structure" type="checkbox">Simplify structure</label>
+    <label>Method <select id="structure-backend" title="Strictness controls word replacements. Structure uses its own fixed threshold."><option value="rules">Grammar rules</option><option value="ranker" disabled>Learned splitter</option></select></label>
   </div>
   <details class="more"><summary>More options</summary>
     <div class="bar">
@@ -150,9 +151,15 @@ const EXAMPLES = [
   'The contract stipulates that payment is due within thirty days.',
   'Prior to the meeting, a large number of residents submitted complaints.',
   'The report was published by the committee.',
+  'The server checks each request and sends a response to the client.',
 ];
 const DEFAULTS = { edits: 1, strict: 0.4, hard: 0.39, noun: 0.8 };
 let edits = DEFAULTS.edits;
+fetch('/api/config').then(r => r.json()).then(config => {
+  const select = $('structure-backend');
+  for (const option of select.options) option.disabled = !config.structure_backends.includes(option.value);
+  select.value = config.preferred_structure_backend;
+}).catch(() => {});
 
 EXAMPLES.forEach(t => { const b = document.createElement('button'); b.className = 'chipbtn'; b.textContent = t.length > 38 ? t.slice(0, 36) + '…' : t; b.title = t; b.onclick = () => { $('text').value = t; run(); }; $('examples').appendChild(b); });
 for (let i = 0; i <= 3; i++) { const b = document.createElement('button'); b.textContent = i; b.onclick = () => { edits = i; seg(); }; $('edits').appendChild(b); }
@@ -177,7 +184,8 @@ async function run() {
   try {
     const res = await fetch('/api/simplify', { method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, max_edits: edits, strictness: +$('strict').value, hard: +$('hard').value, noun: +$('noun').value,
-        phrases: $('phrases').checked, structure: $('structure').checked }) });
+        phrases: $('phrases').checked, structure: $('structure').checked,
+        structure_backend: $('structure-backend').value }) });
     render(await res.json());
   } catch (err) { $('out').innerHTML = '<p class="error">Could not reach the model server: ' + esc(err.message) + '</p>'; $('status').textContent = ''; }
   finally { $('go').disabled = false; }
@@ -222,10 +230,12 @@ function render(r) {
     <p class="steps-title">How the model got there</p>`;
 
   // 1 Structure
-  h += step(1, 'Sentence structure', 'Two handwritten grammar rules: split two joined clauses, or turn a simple passive into active voice.',
-    !S.structure.on ? '<p class="off">Off. Turn on "Structure rules" to use it.</p>' :
+  h += step(1, 'Sentence structure', S.structure.backend === 'ranker'
+    ? 'A ranker trained on 2,000 WikiSplit pairs chooses among possible splits. It keeps the original when no candidate passes its fixed threshold and grammar/content checks. These checks can miss meaning changes.'
+    : 'Two handwritten grammar rules: split two joined clauses, or turn a simple passive into active voice.',
+    !S.structure.on ? '<p class="off">Off. Turn on "Simplify structure" to use it.</p>' :
     S.structure.changed ? `<p><span class="ok">✓ ${esc(S.structure.rule)}</span></p><p class="orig">${esc(S.structure.before)}<br>→ <b style="color:var(--ink)">${esc(S.structure.after)}</b></p>` :
-    '<p class="off">No rule matched. They only fire on two full clauses joined by ", and" or on a passive with "by".</p>');
+    `<p class="off">${esc(S.structure.reason || 'No rule matched. Rules handle two full clauses joined by comma + and, or a simple passive with by.')}</p>`);
 
   // 2 Phrases
   const P = S.phrases;

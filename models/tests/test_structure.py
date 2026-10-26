@@ -190,6 +190,62 @@ def test_candidate_pool_always_includes_identity_and_is_bounded():
     assert len({normalize(r["output"]) for r in rows}) == len(rows)
 
 
+class FixedRewrite:
+    def __init__(self, output):
+        self.output = output
+
+    def predict(self, text):
+        return {"output": self.output, "score": 20, "candidate_count": 3}
+
+
+def test_pipeline_uses_one_checked_structural_stage_and_rechecks_model_output():
+    from cleartext.ensemble_pipeline import EnsembleClearText
+
+    pipe = EnsembleClearText(None, None)
+    old = "Alice reviewed the report, and Bob checked the figures."
+    new = "Alice reviewed the report. Bob checked the figures."
+    result = pipe.analyze(
+        old, phrases=False, words=False, structure_rewriter=FixedRewrite(new)
+    )
+    assert result["output"] == new
+    assert result["structure"]["after"] == new
+    assert result["edits"][0]["stage"] == "structure"
+    bad = pipe.analyze(
+        old,
+        phrases=False,
+        words=False,
+        structure_rewriter=FixedRewrite(
+            "Bob reviewed the report. Alice checked the figures."
+        ),
+    )
+    assert bad["output"] == old and bad["edits"] == []
+    off = pipe.analyze(
+        old,
+        structure=False,
+        phrases=False,
+        words=False,
+        structure_rewriter=FixedRewrite(new),
+    )
+    assert off["output"] == old and off["structure"] == {"on": False}
+
+
+def test_learned_stage_abstains_on_fragments_and_out_of_budget_inputs():
+    from cleartext.structure.adapter import rewrite
+
+    old = "The detector emits a signal while the researcher studies the report."
+    output, edits, _ = rewrite(
+        old,
+        FixedRewrite(
+            "The detector emitting a signal. The researcher studies the report."
+        ),
+    )
+    assert output == old and edits == []
+    long = "The detector " + "carefully " * 70 + "works."
+    assert rewrite(long, FixedRewrite("The detector works."))[0] == long
+    multi = "The detector works. The researcher waits."
+    assert rewrite(multi, FixedRewrite("The detector works."))[0] == multi
+
+
 def test_mac_warning_stops_own_training(monkeypatch, tmp_path):
     from types import SimpleNamespace
 

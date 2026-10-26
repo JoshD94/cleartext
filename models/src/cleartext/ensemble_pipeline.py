@@ -523,7 +523,13 @@ class EnsembleClearText:
         }
 
     def analyze(
-        self, text, structure=True, phrases=True, words=True, max_word_edits=None
+        self,
+        text,
+        structure=True,
+        phrases=True,
+        words=True,
+        max_word_edits=None,
+        structure_rewriter=None,
     ):
         max_word_edits = (
             self.max_word_edits if max_word_edits is None else max_word_edits
@@ -534,12 +540,28 @@ class EnsembleClearText:
         trace = []
         term_spans = []
         blocked_term_stages = []
+        structure_details = {"on": False}
         if self.technical_terms:
             from .technical_terms import detect_terms, preserved_terms
 
             term_spans = detect_terms(original_doc)
         if structure:
-            current, changes = structural(current)
+            if structure_rewriter is None:
+                current, changes = structural(current)
+                structure_details = {
+                    "backend": "rules",
+                    "before": text,
+                    "after": current,
+                    "changed": bool(changes),
+                    "rule": changes[0].get("rule") if changes else None,
+                }
+            else:
+                from .structure.adapter import rewrite
+
+                current, changes, structure_details = rewrite(
+                    current, structure_rewriter
+                )
+            structure_details["on"] = True
             edits += changes
             if (
                 self.technical_terms
@@ -548,6 +570,13 @@ class EnsembleClearText:
                 current = text
                 edits = []
                 blocked_term_stages.append("structure")
+                structure_details.update(
+                    {
+                        "after": text,
+                        "changed": False,
+                        "reason": "A detected technical term would change.",
+                    }
+                )
         if phrases and self.phrase_model is not None:
             before = current
             current, changes = phrase_rewrite(current, self.complexity)
@@ -665,6 +694,7 @@ class EnsembleClearText:
             "output": current,
             "edits": edits,
             "trace": trace,
+            "structure": structure_details,
             **levels,
             **term_details,
             "limits": "At most one syntax rule, one phrase and one word edit. Fit is a probability, not a meaning certificate.",
