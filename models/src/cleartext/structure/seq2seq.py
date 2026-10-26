@@ -91,10 +91,12 @@ def train_seq2seq(
     batch_size=4,
     device="auto",
     model_name="google-t5/t5-small",
+    optimizer_name="adafactor",
+    accumulation_steps=1,
 ):
     import torch
     from huggingface_hub import model_info
-    from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+    from transformers import Adafactor, AutoModelForSeq2SeqLM, AutoTokenizer
 
     run = Path(run)
     capacity_check(run)
@@ -127,10 +129,27 @@ def train_seq2seq(
         device
     )
     model.config.use_cache = False
-    optimizer = torch.optim.AdamW(
-        model.parameters(), lr=3e-4, weight_decay=0.01, foreach=False
+    learning_rate = 1e-3 if optimizer_name == "adafactor" else 3e-4
+    warmup_steps = max(1, max_steps // 10)
+    if optimizer_name == "adafactor":
+        optimizer = Adafactor(
+            model.parameters(),
+            lr=learning_rate,
+            scale_parameter=False,
+            relative_step=False,
+            warmup_init=False,
+            clip_threshold=1.0,
+        )
+    elif optimizer_name == "adamw":
+        optimizer = torch.optim.AdamW(
+            model.parameters(), lr=learning_rate, weight_decay=0.01, foreach=False
+        )
+    else:
+        raise ValueError(f"Unsupported optimizer: {optimizer_name}")
+    effective_batch = batch_size * accumulation_steps
+    epochs = max(
+        1, math.ceil(max_steps / max(1, math.ceil(len(train) / effective_batch)))
     )
-    epochs = max(1, math.ceil(max_steps / max(1, math.ceil(len(train) / batch_size))))
     configuration = {
         "model": model_name,
         "revision": revision,
@@ -138,7 +157,11 @@ def train_seq2seq(
         "seed": 4701,
         "max_steps": max_steps,
         "batch_size": batch_size,
-        "learning_rate": 3e-4,
+        "optimizer": optimizer_name,
+        "learning_rate": learning_rate,
+        "warmup_steps": warmup_steps,
+        "accumulation_steps": accumulation_steps,
+        "effective_batch_size": effective_batch,
         "max_source_tokens": 192,
         "max_target_tokens": 256,
         "training_pairs": len(train),
@@ -165,20 +188,31 @@ def train_seq2seq(
     for epoch in range(epochs):
         order = list(train)
         random.Random(4701 + epoch).shuffle(order)
-        for offset in range(0, len(order), batch_size):
+        for offset in range(0, len(order), effective_batch):
             if step >= max_steps:
                 break
             if time.monotonic() - last_check > 90:
                 capacity_check(run)
                 last_check = time.monotonic()
             model.train()
-            batch = _batch(tokenizer, order[offset : offset + batch_size], device)
             optimizer.zero_grad(set_to_none=True)
-            loss = model(**batch).loss
-            if not torch.isfinite(loss):
-                raise RuntimeError("Non-finite training loss")
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            group = order[offset : offset + effective_batch]
+            reported_loss = 0.0
+            for start in range(0, len(group), batch_size):
+                micro = group[start : start + batch_size]
+                batch = _batch(tokenizer, micro, device)
+                loss = model(**batch).loss
+                if not torch.isfinite(loss):
+                    raise RuntimeError("Non-finite training loss")
+                weight = len(micro) / len(group)
+                (loss * weight).backward()
+                reported_loss += float(loss.item()) * weight
+            if optimizer_name == "adamw":
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            for parameter_group in optimizer.param_groups:
+                parameter_group["lr"] = learning_rate * min(
+                    1.0, (step + 1) / warmup_steps
+                )
             optimizer.step()
             step += 1
             if step == 1 or step % 20 == 0:
@@ -187,7 +221,7 @@ def train_seq2seq(
                     "stage": "train-seq2seq",
                     "step": step,
                     "max_steps": max_steps,
-                    "loss": float(loss.item()),
+                    "loss": reported_loss,
                     "elapsed_seconds": elapsed,
                     "estimated_remaining_seconds": elapsed / step * (max_steps - step),
                     "device": str(device),
@@ -198,7 +232,7 @@ def train_seq2seq(
             if (
                 step % 100 == 0
                 or step == max_steps
-                or offset + batch_size >= len(order)
+                or offset + effective_batch >= len(order)
             ):
                 dev_loss = validate(model)
                 history.append({"step": step, "dev_loss": dev_loss})
@@ -216,6 +250,8 @@ def train_seq2seq(
     result = {
         **configuration,
         "steps_completed": step,
+        "training_examples_seen": (epoch * len(train))
+        + min(len(train), offset + effective_batch),
         "history": history,
         "selected": json.loads((run / "seq2seq" / "selection.json").read_text()),
         "elapsed_seconds": time.monotonic() - start,

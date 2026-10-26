@@ -247,6 +247,10 @@ def main():
     parser.add_argument("--scan-limit", type=int, default=50000)
     parser.add_argument("--max-steps", type=int, default=400)
     parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--accumulation-steps", type=int, default=1)
+    parser.add_argument(
+        "--optimizer", choices=["adafactor", "adamw"], default="adafactor"
+    )
     parser.add_argument("--device", default="auto")
     parser.add_argument("--classic-only", action="store_true")
     parser.add_argument("--resume", action="store_true")
@@ -264,6 +268,7 @@ def main():
             args.scan_limit,
             args.max_steps,
             args.batch_size,
+            args.accumulation_steps,
         ]
     ):
         parser.error("Sizes, scan limit, steps, and batch size must be positive")
@@ -338,7 +343,15 @@ def main():
     ):
         from .seq2seq import train_seq2seq
 
-        train_seq2seq(data, run, args.max_steps, args.batch_size, args.device)
+        train_seq2seq(
+            data,
+            run,
+            args.max_steps,
+            args.batch_size,
+            args.device,
+            optimizer_name=args.optimizer,
+            accumulation_steps=args.accumulation_steps,
+        )
     if args.stage in {"evaluate", "all"}:
         comparison = evaluate(data, run, args.device, args.classic_only)
         print(json.dumps(comparison, indent=2), flush=True)

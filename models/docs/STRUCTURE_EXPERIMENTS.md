@@ -84,6 +84,12 @@ download cache and one saved T5 checkpoint. Check actual usage during the run.
 The script checks capacity during training and limits MPS allocation. It uses four
 CPU threads. CUDA, MPS or CPU is selected automatically, or use `--device`.
 Mac training stops if the system reports warning or critical memory pressure.
+The default optimizer is Adafactor with a fixed target learning rate of 0.001,
+10% warm-up and internal update clipping. `--optimizer adamw` uses 0.0003 with
+gradient clipping. A lower-memory CPU configuration uses `--device cpu
+--batch-size 2 --accumulation-steps 2`, with an estimated peak RAM of 3 GB.
+Accumulation keeps an effective batch of four examples. The training summary
+records actual steps and examples seen, which may be less than a full epoch.
 
 Stages can run separately: `prepare`, `train-classic`, `train-seq2seq`, `evaluate`.
 `all --resume` reuses completed data and model stages after an interruption. An
@@ -107,4 +113,5 @@ Run any of the three models explicitly:
 - [LaserTagger, the editing approach that informed this prototype](https://aclanthology.org/D19-1510/)
 - [CRFsuite Python wrapper](https://sklearn-crfsuite.readthedocs.io/en/latest/api.html)
 - [T5-small model card](https://huggingface.co/google-t5/t5-small)
+- [Adafactor configuration and memory use](https://huggingface.co/docs/transformers/main_classes/optimizer_schedules#transformers.Adafactor)
 - [BiSECT, a separate dataset for a later transfer evaluation](https://aclanthology.org/2021.emnlp-main.500/)
