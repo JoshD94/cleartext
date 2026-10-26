@@ -120,15 +120,18 @@ PYTHONPATH=models/src python -m cleartext.structure.technical audit \
 
 Use the existing demo environment with the structural dependencies installed.
 Load only a trusted local ranker artifact, with the same sklearn version used
-for fitting. Weights stay outside Git. To start from `models/`:
+for fitting. The October 26 bundle uses scikit-learn 1.9.1 and spaCy 3.8.16,
+as recorded in `models/requirements-lock.txt`, with `en_core_web_sm` 3.8.0.
+Weights stay outside Git. To start from `models/`:
 
 ```sh
 CLEARTEXT_STRUCTURE_RANKER=/path/to/followup/ranker.pkl \
   .venv/bin/python demo/server.py --host 127.0.0.1 --port 8770
 ```
 
-Turn on "Simplify structure" and choose "Learned splitter". Grammar rules remain
-available for comparison. Without an artifact, only grammar rules are available.
+Turn on "Simplify structure" and choose "Learned splitter (experimental)".
+Structure starts off, and grammar rules remain the preferred method. Without
+an artifact, only grammar rules are available.
 The word strictness slider does not change the structural threshold selected
 on development data. Inputs exceeding one sentence or 70 words are preserved
 by the learned stage. The adapter rechecks the selected output before the

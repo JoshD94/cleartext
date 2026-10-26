@@ -339,9 +339,7 @@ class Handler(BaseHTTPRequestHandler):
                     {
                         "structure_backends": ["rules"]
                         + (["ranker"] if RANKER is not None else []),
-                        "preferred_structure_backend": "ranker"
-                        if RANKER is not None
-                        else "rules",
+                        "preferred_structure_backend": "rules",
                     }
                 ).encode(),
                 "application/json",
