@@ -169,3 +169,42 @@ def prepare(run, cache, train_size=2000, dev_size=128, test_size=128, scan_limit
     }
     write_json(run / "data_manifest.json", manifest)
     return data, manifest
+
+
+def prepare_followup(run, cache, previous_run, test_size=256):
+    """Reuse frozen training/development pairs, reserve untouched validation rows.
+
+    Exclude sources AND full targets from every previously selected split.
+    This cannot exclude near duplicates or foundation-model pretraining overlap.
+    """
+    run, previous_run = Path(run), Path(previous_run)
+    if (run / "data.json").exists():
+        raise FileExistsError(f"Refusing to overwrite prepared data in {run}")
+    previous_path = previous_run / "data.json"
+    previous = json.loads(previous_path.read_text())
+    excluded = {
+        key for rows in previous.values() for row in rows for key in pair_keys(row)
+    }
+    path, receipt = download("validation.tsv", cache)
+    with path.open() as lines:
+        rows, counts, _ = select_pairs(lines, "validation", test_size, excluded)
+    if len(rows) != test_size:
+        raise ValueError("Not enough fresh validation pairs")
+    data = {"train": previous["train"], "dev": previous["dev"], "test": rows}
+    manifest = {
+        "dataset": "WikiSplit",
+        "commit": WIKISPLIT_COMMIT,
+        "files": {"validation.tsv": receipt},
+        "previous_data_sha256": hashlib.sha256(previous_path.read_bytes()).hexdigest(),
+        "counts": {"test": counts},
+        "split_policy": "Reuse previous train/dev unchanged; fresh evaluation on official validation.tsv after excluding all previous selected source/full-target keys",
+        "selection": "Same fixed eligibility filters and SHA256 seed 4701 as pilot",
+        "limitations": [
+            "No near-duplicate or pretraining-overlap exclusion",
+            "Automatically mined references are noisy",
+            "Previous test is development evidence for the revised clause check",
+        ],
+    }
+    write_json(run / "data.json", data)
+    write_json(run / "data_manifest.json", manifest)
+    return data, manifest

@@ -16,7 +16,12 @@ pytest.importorskip(
 )
 from cleartext.features import nlp
 from cleartext.structure.common import candidate_pool, normalize, sari, structure_checks
-from cleartext.structure.corpus import pair_keys, read_pair, select_pairs
+from cleartext.structure.corpus import (
+    pair_keys,
+    prepare_followup,
+    read_pair,
+    select_pairs,
+)
 from cleartext.structure.learning import edit_alignment, render_tags, token_features
 
 
@@ -31,6 +36,38 @@ def test_checks_allow_splits_without_token_index_comparison():
     old = "Alice reviewed the report, and Bob checked the figures."
     new = "Alice reviewed the report. Bob checked the figures."
     assert structure_checks(old, new)["pass"]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "The detector emitting a signal.",
+        "The researcher a professor who studies neural networks.",
+        "The researcher, who studies networks, a professor.",
+        "Because the detector failed.",
+        "The signal detected by the researcher.",
+    ],
+)
+def test_embedded_verbs_and_participles_do_not_complete_a_main_clause(text):
+    assert not structure_checks(text, text)["checks"]["complete_clauses"]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "The detector is emitting a signal.",
+        "The detector has emitted a signal.",
+        "The signal was detected.",
+        "The signal is weak.",
+        "There is a signal.",
+        "The researcher studies neural networks.",
+        "The detector may emit a signal.",
+        "The detector works because the signal is strong.",
+        "The detector works. The signal was detected.",
+    ],
+)
+def test_finite_predicates_auxiliaries_and_copulas_complete_main_clauses(text):
+    assert structure_checks(text, text)["checks"]["complete_clauses"]
 
 
 def test_role_swap_and_lost_detail_are_rejected():
@@ -112,6 +149,37 @@ def test_pair_selection_excludes_cross_split_sources_and_targets():
     rows, counts, _ = select_pairs([line], "train", 10, pair_keys(row))
     assert not rows and counts["cross_split_overlap"] == 1
     assert select_pairs([line, line], "train", 10)[1]["within_split_duplicate"] == 1
+
+
+def test_followup_reuses_fit_data_and_excludes_every_previous_split(
+    tmp_path, monkeypatch
+):
+    from cleartext.structure import corpus
+
+    template = "The {name} checks each new request and the client sends each new response .\tThe {name} checks each new request . <::::> The client sends each new response .\n"
+    previous = {
+        key: [read_pair(template.format(name=name), key, i)]
+        for i, (key, name) in enumerate(
+            [("train", "server"), ("dev", "gateway"), ("test", "proxy")]
+        )
+    }
+    old = tmp_path / "previous"
+    old.mkdir()
+    (old / "data.json").write_text(json.dumps(previous))
+    path = tmp_path / "validation.tsv"
+    path.write_text(
+        "".join(
+            template.format(name=n) for n in ("server", "gateway", "proxy", "router")
+        )
+    )
+    monkeypatch.setattr(corpus, "download", lambda *a: (path, {"sha256": "fixture"}))
+    run = tmp_path / "new"
+    data, manifest = prepare_followup(run, tmp_path, old, test_size=1)
+    assert data["train"] == previous["train"] and data["dev"] == previous["dev"]
+    assert "router" in data["test"][0]["source"]
+    assert manifest["counts"]["test"]["cross_split_overlap"] == 3
+    with pytest.raises(FileExistsError):
+        prepare_followup(run, tmp_path, old, test_size=1)
 
 
 def test_candidate_pool_always_includes_identity_and_is_bounded():

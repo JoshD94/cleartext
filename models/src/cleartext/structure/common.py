@@ -146,6 +146,26 @@ def _operators(doc):
     return result
 
 
+def complete_clause(sentence):
+    """Require a finite main predicate and its own subject.
+
+    A relative-clause verb cannot complete a noun phrase. Participles need a
+    finite auxiliary attached to the main predicate. Standalone subordinate
+    clauses and imperatives abstain conservatively. Parser errors still apply.
+    """
+    root = sentence.root
+    children = list(root.children)
+    if any(t.dep_ == "mark" for t in children):
+        return False
+    if not any(t.dep_ in {"nsubj", "nsubjpass", "expl"} for t in children):
+        return False
+    predicates = [root] + [t for t in children if t.dep_ in {"aux", "auxpass", "cop"}]
+    return any(
+        t.pos_ in {"VERB", "AUX"} and "Fin" in t.morph.get("VerbForm")
+        for t in predicates
+    )
+
+
 def structure_checks(source, output, source_doc=None, output_doc=None):
     old = source_doc if source_doc is not None else nlp()(source)
     new = output_doc if output_doc is not None else nlp()(output)
@@ -188,11 +208,7 @@ def structure_checks(source, output, source_doc=None, output_doc=None):
         ),
         "sentence_count": 1 <= len(sentences) <= 4,
         "complete_clauses": bool(sentences)
-        and all(
-            any(t.dep_ in {"nsubj", "nsubjpass", "expl"} for t in sent)
-            and any(t.pos_ in {"VERB", "AUX"} for t in sent)
-            for sent in sentences
-        ),
+        and all(complete_clause(sent) for sent in sentences),
     }
     failed = [k for k, v in checks.items() if not v]
     return {

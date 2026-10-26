@@ -16,7 +16,7 @@ import numpy as np
 from ..features import nlp
 from ..rewrites import structural
 from .common import normalize, sari, structure_checks
-from .corpus import prepare, write_json
+from .corpus import prepare, prepare_followup, write_json
 from .learning import parse_sources, train_editor, train_ranker
 
 DIAGNOSTICS = [
@@ -232,6 +232,8 @@ def main():
         "stage",
         choices=[
             "prepare",
+            "prepare-followup",
+            "train-ranker",
             "train-classic",
             "train-seq2seq",
             "evaluate",
@@ -241,6 +243,7 @@ def main():
     )
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--cache", type=Path)
+    parser.add_argument("--previous-run", type=Path)
     parser.add_argument("--train-size", type=int, default=2000)
     parser.add_argument("--dev-size", type=int, default=128)
     parser.add_argument("--test-size", type=int, default=128)
@@ -274,7 +277,7 @@ def main():
         parser.error("Sizes, scan limit, steps, and batch size must be positive")
     run = args.run.resolve()
     if (
-        args.stage in {"all", "train-classic", "train-seq2seq"}
+        args.stage in {"all", "train-classic", "train-ranker", "train-seq2seq"}
         and (run / "comparison.json").exists()
     ):
         parser.error(
@@ -293,7 +296,17 @@ def main():
         print(json.dumps(model.predict(args.text), indent=2))
         return
     run.mkdir(parents=True, exist_ok=True)
-    if args.stage in {"prepare", "all"}:
+    if args.stage == "prepare-followup":
+        if args.previous_run is None:
+            parser.error("--previous-run is required for prepare-followup")
+        data, _ = prepare_followup(
+            run,
+            args.cache or run.parent / "wikisplit-cache",
+            args.previous_run,
+            args.test_size,
+        )
+        source_provenance(run, args.stage)
+    elif args.stage in {"prepare", "all"}:
         if args.resume and (run / "data.json").exists():
             data = json.loads((run / "data.json").read_text())
         else:
@@ -322,9 +335,13 @@ def main():
     else:
         data = json.loads((run / "data.json").read_text())
         source_provenance(run, args.stage)
-    if args.stage in {"train-classic", "all"}:
-        docs = parse_sources(data)
-        for name, train in [("ranker", train_ranker), ("editor", train_editor)]:
+    if args.stage in {"train-classic", "train-ranker", "all"}:
+        # Fitting needs no test text, parses, or references.
+        docs = parse_sources({key: data[key] for key in ("train", "dev")})
+        trainers = [("ranker", train_ranker)]
+        if args.stage != "train-ranker":
+            trainers.append(("editor", train_editor))
+        for name, train in trainers:
             if args.resume and (run / f"{name}_training.json").exists():
                 continue
             write_json(
