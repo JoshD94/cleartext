@@ -136,3 +136,11 @@ uvx ruff check --select F,E9 .
 Tests exercise candidate provenance, exact target offsets, complete-span pooling, grammar fallback, protected term occurrences, output rollback and disabled novel gates. They do not substitute for independent sentence-level judgments.
 
 Experiment caches require matching source and input fingerprints to resume. Code cleanup changes source hashes even when behavior is unchanged. Keep completed outputs with their saved source snapshots; use a new cache directory for experiments under changed source.
+
+## Learned sentence structure experiments
+
+The separate [structural experiment suite](docs/STRUCTURE_EXPERIMENTS.md) trains a
+rewrite ranker, a CRF edit tagger and a T5-small encoder–decoder on bounded public
+sentence-splitting pairs. It compares raw and filtered outputs with the existing
+rules and identity on held-out data. It requires the optional dependencies in
+`requirements-structure.txt` and leaves the demo defaults unchanged.

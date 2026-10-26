@@ -122,6 +122,30 @@ def _arguments(doc):
     return result
 
 
+def _operators(doc):
+    """Track which predicates carry negation and modal scope across a split."""
+    result = set()
+    for predicate in doc:
+        if predicate.pos_ not in {"VERB", "AUX", "ADJ"}:
+            continue
+        governors = [predicate]
+        current, seen = predicate, {predicate.i}
+        while current.dep_ == "conj" and current.head.i not in seen:
+            if any(
+                c.dep_ in {"nsubj", "nsubjpass", "aux", "auxpass"}
+                for c in current.children
+            ):
+                break
+            current = current.head
+            seen.add(current.i)
+            governors.append(current)
+        for governor in governors:
+            for child in governor.children:
+                if child.lower_ in NEG or child.lower_ in MODAL:
+                    result.add((predicate.lemma_.lower(), child.lower_))
+    return result
+
+
 def structure_checks(source, output, source_doc=None, output_doc=None):
     old = source_doc if source_doc is not None else nlp()(source)
     new = output_doc if output_doc is not None else nlp()(output)
@@ -145,6 +169,23 @@ def structure_checks(source, output, source_doc=None, output_doc=None):
         "content_retained": not (a - b),
         "no_new_content": not (b.keys() - a.keys()),
         "argument_roles": _arguments(old) <= _arguments(new),
+        "operator_scope": _operators(old) == _operators(new),
+        "logical_connectives": all(
+            oc[k] == nc[k]
+            for k in (
+                "if",
+                "unless",
+                "because",
+                "although",
+                "while",
+                "when",
+                "until",
+                "but",
+                "only",
+                "before",
+                "after",
+            )
+        ),
         "sentence_count": 1 <= len(sentences) <= 4,
         "complete_clauses": bool(sentences)
         and all(

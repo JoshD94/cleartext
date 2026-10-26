@@ -2,6 +2,7 @@
 
 import argparse
 import gc
+import hashlib
 import json
 import pickle
 import platform
@@ -26,6 +27,30 @@ DIAGNOSTICS = [
     "The neural network processed 500 records, and the analyst checked the results.",
     "Only users who have administrator access can delete the records.",
 ]
+
+
+def source_provenance(run, stage):
+    root = Path(__file__).resolve().parents[4]
+    receipt = root / "source_commit.txt"
+    if (root / ".git").exists():
+        commit = subprocess.check_output(
+            ["git", "-C", str(root), "rev-parse", "HEAD"], text=True
+        ).strip()
+    else:
+        commit = receipt.read_text().strip() if receipt.exists() else "unknown archive"
+    files = sorted(Path(__file__).parent.glob("*.py"))
+    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+    data_hash = hashlib.sha256((run / "data.json").read_bytes()).hexdigest()
+    result = {
+        "source_commit": commit,
+        "files": hashes,
+        "data_sha256": data_hash,
+        "stage": stage,
+        "host": platform.node(),
+    }
+    with (run / "provenance.jsonl").open("a") as stream:
+        stream.write(json.dumps(result) + "\n")
+    return result
 
 
 def summarize(rows, output_key):
@@ -243,6 +268,13 @@ def main():
     ):
         parser.error("Sizes, scan limit, steps, and batch size must be positive")
     run = args.run.resolve()
+    if (
+        args.stage in {"all", "train-classic", "train-seq2seq"}
+        and (run / "comparison.json").exists()
+    ):
+        parser.error(
+            "Final comparison already exists; use a fresh run to change models"
+        )
     if args.stage == "predict":
         if not args.text:
             parser.error("--text is required for predict")
@@ -268,12 +300,7 @@ def main():
                 args.test_size,
                 args.scan_limit,
             )
-        try:
-            commit = subprocess.check_output(
-                ["git", "rev-parse", "HEAD"], text=True
-            ).strip()
-        except (subprocess.CalledProcessError, FileNotFoundError):
-            commit = "source archive, see source_commit.txt"
+        provenance = source_provenance(run, args.stage)
         if not (run / "invocation.json").exists():
             write_json(
                 run / "invocation.json",
@@ -282,13 +309,14 @@ def main():
                         k: str(v) if isinstance(v, Path) else v
                         for k, v in vars(args).items()
                     },
-                    "source_commit": commit,
+                    "source_commit": provenance["source_commit"],
                     "host": platform.node(),
                     "created": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                 },
             )
     else:
         data = json.loads((run / "data.json").read_text())
+        source_provenance(run, args.stage)
     if args.stage in {"train-classic", "all"}:
         docs = parse_sources(data)
         for name, train in [("ranker", train_ranker), ("editor", train_editor)]:

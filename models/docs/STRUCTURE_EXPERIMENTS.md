@@ -58,6 +58,10 @@ predicate/argument signatures. They work across token count changes, unlike the
 existing lexical substitution guard. Parser errors can reject valid edits. Passing
 these checks does not establish semantic equivalence or fluency. Conservative
 content checks can reject useful paraphrases, so raw results must be retained.
+Modal and negation scope are compared by predicate, including shared operators
+on coordinated verbs. Counting the words alone would miss a rewrite that changes
+"may check and send" into "may check. Sends." Logical connective counts are also
+preserved conservatively.
 No automatic metric result promotes a model into the demo.
 
 ## Run
@@ -79,6 +83,7 @@ Estimated peak RAM is 5 GB, with under 3 GB additional disk for the environment,
 download cache and one saved T5 checkpoint. Check actual usage during the run.
 The script checks capacity during training and limits MPS allocation. It uses four
 CPU threads. CUDA, MPS or CPU is selected automatically, or use `--device`.
+Mac training stops if the system reports warning or critical memory pressure.
 
 Stages can run separately: `prepare`, `train-classic`, `train-seq2seq`, `evaluate`.
 `all --resume` reuses completed data and model stages after an interruption. An

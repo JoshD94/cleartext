@@ -51,6 +51,14 @@ def test_negation_modality_numbers_and_technical_terms():
     )
 
 
+def test_shared_modal_scope_cannot_disappear_after_splitting():
+    old = "The server may check each request and send a response."
+    bad = "The server may check each request. The server sends a response."
+    check = structure_checks(old, bad)
+    assert check["checks"]["modality"]  # Word counts alone miss this.
+    assert not check["checks"]["operator_scope"]
+
+
 def test_identity_preserves_bytes_in_tagger():
     text = "  The server works.\n"
     doc = nlp()(text)
@@ -108,3 +116,80 @@ def test_candidate_pool_always_includes_identity_and_is_bounded():
     assert rows[0]["output"] == source
     assert 1 < len(rows) <= 26
     assert len({normalize(r["output"]) for r in rows}) == len(rows)
+
+
+def test_mac_warning_stops_own_training(monkeypatch, tmp_path):
+    from types import SimpleNamespace
+
+    from cleartext.structure import seq2seq
+
+    monkeypatch.setattr(seq2seq.platform, "system", lambda: "Darwin")
+    monkeypatch.setattr(
+        seq2seq.shutil, "disk_usage", lambda _: SimpleNamespace(free=10 * 1024**3)
+    )
+    monkeypatch.setattr(
+        seq2seq.subprocess, "run", lambda *a, **k: SimpleNamespace(stdout="2\n")
+    )
+    with pytest.raises(RuntimeError, match="pressure is not normal"):
+        seq2seq.capacity_check(tmp_path)
+
+
+def test_seq2seq_batch_padding_supports_a_real_gradient_step():
+    import torch
+    from cleartext.structure.seq2seq import _batch
+    from tokenizers import Tokenizer
+    from tokenizers.models import WordLevel
+    from tokenizers.pre_tokenizers import Whitespace
+    from tokenizers.processors import TemplateProcessing
+    from transformers import (
+        PreTrainedTokenizerFast,
+        T5Config,
+        T5ForConditionalGeneration,
+    )
+
+    torch.set_num_threads(2)
+    vocab = {
+        word: i
+        for i, word in enumerate(
+            ["<pad>", "</s>", "<unk>", "The", "server", "works", ".", "client", "waits"]
+        )
+    }
+    core = Tokenizer(WordLevel(vocab, unk_token="<unk>"))
+    core.pre_tokenizer = Whitespace()
+    core.post_processor = TemplateProcessing(
+        single="$A </s>", special_tokens=[("</s>", 1)]
+    )
+    tokenizer = PreTrainedTokenizerFast(
+        tokenizer_object=core,
+        pad_token="<pad>",
+        eos_token="</s>",
+        unk_token="<unk>",
+        model_input_names=["input_ids", "attention_mask"],
+    )
+    rows = [
+        {"source": "The server works.", "reference": "The server works."},
+        {
+            "source": "The client waits.",
+            "reference": "The client waits. The server works.",
+        },
+    ]
+    batch = _batch(tokenizer, rows, torch.device("cpu"))
+    assert (batch["labels"] == -100).any()
+    assert not (batch["labels"] == tokenizer.pad_token_id).any()
+    model = T5ForConditionalGeneration(
+        T5Config(
+            vocab_size=len(vocab),
+            d_model=16,
+            d_ff=32,
+            num_layers=1,
+            num_decoder_layers=1,
+            num_heads=2,
+            decoder_start_token_id=0,
+            pad_token_id=0,
+            eos_token_id=1,
+        )
+    )
+    loss = model(**batch).loss
+    assert torch.isfinite(loss)
+    loss.backward()
+    assert model.shared.weight.grad.abs().sum() > 0
