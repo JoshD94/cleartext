@@ -107,8 +107,10 @@ def train_seq2seq(
     device = choose_device(device)
     if device.type == "mps":
         torch.mps.set_per_process_memory_fraction(0.45)
-    revision = model_info(model_name).sha
-    tokenizer = AutoTokenizer.from_pretrained(model_name, revision=revision)
+    revision = model_info(model_name, token=False).sha
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_name, revision=revision, token=False
+    )
     # Filter training only on length. No tokens are truncated at inference either.
     train = []
     for row in data["train"]:
@@ -125,9 +127,9 @@ def train_seq2seq(
     ]
     if not train or not dev:
         raise ValueError("No token-length eligible training/development pairs")
-    model = AutoModelForSeq2SeqLM.from_pretrained(model_name, revision=revision).to(
-        device
-    )
+    model = AutoModelForSeq2SeqLM.from_pretrained(
+        model_name, revision=revision, token=False
+    ).to(device)
     model.config.use_cache = False
     learning_rate = 1e-3 if optimizer_name == "adafactor" else 3e-4
     warmup_steps = max(1, max_steps // 10)
@@ -198,8 +200,8 @@ def train_seq2seq(
             optimizer.zero_grad(set_to_none=True)
             group = order[offset : offset + effective_batch]
             reported_loss = 0.0
-            for start in range(0, len(group), batch_size):
-                micro = group[start : start + batch_size]
+            for micro_offset in range(0, len(group), batch_size):
+                micro = group[micro_offset : micro_offset + batch_size]
                 batch = _batch(tokenizer, micro, device)
                 loss = model(**batch).loss
                 if not torch.isfinite(loss):

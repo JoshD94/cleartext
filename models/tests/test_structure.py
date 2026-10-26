@@ -10,6 +10,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 import pytest
+
+pytest.importorskip(
+    "sacremoses", reason="Optional structural experiments are not installed"
+)
 from cleartext.features import nlp
 from cleartext.structure.common import candidate_pool, normalize, sari, structure_checks
 from cleartext.structure.corpus import pair_keys, read_pair, select_pairs
@@ -134,9 +138,9 @@ def test_mac_warning_stops_own_training(monkeypatch, tmp_path):
         seq2seq.capacity_check(tmp_path)
 
 
-def test_seq2seq_batch_padding_supports_a_real_gradient_step():
+@pytest.fixture
+def tiny_t5():
     import torch
-    from cleartext.structure.seq2seq import _batch
     from tokenizers import Tokenizer
     from tokenizers.models import WordLevel
     from tokenizers.pre_tokenizers import Whitespace
@@ -173,9 +177,6 @@ def test_seq2seq_batch_padding_supports_a_real_gradient_step():
             "reference": "The client waits. The server works.",
         },
     ]
-    batch = _batch(tokenizer, rows, torch.device("cpu"))
-    assert (batch["labels"] == -100).any()
-    assert not (batch["labels"] == tokenizer.pad_token_id).any()
     model = T5ForConditionalGeneration(
         T5Config(
             vocab_size=len(vocab),
@@ -189,7 +190,56 @@ def test_seq2seq_batch_padding_supports_a_real_gradient_step():
             eos_token_id=1,
         )
     )
+    return model, tokenizer, rows
+
+
+def test_seq2seq_batch_padding_supports_a_real_gradient_step(tiny_t5):
+    import torch
+    from cleartext.structure.seq2seq import _batch
+
+    model, tokenizer, rows = tiny_t5
+    batch = _batch(tokenizer, rows, torch.device("cpu"))
+    assert (batch["labels"] == -100).any()
+    assert not (batch["labels"] == tokenizer.pad_token_id).any()
     loss = model(**batch).loss
     assert torch.isfinite(loss)
     loss.backward()
     assert model.shared.weight.grad.abs().sum() > 0
+
+
+def test_accumulated_training_saves_a_reloadable_checkpoint(
+    tiny_t5, tmp_path, monkeypatch
+):
+    from types import SimpleNamespace
+
+    import huggingface_hub
+    import torch
+    from cleartext.structure import seq2seq
+
+    model, tokenizer, rows = tiny_t5
+    initial_weight = model.shared.weight.detach().clone()
+    pretrained = tmp_path / "pretrained"
+    model.save_pretrained(pretrained)
+    tokenizer.save_pretrained(pretrained)
+    monkeypatch.setattr(
+        huggingface_hub, "model_info", lambda *a, **k: SimpleNamespace(sha="local-test")
+    )
+    monkeypatch.setattr(seq2seq, "capacity_check", lambda _: None)
+    data = {"train": rows * 2, "dev": rows}
+    run = tmp_path / "run"
+    run.mkdir()
+    result = seq2seq.train_seq2seq(
+        data,
+        run,
+        max_steps=2,
+        batch_size=1,
+        accumulation_steps=2,
+        model_name=str(pretrained),
+        device="cpu",
+    )
+    assert result["steps_completed"] == 2
+    assert result["effective_batch_size"] == 2
+    assert result["training_examples_seen"] == 4
+    assert 0 <= result["elapsed_seconds"] < 120
+    loaded = seq2seq.SentenceGenerator(run / "seq2seq", device="cpu")
+    assert not torch.equal(initial_weight, loaded.model.shared.weight)
