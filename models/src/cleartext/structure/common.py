@@ -157,6 +157,10 @@ def complete_clause(sentence):
     children = list(root.children)
     if any(t.dep_ == "mark" for t in children):
         return False
+    # A detached relative such as "Where she studies networks." still has a
+    # finite root and subject. Keep embedded relatives attached to their noun.
+    if any(t.tag_ in {"WDT", "WP", "WP$", "WRB"} for t in children):
+        return False
     if not any(t.dep_ in {"nsubj", "nsubjpass", "expl"} for t in children):
         return False
     predicates = [root] + [t for t in children if t.dep_ in {"aux", "auxpass", "cop"}]
