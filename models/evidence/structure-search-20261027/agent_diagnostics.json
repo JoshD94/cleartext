@@ -1,0 +1,33 @@
+{
+  "inspection": "Agent diagnostic inspection, not human ratings or reference approval",
+  "compared_changed_outputs": 7,
+  "selection_or_threshold_changes_after_final_test": false,
+  "issues": [
+    {
+      "id": "desse-test-367",
+      "kind": "false_rejection",
+      "detail": "The source-root boundary gate rejects a complete sentence beginning with the discourse marker As a result."
+    },
+    {
+      "id": "desse-test-687",
+      "kind": "false_rejection",
+      "detail": "A conditional followed by its main clause is rejected because its main root differs from the source sentence root."
+    },
+    {
+      "id": "desse-test-506",
+      "kind": "false_rejection",
+      "detail": "A conditional plus main clause is rejected when the original comma-spliced source has a different parser root."
+    },
+    {
+      "id": "desse-test-359",
+      "kind": "missed_boundary_error",
+      "detail": "Comma repair can leave a sentence ending in an incomplete prepositional phrase while the parser still calls it complete."
+    },
+    {
+      "id": "desse-test-257",
+      "kind": "missed_scope_error",
+      "detail": "A lower beam turns an embedded knowledge/how clause into a standalone assertion. Existing forward verbal complement checks miss noun-complement scope."
+    }
+  ],
+  "decision": "Keep experiment opt-in; do not promote boundary checks or candidate search to demo defaults. Diagnostic pass rates are not independent quality evidence."
+}

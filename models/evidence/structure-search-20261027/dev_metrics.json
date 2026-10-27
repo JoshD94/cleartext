@@ -1,0 +1,247 @@
+{
+  "dev": {
+    "identity": {
+      "n": 128,
+      "changed": 0,
+      "strict_check_failures": {
+        "no_comma_splice": 12
+      },
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 18.8125,
+      "overlap_metrics": {
+        "n": 128,
+        "sari": 30.580907918481437,
+        "changed": 0,
+        "change_rate": 0.0,
+        "split_rate": 0.0,
+        "max_sentence_words": 18.8125,
+        "source_words": 18.8125,
+        "check_pass_rate": 1.0,
+        "content_recall": 1.0,
+        "check_failures": {},
+        "semantic_certified": false
+      },
+      "annotated_copies": 32,
+      "annotated_copies_kept": 32
+    },
+    "baseline": {
+      "n": 128,
+      "changed": 52,
+      "strict_check_failures": {
+        "independent_boundaries": 4,
+        "no_comma_splice": 3
+      },
+      "changed_outputs_failing_strict_checks": 4,
+      "mean_max_sentence_words": 15.3984375,
+      "overlap_metrics": {
+        "n": 128,
+        "sari": 54.078705335762635,
+        "changed": 52,
+        "change_rate": 0.40625,
+        "split_rate": 0.40625,
+        "max_sentence_words": 15.3984375,
+        "source_words": 18.8125,
+        "check_pass_rate": 1.0,
+        "content_recall": 1.0,
+        "check_failures": {},
+        "semantic_certified": false
+      },
+      "annotated_copies": 32,
+      "annotated_copies_kept": 32
+    },
+    "strict": {
+      "n": 128,
+      "changed": 48,
+      "strict_check_failures": {
+        "no_comma_splice": 6
+      },
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 15.84375,
+      "overlap_metrics": {
+        "n": 128,
+        "sari": 52.553854284593776,
+        "changed": 48,
+        "change_rate": 0.375,
+        "split_rate": 0.375,
+        "max_sentence_words": 15.84375,
+        "source_words": 18.8125,
+        "check_pass_rate": 1.0,
+        "content_recall": 1.0,
+        "check_failures": {},
+        "semantic_certified": false
+      },
+      "annotated_copies": 32,
+      "annotated_copies_kept": 32
+    },
+    "search": {
+      "n": 128,
+      "changed": 53,
+      "strict_check_failures": {
+        "no_comma_splice": 5
+      },
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 15.5546875,
+      "overlap_metrics": {
+        "n": 128,
+        "sari": 54.199273821420846,
+        "changed": 53,
+        "change_rate": 0.4140625,
+        "split_rate": 0.40625,
+        "max_sentence_words": 15.5546875,
+        "source_words": 18.8125,
+        "check_pass_rate": 1.0,
+        "content_recall": 1.0,
+        "check_failures": {},
+        "semantic_certified": false
+      },
+      "annotated_copies": 32,
+      "annotated_copies_kept": 32
+    },
+    "selection_origins": {
+      "beam": 122,
+      "identity_fallback": 6
+    },
+    "selected_beams": {
+      "0": 99,
+      "2": 12,
+      "None": 6,
+      "1": 11
+    },
+    "different_from_baseline": 9,
+    "search_minus_baseline": {
+      "mean_delta": 0.12056848565820377,
+      "ci95": [
+        -2.0340938291987967,
+        2.4080629722839797
+      ],
+      "resamples": 1000
+    },
+    "search_minus_strict": {
+      "mean_delta": 1.6454195368270697,
+      "ci95": [
+        0.2869615567622032,
+        3.338282297601031
+      ],
+      "resamples": 1000
+    },
+    "latency_seconds": {
+      "baseline": {
+        "mean": 0.2925312984880293,
+        "median": 0.2596455654129386
+      },
+      "search": {
+        "mean": 0.3392873621560284,
+        "median": 0.3020150426309556
+      }
+    }
+  },
+  "domain_dev": {
+    "identity": {
+      "n": 24,
+      "changed": 0,
+      "strict_check_failures": {
+        "no_comma_splice": 4
+      },
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 27.625
+    },
+    "baseline": {
+      "n": 24,
+      "changed": 2,
+      "strict_check_failures": {
+        "no_comma_splice": 4,
+        "independent_boundaries": 1
+      },
+      "changed_outputs_failing_strict_checks": 2,
+      "mean_max_sentence_words": 26.5
+    },
+    "strict": {
+      "n": 24,
+      "changed": 0,
+      "strict_check_failures": {
+        "no_comma_splice": 4
+      },
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 27.625
+    },
+    "search": {
+      "n": 24,
+      "changed": 2,
+      "strict_check_failures": {
+        "no_comma_splice": 3
+      },
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 26.5
+    },
+    "selection_origins": {
+      "beam": 19,
+      "boundary_repair": 1,
+      "identity_fallback": 4
+    },
+    "selected_beams": {
+      "3": 2,
+      "1": 5,
+      "0": 11,
+      "None": 4,
+      "2": 2
+    },
+    "different_from_baseline": 3,
+    "latency_seconds": {
+      "baseline": {
+        "mean": 0.43466265336610377,
+        "median": 0.4142063257750124
+      },
+      "search": {
+        "mean": 0.5123792747617699,
+        "median": 0.49516533338464797
+      }
+    }
+  },
+  "diagnostics": {
+    "identity": {
+      "n": 6,
+      "changed": 0,
+      "strict_check_failures": {},
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 10.0
+    },
+    "baseline": {
+      "n": 6,
+      "changed": 1,
+      "strict_check_failures": {},
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 9.0
+    },
+    "strict": {
+      "n": 6,
+      "changed": 1,
+      "strict_check_failures": {},
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 9.0
+    },
+    "search": {
+      "n": 6,
+      "changed": 1,
+      "strict_check_failures": {},
+      "changed_outputs_failing_strict_checks": 0,
+      "mean_max_sentence_words": 9.0
+    },
+    "selection_origins": {
+      "beam": 6
+    },
+    "selected_beams": {
+      "0": 6
+    },
+    "different_from_baseline": 0,
+    "latency_seconds": {
+      "baseline": {
+        "mean": 0.14526908712772033,
+        "median": 0.1467982849571854
+      },
+      "search": {
+        "mean": 0.17421153715501228,
+        "median": 0.17149730725213885
+      }
+    }
+  }
+}

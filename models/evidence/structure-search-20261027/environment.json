@@ -1,0 +1,15 @@
+{
+  "torch": "2.14.0+cpu",
+  "transformers": "5.17.0",
+  "spacy": "3.8.16",
+  "en-core-web-sm": "3.8.0",
+  "numpy": "2.5.3",
+  "sentencepiece": "not installed; fast tokenizer used",
+  "pytest": "9.1.1",
+  "device": "cpu",
+  "OMP_NUM_THREADS": 2,
+  "OPENBLAS_NUM_THREADS": 2,
+  "MKL_NUM_THREADS": 2,
+  "memory_cap_gb": 3,
+  "new_training": false
+}

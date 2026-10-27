@@ -80,3 +80,13 @@ Run persistent inference on Yoga in a named tmux session with a 3 GB memory cap
 and two CPU threads. Allow roughly 0.5 GB of new disk space. Preserve all previous
 artifacts. The results determine whether to retain this as an experimental
 option; they do not automatically change demo defaults.
+
+## October 27 result
+
+The [saved comparison](../evidence/structure-search-20261027/README.md) did not
+establish an overall quality gain. On 128 fresh test pairs, current decoding
+scored 37.03 SARI and search scored 36.36, with an uncertainty interval spanning
+a tie. Both changed 19 inputs and kept all 31 annotated copies. Inspection found
+false alarms and missed meaning changes despite fewer diagnostic failures.
+Keep this option experimental. The useful technical comma repair and rejection
+of observed fragments do not establish general sentence simplification quality.

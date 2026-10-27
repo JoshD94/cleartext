@@ -1,0 +1,32 @@
+{
+  "focused_pytest": {
+    "passed": 158,
+    "elapsed_seconds": 10.17,
+    "files": [
+      "test_structure.py",
+      "test_structure_expanded.py",
+      "test_structure_review.py",
+      "test_structure_search.py",
+      "test_proposal_evidence.py",
+      "test_building_blocks.py",
+      "test_preservation.py",
+      "test_invariants.py"
+    ]
+  },
+  "ruff": {
+    "version": "0.17.2",
+    "result": "passed",
+    "scope": "All new/modified Python files"
+  },
+  "whitespace": "passed",
+  "real_checkpoint_cli_smoke": {
+    "exit_code": 0,
+    "candidates": 4,
+    "output": "Alice reviewed the report. Bob checked the figures.",
+    "all_output_checks_pass": true
+  },
+  "new_training": false,
+  "human_ratings": 0,
+  "reserved_domain_test_predictions": 0,
+  "promotion": "none"
+}
