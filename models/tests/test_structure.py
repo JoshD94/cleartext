@@ -545,3 +545,100 @@ def test_training_cannot_overwrite_its_initial_checkpoint(tmp_path):
     initial = tmp_path / "run" / "seq2seq"
     with pytest.raises(ValueError, match="separate directories"):
         train_seq2seq({}, tmp_path / "run", initial_checkpoint=initial)
+
+
+def test_continuation_retains_step_zero_when_training_does_not_improve(
+    tiny_t5, tmp_path, monkeypatch
+):
+    from cleartext.structure import seq2seq
+
+    model, tokenizer, rows = tiny_t5
+    initial = tmp_path / "initial"
+    model.save_pretrained(initial)
+    tokenizer.save_pretrained(initial)
+    monkeypatch.setattr(seq2seq, "capacity_check", lambda _: None)
+    result = seq2seq.train_seq2seq(
+        {"train": rows, "dev": rows},
+        tmp_path / "run",
+        max_steps=1,
+        batch_size=1,
+        initial_checkpoint=initial,
+        target_learning_rate=1e-30,
+        device="cpu",
+    )
+    assert result["steps_completed"] == 1
+    assert result["selected"]["step"] == 0
+    assert [r["step"] for r in result["history"]] == [0, 1]
+
+
+def test_training_refuses_to_replace_an_existing_output_checkpoint(tmp_path):
+    from cleartext.structure.seq2seq import train_seq2seq
+
+    checkpoint = tmp_path / "seq2seq"
+    checkpoint.mkdir()
+    original = checkpoint / "model.safetensors"
+    original.write_bytes(b"existing model")
+    with pytest.raises(FileExistsError, match="overwrite"):
+        train_seq2seq({}, tmp_path)
+    assert original.read_bytes() == b"existing model"
+
+
+@pytest.mark.parametrize(
+    "source,output,equal",
+    [
+        (
+            "Alice reviewed the report and Bob checked the figures.",
+            "Alice reviews the report. Bob checks the figures.",
+            False,
+        ),
+        (
+            "Alice reviewed the report and Bob checked the figures.",
+            "Alice reviewed the report. Bob checked the figures.",
+            True,
+        ),
+        (
+            "The report was prepared and approved.",
+            "The report was prepared. The report was approved.",
+            True,
+        ),
+        (
+            "The report was prepared and approved.",
+            "The report is prepared. The report is approved.",
+            False,
+        ),
+    ],
+)
+def test_t5_tense_signatures_keep_tense_and_allow_repeated_auxiliaries(
+    source, output, equal
+):
+    from cleartext.structure.seq2seq import predicate_tenses
+
+    assert (predicate_tenses(nlp()(source)) == predicate_tenses(nlp()(output))) == equal
+
+
+def test_t5_predict_abstains_when_generated_verbs_change_tense():
+    from types import SimpleNamespace
+    import torch
+    from cleartext.structure.seq2seq import SentenceGenerator
+
+    source = "Alice reviewed the report and Bob checked the figures."
+    raw = "Alice reviews the report. Bob checks the figures."
+
+    class Tokenizer:
+        eos_token_id = 1
+
+        def __call__(self, *args, **kwargs):
+            return {"input_ids": torch.tensor([[2, 1]])}
+
+        def decode(self, *args, **kwargs):
+            return raw
+
+    generator = SentenceGenerator.__new__(SentenceGenerator)
+    generator.tokenizer = Tokenizer()
+    generator.device = torch.device("cpu")
+    generator.model = SimpleNamespace(
+        generate=lambda **kwargs: torch.tensor([[0, 2, 1]])
+    )
+    result = generator.predict(source)
+    assert result["raw"] == raw and result["output"] == source
+    assert result["raw_checks"]["failed"] == ["predicate_tense"]

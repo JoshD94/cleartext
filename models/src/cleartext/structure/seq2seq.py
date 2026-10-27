@@ -20,6 +20,47 @@ from .corpus import write_json
 PREFIX = "split sentence: "
 
 
+def predicate_tenses(doc):
+    """Source-relative tense signatures, allowing a repeated shared auxiliary.
+
+    Sets allow "was prepared and approved" to repeat "was" after a split.
+    They do not prove that a tense is attached to the correct participant.
+    """
+    result = set()
+    for token in doc:
+        if token.pos_ not in {"VERB", "AUX", "ADJ"}:
+            continue
+        current, seen = token, set()
+        while current.i not in seen:
+            seen.add(current.i)
+            finite = [
+                p
+                for p in [
+                    current,
+                    *[
+                        c
+                        for c in current.children
+                        if c.dep_ in {"aux", "auxpass", "cop"}
+                    ],
+                ]
+                if p.pos_ in {"VERB", "AUX"} and "Fin" in p.morph.get("VerbForm")
+            ]
+            if finite:
+                result.update(
+                    (
+                        token.lemma_.lower(),
+                        tuple(p.morph.get("Tense")),
+                        tuple(p.morph.get("Mood")),
+                    )
+                    for p in finite
+                )
+                break
+            if current.dep_ != "conj":
+                break
+            current = current.head
+    return result
+
+
 def choose_device(requested="auto"):
     import torch
 
@@ -122,6 +163,8 @@ def train_seq2seq(
     from transformers import Adafactor, AutoModelForSeq2SeqLM, AutoTokenizer
 
     run = Path(run)
+    if (run / "seq2seq").exists() and any((run / "seq2seq").iterdir()):
+        raise FileExistsError("Refusing to overwrite an existing seq2seq checkpoint")
     if target_learning_rate is not None and (
         not math.isfinite(target_learning_rate) or target_learning_rate <= 0
     ):
@@ -230,7 +273,7 @@ def train_seq2seq(
         "training_domains": dict(Counter(r.get("domain", "general") for r in train)),
         "length_filtered_training_pairs": len(data["train"]) - len(train),
         "dev_pairs": len(dev),
-        "selection": "Lowest token-weighted dev teacher-forced loss; test not used",
+        "selection": "Lowest token-weighted dev teacher-forced loss, including step 0; test not used",
         "prefix": PREFIX,
         "trainable_parameters": sum(p.numel() for p in model.parameters()),
     }
@@ -247,7 +290,19 @@ def train_seq2seq(
                 count = int((batch["labels"] != -100).sum().item())
                 total += float(current_model(**batch).loss.item()) * count
                 tokens += count
-        return total / max(1, tokens)
+        result = total / max(1, tokens)
+        if not math.isfinite(result):
+            raise RuntimeError("Non-finite development loss")
+        return result
+
+    # Retain initialization when continuation makes development loss worse.
+    # Previously the first trained checkpoint could replace a better initializer.
+    best = validate(model)
+    history.append({"step": 0, "dev_loss": best})
+    model.save_pretrained(run / "seq2seq", safe_serialization=True)
+    tokenizer.save_pretrained(run / "seq2seq")
+    write_json(run / "seq2seq" / "selection.json", {"step": 0, "dev_loss": best})
+    print("dev", 0, best, flush=True)
 
     for epoch in range(epochs):
         order = list(train)
@@ -345,6 +400,7 @@ class SentenceGenerator:
         import torch
 
         from .common import structure_checks
+        from ..features import nlp
 
         encoded = self.tokenizer(PREFIX + source, return_tensors="pt")
         if encoded["input_ids"].shape[1] > 192:
@@ -364,7 +420,14 @@ class SentenceGenerator:
             )
         raw = self.tokenizer.decode(ids[0], skip_special_tokens=True).strip()
         terminated = self.tokenizer.eos_token_id in ids[0].tolist()[1:]
-        checks = structure_checks(source, raw, doc)
+        old = doc if doc is not None else nlp()(source)
+        new = nlp()(raw)
+        checks = structure_checks(source, raw, old, new)
+        same_tense = predicate_tenses(old) == predicate_tenses(new)
+        checks["checks"]["predicate_tense"] = same_tense
+        if not same_tense:
+            checks["failed"].append("predicate_tense")
+            checks["pass"] = False
         checks["checks"]["generation_terminated"] = terminated
         if not terminated:
             checks["failed"].append("generation_terminated")
