@@ -88,6 +88,18 @@ def test_all_failed_candidates_return_original_with_trace():
     assert result["candidates"][0]["checks"]["failed"]
 
 
+def test_lower_ranked_candidate_cannot_compound_a_boundary_repair():
+    result = select_candidate(
+        SOURCE,
+        [
+            proposal("Alice reviewed the report."),
+            proposal("Alice reviewed the report, Bob checked the figures."),
+        ],
+    )
+    assert result["output"] == SOURCE
+    assert all(c["origin"] == "beam" for c in result["candidates"])
+
+
 def test_terminated_duplicate_can_follow_truncated_candidate():
     result = select_candidate(SOURCE, [proposal(SPLIT, False), proposal(SPLIT)])
     assert result["output"] == SPLIT and result["selected_beam"] == 1
@@ -164,3 +176,30 @@ def test_evaluation_cannot_overwrite_or_use_changed_protocol(tmp_path):
     )
     with pytest.raises(ValueError, match="Settings changed"):
         evaluate(tmp_path, tmp_path, "test", tmp_path / "new")
+
+
+def test_search_does_not_decode_truncated_source():
+    import torch
+
+    class Tokenizer:
+        def __call__(self, *args, **kwargs):
+            assert "truncation" not in kwargs
+            return {"input_ids": torch.ones((1, 193), dtype=torch.long)}
+
+    generator = CandidateGenerator.__new__(CandidateGenerator)
+    generator.tokenizer = Tokenizer()
+    # No model exists, so an attempted decode would fail this test.
+    result = generator.predict(SOURCE)
+    assert result["output"] == SOURCE
+    assert result["reason"] == "source exceeds token limit"
+
+
+def test_multiple_comma_repairs_stop_at_four_sentences():
+    text = (
+        "Applications can manage a graceful shutdown, endpoints can negotiate "
+        "a timeout period, errors can cause immediate connection teardown. "
+        "A stateless mechanism provides for termination of connections."
+    )
+    output = repair_boundaries(text)
+    assert len(list(nlp()(output).sents)) == 4
+    assert "," not in output

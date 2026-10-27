@@ -148,3 +148,7 @@ rules and identity on held-out data. It requires the optional dependencies in
 [Continued T5 training](docs/STRUCTURE_CONTINUATION.md) adds filtered published
 DeSSE annotations and additional WikiSplit edits, preserves saved weights and
 compares the continuation with its initializer under identical checks.
+
+[Checked candidate search](docs/STRUCTURE_SEARCH.md) reuses that checkpoint and
+tries four model candidates with additional sentence-boundary checks and bounded
+comma repairs. It is an opt-in experiment with a standalone prediction command.

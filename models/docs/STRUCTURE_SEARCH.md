@@ -3,10 +3,16 @@
 This opt-in experiment reuses the continued T5 checkpoint. It generates four
 deterministic beams and tries them in model order. Each beam must pass the
 existing content, scope, tense and clause checks, plus two new boundary checks.
-If a comma separates independently parsed complete clauses, the selector can
+If a comma in the first beam separates independently parsed complete clauses, the selector can
 replace it with a period and capitalize the next character. The repaired text
 must pass every check too. A valid preferred copy stays a copy. If all candidates
 fail, the selector returns the source.
+
+Lower-ranked beams must pass as generated. The selector does not repair them.
+Development inspection found that composing a lower-ranked candidate with a
+punctuation repair could expose a noun-list fragment that the parser accepted.
+Restricting repairs to the preferred beam avoids that observed combination;
+it does not solve the underlying parser ambiguity.
 
 The comma repair changes no words or word order. It stops at four sentences or
 three repairs and abstains on sentences containing quotations, brackets or
@@ -21,6 +27,17 @@ keep their behavior. Import `CandidateGenerator` from
 `cleartext.structure.search` to use the experiment with a local checkpoint.
 The returned dictionary includes selected beam, repair origin, attempted
 candidates and failed checks. There is no reference-dependent selection.
+
+From the repository root, run one sentence with an extracted checkpoint:
+
+```sh
+OMP_NUM_THREADS=2 models/.venv/bin/python models/scripts/predict_structure_search.py \
+  --checkpoint /path/to/seq2seq --device cpu --details \
+  "Alice reviewed the report and Bob checked the figures."
+```
+
+Omit `--details` to print only the selected sentence. This loads local weights;
+it does not start training or download new data.
 
 ## Fixed comparison protocol
 

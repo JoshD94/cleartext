@@ -109,7 +109,7 @@ def repair_boundaries(text):
 
 
 def select_candidate(source, proposals, source_doc=None):
-    """Try model order, then its punctuation repair, with identity fallback.
+    """Try model order, with a primary-beam punctuation repair and copy fallback.
 
     The model's preferred valid copy stays a copy. A failed high-ranked beam
     cannot hide a passing alternative. Selection never sees a reference.
@@ -119,9 +119,13 @@ def select_candidate(source, proposals, source_doc=None):
     for rank, proposal in enumerate(proposals):
         raw, terminated = proposal["text"], proposal["terminated"]
         variants = [(raw, "beam")]
-        repaired = repair_boundaries(raw)
-        if repaired != raw:
-            variants.append((repaired, "boundary_repair"))
+        # Do not compound a lower-ranked model alternative with another edit.
+        # Development inspection found that combination could expose noun-list
+        # fragments which the parser incorrectly called complete clauses.
+        if rank == 0:
+            repaired = repair_boundaries(raw)
+            if repaired != raw:
+                variants.append((repaired, "boundary_repair"))
         for text, origin in variants:
             key = (normalize(text), terminated)
             if key in seen:

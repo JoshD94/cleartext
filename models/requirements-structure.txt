@@ -8,6 +8,6 @@ nltk>=3.9,<4
 sacremoses>=0.1,<0.3
 sklearn-crfsuite==0.5.0
 torch>=2.6,<3
-transformers>=4.48,<5
+transformers>=4.48,<6
 sentencepiece>=0.2,<0.3
 pytest>=8,<10

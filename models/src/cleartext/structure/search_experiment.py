@@ -33,7 +33,7 @@ from .seq2seq import SentenceGenerator, capacity_check
 SETTINGS = {
     "baseline": "Current two-beam T5 with tense/complement checks",
     "strict": "Same baseline raw text plus independent-boundary/comma-splice checks",
-    "search": "Four deterministic beams; first passing beam or word-preserving comma repair, otherwise original",
+    "search": "Four deterministic beams; first passing beam or primary-beam word-preserving comma repair, otherwise original",
     "max_new_tokens": 256,
     "max_source_tokens": 192,
     "max_sentences": 4,
