@@ -167,3 +167,9 @@ These experiments keep v7 as the library and demo default. All BenchLS cases are
 | Novel context validators | Latest full-span similarity shadow gains 14.67 net but loses 3.34 precision points; no calibrated threshold qualifies, so safe novel edits stay disabled | [Novel context](NOVEL_CONTEXT.md) |
 
 Each report retains its original protocol, comparison, failures, saved output paths and source fingerprints. Test counts in those reports describe the suite at that stage. The current suite is documented in the PR validation.
+
+## Structural training alignment, October 27
+
+[Training alignment](STRUCTURE_ALIGNMENT.md) records the shared data/runtime checks,
+the conservative attribution repair, quarantined target conflicts and the bounded
+T5 continuation. The generator remains experimental and the v7 demo is unchanged.

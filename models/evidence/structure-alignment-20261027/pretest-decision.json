@@ -1,0 +1,14 @@
+{
+  "recorded_at": "2026-10-27T15:24:28.618830-04:00",
+  "selected_step": 906,
+  "selected_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "baseline_sha256": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+  "reserved_test_sha256": "7d09d3406ec0440e2666d80e46879d49d5f090905b3d21f6f5dae7c6732d9f4d",
+  "development_comparison_sha256": "174ba6dae56e8d51f5bff793374a3010ba94e65058176814f8937f7f2deba8cd",
+  "decision": "Advance selected experimental weights to the fixed report-only reserved comparison. No demo promotion.",
+  "test_predictions_so_far": 0,
+  "saved_checkpoint_reproduces_all_in_memory_broad_dev_outputs": true,
+  "selection_policy_changed": false,
+  "test_policy": "Single comparison of baseline and selected weights, same shared checks and two-beam decoding. No threshold, selection or weight changes afterward.",
+  "domain_test_used": false
+}

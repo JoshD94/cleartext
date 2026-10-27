@@ -1,0 +1,51 @@
+{
+  "split": "dev",
+  "n": 96,
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "metrics": {
+    "identity": {
+      "n": 96,
+      "changed": 0,
+      "shorter_splits": 0,
+      "copy_reference_n": 6,
+      "copy_references_kept": 6,
+      "all_reference_sari": 27.65135829408935,
+      "compatible_n": 12,
+      "compatible_structural_score": 29.482622779488793
+    },
+    "baseline": {
+      "n": 96,
+      "changed": 12,
+      "shorter_splits": 11,
+      "copy_reference_n": 6,
+      "copy_references_kept": 6,
+      "all_reference_sari": 32.50158910277442,
+      "compatible_n": 12,
+      "compatible_structural_score": 41.48548519013932
+    },
+    "continued": {
+      "n": 96,
+      "changed": 14,
+      "shorter_splits": 13,
+      "copy_reference_n": 6,
+      "copy_references_kept": 6,
+      "all_reference_sari": 33.810315437493415,
+      "compatible_n": 12,
+      "compatible_structural_score": 41.48548519013932
+    }
+  },
+  "overlap_delta_bootstrap": {
+    "mean_delta": 1.3087263347189975,
+    "ci95": [
+      0.012410213240131881,
+      3.029810334060053
+    ],
+    "resamples": 1000
+  },
+  "limitations": [
+    "Single bounded seed",
+    "Published decomposition references and parser compatibility are not human quality ratings",
+    "Near duplicates and pretraining overlap not excluded",
+    "No domain test prediction or default promotion"
+  ]
+}

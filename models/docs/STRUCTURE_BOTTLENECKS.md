@@ -6,6 +6,9 @@ The model also copies too often. Adding another verifier or more training steps
 before resolving those disagreements is unlikely to be a good use of the next
 experiment.
 
+The subsequent [training-alignment experiment](STRUCTURE_ALIGNMENT.md) records
+the shared-check repair and continued training.
+
 This diagnosis uses previously inspected data. It is development analysis, not
 a new held-out result. The [aggregate audit](../evidence/structure-audit-20261027/summary.json)
 and [frozen inputs and source hashes](../evidence/structure-audit-20261027/freeze.json)

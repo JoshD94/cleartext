@@ -1,0 +1,8 @@
+{
+  "file": "/home/joshuadirga/.local/state/cleartext/structure-alignment-20261027/cleartext-structure-aligned-20261027.tar",
+  "bytes": 244500480,
+  "sha256": "36b9b12169bad3c4a2b9bc4ed8a32b8168d1bee27223ead7851f09a7f610b675",
+  "weights_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "uploaded": false,
+  "contents": "Selected weights, tokenizer, configuration, selection and aggregate training metadata. No raw data."
+}

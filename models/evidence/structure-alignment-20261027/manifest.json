@@ -1,0 +1,49 @@
+{
+  "prior_data_sha256": {
+    "structural-20261026/run/data.json": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+    "structure-followup-20261026/run/data.json": "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+    "structure-repair-20261026/run/data.json": "6a4c97f43a313e30d086e6da04ee7ec3b27f9960138e82c06abd59defac460d0",
+    "structure-expanded-20261026/run/data.json": "2b24cfe55d43704ccc2c85f6d14ac22f3d05e3b20b2a6b9e2cea92809a0f3c79",
+    "structure-search-20261027/run/data.json": "13d9af141892b96b94af13aa5060693c1e5a51bdba77b23d45638f7126380ece",
+    "structure-search-20261027/run-v2/data.json": "ab893eb5f60cb5597ef65cb53c411f022fcacdd6fdc346e3c06a9f64c6d2525e",
+    "structure-expanded-20261026/initial-preparation/data.json": "af90ad401162017c9c039d272cb4664560081a83abf8da3198d856a70535fdc9",
+    "structure-expanded-20261026/desse-only-preparation/data.json": "df88841ff2a70d42579c5bb1d065cdeb75534b49e7db83a585996d13cc1fc3ce"
+  },
+  "source_config_sha256": "1bf5b140cb6932d9e9217e547aabd8c51c931f14a2301955bb61c2ea2ec40048",
+  "data_sha256": "35587e382003a2c4ccc5a783f03aafcec59a995cfb254860867f27a4e44ad2ef",
+  "test_sha256": "7d09d3406ec0440e2666d80e46879d49d5f090905b3d21f6f5dae7c6732d9f4d",
+  "counts": {
+    "train": 3618,
+    "dev": 101,
+    "broad_dev": 96
+  },
+  "reserved_test_n": 96,
+  "train_filters": {
+    "rows": 3986,
+    "accepted_split": 2620,
+    "complement_scope": 361,
+    "predicate_tense+complement_scope": 1,
+    "predicate_tense": 5,
+    "accepted_copy": 998,
+    "argument_roles": 1
+  },
+  "dev_filters": {
+    "rows": 128,
+    "complement_scope": 27,
+    "accepted_split": 69,
+    "accepted_copy": 32
+  },
+  "quarantined_train": 368,
+  "retained_target_conflicts": 0,
+  "broad_dev_reference_compatible": 12,
+  "selection": "Two equal panels: aligned prior dev and compatible subset of input-sampled broad dev. Changed-reference scoring substitutes identity for non-splitting outputs. Copy-reference scoring uses actual outputs. Higher mean overlap wins; lower loss breaks ties.",
+  "test_sampling": "Up to96 previously unused official test sources/full targets, seed4701 source-hash order, basic length/markup filters only; no grammar/reference-quality filter. Minimum32 required.",
+  "training": {
+    "epochs": 2,
+    "batch_size": 2,
+    "accumulation_steps": 4,
+    "learning_rate": 0.0001,
+    "seed": 4701
+  },
+  "human_ratings": 0
+}

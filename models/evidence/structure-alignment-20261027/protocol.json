@@ -1,0 +1,22 @@
+{
+  "purpose": "Fix train/runtime contract, then continue selected T5 weights. No synthetic gold or human review. Existing demo unchanged.",
+  "frozen_before_preparation": true,
+  "training": {
+    "epochs": 2,
+    "initial": "structure-expanded-20261026/run/seq2seq",
+    "learning_rate": 0.0001,
+    "batch": 2,
+    "accumulation": 4,
+    "seed": 4701,
+    "cpu_threads": 2
+  },
+  "data_policy": "Retain only published prior training targets passing shared runtime checks plus structural/discourse eligibility. Quarantine conflicts, never relabel as copies. Exact train/eval exclusions.",
+  "dev": "Aligned prior dev for loss; new96 input-hash-sampled dev without grammar/reference-quality selection. Flag compatibility after selection and retain failures as separate diagnostics.",
+  "selection": "Evaluate initializer and each full epoch. Mean of two equal panel scores on compatible refs. Edited-reference output scored as identity unless it adds a shorter sentence; copy-reference scored as returned. Highest score then lowest loss. No test selection.",
+  "test": "Up to96 unused official DeSSE test pairs after every prior selected/prepared source/full-target exclusion. Basic length/markup only, no quality filtering. Minimum32. Score once after training, development comparison and frozen decision. Reserved domain test unused.",
+  "host": "yoga",
+  "session": "cleartext-alignment-20261027",
+  "ram_estimate_gb": 2.5,
+  "memory_cap_gb": 4,
+  "resource_choice": "Yoga8.7GB available,15minload3.29,289GiBdisk; Mac normal43%free but Yoga fits. Preserve all unrelated jobs."
+}

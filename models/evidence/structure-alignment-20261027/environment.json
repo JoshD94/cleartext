@@ -1,0 +1,17 @@
+{
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "python": "3.12.14",
+  "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0",
+    "numpy": "2.5.3",
+    "pytest": "9.1.1"
+  },
+  "source_commit": "16c72b3",
+  "tests": "196 passed in 11.02s",
+  "lint": "ruff F,E9 passed",
+  "host_choice": "Yoga; available RAM >9GB and 15-minute load below4 before training; cap4GB,2 CPU threads",
+  "tmux_session": "cleartext-alignment-20261027"
+}

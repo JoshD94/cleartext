@@ -1,0 +1,59 @@
+{
+  "source_commit": "16c72b3814d7ec0a560c6f9762ce02b3ca95ed3c",
+  "files": {
+    "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+    "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+    "alignment.py": "e55905e596b19a847ee4885c3d228963a63e7e5190bb8fde6ca6d324b13a115c",
+    "audit.py": "7d2f1a1190134d0bada96669a0ecb05dacf5a45a8792234f1aaf1cc30fdbcea7",
+    "common.py": "3a39d562a9099c76be20c967cdd0c24e96592b6e721866e5299785b9912ab92c",
+    "continuation.py": "9da7c3d44f66021ca220eaf900116b2c7f49ea38dae0968c774b75b05e896206",
+    "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+    "expanded.py": "06248ef9d7a45054706c1ed10871f243d94433196217bd32592e8644389d078c",
+    "experiment.py": "b10e4cda6aa2ff1f89e9d156814d8e5fdbda443158237bfc47c2ec97e2068f16",
+    "learning.py": "4251210ef9efd0532803a594493af0e4f0e3be79d3976e914fb5d8d97ad29cb5",
+    "meaning.py": "18d35affcb643756fc57cc3bfe7bae52e341c35b832bd4e17c3bae128a05f50a",
+    "meaning_experiment.py": "adae7eaae8ff3382eb896d58a1da2e0da649154a0351ac808415db2eb8749850",
+    "review.py": "83ef486b47a10e613b5ce6e1e02bddfb1cf5a8129d1c72fcb5e353b88be2145f",
+    "search.py": "1de8599c92f47d74d4280af930e4e510d47d3ad53a6278ec9a0be40ecff3d66d",
+    "search_experiment.py": "05749a868fd88fb63e1bcddb5485c190c99760a9564f3369b29e7824186a894a",
+    "seq2seq.py": "6ab174f91553de0058d2f4e90235f781ebb57ace9e45ca31a6aaee7de1e697a7",
+    "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072"
+  },
+  "data_sha256": "35587e382003a2c4ccc5a783f03aafcec59a995cfb254860867f27a4e44ad2ef",
+  "stage": "alignment-test",
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "baseline_sha256": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+  "continued_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "selection": {
+    "step": 906,
+    "dev_loss": 0.17240341880671303,
+    "decoded": {
+      "score": 52.30827393943816,
+      "panels": {
+        "aligned_dev": {
+          "n": 101,
+          "changed": 57,
+          "shorter_splits": 57,
+          "copy_reference_n": 32,
+          "copy_references_kept": 32,
+          "all_reference_sari": 63.131062688736996,
+          "compatible_n": 101,
+          "compatible_structural_score": 63.131062688736996,
+          "raw_changed_rejections": 3
+        },
+        "broad_dev": {
+          "n": 96,
+          "changed": 14,
+          "shorter_splits": 13,
+          "copy_reference_n": 6,
+          "copy_references_kept": 6,
+          "all_reference_sari": 33.810315437493415,
+          "compatible_n": 12,
+          "compatible_structural_score": 41.48548519013932,
+          "raw_changed_rejections": 12
+        }
+      }
+    }
+  },
+  "split": "test"
+}
