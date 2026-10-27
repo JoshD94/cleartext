@@ -4,6 +4,11 @@ This round uses published sentence pairs while the project's domain review
 sheets remain unfinished. It does not invent human approvals or train on agent
 rewrites. The existing v7 demo and experimental ranker remain available.
 
+The [completed October 26 run](../evidence/structure-continuation-20261026/README.md)
+records 400 training steps and a held-out SARI increase from 36.17 to 39.38 under
+the frozen comparison checks. Domain development outputs still contain grammar
+errors. A later attribution guard has development evidence only.
+
 ## Prepared data
 
 [DeSSE](https://github.com/serenayj/DeSSE) supplies 13,200 released training
@@ -13,7 +18,7 @@ process, which intentionally removes discourse connectives. Published references
 can therefore conflict with our requirement to preserve conditions and contrast.
 The pinned repository includes an MIT license.
 
-Training/development selection requires a complete single-clause source and
+Training/development selection requires a complete single-sentence source and
 either an annotated copy or two to four shorter complete output clauses. Shared
 checks must preserve content, participants, quantities, negation and modality.
 Additional counts preserve discourse words and finite verb tense/mood. These
@@ -78,10 +83,20 @@ rewrite that changes "reviewed" to "reviews", while allowing a shared "was" to
 be repeated across a split. This check is parser-dependent and does not certify
 which participant has which tense. Ranker feature meanings are unchanged.
 
+Generation also preserves forward complement scope. For example, splitting
+"The company said that revenue increased and costs fell" must keep both claims
+under "said". Repeating "The company said that" can preserve the relationship.
+Matching dependency/lemma counts can still miss speaker changes, relative-clause
+meaning and parser errors. Backward complements are excluded because comma
+splices can produce spurious backward dependency attachments.
+
 The comparison uses identical deterministic generation and checks for the
-initializer and continuation. It also computes results without the added tense
-check, using the same raw outputs, to separate the effect of filtering from
+initializer and continuation. It also computes results without the added T5
+checks, using the same raw outputs, to separate the effect of filtering from
 changed weights. Checkpoints, data and source hashes are frozen before scoring.
+The completed October 26 comparison predates the complement scope guard and
+includes the tense check only. A separate development replay records the scope
+guard's cost in coverage. The held-out score was not recomputed after that repair.
 
 ```sh
 PYTHONPATH=models/src /path/to/venv/bin/python -m cleartext.structure.continuation \

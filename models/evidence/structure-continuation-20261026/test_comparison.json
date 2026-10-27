@@ -1,0 +1,201 @@
+{
+  "split": "test",
+  "n": 256,
+  "metrics": {
+    "identity": {
+      "n": 256,
+      "sari": 29.353261818329827,
+      "changed": 0,
+      "change_rate": 0.0,
+      "split_rate": 0.015625,
+      "max_sentence_words": 19.53515625,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.8515625,
+      "content_recall": 1.0,
+      "check_failures": {
+        "complete_clauses": 38
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 1.0,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 28.161260704699338
+    },
+    "rules": {
+      "n": 256,
+      "sari": 29.59476058108689,
+      "changed": 1,
+      "change_rate": 0.00390625,
+      "split_rate": 0.01953125,
+      "max_sentence_words": 19.5078125,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.8515625,
+      "content_recall": 1.0,
+      "check_failures": {
+        "complete_clauses": 38
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 1.0,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 28.475086508079077
+    },
+    "baseline_raw": {
+      "n": 256,
+      "sari": 45.70382332885366,
+      "changed": 106,
+      "change_rate": 0.4140625,
+      "split_rate": 0.390625,
+      "max_sentence_words": 15.76171875,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.65234375,
+      "content_recall": 0.9966905381944444,
+      "check_failures": {
+        "complete_clauses": 59,
+        "argument_roles": 24,
+        "no_new_content": 2,
+        "finite_predicates": 4,
+        "logical_connectives": 16,
+        "content_retained": 6,
+        "operator_scope": 2
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 0.8983050847457628,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 49.47052937779045
+    },
+    "baseline_previous_checks": {
+      "n": 256,
+      "sari": 36.25579949874392,
+      "changed": 42,
+      "change_rate": 0.1640625,
+      "split_rate": 0.16796875,
+      "max_sentence_words": 18.1484375,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.85546875,
+      "content_recall": 1.0,
+      "check_failures": {
+        "complete_clauses": 37
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 0.9661016949152542,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 37.14940926650963
+    },
+    "baseline": {
+      "n": 256,
+      "sari": 36.16516381422127,
+      "changed": 41,
+      "change_rate": 0.16015625,
+      "split_rate": 0.1640625,
+      "max_sentence_words": 18.18359375,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.8515625,
+      "content_recall": 1.0,
+      "check_failures": {
+        "complete_clauses": 38
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 0.9661016949152542,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 37.031628884591875,
+      "latency_median_seconds": 0.23254747909959406,
+      "latency_p95_seconds": 0.4816876355325803,
+      "raw_model_checks_passed": 166,
+      "tense_rejections": 10
+    },
+    "continued_raw": {
+      "n": 256,
+      "sari": 46.38238257301173,
+      "changed": 100,
+      "change_rate": 0.390625,
+      "split_rate": 0.390625,
+      "max_sentence_words": 15.99609375,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.7265625,
+      "content_recall": 0.9989536830357143,
+      "check_failures": {
+        "complete_clauses": 52,
+        "argument_roles": 19,
+        "operator_scope": 2,
+        "logical_connectives": 6,
+        "content_retained": 2,
+        "finite_predicates": 1
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 0.9830508474576272,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 50.300024800918536
+    },
+    "continued_previous_checks": {
+      "n": 256,
+      "sari": 39.47447535520255,
+      "changed": 60,
+      "change_rate": 0.234375,
+      "split_rate": 0.2421875,
+      "max_sentence_words": 17.4140625,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.85546875,
+      "content_recall": 1.0,
+      "check_failures": {
+        "complete_clauses": 37
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 0.9830508474576272,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 41.3232519696538
+    },
+    "continued": {
+      "n": 256,
+      "sari": 39.383839670679905,
+      "changed": 59,
+      "change_rate": 0.23046875,
+      "split_rate": 0.23828125,
+      "max_sentence_words": 17.44921875,
+      "source_words": 19.703125,
+      "check_pass_rate": 0.8515625,
+      "content_recall": 1.0,
+      "check_failures": {
+        "complete_clauses": 38
+      },
+      "semantic_certified": false,
+      "annotated_copy_n": 59,
+      "annotated_copy_accuracy": 0.9830508474576272,
+      "changed_reference_n": 197,
+      "changed_reference_sari": 41.20547158773605,
+      "latency_median_seconds": 0.22353543748613447,
+      "latency_p95_seconds": 0.46943532273871824,
+      "raw_model_checks_passed": 185,
+      "tense_rejections": 9
+    }
+  },
+  "continued_vs_baseline": {
+    "mean_delta": 3.2186758564586238,
+    "ci95": [
+      1.6326259143478372,
+      4.748760813403045
+    ],
+    "resamples": 1000
+  },
+  "continued_vs_baseline_previous_checks": {
+    "mean_delta": 3.1280401719359756,
+    "ci95": [
+      1.552690885153659,
+      4.692844978119113
+    ],
+    "resamples": 1000
+  },
+  "label_status": "Published crowdsourced references, not project human model ratings",
+  "limitations": [
+    "One bounded seed and selected sample",
+    "Set-based single-reference SARI measures overlap, not correctness",
+    "Published references may delete facts or relations",
+    "Near duplicates, document overlap and pretraining overlap not excluded",
+    "No independent human judgments or project domain quality claim"
+  ]
+}

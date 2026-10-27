@@ -144,3 +144,7 @@ rewrite ranker, a CRF edit tagger and a T5-small encoder–decoder on bounded pu
 sentence-splitting pairs. It compares raw and filtered outputs with the existing
 rules and identity on held-out data. It requires the optional dependencies in
 `requirements-structure.txt` and leaves the demo defaults unchanged.
+
+[Continued T5 training](docs/STRUCTURE_CONTINUATION.md) adds filtered published
+DeSSE annotations and additional WikiSplit edits, preserves saved weights and
+compares the continuation with its initializer under identical checks.

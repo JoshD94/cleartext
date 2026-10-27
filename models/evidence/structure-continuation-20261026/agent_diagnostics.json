@@ -1,0 +1,76 @@
+{
+  "review_type": "Agent development diagnostics, not human ratings or gold labels",
+  "sampling": "First 20 normalized changed filtered outputs per model in fixed saved development row order, plus all changed annotated copies and all changed domain outputs",
+  "reviewed_per_model": 20,
+  "findings": [
+    {
+      "id": "desse-train-5870",
+      "systems": [
+        "baseline",
+        "continued"
+      ],
+      "concern": "A restrictive location relation becomes an independent assertion. Complement scope check does not cover relative-clause meaning."
+    },
+    {
+      "id": "desse-dev-13",
+      "systems": [
+        "baseline",
+        "continued"
+      ],
+      "concern": "The second claim escapes the original thought attribution. New complement scope check rejects both."
+    },
+    {
+      "id": "desse-train-4961",
+      "systems": [
+        "baseline"
+      ],
+      "concern": "An embedded location/time relation is detached from its original claim. The new complement scope check does not establish equivalence."
+    },
+    {
+      "id": "desse-train-4641",
+      "systems": [
+        "baseline"
+      ],
+      "concern": "A claim in remembered reported speech becomes independent. Attribution and event relationships need review."
+    },
+    {
+      "id": "desse-train-5758",
+      "systems": [
+        "continued"
+      ],
+      "concern": "An agreement complement becomes an independent assertion. New complement scope check rejects it."
+    },
+    {
+      "id": "desse-train-2326",
+      "systems": [
+        "continued"
+      ],
+      "concern": "An annotated copy loses agreement scope. New complement scope check rejects it."
+    },
+    {
+      "id": "desse-train-9244",
+      "systems": [
+        "continued"
+      ],
+      "concern": "An annotated copy detaches the content of thinking. New complement scope check rejects it."
+    },
+    {
+      "id": "quic-rfc9000-4",
+      "systems": [
+        "baseline",
+        "continued"
+      ],
+      "concern": "Technical outputs retain comma splices."
+    },
+    {
+      "id": "biden-inaugural2021-1",
+      "systems": [
+        "continued"
+      ],
+      "concern": "An initial subordinate clause becomes a standalone fragment despite parser checks."
+    }
+  ],
+  "scope_guard_test_status": "New guard was assessed on development only. Frozen held-out score was not recomputed under it.",
+  "human_ratings": 0,
+  "default_promotion": false
+}

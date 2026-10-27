@@ -1,0 +1,37 @@
+{
+  "n": 24,
+  "split": "dev",
+  "frozen_source_commit": "24a7e0589206161ce8547fd33e58042866d19335",
+  "scope_replay_module_sha256": "f1d49923bddb451f0bd1eba1a04bf5aec6082bac143bad1219dd1914bc0006ce",
+  "input_sha256": "92eefc47516baea891488ec9f85fb834c494adf6d7892524f4a4e0daeb6a0340",
+  "metrics": {
+    "baseline": {
+      "changed": 1,
+      "by_domain": {
+        "technical": 1,
+        "corporate": 0,
+        "political": 0
+      },
+      "additional_scope_rejected_ids": []
+    },
+    "continued": {
+      "changed": 2,
+      "by_domain": {
+        "technical": 1,
+        "corporate": 0,
+        "political": 1
+      },
+      "additional_scope_rejected_ids": []
+    }
+  },
+  "blind_variants": 26,
+  "human_ratings": 0,
+  "domain_test_predictions": 0,
+  "quality_findings": "Agent inspection: both technical outputs retain comma splices; the additional continued political output detaches a subordinate fragment. Counts are not quality gains.",
+  "authored_diagnostics": {
+    "n": 6,
+    "identical_between_models": true,
+    "changed": 1,
+    "known_failure": "The simple shared-subject and relative-clause diagnostics remain unchanged."
+  }
+}

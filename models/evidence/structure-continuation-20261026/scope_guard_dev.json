@@ -1,0 +1,79 @@
+{
+  "split": "dev",
+  "n": 128,
+  "protocol": "Development-only replay of identical saved raw outputs after inspecting development scope failures. Frozen test comparison was not rescored.",
+  "metrics": {
+    "baseline": {
+      "n": 128,
+      "sari": 49.57454932339397,
+      "changed": 44,
+      "change_rate": 0.34375,
+      "split_rate": 0.34375,
+      "max_sentence_words": 15.7890625,
+      "source_words": 18.8125,
+      "check_pass_rate": 1.0,
+      "content_recall": 1.0,
+      "check_failures": {},
+      "semantic_certified": false,
+      "annotated_copy_accuracy": 1.0,
+      "additional_rejected_ids": [
+        "desse-train-2008",
+        "desse-dev-13",
+        "desse-train-9488",
+        "desse-train-563",
+        "desse-train-10312",
+        "desse-train-4370",
+        "desse-train-2473",
+        "desse-train-12666",
+        "desse-train-3902"
+      ]
+    },
+    "continued": {
+      "n": 128,
+      "sari": 54.078705335762635,
+      "changed": 52,
+      "change_rate": 0.40625,
+      "split_rate": 0.40625,
+      "max_sentence_words": 15.3984375,
+      "source_words": 18.8125,
+      "check_pass_rate": 1.0,
+      "content_recall": 1.0,
+      "check_failures": {},
+      "semantic_certified": false,
+      "annotated_copy_accuracy": 1.0,
+      "additional_rejected_ids": [
+        "desse-train-5758",
+        "desse-train-2008",
+        "desse-dev-13",
+        "desse-train-9488",
+        "desse-train-563",
+        "desse-train-836",
+        "desse-train-10312",
+        "desse-train-4370",
+        "desse-train-918",
+        "desse-train-2473",
+        "desse-train-1433",
+        "desse-train-12666",
+        "desse-train-3902",
+        "desse-train-2326",
+        "desse-train-9244"
+      ]
+    }
+  },
+  "continued_vs_baseline_scope_guarded": {
+    "mean_delta": 4.504156012368675,
+    "ci95": [
+      1.6655456538179556,
+      7.737983702490005
+    ],
+    "resamples": 1000
+  },
+  "human_ratings": 0,
+  "source_module_sha256": "f1d49923bddb451f0bd1eba1a04bf5aec6082bac143bad1219dd1914bc0006ce",
+  "predictions_sha256": "21bef3064ee777fbd4d6a26b117e8d15ce0ceaafe41f597ed025b7ae79463487",
+  "limitations": [
+    "Forward complement scope counts are conservative and can reject valid paraphrases",
+    "Unchanged counts do not establish meaning preservation",
+    "Relative clauses, speaker identity, backward complements and coreference remain unresolved"
+  ]
+}
