@@ -73,6 +73,69 @@ predictions, input hashes and both run receipts are local under
 `cleartext-grammar-20261027`, capped at 3 GiB for the server and evaluation together.
 The trial server stopped when evaluation finished.
 
+## Review of correction accuracy
+
+I inspected all five applied development edits in context, the 17 authored
+diagnostics, and the 96 development inputs with their saved warnings. The five
+applied edits look correct, but all five only add contraction apostrophes. Some
+sentences still have other errors after that edit. This is a small qualitative
+review by the coding assistant, not independent human validation or an estimate
+of general correction accuracy.
+
+The checker missed a missing noun or extra article, a malformed reflexive,
+sentence fragments and possessive apostrophes. It also treated a word-boundary
+error as a contraction in one raw suggestion. Our restricted correction policy
+rejected that suggestion. A grammatical sentence received a vocabulary-strength
+suggestion, and names received spelling warnings. Rejecting every checker warning
+would therefore discard valid inputs while retaining some malformed ones.
+
+The earlier 14-of-14 result covered ten intended repairs and four unchanged
+controls. It excluded three report-only examples. Those exposed two missed
+errors and one partial repair, `He dont` becoming `He don't`. Passing the 14
+checks does not mean the checker fixes every sentence.
+
+## Screen candidate data without changing the benchmark
+
+`cleartext.grammar_screening` reads saved grammar results and creates a manifest.
+It keeps every row and its original order, records input hashes, and never
+rewrites text. It classifies warnings about the original input, before correction.
+No inference, training or running grammar server is required.
+
+- `flagged`: a selected grammar, punctuation or spacing rule found a suspected
+  problem. This can be used to quarantine candidate data for a separate panel.
+- `review`: spelling or an unknown rule needs inspection. Names and technical
+  terms can trigger these warnings.
+- `no_covered_issue`: no selected problem was found. This does not certify
+  grammaticality. Known style preferences and warnings in protected spans are
+  ignored for this screen.
+- `unavailable`: the saved check failed or has malformed results. These inputs
+  must never count as passing a grammar check.
+
+On the 96 development inputs, the screen flagged 16, marked one for review and
+found no covered issue in 79. Several of those 79 have clear grammar errors in
+the qualitative review. All 96 remain in the manifest and benchmark. These
+counts describe rule coverage, not a measured accuracy or recall.
+
+From the repository root:
+
+```sh
+PYTHONPATH=models/src models/.venv/bin/python -m cleartext.grammar_screening \
+  --saved-outputs /path/to/grammar-comparison/outputs.json \
+  --output /path/to/new-screening-manifest.json
+```
+
+The command refuses to overwrite an existing manifest and rejects checks whose
+original text differs from the saved source. Aggregate review evidence and the
+manifest are in `models/evidence/grammar-review-20261027/`. Detailed judgments
+with source text remain outside Git under the local grammar trial directory.
+
+Use this screen to flag future training candidates or define a separately
+reported diagnostic subset. A subset selected this way still needs its own
+grammar assessment. Keep the original full benchmark, report its scores and
+denominator, and disclose the screen policy and counts for any subset. Removing
+flagged cases alone is not a model improvement. This change does not exclude
+any data or enable grammar correction in the demo.
+
 ## Try it locally
 
 Use Java 17 and the existing model environment. Download and extract

@@ -1,0 +1,49 @@
+{
+  "review_date": "2026-10-27",
+  "reviewer": "Coding assistant qualitative inspection, not independent human validation",
+  "implementation_commit": "bc71874bb0c3cec99a7834cbc5c740fb7592caf9",
+  "correction_policy": "local-grammar-v2",
+  "sources": {
+    "outputs.json": "b85f2dfe3e562be1d445575c92b1c413de92e84113fd5843f4bf3fc979d48cc4",
+    "diagnostics.json": "da0c895966851ce20f504c94f47e05d26e737eaeb12aa69fc563b803d3ddea95",
+    "screening-v1.json": "4b185ad1873984fd05ec43e6e4fd891040985c9fb4afd4b8d5f2d620d667d83c"
+  },
+  "scope": {
+    "development_inputs_inspected": 96,
+    "applied_development_edits_inspected": 5,
+    "authored_diagnostics_inspected": 17,
+    "all_inputs_formally_grammar_labeled": false
+  },
+  "limits": "Five correct local edits do not establish general correction precision. No full grammaticality gold labels or recall estimate. Full benchmark unchanged.",
+  "local_applied_edit_judgments": {
+    "inspected": 5,
+    "judged_correct_in_context": 5,
+    "all_missing_apostrophes": true,
+    "whole_sentences_certified": 0
+  },
+  "authored_diagnostic_judgments": {
+    "intended_repairs_correct": 10,
+    "intended_unchanged_controls_correct": 4,
+    "report_only_missed_errors": 2,
+    "report_only_partial_repairs": 1
+  },
+  "selected_zero_warning_error_ids": [
+    "desse-train-13192",
+    "desse-train-8099",
+    "desse-train-3311",
+    "desse-train-4825",
+    "desse-train-10182",
+    "desse-train-2532"
+  ],
+  "style_warning_on_grammatical_input_id": "desse-train-3085",
+  "inappropriate_raw_suggestion_rejected_id": "desse-train-129",
+  "screen_policy": "grammar-screen-v1",
+  "screen_counts": {
+    "no_covered_issue": 79,
+    "flagged": 16,
+    "review": 1
+  },
+  "benchmark_rows_before": 96,
+  "benchmark_rows_after": 96,
+  "detailed_local_review_sha256": "17905153b65c8db99a6fc7a585ad1726de3590d20607584be19f791fbad01197"
+}
