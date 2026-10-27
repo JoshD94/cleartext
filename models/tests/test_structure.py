@@ -583,6 +583,45 @@ def test_training_refuses_to_replace_an_existing_output_checkpoint(tmp_path):
     assert original.read_bytes() == b"existing model"
 
 
+@pytest.mark.parametrize("decoded_improves", [False, True])
+def test_decoded_checkpoint_selection_overrides_loss_and_can_retain_initializer(
+    tiny_t5, tmp_path, monkeypatch, decoded_improves
+):
+    import hashlib
+    from cleartext.structure import seq2seq
+
+    model, tokenizer, rows = tiny_t5
+    initial = tmp_path / "initial"
+    model.save_pretrained(initial)
+    tokenizer.save_pretrained(initial)
+    monkeypatch.setattr(seq2seq, "capacity_check", lambda _: None)
+    calls = []
+
+    def decoded(current_model, current_tokenizer, device):
+        calls.append(len(calls))
+        return {"score": float(calls[-1] if decoded_improves else -calls[-1])}
+
+    result = seq2seq.train_seq2seq(
+        {"train": rows, "dev": rows},
+        tmp_path / "run",
+        max_steps=1,
+        batch_size=2,
+        initial_checkpoint=initial,
+        target_learning_rate=0.0001,
+        device="cpu",
+        cpu_threads=2,
+        validation_interval=1,
+        selection_evaluator=decoded,
+    )
+    assert calls == [0, 1]
+    assert result["selected"]["step"] == int(decoded_improves)
+    before = hashlib.sha256((initial / "model.safetensors").read_bytes()).hexdigest()
+    after = hashlib.sha256(
+        (tmp_path / "run/seq2seq/model.safetensors").read_bytes()
+    ).hexdigest()
+    assert (before != after) == decoded_improves
+
+
 @pytest.mark.parametrize(
     "source,output,equal",
     [
@@ -703,4 +742,6 @@ def test_complement_scope_preserves_embedded_claims_and_shared_attribution(
 ):
     from cleartext.structure.seq2seq import complement_scopes
 
-    assert (complement_scopes(nlp()(source)) == complement_scopes(nlp()(output))) == equal
+    assert (
+        complement_scopes(nlp()(source)) == complement_scopes(nlp()(output))
+    ) == equal

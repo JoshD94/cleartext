@@ -17,9 +17,10 @@ from collections import Counter
 from pathlib import Path
 
 from ..features import nlp
-from .common import complete_clause, detokenize, normalize, structure_checks
+from .common import complete_clause, detokenize, normalize
 from .corpus import download, pair_keys, read_pair, write_json
 from .review import excluded_keys
+from .seq2seq import generation_checks
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[3] / "structure-expanded-sources.json"
 RELATIONS = {
@@ -119,6 +120,11 @@ def reference_quality(row, source_doc, reference_doc):
     old, new = list(source_doc.sents), list(reference_doc.sents)
     if len(old) != 1 or not complete_clause(old[0]):
         return "source_clause"
+    checks = generation_checks(
+        row["source"], row["reference"], source_doc, reference_doc
+    )
+    if not checks["pass"]:
+        return "+".join(checks["failed"])
     if normalize(row["source"]) == normalize(row["reference"]):
         return None
     if not 2 <= len(new) <= 4:
@@ -133,19 +139,7 @@ def reference_quality(row, source_doc, reference_doc):
         ):
             return "discourse_relation"
 
-    def finite_tenses(doc):
-        return Counter(
-            (t.lemma_.lower(), tuple(t.morph.get("Tense")), tuple(t.morph.get("Mood")))
-            for t in doc
-            if t.pos_ in {"VERB", "AUX"} and "Fin" in t.morph.get("VerbForm")
-        )
-
-    if finite_tenses(source_doc) != finite_tenses(reference_doc):
-        return "finite_tense"
-    checks = structure_checks(
-        row["source"], row["reference"], source_doc, reference_doc
-    )
-    return None if checks["pass"] else "+".join(checks["failed"])
+    return None
 
 
 def filtered_pairs(rows, excluded):

@@ -3,8 +3,8 @@
 from functools import lru_cache
 
 from ..features import nlp
-from .common import complete_clause, normalize, structure_checks
-from .seq2seq import PREFIX, SentenceGenerator, complement_scopes, predicate_tenses
+from .common import complete_clause, normalize
+from .seq2seq import PREFIX, SentenceGenerator, generation_checks
 
 COORDINATORS = {"and", "but", "or", "nor", "yet", "so", "for"}
 SUBORDINATORS = {
@@ -76,12 +76,8 @@ def boundary_checks(source_doc, output_doc):
 
 def checked(source, raw, source_doc, terminated=True, boundaries=True):
     new = nlp()(raw)
-    result = structure_checks(source, raw, source_doc, new)
-    added = {
-        "predicate_tense": predicate_tenses(source_doc) == predicate_tenses(new),
-        "complement_scope": complement_scopes(source_doc) == complement_scopes(new),
-        "generation_terminated": terminated,
-    }
+    result = generation_checks(source, raw, source_doc, new, terminated)
+    added = {}
     if boundaries:
         added.update(boundary_checks(source_doc, new))
     result["checks"].update(added)

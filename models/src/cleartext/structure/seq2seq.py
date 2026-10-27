@@ -20,6 +20,44 @@ from .corpus import write_json
 PREFIX = "split sentence: "
 
 
+def _subjects(token):
+    return {
+        tuple(
+            t.lemma_.casefold()
+            for t in child.subtree
+            if t == child or t.dep_ in {"compound", "flat"}
+        )
+        for child in token.children
+        if child.dep_ in {"nsubj", "nsubjpass"}
+    }
+
+
+def _independent_report(token):
+    """Recognize a repeated matrix subject with its own finite complement.
+
+    "She thinks Bob works here and she hopes Carol joins" can attach hopes to
+    works. A distinct embedded subject and repeated matrix subject support an
+    independent report. Unknown pronoun/name links and nested repeated subjects
+    remain conservative. A new subject alone never licenses losing attribution.
+    """
+    parent = token.head
+    if token.dep_ != "conj" or parent.dep_ not in {"ccomp", "xcomp"}:
+        return False
+    subject = _subjects(token)
+    return bool(
+        subject
+        and subject == _subjects(parent.head)
+        and _subjects(parent)
+        and subject.isdisjoint(_subjects(parent))
+        and not any(c.dep_ == "mark" for c in token.children)
+        and any(
+            c.dep_ == "ccomp"
+            and any("Fin" in t.morph.get("VerbForm") for t in [c, *c.children])
+            for c in token.children
+        )
+    )
+
+
 def complement_scopes(doc):
     """Keep embedded claims under their original predicate, including conjuncts.
 
@@ -36,11 +74,34 @@ def complement_scopes(doc):
         current, seen = token, set()
         while current.dep_ == "conj" and current.i not in seen:
             seen.add(current.i)
+            if _independent_report(current):
+                break
             current = current.head
         if current.dep_ in {"ccomp", "xcomp"} and current.i > current.head.i:
             result[
                 (current.dep_, current.head.lemma_.lower(), token.lemma_.lower())
             ] += 1
+    return result
+
+
+def generation_checks(
+    source, output, source_doc=None, output_doc=None, terminated=True
+):
+    """One contract for published training targets and baseline generation."""
+    from ..features import nlp
+    from .common import structure_checks
+
+    old = source_doc if source_doc is not None else nlp()(source)
+    new = output_doc if output_doc is not None else nlp()(output)
+    result = structure_checks(source, output, old, new)
+    added = {
+        "predicate_tense": predicate_tenses(old) == predicate_tenses(new),
+        "complement_scope": complement_scopes(old) == complement_scopes(new),
+        "generation_terminated": terminated,
+    }
+    result["checks"].update(added)
+    result["failed"].extend(k for k, v in added.items() if not v)
+    result["pass"] = not result["failed"]
     return result
 
 
@@ -181,11 +242,16 @@ def train_seq2seq(
     accumulation_steps=1,
     initial_checkpoint=None,
     target_learning_rate=None,
+    selection_evaluator=None,
+    validation_interval=100,
+    cpu_threads=4,
 ):
     import torch
     from huggingface_hub import model_info
     from transformers import Adafactor, AutoModelForSeq2SeqLM, AutoTokenizer
 
+    if validation_interval < 1 or cpu_threads < 1:
+        raise ValueError("Validation interval and CPU threads must be positive")
     run = Path(run)
     if (run / "seq2seq").exists() and any((run / "seq2seq").iterdir()):
         raise FileExistsError("Refusing to overwrite an existing seq2seq checkpoint")
@@ -221,7 +287,7 @@ def train_seq2seq(
     random.seed(4701)
     np.random.seed(4701)
     torch.manual_seed(4701)
-    torch.set_num_threads(4)
+    torch.set_num_threads(cpu_threads)
     device = choose_device(device)
     if device.type == "mps":
         torch.mps.set_per_process_memory_fraction(0.45)
@@ -298,11 +364,17 @@ def train_seq2seq(
         "length_filtered_training_pairs": len(data["train"]) - len(train),
         "dev_pairs": len(dev),
         "selection": "Lowest token-weighted dev teacher-forced loss, including step 0; test not used",
+        "validation_interval": validation_interval,
+        "cpu_threads": cpu_threads,
         "prefix": PREFIX,
         "trainable_parameters": sum(p.numel() for p in model.parameters()),
     }
+    if selection_evaluator is not None:
+        configuration["selection"] = (
+            "Highest decoded development score, then lowest dev loss; step zero included; test not used"
+        )
     write_json(run / "seq2seq_config.json", configuration)
-    start, last_check, step, best, history = time.monotonic(), 0.0, 0, math.inf, []
+    start, last_check, step, history = time.monotonic(), 0.0, 0, []
     examples_seen = 0
 
     def validate(current_model):
@@ -321,12 +393,29 @@ def train_seq2seq(
 
     # Retain initialization when continuation makes development loss worse.
     # Previously the first trained checkpoint could replace a better initializer.
-    best = validate(model)
-    history.append({"step": 0, "dev_loss": best})
-    model.save_pretrained(run / "seq2seq", safe_serialization=True)
-    tokenizer.save_pretrained(run / "seq2seq")
-    write_json(run / "seq2seq" / "selection.json", {"step": 0, "dev_loss": best})
-    print("dev", 0, best, flush=True)
+    best_rank = None
+
+    def validate_checkpoint(current_model, current_step):
+        nonlocal best_rank
+        dev_loss = validate(current_model)
+        record = {"step": current_step, "dev_loss": dev_loss}
+        rank = (-dev_loss,)
+        if selection_evaluator is not None:
+            decoded = selection_evaluator(current_model, tokenizer, device)
+            score = float(decoded["score"])
+            if not math.isfinite(score):
+                raise RuntimeError("Non-finite decoded development score")
+            record["decoded"] = decoded
+            rank = (score, -dev_loss)
+        history.append(record)
+        print("dev", json.dumps(record), flush=True)
+        if best_rank is None or rank > best_rank:
+            best_rank = rank
+            current_model.save_pretrained(run / "seq2seq", safe_serialization=True)
+            tokenizer.save_pretrained(run / "seq2seq")
+            write_json(run / "seq2seq" / "selection.json", record)
+
+    validate_checkpoint(model, 0)
 
     for epoch in range(epochs):
         order = list(train)
@@ -374,21 +463,11 @@ def train_seq2seq(
                 write_json(run / "progress.json", progress)
                 print(json.dumps(progress), flush=True)
             if (
-                step % 100 == 0
+                step % validation_interval == 0
                 or step == max_steps
                 or offset + effective_batch >= len(order)
             ):
-                dev_loss = validate(model)
-                history.append({"step": step, "dev_loss": dev_loss})
-                print("dev", step, dev_loss, flush=True)
-                if dev_loss < best:
-                    best = dev_loss
-                    model.save_pretrained(run / "seq2seq", safe_serialization=True)
-                    tokenizer.save_pretrained(run / "seq2seq")
-                    write_json(
-                        run / "seq2seq" / "selection.json",
-                        {"step": step, "dev_loss": best},
-                    )
+                validate_checkpoint(model, step)
         if step >= max_steps:
             break
     result = {
@@ -423,7 +502,6 @@ class SentenceGenerator:
     def predict(self, source, doc=None):
         import torch
 
-        from .common import structure_checks
         from ..features import nlp
 
         encoded = self.tokenizer(PREFIX + source, return_tensors="pt")
@@ -432,7 +510,7 @@ class SentenceGenerator:
                 "raw": source,
                 "output": source,
                 "reason": "source exceeds token limit",
-                "raw_checks": structure_checks(source, source, doc),
+                "raw_checks": generation_checks(source, source, doc),
             }
         with torch.inference_mode():
             ids = self.model.generate(
@@ -445,22 +523,7 @@ class SentenceGenerator:
         raw = self.tokenizer.decode(ids[0], skip_special_tokens=True).strip()
         terminated = self.tokenizer.eos_token_id in ids[0].tolist()[1:]
         old = doc if doc is not None else nlp()(source)
-        new = nlp()(raw)
-        checks = structure_checks(source, raw, old, new)
-        same_tense = predicate_tenses(old) == predicate_tenses(new)
-        checks["checks"]["predicate_tense"] = same_tense
-        if not same_tense:
-            checks["failed"].append("predicate_tense")
-            checks["pass"] = False
-        same_scope = complement_scopes(old) == complement_scopes(new)
-        checks["checks"]["complement_scope"] = same_scope
-        if not same_scope:
-            checks["failed"].append("complement_scope")
-            checks["pass"] = False
-        checks["checks"]["generation_terminated"] = terminated
-        if not terminated:
-            checks["failed"].append("generation_terminated")
-            checks["pass"] = False
+        checks = generation_checks(source, raw, old, terminated=terminated)
         return {
             "raw": raw,
             "output": raw if checks["pass"] else source,
