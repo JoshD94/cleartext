@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "features": [
+    "min_contradiction",
+    "max_contradiction",
+    "min_entailment",
+    "max_entailment",
+    "min_neutral",
+    "max_neutral"
+  ],
+  "coefficients": [
+    -0.2788294335137409,
+    -1.8248509714166,
+    1.0570092872335395,
+    -0.38604432831511976,
+    0.16592525694956226,
+    0.9618088502677633
+  ],
+  "intercept": -0.41411599311909747,
+  "threshold": 0.55,
+  "data_sha256": "0ab03ea2e3f52afe73eab6ef551925389981972b7d084d9195c857e2b1713a41",
+  "nli_model_sha256": "ec9c5b6a08b60d7a01b465c7ed44b496244dfd1bed3274c95875a74cea89ab35",
+  "scorer_sha256": "18d35affcb643756fc57cc3bfe7bae52e341c35b832bd4e17c3bae128a05f50a",
+  "training_rows": 2048,
+  "training_abstentions": 0,
+  "training_majority": 0,
+  "semantic_certified": false
+}

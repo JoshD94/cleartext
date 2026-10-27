@@ -1,0 +1,28 @@
+{
+  "host": "Yoga",
+  "session": "cleartext-semantics-20261027",
+  "reason": "10.2GB available RAM, 270GiB disk, load0.53 before launch; peak estimate4GB RAM and1GB disk fits Yoga. Mac SSH timed out.",
+  "memory_cap_gib": 4,
+  "cpu_threads": 2,
+  "runs": {
+    "train-dev": {
+      "exit": 0,
+      "elapsed": "2:27.16",
+      "peak_rss_kib": 943440
+    },
+    "test-diagnostics": {
+      "exit": 0,
+      "elapsed": "0:47.81",
+      "peak_rss_kib": 873912
+    },
+    "smoke": {
+      "exit": 0,
+      "elapsed": "0:06.73",
+      "peak_rss_kib": 876336
+    }
+  },
+  "new_data_bytes": 342023902,
+  "unrelated_jobs_preserved": true,
+  "other_heavy_model_jobs_started": false,
+  "own_experiment_jobs_finished": true
+}

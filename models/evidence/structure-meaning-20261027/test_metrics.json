@@ -1,0 +1,51 @@
+{
+  "baseline": {
+    "n": 512,
+    "tp": 209,
+    "tn": 71,
+    "fp": 211,
+    "fn": 21,
+    "accuracy": 0.546875,
+    "balanced_accuracy": 0.5802343509096515,
+    "precision": 0.4976190476190476,
+    "recall": 0.908695652173913,
+    "false_accept_rate": 0.74822695035461,
+    "accepted": 420
+  },
+  "abstained": 0,
+  "elapsed_seconds": 26.697773362975568,
+  "learned": {
+    "n": 512,
+    "tp": 191,
+    "tn": 154,
+    "fp": 128,
+    "fn": 39,
+    "accuracy": 0.673828125,
+    "balanced_accuracy": 0.6882670366944188,
+    "precision": 0.5987460815047022,
+    "recall": 0.8304347826086956,
+    "false_accept_rate": 0.45390070921985815,
+    "accepted": 319
+  },
+  "training_majority": {
+    "n": 512,
+    "tp": 0,
+    "tn": 282,
+    "fp": 0,
+    "fn": 230,
+    "accuracy": 0.55078125,
+    "balanced_accuracy": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "false_accept_rate": 0.0,
+    "accepted": 0
+  },
+  "accuracy_delta": {
+    "mean": 0.126953125,
+    "bootstrap_95_ci": [
+      0.08984375,
+      0.1640625
+    ],
+    "resamples": 1000
+  }
+}

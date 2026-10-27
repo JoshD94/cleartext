@@ -1,5 +1,9 @@
 # Learned meaning check
 
+[Completed results](../evidence/structure-meaning-20261027/README.md) show a PAWS
+classification gain, with frequent remaining errors and no Cleartext
+simplification gain. Keep this experiment opt-in.
+
 This experiment adds a small NLI model and a trained paraphrase classifier to
 the optional sentence simplification tools. The demo still uses its existing
 defaults. Scores are model predictions, not proof that a rewrite is correct.
@@ -47,3 +51,45 @@ After freezing, apply the scorer to saved Cleartext development outputs and
 authored semantic diagnostics. Report those separately. PAWS classification
 accuracy does not measure simplification quality, grammaticality or CEFR level.
 Do not predict the reserved domain test inputs or promote a demo default.
+
+## Run it
+
+Install `requirements-meaning.txt` in the optional model environment. From the
+repository root, set `PYTHONPATH=models/src`. Use a fresh directory for each
+stage. Downloads, all pretrained weights and raw examples stay outside Git.
+
+```sh
+python -m cleartext.structure.meaning_experiment download --cache "$CACHE"
+python -m cleartext.structure.meaning_experiment prepare --cache "$CACHE" --output "$RUN"
+python -m cleartext.structure.meaning_experiment score --cache "$CACHE" --run "$RUN" --phase train --output "$TRAIN"
+python -m cleartext.structure.meaning_experiment score --cache "$CACHE" --run "$RUN" --phase dev --output "$DEV"
+python -m cleartext.structure.meaning_experiment fit --run "$RUN" --train-scores "$TRAIN" --dev-scores "$DEV" --output "$FIT"
+python -m cleartext.structure.meaning_experiment score --cache "$CACHE" --run "$RUN" --phase test --classifier "$FIT/classifier.json" --output "$TEST"
+```
+
+Set each variable above to a separate local path. The runner saves input,
+source and model hashes before inference. It rejects changed data, mismatched
+NLI weights, changed scorer code and incomplete scored splits. Classifier
+weights are a small JSON document, loaded without pickle or remote code.
+
+The optional rollback compares only the already selected search output with the
+source. A rejection or token-budget abstention returns the source and keeps the
+rejected candidate and its checks in the trace. It does not search additional
+candidates or certify the accepted text.
+
+```sh
+python models/scripts/predict_structure_search.py \
+  --checkpoint "$T5_CHECKPOINT" --device cpu --details \
+  --meaning-model "$CACHE/model" --meaning-classifier "$FIT/classifier.json" \
+  'Alice reviewed the report and Bob checked the figures.'
+```
+
+To reproduce the separate development diagnostics, use the previous completed
+search run and a fresh output directory:
+
+```sh
+python models/scripts/evaluate_meaning_diagnostics.py \
+  --cache "$CACHE" --classifier "$FIT/classifier.json" \
+  --authored models/evidence/structure-meaning-20261027/authored_inputs.json \
+  --prior-run "$PRIOR_SEARCH_RUN" --output "$DIAGNOSTICS"
+```

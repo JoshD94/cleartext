@@ -1,0 +1,12 @@
+{
+  "python": "3.12.14",
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "pyarrow": "26.0.0",
+    "spacy": "3.8.16"
+  }
+}

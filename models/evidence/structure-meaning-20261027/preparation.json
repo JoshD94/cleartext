@@ -1,0 +1,159 @@
+{
+  "settings": {
+    "counts": {
+      "train": 2048,
+      "dev": 256,
+      "test": 512
+    },
+    "seed": 4701,
+    "thresholds": [
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
+    ],
+    "selection": "SHA256(seed:split:id), no label stratification",
+    "fit": {
+      "C": 1.0,
+      "class_weight": "balanced",
+      "max_iter": 500
+    },
+    "baseline": "Minimum bidirectional entailment probability >= 0.5",
+    "features": [
+      "min_contradiction",
+      "max_contradiction",
+      "min_entailment",
+      "max_entailment",
+      "min_neutral",
+      "max_neutral"
+    ],
+    "max_tokens": 512
+  },
+  "data_sha256": "0ab03ea2e3f52afe73eab6ef551925389981972b7d084d9195c857e2b1713a41",
+  "config_sha256": "30173ac9d56ac244c8d07ecd2f6d7391666e4236afabbf1f6fc993509fee06fa",
+  "sources": {
+    "model_id": "cross-encoder/nli-MiniLM2-L6-H768",
+    "model_revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+    "dataset_id": "google-research-datasets/paws",
+    "dataset_revision": "161ece9501cf0a11f3e48bd356eaa82de46d6a09",
+    "dataset_original": "https://github.com/google-research-datasets/paws",
+    "original_download_status": "Official storage.googleapis.com archive returned HTTP403; use publisher Hugging Face Parquet mirror",
+    "files": [
+      {
+        "path": "model/README.md",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/README.md",
+        "bytes": 2695,
+        "git_blob_sha1": "c424f2537691c27718354d28794160ba0c6175ec"
+      },
+      {
+        "path": "model/config.json",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/config.json",
+        "bytes": 875,
+        "git_blob_sha1": "f3d2c8b047a34c20737866987ba16ea6114c7b53"
+      },
+      {
+        "path": "model/merges.txt",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/merges.txt",
+        "bytes": 456356,
+        "git_blob_sha1": "6636bda4a1fd7a63653dffb22683b8162c8de956"
+      },
+      {
+        "path": "model/model.safetensors",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/model.safetensors",
+        "bytes": 328499560,
+        "sha256": "ec9c5b6a08b60d7a01b465c7ed44b496244dfd1bed3274c95875a74cea89ab35"
+      },
+      {
+        "path": "model/special_tokens_map.json",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/special_tokens_map.json",
+        "bytes": 239,
+        "git_blob_sha1": "2ea7ad0e45a9d1d1591782ba7e29a703d0758831"
+      },
+      {
+        "path": "model/tokenizer.json",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/tokenizer.json",
+        "bytes": 1356048,
+        "git_blob_sha1": "8df0092a08e1d459f60ec541e08cd35a16362bfe"
+      },
+      {
+        "path": "model/tokenizer_config.json",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/tokenizer_config.json",
+        "bytes": 330,
+        "git_blob_sha1": "6c26b0317aae78dbce2c8f06dbf846c6e9dd4145"
+      },
+      {
+        "path": "model/vocab.json",
+        "url": "https://huggingface.co/cross-encoder/nli-MiniLM2-L6-H768/resolve/b95119ce93d3e065de6214e38cd4a97b0f2f2c6d/vocab.json",
+        "bytes": 798293,
+        "git_blob_sha1": "4ebe4bb3f3114daf2e4cc349f24873a1175a35d7"
+      },
+      {
+        "path": "paws/README.md",
+        "url": "https://huggingface.co/datasets/google-research-datasets/paws/resolve/161ece9501cf0a11f3e48bd356eaa82de46d6a09/README.md",
+        "bytes": 9795,
+        "git_blob_sha1": "ffcd4695cb531f85c7dfdab8b695e118439effb0"
+      },
+      {
+        "path": "paws/labeled_final/test-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/google-research-datasets/paws/resolve/161ece9501cf0a11f3e48bd356eaa82de46d6a09/labeled_final/test-00000-of-00001.parquet",
+        "bytes": 1235128,
+        "sha256": "ae342ff12bb84b84b95f468abf5db6cb7c7bd578271299fe9c99be75b8132f4d"
+      },
+      {
+        "path": "paws/labeled_final/train-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/google-research-datasets/paws/resolve/161ece9501cf0a11f3e48bd356eaa82de46d6a09/labeled_final/train-00000-of-00001.parquet",
+        "bytes": 8433884,
+        "sha256": "8dc9ad3e5f30ad9a86b290fe236d528ef23a5751fec9a35d99cbacf68ba277cf"
+      },
+      {
+        "path": "paws/labeled_final/validation-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/google-research-datasets/paws/resolve/161ece9501cf0a11f3e48bd356eaa82de46d6a09/labeled_final/validation-00000-of-00001.parquet",
+        "bytes": 1230379,
+        "sha256": "7760d829453764ba342a6f562809a8ed21c2c3eec3fd9ffa544089f145d42f6d"
+      },
+      {
+        "path": "paws/LICENSE",
+        "url": "https://raw.githubusercontent.com/google-research-datasets/paws/02b29f3af1143620d1b7f352247e65c0bdd2ec18/LICENSE",
+        "bytes": 320,
+        "sha256": "3f2d0f4e3fd88fa1bfeff353754da904c0060ec9d26c9266b8fda73ef98b8a25"
+      }
+    ]
+  },
+  "counts": {
+    "train": 2048,
+    "dev": 256,
+    "test": 512
+  },
+  "labels": {
+    "train": {
+      "1": 891,
+      "0": 1157
+    },
+    "dev": {
+      "0": 144,
+      "1": 112
+    },
+    "test": {
+      "1": 230,
+      "0": 282
+    }
+  },
+  "excluded_all_validation_test_sentence_keys_from_training": 12899,
+  "new_human_ratings": 0,
+  "synthetic_training_labels": 0
+}

@@ -1,0 +1,35 @@
+{
+  "purpose": "Previously inspected development failures, agent notes only",
+  "issues": [
+    {
+      "id": "desse-test-359",
+      "method": "search",
+      "issue": "Missed incomplete prepositional phrase",
+      "decision": {
+        "accepted": true,
+        "paraphrase_probability": 0.5640392710070318,
+        "threshold": 0.55,
+        "semantic_certified": false
+      },
+      "directional_entailment": {
+        "forward": 0.9923118948936462,
+        "reverse": 0.9893038272857666
+      }
+    },
+    {
+      "id": "desse-test-257",
+      "method": "search",
+      "issue": "Missed knowledge/how scope change",
+      "decision": {
+        "accepted": true,
+        "paraphrase_probability": 0.5643447486572089,
+        "threshold": 0.55,
+        "semantic_certified": false
+      },
+      "directional_entailment": {
+        "forward": 0.9898640513420105,
+        "reverse": 0.9895723462104797
+      }
+    }
+  ]
+}

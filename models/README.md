@@ -152,3 +152,7 @@ compares the continuation with its initializer under identical checks.
 [Checked candidate search](docs/STRUCTURE_SEARCH.md) reuses that checkpoint and
 tries four model candidates with additional sentence-boundary checks and bounded
 comma repairs. It is an opt-in experiment with a standalone prediction command.
+
+The [learned meaning experiment](docs/STRUCTURE_MEANING.md) compares both NLI
+directions and trains a small paraphrase classifier on public PAWS labels.
+An optional prediction flag rolls back rejected rewrites to the original text.

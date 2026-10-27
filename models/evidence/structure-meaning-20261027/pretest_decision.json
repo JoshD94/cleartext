@@ -1,0 +1,6 @@
+{
+  "classifier_sha256": "115ffff246687a5f38bffff5d78653183418ec245b649c5443902935d3fb9438",
+  "threshold": 0.55,
+  "after_development": "Proceed with fixed protocol. Development accuracy63.67%, non-equivalent acceptance51.39%, insufficient for trusted meaning gate. Keep opt-in and no demo promotion regardless of test point estimate. No parameter or code changes after development.",
+  "held_out_test_predicted": false
+}
