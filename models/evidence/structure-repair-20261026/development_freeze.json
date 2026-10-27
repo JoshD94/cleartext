@@ -1,0 +1,17 @@
+{
+  "source_commit": "c6ffeaa7bc986bee246fa1ad3c4c4f2af2fc32c0",
+  "files": {
+    "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+    "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072",
+    "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+    "experiment.py": "0025361ff30ec9e7bd45a2799edcdb177606dfe72ede5628e955210d1112e81b",
+    "common.py": "974d5f6771558138ab24b41847a174b94e7cda1b8af43012ed07243206b1fa5c",
+    "learning.py": "4251210ef9efd0532803a594493af0e4f0e3be79d3976e914fb5d8d97ad29cb5",
+    "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+    "seq2seq.py": "6c101b6c0b517c65e8c421cbd7c69244ce3317c52bc3f4b93f8b1e081aa11d14"
+  },
+  "inputs_sha256": "92eefc47516baea891488ec9f85fb834c494adf6d7892524f4a4e0daeb6a0340",
+  "ranker_sha256": "3beaaae087cbf89798090bde31bbba6e7dffbc16867ef40ea278513191e40c7a",
+  "t5_sha256": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+  "note": "Development only. Original T5 checkpoint reused, no new T5 training or test predictions."
+}

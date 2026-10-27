@@ -1,0 +1,417 @@
+[
+  {
+    "source": "The server checks each request and sends a response to the client.",
+    "prediction": {
+      "raw": "The server checks each request. The server sends a response to the client.",
+      "output": "The server checks each request. The server sends a response to the client.",
+      "score": 36.208372007154274,
+      "candidate_count": 2,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The server checks each request and sends a response to the client.",
+        "kind": "identity"
+      },
+      {
+        "output": "The server checks each request. The server sends a response to the client.",
+        "kind": "copy_subject"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The server checks each request, and the client sends each response.",
+    "prediction": {
+      "raw": "The server checks each request. The client sends each response.",
+      "output": "The server checks each request. The client sends each response.",
+      "score": 44.4056144124998,
+      "candidate_count": 2,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The server checks each request, and the client sends each response.",
+        "kind": "identity"
+      },
+      {
+        "output": "The server checks each request. The client sends each response.",
+        "kind": "existing_rule"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The researcher reviewed the report, and she published the findings.",
+    "prediction": {
+      "raw": "The researcher reviewed the report. She published the findings.",
+      "output": "The researcher reviewed the report. She published the findings.",
+      "score": 44.4056144124998,
+      "candidate_count": 2,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The researcher reviewed the report, and she published the findings.",
+        "kind": "identity"
+      },
+      {
+        "output": "The researcher reviewed the report. She published the findings.",
+        "kind": "existing_rule"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The researcher visited her father and mother before the meeting.",
+    "prediction": {
+      "raw": "The researcher visited her father and mother before the meeting.",
+      "output": "The researcher visited her father and mother before the meeting.",
+      "score": 0.0,
+      "candidate_count": 1,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The researcher visited her father and mother before the meeting.",
+        "kind": "identity"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The report was prepared by Alice and approved by Bob.",
+    "prediction": {
+      "raw": "The report was prepared by Alice and approved by Bob.",
+      "output": "The report was prepared by Alice and approved by Bob.",
+      "score": 0.0,
+      "candidate_count": 1,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The report was prepared by Alice and approved by Bob.",
+        "kind": "identity"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The server may check each request and send a response.",
+    "prediction": {
+      "raw": "The server may check each request and send a response.",
+      "output": "The server may check each request and send a response.",
+      "score": 0.0,
+      "candidate_count": 1,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The server may check each request and send a response.",
+        "kind": "identity"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The gateway uses Diffie-Hellman keys; the client stores each response.",
+    "prediction": {
+      "raw": "The gateway uses Diffie-Hellman keys. The client stores each response.",
+      "output": "The gateway uses Diffie-Hellman keys. The client stores each response.",
+      "score": 49.89015985103612,
+      "candidate_count": 2,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "finite_predicates": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "candidates": [
+      {
+        "output": "The gateway uses Diffie-Hellman keys; the client stores each response.",
+        "kind": "identity"
+      },
+      {
+        "output": "The gateway uses Diffie-Hellman keys. The client stores each response.",
+        "kind": "boundary"
+      }
+    ],
+    "checks": {
+      "pass": true,
+      "checks": {
+        "numbers": true,
+        "negation": true,
+        "modality": true,
+        "entities": true,
+        "technical_phrases": true,
+        "content_retained": true,
+        "no_new_content": true,
+        "argument_roles": true,
+        "operator_scope": true,
+        "finite_predicates": true,
+        "logical_connectives": true,
+        "sentence_count": true,
+        "complete_clauses": true
+      },
+      "failed": [],
+      "content_recall": 1.0,
+      "semantic_certified": false
+    }
+  }
+]

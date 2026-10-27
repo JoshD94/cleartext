@@ -1,0 +1,47 @@
+{
+  "cases": [
+    {
+      "source": "The server checks each request and sends a response to the client.",
+      "output": "The server checks each request. The server sends a response to the client.",
+      "exact_trace": true
+    },
+    {
+      "source": "The server checks each request, and the client sends each response.",
+      "output": "The server checks each request. The client sends each response.",
+      "exact_trace": true
+    },
+    {
+      "source": "The researcher reviewed the report, and she published the findings.",
+      "output": "The researcher reviewed the report. She published the findings.",
+      "exact_trace": true
+    },
+    {
+      "source": "The researcher visited her father and mother before the meeting.",
+      "output": "The researcher visited her father and mother before the meeting.",
+      "exact_trace": true
+    },
+    {
+      "source": "The report was prepared by Alice and approved by Bob.",
+      "output": "The report was prepared by Alice and approved by Bob.",
+      "exact_trace": true
+    },
+    {
+      "source": "The server may check each request and send a response.",
+      "output": "The server may check each request and send a response.",
+      "exact_trace": true
+    },
+    {
+      "source": "The gateway uses Diffie-Hellman keys; the client stores each response.",
+      "output": "The gateway uses Diffie-Hellman keys. The client stores each response.",
+      "exact_trace": true
+    }
+  ],
+  "config": {
+    "structure_backends": [
+      "rules",
+      "ranker"
+    ],
+    "preferred_structure_backend": "rules"
+  },
+  "passed": true
+}

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "archive_sha256": "fde430d0866f360e60092bc34231698627612a6e2f5a45ffc891f828162eb0ac",
+  "ranker_sha256": "3beaaae087cbf89798090bde31bbba6e7dffbc16867ef40ea278513191e40c7a",
+  "cli_prediction": "The server checks each request. The server sends a response to the client.",
+  "temporary_files_removed": true
+}

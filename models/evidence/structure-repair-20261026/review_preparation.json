@@ -1,0 +1,34 @@
+{
+  "workflow_commit": "6408990a17f56d35e2e568217d5f3e0a6e715953",
+  "inputs": 72,
+  "split_counts": {
+    "train": 24,
+    "dev": 24,
+    "reserved_test": 24
+  },
+  "domains": [
+    "technical",
+    "corporate",
+    "political"
+  ],
+  "references_rows": 48,
+  "development_system_outputs": 72,
+  "unique_blind_variants": 25,
+  "human_references": 0,
+  "human_ratings": 0,
+  "reserved_test_predictions": 0,
+  "all_review_fields_blank": true,
+  "committed_preparation_reproduced_inputs_byte_for_byte": true,
+  "input_sha256": {
+    "train": "ef2c56a9300072f45403e01e80073d9a0b337d074d6fc999717453ba1c09f986",
+    "dev": "92eefc47516baea891488ec9f85fb834c494adf6d7892524f4a4e0daeb6a0340",
+    "test": "592872c2a68dc208c906c21e1f2bb4dfb3bf3d0dc7c2991d59e961412b60c8ac"
+  },
+  "sheet_sha256": {
+    "references.csv": "24114390c3a85a60cdc183074e8834830309396e1af2a459aec3eec135a5035d",
+    "blind-review.csv": "f45cea2049e388ba975970e6746ae9a58c602edf039abf74ab792f295bea4096"
+  },
+  "initial_extraction": "Preserved locally as a diagnostic; revised document anchors and clause eligibility before any reserved test predictions",
+  "review_key": "Kept separately from reviewer CSV; identical outputs share one variant",
+  "source_text_and_weights_in_git": false
+}

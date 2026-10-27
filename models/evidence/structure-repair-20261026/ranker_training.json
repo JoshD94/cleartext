@@ -1,0 +1,32 @@
+{
+  "feature_version": 2,
+  "training_candidates": 2153,
+  "training_pairs": 2000,
+  "label": "Single-reference SARI(candidate) minus SARI(identity), not human quality",
+  "selection": [
+    {
+      "threshold": 0.0,
+      "dev_sari": 34.97778750266127
+    },
+    {
+      "threshold": 1.0,
+      "dev_sari": 34.97778750266127
+    },
+    {
+      "threshold": 2.0,
+      "dev_sari": 34.97778750266127
+    },
+    {
+      "threshold": 5.0,
+      "dev_sari": 34.97778750266127
+    },
+    {
+      "threshold": 10.0,
+      "dev_sari": 34.97778750266127
+    }
+  ],
+  "selected": {
+    "threshold": 10.0,
+    "dev_sari": 34.97778750266127
+  }
+}

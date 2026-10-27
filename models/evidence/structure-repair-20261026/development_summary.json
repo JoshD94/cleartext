@@ -1,0 +1,16 @@
+{
+  "n": 24,
+  "split": "development",
+  "label_status": "No human ratings; changed counts are coverage, not quality",
+  "systems": {
+    "rules": {
+      "changed": 0
+    },
+    "ranker": {
+      "changed": 0
+    },
+    "seq2seq": {
+      "changed": 1
+    }
+  }
+}
