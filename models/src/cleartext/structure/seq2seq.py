@@ -1,6 +1,7 @@
 """Bounded local T5-small fine-tuning, with dev-only checkpoint selection."""
 
 import gc
+import hashlib
 import json
 import math
 import os
@@ -9,6 +10,7 @@ import random
 import shutil
 import subprocess
 import time
+from collections import Counter
 from pathlib import Path
 
 import numpy as np
@@ -112,12 +114,42 @@ def train_seq2seq(
     model_name="google-t5/t5-small",
     optimizer_name="adafactor",
     accumulation_steps=1,
+    initial_checkpoint=None,
+    target_learning_rate=None,
 ):
     import torch
     from huggingface_hub import model_info
     from transformers import Adafactor, AutoModelForSeq2SeqLM, AutoTokenizer
 
     run = Path(run)
+    if target_learning_rate is not None and (
+        not math.isfinite(target_learning_rate) or target_learning_rate <= 0
+    ):
+        raise ValueError("Learning rate must be finite and positive")
+    checkpoint = None
+    if initial_checkpoint is not None:
+        initial_checkpoint = Path(initial_checkpoint).resolve()
+        destination = (run / "seq2seq").resolve()
+        if initial_checkpoint.is_relative_to(destination) or destination.is_relative_to(
+            initial_checkpoint
+        ):
+            raise ValueError(
+                "Initial checkpoint and output must be separate directories"
+            )
+        if not (initial_checkpoint / "config.json").is_file() or not any(
+            (initial_checkpoint / name).is_file()
+            for name in ("model.safetensors", "pytorch_model.bin")
+        ):
+            raise ValueError("Initial checkpoint needs config and local model weights")
+        hashes = {}
+        for path in sorted(initial_checkpoint.iterdir()):
+            if path.is_file():
+                digest = hashlib.sha256()
+                with path.open("rb") as stream:
+                    for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                        digest.update(chunk)
+                hashes[path.name] = digest.hexdigest()
+        checkpoint = {"path": str(initial_checkpoint), "files_sha256": hashes}
     capacity_check(run)
     random.seed(4701)
     np.random.seed(4701)
@@ -126,10 +158,15 @@ def train_seq2seq(
     device = choose_device(device)
     if device.type == "mps":
         torch.mps.set_per_process_memory_fraction(0.45)
-    revision = model_info(model_name, token=False).sha
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_name, revision=revision, token=False
-    )
+    if checkpoint is None:
+        revision = model_info(model_name, token=False).sha
+        load_name = model_name
+        load_options = {"revision": revision, "token": False}
+    else:
+        revision = None
+        load_name = str(initial_checkpoint)
+        load_options = {"local_files_only": True, "token": False}
+    tokenizer = AutoTokenizer.from_pretrained(load_name, **load_options)
     # Filter training only on length. No tokens are truncated at inference either.
     train = []
     for row in data["train"]:
@@ -146,11 +183,13 @@ def train_seq2seq(
     ]
     if not train or not dev:
         raise ValueError("No token-length eligible training/development pairs")
-    model = AutoModelForSeq2SeqLM.from_pretrained(
-        model_name, revision=revision, token=False
-    ).to(device)
+    model = AutoModelForSeq2SeqLM.from_pretrained(load_name, **load_options).to(device)
     model.config.use_cache = False
-    learning_rate = 1e-3 if optimizer_name == "adafactor" else 3e-4
+    learning_rate = (
+        target_learning_rate
+        if target_learning_rate is not None
+        else (1e-3 if optimizer_name == "adafactor" else 3e-4)
+    )
     warmup_steps = max(1, max_steps // 10)
     if optimizer_name == "adafactor":
         optimizer = Adafactor(
@@ -172,8 +211,10 @@ def train_seq2seq(
         1, math.ceil(max_steps / max(1, math.ceil(len(train) / effective_batch)))
     )
     configuration = {
-        "model": model_name,
+        "model": load_name,
         "revision": revision,
+        "initial_checkpoint": checkpoint,
+        "optimizer_state": "New optimizer; this is weight initialization, not optimizer/step resumption",
         "device": str(device),
         "seed": 4701,
         "max_steps": max_steps,
@@ -186,6 +227,7 @@ def train_seq2seq(
         "max_source_tokens": 192,
         "max_target_tokens": 256,
         "training_pairs": len(train),
+        "training_domains": dict(Counter(r.get("domain", "general") for r in train)),
         "length_filtered_training_pairs": len(data["train"]) - len(train),
         "dev_pairs": len(dev),
         "selection": "Lowest token-weighted dev teacher-forced loss; test not used",

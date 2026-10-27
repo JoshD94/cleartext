@@ -496,3 +496,52 @@ def test_accumulated_training_saves_a_reloadable_checkpoint(
     assert 0 <= result["elapsed_seconds"] < 120
     loaded = seq2seq.SentenceGenerator(run / "seq2seq", device="cpu")
     assert not torch.equal(initial_weight, loaded.model.shared.weight)
+
+
+def test_training_can_initialize_from_a_local_checkpoint_without_changing_it(
+    tiny_t5, tmp_path, monkeypatch
+):
+    import hashlib
+    import huggingface_hub
+    import torch
+    from cleartext.structure import seq2seq
+
+    model, tokenizer, rows = tiny_t5
+    initial = tmp_path / "selected-checkpoint"
+    model.save_pretrained(initial)
+    tokenizer.save_pretrained(initial)
+    before = hashlib.sha256((initial / "model.safetensors").read_bytes()).hexdigest()
+    monkeypatch.setattr(
+        huggingface_hub,
+        "model_info",
+        lambda *a, **k: pytest.fail(
+            "Local initialization must not resolve a Hub model"
+        ),
+    )
+    monkeypatch.setattr(seq2seq, "capacity_check", lambda _: None)
+    run = tmp_path / "continued-run"
+    result = seq2seq.train_seq2seq(
+        {"train": rows, "dev": rows},
+        run,
+        max_steps=1,
+        batch_size=1,
+        initial_checkpoint=initial,
+        target_learning_rate=0.0001,
+        device="cpu",
+    )
+    assert result["revision"] is None and result["learning_rate"] == 0.0001
+    assert result["initial_checkpoint"]["files_sha256"]["model.safetensors"] == before
+    assert (
+        hashlib.sha256((initial / "model.safetensors").read_bytes()).hexdigest()
+        == before
+    )
+    loaded = seq2seq.SentenceGenerator(run / "seq2seq", device="cpu")
+    assert not torch.equal(model.shared.weight, loaded.model.shared.weight)
+
+
+def test_training_cannot_overwrite_its_initial_checkpoint(tmp_path):
+    from cleartext.structure.seq2seq import train_seq2seq
+
+    initial = tmp_path / "run" / "seq2seq"
+    with pytest.raises(ValueError, match="separate directories"):
+        train_seq2seq({}, tmp_path / "run", initial_checkpoint=initial)

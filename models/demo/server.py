@@ -31,9 +31,16 @@ PIPE = EnsembleClearText.load(LATEST)
 RANKER_PATH = os.environ.get("CLEARTEXT_STRUCTURE_RANKER")
 RANKER = None
 if RANKER_PATH:
+    from cleartext.structure.learning import RANKER_FEATURE_VERSION
+
     # Trusted local artifact only. Never deserialize an uploaded/request-supplied path.
     with Path(RANKER_PATH).open("rb") as stream:
         RANKER = pickle.load(stream)
+    if getattr(RANKER, "feature_version", None) != RANKER_FEATURE_VERSION:
+        raise RuntimeError(
+            "The structural ranker needs refitting for the current source. "
+            "Use the repaired bundle described in models/docs/STRUCTURE_REVIEW.md."
+        )
 PIPE.analyze(
     "The technician will commence the installation.", structure=False, phrases=False
 )  # warm caches

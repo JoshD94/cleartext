@@ -255,6 +255,8 @@ def main():
         "--optimizer", choices=["adafactor", "adamw"], default="adafactor"
     )
     parser.add_argument("--device", default="auto")
+    parser.add_argument("--initial-checkpoint", type=Path)
+    parser.add_argument("--learning-rate", type=float)
     parser.add_argument("--classic-only", action="store_true")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument(
@@ -368,6 +370,8 @@ def main():
             args.device,
             optimizer_name=args.optimizer,
             accumulation_steps=args.accumulation_steps,
+            initial_checkpoint=args.initial_checkpoint,
+            target_learning_rate=args.learning_rate,
         )
     if args.stage in {"evaluate", "all"}:
         comparison = evaluate(data, run, args.device, args.classic_only)

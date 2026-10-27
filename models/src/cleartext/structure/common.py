@@ -222,11 +222,14 @@ def structure_checks(source, output, source_doc=None, output_doc=None):
     old = source_doc if source_doc is not None else nlp()(source)
     new = output_doc if output_doc is not None else nlp()(output)
     oc, nc = Counter(t.lower_ for t in old), Counter(t.lower_ for t in new)
-    content = lambda d: Counter(
-        t.lemma_.lower()
-        for t in d
-        if t.pos_ in {"NOUN", "PROPN", "VERB", "ADJ", "ADV"} and not t.is_stop
-    )
+
+    def content(d):
+        return Counter(
+            t.lemma_.lower()
+            for t in d
+            if t.pos_ in {"NOUN", "PROPN", "VERB", "ADJ", "ADV"} and not t.is_stop
+        )
+
     a, b = content(old), content(new)
     sentences = list(new.sents)
     checks = {
@@ -310,9 +313,7 @@ def _split_candidates(text, doc):
         if token.lower_ != "and" or token.dep_ != "cc" or token.head != root:
             continue
         conjuncts = [
-            c
-            for c in root.children
-            if c.dep_ == "conj" and c.pos_ in {"VERB", "AUX"}
+            c for c in root.children if c.dep_ == "conj" and c.pos_ in {"VERB", "AUX"}
         ]
         if len(conjuncts) != 1:
             continue
@@ -324,8 +325,7 @@ def _split_candidates(text, doc):
         # No argument/modifier may cross the proposed boundary. In particular,
         # a trailing shared modifier attached to the first predicate stays put.
         if any(
-            not t.is_punct and (t.i in subtree) != (t.i >= right_start)
-            for t in doc
+            not t.is_punct and (t.i in subtree) != (t.i >= right_start) for t in doc
         ):
             continue
         subjects = [
@@ -347,9 +347,12 @@ def _split_candidates(text, doc):
             continue
         if tokens[-1].i >= root.i or len(tokens) != tokens[-1].i - tokens[0].i + 1:
             continue
+
         # "Buys and sells cars" may share the right-hand object. Do not turn it
         # into "Buys. Sells cars" by silently changing the first predicate.
-        objects = lambda p: any(c.dep_ in {"dobj", "obj", "attr"} for c in p.children)
+        def objects(p):
+            return any(c.dep_ in {"dobj", "obj", "attr"} for c in p.children)
+
         if objects(root) != objects(predicate):
             continue
         prefix = doc[tokens[0].i : tokens[-1].i + 1].text + " "

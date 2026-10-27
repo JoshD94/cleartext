@@ -1,5 +1,9 @@
 # Learned sentence structure experiments
 
+For the current splitter repairs, compatible ranker bundle and human review
+workflow, see [sentence splitter review](STRUCTURE_REVIEW.md). Ranker features
+are now version 2. Earlier artifacts need their frozen source or a refit.
+
 These experiments compare three approaches on the same bounded WikiSplit sample.
 Training and comparison run through a separate CLI. The demo can load a checked
 ranker as an optional structural stage before the existing v7 word models.
