@@ -18,9 +18,22 @@ def main():
         "--device", choices=("auto", "cpu", "mps", "cuda"), default="auto"
     )
     parser.add_argument("--details", action="store_true")
+    parser.add_argument("--meaning-model", type=Path)
+    parser.add_argument("--meaning-classifier", type=Path)
     parser.add_argument("text")
     args = parser.parse_args()
+    if bool(args.meaning_model) != bool(args.meaning_classifier):
+        parser.error(
+            "--meaning-model and --meaning-classifier must be supplied together"
+        )
     result = CandidateGenerator(args.checkpoint, args.device).predict(args.text)
+    if args.meaning_model:
+        from cleartext.structure.meaning import MeaningScorer, guard_output
+
+        classifier = json.loads(args.meaning_classifier.read_text())
+        result = guard_output(
+            args.text, result, MeaningScorer(args.meaning_model), classifier
+        )
     print(json.dumps(result, indent=2) if args.details else result["output"])
 
 

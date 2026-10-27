@@ -1,0 +1,3 @@
+# Optional public Parquet data reader for the meaning experiment.
+-r requirements-structure.txt
+pyarrow==26.0.0
