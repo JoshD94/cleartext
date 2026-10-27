@@ -139,6 +139,11 @@ Experiment caches require matching source and input fingerprints to resume. Code
 
 ## Learned sentence structure experiments
 
+[Input grammar correction](docs/GRAMMAR_PREPROCESSING.md) is an optional local,
+rule-based stage before simplification. It fixes selected article, contraction
+and verb-agreement errors while recording each correction. Its first development
+trial corrected five of 96 inputs and left the number of shorter splits unchanged.
+
 The separate [structural experiment suite](docs/STRUCTURE_EXPERIMENTS.md) trains a
 rewrite ranker, a CRF edit tagger and a T5-small encoder–decoder on bounded public
 sentence-splitting pairs. It compares raw and filtered outputs with the existing

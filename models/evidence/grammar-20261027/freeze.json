@@ -1,0 +1,80 @@
+{
+  "policy": "local-grammar-v2",
+  "saved_outputs_sha256": "e19faee939f223e9caa1736556bfb065bf8cbf2380d37a1eb50aa5dfe3d277cd",
+  "weights_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "corrector_source_sha256": "f0d9b45ddf7ff38ae2c87bdad8a9f8467ec9057ef657c4f6e8102c85e7a8d3a6",
+  "experiment_source_sha256": "adaeee3938e359c13d09f7a772b0833dca85e308ea7c5a0171a20b32889db054",
+  "n": 96,
+  "diagnostics": [
+    [
+      "She go to school every day.",
+      "She goes to school every day."
+    ],
+    [
+      "They is ready.",
+      "They are ready."
+    ],
+    [
+      "He have a new car.",
+      "He has a new car."
+    ],
+    [
+      "We was ready.",
+      "We were ready."
+    ],
+    [
+      "She were ready yesterday.",
+      "She was ready yesterday."
+    ],
+    [
+      "She does not knows the answer.",
+      "She does not know the answer."
+    ],
+    [
+      "They has 25 neural networks.",
+      "They have 25 neural networks."
+    ],
+    [
+      "This is an useful tool.",
+      "This is a useful tool."
+    ],
+    [
+      "A hour passed.",
+      "An hour passed."
+    ],
+    [
+      "We dont understand the result.",
+      "We don't understand the result."
+    ],
+    [
+      "This is a useful tool.",
+      "This is a useful tool."
+    ],
+    [
+      "The data are stored in PostgreSQL.",
+      "The data are stored in PostgreSQL."
+    ],
+    [
+      "The server may not process 25 samples.",
+      "The server may not process 25 samples."
+    ],
+    [
+      "The token is `dont`.",
+      "The token is `dont`."
+    ],
+    [
+      "There are several schools offer evening classes.",
+      null
+    ],
+    [
+      "The houses were painted and where ready for sale.",
+      null
+    ],
+    [
+      "He dont know the result.",
+      null
+    ]
+  ],
+  "scope": "Reused, inspected broad development panel plus authored diagnostics. No training or fresh test claim. All dev rows included, unchanged inputs reuse saved outputs after two exact reproduction controls.",
+  "inference": "Frozen selected step906 checkpoint, greedy=False, two beams, no sampling; source and guards receive corrected input."
+}

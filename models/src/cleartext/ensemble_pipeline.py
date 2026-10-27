@@ -530,7 +530,16 @@ class EnsembleClearText:
         words=True,
         max_word_edits=None,
         structure_rewriter=None,
+        grammar_corrector=None,
     ):
+        original_text = text
+        grammar_details = {}
+        grammar_edits = []
+        if grammar_corrector is not None:
+            grammar = grammar_corrector.correct(text)
+            text = grammar["output"]
+            grammar_edits = grammar["edits"]
+            grammar_details = {"preprocessed": text, "grammar": grammar}
         max_word_edits = (
             self.max_word_edits if max_word_edits is None else max_word_edits
         )
@@ -684,18 +693,21 @@ class EnsembleClearText:
         levels = {}
         if self.sentence_model is not None:
             levels = {
-                "reading_level_before": self.reading_level(original_doc),
+                "reading_level_before": self.reading_level(
+                    nlp()(original_text) if original_text != text else original_doc
+                ),
                 "reading_level_after": self.reading_level(nlp()(current))
                 if current != text
                 else self.reading_level(original_doc),
             }
         return {
-            "original": text,
+            "original": original_text,
             "output": current,
-            "edits": edits,
+            "edits": grammar_edits + edits,
             "trace": trace,
             "structure": structure_details,
             **levels,
             **term_details,
+            **grammar_details,
             "limits": "At most one syntax rule, one phrase and one word edit. Fit is a probability, not a meaning certificate.",
         }

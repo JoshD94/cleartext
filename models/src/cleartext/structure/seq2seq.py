@@ -499,7 +499,15 @@ class SentenceGenerator:
         )
         self.model.config.use_cache = True
 
-    def predict(self, source, doc=None):
+    def predict(self, source, doc=None, grammar_corrector=None):
+        if grammar_corrector is not None:
+            grammar = grammar_corrector.correct(source)
+            return {
+                **self.predict(grammar["output"]),
+                "original": source,
+                "preprocessed": grammar["output"],
+                "grammar": grammar,
+            }
         import torch
 
         from ..features import nlp
