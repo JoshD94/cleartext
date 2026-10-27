@@ -1,0 +1,451 @@
+{
+  "purpose": "Development diagnosis, no human quality labels",
+  "exposure": {
+    "selected_step": 300,
+    "prepared_rows": 3986,
+    "examples_seen_at_selected_step": 2400,
+    "distinct_rows_seen_at_selected_step": 2400,
+    "distinct_fraction": 0.6021073758153538,
+    "unseen_in_this_continuation": 1586,
+    "seen_by_dataset": {
+      "DeSSE": 1106,
+      "WikiSplit": 1294
+    },
+    "seen_copy_targets": 615,
+    "caution": "Initializer may already have seen replay examples; coverage alone does not prove undertraining.",
+    "dev_loss_history": [
+      {
+        "step": 0,
+        "dev_loss": 0.24409746256637563
+      },
+      {
+        "step": 100,
+        "dev_loss": 0.20893642229163728
+      },
+      {
+        "step": 200,
+        "dev_loss": 0.19419656744747393
+      },
+      {
+        "step": 300,
+        "dev_loss": 0.1835129303785535
+      },
+      {
+        "step": 400,
+        "dev_loss": 0.18478253995415117
+      }
+    ]
+  },
+  "references": {
+    "train": {
+      "n": 3986,
+      "counts": {
+        "edited_reference": 2986,
+        "source_words_total": 82368,
+        "reference_sentences_total": 6036,
+        "reference_pass": 2620,
+        "copy_reference": 1000
+      },
+      "failed_checks_on_edited_references": {
+        "complement_scope": 361,
+        "predicate_tense": 6
+      },
+      "sole_failed_check_on_edited_references": {
+        "complement_scope": 360,
+        "predicate_tense": 5
+      },
+      "caution": "A rejected published target can indicate a bad target, a bad parse, or an overstrict check. These are not quality labels."
+    },
+    "dev": {
+      "n": 128,
+      "counts": {
+        "edited_reference": 96,
+        "source_words_total": 1897,
+        "reference_sentences_total": 203,
+        "reference_pass": 68,
+        "copy_reference": 32
+      },
+      "failed_checks_on_edited_references": {
+        "complement_scope": 28
+      },
+      "sole_failed_check_on_edited_references": {
+        "complement_scope": 28
+      },
+      "caution": "A rejected published target can indicate a bad target, a bad parse, or an overstrict check. These are not quality labels."
+    },
+    "test": {
+      "n": 256,
+      "counts": {
+        "edited_reference": 197,
+        "source_words_total": 4226,
+        "reference_sentences_total": 411,
+        "reference_pass": 33,
+        "copy_reference": 59
+      },
+      "failed_checks_on_edited_references": {
+        "negation": 18,
+        "operator_scope": 22,
+        "complete_clauses": 43,
+        "no_new_content": 24,
+        "finite_predicates": 26,
+        "logical_connectives": 68,
+        "predicate_tense": 57,
+        "argument_roles": 80,
+        "entities": 8,
+        "content_retained": 45,
+        "complement_scope": 58,
+        "modality": 11,
+        "sentence_count": 1
+      },
+      "sole_failed_check_on_edited_references": {
+        "argument_roles": 11,
+        "logical_connectives": 21,
+        "complete_clauses": 9,
+        "complement_scope": 5,
+        "modality": 1,
+        "no_new_content": 2,
+        "content_retained": 1,
+        "predicate_tense": 1
+      },
+      "caution": "A rejected published target can indicate a bad target, a bad parse, or an overstrict check. These are not quality labels."
+    }
+  },
+  "funnels": {
+    "old_dev": {
+      "n": 128,
+      "counts": {
+        "raw_copy": 52,
+        "raw_change": 76,
+        "blocked_change": 9,
+        "final_change": 67
+      },
+      "reference_strata": {
+        "edited_reference": {
+          "raw_copy": 26,
+          "raw_change": 70,
+          "final_change": 65
+        },
+        "copy_reference": {
+          "raw_change": 6,
+          "raw_copy": 26,
+          "final_change": 2
+        }
+      },
+      "failed_checks_on_changed_raw_only": {
+        "argument_roles": 3,
+        "complete_clauses": 3,
+        "logical_connectives": 1,
+        "content_retained": 2,
+        "predicate_tense": 2,
+        "no_new_content": 1,
+        "finite_predicates": 1
+      },
+      "sole_failed_check_on_changed_raw": {
+        "argument_roles": 2,
+        "complete_clauses": 3,
+        "logical_connectives": 1
+      },
+      "sari_overlap_proxy": {
+        "identity": 30.580907918481437,
+        "raw": 61.128403484929045,
+        "final": 59.62583050996012
+      }
+    },
+    "old_test": {
+      "n": 256,
+      "counts": {
+        "raw_copy": 156,
+        "raw_change": 100,
+        "blocked_change": 41,
+        "final_change": 59
+      },
+      "reference_strata": {
+        "edited_reference": {
+          "raw_copy": 98,
+          "raw_change": 99,
+          "final_change": 58
+        },
+        "copy_reference": {
+          "raw_copy": 58,
+          "raw_change": 1,
+          "final_change": 1
+        }
+      },
+      "failed_checks_on_changed_raw_only": {
+        "complete_clauses": 22,
+        "argument_roles": 19,
+        "operator_scope": 2,
+        "predicate_tense": 9,
+        "logical_connectives": 6,
+        "content_retained": 2,
+        "finite_predicates": 1
+      },
+      "sole_failed_check_on_changed_raw": {
+        "complete_clauses": 13,
+        "argument_roles": 9,
+        "logical_connectives": 1,
+        "predicate_tense": 1
+      },
+      "sari_overlap_proxy": {
+        "identity": 29.353261818329827,
+        "raw": 46.38238257301173,
+        "final": 39.383839670679905
+      }
+    },
+    "current_dev": {
+      "n": 128,
+      "counts": {
+        "raw_copy": 52,
+        "raw_change": 76,
+        "blocked_change": 24,
+        "final_change": 52
+      },
+      "reference_strata": {
+        "edited_reference": {
+          "raw_copy": 26,
+          "raw_change": 70,
+          "final_change": 52
+        },
+        "copy_reference": {
+          "raw_change": 6,
+          "raw_copy": 26
+        }
+      },
+      "failed_checks_on_changed_raw_only": {
+        "argument_roles": 3,
+        "complement_scope": 17,
+        "complete_clauses": 3,
+        "logical_connectives": 1,
+        "content_retained": 2,
+        "predicate_tense": 2,
+        "no_new_content": 1,
+        "finite_predicates": 1
+      },
+      "sole_failed_check_on_changed_raw": {
+        "argument_roles": 1,
+        "complement_scope": 15,
+        "complete_clauses": 3,
+        "logical_connectives": 1
+      },
+      "sari_overlap_proxy": {
+        "identity": 30.580907918481437,
+        "raw": 61.128403484929045,
+        "final": 54.078705335762635
+      }
+    },
+    "current_test": {
+      "n": 128,
+      "counts": {
+        "raw_copy": 76,
+        "raw_change": 52,
+        "blocked_change": 33,
+        "final_change": 19
+      },
+      "reference_strata": {
+        "copy_reference": {
+          "raw_copy": 30,
+          "raw_change": 1
+        },
+        "edited_reference": {
+          "raw_copy": 46,
+          "raw_change": 51,
+          "final_change": 19
+        }
+      },
+      "failed_checks_on_changed_raw_only": {
+        "logical_connectives": 6,
+        "complete_clauses": 12,
+        "complement_scope": 12,
+        "argument_roles": 12,
+        "predicate_tense": 4,
+        "content_retained": 1
+      },
+      "sole_failed_check_on_changed_raw": {
+        "complement_scope": 9,
+        "argument_roles": 8,
+        "complete_clauses": 5,
+        "logical_connectives": 2
+      },
+      "sari_overlap_proxy": {
+        "identity": 29.863441127311074,
+        "raw": 47.99176854879592,
+        "final": 37.03055051671231
+      }
+    }
+  },
+  "beams": {
+    "current_dev": {
+      "n": 128,
+      "counts": {
+        "with_any_raw_change": 128,
+        "with_any_passing_change": 82,
+        "selected_change": 53,
+        "top_copy_hides_passing_change": 29,
+        "unselected_passing_change": 29,
+        "with_any_passing_added_sentence": 61,
+        "unselected_passing_added_sentence": 9
+      },
+      "reference_gate_strata": {
+        "edited_reference_fails": {
+          "n": 28,
+          "baseline_raw_copy": 13,
+          "with_passing_change": 7,
+          "selected_change": 3,
+          "unselected_passing_change": 4
+        },
+        "edited_reference_passes": {
+          "n": 68,
+          "baseline_raw_copy": 13,
+          "with_passing_change": 61,
+          "selected_change": 50,
+          "unselected_passing_change": 11
+        },
+        "copy_reference": {
+          "n": 32,
+          "baseline_raw_copy": 26,
+          "with_passing_change": 14,
+          "selected_change": 0,
+          "unselected_passing_change": 14
+        }
+      },
+      "sari_overlap_proxy": {
+        "identity": 30.580907918481483,
+        "selected": 54.19927382142078,
+        "raw_oracle_with_identity": 71.85814659424605,
+        "checked_oracle_with_identity": 59.219681747542616,
+        "first_passing_change_else_identity": 58.10267898101993
+      },
+      "caution": "Oracle sees the reference and is not deployable. Passing a parser check does not establish meaning or grammar correctness."
+    },
+    "current_test": {
+      "n": 128,
+      "counts": {
+        "with_any_raw_change": 128,
+        "with_any_passing_change": 60,
+        "selected_change": 19,
+        "top_copy_hides_passing_change": 39,
+        "unselected_passing_change": 41,
+        "with_any_passing_added_sentence": 30,
+        "unselected_passing_added_sentence": 12
+      },
+      "reference_gate_strata": {
+        "copy_reference": {
+          "n": 31,
+          "baseline_raw_copy": 30,
+          "with_passing_change": 17,
+          "selected_change": 0,
+          "unselected_passing_change": 17
+        },
+        "edited_reference_fails": {
+          "n": 79,
+          "baseline_raw_copy": 41,
+          "with_passing_change": 28,
+          "selected_change": 10,
+          "unselected_passing_change": 18
+        },
+        "edited_reference_passes": {
+          "n": 18,
+          "baseline_raw_copy": 5,
+          "with_passing_change": 15,
+          "selected_change": 9,
+          "unselected_passing_change": 6
+        }
+      },
+      "sari_overlap_proxy": {
+        "identity": 29.86344112731108,
+        "selected": 36.35567893534201,
+        "raw_oracle_with_identity": 64.32431623243035,
+        "checked_oracle_with_identity": 41.71131015019053,
+        "first_passing_change_else_identity": 40.74964975488582
+      },
+      "caution": "Oracle sees the reference and is not deployable. Passing a parser check does not establish meaning or grammar correctness."
+    }
+  },
+  "losses": {
+    "current_dev": {
+      "n": 128,
+      "edited_references": 96,
+      "copy_lower_mean_token_loss_on_edited_references": 53,
+      "mean_reference_minus_copy_loss_on_edited_references": 0.14368367044395805,
+      "caution": "Teacher-forced loss is not decoding probability or quality; targets differ in length. No fitting or checkpoint selection here."
+    },
+    "current_test": {
+      "n": 128,
+      "edited_references": 97,
+      "copy_lower_mean_token_loss_on_edited_references": 82,
+      "mean_reference_minus_copy_loss_on_edited_references": 0.5653534858936405,
+      "caution": "Teacher-forced loss is not decoding probability or quality; targets differ in length. No fitting or checkpoint selection here."
+    }
+  },
+  "same_raw_dev_control": {
+    "n": 128,
+    "same_source_and_raw": 128,
+    "previous_changed_now_copy_ids": [
+      "desse-train-5758",
+      "desse-train-2008",
+      "desse-dev-13",
+      "desse-train-9488",
+      "desse-train-563",
+      "desse-train-836",
+      "desse-train-10312",
+      "desse-train-4370",
+      "desse-train-918",
+      "desse-train-2473",
+      "desse-train-1433",
+      "desse-train-12666",
+      "desse-train-3902",
+      "desse-train-2326",
+      "desse-train-9244"
+    ]
+  },
+  "authored_probes": [
+    {
+      "id": "two_attributions_preserved",
+      "expected_equivalence": true,
+      "failed": [
+        "complement_scope"
+      ]
+    },
+    {
+      "id": "two_attributions_with_but",
+      "expected_equivalence": true,
+      "failed": []
+    },
+    {
+      "id": "attribution_removed",
+      "expected_equivalence": false,
+      "failed": [
+        "complement_scope"
+      ]
+    },
+    {
+      "id": "negated_complement_removed",
+      "expected_equivalence": false,
+      "failed": [
+        "complement_scope"
+      ]
+    },
+    {
+      "id": "safe_independent_clauses",
+      "expected_equivalence": true,
+      "failed": []
+    },
+    {
+      "id": "shared_passive",
+      "expected_equivalence": true,
+      "failed": []
+    },
+    {
+      "id": "roles_reversed",
+      "expected_equivalence": false,
+      "failed": [
+        "argument_roles"
+      ]
+    },
+    {
+      "id": "relative_clause_explicit_subject",
+      "expected_equivalence": true,
+      "failed": []
+    }
+  ]
+}

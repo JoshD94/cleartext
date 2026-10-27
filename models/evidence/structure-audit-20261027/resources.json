@@ -1,0 +1,33 @@
+{
+  "host": "yoga",
+  "session": "cleartext-audit-20261027",
+  "memory_cap_gb": 4,
+  "threads": 2,
+  "runs": [
+    {
+      "directory": "run",
+      "seconds": 63.8,
+      "peak_rss_kib": 904012,
+      "exit": 0
+    },
+    {
+      "directory": "run-v2",
+      "seconds": 70.4,
+      "peak_rss_kib": 901468,
+      "exit": 0
+    }
+  ],
+  "available_ram_mb_after": 8697,
+  "existing_checkpoints_sha256_after": {
+    "structural-20261026": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+    "structure-expanded-20261026": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756"
+  },
+  "demo_config": {
+    "structure_backends": [
+      "rules",
+      "ranker"
+    ],
+    "preferred_structure_backend": "rules"
+  },
+  "demo_status": 200
+}

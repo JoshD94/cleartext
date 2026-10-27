@@ -1,0 +1,54 @@
+{
+  "purpose": "Previously inspected material, development diagnosis only; no training or promotion",
+  "inputs": {
+    "data": {
+      "path": "/home/joshuadirga/.local/state/cleartext/structure-expanded-20261026/run/data.json",
+      "sha256": "2b24cfe55d43704ccc2c85f6d14ac22f3d05e3b20b2a6b9e2cea92809a0f3c79"
+    },
+    "training": {
+      "path": "/home/joshuadirga/.local/state/cleartext/structure-expanded-20261026/run/seq2seq_training.json",
+      "sha256": "3ca0028a0cd54ed170da3d6d2e3db94060bbba4a0b9315d8750476dbd27e5a95"
+    },
+    "old_dev": {
+      "path": "/home/joshuadirga/.local/state/cleartext/structure-expanded-20261026/run/dev-evaluation/outputs.jsonl",
+      "sha256": "21bef3064ee777fbd4d6a26b117e8d15ce0ceaafe41f597ed025b7ae79463487"
+    },
+    "old_test": {
+      "path": "/home/joshuadirga/.local/state/cleartext/structure-expanded-20261026/run/test-evaluation/outputs.jsonl",
+      "sha256": "bc430127ee90cae1bf9d2a17692316791f16ad6bb0190a49c2740cd746ed3244"
+    },
+    "current_dev": {
+      "path": "/home/joshuadirga/.local/state/cleartext/structure-search-20261027/dev-v2/dev.jsonl",
+      "sha256": "380fa073844cf166ee38c908eb5c6490e7ee7cc02d0b9efa4dbe0ffd256e4a1f"
+    },
+    "current_test": {
+      "path": "/home/joshuadirga/.local/state/cleartext/structure-search-20261027/test-v2/test.jsonl",
+      "sha256": "7e8faf53bacb945ceb05e6ac58ff745434c10bb31dfbd73f508c611d143016f8"
+    },
+    "probes": {
+      "path": "models/evidence/structure-audit-20261027/probes.json",
+      "sha256": "7391ec9848e3994ce94a3181fa23622112918c501bff432d14dd36c26e80344a"
+    }
+  },
+  "source_sha256": {
+    "audit_structure_bottlenecks.py": "b91b3667637434166598c73b43b9186f7774c9ec7c982f77a2db4ac66dba6fd9",
+    "continuation.py": "9da7c3d44f66021ca220eaf900116b2c7f49ea38dae0968c774b75b05e896206",
+    "experiment.py": "b10e4cda6aa2ff1f89e9d156814d8e5fdbda443158237bfc47c2ec97e2068f16",
+    "search_experiment.py": "05749a868fd88fb63e1bcddb5485c190c99760a9564f3369b29e7824186a894a",
+    "common.py": "3a39d562a9099c76be20c967cdd0c24e96592b6e721866e5299785b9912ab92c",
+    "expanded.py": "496fc9be90d2e08de85ac07e06f0dce30d631039a4137f92604ea2f2198733f1",
+    "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+    "search.py": "9fca4b23050e8540233fb4ad08e726031b7f8e43358e7777462c9c13c36f3f00",
+    "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072",
+    "review.py": "83ef486b47a10e613b5ce6e1e02bddfb1cf5a8129d1c72fcb5e353b88be2145f",
+    "audit.py": "7d2f1a1190134d0bada96669a0ecb05dacf5a45a8792234f1aaf1cc30fdbcea7",
+    "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+    "learning.py": "4251210ef9efd0532803a594493af0e4f0e3be79d3976e914fb5d8d97ad29cb5",
+    "meaning.py": "18d35affcb643756fc57cc3bfe7bae52e341c35b832bd4e17c3bae128a05f50a",
+    "meaning_experiment.py": "adae7eaae8ff3382eb896d58a1da2e0da649154a0351ac808415db2eb8749850",
+    "seq2seq.py": "f1d49923bddb451f0bd1eba1a04bf5aec6082bac143bad1219dd1914bc0006ce",
+    "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6"
+  },
+  "checkpoint_sha256": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+  "teacher_forcing": true
+}
