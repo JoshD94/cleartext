@@ -20,6 +20,30 @@ from .corpus import write_json
 PREFIX = "split sentence: "
 
 
+def complement_scopes(doc):
+    """Keep embedded claims under their original predicate, including conjuncts.
+
+    Splitting "said that revenue rose and costs fell" must retain attribution for
+    both claims. Lemma/dependency counts are conservative parser diagnostics;
+    they do not resolve speakers, coreference or every kind of semantic scope.
+    Only forward complements are tracked. Comma splices can parse as backward
+    complements; treating those as attribution would reject useful repairs.
+    """
+    result = Counter()
+    for token in doc:
+        if token.pos_ not in {"VERB", "AUX", "ADJ"}:
+            continue
+        current, seen = token, set()
+        while current.dep_ == "conj" and current.i not in seen:
+            seen.add(current.i)
+            current = current.head
+        if current.dep_ in {"ccomp", "xcomp"} and current.i > current.head.i:
+            result[
+                (current.dep_, current.head.lemma_.lower(), token.lemma_.lower())
+            ] += 1
+    return result
+
+
 def predicate_tenses(doc):
     """Source-relative tense signatures, allowing a repeated shared auxiliary.
 
@@ -427,6 +451,11 @@ class SentenceGenerator:
         checks["checks"]["predicate_tense"] = same_tense
         if not same_tense:
             checks["failed"].append("predicate_tense")
+            checks["pass"] = False
+        same_scope = complement_scopes(old) == complement_scopes(new)
+        checks["checks"]["complement_scope"] = same_scope
+        if not same_scope:
+            checks["failed"].append("complement_scope")
             checks["pass"] = False
         checks["checks"]["generation_terminated"] = terminated
         if not terminated:

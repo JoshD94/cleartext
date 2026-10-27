@@ -61,11 +61,11 @@ def compare(run, baseline, split, device="auto", output=None):
             row[name] = prediction["output"]
             row[f"{name}_raw"] = prediction["raw"]
             row[f"{name}_details"] = prediction
-            # Isolate the effect of the new tense check using the same raw text.
+            # Isolate the added T5 checks using the same raw text.
             legacy_pass = all(
                 v
                 for k, v in prediction["raw_checks"]["checks"].items()
-                if k != "predicate_tense"
+                if k not in {"predicate_tense", "complement_scope"}
             )
             row[f"{name}_previous_checks"] = (
                 prediction["raw"] if legacy_pass else row["source"]

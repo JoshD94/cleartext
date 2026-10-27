@@ -616,13 +616,27 @@ def test_t5_tense_signatures_keep_tense_and_allow_repeated_auxiliaries(
     assert (predicate_tenses(nlp()(source)) == predicate_tenses(nlp()(output))) == equal
 
 
-def test_t5_predict_abstains_when_generated_verbs_change_tense():
+@pytest.mark.parametrize(
+    "source,raw,failed",
+    [
+        (
+            "Alice reviewed the report and Bob checked the figures.",
+            "Alice reviews the report. Bob checks the figures.",
+            "predicate_tense",
+        ),
+        (
+            "I can agree that people can play a role in determining the outcome.",
+            "I can agree. People can play a role in determining the outcome.",
+            "complement_scope",
+        ),
+    ],
+)
+def test_t5_predict_abstains_when_generated_verbs_change_tense_or_scope(
+    source, raw, failed
+):
     from types import SimpleNamespace
     import torch
     from cleartext.structure.seq2seq import SentenceGenerator
-
-    source = "Alice reviewed the report and Bob checked the figures."
-    raw = "Alice reviews the report. Bob checks the figures."
 
     class Tokenizer:
         eos_token_id = 1
@@ -641,4 +655,52 @@ def test_t5_predict_abstains_when_generated_verbs_change_tense():
     )
     result = generator.predict(source)
     assert result["raw"] == raw and result["output"] == source
-    assert result["raw_checks"]["failed"] == ["predicate_tense"]
+    assert result["raw_checks"]["failed"] == [failed]
+
+
+@pytest.mark.parametrize(
+    "source,output,equal",
+    [
+        (
+            "The company said that revenue increased and costs fell.",
+            "The company said that revenue increased. Costs fell.",
+            False,
+        ),
+        (
+            "The company said that revenue increased and costs fell.",
+            "The company said that revenue increased. The company said that costs fell.",
+            True,
+        ),
+        (
+            "It is upsetting to think that many of us do not know the result.",
+            "It is upsetting to think. Many of us do not know the result.",
+            False,
+        ),
+        (
+            "The analyst hopes to review the report and publish the findings.",
+            "The analyst hopes to review the report. The analyst hopes to publish the findings.",
+            True,
+        ),
+        (
+            "The server checks each request and sends a response to the client.",
+            "The server checks each request. The server sends a response to the client.",
+            True,
+        ),
+        (
+            "His family was murdered, I could cry just thinking about it.",
+            "His family was murdered. I could cry just thinking about it.",
+            True,
+        ),
+        (
+            "You never know what is going to happen next in your life, everything in the world is so unpredictable.",
+            "You never know what is going to happen next in your life. Everything in the world is so unpredictable.",
+            True,
+        ),
+    ],
+)
+def test_complement_scope_preserves_embedded_claims_and_shared_attribution(
+    source, output, equal
+):
+    from cleartext.structure.seq2seq import complement_scopes
+
+    assert (complement_scopes(nlp()(source)) == complement_scopes(nlp()(output))) == equal
