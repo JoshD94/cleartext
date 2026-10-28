@@ -1,0 +1,63 @@
+{
+  "ready_for_parent_review_and_placement": true,
+  "native_started": false,
+  "copy_verified_files": 185,
+  "copy_verified_bytes": 818070950,
+  "source_sha256_equal": 73,
+  "all_929_audit_records_equal": true,
+  "audit_jsonl_sha256": "f0a886475c43dbdb87ab2f828fe00793334a43a5c51a9d718f2494394bc782c6",
+  "audit_input_hashes_equal": true,
+  "copied_resource_parity": {
+    "encoder": 5,
+    "static_vectors": 28,
+    "brown_bigrams": 1,
+    "wordnet": 1,
+    "cmudict": 2,
+    "stopwords": 34
+  },
+  "fresh_installed_resources": {
+    "parser": {
+      "files": 28,
+      "matches_yoga_bytes": true,
+      "path": "/Users/joshuadirga/.local/state/cleartext/structural-20261026/venv/lib/python3.12/site-packages/en_core_web_sm"
+    },
+    "lemminflect": {
+      "files": 6,
+      "matches_yoga_bytes": true,
+      "path": "/Users/joshuadirga/.local/state/cleartext/structural-20261026/venv/lib/python3.12/site-packages/lemminflect/resources"
+    },
+    "frequency_large_en": {
+      "files": 1,
+      "matches_yoga_bytes": true,
+      "path": "/Users/joshuadirga/.local/state/cleartext/structural-20261026/venv/lib/python3.12/site-packages/wordfreq/data/large_en.msgpack.gz"
+    },
+    "frequency_small_en": {
+      "files": 1,
+      "matches_yoga_bytes": true,
+      "path": "/Users/joshuadirga/.local/state/cleartext/structural-20261026/venv/lib/python3.12/site-packages/wordfreq/data/small_en.msgpack.gz"
+    }
+  },
+  "freeze_manifest": "/Users/joshuadirga/.local/state/cleartext/improvement-sprint-20261028/candidate-roundtrip/native-freeze-mac.json",
+  "freeze_sha256": "f811b88007c3bf767eaff6b95260d32a8650babba76c812db5e47dcae901d2a8",
+  "input_files": 33,
+  "resource_files": 107,
+  "runtime_versions": {
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "executable": "/Users/joshuadirga/.local/state/cleartext/structural-20261026/venv/bin/python",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1",
+    "spacy": "3.8.16",
+    "nltk": "3.10.4",
+    "lemminflect": "0.2.3",
+    "wordfreq": "3.1.1",
+    "transformers": "5.17.0",
+    "tokenizers": "0.23.2",
+    "huggingface-hub": "1.33.0",
+    "safetensors": "0.8.0"
+  },
+  "ml_imports": [],
+  "elapsed_seconds": 4.703196041984484,
+  "peak_rss_bytes": 53084160
+}

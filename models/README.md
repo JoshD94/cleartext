@@ -116,6 +116,12 @@ The [combined-pipeline comparison](docs/PIPELINE_BENCHMARK.md) connects the sent
 generator and word models to the teammate evaluator, with separate stage
 ablations, changed-output metrics and precision/coverage policies.
 
+The [October 28 improvement sprint](docs/IMPROVEMENT_SPRINT_20261028.md) adds code
+preservation, bounded grammar follow-up and explicit benchmark completeness checks.
+Its optional sentence selector recovers one extra split on 128 current-model
+development inputs while retaining all baseline edits. The report separates these
+measured changes from experimental candidate repairs and remaining limits.
+
 - TSAR 2022 test, 373 sentences: 158 correct replacements from 219 edits (72.1%). v5 without BERT: 152 of 238 (63.9%). The dictionary baseline gets 85 of 196 (43.4%).
 - Word meaning, SemCor test: 67.6% (61.8% without BERT). Fit, SWORDS cross-validated AUC: 0.808 (0.779 without BERT).
 - Hard-word detection, CWI 2018 test: F1 0.78. The first detector got 0.38.

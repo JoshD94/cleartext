@@ -1,0 +1,256 @@
+{
+  "repeats": [
+    {
+      "seed": 0,
+      "baseline_probability_max_error": 9.259260025373806e-14,
+      "default": {
+        "baseline": {
+          "edits": 643,
+          "listed": 515,
+          "unlisted": 128,
+          "net": 387,
+          "precision": 0.8009331259720062,
+          "coverage": 0.6921420882669537
+        },
+        "repaired": {
+          "edits": 645,
+          "listed": 517,
+          "unlisted": 128,
+          "net": 389,
+          "precision": 0.8015503875968992,
+          "coverage": 0.6942949407965554
+        },
+        "changed_selections": [
+          {
+            "id": "benchls-310",
+            "before": null,
+            "after": "recording",
+            "before_listed": false,
+            "after_listed": true
+          },
+          {
+            "id": "benchls-141",
+            "before": null,
+            "after": "scratching",
+            "before_listed": false,
+            "after_listed": true
+          }
+        ]
+      },
+      "strict": {
+        "baseline": {
+          "edits": 307,
+          "listed": 279,
+          "unlisted": 28,
+          "net": 251,
+          "precision": 0.9087947882736156,
+          "coverage": 0.3304628632938644
+        },
+        "repaired": {
+          "edits": 308,
+          "listed": 280,
+          "unlisted": 28,
+          "net": 252,
+          "precision": 0.9090909090909091,
+          "coverage": 0.33153928955866524
+        },
+        "changed_selections": [
+          {
+            "id": "benchls-310",
+            "before": null,
+            "after": "recording",
+            "before_listed": false,
+            "after_listed": true
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "baseline_probability_max_error": 1.4732659536775827e-13,
+      "default": {
+        "baseline": {
+          "edits": 639,
+          "listed": 511,
+          "unlisted": 128,
+          "net": 383,
+          "precision": 0.7996870109546166,
+          "coverage": 0.6878363832077503
+        },
+        "repaired": {
+          "edits": 641,
+          "listed": 513,
+          "unlisted": 128,
+          "net": 385,
+          "precision": 0.8003120124804992,
+          "coverage": 0.689989235737352
+        },
+        "changed_selections": [
+          {
+            "id": "benchls-310",
+            "before": null,
+            "after": "recording",
+            "before_listed": false,
+            "after_listed": true
+          },
+          {
+            "id": "benchls-141",
+            "before": null,
+            "after": "scratching",
+            "before_listed": false,
+            "after_listed": true
+          }
+        ]
+      },
+      "strict": {
+        "baseline": {
+          "edits": 293,
+          "listed": 266,
+          "unlisted": 27,
+          "net": 239,
+          "precision": 0.9078498293515358,
+          "coverage": 0.3153928955866523
+        },
+        "repaired": {
+          "edits": 294,
+          "listed": 267,
+          "unlisted": 27,
+          "net": 240,
+          "precision": 0.9081632653061225,
+          "coverage": 0.31646932185145316
+        },
+        "changed_selections": [
+          {
+            "id": "benchls-310",
+            "before": null,
+            "after": "recording",
+            "before_listed": false,
+            "after_listed": true
+          }
+        ]
+      }
+    },
+    {
+      "seed": 2,
+      "baseline_probability_max_error": 1.9872992140790302e-13,
+      "default": {
+        "baseline": {
+          "edits": 647,
+          "listed": 516,
+          "unlisted": 131,
+          "net": 385,
+          "precision": 0.7975270479134466,
+          "coverage": 0.6964477933261571
+        },
+        "repaired": {
+          "edits": 649,
+          "listed": 518,
+          "unlisted": 131,
+          "net": 387,
+          "precision": 0.7981510015408321,
+          "coverage": 0.6986006458557589
+        },
+        "changed_selections": [
+          {
+            "id": "benchls-310",
+            "before": null,
+            "after": "recording",
+            "before_listed": false,
+            "after_listed": true
+          },
+          {
+            "id": "benchls-141",
+            "before": null,
+            "after": "scratching",
+            "before_listed": false,
+            "after_listed": true
+          }
+        ]
+      },
+      "strict": {
+        "baseline": {
+          "edits": 300,
+          "listed": 271,
+          "unlisted": 29,
+          "net": 242,
+          "precision": 0.9033333333333333,
+          "coverage": 0.32292787944025836
+        },
+        "repaired": {
+          "edits": 301,
+          "listed": 272,
+          "unlisted": 29,
+          "net": 243,
+          "precision": 0.9036544850498339,
+          "coverage": 0.3240043057050592
+        },
+        "changed_selections": [
+          {
+            "id": "benchls-310",
+            "before": null,
+            "after": "recording",
+            "before_listed": false,
+            "after_listed": true
+          }
+        ]
+      }
+    }
+  ],
+  "mean_default_net_delta": 2.0,
+  "net_bar_passed": false,
+  "strict_bar_passed_every_repeat": true,
+  "adoption_bar_passed": false,
+  "population_log_loss_adoption_eligible": false,
+  "native_repair_parity_cases": 929,
+  "native_checks": [
+    {
+      "id": "benchls-310",
+      "word": "attaching",
+      "max_fit_error": 3.814697265625e-06,
+      "similarity_error": 0.0
+    },
+    {
+      "id": "benchls-141",
+      "word": "accumulating",
+      "max_fit_error": 0.0,
+      "similarity_error": 0.0
+    }
+  ],
+  "native_cache_checks": [
+    {
+      "id": "benchls-0",
+      "word": "parts",
+      "max_fit_error": 1.3232231140136719e-05
+    },
+    {
+      "id": "benchls-77",
+      "word": "reconstruct",
+      "max_fit_error": 1.2721284292638302e-06
+    },
+    {
+      "id": "benchls-928",
+      "word": "mathematical function",
+      "max_fit_error": 1.0967254638671875e-05
+    }
+  ],
+  "scored_repaired_candidates": 27,
+  "repaired_context_and_target_groups_disjoint": true,
+  "baseline_fold_scope": "Historical target-word folds retained exactly; no claim of full baseline context-group separation.",
+  "full_sentence_accuracy": null,
+  "default_changed": false,
+  "saved_run": null,
+  "freeze_validated_after_native": true,
+  "historical_model_bytes_verified": false,
+  "elapsed_seconds": 40.61865116702393,
+  "manifest_sha256": "f811b88007c3bf767eaff6b95260d32a8650babba76c812db5e47dcae901d2a8",
+  "output_sha256": {
+    "native-cache-checks.json": "290de760bd1e32d4dd4134884093bea8473ab96b312b866616f5c84191346342",
+    "predictions-seed2.npz": "d1f28a99fcebd5496d7de53b592c60b6236a0d9aa747c29e780e51dd1cbccd85",
+    "predictions-seed1.npz": "71619bdbd3a18d17706930128384e878d9736184374dba714200eea7d54a6cd4",
+    "predictions-seed0.npz": "e9d4862463a3df261d004679d2d9c7f91803fdb5314a07580fd8788582b6a515",
+    "manifest.json": "f811b88007c3bf767eaff6b95260d32a8650babba76c812db5e47dcae901d2a8",
+    "repaired-features.npz": "63b7e892310e7626b7f129fa3e8a4e3cf6fd54553c04ef751bb7cef6c439ae58",
+    "repaired-keys.json": "f80a3eaae43f8a0cc5633df638c6ed0383ae894de363a8956a0f7eb6d60dadcd",
+    "native-records.jsonl": "6231ef4308af84e152c78bc00783cfc20c0687b40a458b5c969e7d4bc1301572"
+  }
+}

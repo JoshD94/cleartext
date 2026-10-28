@@ -1,5 +1,5 @@
 {
-  "scope": "Mechanism tests and resource freeze only. Native comparison queued; no accuracy or accepted-edit gain measured.",
+  "scope": "Completed reused-development native comparison. Two additional listed selections per default repeat; no full-sentence semantic accuracy claim.",
   "candidate_tests": 31,
   "candidate_subtests": 9,
   "candidate_test_seconds": 0.34,
@@ -16,5 +16,20 @@
   "historical_model_bytes_verified": false,
   "weights_changed": false,
   "default_changed": false,
-  "native_started": false
+  "native_started": true,
+  "native_completed": true,
+  "native_exit": 0,
+  "native_host": "mac",
+  "yoga_coordinator_session": "cleartext-candidate-roundtrip-20261028",
+  "native_seconds": 40.61865116702393,
+  "maximum_resident_bytes": 2266759168,
+  "peak_memory_footprint_bytes": 2427194176,
+  "freeze_validated_after_native": true,
+  "native_repair_parity_cases": 929,
+  "mean_default_net_delta": 2.0,
+  "adoption_bar_passed": false,
+  "three_native_controls_passed": true,
+  "max_baseline_probability_error": 1.9872992140790302e-13,
+  "pulled_output_hashes_verified": true,
+  "pulled_source_hashes_verified": 73
 }
