@@ -220,9 +220,12 @@ def generate(args):
 
 
 def score(args):
-    from cleartext.structure.common import sari
+    from cleartext.grammar_pipeline_alignment import validate_matrix
 
     rows = [json.loads(line) for line in args.predictions.read_text().splitlines()]
+    passages = json.loads(args.passages.read_text())
+    validate_matrix(passages, rows, args.systems.split(","))
+    from cleartext.structure.common import sari
     keys = [(r["system"], r["id"]) for r in rows]
     if len(set(keys)) != len(keys):
         raise ValueError("Duplicate prediction system/ID")
@@ -237,6 +240,8 @@ def score(args):
     cache_path = args.out / "pair_metrics.jsonl"
     signature = {
         "predictions_sha256": hashlib.sha256(args.predictions.read_bytes()).hexdigest(),
+        "passages_sha256": hashlib.sha256(args.passages.read_bytes()).hexdigest(),
+        "expected_systems": args.systems.split(","),
         "embedding_model": args.embedding_model, "nli_model": args.nli_model,
         "evaluation_model_artifacts": {
             str(p): hashlib.sha256(p.read_bytes()).hexdigest()
@@ -304,6 +309,8 @@ def main():
     gen.add_argument("--threshold", type=float)
     scoring = sub.add_parser("score")
     scoring.add_argument("--predictions", type=Path, required=True)
+    scoring.add_argument("--passages", type=Path, required=True)
+    scoring.add_argument("--systems", required=True)
     scoring.add_argument("--out", type=Path, required=True)
     scoring.add_argument("--embedding-model")
     scoring.add_argument("--nli-model")

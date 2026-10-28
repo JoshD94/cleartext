@@ -51,6 +51,8 @@ def screen_result(grammar):
         "review_rules": [],
         "ignored_rules": [],
     }
+    if not isinstance(grammar, dict):
+        return result
     suggestions = grammar.get("suggestions")
     if (
         grammar.get("available") is not True

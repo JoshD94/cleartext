@@ -1,0 +1,12 @@
+{
+  "n": 96,
+  "retained_n": 96,
+  "archived_one_pass_reproduced_n": 96,
+  "different_preprocessed_inputs": 0,
+  "unavailable": {
+    "one_pass": 2,
+    "followup": 1
+  },
+  "corrections_sha256": "742c4005adb539fadb149826240943db406fce53af4e44a255a87abbe7641057",
+  "limits": "Correction counts are mechanism diagnostics. No general grammar or semantic accuracy estimate. Failed checks remain in the denominator."
+}

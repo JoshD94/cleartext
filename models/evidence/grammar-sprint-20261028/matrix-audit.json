@@ -1,0 +1,30 @@
+{
+  "input_n": 190,
+  "system_n": 10,
+  "prediction_n": 1900,
+  "panel_counts": {
+    "desse_reused_dev": 96,
+    "domain_reused_dev": 24,
+    "authored_smoke": 6,
+    "asset_validation": 64
+  },
+  "systems": [
+    "original",
+    "rule_based",
+    "lexical_only",
+    "structural_only",
+    "lexical_structural",
+    "full_no_guardrails",
+    "full_pipeline",
+    "full_rules",
+    "contextual_default",
+    "contextual_precision"
+  ],
+  "complete": true,
+  "limits": "Checks input/reference alignment and completeness only. No output quality verdict or accuracy labels.",
+  "files": {
+    "/home/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/passages.json": "2d39da8438317166a24e69d6a822e29039c5ae3031b8a23da95b912244ae2d4f",
+    "/home/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/mac-result/combined/predictions.jsonl": "6ab0a39656b4d701317a8f579562e917d1bbcab3e4a764c24f1ca63aa89dba00",
+    "/home/joshuadirga/Documents/projects/cleartext/models/src/cleartext/grammar_pipeline_alignment.py": "2bd6f54dfac7052e048be32d64a152538ec8af28fd6dd483506dd3964b8c7182"
+  }
+}

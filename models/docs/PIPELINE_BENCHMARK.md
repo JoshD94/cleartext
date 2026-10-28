@@ -268,10 +268,18 @@ python evals/pipeline_benchmark.py generate \
 
 python evals/pipeline_benchmark.py score \
   --predictions /path/outside-git/generation/predictions.jsonl \
+  --passages /path/outside-git/passages.json \
+  --systems original,rule_based,lexical_only,structural_only,lexical_structural,full_no_guardrails,full_pipeline,full_rules \
   --out /path/outside-git/scoring \
   --embedding-model /path/to/pinned/MiniLM \
   --nli-model /path/to/pinned/DeBERTa
 ```
+
+Scoring requires the independent frozen passage file and the complete expected
+system list. Equal omissions in every system, or a missing whole system, now
+fail before metric computation. The scoring cache fingerprints both arguments,
+so use a fresh scoring directory for this version. For the combined ten-system
+comparison, include `contextual_default,contextual_precision` in that list.
 
 For precision policies, run `models/scripts/experiments/calibrate_precision.py`
 and `select_cached_precision.py`, each with a new `--out` directory. The latter

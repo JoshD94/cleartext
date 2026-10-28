@@ -104,6 +104,31 @@ def test_duplicate_passages_fail_before_prediction():
         validate_passages([p, p])
 
 
+@pytest.mark.parametrize("missing", ["input", "system"])
+def test_scoring_rejects_shared_omissions_before_metrics(tmp_path, monkeypatch, missing):
+    import json
+    from evals import pipeline_benchmark as benchmark
+
+    passages = [{"id": i, "original": "Alice left.", "panel": "authored", "references": []}
+                for i in ("one", "two")]
+    rows = [{**p, "system": system, "output": p["original"]}
+            for system in ("a", "b") for p in passages
+            if (p["id"] != "two" if missing == "input" else system != "b")]
+    inputs, predictions = tmp_path / "passages.json", tmp_path / "predictions.jsonl"
+    inputs.write_text(json.dumps(passages))
+    predictions.write_text("\n".join(json.dumps(r) for r in rows))
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Incomplete evaluation reached metric computation")
+
+    monkeypatch.setattr(benchmark, "readability_report", forbidden)
+    monkeypatch.setattr(benchmark, "preservation_report", forbidden)
+    with pytest.raises(ValueError, match="Missing"):
+        benchmark.score(SimpleNamespace(passages=inputs, predictions=predictions,
+                                        systems="a,b", out=tmp_path / "score"))
+    assert not (tmp_path / "score").exists()
+
+
 def test_http_full_flag_enables_both_stages(monkeypatch):
     import json
     from io import BytesIO

@@ -1,0 +1,50 @@
+{
+  "n": 17,
+  "retained_n": 17,
+  "mechanism_expected_n": 14,
+  "report_only_n": 3,
+  "archived_one_pass_reproduced_n": 17,
+  "different_preprocessed_ids": [
+    "authored-16"
+  ],
+  "conditions": {
+    "one_pass": {
+      "unavailable_ids": [],
+      "changed_ids": [
+        "authored-0",
+        "authored-1",
+        "authored-2",
+        "authored-3",
+        "authored-4",
+        "authored-5",
+        "authored-6",
+        "authored-7",
+        "authored-8",
+        "authored-9",
+        "authored-16"
+      ],
+      "mechanism_expected_matches": 14,
+      "mechanism_expected_mismatch_ids": []
+    },
+    "followup": {
+      "unavailable_ids": [],
+      "changed_ids": [
+        "authored-0",
+        "authored-1",
+        "authored-2",
+        "authored-3",
+        "authored-4",
+        "authored-5",
+        "authored-6",
+        "authored-7",
+        "authored-8",
+        "authored-9",
+        "authored-16"
+      ],
+      "mechanism_expected_matches": 14,
+      "mechanism_expected_mismatch_ids": []
+    }
+  },
+  "diagnostics_sha256": "932fa49cb10f5f0822bbb3620e87f79bc9382c52835bf1dfa57539cbcc17d8c4",
+  "limits": "Authored grammar mechanism expectations only, no semantic or general grammar accuracy claim. All 17 cases and failed checks retained. The three original report-only cases remain report-only."
+}
