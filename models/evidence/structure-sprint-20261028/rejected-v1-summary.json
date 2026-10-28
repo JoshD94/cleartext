@@ -1,0 +1,86 @@
+{
+  "caution": "Development coverage and mechanical/reference diagnostics, not semantic correctness. Every difference is retained in records.jsonl.",
+  "panels": {
+    "input-0.jsonl": {
+      "candidate_check_failures": {
+        "argument_roles": 58,
+        "complement_scope": 91,
+        "complete_clauses": 34,
+        "content_retained": 63,
+        "discourse_markers": 9,
+        "entities": 5,
+        "finite_predicates": 15,
+        "independent_boundaries": 16,
+        "logical_connectives": 15,
+        "modality": 6,
+        "negation": 3,
+        "no_comma_splice": 22,
+        "no_new_content": 55,
+        "operator_scope": 9,
+        "participant_events": 261,
+        "predicate_tense": 30,
+        "shorter_split": 226,
+        "source_anchored_words": 272,
+        "uncertainty_scope": 4,
+        "unquoted_split": 12
+      },
+      "counts": {
+        "baseline_changes": 54,
+        "baseline_copy_reference_changes": 0,
+        "baseline_edits_lost": 24,
+        "baseline_shorter_splits": 53,
+        "candidate_changes": 32,
+        "candidate_copy_reference_changes": 0,
+        "candidate_shorter_splits": 32,
+        "copy_references": 32,
+        "differences": 26,
+        "inputs": 128,
+        "overlap_gains": 2,
+        "overlap_losses": 23,
+        "recovered_from_baseline_copy": 2
+      },
+      "reference_overlap_mean_delta": -9.20802303393333,
+      "reference_overlap_n": 128
+    },
+    "input-1.jsonl": {
+      "candidate_check_failures": {
+        "argument_roles": 84,
+        "complement_scope": 74,
+        "complete_clauses": 132,
+        "content_retained": 59,
+        "discourse_markers": 23,
+        "entities": 7,
+        "finite_predicates": 24,
+        "independent_boundaries": 27,
+        "logical_connectives": 40,
+        "modality": 6,
+        "negation": 9,
+        "no_comma_splice": 11,
+        "no_new_content": 46,
+        "operator_scope": 18,
+        "participant_events": 264,
+        "predicate_tense": 44,
+        "shorter_split": 278,
+        "source_anchored_words": 281,
+        "uncertainty_scope": 4
+      },
+      "counts": {
+        "baseline_changes": 18,
+        "baseline_copy_reference_changes": 0,
+        "baseline_edits_lost": 7,
+        "baseline_shorter_splits": 17,
+        "candidate_changes": 12,
+        "candidate_copy_reference_changes": 0,
+        "candidate_shorter_splits": 12,
+        "copy_references": 31,
+        "differences": 9,
+        "inputs": 128,
+        "overlap_gains": 4,
+        "overlap_losses": 5,
+        "recovered_from_baseline_copy": 1
+      },
+      "reference_overlap_mean_delta": -1.1290606347193946,
+      "reference_overlap_n": 128
+    }
+  }
+}

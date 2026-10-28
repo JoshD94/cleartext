@@ -104,13 +104,32 @@ def repair_boundaries(text):
     return text
 
 
-def select_candidate(source, proposals, source_doc=None):
-    """Try model order, with a primary-beam punctuation repair and copy fallback.
+def select_candidate(source, proposals, source_doc=None, *, policy="model_order"):
+    """Select checked model beams, preserving the model-order default.
 
     The model's preferred valid copy stays a copy. A failed high-ranked beam
-    cannot hide a passing alternative. Selection never sees a reference.
+    cannot hide a passing alternative. Opt in to source_anchored_split to search
+    behind copies with word alignment and event signatures. Existing edits stay
+    unchanged. Neither policy sees a reference.
     """
+    if policy not in {"model_order", "source_anchored_split"}:
+        raise ValueError(f"Unknown candidate selection policy: {policy}")
     old = source_doc if source_doc is not None else nlp()(source)
+    if policy == "source_anchored_split":
+        from .split_selection import select_split
+
+        baseline = select_candidate(source, proposals, old)
+        if normalize(baseline["output"]) != normalize(source):
+            return {**baseline, "selection_policy": policy,
+                    "selection_route": "retained_baseline_edit"}
+        # The stricter split constraints govern only edits newly exposed behind
+        # a preferred copy. They do not certify inherited baseline edits.
+        split = select_split(source, proposals, old)
+        if split["selected_beam"] is None:
+            return {**baseline, "selection_policy": policy,
+                    "selection_route": "retained_baseline_copy",
+                    "split_candidates": split["candidates"]}
+        return {**split, "selection_route": "source_anchored_copy_fallback"}
     inspected, seen = [], set()
     for rank, proposal in enumerate(proposals):
         raw, terminated = proposal["text"], proposal["terminated"]
@@ -161,13 +180,20 @@ def select_candidate(source, proposals, source_doc=None):
 class CandidateGenerator(SentenceGenerator):
     """Four deterministic model beams, sharing one encoder/model in memory."""
 
+    def __init__(self, path, device="auto", *, selection_policy="model_order"):
+        if selection_policy not in {"model_order", "source_anchored_split"}:
+            raise ValueError(f"Unknown candidate selection policy: {selection_policy}")
+        super().__init__(path, device)
+        self.selection_policy = selection_policy
+
     def predict(self, source, doc=None):
         import torch
 
         old = doc if doc is not None else nlp()(source)
         encoded = self.tokenizer(PREFIX + source, return_tensors="pt")
         if encoded["input_ids"].shape[1] > 192:
-            result = select_candidate(source, [], old)
+            result = select_candidate(source, [], old,
+                                      policy=getattr(self, "selection_policy", "model_order"))
             result["reason"] = "source exceeds token limit"
             return result
         with torch.inference_mode():
@@ -186,6 +212,7 @@ class CandidateGenerator(SentenceGenerator):
             }
             for row in ids
         ]
-        result = select_candidate(source, proposals, old)
+        result = select_candidate(source, proposals, old,
+                                  policy=getattr(self, "selection_policy", "model_order"))
         result["model_candidates"] = proposals
         return result
