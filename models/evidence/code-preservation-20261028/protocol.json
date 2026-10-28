@@ -1,0 +1,8 @@
+{
+  "change": "Preserve inline/fenced code bytes and multiplicity in candidate guards, phrase matches, lexical target masking and final ensemble output. No natural-language quote freezing.",
+  "baseline": "fde61c46253687abe03d9d6207023090bab00937",
+  "evaluation": "Run pure span mechanism fixtures and pipeline fixture stages; replay complete saved96-input grammar outputs plus all17 authoreddiagnostics, report every code-related rollback and unchanged non-code rows. No model inference, semanticlabels or retuning in replay. All929BenchLS input/candidate strings checked for code prevalence; no label-based filtering.",
+  "adoption": "All mechanism fixtures pass; no output on code-free sources changes due to literalguard; restore original source when saved output damaged code, disclose resulting coverage cost. No semanticaccuracy claim.",
+  "resource": "PurePython replay. Model-loading/native tests scheduled separately on a fitting host.",
+  "format_corrections": "Before policy/label evaluation: distinguish PennTreebank backtick/apostrophe quotations, treat unmatched inline markers as plain text, and exclude ambiguous space-padded multibacktick spans without literal backticks. Initial saved-output replays preserved separately. No semantic label or model-setting tuning."
+}

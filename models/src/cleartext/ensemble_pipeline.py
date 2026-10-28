@@ -19,6 +19,7 @@ from .phrase_complexity import phrase_features
 from . import ensemble as E
 from . import detection as D
 from .detection import CONTENT
+from .protected_literals import literal_spans, preserved_literals
 
 RUN_V1 = ROOT / "runs/ensemble-20260927"
 RUN = ROOT / "runs/ensemble-v2-20260927"
@@ -615,6 +616,8 @@ class EnsembleClearText:
                     for span in detect_terms(doc)
                     if span.protected
                 ]
+            if guardrails:
+                spans += [(span.start, span.end) for span in literal_spans(current)]
             # CompLex rates only content words; function words ("is", "at") fall outside its training data.
             words = [
                 t
@@ -692,6 +695,32 @@ class EnsembleClearText:
                     "blocked_stages": blocked_term_stages,
                 },
             }
+        literal_check = preserved_literals(text, current)
+        literal_blocked = guardrails and not literal_check["pass"]
+        if literal_blocked:
+            discarded_structure = dict(structure_details)
+            current = text
+            edits = []
+            if structure_details["on"]:
+                structure_details = {
+                    **structure_details, "after": text, "changed": False,
+                    "reason": "A code snippet would change.",
+                    "blocked_by": "code_literals", "attempt": discarded_structure,
+                }
+            for row in trace:
+                if row.get("selected"):
+                    row["attempted_selection"] = row["selected"]
+                    row["selected"] = None
+                    row["blocked_by"] = "code_literals"
+        literal_details = {}
+        if literal_spans(text) or literal_blocked:
+            literal_details = {
+                "literal_preservation": {
+                    **preserved_literals(text, current),
+                    "blocked": bool(literal_blocked),
+                    "attempt": literal_check,
+                }
+            }
         levels = {}
         if self.sentence_model is not None:
             levels = {
@@ -711,5 +740,6 @@ class EnsembleClearText:
             **levels,
             **term_details,
             **grammar_details,
+            **literal_details,
             "limits": "At most one syntax rule, one phrase and one word edit. Fit is a probability, not a meaning certificate.",
         }

@@ -89,6 +89,7 @@ def generation_checks(
 ):
     """One contract for published training targets and baseline generation."""
     from ..features import nlp
+    from ..protected_literals import preserved_literals
     from .common import structure_checks
     from .discourse import discourse_checks
 
@@ -96,6 +97,7 @@ def generation_checks(
     new = output_doc if output_doc is not None else nlp()(output)
     result = structure_checks(source, output, old, new)
     added = {
+        "code_literals": preserved_literals(source, output)["pass"],
         **discourse_checks(old, new),
         "predicate_tense": predicate_tenses(old) == predicate_tenses(new),
         "complement_scope": complement_scopes(old) == complement_scopes(new),

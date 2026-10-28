@@ -164,11 +164,14 @@ def entity_roles_preserved(original_doc, candidate_doc):
 
 
 def guardrails(original, candidate, original_doc=None):
+    from .protected_literals import preserved_literals
+
     od = original_doc or nlp()(original)
     nd = nlp()(candidate)
     old_words = Counter(t.lower_ for t in od)
     new_words = Counter(t.lower_ for t in nd)
     checks = {}
+    checks["code_literals"] = preserved_literals(original, candidate)["pass"]
     checks["numbers"] = Counter(re.findall(r"\d+(?:[,.]\d+)*", original)) == Counter(
         re.findall(r"\d+(?:[,.]\d+)*", candidate)
     )

@@ -52,6 +52,7 @@ DEFAULTS = {
 PAGE = HERE / "index.html"  # read per request so page edits apply without a restart
 # Short column label and full description for each safety check, in display order.
 CHECK_NAMES = {
+    "code_literals": ("Code", "Code snippets are unchanged"),
     "numbers": ("Numbers", "Numbers are unchanged"),
     "quantities": ("Amounts", "Quantities with units are unchanged"),
     "negation": ("Negation", '"not", "no", "never" are kept'),
@@ -99,9 +100,10 @@ def skip_reason(t, spans):
     return None
 
 
-def trace(text, opts, structure_details):
+def trace(text, opts, structure_details, pipeline_result=None):
     """Every building block's view of the sentence, in pipeline order."""
     out = {}
+    rollback = bool((pipeline_result or {}).get("literal_preservation", {}).get("blocked"))
     current = text
     # 1. Sentence structure
     out["structure"] = structure_details
@@ -129,9 +131,13 @@ def trace(text, opts, structure_details):
         new, changes = phrase_rewrite(current, PIPE.complexity)
         applied = changes[0]["source"] if changes else None
         for m in matches:
-            m["applied"] = m["phrase"] == applied
+            proposed = m["phrase"] == applied
+            m["applied"] = proposed and not rollback
+            if rollback and proposed:
+                m["attempted"] = True
+                m["blocked_by"] = "code_literals"
         out["phrases"] = {"on": True, "matches": matches, "inventory": len(PHRASES)}
-        current = new
+        current = pipeline_result["output"] if rollback else new
     else:
         out["phrases"] = {"on": False, "matches": matches, "inventory": len(PHRASES)}
     # 3. Word difficulty and hard-word detection on every token
@@ -231,7 +237,7 @@ def trace(text, opts, structure_details):
                     },
                 }
             )
-        sel = r["selected"]
+        sel = None if rollback else r["selected"]
         targets.append(
             {
                 "word": t.text,
@@ -279,7 +285,7 @@ def simplify(req):
             max_word_edits=opts["max_edits"],
             structure_rewriter=RANKER if backend == "ranker" else None,
         )
-        steps = trace(text, opts, r["structure"])
+        steps = trace(text, opts, r["structure"], r)
         steps["decision_threshold"] = PIPE.decision_threshold
     finally:
         PIPE.decision_threshold, PIPE.detector["threshold"], PIPE.noun_threshold = (

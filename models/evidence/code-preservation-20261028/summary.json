@@ -1,0 +1,32 @@
+{
+  "scope": "Saved-output code preservation replay, not native generation or semantic evaluation.",
+  "panel": {
+    "inputs": 96,
+    "inputs_with_code": 0,
+    "baseline_code_rollbacks": 0,
+    "baseline_changed_outputs_before": 15,
+    "baseline_changed_outputs_after": 15,
+    "baseline_noncode_output_changes": 0,
+    "grammar_code_rollbacks": 0,
+    "grammar_changed_outputs_before": 15,
+    "grammar_changed_outputs_after": 15,
+    "grammar_noncode_output_changes": 0
+  },
+  "authored_diagnostics": {
+    "inputs": 17,
+    "inputs_with_code": 1,
+    "baseline_code_rollbacks": 1,
+    "baseline_changed_outputs_before": 2,
+    "baseline_changed_outputs_after": 1,
+    "baseline_noncode_output_changes": 0,
+    "grammar_code_rollbacks": 1,
+    "grammar_changed_outputs_before": 1,
+    "grammar_changed_outputs_after": 0,
+    "grammar_noncode_output_changes": 0
+  },
+  "candidate_pool": {
+    "inputs": 929,
+    "candidates": 14617,
+    "inputs_with_code": 0
+  }
+}
