@@ -108,8 +108,34 @@ probabilities. All 929 historical selections were reproduced in all three
 repeats before using those arrays. The same target, coverage floor and threshold
 grid select 0.80. It reaches 90.85%, 90.75% and 90.30% development precision at
 32.9%, 31.4% and 32.2% coverage. These repeats share cases and are not three
-independent experiments. A separate saved-model check is required before using
-this as test evidence.
+independent experiments.
+
+The separate saved-model check retains all 373 reused TSAR cases. It recomputes
+the contextual proposal support and replacement similarity, then compares three
+fixed cases with the native pipeline. Candidate pools and chosen words match;
+the largest acceptance-probability difference is below 0.00000008.
+
+| Contextual policy | Listed matches / edits | Edit precision | Input coverage |
+| --- | ---: | ---: | ---: |
+| Existing 0.45 threshold | 172 / 204 | 84.3% | 54.7% |
+| Development-selected 0.80 | 80 / 84 | 95.2% | 22.5% |
+
+At its original threshold, the contextual model finds 14 more listed matches
+than v7 and makes 15 fewer edits on these cases. Its unlisted edits fall from
+61 to 32. The stricter policy meets the 90% precision and 20% coverage targets
+on this reused test, but accepts far fewer replacements. Its Wilson 95% interval
+is 88.4% to 98.1%, so the result does not establish that true precision exceeds
+90%. Across all 373 inputs it finds 80 listed matches; 95.2% is conditional on
+the 84 accepted edits. Neither policy measures full-pipeline accuracy.
+
+This check ran on the Mac while Yoga generated pipeline variants. The first
+native verification attempt found a missing `en_core_web_md` dependency after
+the 373 contextual predictions were saved. Copying Yoga's identical spaCy 3.8.0
+model into the isolated job dependencies allowed verification to resume. No
+predictions, threshold or examples changed. Transformers, tokenizer, NumPy,
+spaCy and scikit-learn versions match Yoga. Torch differs by a patch version,
+2.14.1 on Mac and 2.14.0 on Yoga. The native score checks pass despite that
+difference. The Mac's primary source and existing environment were preserved.
 
 ## Reproduction
 
@@ -157,7 +183,10 @@ Exact rank-result reuse requires the same input, target offset, original context
 guard setting and acceptance threshold. Mutable trace fields are copied.
 
 Execution records are under
-`~/.local/state/cleartext/pipeline-eval-20261027/` on Yoga. Jobs use two CPU threads,
-named tmux sessions and memory-capped scopes. Resource monitoring stops this
-experiment if available host RAM falls below 2 GiB. Unrelated jobs and the
-existing demo are preserved.
+`~/.local/state/cleartext/pipeline-eval-20261027/` on Yoga. The contextual encoder
+sets four Torch CPU threads. Generation initially had a two-CPU quota; this was
+raised to four during inference to match the existing thread count. Models,
+inputs, code and model thread settings did not change. Scoring uses two threads.
+Jobs use named tmux sessions and 4 GiB memory-capped scopes. Resource monitoring
+stops this experiment if available host RAM falls below 2 GiB. Unrelated jobs
+and the existing demo are preserved.

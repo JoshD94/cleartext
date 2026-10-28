@@ -8,6 +8,11 @@ copying corpus text. The v7 precision files record the predeclared protocol,
 three grouped development repeats, frozen threshold and reused TSAR comparison.
 `contextual_precision_policy.json` records the stronger ranker's separately
 selected development threshold and reproduction of its historical selections.
+`contextual_precision_test.json` records all 373 reused TSAR cases and the
+three fixed native-ranking checks. Its freeze and runtime files identify the
+policy, model, cache and package versions. The strict policy matches a published
+substitute in 80 of 84 accepted edits, with 22.5% coverage. This is not a
+full-sentence accuracy result.
 
 `early_qualitative_review.json` contains coding-assistant diagnostic notes by ID.
 They are not independent human labels or an accuracy sample.

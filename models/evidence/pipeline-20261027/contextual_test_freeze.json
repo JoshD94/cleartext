@@ -1,0 +1,13 @@
+{
+  "policy_sha256": "e46df149f93cc47c08294d731983cf3e5b73889c0de6919412a63da66edd6d3d",
+  "model_sha256": "b377fbffebe09d2ca94c76e0dfaafd1afc3c63669c258b9c917c1e936d621625",
+  "test_cache_sha256": "6b83908681a20eed31916e82f173f73f85f86507b50ad1d3527017fc2ebdf535",
+  "source_sha256": "fc5915237c3a85ef7d334bb771c3ac42f6c86201ef37adff8177ed9c35eb556f",
+  "threshold": 0.8,
+  "native_check_indices": [
+    0,
+    186,
+    372
+  ],
+  "scope": "All373reused TSAR cases. Labels excluded from features. Threshold frozen from BenchLS before reading new-model TSAR predictions."
+}
