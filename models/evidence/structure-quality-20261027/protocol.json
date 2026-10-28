@@ -1,0 +1,22 @@
+{
+  "objective": "Audit inherited versus model-introduced errors, screen unchanged published training pairs, continue best step906 for one complete screened-data epoch, compare on identical 101+96 development inputs.",
+  "host": "Yoga",
+  "session": "cleartext-quality-v2-20261027",
+  "memory_cap_gib": 4,
+  "resource_reason": "Yoga has9.6GB available, load0.5 and390GB free; Mac reachable but Yoga fits. One own heavy job, combined local checker and training below4GB cap.",
+  "baseline_weights_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "training": {
+    "epochs": 1,
+    "learning_rate": 0.0001,
+    "batch_size": 2,
+    "accumulation_steps": 4,
+    "seed": 4701
+  },
+  "selection": "Existing decoded equal-panel structural overlap, then lower dev loss; step0 included. Both development panels and compatibility annotations remain unchanged.",
+  "data_policy": "Selected grammar, punctuation and spacing errors plus4 identified grammar/orthography rule families quarantine a pair. Spelling-only, unfamiliar names, dialect/style and other unknown review warnings are retained. No pair is grammar-certified. Labels unchanged.",
+  "evaluation_policy": "Full existing development panels. No reserved or domain test prediction, no filtering evaluation, no fresh-quality claim. Selected model and final trained outputs both reported.",
+  "promotion": "Experimental only. Current demo and old checkpoints preserved. No automatic deployment.",
+  "constraints": "Personal credentials only, no agents/Claude, paid services or new human rating collection. Raw pairs/outputs and weights outside Git.",
+  "prior_attempt": "Original broader review-warning quarantine was stopped at step80/363 before first trained checkpoint validation. Quarantine review, not decoded performance, motivated narrowing. Prior attempt fully preserved under structure-quality-20261027.",
+  "cache_reuse": "All 6633 checked text results reused from original scan; no text changed."
+}

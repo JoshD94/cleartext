@@ -1,0 +1,74 @@
+{
+  "dev": {
+    "n": 101,
+    "original_compatible": 101,
+    "current_compatible": 101,
+    "formerly_compatible_now_failing": [],
+    "failure_counts": {}
+  },
+  "broad_dev": {
+    "n": 96,
+    "original_compatible": 12,
+    "current_compatible": 6,
+    "formerly_compatible_now_failing": [
+      {
+        "id": "desse-train-5830",
+        "original_reference_compatible": true,
+        "current_failed": [
+          "discourse_markers"
+        ]
+      },
+      {
+        "id": "desse-train-2654",
+        "original_reference_compatible": true,
+        "current_failed": [
+          "discourse_markers"
+        ]
+      },
+      {
+        "id": "desse-train-9584",
+        "original_reference_compatible": true,
+        "current_failed": [
+          "discourse_markers"
+        ]
+      },
+      {
+        "id": "desse-train-5487",
+        "original_reference_compatible": true,
+        "current_failed": [
+          "discourse_markers"
+        ]
+      },
+      {
+        "id": "desse-train-12452",
+        "original_reference_compatible": true,
+        "current_failed": [
+          "discourse_markers"
+        ]
+      },
+      {
+        "id": "desse-train-8559",
+        "original_reference_compatible": true,
+        "current_failed": [
+          "discourse_markers"
+        ]
+      }
+    ],
+    "failure_counts": {
+      "complete_clauses": 30,
+      "complement_scope": 23,
+      "negation": 6,
+      "content_retained": 20,
+      "no_new_content": 9,
+      "argument_roles": 41,
+      "operator_scope": 12,
+      "discourse_markers": 22,
+      "predicate_tense": 27,
+      "logical_connectives": 33,
+      "entities": 2,
+      "finite_predicates": 10,
+      "modality": 6,
+      "sentence_count": 1
+    }
+  }
+}

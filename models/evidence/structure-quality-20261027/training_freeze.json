@@ -1,0 +1,27 @@
+{
+  "initial_weights_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "manifest_sha256": "e18cec9a6d87fd59f91ff78033d5d21b4b11adad695244c7203c5450d5e27763",
+  "max_steps": 441,
+  "selection": "Existing equal-panel decoded structural overlap, with original reference compatibility annotations, then lower dev loss; initializer included. No evaluation input removed. One complete screened-data epoch only.",
+  "source_sha256": {
+    "continuation.py": "9da7c3d44f66021ca220eaf900116b2c7f49ea38dae0968c774b75b05e896206",
+    "experiment.py": "b10e4cda6aa2ff1f89e9d156814d8e5fdbda443158237bfc47c2ec97e2068f16",
+    "search_experiment.py": "05749a868fd88fb63e1bcddb5485c190c99760a9564f3369b29e7824186a894a",
+    "common.py": "3a39d562a9099c76be20c967cdd0c24e96592b6e721866e5299785b9912ab92c",
+    "expanded.py": "3e36f19b6366cea5fd4d057a46acdb67b24ccf3f80f5f98f02809113e80048e6",
+    "alignment.py": "e55905e596b19a847ee4885c3d228963a63e7e5190bb8fde6ca6d324b13a115c",
+    "corpus.py": "73971641f7fa2f710591fea7e673f755c058549e33633976103c12ef6dbd2518",
+    "search.py": "1de8599c92f47d74d4280af930e4e510d47d3ad53a6278ec9a0be40ecff3d66d",
+    "technical.py": "e0631fddded5cf94b1717bc1f566fd1f9fa34a2eb93c00a3ff0944c6a64c5072",
+    "review.py": "83ef486b47a10e613b5ce6e1e02bddfb1cf5a8129d1c72fcb5e353b88be2145f",
+    "audit.py": "7d2f1a1190134d0bada96669a0ecb05dacf5a45a8792234f1aaf1cc30fdbcea7",
+    "quality.py": "3cff198e79f4db4913c96e857d68a4975cc03e5957f0f7366209c09f76059b27",
+    "adapter.py": "32483689027cd3295bdf6ef40adfeb96567fa4748764c95f3de7f524819fe8bc",
+    "learning.py": "4251210ef9efd0532803a594493af0e4f0e3be79d3976e914fb5d8d97ad29cb5",
+    "discourse.py": "1bde622de7dac5d5795d19990d4c769159131e2ad428d6b052fe1c385e0be0ee",
+    "meaning.py": "18d35affcb643756fc57cc3bfe7bae52e341c35b832bd4e17c3bae128a05f50a",
+    "meaning_experiment.py": "adae7eaae8ff3382eb896d58a1da2e0da649154a0351ac808415db2eb8749850",
+    "seq2seq.py": "f66b11c5abeab3bd64c2fadf99bdf453a6c897f05266c2033d6d98ffc34c31bf",
+    "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6"
+  }
+}

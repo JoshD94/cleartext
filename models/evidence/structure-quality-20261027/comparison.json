@@ -1,0 +1,204 @@
+{
+  "selected_step": 441,
+  "panels": {
+    "aligned_dev": {
+      "baseline_repaired_checks": {
+        "metrics": {
+          "n": 101,
+          "changed": 56,
+          "shorter_splits": 56,
+          "copy_reference_n": 32,
+          "copy_references_kept": 32,
+          "all_reference_sari": 62.864898266009796,
+          "compatible_n": 101,
+          "compatible_structural_score": 62.864898266009796
+        },
+        "grammar": {
+          "n": 101,
+          "changed": 56,
+          "input_status_counts": {
+            "review": 12,
+            "no_covered_issue": 87,
+            "flagged": 2
+          },
+          "output_status_counts": {
+            "review": 13,
+            "no_covered_issue": 86,
+            "flagged": 2
+          },
+          "new_warning_candidate_inputs": 0,
+          "resolved_warning_candidate_inputs": 0,
+          "shared_warning_candidate_inputs": 2,
+          "current_check_failures": {},
+          "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+        }
+      },
+      "selected": {
+        "metrics": {
+          "n": 101,
+          "changed": 54,
+          "shorter_splits": 54,
+          "copy_reference_n": 32,
+          "copy_references_kept": 32,
+          "all_reference_sari": 61.725566024637416,
+          "compatible_n": 101,
+          "compatible_structural_score": 61.725566024637416
+        },
+        "grammar": {
+          "n": 101,
+          "changed": 54,
+          "input_status_counts": {
+            "review": 12,
+            "no_covered_issue": 87,
+            "flagged": 2
+          },
+          "output_status_counts": {
+            "review": 13,
+            "no_covered_issue": 86,
+            "flagged": 2
+          },
+          "new_warning_candidate_inputs": 0,
+          "resolved_warning_candidate_inputs": 0,
+          "shared_warning_candidate_inputs": 2,
+          "current_check_failures": {},
+          "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+        }
+      },
+      "final_trained": {
+        "metrics": {
+          "n": 101,
+          "changed": 54,
+          "shorter_splits": 54,
+          "copy_reference_n": 32,
+          "copy_references_kept": 32,
+          "all_reference_sari": 61.725566024637416,
+          "compatible_n": 101,
+          "compatible_structural_score": 61.725566024637416
+        },
+        "grammar": {
+          "n": 101,
+          "changed": 54,
+          "input_status_counts": {
+            "review": 12,
+            "no_covered_issue": 87,
+            "flagged": 2
+          },
+          "output_status_counts": {
+            "review": 13,
+            "no_covered_issue": 86,
+            "flagged": 2
+          },
+          "new_warning_candidate_inputs": 0,
+          "resolved_warning_candidate_inputs": 0,
+          "shared_warning_candidate_inputs": 2,
+          "current_check_failures": {},
+          "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+        }
+      },
+      "selected_outputs_differ": 2
+    },
+    "broad_dev": {
+      "baseline_repaired_checks": {
+        "metrics": {
+          "n": 96,
+          "changed": 11,
+          "shorter_splits": 10,
+          "copy_reference_n": 6,
+          "copy_references_kept": 6,
+          "all_reference_sari": 32.32417695030008,
+          "compatible_n": 12,
+          "compatible_structural_score": 34.69899636596042
+        },
+        "grammar": {
+          "n": 96,
+          "changed": 11,
+          "input_status_counts": {
+            "no_covered_issue": 79,
+            "flagged": 16,
+            "review": 1
+          },
+          "output_status_counts": {
+            "no_covered_issue": 79,
+            "flagged": 16,
+            "review": 1
+          },
+          "new_warning_candidate_inputs": 0,
+          "resolved_warning_candidate_inputs": 1,
+          "shared_warning_candidate_inputs": 16,
+          "current_check_failures": {
+            "complete_clauses": 20
+          },
+          "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+        }
+      },
+      "selected": {
+        "metrics": {
+          "n": 96,
+          "changed": 11,
+          "shorter_splits": 11,
+          "copy_reference_n": 6,
+          "copy_references_kept": 6,
+          "all_reference_sari": 31.847760892405905,
+          "compatible_n": 12,
+          "compatible_structural_score": 35.89038048058089
+        },
+        "grammar": {
+          "n": 96,
+          "changed": 11,
+          "input_status_counts": {
+            "no_covered_issue": 79,
+            "flagged": 16,
+            "review": 1
+          },
+          "output_status_counts": {
+            "no_covered_issue": 80,
+            "flagged": 15,
+            "review": 1
+          },
+          "new_warning_candidate_inputs": 0,
+          "resolved_warning_candidate_inputs": 2,
+          "shared_warning_candidate_inputs": 15,
+          "current_check_failures": {
+            "complete_clauses": 20
+          },
+          "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+        }
+      },
+      "final_trained": {
+        "metrics": {
+          "n": 96,
+          "changed": 11,
+          "shorter_splits": 11,
+          "copy_reference_n": 6,
+          "copy_references_kept": 6,
+          "all_reference_sari": 31.847760892405905,
+          "compatible_n": 12,
+          "compatible_structural_score": 35.89038048058089
+        },
+        "grammar": {
+          "n": 96,
+          "changed": 11,
+          "input_status_counts": {
+            "no_covered_issue": 79,
+            "flagged": 16,
+            "review": 1
+          },
+          "output_status_counts": {
+            "no_covered_issue": 80,
+            "flagged": 15,
+            "review": 1
+          },
+          "new_warning_candidate_inputs": 0,
+          "resolved_warning_candidate_inputs": 2,
+          "shared_warning_candidate_inputs": 15,
+          "current_check_failures": {
+            "complete_clauses": 20
+          },
+          "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+        }
+      },
+      "selected_outputs_differ": 2
+    }
+  },
+  "limits": "Inspected development panels used for selection, not fresh tests. Screening and additional training confounded. Parser and LanguageTool checks are incomplete. No automatic promotion or benchmark exclusions. Final trained outputs reported even if initializer wins."
+}

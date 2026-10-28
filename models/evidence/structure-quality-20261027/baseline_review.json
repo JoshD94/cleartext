@@ -1,0 +1,82 @@
+{
+  "reviewer": "Coding assistant qualitative inspection, not independent human labels",
+  "scope": "All15 byte-different baseline outputs on96dev, including one normalized formatting-only change. Unchanged copies inherit source errors. These judgments are not a global accuracy estimate.",
+  "cases": [
+    {
+      "id": "desse-train-9192",
+      "category": "useful_split",
+      "notes": "No obvious new grammar or meaning error in this inspection."
+    },
+    {
+      "id": "desse-train-5830",
+      "category": "introduced_meaning_issue",
+      "notes": "Original uncertainty covers shared-subject seeing and not understanding; split leaves second statement without maybe."
+    },
+    {
+      "id": "desse-train-6368",
+      "category": "inherited_input_issue",
+      "notes": "Missing contraction apostrophe and awkward schools wording already in source; split preserves both."
+    },
+    {
+      "id": "desse-train-6633",
+      "category": "minor_nonstructural_edit",
+      "notes": "Deletes also; not a sentence split or clear useful structural simplification."
+    },
+    {
+      "id": "desse-train-12363",
+      "category": "inherited_input_issue",
+      "notes": "Awkward or had ever experienced wording and unclear it antecedent remain; present before split."
+    },
+    {
+      "id": "desse-train-5591",
+      "category": "inherited_input_issue",
+      "notes": "Possessive, contraction apostrophe, awkward occurred-by construction already present before split."
+    },
+    {
+      "id": "desse-train-6514",
+      "category": "introduced_meaning_issue",
+      "notes": "Causal so dropped, leaving two statements without explicit causal relation."
+    },
+    {
+      "id": "desse-train-4909",
+      "category": "useful_split",
+      "notes": "Contrast and conditional retained. No obvious new issue in this inspection."
+    },
+    {
+      "id": "desse-train-7231",
+      "category": "useful_split",
+      "notes": "Repeats generalizations as subject of second clause; original wording remains awkward, no clear introduced error."
+    },
+    {
+      "id": "desse-train-12342",
+      "category": "useful_split",
+      "notes": "Contrast and parenthetical preserved. No obvious introduced issue in this inspection."
+    },
+    {
+      "id": "desse-train-12683",
+      "category": "formatting_only_with_inherited_issue",
+      "notes": "Adds space after period; this sets remains wrong as in source. Normalized identity unchanged."
+    },
+    {
+      "id": "desse-train-8231",
+      "category": "useful_split",
+      "notes": "Repeats the shared subject we; no obvious new issue in this inspection."
+    },
+    {
+      "id": "desse-train-5487",
+      "category": "introduced_meaning_issue",
+      "notes": "Fixes explaining to explain, but drops so and loses explicit causal relation."
+    },
+    {
+      "id": "desse-train-8513",
+      "category": "inherited_input_issue",
+      "notes": "Dangling opening modifier and awkward coordination remain from source."
+    },
+    {
+      "id": "desse-train-8559",
+      "category": "useful_split",
+      "notes": "Splits coordinated predicates with subject repeated; no obvious new issue in this inspection."
+    }
+  ],
+  "local_review_sha256": "c2c30ada0e8dded0a2f432801f79d274141a4393caf6de84bbee23ccf100f8f3"
+}

@@ -1,0 +1,13 @@
+{
+  "host": "Yoga",
+  "session": "cleartext-quality-v2-20261027",
+  "combined_memory_cap_bytes": 4294967296,
+  "observed_scope_peak_bytes": 2285862912,
+  "training_peak_rss_kib": 1618944,
+  "sampled_min_available_mb": 6812,
+  "sampled_max_load_15min": 3.4912109375,
+  "resource_sample_n": 35,
+  "main_job_exit": 0,
+  "saved_weight_verification_exit": 0,
+  "server_stopped": true
+}

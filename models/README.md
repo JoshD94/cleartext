@@ -144,6 +144,11 @@ rule-based stage before simplification. It fixes selected article, contraction
 and verb-agreement errors while recording each correction. Its first development
 trial corrected five of 96 inputs and left the number of shorter splits unchanged.
 
+[The input/output quality pass](docs/STRUCTURE_QUALITY.md) separates inherited
+grammar problems from meaning lost during splitting. It shares discourse checks
+between training and generation and tests a narrowly screened training pool on
+the complete existing development panels.
+
 The separate [structural experiment suite](docs/STRUCTURE_EXPERIMENTS.md) trains a
 rewrite ranker, a CRF edit tagger and a T5-small encoder–decoder on bounded public
 sentence-splitting pairs. It compares raw and filtered outputs with the existing

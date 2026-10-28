@@ -1,0 +1,32 @@
+{
+  "reviewer": "Coding assistant qualitative inspection, not independent human labels",
+  "n_changed_outputs_inspected": 4,
+  "decision": "Mixed development result. Proxy selects441by0.026points; keep trained checkpoint experimental, do not promote it over old checkpoint or into demo. Shared guard repair independently blocks3known meaning-loss cases. No broad quality claim.",
+  "cases": [
+    {
+      "id": "desse-train-10322",
+      "panel": "aligned_dev",
+      "category": "lost_useful_split",
+      "notes": "Initializer returned a useful split. Trained proposal fails argument roles, completeness and tense checks, so returned text is the original. Lost coverage; no broken proposal returned."
+    },
+    {
+      "id": "desse-train-10649",
+      "panel": "aligned_dev",
+      "category": "avoided_bad_fragment",
+      "notes": "Initializer dropped the object of communicate with in its second sentence. Trained model copies the grammatical original instead. Existing checks and checker warnings missed the bad fragment."
+    },
+    {
+      "id": "desse-train-6633",
+      "panel": "broad_dev",
+      "category": "stopped_minor_nonstructural_edit",
+      "notes": "Trained model preserves original instead of deleting also. No sentence split lost."
+    },
+    {
+      "id": "desse-train-5487",
+      "panel": "broad_dev",
+      "category": "recovered_split_with_grammar_repair",
+      "notes": "Trained output repairs the modal verb form and retains causal So. It passes shared checks and no longer has the selected modal-form warning. The initializer under repaired checks copied the original."
+    }
+  ],
+  "local_review_sha256": "79f2b871184347a8804d6fd61f13c01f57899d30a7555041aa4845885f603a40"
+}

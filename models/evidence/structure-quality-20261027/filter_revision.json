@@ -1,0 +1,14 @@
+{
+  "reason": "Inspection of quarantined training rows found valid names, afterwards and all-of-the style warnings. Quarantining every review-only warning was too broad. Narrow policy before completed trained checkpoint validation.",
+  "latest_progress": {
+    "stage": "train-seq2seq",
+    "step": 80,
+    "max_steps": 363,
+    "loss": 0.023498472524806857,
+    "elapsed_seconds": 254.1419028104283,
+    "estimated_remaining_seconds": 899.0269811918901,
+    "device": "cpu",
+    "host": "joshuadirga-Yoga-7-14IRL8"
+  },
+  "decision": "Preserve this attempt; retain spelling/style-only review cases in revised preparation. Do not use this attempt for quality claims."
+}

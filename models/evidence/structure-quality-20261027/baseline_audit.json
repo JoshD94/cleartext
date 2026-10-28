@@ -1,0 +1,23 @@
+{
+  "n": 96,
+  "changed": 14,
+  "input_status_counts": {
+    "no_covered_issue": 79,
+    "flagged": 16,
+    "review": 1
+  },
+  "output_status_counts": {
+    "no_covered_issue": 80,
+    "flagged": 15,
+    "review": 1
+  },
+  "new_warning_candidate_inputs": 0,
+  "resolved_warning_candidate_inputs": 2,
+  "shared_warning_candidate_inputs": 15,
+  "current_check_failures": {
+    "complete_clauses": 20,
+    "uncertainty_scope": 1,
+    "discourse_markers": 2
+  },
+  "limits": "Warning changes are candidates for inspection, not measured grammar regressions or repairs. Zero warnings does not certify grammar. Every input retained."
+}

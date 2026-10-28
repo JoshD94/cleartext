@@ -173,3 +173,11 @@ Each report retains its original protocol, comparison, failures, saved output pa
 [Training alignment](STRUCTURE_ALIGNMENT.md) records the shared data/runtime checks,
 the conservative attribution repair, quarantined target conflicts and the bounded
 T5 continuation. The generator remains experimental and the v7 demo is unchanged.
+
+## Structural input/output quality, October 27
+
+[The quality pass](STRUCTURE_QUALITY.md) audits original and returned sentences,
+adds shared discourse and uncertainty checks, and continues the best checkpoint
+on published pairs screened for selected input and target errors. It preserves
+the complete development panels and reports the final trained checkpoint even
+when selection retains the initializer.
