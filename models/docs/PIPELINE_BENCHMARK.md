@@ -318,3 +318,7 @@ pressure and disk space every 20 seconds. It stops its own job if memory
 pressure rises or free disk falls below 2 GiB. Completed outputs are copied
 back to Yoga. The Mac's primary checkout, shared environment, user applications
 and current demo remain intact.
+
+## Subsequent word-ranking experiment
+
+The October 28 [candidate sense usage experiment](SENSE_USAGE.md) tested nine additional WordNet usage and verb-pattern features on frozen grouped development data. It failed the adoption bar, so the models measured in this benchmark remain the retained models. Its separate candidate availability audit identifies losses during generation and eligibility checks for the next investigation.

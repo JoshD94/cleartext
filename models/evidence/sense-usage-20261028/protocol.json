@@ -1,0 +1,31 @@
+{
+  "objective": "Test whether candidate-specific WordNet usage priors and lemma-level verb frames improve frozen contextual word ranking.",
+  "variant_count": 1,
+  "baseline": "52 frozen contextual-similarity columns from detail-preservation-final-20261002; replay baseline folds before comparison",
+  "additional_features": [
+    "same_sense_prior_mass",
+    "linked_sense_prior_mass",
+    "maximum_same_sense_prior",
+    "prior_mass_times_sense_fit",
+    "shared_verb_frame_coverage",
+    "shared_verb_frame_available",
+    "candidate_prior_entropy",
+    "shared_prior_gap",
+    "sense_evidence_available"
+  ],
+  "prior": "Add-one smoothing of existing WordNet lemma usage counts within each candidate POS inventory. No learned or authored new labels.",
+  "repeats": 3,
+  "folds": 10,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "group": "lowercase target word; reuse frozen fold assignments",
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "adoption": "Mean net listed edits +5 or mean candidate log-loss change <=-0.001. Passing permits opt-in saved model, not demo promotion. No threshold tuning in this experiment.",
+  "scope": "All929BenchLS cases reused development, no TSAR labels or reserved domain inputs. No new human ratings, paid API, agents, or synthetic gold. Known pipeline failures are inspected development diagnostics, not independent confirmation.",
+  "next": "If retained, verify native feature equivalence at fixed positions0,464,928, then frozen ungraded diagnostic comparison. Report regressions and coverage.",
+  "implementation_correction": "Before any folds fitted, handle all WordNet morphological analyses consistently with wn.synsets, including found/find and bound/bind. Original failed manifest and source retained in development. No feature list, folds, thresholds or adoption bar changed."
+}

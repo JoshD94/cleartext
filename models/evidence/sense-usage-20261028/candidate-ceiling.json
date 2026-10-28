@@ -1,0 +1,14 @@
+{
+  "scope": "Post-hoc description of all reused BenchLS development with the target supplied. A missing listed substitute does not prove no valid simplification exists. No threshold selection or adoption-bar change.",
+  "meaning_floor": 0.1,
+  "cases": 929,
+  "with_candidates": 918,
+  "with_listed_candidate": 807,
+  "with_guarded_listed_candidate": 772,
+  "with_eligible_listed_candidate": 690,
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d"
+  },
+  "source_sha256": "baaf1b385197bfd18817735c0e2a98cc501aea951348065ed8feed77682c777c"
+}
