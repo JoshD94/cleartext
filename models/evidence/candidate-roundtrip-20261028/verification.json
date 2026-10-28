@@ -1,0 +1,20 @@
+{
+  "scope": "Mechanism tests and resource freeze only. Native comparison queued; no accuracy or accepted-edit gain measured.",
+  "candidate_tests": 31,
+  "candidate_subtests": 9,
+  "candidate_test_seconds": 0.34,
+  "candidate_test_log_sha256": "7e5ade7f2b49694f0e99602c681e3c3f6cc5ef001387569d4c7b6cf64f550138",
+  "pinned_preflight": {
+    "input_files": 33,
+    "source_files": 73,
+    "resource_files": 107,
+    "ml_imports": false
+  },
+  "independent_review_rounds": 2,
+  "review_r1": "P2 implicit scoring artifacts omitted; fixed.",
+  "review_r2": "Clean, all73sourcehashes match;7tests+4supplementalchecks pass.",
+  "historical_model_bytes_verified": false,
+  "weights_changed": false,
+  "default_changed": false,
+  "native_started": false
+}

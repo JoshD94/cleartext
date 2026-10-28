@@ -1,0 +1,25 @@
+{
+  "variant": "unique_dictionary_verb_roundtrip_v1",
+  "predeclared_at": "2026-10-28T05:11:36.360367+00:00",
+  "scope": "All929 BenchLS reused development, morphology mechanism experiment. No new trained variant or semantic labels. No SWORDS/TSAR/reserved-domain use.",
+  "source_change": "Only known incompatible verb lemmas with one dictionary-supported exact WordNet alternative. Keep equivalent inventories, POS, tense, thresholds and floor.",
+  "baseline": "Frozen 52-feature contextual model with corrected entity guard",
+  "thresholds": [
+    0.45,
+    0.8
+  ],
+  "meaning_floor": 0.1,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "folds": 10,
+  "training": "Reconstruct frozen baseline OOF models on original candidate rows only, target-word groups and saved folds. Repaired candidates never enter training. Verify baseline probabilities at 1e-12.",
+  "selection": "Native regenerate both repaired cases from corrected lemma. Original candidates/scores and order retained on unchanged cases. Fresh guards for changed cases; corrected guard cache elsewhere.",
+  "native_checks": "Compare raw and native repair decisions for all929. Raw/native verb inventories for all repaired lemmas. Regenerated candidate origin IDs exact. Batch-vs-single feature matrices and replacement similarities on each repaired case, no label-selected checks.",
+  "adoption": "Mean default net gain >=5 AND strict precision >=.90/coverage >=.20 every repeat. No logloss comparison on changed populations. Keep opt-in; never auto-save/promote.",
+  "no_tuning": true,
+  "guard_snapshot": "Same supplied-baseline corrected entity guard for both policies. Explicit guard-source.py matches guard scan SHA256, isolating concurrent literal protection work.",
+  "context_split": "Preserve historical target-word folds and verify no repaired row shares its target group OR normalized full sentence with training rows. No new variant training."
+}
