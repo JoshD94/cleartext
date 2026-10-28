@@ -90,11 +90,13 @@ def generation_checks(
     """One contract for published training targets and baseline generation."""
     from ..features import nlp
     from .common import structure_checks
+    from .discourse import discourse_checks
 
     old = source_doc if source_doc is not None else nlp()(source)
     new = output_doc if output_doc is not None else nlp()(output)
     result = structure_checks(source, output, old, new)
     added = {
+        **discourse_checks(old, new),
         "predicate_tense": predicate_tenses(old) == predicate_tenses(new),
         "complement_scope": complement_scopes(old) == complement_scopes(new),
         "generation_terminated": terminated,

@@ -19,31 +19,11 @@ from pathlib import Path
 from ..features import nlp
 from .common import complete_clause, detokenize, normalize
 from .corpus import download, pair_keys, read_pair, write_json
+from .discourse import RELATIONS
 from .review import excluded_keys
 from .seq2seq import generation_checks
 
 DEFAULT_CONFIG = Path(__file__).resolve().parents[3] / "structure-expanded-sources.json"
-RELATIONS = {
-    "so",
-    "therefore",
-    "however",
-    "otherwise",
-    "or",
-    "yet",
-    "instead",
-    "since",
-    "as",
-    "though",
-    "whereas",
-    "once",
-    "whether",
-    "provided",
-    "nevertheless",
-    "nonetheless",
-    "consequently",
-    "thus",
-    "hence",
-}
 
 
 def digest(path):
