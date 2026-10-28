@@ -79,6 +79,27 @@ def test_training_cannot_overlap_reserved_source_or_target():
         )
 
 
+@pytest.mark.parametrize(
+    "rule", ["MORFOLOGIK_RULE_EN_US", "AFTERWARDS_US", "ALL_OF_THE"]
+)
+def test_training_retains_spelling_and_style_only_review_cases(rule):
+    text = "Alice reviewed the report and Bob checked the figures."
+    row = pair("copy", text, text)
+    retained, quarantine = select_training(
+        [row], {text_key(text): grammar(text, rule)}, []
+    )
+    assert retained == [row] and not quarantine
+
+
+def test_training_excludes_selected_grammar_review_rule():
+    from cleartext.structure.quality import training_exclusion
+
+    assert (
+        training_exclusion(grammar("Ive seen it.", "IVE_CONTRACTION"))
+        == "selected_review_rule"
+    )
+
+
 def test_inherited_grammar_warning_is_not_counted_as_new():
     a = "Alice checked the figures and Bob revised the report."
     b = "Alice checked the figures. Bob revised the report."

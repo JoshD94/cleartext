@@ -20,6 +20,25 @@ from .corpus import pair_keys, write_json
 from .expanded import digest
 from .seq2seq import capacity_check, generation_checks, train_seq2seq
 
+TRAINING_POLICY = "training-grammar-v2"
+# Review-only spelling, unfamiliar names, dialect and style are retained. These
+# additional, identified rule families concern grammar or sentence orthography.
+TRAINING_ERROR_RULES = {
+    "IVE_CONTRACTION",
+    "UPPERCASE_SENTENCE_START",
+    "POSSESSIVE_APOSTROPHE",
+    "EVERYDAY_EVERY_DAY",
+}
+
+
+def training_exclusion(grammar):
+    screen = screen_result(grammar)
+    if screen["status"] in {"flagged", "unavailable"}:
+        return screen["status"]
+    if TRAINING_ERROR_RULES.intersection(screen["review_rules"]):
+        return "selected_review_rule"
+    return None
+
 
 def text_key(text):
     return hashlib.sha256(text.encode()).hexdigest()
@@ -125,9 +144,9 @@ def select_training(rows, cache, evaluation_rows):
             raise ValueError("Training/evaluation overlap")
         reasons = []
         for field in ("source", "reference"):
-            status = screen_result(cache[text_key(row[field])])["status"]
-            if status != "no_covered_issue":
-                reasons.append(field + ":" + status)
+            reason = training_exclusion(cache[text_key(row[field])])
+            if reason:
+                reasons.append(field + ":" + reason)
         checks = generation_checks(row["source"], row["reference"])
         reasons.extend(checks["failed"])
         if reasons:
@@ -183,6 +202,8 @@ def prepare(prior, reserved, run):
     write_json(run / "data.json", prepared)
     write_json(run / "quarantined_training.json", quarantine)
     summary = {
+        "training_policy": TRAINING_POLICY,
+        "additional_training_error_rules": sorted(TRAINING_ERROR_RULES),
         "prior_data_sha256": digest(prior),
         "reserved_exclusion_sha256": digest(reserved),
         "grammar_cache_sha256": digest(run / "grammar-cache.jsonl"),
@@ -197,6 +218,13 @@ def prepare(prior, reserved, run):
         ),
         "retained_copies": sum(
             normalize(r["source"]) == normalize(r["reference"]) for r in retained
+        ),
+        "retained_pairs_with_review_only_warnings": sum(
+            any(
+                screen_result(cache[text_key(r[k])])["status"] == "review"
+                for k in ("source", "reference")
+            )
+            for r in retained
         ),
         "evaluation_panels_unchanged": all(
             prepared[k] == data[k] for k in ("dev", "broad_dev")
