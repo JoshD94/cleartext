@@ -1,0 +1,10 @@
+{
+  "scope": "Descriptive ablation on all929 reused BenchLS development cases. No test labels or new correctness labels.",
+  "hypothesis": "A fixed hard sense-fit floor can reject listed substitutes already supported by the learned contextual ranker.",
+  "variant": "Remove only the0.10 sense-fit floor, retaining cached candidate guards, candidate pool, frozen52features and unchanged learned OOF probabilities.",
+  "thresholds": [0.45,0.80],
+  "seeds": [0,1,2],
+  "groups": "Frozen10fold target-word groups, identical to contextual baseline",
+  "retention_bar": "For an opt-in policy, mean net gain >=5 at0.45, and precision >=0.90 and coverage >=0.20 at0.80 in every repeat. Also require native behavior verification and audit regression comparison. No default or demo change.",
+  "no_search": "These are the two existing contextual policy thresholds. No floor grid, threshold tuning, additional model fitting, TSAR labels or reserved-domain outputs. Known failures used to motivate this analysis are development diagnostics, not independent confirmation."
+}

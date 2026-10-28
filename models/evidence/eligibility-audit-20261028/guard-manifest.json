@@ -1,0 +1,18 @@
+{
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/detail-senses-final-20261002/records.jsonl": "2ac5048ee7b82f16db1d4b105de1d536cf888bba7c05def92abfa2c3150bf717"
+  },
+  "export_sha256": "7d44d6acf6e220a9845bd70ee017d033950b33e9cbe5562c5c78fea25233a856",
+  "source_sha256": {
+    "scanner": "4ba683d7b4de71d46d44aad232211563b0cb0878e20a49d2741deae975dc1f22",
+    "aligned": "5ff5cbbe02698ce390af5bb7256e49a7b16053bfb2eb35bdc0b3ba41928b914d",
+    "legacy": "5a8d0a091c492af80e4803c934fdf6abec256d340fa9ed06d81dcb4014a5b39d"
+  },
+  "packages": {
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0"
+  },
+  "parse_cache_entries": 2
+}

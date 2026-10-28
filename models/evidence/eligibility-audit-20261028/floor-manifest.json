@@ -1,0 +1,30 @@
+{
+  "protocol": {
+    "scope": "Descriptive ablation on all929 reused BenchLS development cases. No test labels or new correctness labels.",
+    "hypothesis": "A fixed hard sense-fit floor can reject listed substitutes already supported by the learned contextual ranker.",
+    "variant": "Remove only the0.10 sense-fit floor, retaining cached candidate guards, candidate pool, frozen52features and unchanged learned OOF probabilities.",
+    "thresholds": [
+      0.45,
+      0.8
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "groups": "Frozen10fold target-word groups, identical to contextual baseline",
+    "retention_bar": "For an opt-in policy, mean net gain >=5 at0.45, and precision >=0.90 and coverage >=0.20 at0.80 in every repeat. Also require native behavior verification and audit regression comparison. No default or demo change.",
+    "no_search": "These are the two existing contextual policy thresholds. No floor grid, threshold tuning, additional model fitting, TSAR labels or reserved-domain outputs. Known failures used to motivate this analysis are development diagnostics, not independent confirmation."
+  },
+  "input_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "/home/joshuadirga/Documents/projects/cleartext/models/data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "/home/joshuadirga/.local/state/cleartext/eligibility-audit-20261028/floor-ablation-protocol.json": "a1e2a9f721650b1a608bf5a072a1786604a0697da069b9272690170ec29baf5f",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/feature-keys.json": "c8010a40dab33c313c666ba283a72d7f38dd862deae387f006c82064fc94f061",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/summary.json": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/similarity-seed0.npz": "edc248ec5c942d5fa9588c8b38690481e3725b0032c2c6a50aae4e56dc8faaaf",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/similarity-seed1.npz": "a03f56a7ecfee53082b4c644aea2a3bc4b779051fc657dbb2cef55cfbfcb8b42",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/similarity-seed2.npz": "68a2ae0de0ce91a736f0121d69edcc58fb162da7a3419b0f615bfd51912fe38d"
+  },
+  "source_sha256": "7d642a700e5aaea8d0519386b618709da0303d9a023415ee2a47102f5483ec89"
+}

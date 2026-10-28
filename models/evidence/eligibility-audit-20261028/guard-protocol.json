@@ -1,0 +1,19 @@
+{
+  "change": "Compare original PERSON/ORG/GPE occurrences against aligned tokens and their dependency/head, independent of new NER labels. Preserve the existing unequal-token path. Check repeated name occurrences individually.",
+  "cases": 929,
+  "candidate_rows": 14617,
+  "scope": "All reused BenchLS development, no fresh test or semantic gold. Native guard scan receives no correctness labels.",
+  "policies": {
+    "thresholds": [
+      0.45,
+      0.8
+    ],
+    "meaning_floor": 0.1,
+    "model": "Existing frozen contextual OOF probabilities, no retraining or threshold search"
+  },
+  "checks": "All nonentity guard results must match legacy exactly. Role-swap, repeated-name and predicate-attachment regressions must reject, NER-only changes with identical words and roles must pass. Compare fresh old/new guard eligibility, disclose historical cache drift.",
+  "source_archive_sha256": "aab66d8f805b3c0eb838552cfbffda89d0491225719212bca84db50a2acf9c62",
+  "staging_correction": "Include package subdirectories in source archive; initial test collection stopped before guard scanning. No behavior or comparison policies changed.",
+  "test_corrections": "Before guard scanning, construct test Docs with English lowercasing attributes; update older detail-policy fixture to test guard=True and explicitly assert guard=False bypass. Guard implementation unchanged.",
+  "anchor_root_correction": "Before complete comparison, compare the root of the aligned name span, allowing its internal compound head to change when external role and head are retained. Added a mechanism regression fixture."
+}

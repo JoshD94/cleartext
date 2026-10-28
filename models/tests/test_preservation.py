@@ -52,10 +52,15 @@ def test_cached_provenance_matches_live_generator():
         broader_links(cached)
 
 
-def test_filter_falls_back_after_scoring_and_default_stays_unchanged():
+def test_filter_falls_back_after_scoring_and_default_stays_unchanged(monkeypatch):
+    monkeypatch.setattr(
+        "cleartext.ensemble_pipeline.guardrails",
+        lambda *args: {"pass": True, "failed": []},
+    )
     doc = nlp()("The database stores records.")
     proposals = candidates(doc.text, "database")
-    broad = {**proposals["information"], "accept": 0.9, "rejections": []}
+    broad = {**proposals["information"], "accept": 0.9, "rejections": [],
+             "output": "The information stores records."}
     # A lower scoring positive proposal remains available after the broad candidate is rejected.
     same = {
         "word": "store",
@@ -64,15 +69,18 @@ def test_filter_falls_back_after_scoring_and_default_stays_unchanged():
         "source": "synonym",
         "accept": 0.6,
         "rejections": [],
+        "output": "The store stores records.",
     }
     default = object.__new__(EnsembleClearText)
     default.decision_threshold = 0.45
     experimental = object.__new__(ConservativeDetailClearText)
     experimental.decision_threshold = 0.45
     assert (
-        default.first_guarded(doc, [broad, same], guard=False)["word"] == "information"
+        default.first_guarded(doc, [broad, same], guard=True)["word"] == "information"
     )
     assert (
-        experimental.first_guarded(doc, [broad, same], guard=False)["word"] == "store"
+        experimental.first_guarded(doc, [broad, same], guard=True)["word"] == "store"
     )
     assert "experimental detail policy" in broad["rejections"][0]
+    # The no-guard ablation bypasses experimental rejection reasons as well.
+    assert experimental.first_guarded(doc, [broad, same], guard=False)["word"] == "information"

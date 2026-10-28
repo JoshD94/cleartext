@@ -42,6 +42,8 @@ The pool lacks a listed substitute for 122 cases. The guard removes the last lis
 
 The next useful investigation is a paired audit of those 35 guard losses and 82 meaning-floor losses. It should distinguish defective inflection or sense scoring from legitimate rejection before relaxing any checks. Missing candidates also remain a separate bottleneck. This experiment gives no evidence for adding more dictionary columns to the current ranker.
 
+The subsequent [eligibility audit](ELIGIBILITY_AUDIT.md) traces those losses, tests removal of the meaning floor and corrects an entity-role comparison bug.
+
 ## Execution and reproduction
 
 The successful fit ran on Yoga in `cleartext-sense-usage-r2-20261028`, capped at 2 GB and two CPU threads. It took 78.8 seconds and peaked at 636 MiB resident memory. The Mac was checked; Yoga fit the placement rules. The related 29 tests and fatal/undefined-name lint passed. The demo still responds with HTTP 200.

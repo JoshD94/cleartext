@@ -139,6 +139,30 @@ def simple_tokens(text):
     return re.findall(r"[a-z]+|n't", text.lower())
 
 
+def entity_roles_preserved(original_doc, candidate_doc):
+    """Compare each original name at its aligned tokens, independent of new NER labels."""
+    labels = {"PERSON", "ORG", "GPE"}
+    if len(original_doc) == len(candidate_doc):
+        # Equal token counts provide the same alignment used by argument_roles.
+        # Check every occurrence, including repeated names. Recognition may change
+        # from ORG to FAC or disappear even when the words and role stay the same.
+        return all(
+            [t.lower_ for t in entity] == [t.lower_ for t in candidate_doc[entity.start:entity.end]]
+            and (candidate_doc[entity.start:entity.end].root.dep_,
+                 candidate_doc[entity.start:entity.end].root.head.i)
+            == (entity.root.dep_, entity.root.head.i)
+            for entity in original_doc.ents if entity.label_ in labels
+        )
+    # Multiword edits still use the existing conservative comparison. Their
+    # argument-role alignment is a separate limitation of this guard.
+    named = lambda doc: {
+        e.text.lower(): (e.root.dep_, e.root.head.i)
+        for e in doc.ents if e.label_ in labels
+    }
+    old, new = named(original_doc), named(candidate_doc)
+    return all(new.get(name) == role for name, role in old.items())
+
+
 def guardrails(original, candidate, original_doc=None):
     od = original_doc or nlp()(original)
     nd = nlp()(candidate)
@@ -159,13 +183,7 @@ def guardrails(original, candidate, original_doc=None):
         {k: old_words[k] for k in MODAL if old_words[k]}
     ) == Counter({k: new_words[k] for k in MODAL if new_words[k]})
     checks["entities"] = all(e.text.lower() in candidate.lower() for e in od.ents)
-    named = lambda d: {
-        e.text.lower(): (e.root.dep_, e.root.head.i)
-        for e in d.ents
-        if e.label_ in {"PERSON", "ORG", "GPE"}
-    }
-    old_named, new_named = named(od), named(nd)
-    checks["entity_roles"] = all(new_named.get(k) == v for k, v in old_named.items())
+    checks["entity_roles"] = entity_roles_preserved(od, nd)
     checks["technical_phrases"] = all(
         p not in original.lower() or p in candidate.lower() for p in PROTECTED
     )

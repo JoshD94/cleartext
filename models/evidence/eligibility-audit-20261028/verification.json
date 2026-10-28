@@ -1,0 +1,48 @@
+{
+  "host": "yoga",
+  "session": "cleartext-entity-queued-20261028",
+  "scope": "cleartext-entity-guards-20261028.scope",
+  "memory_cap_bytes": 1610612736,
+  "cpu_quota_percent": 100,
+  "available_memory_min_bytes": 5253750784,
+  "source_freeze_verified": true,
+  "candidate_order_verified": true,
+  "tests_passed": 101,
+  "test_log_sha256": "9e9184fe1b76d6d00564643bdf9453f42bb719146c7da34016c259af8f857717",
+  "all_929_cases_retained": true,
+  "all_14617_candidate_pairs_retained": true,
+  "nonentity_guard_checks_identical": true,
+  "new_model_fitted": false,
+  "meaning_floor_changed": false,
+  "thresholds_changed": false,
+  "semantic_accuracy_measured": false,
+  "failed_or_aborted_attempts": [
+    {
+      "host": "mac",
+      "stage": "loss-audit import/substitution",
+      "reason": "NLTK_DATA path missing; rerun with existing downloaded corpus path"
+    },
+    {
+      "host": "mac",
+      "stage": "test collection",
+      "reason": "First source archive omitted package subdirectories; no guard scan started"
+    },
+    {
+      "host": "mac",
+      "stage": "tests",
+      "reason": "Bare test Vocab lacked lowercase attributes; older detail-policy fixture incorrectly expected guard=False to filter. Fixtures corrected before scan."
+    },
+    {
+      "host": "mac",
+      "stage": "guard scan",
+      "cases_saved": 65,
+      "reason": "Own worker stopped at memory pressure warn; partial attempt retained outside Git"
+    },
+    {
+      "host": "mac",
+      "stage": "guard scan retry",
+      "cases_saved": 0,
+      "reason": "Own worker stopped at memory pressure warn before records; moved to queued Yoga job"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "source_sha256": {
+    "audit": "3c27a9f5f420fbc076e087fac158a92ce0f64b53c38243cf50b4197164fac7c8",
+    "lexical": "5a8d0a091c492af80e4803c934fdf6abec256d340fa9ed06d81dcb4014a5b39d"
+  },
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/detail-senses-final-20261002/records.jsonl": "2ac5048ee7b82f16db1d4b105de1d536cf888bba7c05def92abfa2c3150bf717"
+  },
+  "packages": {
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0",
+    "nltk": "3.10.4"
+  }
+}

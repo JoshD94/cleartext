@@ -322,3 +322,5 @@ and current demo remain intact.
 ## Subsequent word-ranking experiment
 
 The October 28 [candidate sense usage experiment](SENSE_USAGE.md) tested nine additional WordNet usage and verb-pattern features on frozen grouped development data. It failed the adoption bar, so the models measured in this benchmark remain the retained models. Its separate candidate availability audit identifies losses during generation and eligibility checks for the next investigation.
+
+A later [eligibility audit](ELIGIBILITY_AUDIT.md) corrects an entity-role comparison bug. The ten-system matrix above predates that guard correction; model weights remain the same.

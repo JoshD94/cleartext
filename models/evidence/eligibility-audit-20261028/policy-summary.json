@@ -1,0 +1,148 @@
+{
+  "scope": "Paired guard-only comparison on all929 reused BenchLS development cases with target supplied. Frozen contextual OOF scores; no new model or semantic labels.",
+  "results": [
+    {
+      "seed": 0,
+      "threshold": 0.45,
+      "legacy": {
+        "edits": 642,
+        "correct": 513,
+        "wrong": 129,
+        "net": 384,
+        "precision": 0.7990654205607477,
+        "coverage": 0.6910656620021528
+      },
+      "aligned": {
+        "edits": 643,
+        "correct": 515,
+        "wrong": 128,
+        "net": 387,
+        "precision": 0.8009331259720062,
+        "coverage": 0.6921420882669537
+      },
+      "net_delta": 3,
+      "changed_selections": 2
+    },
+    {
+      "seed": 0,
+      "threshold": 0.8,
+      "legacy": {
+        "edits": 306,
+        "correct": 278,
+        "wrong": 28,
+        "net": 250,
+        "precision": 0.9084967320261438,
+        "coverage": 0.3293864370290635
+      },
+      "aligned": {
+        "edits": 307,
+        "correct": 279,
+        "wrong": 28,
+        "net": 251,
+        "precision": 0.9087947882736156,
+        "coverage": 0.3304628632938644
+      },
+      "net_delta": 1,
+      "changed_selections": 1
+    },
+    {
+      "seed": 1,
+      "threshold": 0.45,
+      "legacy": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.7990580847723705,
+        "coverage": 0.6856835306781486
+      },
+      "aligned": {
+        "edits": 639,
+        "correct": 511,
+        "wrong": 128,
+        "net": 383,
+        "precision": 0.7996870109546166,
+        "coverage": 0.6878363832077503
+      },
+      "net_delta": 2,
+      "changed_selections": 2
+    },
+    {
+      "seed": 1,
+      "threshold": 0.8,
+      "legacy": {
+        "edits": 292,
+        "correct": 265,
+        "wrong": 27,
+        "net": 238,
+        "precision": 0.9075342465753424,
+        "coverage": 0.3143164693218515
+      },
+      "aligned": {
+        "edits": 293,
+        "correct": 266,
+        "wrong": 27,
+        "net": 239,
+        "precision": 0.9078498293515358,
+        "coverage": 0.3153928955866523
+      },
+      "net_delta": 1,
+      "changed_selections": 1
+    },
+    {
+      "seed": 2,
+      "threshold": 0.45,
+      "legacy": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.7956656346749226,
+        "coverage": 0.6953713670613563
+      },
+      "aligned": {
+        "edits": 647,
+        "correct": 516,
+        "wrong": 131,
+        "net": 385,
+        "precision": 0.7975270479134466,
+        "coverage": 0.6964477933261571
+      },
+      "net_delta": 3,
+      "changed_selections": 2
+    },
+    {
+      "seed": 2,
+      "threshold": 0.8,
+      "legacy": {
+        "edits": 299,
+        "correct": 270,
+        "wrong": 29,
+        "net": 241,
+        "precision": 0.903010033444816,
+        "coverage": 0.3218514531754575
+      },
+      "aligned": {
+        "edits": 300,
+        "correct": 271,
+        "wrong": 29,
+        "net": 242,
+        "precision": 0.9033333333333333,
+        "coverage": 0.32292787944025836
+      },
+      "net_delta": 1,
+      "changed_selections": 1
+    }
+  ],
+  "candidate_ceiling": {
+    "legacy": {
+      "listed_guarded": 773,
+      "listed_eligible": 691
+    },
+    "aligned": {
+      "listed_guarded": 776,
+      "listed_eligible": 694
+    }
+  },
+  "manifest_sha256": "739f6394c0e12a1c4949237ceff1d9cf68eb2959cf8b767b5f03eca79eff868e"
+}

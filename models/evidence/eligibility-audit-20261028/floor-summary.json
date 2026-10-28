@@ -1,0 +1,155 @@
+{
+  "scope": "Descriptive ablation on all929 reused BenchLS development cases. No test labels or new correctness labels.",
+  "results": [
+    {
+      "seed": 0,
+      "threshold": 0.45,
+      "baseline": {
+        "edits": 642,
+        "correct": 513,
+        "wrong": 129,
+        "net": 384,
+        "precision": 0.7990654205607477,
+        "coverage": 0.6910656620021528
+      },
+      "no_floor": {
+        "edits": 673,
+        "correct": 541,
+        "wrong": 132,
+        "net": 409,
+        "precision": 0.8038632986627043,
+        "coverage": 0.7244348762109796
+      },
+      "net_delta": 25,
+      "changed_selections": 61,
+      "correct_to_wrong": 4,
+      "wrong_to_correct": 13
+    },
+    {
+      "seed": 0,
+      "threshold": 0.8,
+      "baseline": {
+        "edits": 306,
+        "correct": 278,
+        "wrong": 28,
+        "net": 250,
+        "precision": 0.9084967320261438,
+        "coverage": 0.3293864370290635
+      },
+      "no_floor": {
+        "edits": 319,
+        "correct": 288,
+        "wrong": 31,
+        "net": 257,
+        "precision": 0.9028213166144201,
+        "coverage": 0.3433799784714747
+      },
+      "net_delta": 7,
+      "changed_selections": 15,
+      "correct_to_wrong": 0,
+      "wrong_to_correct": 0
+    },
+    {
+      "seed": 1,
+      "threshold": 0.45,
+      "baseline": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.7990580847723705,
+        "coverage": 0.6856835306781486
+      },
+      "no_floor": {
+        "edits": 665,
+        "correct": 534,
+        "wrong": 131,
+        "net": 403,
+        "precision": 0.8030075187969925,
+        "coverage": 0.7158234660925726
+      },
+      "net_delta": 22,
+      "changed_selections": 58,
+      "correct_to_wrong": 3,
+      "wrong_to_correct": 11
+    },
+    {
+      "seed": 1,
+      "threshold": 0.8,
+      "baseline": {
+        "edits": 292,
+        "correct": 265,
+        "wrong": 27,
+        "net": 238,
+        "precision": 0.9075342465753424,
+        "coverage": 0.3143164693218515
+      },
+      "no_floor": {
+        "edits": 306,
+        "correct": 276,
+        "wrong": 30,
+        "net": 246,
+        "precision": 0.9019607843137255,
+        "coverage": 0.3293864370290635
+      },
+      "net_delta": 8,
+      "changed_selections": 15,
+      "correct_to_wrong": 0,
+      "wrong_to_correct": 0
+    },
+    {
+      "seed": 2,
+      "threshold": 0.45,
+      "baseline": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.7956656346749226,
+        "coverage": 0.6953713670613563
+      },
+      "no_floor": {
+        "edits": 676,
+        "correct": 542,
+        "wrong": 134,
+        "net": 408,
+        "precision": 0.8017751479289941,
+        "coverage": 0.7276641550053822
+      },
+      "net_delta": 26,
+      "changed_selections": 59,
+      "correct_to_wrong": 3,
+      "wrong_to_correct": 12
+    },
+    {
+      "seed": 2,
+      "threshold": 0.8,
+      "baseline": {
+        "edits": 299,
+        "correct": 270,
+        "wrong": 29,
+        "net": 241,
+        "precision": 0.903010033444816,
+        "coverage": 0.3218514531754575
+      },
+      "no_floor": {
+        "edits": 314,
+        "correct": 282,
+        "wrong": 32,
+        "net": 250,
+        "precision": 0.8980891719745223,
+        "coverage": 0.3379978471474704
+      },
+      "net_delta": 9,
+      "changed_selections": 17,
+      "correct_to_wrong": 0,
+      "wrong_to_correct": 0
+    }
+  ],
+  "mean_default_net_delta": 24.333333333333332,
+  "strict_constraints_passed": false,
+  "retention_bar_passed": false,
+  "default_changed": false,
+  "new_model_fitted": false,
+  "manifest_sha256": "80cf20ec5263a71fd0a1f70c24b878d431d6b8ccfdbf0907bd50ee01018a63ac"
+}
