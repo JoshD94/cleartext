@@ -19,7 +19,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from evals.runner import (  # noqa: E402
     default_ablation_order,
-    register_system,
     run_evaluation,
     save_results,
     to_markdown_table,
@@ -67,7 +66,7 @@ def main():
         from evals.model_adapter import ModelUnavailable, register_model_pipeline
         try:
             transport = register_model_pipeline(
-                run=args.model_run, url=args.model_url)
+                run=args.model_run, url=args.model_url, full=True)
             print(f"full_pipeline registered via {transport} transport")
         except ModelUnavailable as exc:
             print(f"error: {exc}", file=sys.stderr)

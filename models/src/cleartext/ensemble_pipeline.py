@@ -452,7 +452,7 @@ class EnsembleClearText:
         for r in sorted(rows, key=lambda r: -r["accept"]):
             if r["accept"] < self.decision_threshold:
                 break
-            if r["rejections"]:
+            if r["rejections"] and guard:
                 continue
             if not guard:
                 return r
@@ -531,6 +531,7 @@ class EnsembleClearText:
         max_word_edits=None,
         structure_rewriter=None,
         grammar_corrector=None,
+        guardrails=True,
     ):
         original_text = text
         grammar_details = {}
@@ -550,7 +551,8 @@ class EnsembleClearText:
         term_spans = []
         blocked_term_stages = []
         structure_details = {"on": False}
-        if self.technical_terms:
+        protect_terms = self.technical_terms and guardrails
+        if protect_terms:
             from .technical_terms import detect_terms, preserved_terms
 
             term_spans = detect_terms(original_doc)
@@ -568,12 +570,12 @@ class EnsembleClearText:
                 from .structure.adapter import rewrite
 
                 current, changes, structure_details = rewrite(
-                    current, structure_rewriter
+                    current, structure_rewriter, guard=guardrails
                 )
             structure_details["on"] = True
             edits += changes
             if (
-                self.technical_terms
+                protect_terms
                 and not preserved_terms(original_doc, current, term_spans)["pass"]
             ):
                 current = text
@@ -591,7 +593,7 @@ class EnsembleClearText:
             current, changes = phrase_rewrite(current, self.complexity)
             edits += changes
             if (
-                self.technical_terms
+                protect_terms
                 and not preserved_terms(original_doc, current, term_spans)["pass"]
             ):
                 current = before
@@ -607,7 +609,7 @@ class EnsembleClearText:
                     r"(?<!\w)" + re.escape(p) + r"(?!\w)", current, re.I
                 )
             ]
-            if self.technical_terms:
+            if protect_terms:
                 spans += [
                     (span.start, span.end)
                     for span in detect_terms(doc)
@@ -635,7 +637,7 @@ class EnsembleClearText:
                     if p >= th and (t.pos_ != "NOUN" or p >= self.noun_threshold)
                 ]
             for token, hard in flagged:
-                r = self.rank_word(doc, token, original_doc)
+                r = self.rank_word(doc, token, original_doc, guard=guardrails)
                 r["hardness"] = hard
                 trace.append(r)
             # Across words: decision probability times hardness**alpha (alpha 0 is decision probability alone).
@@ -659,7 +661,7 @@ class EnsembleClearText:
                 current = apply_edits(
                     doc, [(tokens[r["start"]], r["selected"]["word"]) for r in chosen]
                 )
-                if len(chosen) > 1 and not combined_ok(doc, current):
+                if guardrails and len(chosen) > 1 and not combined_ok(doc, current):
                     chosen = chosen[:1]
                     current = apply_edits(
                         doc,
@@ -677,7 +679,7 @@ class EnsembleClearText:
                         }
                     )
         term_details = {}
-        if self.technical_terms:
+        if protect_terms:
             check = preserved_terms(original_doc, current, term_spans)
             if not check["pass"]:
                 current = text

@@ -80,6 +80,14 @@ and the import is lazy, so the baselines above run without it.
 
 ## Ablation study (proposal Section 3.2)
 
+For the trained sentence generator plus lexical model, use
+[`pipeline_benchmark.py`](pipeline_benchmark.py). It runs the stage variants on
+one frozen input panel, then scores their saved outputs with this package's
+readability and preservation functions. See the
+[combined-pipeline record](../models/docs/PIPELINE_BENCHMARK.md) for data, limits
+and commands. The ordinary `run_evals.py` full-pipeline adapter enables phrase
+and structure rules; use the benchmark CLI to select a trained T5 checkpoint.
+
 The 7-way ladder — original, rule-based, lexical-only, structural-only,
 lexical+structural, full without guardrails, full pipeline — is defined in
 `runner.default_ablation_order()`. As each team module lands, register it in

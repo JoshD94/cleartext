@@ -75,7 +75,7 @@ def make_model_system(run=None, max_edits=None, full=False):
     return simplify
 
 
-def make_http_system(base_url, max_edits=None, timeout=120):
+def make_http_system(base_url, max_edits=None, timeout=120, full=False):
     """Return a str->str callable backed by the models demo server.
 
     `base_url` is the demo server root, e.g. http://127.0.0.1:8770
@@ -85,7 +85,8 @@ def make_http_system(base_url, max_edits=None, timeout=120):
 
     def simplify(text):
         payload = json.dumps(
-            {"text": text, "max_edits": 1 if max_edits is None else max_edits}
+            {"text": text, "max_edits": 1 if max_edits is None else max_edits,
+             "structure": full, "phrases": full}
         ).encode("utf-8")
         req = urllib.request.Request(
             url, data=payload, headers={"Content-Type": "application/json"})
@@ -116,7 +117,7 @@ def register_model_pipeline(name="full_pipeline", run=None, url=None,
 
     url = url or os.environ.get("CLEARTEXT_DEMO_URL")
     if url:
-        register_system(name, make_http_system(url, max_edits=max_edits))
+        register_system(name, make_http_system(url, max_edits=max_edits, full=full))
         return "http"
     register_system(
         name, make_model_system(run=run, max_edits=max_edits, full=full))

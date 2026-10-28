@@ -5,7 +5,7 @@ from ..rewrites import structural
 from .common import structure_checks
 
 
-def rewrite(text, model=None):
+def rewrite(text, model=None, guard=True):
     if model is None:
         output, edits = structural(text)
         return (
@@ -19,8 +19,13 @@ def rewrite(text, model=None):
                 "rule": edits[0]["rule"] if edits else None,
             },
         )
-    details = {"backend": "ranker", "before": text, "after": text, "changed": False}
-    if len(text.split()) > 70 or len(list(nlp()(text).sents)) != 1:
+    details = {
+        "backend": getattr(model, "backend", "ranker"),
+        "before": text, "after": text, "changed": False,
+    }
+    if not getattr(model, "supports_passages", False) and (
+        len(text.split()) > 70 or len(list(nlp()(text).sents)) != 1
+    ):
         return (
             text,
             [],
@@ -39,7 +44,7 @@ def rewrite(text, model=None):
             "candidate_count": prediction.get("candidate_count"),
         }
     )
-    if not checks["pass"] or output == text:
+    if (guard and not checks["pass"]) or output == text:
         return (
             text,
             [],
@@ -48,7 +53,10 @@ def rewrite(text, model=None):
                 "reason": "No candidate passed the model threshold and structural checks.",
             },
         )
-    details.update({"after": output, "changed": True, "rule": "learned rewrite ranker"})
+    details.update({
+        "after": output, "changed": True,
+        "rule": "learned " + details["backend"],
+    })
     return (
         output,
         [

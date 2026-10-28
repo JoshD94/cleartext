@@ -35,7 +35,7 @@ _EMB_MODELS = {}
 _NLI_PIPES = {}
 
 _NUMBER_RE = re.compile(
-    r"\b\d{1,3}(?:,\d{3})*(?:\.\d+)?\b"  # 1,000 / 3.14
+    r"\b\d+(?:,\d{3})*(?:\.\d+)?\b"  # 1,000 / 3.14 / 2026
     r"|\b\d+\s*(?:%|percent|dollars?|USD|million|billion|thousand)\b",  # quantities
     re.IGNORECASE,
 )
@@ -200,7 +200,7 @@ def tfidf_cosine_similarity(original, simplified):
     """Cosine similarity between TF-IDF vectors of the two passages."""
     if not original.strip() or not simplified.strip():
         return 0.0
-    vec = TfidfVectorizer().fit_transform([original, simplified])
+    vec = TfidfVectorizer(token_pattern=r"(?u)\b\w+\b").fit_transform([original, simplified])
     return float(cosine_similarity(vec[0], vec[1])[0][0])
 
 
@@ -249,7 +249,7 @@ def nli_entailment(original, simplified,
         try:
             _NLI_PIPES[model_name] = pipeline(
                 "text-classification", model=model_name,
-                top_k=None, truncation=True, padding=True,
+                top_k=None, padding=True,
             )
         except Exception as exc:
             warnings.warn(f"could not load NLI model {model_name}: {exc}")
@@ -258,7 +258,13 @@ def nli_entailment(original, simplified,
 
     def entail_prob(premise, hypothesis):
         try:
-            scores = pipe({"text": premise, "text_pair": hypothesis})
+            encoded = pipe.tokenizer(premise, hypothesis, truncation=False)
+            limits = [pipe.tokenizer.model_max_length,
+                      getattr(pipe.model.config, "max_position_embeddings", 512)]
+            if len(encoded["input_ids"]) > min(limits):
+                warnings.warn("NLI pair exceeds token limit; abstaining without truncation")
+                return None
+            scores = pipe({"text": premise, "text_pair": hypothesis}, truncation=False)
         except Exception:
             return None
         # single input -> flat list of {"label","score"} dicts
@@ -267,11 +273,8 @@ def nli_entailment(original, simplified,
         for s in scores:
             if isinstance(s, dict) and "entail" in s.get("label", "").lower():
                 return float(s["score"])
-        # MNLI label order fallback: contradiction, neutral, entailment
-        labs = [s.get("label", "") for s in scores if isinstance(s, dict)]
-        if len(labs) == 3:
-            idx = sorted(range(3), key=lambda i: labs[i])[-1]
-            return float(scores[idx]["score"])
+        # Generic LABEL_n names have no reliable entailment ordering.
+        warnings.warn("NLI model does not expose a named entailment label; abstaining")
         return None
 
     fwd = entail_prob(original, simplified)
@@ -294,7 +297,9 @@ def _preservation_fraction(original_items, simplified_text):
     if not items:
         return 1.0  # vacuous preservation
     simp_lower = simplified_text.lower()
-    kept = sum(1 for it in items if it.lower() in simp_lower)
+    kept = sum(1 for it in items if re.search(
+        r"(?<!\w)" + re.escape(it.lower()) + r"(?!\w)", simp_lower
+    ))
     return kept / len(items)
 
 
@@ -319,12 +324,17 @@ def explicit_checks(original, simplified):
     """Fraction of key information preserved: numbers, dates, entities,
     negations, verb tense. 1.0 = everything preserved."""
     return {
-        "numbers_preserved": _preservation_fraction(extract_numbers(original), simplified),
+        "numbers_preserved": _item_fraction(extract_numbers(original), extract_numbers(simplified)),
         "dates_preserved": _preservation_fraction(extract_dates(original), simplified),
         "entities_preserved": _preservation_fraction(extract_entities(original), simplified),
         "negations_preserved": _preservation_fraction(extract_negations(original), simplified),
         "tenses_preserved": tense_preserved(original, simplified),
     }
+
+
+def _item_fraction(original, simplified):
+    items = set(original)
+    return len(items & set(simplified)) / len(items) if items else 1.0
 
 
 def preservation_report(original, simplified, embedding_model=None, nli_model=None):

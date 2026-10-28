@@ -1,0 +1,23 @@
+{
+  "reviewer": "Coding assistant inspection, not independent human labels",
+  "selection": "Early changed lexical-only outputs while full generation is in progress; diagnostic observations only, not an accuracy estimate",
+  "items": [
+    {
+      "id": "desse-train-2226",
+      "judgment": "The replacement loses the specific category of violence."
+    },
+    {
+      "id": "desse-train-9411",
+      "judgment": "The new adjective occupies a nominal slot and creates a broken phrase; the source has other inherited defects."
+    },
+    {
+      "id": "desse-train-10769",
+      "judgment": "The replacement reverses the teaching/learning relation without changing the grammatical participant."
+    },
+    {
+      "id": "desse-train-11864",
+      "judgment": "The replacement does not preserve the expected prepositional construction."
+    }
+  ],
+  "action": "Retain full evaluation panel. Test already development-selected stronger contextual ranker, no new gold or test-driven threshold changes."
+}
