@@ -27,7 +27,9 @@ def model():
 def slot_scores(context, start, end, words, max_pieces=6, window=150, limit=320):
     """Mean log-probability of each word's pieces in context[start:end], one piece masked at a time.
     Inputs longer than `limit` pieces keep `window` pieces on each side of the slot (same rule as the cached
-    SWORDS scores from scripts/experiments/bert_benchmark.py)."""
+    SWORDS scores from scripts/experiments/bert_benchmark.py). Only masked
+    positions need vocabulary scores; retain the legacy inputs and piece cap.
+    """
     import torch
 
     tok, mlm = model()
@@ -66,9 +68,11 @@ def slot_scores(context, start, end, words, max_pieces=6, window=150, limit=320)
                 [x + [tok.pad_token_id] * (L - len(x)) for x, _, _ in chunk]
             )
             att = (ids != tok.pad_token_id).long()
-            lp = mlm(input_ids=ids, attention_mask=att).logits.log_softmax(-1)
+            hidden = mlm.bert(input_ids=ids, attention_mask=att).last_hidden_state
+            positions = torch.tensor([p for _, p, _ in chunk])
+            lp = mlm.cls(hidden[torch.arange(len(chunk)), positions]).log_softmax(-1)
             for r, (x, p, piece) in enumerate(chunk):
-                out[owner[k + r]] += float(lp[r, p, piece])
+                out[owner[k + r]] += float(lp[r, piece])
                 n[owner[k + r]] += 1
     return out / np.maximum(n, 1)
 

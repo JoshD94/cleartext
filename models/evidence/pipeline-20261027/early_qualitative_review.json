@@ -19,5 +19,28 @@
       "judgment": "The replacement does not preserve the expected prepositional construction."
     }
   ],
-  "action": "Retain full evaluation panel. Test already development-selected stronger contextual ranker, no new gold or test-driven threshold changes."
+  "action": "Retain full evaluation panel. Test already development-selected stronger contextual ranker, no new gold or test-driven threshold changes.",
+  "followup": {
+    "system": "contextual precision full combination at0.80",
+    "reviewer": "Same coding assistant, not independent labels",
+    "observations": [
+      {
+        "id": "desse-train-2226",
+        "result": "Leaves source unchanged; avoids the recorded loss of specificity."
+      },
+      {
+        "id": "desse-train-9411",
+        "result": "Leaves source unchanged; avoids the introduced adjective-in-noun-slot defect, while inherited source defects remain."
+      },
+      {
+        "id": "desse-train-11864",
+        "result": "Leaves source unchanged; avoids the recorded prepositional-construction problem."
+      },
+      {
+        "id": "desse-train-10769",
+        "result": "Still accepts the teaching-to-learning shift with acceptance score0.835. Contextual similarity and high acceptance score do not settle predicate meaning."
+      }
+    ],
+    "limits": "Purposively selected previously inspected failures, no accuracy estimate or test-threshold tuning."
+  }
 }

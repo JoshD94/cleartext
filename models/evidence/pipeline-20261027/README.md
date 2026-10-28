@@ -14,6 +14,11 @@ policy, model, cache and package versions. The strict policy matches a published
 substitute in 80 of 84 accepted edits, with 22.5% coverage. This is not a
 full-sentence accuracy result.
 
+The `bounded-*` files record numeric equivalence for masked-position vocabulary
+scoring, agreement with the 81 saved partial outputs, and agreement between the
+experimental function and production code. Initial model-load timing is kept
+explicit and is not a speedup estimate.
+
 `early_qualitative_review.json` contains coding-assistant diagnostic notes by ID.
 They are not independent human labels or an accuracy sample.
 

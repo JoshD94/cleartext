@@ -137,6 +137,28 @@ spaCy and scikit-learn versions match Yoga. Torch differs by a patch version,
 2.14.1 on Mac and 2.14.0 on Yoga. The native score checks pass despite that
 difference. The Mac's primary source and existing environment were preserved.
 
+## Word scorer memory use
+
+The legacy masked-word scorer produced vocabulary logits at every token, then
+used only the masked positions. The scorer now applies the same BERT vocabulary
+head to the masked-position vectors. This avoids the batch × sequence ×
+vocabulary allocation. Candidate tokenization, the six-piece cap, context
+windows, attention masks and batches remain the same. The optional complete-
+candidate scorer remains a separate experiment.
+
+Fixed real-BERT checks cover short text, a 4,006-character context and a literal
+padding token. The largest log-probability difference is 0.00000477. Three native
+contextual rankings still reproduce the cached scores and selected words. All
+81 strict-policy outputs saved before a Mac memory stop match the fresh rerun.
+The regression test prevents full-sequence vocabulary projection and checks the
+legacy piece cap, attention behavior and batch boundary. Fifteen related tests
+pass. Cold-load timings in the numeric verification are not a speed comparison.
+
+The running experiments use a recorded runtime override of the same function.
+The production function and experimental helper have identical executable ASTs.
+Source, wrapper and helper hashes accompany the output evidence. This change
+reduces an allocation; it does not make a substitute more accurate.
+
 ## Reproduction
 
 Merge the model and evaluator branches and use the model environment plus the
