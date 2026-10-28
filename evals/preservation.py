@@ -221,6 +221,22 @@ def embedding_similarity(original, simplified, model_name="all-MiniLM-L6-v2"):
     if model_name not in _EMB_MODELS:
         _EMB_MODELS[model_name] = SentenceTransformer(model_name)
     model = _EMB_MODELS[model_name]
+    # A high similarity between truncated prefixes says nothing about the tail.
+    # Include the model's default prompt in the length check, as encode does.
+    try:
+        prompt = getattr(model, "prompts", {}).get(
+            getattr(model, "default_prompt_name", None), ""
+        )
+        limit = min(model.max_seq_length, model.tokenizer.model_max_length)
+        lengths = [len(model.tokenizer(
+            prompt + text, add_special_tokens=True, truncation=False
+        )["input_ids"]) for text in (original, simplified)]
+    except (AttributeError, KeyError, TypeError, ValueError):
+        warnings.warn("Embedding token limit unavailable; abstaining")
+        return None
+    if max(lengths) > limit:
+        warnings.warn("Embedding input exceeds token limit; abstaining without truncation")
+        return None
     emb = model.encode([original, simplified], normalize_embeddings=True)
     return float(emb[0] @ emb[1])
 

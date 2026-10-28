@@ -1,0 +1,45 @@
+{
+  "host": "Mac",
+  "coordinator_host": "Yoga",
+  "generation_threads": 4,
+  "scoring_threads": 2,
+  "worker_watchdog_seconds": 20,
+  "measurements": 103,
+  "max_pressure_level": 2,
+  "min_free_disk_gib": 19.11066436767578,
+  "resources_log_sha256": "fb4803c127f467216975138bdee6d21b8b9d783777fb7eeec9ce0db218fa4846",
+  "resource_log_scope": "Includes the initial stopped Mac attempt and final successful workers. All sampled pressure levels from2026-10-28T03:29Z onward were normal.",
+  "attempts": [
+    {
+      "host": "Mac",
+      "directory": "contextual_generation",
+      "exit": 143,
+      "reason": "Watchdog stopped original word scorer at memory-pressure level2; all81 partial outputs retained and reproduced by bounded scorer."
+    },
+    {
+      "host": "Mac",
+      "directory": "combined-score-attempt1",
+      "exit": 1,
+      "reason": "Scoring import failed before any metric rows because isolated snapshot lacked the dictionary dependency. Restored identical public dictionary and restarted without changing predictions."
+    },
+    {
+      "host": "Yoga",
+      "directory": "generation",
+      "exit": 143,
+      "reason": "Stopped own legacy attempt for bounded masked-word allocation. Partial predictions retained and compared."
+    },
+    {
+      "host": "Yoga",
+      "directory": "generation_bounded",
+      "exit": 143,
+      "reason": "Stopped own bounded attempt when15-minute load exceeded12. Partial predictions retained and compared."
+    }
+  ],
+  "successful_mac_exit_files": {
+    "contextual-bounded.exit": 0,
+    "contextual-default-bounded.exit": 0,
+    "baseline-bounded.exit": 0,
+    "combined-score.exit": 0
+  },
+  "scope": "Resource signals, not model-quality evidence. No unrelated jobs stopped."
+}

@@ -5,7 +5,45 @@ from types import SimpleNamespace
 import pytest
 
 from evals.pipeline_benchmark import SentencewiseGenerator, aggregate, validate_passages
-from evals.preservation import explicit_checks, nli_entailment, tfidf_cosine_similarity
+from evals.preservation import embedding_similarity, explicit_checks, nli_entailment, tfidf_cosine_similarity
+
+
+@pytest.mark.parametrize("overlong", ["source", "output", "prompt"])
+def test_embedding_does_not_score_only_a_truncated_prefix(monkeypatch, overlong):
+    import sys
+    import numpy as np
+    from evals import preservation
+
+    encoded = []
+
+    def tokenizer(text, add_special_tokens, truncation):
+        assert add_special_tokens and not truncation
+        return {"input_ids": [1] * (len(text.split()) + 2)}
+
+    tokenizer.model_max_length = 10
+
+    def encode(texts, normalize_embeddings):
+        encoded.append(texts)
+        return np.array([[1., 0.], [.6, .8]])
+
+    model = SimpleNamespace(tokenizer=tokenizer, max_seq_length=5,
+                            prompts={}, default_prompt_name=None, encode=encode)
+    monkeypatch.setitem(sys.modules, "sentence_transformers", SimpleNamespace(
+        SentenceTransformer=lambda name: model
+    ))
+    monkeypatch.setattr(preservation, "_EMB_MODELS", {})
+    assert embedding_similarity("one", "one two", "authored") == .6
+    source, output = "one", "one"
+    if overlong == "source":
+        source = "one two three four"
+    elif overlong == "output":
+        output = "one two three four"
+    else:
+        model.prompts, model.default_prompt_name = {"task": "prefix "}, "task"
+        source = "one two three"
+    with pytest.warns(UserWarning, match="token limit"):
+        assert embedding_similarity(source, output, "authored") is None
+    assert len(encoded) == 1
 
 
 def test_changed_only_denominators_do_not_reward_copying():

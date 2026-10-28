@@ -25,3 +25,19 @@ They are not independent human labels or an accuracy sample.
 Raw datasets, predictions, per-candidate features, model files and logs remain
 under `~/.local/state/cleartext/pipeline-eval-20261027/` on Yoga. Aggregate evidence
 does not establish 90% full-pipeline accuracy.
+
+`combined_summary.json` contains the complete ten-system comparison on 190
+identical inputs, including each panel and changed-only denominators.
+`combined_per_example_metrics.json` retains input IDs, output hashes and metrics
+without corpus text. `combined_paired_analysis.json` adds readability changes
+against each original and comparisons restricted to inputs changed by both
+systems. It also records every mismatch against partial earlier attempts.
+
+`combined_generation_provenance.json` identifies all three fresh generation
+runs, the 1,900 combined prediction rows, frozen artifacts and runtime overrides.
+`combined_scoring_freeze.json` pins evaluator source, prediction and model hashes;
+`combined_scoring_runtime.json` records package versions and both MPS devices.
+`combined_execution.json` records host placement, stops, retries and successful
+exit codes. The resource log includes the initial pressure-triggered Mac stop,
+followed by successful bounded runs. Both evaluation metrics cover all 190 inputs
+per system; references cover 160. No case was dropped based on grammar or quality.
