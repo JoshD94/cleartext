@@ -1,0 +1,102 @@
+{
+  "word_weights": {
+    "A": 0.6625946487200344,
+    "B": 0.0975742258343933,
+    "C": -0.017154268022685503,
+    "D": 0.02700964657548548,
+    "E": 0.014207522989465144,
+    "F": 0.1
+  },
+  "sentence_weights": {
+    "G": 0.4565726636958956,
+    "H": 0.5004886231069319,
+    "I": 0.04293871319717257
+  },
+  "sentence_weights_maxcorr_combined": {
+    "G": 0.4875160200533238,
+    "H": 0.4686954938533984,
+    "I": 0.04378848609327783
+  },
+  "defaults": {
+    "word": {
+      "A": 0.0,
+      "B": 1.0,
+      "C": 0.08,
+      "D": 0.25,
+      "E": 0.2,
+      "F": 0.1
+    },
+    "sentence": {
+      "G": 0.3333333333333333,
+      "H": 0.3333333333333333,
+      "I": 0.3333333333333333
+    }
+  },
+  "stage_a": {
+    "trial_pearson_trained": 0.6793930813552145,
+    "trial_pearson_default": 0.5747138550805087
+  },
+  "stage_b": {
+    "trained (max corr)": {
+      "G": 0.4565726636958956,
+      "H": 0.5004886231069319,
+      "I": 0.04293871319717257,
+      "train_r": 0.5631255940355364,
+      "test_r": 0.6026662919791227
+    },
+    "trained (least squares)": {
+      "G": 0.0,
+      "H": 0.9999999999999998,
+      "I": 1.7190705406923387e-16,
+      "train_r": 0.38220562632775495,
+      "test_r": 0.569915189948691
+    },
+    "trained (max corr, combined)": {
+      "G": 0.4875160200533238,
+      "H": 0.4686954938533984,
+      "I": 0.04378848609327783,
+      "train_r": 0.5623794637423203,
+      "test_r": 0.5946347448039753
+    },
+    "PR#1 default (1/3,1/3,1/3)": {
+      "G": 0.3333333333333333,
+      "H": 0.3333333333333333,
+      "I": 0.3333333333333333,
+      "train_r": 0.40133725962730143,
+      "test_r": 0.3674586157410223
+    },
+    "S_lex only": {
+      "G": 1.0,
+      "H": 0.0,
+      "I": 0.0,
+      "train_r": 0.4583615428845628,
+      "test_r": 0.4180605640598582
+    },
+    "S_read only": {
+      "G": 0.0,
+      "H": 1.0,
+      "I": 0.0,
+      "train_r": 0.38220562632775495,
+      "test_r": 0.5699151899486911
+    },
+    "S_jargon only": {
+      "G": 0.0,
+      "H": 0.0,
+      "I": 1.0,
+      "train_r": 0.18995575425374597,
+      "test_r": 0.16003683066028457
+    }
+  },
+  "notes": [
+    "RECOMMENDED: use trained A-E for word complexity (trial Pearson r 0.68 vs 0.57 for PR#1 defaults on held-out CompLex trial).",
+    "RECOMMENDED: use fitted G/H/I (max-corr on simpDA) instead of the 1/3 defaults: held-out r 0.63 vs 0.38. The 1/3 default underperforms now because S_jargon (zipf<3.0 proxy on news text) is near-noise here; the fit correctly downweights it (I~0.04). Revisit I with a real per-domain jargon term list.",
+    "S_lex is threshold-based since 2026-10-04: normalized reduction in the count of words with C(w,s) > 0.5 (was: mean-complexity difference). This raised S_lex alone from test r=0.05 to r=0.44.",
+    "S_jargon uses the same normalized-reduction form over a technical-term set; training uses a zipf<3.0 rarity proxy for the term set on SimpEval's news domain.",
+    "'Combine datasets' experiment: pooling simpDA_2022 (absolute 0-100) with simplikert_2022 (relative -2..+2) views of the same 360 pairs gives near-identical fitted weights (test r 0.62 vs 0.63) \u2014 redundant views.",
+    "A-E fit by least squares on CompLex single-word train (7662 human complexity ratings).",
+    "F (POS) kept at PR#1 default 0.1: no POS labels in training data.",
+    "Word features use real sentence context for E (context complexity); PR #1's evaluate_record did the same after the 2026-10-04 E-term fix (it previously passed empty context, zeroing E).",
+    "Targets: simpDA mean(Answer.simplicity)/100; simplikert mean((Answer.simplicity+2)/4).",
+    "CompLex TSVs contain unbalanced double quotes; parsed with naive tab-split, not csv."
+  ]
+}

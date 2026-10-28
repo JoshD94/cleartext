@@ -1,0 +1,11 @@
+# Python caches
+__pycache__/
+*.pyc
+
+# Regenerable outputs (rebuild with the matching script)
+results/
+status.html
+status_fresh.html
+
+# Downloadable benchmarks (fetch with: python evals/datasets.py --fetch)
+data/benchmarks/

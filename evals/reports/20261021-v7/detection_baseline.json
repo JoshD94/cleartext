@@ -1,0 +1,28 @@
+{
+  "word_model": "linear",
+  "word_model_desc": "linear (trained A-E weights)",
+  "threshold_tuned_on": "cwi2018_en_train",
+  "threshold": 0.55,
+  "train": {
+    "precision": 0.467876481779599,
+    "recall": 0.8523060517195414,
+    "f1": 0.604119425547997
+  },
+  "dev": {
+    "precision": 0.4828559903186769,
+    "recall": 0.8623919308357348,
+    "f1": 0.6190845616757176
+  },
+  "train_n": 27299,
+  "dev_n": 3328,
+  "ranking_benchmarks": {
+    "tsar2022_en_test_gold": 373,
+    "multils2024_en_trial_ls": 30,
+    "multils2024_en_trial_lcp": 30,
+    "note": "ranking eval (accuracy@k / MRR) needs a substitute candidate generator from the models side"
+  },
+  "notes": [
+    "C(w,s) via linear (trained A-E weights), with real sentence context.",
+    "CWI binary label = >=1 of 20 annotators marked complex (lenient); threshold tuned on train rather than using the sigmoid midpoint 0.5."
+  ]
+}
