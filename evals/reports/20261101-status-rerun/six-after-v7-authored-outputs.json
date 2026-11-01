@@ -1,0 +1,152 @@
+[
+  {
+    "id": "cs-01",
+    "system": "original",
+    "output": "We utilize a heterogeneous ensemble of neural architectures to facilitate robust generalization across disparate data distributions."
+  },
+  {
+    "id": "cs-02",
+    "system": "original",
+    "output": "The methodology employs stochastic gradient descent to mitigate overfitting, and empirical results corroborate a substantial amelioration in convergence speed."
+  },
+  {
+    "id": "corp-01",
+    "system": "original",
+    "output": "Management anticipates that the proliferation of supply-chain disruptions will exacerbate margin deterioration, notwithstanding prior mitigation endeavors."
+  },
+  {
+    "id": "corp-02",
+    "system": "original",
+    "output": "The company will commence a restructuring initiative in order to expedite operational efficiency and ameliorate shareholder value, effective January 15, 2026."
+  },
+  {
+    "id": "polsci-01",
+    "system": "original",
+    "output": "The legislation seeks to disseminate pragmatic reforms that mitigate ubiquitous regulatory fluctuations affecting a large number of constituents."
+  },
+  {
+    "id": "polsci-02",
+    "system": "original",
+    "output": "Members deliberated the paradigm at length; nevertheless, no consensus was ascertained prior to the adjournment on March 3, 2026."
+  },
+  {
+    "id": "cs-01",
+    "system": "rule_based",
+    "output": "We use a varied ensemble of neural architectures to help robust generalization across disparate data distributions."
+  },
+  {
+    "id": "cs-02",
+    "system": "rule_based",
+    "output": "The method employs stochastic gradient descent to reduce overfitting, and observed results confirm a large amelioration in convergence speed."
+  },
+  {
+    "id": "corp-01",
+    "system": "rule_based",
+    "output": "Management anticipates that the spread of supply-chain disruptions will worsen margin deterioration, despite prior mitigation endeavors."
+  },
+  {
+    "id": "corp-02",
+    "system": "rule_based",
+    "output": "The company will start a restructuring initiative to speed up operational efficiency and improve shareholder value, effective January 15, 2026."
+  },
+  {
+    "id": "polsci-01",
+    "system": "rule_based",
+    "output": "The legislation seeks to share practical reforms that reduce common regulatory fluctuations affecting many constituents."
+  },
+  {
+    "id": "polsci-02",
+    "system": "rule_based",
+    "output": "Members deliberated the model at length; still, no consensus was ascertained before the adjournment on March 3, 2026."
+  },
+  {
+    "id": "cs-01",
+    "system": "lexical_only",
+    "output": "We use a heterogeneous ensemble of neural architectures to facilitate robust generalization across disparate data distributions."
+  },
+  {
+    "id": "cs-02",
+    "system": "lexical_only",
+    "output": "The methodology uses stochastic gradient descent to mitigate overfitting, and empirical results corroborate a substantial amelioration in convergence speed."
+  },
+  {
+    "id": "corp-01",
+    "system": "lexical_only",
+    "output": "Management anticipates that the development of supply-chain disruptions will exacerbate margin deterioration, notwithstanding prior mitigation endeavors."
+  },
+  {
+    "id": "corp-02",
+    "system": "lexical_only",
+    "output": "The company will commence a restructuring initiative in order to expedite operational efficiency and improve shareholder value, effective January 15, 2026."
+  },
+  {
+    "id": "polsci-01",
+    "system": "lexical_only",
+    "output": "The legislation seeks to disseminate pragmatic reforms that mitigate present regulatory fluctuations affecting a large number of constituents."
+  },
+  {
+    "id": "polsci-02",
+    "system": "lexical_only",
+    "output": "Members discussed the paradigm at length; nevertheless, no consensus was ascertained prior to the adjournment on March 3, 2026."
+  },
+  {
+    "id": "cs-01",
+    "system": "full_pipeline",
+    "output": "We use a heterogeneous ensemble of neural architectures to facilitate robust generalization across disparate data distributions."
+  },
+  {
+    "id": "cs-02",
+    "system": "full_pipeline",
+    "output": "The methodology uses stochastic gradient descent to mitigate overfitting. empirical results corroborate a substantial amelioration in convergence speed."
+  },
+  {
+    "id": "corp-01",
+    "system": "full_pipeline",
+    "output": "Management anticipates that the development of supply-chain disruptions will exacerbate margin deterioration, notwithstanding prior mitigation endeavors."
+  },
+  {
+    "id": "corp-02",
+    "system": "full_pipeline",
+    "output": "The company will commence a restructuring initiative in order to expedite operational efficiency and improve shareholder value, effective January 15, 2026."
+  },
+  {
+    "id": "polsci-01",
+    "system": "full_pipeline",
+    "output": "The legislation seeks to disseminate pragmatic reforms that mitigate present regulatory fluctuations affecting many constituents."
+  },
+  {
+    "id": "polsci-02",
+    "system": "full_pipeline",
+    "output": "Members discussed the paradigm at length; nevertheless, no consensus was ascertained before the adjournment on March 3, 2026."
+  },
+  {
+    "id": "cs-01",
+    "system": "full_rules",
+    "output": "We use a heterogeneous ensemble of neural architectures to facilitate robust generalization across disparate data distributions."
+  },
+  {
+    "id": "cs-02",
+    "system": "full_rules",
+    "output": "The methodology uses stochastic gradient descent to mitigate overfitting, and empirical results corroborate a substantial amelioration in convergence speed."
+  },
+  {
+    "id": "corp-01",
+    "system": "full_rules",
+    "output": "Management anticipates that the development of supply-chain disruptions will exacerbate margin deterioration, notwithstanding prior mitigation endeavors."
+  },
+  {
+    "id": "corp-02",
+    "system": "full_rules",
+    "output": "The company will commence a restructuring initiative in order to expedite operational efficiency and improve shareholder value, effective January 15, 2026."
+  },
+  {
+    "id": "polsci-01",
+    "system": "full_rules",
+    "output": "The legislation seeks to disseminate pragmatic reforms that mitigate present regulatory fluctuations affecting many constituents."
+  },
+  {
+    "id": "polsci-02",
+    "system": "full_rules",
+    "output": "Members discussed the paradigm at length; nevertheless, no consensus was ascertained before the adjournment on March 3, 2026."
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "historical_190": {
+    "path": "/home/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/passages.json",
+    "sha256": "2d39da8438317166a24e69d6a822e29039c5ae3031b8a23da95b912244ae2d4f",
+    "n": 190
+  },
+  "week7_source_commit": "b1aa16666b298a2d44c1b5b02ae2256a873bcd29",
+  "week7_n": 18,
+  "already_in_190": 6,
+  "new_authored_only": 12,
+  "combined_n": 202,
+  "dictionary_sha256": "9b24856087b6d32aec243955f2be1ae35b4bcbb1bf5acb905145f34d3b3aa1fb",
+  "dictionary_identical_to_oct21_git_object": true,
+  "week7_source_path": "evals/data/week7_passages.json",
+  "combined_passages_sha256": "2ebe5e2cedb5e21c5a7aa7623bb551c8c48ff678b3b17f03eb8a5955f1d19178",
+  "week7_source_sha256": "c6e0ab1b263a4ec4bf03979e654928dc27e8673f2ec5a41700871aeceb272740",
+  "week7_text_id_domain_sha256": "0219f34211a1b097616ae0ba0bfd7537d453c2d2712279c6457f05fdfe323fd1"
+}

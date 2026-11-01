@@ -1,0 +1,45 @@
+{
+  "host": "Yoga",
+  "source_head_before_replay": "085015fceb50859aa7d8bc7b639cdccfc1d9c5f8",
+  "focused_verification": {
+    "command": "scripts/verify",
+    "tests_passed": 419,
+    "subtests_passed": 13,
+    "skipped": 0,
+    "pytest_seconds": 23.8,
+    "wall_seconds": 27.26,
+    "peak_rss_kib": 853664,
+    "junit_sha256": "9710fabc506b3c591fc17be3badf7d6f47d1a102a083ffebee9ef5448337e432",
+    "log_sha256": "8a730f7b35f9290f3a16cee22b9c1c671bd22d11aee8f5a134c8c8b8657cfdbe"
+  },
+  "native_completion_exits": {
+    "matrix-v7": 0,
+    "matrix-context": 0,
+    "score-warm": 0,
+    "strict-tail": 0,
+    "matrix-score": 0
+  },
+  "interrupted_scoring_attempt": {
+    "exit": 143,
+    "completed_fresh_pairs_retained": 65,
+    "record": "runtime-controls.json"
+  },
+  "prediction_rows": 2020,
+  "unique_fresh_metric_pairs": 554,
+  "numeric_partition_counts": {
+    "matrix_190_metrics.jsonl": 1900,
+    "week7_18_metrics.jsonl": 180
+  },
+  "validation": {
+    "json_parse": true,
+    "primary_table_numbers_match_summary": true,
+    "ruff_F_E9": true,
+    "bash_syntax": true,
+    "git_diff_check": true,
+    "raw_output_checkout_guard_negative_probe": true,
+    "larger_panel_raw_text_absent_from_numeric_records": true
+  },
+  "post_run_integrity": "post-run-integrity.json",
+  "six_repeat_parity": "six-repeat-parity.json",
+  "limits": "Focused checks, complete prediction matrices and automatic metrics do not establish human-labelled simplification accuracy. Full reproduction wrapper was syntax checked; its native commands were executed individually."
+}

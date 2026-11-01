@@ -1,0 +1,26 @@
+{
+  "word_model": "linear",
+  "threshold_tuned_on": "cwi2018_en_train",
+  "threshold": 0.55,
+  "train_n": 27299,
+  "dev_n": 3328,
+  "train": {
+    "precision": 0.467876481779599,
+    "recall": 0.8523060517195414,
+    "f1": 0.604119425547997
+  },
+  "dev": {
+    "precision": 0.4828559903186769,
+    "recall": 0.8623919308357348,
+    "f1": 0.6190845616757176
+  },
+  "matches_archived_metrics_exactly": true,
+  "artifacts": {
+    "/home/joshuadirga/Documents/projects/cleartext/evals/reports/20261101-status-rerun/rerun_detector.py": "6887fb15d23cdd096076ac90c42cf010eddd8beda5395a6613d6f822aecfa57c",
+    "/home/joshuadirga/Documents/projects/cleartext/evals/trained_weights.json": "5fb35f2cce441554c90b37b4b79fecaa28556099b36fdfc64087829bc10dd5fc",
+    "/home/joshuadirga/Documents/projects/cleartext/evals/detection_baseline.py": "753afc605b8748c70fba96ea9e84f59777fc672fb4949a3ea4ea3e50865d3d49",
+    "/home/joshuadirga/Documents/projects/cleartext/evals/evaluate_base.py": "693d773489ef5552d6e7a3be46721cdc5445586872c079577aaa847426605162",
+    "/home/joshuadirga/Documents/projects/cleartext/models/data/raw/cwi_english_Train.tsv": "9e25bf48359d0f42d5ba58597fe2711817b3cad19393f92e25847e81b9f9bb26",
+    "/home/joshuadirga/Documents/projects/cleartext/models/data/raw/cwi_english_Dev.tsv": "684dcaa8214a77b51d7811c3cf00d5d486e03f88bc545fdfba09ea431e4af56a"
+  }
+}

@@ -8,7 +8,10 @@ Executed the runbook from [PR #6](https://github.com/JoshD94/cleartext/pull/6) a
 - `eval_results.json` contains the per-passage and aggregate metrics.
 - `detection_baseline.json` contains Kea-Roy's separate linear CWI detection baseline.
 - `provenance.json` records code, data and artifact fingerprints, evaluation model snapshots, package versions and model flags.
-- `reproduce.sh` contains the commands. Run it from the repository root with the documented dependencies installed and an accessible demo URL. A teammate can instead use the PR's local adapter if they have the saved artifacts.
+- `reproduce.sh` records the original commands for the recorded evaluator commit
+  and then-running demo. Later adapters changed the meaning of `full_pipeline`;
+  running that script against today's demo does not reproduce these settings.
+  Use the explicit local replay in the [November 1 comparison](../20261101-status-rerun/README.md).
 
 ## Scope and interpretation
 

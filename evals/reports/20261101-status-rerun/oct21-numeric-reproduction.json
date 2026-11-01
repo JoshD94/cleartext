@@ -1,0 +1,8 @@
+{
+  "compared_means": 51,
+  "max_absolute_difference": 0.007517408308240658,
+  "all_recorded_means_match": false,
+  "note": "Readability, embedding, NLI and explicit-check means reproduce exactly. Two nontrivial TF-IDF changes arise from the later evaluator fix that includes one-character tokens; report them separately.",
+  "means_within_1e12": 49,
+  "changed_metric": "TF-IDF tokenization now includes single-character words"
+}

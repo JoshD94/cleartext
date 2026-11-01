@@ -1,0 +1,31 @@
+{
+  "sources": [
+    {
+      "path": "/home/joshuadirga/.local/state/cleartext/status-benchmark-pr-20261101/score-warm/pair_metrics.jsonl",
+      "sha256": "a0ca1443b2275b58c79be830e1c85e2c8d221f72328cfecb226a49ec9bf5ed31",
+      "pairs": 549
+    },
+    {
+      "path": "/home/joshuadirga/.local/state/cleartext/status-benchmark-pr-20261101/strict-tail/pair_metrics.jsonl",
+      "sha256": "b5d2ac998d662e91e4884ec3ec1f9bdb760789271b61541e84ccda2db415a2d3",
+      "pairs": 5
+    }
+  ],
+  "complete_warm_matrix_n": 1818,
+  "warm_systems": [
+    "original",
+    "rule_based",
+    "lexical_only",
+    "structural_only",
+    "lexical_structural",
+    "full_no_guardrails",
+    "full_pipeline",
+    "full_rules",
+    "contextual_default"
+  ],
+  "strict_tail_matrix_n": 5,
+  "all_unique_pairs_precomputed": 554,
+  "all_final_matrix_rows_validated": 2020,
+  "same_source_and_evaluation_artifacts": true,
+  "historical_metrics_reused": false
+}

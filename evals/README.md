@@ -179,10 +179,11 @@ Full ablation in `WEIGHTS_REPORT.md`, live table on the status page.
 
 ## Notes
 
-- Per the proposal, ClearText itself stays entirely non-LLM. External models
-  (NLI, sentence embeddings) are used here for *evaluation only*.
+- ClearText's newer experiments include BERT context scoring and a locally
+  fine-tuned T5-small sentence model. The MiniLM embeddings and DeBERTa NLI
+  models in this evaluator score outputs; they do not generate simplifications.
 - `technical_term_count` is a heuristic (rare-word proxy via `wordfreq`);
   treat it as a trend signal, not ground truth.
-- Sample passages in `data/sample_passages.json` are placeholders — swap in
-  the team's compiled corpus (arXiv abstracts, 10-K excerpts, Congressional
-  Record speeches) when ready.
+- Keep `data/sample_passages.json` frozen when comparing with the submitted
+  six-passage status report. Collected domain text and larger development panels
+  need separate results and denominators; do not replace the historical inputs.
