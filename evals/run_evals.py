@@ -66,8 +66,21 @@ def main():
         from evals.model_adapter import ModelUnavailable, register_model_pipeline
         try:
             transport = register_model_pipeline(
-                run=args.model_run, url=args.model_url, full=True)
+                run=args.model_run, url=args.model_url)
             print(f"full_pipeline registered via {transport} transport")
+        except ModelUnavailable as exc:
+            print(f"error: {exc}", file=sys.stderr)
+            sys.exit(2)
+    # --- Week 7 ablation ladder: lexical/phrase/structure/combined arms. ---
+    # `full_pipeline` above keeps its PR #6 meaning (v7 words only); the
+    # ladder's guarded full combination is registered as `full_guarded`.
+    from evals.model_adapter import ABLATION_SYSTEMS
+    if set(system_names) & set(ABLATION_SYSTEMS):
+        from evals.model_adapter import ModelUnavailable, register_ablation_systems
+        try:
+            transport = register_ablation_systems(
+                run=args.model_run, url=args.model_url)
+            print(f"ablation ladder registered via {transport} transport")
         except ModelUnavailable as exc:
             print(f"error: {exc}", file=sys.stderr)
             sys.exit(2)

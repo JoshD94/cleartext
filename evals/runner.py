@@ -74,6 +74,7 @@ def evaluate_system(name, passages, embedding_model=None, nli_model=None):
         entry = {
             "id": p.get("id", ""),
             "domain": p.get("domain", ""),
+            "output": simplified,
             "readability": readability_report(simplified),
             "preservation": preservation_report(
                 original, simplified,

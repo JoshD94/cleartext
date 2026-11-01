@@ -107,6 +107,28 @@ python run_evals.py --systems original,rule_based,lexical_only,structural_only,l
 `runner.compare_against_baseline()` adds paired t-tests of each variant
 against the original-text baseline (p-values need `scipy`).
 
+The ladder is implemented in `model_adapter.py`
+(`register_ablation_systems`, Week 7) and runs through the same two
+transports as `full_pipeline`: local import or demo server. Arms:
+`lexical_only`, `phrase_only`, `structure_only`, `lexical_structural`,
+`full_guarded`, `full_no_guardrails`. `full_guarded` is the guarded full
+combination (the Oct 27–28 benchmark's `full_pipeline`); the name
+`full_pipeline` keeps its PR #6 meaning (v7 words only, structure and
+phrases off). `full_no_guardrails` needs a pipeline whose `analyze()`
+accepts a `guardrails` switch (structural branch); over HTTP it raises a
+clear error, since the demo server exposes no guardrail switch.
+
+```bash
+python run_evals.py --systems original,rule_based,lexical_only,phrase_only,structure_only,lexical_structural,full_guarded,full_no_guardrails \
+    --passages data/week7_passages.json \
+    --embedding-model all-MiniLM-L6-v2 \
+    --nli-model MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli \
+    --model-url http://127.0.0.1:8770
+```
+
+Results: `evals/reports/week7/ablation_table.md` (executed Oct 27–28
+numbers + local baseline arms + gaps).
+
 ## `train_weights.py` — human-calibrated weights (Week 3)
 
 Trains the eval formula weights against human judgments, per the Working Doc
