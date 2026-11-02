@@ -234,3 +234,24 @@ def test_passage_rollback_clears_boundary_acceptance(monkeypatch):
     assert not result["edits"] and result["accepted_count"] == 0
     assert result["boundaries"][0]["reason"] == "passage_rollback"
     assert not result["boundaries"][0]["accepted"]
+
+
+@pytest.mark.parametrize("fragment", ["Note: archived.", "(2) Includes archived records."])
+def test_unchanged_fragment_does_not_veto_complete_split(splitter, fragment):
+    source = "The store closed early, and the workers went home.\n\n" + fragment
+    result = splitter.predict(source)
+    assert result["output"] == "The store closed early. The workers went home.\n\n" + fragment
+    assert result["checks"]["pass"]
+    assert result["accepted_count"] == 1
+    assert result["boundaries"][0]["accepted"]
+
+
+@pytest.mark.parametrize("source,output", [
+    ("Alice opened the door and Bob.", "Alice opened the door. And Bob."),
+    ("Alice waited. Note: archived.", "Alice waited. Note: changed."),
+    ("Alice waited. Note: archived.", "Alice waited. Note: archived. Note: archived."),
+])
+def test_new_or_modified_fragments_still_fail_validation(splitter, source, output):
+    result = splitter.validate(source, output)
+    assert not result["pass"]
+    assert not result["checks"]["complete_clauses"]
