@@ -259,3 +259,31 @@ def register_ablation_systems(run=None, url=None, max_edits=None):
         register_system(name, fn)
     url = url or os.environ.get("CLEARTEXT_DEMO_URL")
     return "http" if url else "local"
+
+
+# Separate names keep Kea-Roy's Week 7 old-rule ladder reproducible.
+COMPOUND_SYSTEMS = ("compound_only", "compound_full_guarded")
+
+
+def register_compound_systems(names, run=None, max_edits=None):
+    """Opt-in local dependency splitter; no text-generating model in this stage."""
+    import sys
+    if str(MODELS_SRC) not in sys.path:
+        sys.path.insert(0, str(MODELS_SRC))
+    from cleartext.structure.compound import DependencyCompoundSplitter
+    from .runner import register_system
+
+    requested = set(names) & set(COMPOUND_SYSTEMS)
+    splitter = DependencyCompoundSplitter()
+    if "compound_only" in requested:
+        register_system("compound_only", lambda text: splitter.predict(text)["output"])
+    if "compound_full_guarded" in requested:
+        pipe = _load_pipe(run)
+
+        def full(text):
+            return pipe.analyze(
+                text, structure=True, structure_rewriter=splitter, phrases=True,
+                words=True, guardrails=True, max_word_edits=max_edits,
+            )["output"]
+
+        register_system("compound_full_guarded", full)

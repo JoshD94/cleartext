@@ -38,11 +38,12 @@ can point to a separate directory containing the optional evaluation packages.
 `CLEARTEXT_VERIFY_OUT` chooses the JUnit/log destination, outside Git by default.
 This check does not replace native benchmark execution or certify quality.
 
-For sustained inference, estimate peak RAM, check processes/resources on both
-hosts, choose with `pick-host`, and run in a named Yoga tmux session with a
-systemd memory cap. Preserve unrelated jobs. Stop or pause your newest job if
-resources cross the personal profile's limits. Record host, command, versions,
-input hashes, model hashes, source hashes and completion/failure receipts.
+For sustained inference and the full verify suite, submit through Joshua's
+`~/.local/bin/job` queue with this thread as owner; record the ID and end the
+turn. Do not run heavy work inline, poll, sleep or `job wait`. Small edits,
+Git and a single focused test file may run inline. Use `--account personal`
+for agent jobs. Check required paths before submission. Record host, command,
+versions, input/model/source hashes and completion/failure receipts.
 
 ## Benchmark landmines
 
@@ -64,6 +65,9 @@ input hashes, model hashes, source hashes and completion/failure receipts.
 - Keep experimental morphology, grammar preprocessing, stricter thresholds and
   source-anchored split selection opt-in unless separately authorized and shown
   to meet their recorded adoption criteria.
+- `compound_only` and `compound_full_guarded` select the opt-in dependency
+  compound splitter. Week 7 `structure_only` retains the old rules; neither name
+  selects T5. Passive conversion and negation rewriting belong to teammates.
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before

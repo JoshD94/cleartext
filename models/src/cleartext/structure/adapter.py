@@ -36,7 +36,8 @@ def rewrite(text, model=None, guard=True):
         )
     prediction = model.predict(text)
     output = prediction["output"]
-    checks = structure_checks(text, output)
+    validator = getattr(model, "validate", structure_checks)
+    checks = validator(text, output)
     details.update(
         {
             "score": prediction.get("score"),
@@ -50,12 +51,12 @@ def rewrite(text, model=None, guard=True):
             [],
             {
                 **details,
-                "reason": "No candidate passed the model threshold and structural checks.",
+                "reason": prediction.get("reason", "No candidate passed the model threshold and structural checks."),
             },
         )
     details.update({
         "after": output, "changed": True,
-        "rule": "learned " + details["backend"],
+        "rule": getattr(model, "rule_name", "learned " + details["backend"]),
     })
     return (
         output,
