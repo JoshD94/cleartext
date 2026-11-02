@@ -149,6 +149,10 @@ Experiment caches require matching source and input fingerprints to resume. Code
 
 ## Learned sentence structure experiments
 
+[Non-LLM compound splitting](docs/COMPOUND_SPLITTING.md) is an opt-in
+alternative using the existing small dependency parser and source text edits.
+Its evaluation variants are separate from the Week 7 old-rule ladder and T5.
+
 [Input grammar correction](docs/GRAMMAR_PREPROCESSING.md) is an optional local,
 rule-based stage before simplification. It fixes selected article, contraction
 and verb-agreement errors while recording each correction. Its first development
