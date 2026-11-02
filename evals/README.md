@@ -58,7 +58,35 @@ python run_evals.py --embedding-model all-MiniLM-L6-v2 \
 Outputs: `results/eval_results.json` (per-passage + aggregates) and
 `results/eval_results.md` (results table).
 
+## Scoring the model pipeline (`full_pipeline`)
+
+`model_adapter.py` connects Joshua's `EnsembleClearText` (in `models/`) to
+the runner as the `full_pipeline` system. Two transports:
+
+```bash
+# Local import: needs the trained artifacts under models/runs/ (git-excluded;
+# copy them from a teammate or rebuild per models/README.md)
+python run_evals.py --systems original,rule_based,full_pipeline
+
+# Demo server: run models/demo/server.py on a machine with the artifacts,
+# then point evals at it (no local model deps needed)
+python run_evals.py --systems original,rule_based,full_pipeline \
+    --model-url http://127.0.0.1:8770
+```
+
+`--model-run <path>` selects a different run directory. Evals stays
+modular: the adapter is the only evals module that knows about models/,
+and the import is lazy, so the baselines above run without it.
+
 ## Ablation study (proposal Section 3.2)
+
+For the trained sentence generator plus lexical model, use
+[`pipeline_benchmark.py`](pipeline_benchmark.py). It runs the stage variants on
+one frozen input panel, then scores their saved outputs with this package's
+readability and preservation functions. See the
+[combined-pipeline record](../models/docs/PIPELINE_BENCHMARK.md) for data, limits
+and commands. The ordinary `run_evals.py` full-pipeline adapter enables phrase
+and structure rules; use the benchmark CLI to select a trained T5 checkpoint.
 
 The 7-way ladder — original, rule-based, lexical-only, structural-only,
 lexical+structural, full without guardrails, full pipeline — is defined in
@@ -151,10 +179,11 @@ Full ablation in `WEIGHTS_REPORT.md`, live table on the status page.
 
 ## Notes
 
-- Per the proposal, ClearText itself stays entirely non-LLM. External models
-  (NLI, sentence embeddings) are used here for *evaluation only*.
+- ClearText's newer experiments include BERT context scoring and a locally
+  fine-tuned T5-small sentence model. The MiniLM embeddings and DeBERTa NLI
+  models in this evaluator score outputs; they do not generate simplifications.
 - `technical_term_count` is a heuristic (rare-word proxy via `wordfreq`);
   treat it as a trend signal, not ground truth.
-- Sample passages in `data/sample_passages.json` are placeholders — swap in
-  the team's compiled corpus (arXiv abstracts, 10-K excerpts, Congressional
-  Record speeches) when ready.
+- Keep `data/sample_passages.json` frozen when comparing with the submitted
+  six-passage status report. Collected domain text and larger development panels
+  need separate results and denominators; do not replace the historical inputs.

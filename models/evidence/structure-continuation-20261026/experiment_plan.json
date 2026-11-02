@@ -1,0 +1,15 @@
+{
+  "initial_weights_sha256": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+  "steps": 400,
+  "learning_rate": 0.0001,
+  "batch_size": 2,
+  "accumulation_steps": 4,
+  "optimizer": "adafactor",
+  "seed": 4701,
+  "checkpoint_selection": "Lowest development token-weighted loss, including initializer",
+  "primary_endpoint": "Continued minus initial T5 SARI on new 256-pair DeSSE sample, identical current generation/checks",
+  "no_test_tuning": true,
+  "peak_RAM_GB": 3,
+  "peak_disk_GB": 1,
+  "promotion": "No default/demo promotion from automatic scores alone"
+}

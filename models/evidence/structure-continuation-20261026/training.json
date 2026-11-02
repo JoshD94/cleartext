@@ -1,0 +1,68 @@
+{
+  "model": "saved-original-T5-checkpoint",
+  "revision": null,
+  "initial_checkpoint": {
+    "path": "saved-original-T5-checkpoint",
+    "files_sha256": {
+      "config.json": "b3bd1865a130794492da2b0c09ff6fe1f24e0abf40fab58e66ffc0544687e69f",
+      "generation_config.json": "8145d7eecabff8e16a9876617a6d52728e9b8fbe24c426e6bf9ebbd6bfb87737",
+      "model.safetensors": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+      "selection.json": "26b23952062a8b5fa36bf21b5efe4f661726d938f359af9070d034d9f015e3a3",
+      "special_tokens_map.json": "7a1985a994c41886db38c719d2a3d2f40606663cc19d7c5d6a85d349320e06d2",
+      "spiece.model": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86",
+      "tokenizer.json": "5a7876b84ab62cc0c51bef27f984d0ef39129b87315212495a39b7ce26c56222",
+      "tokenizer_config.json": "f941a71e49530c706dbd84e4732aa0678634779b24e286da98d32906c0fee00a"
+    }
+  },
+  "optimizer_state": "New optimizer; this is weight initialization, not optimizer/step resumption",
+  "device": "mps",
+  "seed": 4701,
+  "max_steps": 400,
+  "batch_size": 2,
+  "optimizer": "adafactor",
+  "learning_rate": 0.0001,
+  "warmup_steps": 40,
+  "accumulation_steps": 4,
+  "effective_batch_size": 8,
+  "max_source_tokens": 192,
+  "max_target_tokens": 256,
+  "training_pairs": 3986,
+  "training_domains": {
+    "student_essays": 1775,
+    "general": 2211
+  },
+  "length_filtered_training_pairs": 0,
+  "dev_pairs": 128,
+  "selection": "Lowest token-weighted dev teacher-forced loss, including step 0; test not used",
+  "prefix": "split sentence: ",
+  "trainable_parameters": 60506624,
+  "steps_completed": 400,
+  "training_examples_seen": 3200,
+  "history": [
+    {
+      "step": 0,
+      "dev_loss": 0.24409746256637563
+    },
+    {
+      "step": 100,
+      "dev_loss": 0.20893642229163728
+    },
+    {
+      "step": 200,
+      "dev_loss": 0.19419656744747393
+    },
+    {
+      "step": 300,
+      "dev_loss": 0.1835129303785535
+    },
+    {
+      "step": 400,
+      "dev_loss": 0.18478253995415117
+    }
+  ],
+  "selected": {
+    "step": 300,
+    "dev_loss": 0.1835129303785535
+  },
+  "elapsed_seconds": 203.46597600006498
+}

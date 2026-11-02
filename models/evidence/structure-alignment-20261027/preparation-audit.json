@@ -1,0 +1,12 @@
+{
+  "first_preparation_exit": 1,
+  "reason": "Two normalized copy labels bypassed the prior copy shortcut but failed shared checks.",
+  "conflicting_ids": [
+    "desse-train-9409",
+    "desse-train-8178"
+  ],
+  "repair": "Apply shared generation checks before accepting normalized copies. Preserve original labels and quarantine failures.",
+  "successful_preparation": "run-v2",
+  "asserted_retained_conflicts": 0,
+  "test_outputs_inspected": false
+}

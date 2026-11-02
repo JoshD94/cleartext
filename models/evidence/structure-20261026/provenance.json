@@ -1,0 +1,142 @@
+{
+  "stages": [
+    {
+      "source_commit": "a975fa5ff3d88a0d717534284288c6d1da09b4ae",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "common.py": "52db8a394d86b4849c9d8a47bb19f7daad3127bbc26323fc50f10e44bf160612",
+        "corpus.py": "1e46b88d64ae542755f5026c77280cd6a25fcb83d7afb0f194a383910a78f06c",
+        "experiment.py": "28e83713896249212167b6462f8ce8330ca69634935989c0c93cde419838fc1d",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "fbff71c17df1c32cde34619fcec39714aabd41312c0be881a7ce81f9b7d283d1"
+      },
+      "data_sha256": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+      "stage": "all",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    },
+    {
+      "source_commit": "dcd668d41716cb4c8e24aea0908014654fc15eda",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "common.py": "52db8a394d86b4849c9d8a47bb19f7daad3127bbc26323fc50f10e44bf160612",
+        "corpus.py": "1e46b88d64ae542755f5026c77280cd6a25fcb83d7afb0f194a383910a78f06c",
+        "experiment.py": "3fe829347daa08ec6eb698acaa289b7faa49c42dc766b79b62c652a63b69670b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "fc0e2f1c4fbcbb18d53d09e2225863f987edf3ac7719b1a225519a7cf3c0f075"
+      },
+      "data_sha256": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+      "stage": "all",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    },
+    {
+      "source_commit": "135010ae8015807b039f0cd794449960d720ee84",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "common.py": "52db8a394d86b4849c9d8a47bb19f7daad3127bbc26323fc50f10e44bf160612",
+        "corpus.py": "1e46b88d64ae542755f5026c77280cd6a25fcb83d7afb0f194a383910a78f06c",
+        "experiment.py": "3fe829347daa08ec6eb698acaa289b7faa49c42dc766b79b62c652a63b69670b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "27b6edf5cb618317c9396e9ccb2772a538a4ee2d33ba97f0acec816a3026308f"
+      },
+      "data_sha256": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+      "stage": "all",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    },
+    {
+      "source_commit": "135010ae8015807b039f0cd794449960d720ee84",
+      "files": {
+        "__init__.py": "2b9480349027a5677caaba4aa7b36463edabb334170ec49cd7cf25dc49c17eb6",
+        "common.py": "52db8a394d86b4849c9d8a47bb19f7daad3127bbc26323fc50f10e44bf160612",
+        "corpus.py": "1e46b88d64ae542755f5026c77280cd6a25fcb83d7afb0f194a383910a78f06c",
+        "experiment.py": "3fe829347daa08ec6eb698acaa289b7faa49c42dc766b79b62c652a63b69670b",
+        "learning.py": "2bc74767fabf4aaca3d63a9cc82f332c7054cc23b9bff42dca664e056e8a717f",
+        "seq2seq.py": "27b6edf5cb618317c9396e9ccb2772a538a4ee2d33ba97f0acec816a3026308f"
+      },
+      "data_sha256": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+      "stage": "evaluate",
+      "host": "dhcp-vl2041-56205.eduroam.cornell.edu"
+    }
+  ],
+  "artifacts": {
+    "ranker.pkl": {
+      "sha256": "e18ad3111dfba52bc8b847ea5023af6ca6d7c4629b09e61f0031b2216679edb7",
+      "bytes": 277519
+    },
+    "editor.pkl": {
+      "sha256": "0177c2c8d81d06e27155259aa12ff44e8f2d8544bfb94ef321f6f65343067581",
+      "bytes": 282547
+    },
+    "seq2seq/config.json": {
+      "sha256": "b3bd1865a130794492da2b0c09ff6fe1f24e0abf40fab58e66ffc0544687e69f",
+      "bytes": 1466
+    },
+    "seq2seq/generation_config.json": {
+      "sha256": "8145d7eecabff8e16a9876617a6d52728e9b8fbe24c426e6bf9ebbd6bfb87737",
+      "bytes": 142
+    },
+    "seq2seq/model.safetensors": {
+      "sha256": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+      "bytes": 242041896
+    },
+    "seq2seq/selection.json": {
+      "sha256": "26b23952062a8b5fa36bf21b5efe4f661726d938f359af9070d034d9f015e3a3",
+      "bytes": 52
+    },
+    "seq2seq/special_tokens_map.json": {
+      "sha256": "7a1985a994c41886db38c719d2a3d2f40606663cc19d7c5d6a85d349320e06d2",
+      "bytes": 2543
+    },
+    "seq2seq/spiece.model": {
+      "sha256": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86",
+      "bytes": 791656
+    },
+    "seq2seq/tokenizer.json": {
+      "sha256": "5a7876b84ab62cc0c51bef27f984d0ef39129b87315212495a39b7ce26c56222",
+      "bytes": 2422324
+    },
+    "seq2seq/tokenizer_config.json": {
+      "sha256": "f941a71e49530c706dbd84e4732aa0678634779b24e286da98d32906c0fee00a",
+      "bytes": 20804
+    }
+  },
+  "data_sha256": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+  "final_training_source_commit": "135010ae8015807b039f0cd794449960d720ee84",
+  "classic_training_source_commit": "a975fa5ff3d88a0d717534284288c6d1da09b4ae",
+  "aborted_attempts": [
+    {
+      "attempt": 1,
+      "stage": "ranker",
+      "result": "Interrupted on resource warning; no final classic artifact from this attempt"
+    },
+    {
+      "attempt": 2,
+      "stage": "seq2seq",
+      "device": "mps",
+      "optimizer": "adamw",
+      "steps_observed": 100,
+      "result": "Stopped for warning pressure; separate local checkpoint, not final initialization"
+    },
+    {
+      "attempt": 3,
+      "stage": "seq2seq",
+      "device": "cpu",
+      "result": "Capacity check stopped before training"
+    }
+  ],
+  "capacity": "Final CPU attempt retained optimizer state across cooperative and SIGSTOP/SIGCONT memory pauses",
+  "evaluation": {
+    "stage": "evaluate",
+    "device": "mps",
+    "source_commit": "135010ae8015807b039f0cd794449960d720ee84",
+    "weights_changed": false,
+    "created": "2026-10-26T18:41:18.686731+00:00",
+    "reason": "CPU generation was slow. Interrupted after dev progress 49/128, before any test results; same frozen models and full dev/test sample rerun on MPS. Estimated peak RAM 2 GB. Queued until Mac pressure normal, then external capacity watcher suspends/resumes own PID on warning/normal."
+  },
+  "bundle": {
+    "filename": "cleartext-structure-models-20261026.tar.gz",
+    "sha256": "d886ec69c12b0d2d3142976795c4a79d6ca705f4a765839a6cd0ec954f7f7916",
+    "bytes": 226638290,
+    "members_verified": 11
+  },
+  "training_counter_fix_commit": "152bb49"
+}

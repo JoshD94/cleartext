@@ -1,0 +1,9 @@
+{
+  "models/src/cleartext/grammar_preprocessing.py": "f0d9b45ddf7ff38ae2c87bdad8a9f8467ec9057ef657c4f6e8102c85e7a8d3a6",
+  "models/src/cleartext/grammar_screening.py": "b06bd6165a77375096128728be8a3062e0da8f5bf501ddce7ac1c140c5c8f0bf",
+  "models/src/cleartext/structure/discourse.py": "1bde622de7dac5d5795d19990d4c769159131e2ad428d6b052fe1c385e0be0ee",
+  "models/src/cleartext/structure/seq2seq.py": "f66b11c5abeab3bd64c2fadf99bdf453a6c897f05266c2033d6d98ffc34c31bf",
+  "models/src/cleartext/structure/quality.py": "3cff198e79f4db4913c96e857d68a4975cc03e5957f0f7366209c09f76059b27",
+  "models/src/cleartext/structure/expanded.py": "3e36f19b6366cea5fd4d057a46acdb67b24ccf3f80f5f98f02809113e80048e6",
+  "models/src/cleartext/structure/alignment.py": "e55905e596b19a847ee4885c3d228963a63e7e5190bb8fde6ca6d324b13a115c"
+}

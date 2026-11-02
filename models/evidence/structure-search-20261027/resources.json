@@ -1,0 +1,12 @@
+{
+  "dev-v2": {
+    "peak_rss_kib": 867992,
+    "elapsed": "2:12.84",
+    "host_choice": "Yoga, sufficient memory, load and disk; 3GB cap, two CPU threads"
+  },
+  "test-v2": {
+    "peak_rss_kib": 869056,
+    "elapsed": "1:38.26",
+    "host_choice": "Yoga, sufficient memory, load and disk; 3GB cap, two CPU threads"
+  }
+}

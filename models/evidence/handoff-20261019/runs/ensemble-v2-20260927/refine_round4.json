@@ -1,0 +1,86 @@
+{
+  "logistic": {
+    "C": 0.03,
+    "threshold": 0.4,
+    "benchls_dev": {
+      "edits": 253,
+      "correct": 161,
+      "wrong": 92,
+      "net": 69,
+      "precision": 0.636,
+      "n": 424
+    },
+    "benchls_holdout": {
+      "edits": 341,
+      "correct": 193,
+      "wrong": 148,
+      "net": 45,
+      "precision": 0.566,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 218,
+      "correct": 116,
+      "wrong": 102,
+      "net": 14,
+      "precision": 0.532,
+      "n": 373
+    }
+  },
+  "gradient boosting": {
+    "C": 4,
+    "threshold": 0.5,
+    "benchls_dev": {
+      "edits": 197,
+      "correct": 124,
+      "wrong": 73,
+      "net": 51,
+      "precision": 0.629,
+      "n": 424
+    },
+    "benchls_holdout": {
+      "edits": 232,
+      "correct": 145,
+      "wrong": 87,
+      "net": 58,
+      "precision": 0.625,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 151,
+      "correct": 91,
+      "wrong": 60,
+      "net": 31,
+      "precision": 0.603,
+      "n": 373
+    }
+  },
+  "average of both": {
+    "C": 4,
+    "threshold": 0.4,
+    "benchls_dev": {
+      "edits": 266,
+      "correct": 159,
+      "wrong": 107,
+      "net": 52,
+      "precision": 0.598,
+      "n": 424
+    },
+    "benchls_holdout": {
+      "edits": 348,
+      "correct": 206,
+      "wrong": 142,
+      "net": 64,
+      "precision": 0.592,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 222,
+      "correct": 127,
+      "wrong": 95,
+      "net": 32,
+      "precision": 0.572,
+      "n": 373
+    }
+  }
+}

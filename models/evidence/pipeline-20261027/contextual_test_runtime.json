@@ -1,0 +1,12 @@
+{
+  "torch": "2.14.1",
+  "transformers": "5.17.0",
+  "huggingface-hub": "1.33.0",
+  "tokenizers": "0.23.2",
+  "numpy": "2.5.3",
+  "spacy": "3.8.16",
+  "scikit-learn": "1.9.1",
+  "textstat": "0.7.13",
+  "platform": "macOS-26.3.1-arm64-arm-64bit",
+  "source_commit": "f572619"
+}

@@ -1,0 +1,123 @@
+{
+  "swords_test": {
+    "stacked": {
+      "auc": 0.7843229945135968,
+      "error_cost": 0.01,
+      "targets": 647,
+      "edits": 207,
+      "correct": 100,
+      "wrong": 107
+    },
+    "stacked_all_costs": [
+      {
+        "error_cost": 0.0,
+        "targets": 647,
+        "edits": 367,
+        "correct": 136,
+        "wrong": 231
+      },
+      {
+        "error_cost": 0.02,
+        "targets": 647,
+        "edits": 149,
+        "correct": 75,
+        "wrong": 74
+      },
+      {
+        "error_cost": 0.05,
+        "targets": 647,
+        "edits": 88,
+        "correct": 44,
+        "wrong": 44
+      },
+      {
+        "error_cost": 0.1,
+        "targets": 647,
+        "edits": 55,
+        "correct": 28,
+        "wrong": 27
+      },
+      {
+        "error_cost": 0.2,
+        "targets": 647,
+        "edits": 24,
+        "correct": 11,
+        "wrong": 13
+      },
+      {
+        "error_cost": 0.3,
+        "targets": 647,
+        "edits": 11,
+        "correct": 6,
+        "wrong": 5
+      }
+    ],
+    "members_auc": {
+      "sense_fit": 0.7616843927946046,
+      "round_trip": 0.730669516353428,
+      "first_sense": 0.7539771015604515,
+      "candidate_sense_rank": 0.581122689355829,
+      "swords_checker": 0.7265152766178137,
+      "context_vector": 0.5547413677124722,
+      "argument_fit": 0.5151608119180358,
+      "bigram": 0.621241914031401
+    }
+  },
+  "tsar": {
+    "dictionary_basic": {
+      "n": 373,
+      "edits": 196,
+      "correct": 85,
+      "match_among_edits": 0.4336734693877551,
+      "wrong_edits": 111
+    },
+    "previous_sense_and_guards": {
+      "n": 373,
+      "edits": 97,
+      "correct": 52,
+      "match_among_edits": 0.5360824742268041,
+      "wrong_edits": 45
+    },
+    "ensemble": {
+      "n": 373,
+      "edits": 180,
+      "correct": 87,
+      "match_among_edits": 0.48333333333333334,
+      "wrong_edits": 93
+    },
+    "diagnostic_sweep": [
+      {
+        "error_cost": 0.0,
+        "edits": 217,
+        "correct": 104
+      },
+      {
+        "error_cost": 0.02,
+        "edits": 179,
+        "correct": 93
+      },
+      {
+        "error_cost": 0.05,
+        "edits": 138,
+        "correct": 79
+      },
+      {
+        "error_cost": 0.1,
+        "edits": 99,
+        "correct": 58
+      },
+      {
+        "error_cost": 0.2,
+        "edits": 65,
+        "correct": 41
+      },
+      {
+        "error_cost": 0.3,
+        "edits": 38,
+        "correct": 31
+      }
+    ]
+  },
+  "note": "SWORDS test and TSAR test were used in earlier experiments; these are exploratory, not fresh final tests. No labels from them fit or selected any model here.",
+  "runtime_seconds": 15.987913608551025
+}

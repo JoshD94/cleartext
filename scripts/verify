@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Focused, offline verification for the model/evaluation branch.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+python_bin=${CLEARTEXT_PYTHON:-models/.venv/bin/python}
+export PYTHONPATH="${CLEARTEXT_EVAL_DEPS:+$CLEARTEXT_EVAL_DEPS:}models/src:.:${PYTHONPATH:-}"
+export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
+export OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2
+evidence=${CLEARTEXT_VERIFY_OUT:-/tmp/cleartext-verify}
+mkdir -p "$evidence"
+"$python_bin" -m pytest -q \
+  models/tests/test_protected_literals.py \
+  models/tests/test_literal_pipeline.py \
+  models/tests/test_entity_alignment.py \
+  models/tests/test_grammar_preprocessing.py \
+  models/tests/test_grammar_screening.py \
+  models/tests/test_grammar_sprint.py \
+  models/tests/test_grammar_sprint_experiment.py \
+  models/tests/test_candidate_morphology.py \
+  models/tests/test_coverage_lexicon.py \
+  models/tests/test_coverage_policy.py \
+  models/tests/test_candidate_coverage_manifest.py \
+  models/tests/test_slot_memory.py \
+  models/tests/test_structure.py \
+  models/tests/test_structure_alignment.py \
+  models/tests/test_structure_audit.py \
+  models/tests/test_structure_expanded.py \
+  models/tests/test_structure_meaning.py \
+  models/tests/test_structure_quality.py \
+  models/tests/test_structure_review.py \
+  models/tests/test_structure_search.py \
+  models/tests/structure_sprint_test_selection.py \
+  models/tests/structure_sprint_test_native.py \
+  models/tests/test_sense_usage.py \
+  models/tests/test_preservation.py \
+  evals/test_pipeline_benchmark.py \
+  --junitxml="$evidence/pytest.xml" | tee "$evidence/pytest.log"
+git diff --check
+printf 'PASS: focused offline checks; evidence %s\n' "$evidence"

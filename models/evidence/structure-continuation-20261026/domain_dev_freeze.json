@@ -1,0 +1,11 @@
+{
+  "split": "dev",
+  "input_sha256": "92eefc47516baea891488ec9f85fb834c494adf6d7892524f4a4e0daeb6a0340",
+  "models": {
+    "baseline": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+    "continued": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756"
+  },
+  "source_commit": "24a7e0589206161ce8547fd33e58042866d19335",
+  "protocol": "Same fixed generation/checks, no references, all 24 previously inspected development inputs, no domain test access",
+  "script_sha256": "0260fdeb3b0f988c7e006515e77aa55db5ed8d481d33fb92086da9549cf0bc6c"
+}

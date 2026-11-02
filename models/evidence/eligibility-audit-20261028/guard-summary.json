@@ -1,0 +1,12 @@
+{
+  "counts": {
+    "candidates": 14617,
+    "cached_legacy_disagreements": 50,
+    "newly_eligible": 46,
+    "newly_blocked": 0,
+    "cases": 929
+  },
+  "nonentity_checks_identical": true,
+  "semantic_accuracy_measured": false,
+  "records_sha256": "3a089be0631bdd5163b98e88240da6cc6b28ce8d89bd0d327d01737f2502e6b3"
+}

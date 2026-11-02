@@ -1,0 +1,7 @@
+{
+  "frozen_before_fresh_predictions": true,
+  "technical_review": "Inspect every changed/raw output of all systems on 12 new section-2 inputs selected before final code/model freeze. Qualitative agent inspection, no human ratings.",
+  "general_review": "Inspect the first 20 accepted changes per learned system in deterministic evaluation order. This is a diagnostic subset, not a statistically representative quality estimate. Record row IDs, predicate/argument or detail issues and fluency concerns. Do not tune on this new evaluation after observing it.",
+  "adoption": "Keep the structure checkbox off by default. Offer the best-supported CPU model as a reversible optional stage. If serious residual meaning/fluency errors remain, label the learned option experimental and retain rules as preferred method.",
+  "technical_development": "The first twelve section-1 RFC inputs informed grammar fixes. They are development examples now, not a fresh audit."
+}

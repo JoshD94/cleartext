@@ -1,0 +1,45 @@
+{
+  "table_dev_only": {
+    "benchls_dev": {
+      "edits": 253,
+      "correct": 166,
+      "wrong": 87,
+      "net": 79,
+      "precision": 0.656,
+      "n": 424
+    },
+    "benchls_holdout": {
+      "edits": 341,
+      "correct": 193,
+      "wrong": 148,
+      "net": 45,
+      "precision": 0.566,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 218,
+      "correct": 116,
+      "wrong": 102,
+      "net": 14,
+      "precision": 0.532,
+      "n": 373
+    }
+  },
+  "tsar_pipeline_dev_only": {
+    "edits": 218,
+    "correct": 116,
+    "precision": 0.532,
+    "net": 14
+  },
+  "tsar_pipeline_shipped": {
+    "edits": 230,
+    "correct": 125,
+    "precision": 0.543,
+    "net": 20
+  },
+  "settings": {
+    "C": 0.03,
+    "threshold": 0.4,
+    "selection": "BenchLS dev, grouped by target word; see refine_round*.json"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "counts": {
+    "dev": 128,
+    "test": 128,
+    "domain_dev": 24,
+    "diagnostics": 6
+  },
+  "data_sha256": "ab893eb5f60cb5597ef65cb53c411f022fcacdd6fdc346e3c06a9f64c6d2525e",
+  "excluded_file_sha256": [
+    "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+    "6bc5527a077802e7864de1b640a54004f9ba37f5bf8b8b4ee036ca0ae295f76d",
+    "6a4c97f43a313e30d086e6da04ee7ec3b27f9960138e82c06abd59defac460d0",
+    "2b24cfe55d43704ccc2c85f6d14ac22f3d05e3b20b2a6b9e2cea92809a0f3c79",
+    "041de8df89f2d18fcc9f5091fa9be64402d30a79131b3491953ca1de253f3f85",
+    "13d9af141892b96b94af13aa5060693c1e5a51bdba77b23d45638f7126380ece"
+  ],
+  "domain_dev_sha256": "92eefc47516baea891488ec9f85fb834c494adf6d7892524f4a4e0daeb6a0340",
+  "source_config_sha256": "1bf5b140cb6932d9e9217e547aabd8c51c931f14a2301955bb61c2ea2ec40048",
+  "test_policy": "First 128 seed-4701 source-hash-ordered official DeSSE test rows after length/markup and exact source/full-target exclusions; no grammar/content/reference-quality filtering",
+  "settings": {
+    "baseline": "Current two-beam T5 with tense/complement checks",
+    "strict": "Same baseline raw text plus independent-boundary/comma-splice checks",
+    "search": "Four deterministic beams; first passing beam or primary-beam word-preserving comma repair, otherwise original",
+    "max_new_tokens": 256,
+    "max_source_tokens": 192,
+    "max_sentences": 4,
+    "max_comma_repairs": 3,
+    "copy_policy": "A valid highest-ranked copy stays a copy",
+    "fitting": "None; reuse selected continued weights",
+    "selection": "No reference scores, no new thresholds, no test-driven changes"
+  },
+  "human_ratings": 0,
+  "domain_test_predictions": 0
+}

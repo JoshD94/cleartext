@@ -19,6 +19,7 @@ from .phrase_complexity import phrase_features
 from . import ensemble as E
 from . import detection as D
 from .detection import CONTENT
+from .protected_literals import literal_spans, preserved_literals
 
 RUN_V1 = ROOT / "runs/ensemble-20260927"
 RUN = ROOT / "runs/ensemble-v2-20260927"
@@ -452,7 +453,7 @@ class EnsembleClearText:
         for r in sorted(rows, key=lambda r: -r["accept"]):
             if r["accept"] < self.decision_threshold:
                 break
-            if r["rejections"]:
+            if r["rejections"] and guard:
                 continue
             if not guard:
                 return r
@@ -523,8 +524,24 @@ class EnsembleClearText:
         }
 
     def analyze(
-        self, text, structure=True, phrases=True, words=True, max_word_edits=None
+        self,
+        text,
+        structure=True,
+        phrases=True,
+        words=True,
+        max_word_edits=None,
+        structure_rewriter=None,
+        grammar_corrector=None,
+        guardrails=True,
     ):
+        original_text = text
+        grammar_details = {}
+        grammar_edits = []
+        if grammar_corrector is not None:
+            grammar = grammar_corrector.correct(text)
+            text = grammar["output"]
+            grammar_edits = grammar["edits"]
+            grammar_details = {"preprocessed": text, "grammar": grammar}
         max_word_edits = (
             self.max_word_edits if max_word_edits is None else max_word_edits
         )
@@ -534,26 +551,50 @@ class EnsembleClearText:
         trace = []
         term_spans = []
         blocked_term_stages = []
-        if self.technical_terms:
+        structure_details = {"on": False}
+        protect_terms = self.technical_terms and guardrails
+        if protect_terms:
             from .technical_terms import detect_terms, preserved_terms
 
             term_spans = detect_terms(original_doc)
         if structure:
-            current, changes = structural(current)
+            if structure_rewriter is None:
+                current, changes = structural(current)
+                structure_details = {
+                    "backend": "rules",
+                    "before": text,
+                    "after": current,
+                    "changed": bool(changes),
+                    "rule": changes[0].get("rule") if changes else None,
+                }
+            else:
+                from .structure.adapter import rewrite
+
+                current, changes, structure_details = rewrite(
+                    current, structure_rewriter, guard=guardrails
+                )
+            structure_details["on"] = True
             edits += changes
             if (
-                self.technical_terms
+                protect_terms
                 and not preserved_terms(original_doc, current, term_spans)["pass"]
             ):
                 current = text
                 edits = []
                 blocked_term_stages.append("structure")
+                structure_details.update(
+                    {
+                        "after": text,
+                        "changed": False,
+                        "reason": "A detected technical term would change.",
+                    }
+                )
         if phrases and self.phrase_model is not None:
             before = current
             current, changes = phrase_rewrite(current, self.complexity)
             edits += changes
             if (
-                self.technical_terms
+                protect_terms
                 and not preserved_terms(original_doc, current, term_spans)["pass"]
             ):
                 current = before
@@ -569,12 +610,14 @@ class EnsembleClearText:
                     r"(?<!\w)" + re.escape(p) + r"(?!\w)", current, re.I
                 )
             ]
-            if self.technical_terms:
+            if protect_terms:
                 spans += [
                     (span.start, span.end)
                     for span in detect_terms(doc)
                     if span.protected
                 ]
+            if guardrails:
+                spans += [(span.start, span.end) for span in literal_spans(current)]
             # CompLex rates only content words; function words ("is", "at") fall outside its training data.
             words = [
                 t
@@ -597,7 +640,7 @@ class EnsembleClearText:
                     if p >= th and (t.pos_ != "NOUN" or p >= self.noun_threshold)
                 ]
             for token, hard in flagged:
-                r = self.rank_word(doc, token, original_doc)
+                r = self.rank_word(doc, token, original_doc, guard=guardrails)
                 r["hardness"] = hard
                 trace.append(r)
             # Across words: decision probability times hardness**alpha (alpha 0 is decision probability alone).
@@ -621,7 +664,7 @@ class EnsembleClearText:
                 current = apply_edits(
                     doc, [(tokens[r["start"]], r["selected"]["word"]) for r in chosen]
                 )
-                if len(chosen) > 1 and not combined_ok(doc, current):
+                if guardrails and len(chosen) > 1 and not combined_ok(doc, current):
                     chosen = chosen[:1]
                     current = apply_edits(
                         doc,
@@ -639,7 +682,7 @@ class EnsembleClearText:
                         }
                     )
         term_details = {}
-        if self.technical_terms:
+        if protect_terms:
             check = preserved_terms(original_doc, current, term_spans)
             if not check["pass"]:
                 current = text
@@ -652,20 +695,51 @@ class EnsembleClearText:
                     "blocked_stages": blocked_term_stages,
                 },
             }
+        literal_check = preserved_literals(text, current)
+        literal_blocked = guardrails and not literal_check["pass"]
+        if literal_blocked:
+            discarded_structure = dict(structure_details)
+            current = text
+            edits = []
+            if structure_details["on"]:
+                structure_details = {
+                    **structure_details, "after": text, "changed": False,
+                    "reason": "A code snippet would change.",
+                    "blocked_by": "code_literals", "attempt": discarded_structure,
+                }
+            for row in trace:
+                if row.get("selected"):
+                    row["attempted_selection"] = row["selected"]
+                    row["selected"] = None
+                    row["blocked_by"] = "code_literals"
+        literal_details = {}
+        if literal_spans(text) or literal_blocked:
+            literal_details = {
+                "literal_preservation": {
+                    **preserved_literals(text, current),
+                    "blocked": bool(literal_blocked),
+                    "attempt": literal_check,
+                }
+            }
         levels = {}
         if self.sentence_model is not None:
             levels = {
-                "reading_level_before": self.reading_level(original_doc),
+                "reading_level_before": self.reading_level(
+                    nlp()(original_text) if original_text != text else original_doc
+                ),
                 "reading_level_after": self.reading_level(nlp()(current))
                 if current != text
                 else self.reading_level(original_doc),
             }
         return {
-            "original": text,
+            "original": original_text,
             "output": current,
-            "edits": edits,
+            "edits": grammar_edits + edits,
             "trace": trace,
+            "structure": structure_details,
             **levels,
             **term_details,
+            **grammar_details,
+            **literal_details,
             "limits": "At most one syntax rule, one phrase and one word edit. Fit is a probability, not a meaning certificate.",
         }

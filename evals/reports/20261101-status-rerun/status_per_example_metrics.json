@@ -1,0 +1,1702 @@
+{
+  "before_original": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "37dce2c6c4f773377e7448a071b577c84fbbec73fbdd952faca4145151726084",
+      "readability": {
+        "flesch_reading_ease": -42.05499999999998,
+        "flesch_kincaid_grade": 23.100000000000005,
+        "gunning_fog": 23.900000000000002,
+        "smog_index": 18.243605946275583,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.25,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0,
+        "embedding_similarity": 1.000000238418579,
+        "nli_forward": 0.9928160905838013,
+        "nli_backward": 0.9928160905838013,
+        "nli_mean": 0.9928160905838013,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "5d6cc7826c34ff1cc8c75409f53f9b184d2d32c39f8d563097ba4569bc9532e4",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 7.315789473684211,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0000000000000009,
+        "embedding_similarity": 0.9999999403953552,
+        "nli_forward": 0.9840632677078247,
+        "nli_backward": 0.9840632677078247,
+        "nli_mean": 0.9840632677078247,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "981cbba7153415deb4030e6fabffe976a75669bb1957f43be0b5d594470d0e85",
+      "readability": {
+        "flesch_reading_ease": -44.314117647058794,
+        "flesch_kincaid_grade": 23.66352941176471,
+        "gunning_fog": 27.976470588235294,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 8.058823529411764,
+        "technical_term_count": 7
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0,
+        "embedding_similarity": 1.0000001192092896,
+        "nli_forward": 0.9931846261024475,
+        "nli_backward": 0.9931846261024475,
+        "nli_mean": 0.9931846261024475,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "c16faa725e82018f89c42328c814af1746d63df223fa645035414f848c35158a",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 28.652631578947364,
+        "smog_index": 21.19438992294339,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.7894736842105265,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9999999999999992,
+        "embedding_similarity": 1.0,
+        "nli_forward": 0.9912932515144348,
+        "nli_backward": 0.9912932515144348,
+        "nli_mean": 0.9912932515144348,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "940362237b1ca08a2cc49608effcf23667fa02c134b9cf2eb53b658b403ee4f0",
+      "readability": {
+        "flesch_reading_ease": -13.534999999999997,
+        "flesch_kincaid_grade": 19.618888888888893,
+        "gunning_fog": 27.200000000000003,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 18.0,
+        "avg_word_length": 7.055555555555555,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0000000000000002,
+        "embedding_similarity": 1.0,
+        "nli_forward": 0.9869790077209473,
+        "nli_backward": 0.9869790077209473,
+        "nli_mean": 0.9869790077209473,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "f7286e56a0b25656a90655e0dd1ed53b94db0479d51420d4cb4490a21353b444",
+      "readability": {
+        "flesch_reading_ease": 20.380000000000024,
+        "flesch_kincaid_grade": 14.64,
+        "gunning_fog": 20.917647058823533,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 6.0,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9999999999999992,
+        "embedding_similarity": 1.0000001192092896,
+        "nli_forward": 0.9925366640090942,
+        "nli_backward": 0.9925366640090942,
+        "nli_mean": 0.9925366640090942,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "before_rule_based": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9dd6c4997904cf6d75d7b5a44d38a111b1e54409e71dbf11c37791270ddf9ea6",
+      "readability": {
+        "flesch_reading_ease": 0.24500000000000455,
+        "flesch_kincaid_grade": 17.2,
+        "gunning_fog": 16.400000000000002,
+        "smog_index": 14.554592549557764,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 6.1875,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6868858922649338,
+        "embedding_similarity": 0.9532153606414795,
+        "nli_forward": 0.9968892931938171,
+        "nli_backward": 0.9943845272064209,
+        "nli_mean": 0.995636910200119,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "92f2c3c62326e35d77696290b502edcee5447277c77ccdc5cdd73e3ac31d08d3",
+      "readability": {
+        "flesch_reading_ease": 13.897368421052647,
+        "flesch_kincaid_grade": 16.04105263157895,
+        "gunning_fog": 18.126315789473683,
+        "smog_index": 15.903189008614273,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.368421052631579,
+        "technical_term_count": 5
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.586346645690157,
+        "embedding_similarity": 0.9474817514419556,
+        "nli_forward": 0.9980410933494568,
+        "nli_backward": 0.9979541301727295,
+        "nli_mean": 0.9979976117610931,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "722b9c9ed0a1400bab1ac12a61d2a8e5385d0af87ecc0f408b8ca2770a8d585d",
+      "readability": {
+        "flesch_reading_ease": -4.50235294117644,
+        "flesch_kincaid_grade": 18.11058823529412,
+        "gunning_fog": 20.917647058823533,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 6.9411764705882355,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7025997416361692,
+        "embedding_similarity": 0.966478705406189,
+        "nli_forward": 0.997707724571228,
+        "nli_backward": 0.9978867173194885,
+        "nli_mean": 0.9977972209453583,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "8fbe6a801b8d8f93b9dee89f7c585664eac032ecff021fb6fe8129a135506583",
+      "readability": {
+        "flesch_reading_ease": -4.134999999999991,
+        "flesch_kincaid_grade": 18.307777777777783,
+        "gunning_fog": 24.977777777777778,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 18.0,
+        "avg_word_length": 6.388888888888889,
+        "technical_term_count": 0
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6433611671987809,
+        "embedding_similarity": 0.9277520179748535,
+        "nli_forward": 0.9970148801803589,
+        "nli_backward": 0.9883711934089661,
+        "nli_mean": 0.9926930367946625,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "a739ba58bb89c80fc589a54de315fde05a8087d35a92bc351ddc112c1dad5a17",
+      "readability": {
+        "flesch_reading_ease": -0.14999999999997726,
+        "flesch_kincaid_grade": 17.006666666666664,
+        "gunning_fog": 22.0,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 15.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 1
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.441566450066022,
+        "embedding_similarity": 0.8388141393661499,
+        "nli_forward": 0.9974308609962463,
+        "nli_backward": 0.9925105571746826,
+        "nli_mean": 0.9949707090854645,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "56c8754410d97fcfa2e135159c97c1c46a340bcbfc51553f2b93d14bce1c576f",
+      "readability": {
+        "flesch_reading_ease": 31.97,
+        "flesch_kincaid_grade": 12.775000000000002,
+        "gunning_fog": 16.400000000000002,
+        "smog_index": 14.554592549557764,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 5.6875,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7114977811307575,
+        "embedding_similarity": 0.8595941662788391,
+        "nli_forward": 0.991563081741333,
+        "nli_backward": 0.9891608357429504,
+        "nli_mean": 0.9903619587421417,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "before_lexical_only": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2fcc877fac08bb833fd5b415af8d69e4f4416f3bfce12e0644d2ba0f3aebcbaf",
+      "readability": {
+        "flesch_reading_ease": -31.47999999999999,
+        "flesch_kincaid_grade": 21.625000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8836351388995085,
+        "embedding_similarity": 0.9991485476493835,
+        "nli_forward": 0.9951105713844299,
+        "nli_backward": 0.9952566027641296,
+        "nli_mean": 0.9951835870742798,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "ac9a55a68a6948365c4b7e709f41919a1cf4d2269da61eabb6ed1fbd0339339f",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 7.157894736842105,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9011114231649515,
+        "embedding_similarity": 0.9962981939315796,
+        "nli_forward": 0.9911231994628906,
+        "nli_backward": 0.9905393123626709,
+        "nli_mean": 0.9908312559127808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9cf574037513c75faf251b0a122a65cdfc173f78b1c9cc9893df127d92626fa5",
+      "readability": {
+        "flesch_reading_ease": -39.33764705882351,
+        "flesch_kincaid_grade": 22.969411764705885,
+        "gunning_fog": 27.976470588235294,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 7.9411764705882355,
+        "technical_term_count": 7
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8901087250340664,
+        "embedding_similarity": 0.9875363111495972,
+        "nli_forward": 0.9936919212341309,
+        "nli_backward": 0.9901638627052307,
+        "nli_mean": 0.9919278919696808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "48a4ba35c48e56a6fd8c2aeda39065633c0a3a320ebe25ffced265859742fcef",
+      "readability": {
+        "flesch_reading_ease": -17.271052631578925,
+        "flesch_kincaid_grade": 20.388421052631582,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.631578947368421,
+        "technical_term_count": 1
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286253,
+        "embedding_similarity": 0.9933620095252991,
+        "nli_forward": 0.875916063785553,
+        "nli_backward": 0.012052124366164207,
+        "nli_mean": 0.4439840940758586,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "d0f875b05c3641b2729fb96205f6d8a9eb4a32097997f86263c73a2c23f38d4f",
+      "readability": {
+        "flesch_reading_ease": -4.134999999999991,
+        "flesch_kincaid_grade": 18.307777777777783,
+        "gunning_fog": 24.977777777777778,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 18.0,
+        "avg_word_length": 6.888888888888889,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8958999951937023,
+        "embedding_similarity": 0.9879748821258545,
+        "nli_forward": 0.9271584749221802,
+        "nli_backward": 0.16441203653812408,
+        "nli_mean": 0.5457852557301521,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "93f65d0a61fb21e5c7df8b13c4d12478ff61541839554c4ec1e37a2a147a04fc",
+      "readability": {
+        "flesch_reading_ease": 30.332941176470626,
+        "flesch_kincaid_grade": 13.251764705882355,
+        "gunning_fog": 20.917647058823533,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 5.882352941176471,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286263,
+        "embedding_similarity": 0.9784539937973022,
+        "nli_forward": 0.9942483901977539,
+        "nli_backward": 0.9934870004653931,
+        "nli_mean": 0.9938676953315735,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_v7_original": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "37dce2c6c4f773377e7448a071b577c84fbbec73fbdd952faca4145151726084",
+      "readability": {
+        "flesch_reading_ease": -42.05499999999998,
+        "flesch_kincaid_grade": 23.100000000000005,
+        "gunning_fog": 23.900000000000002,
+        "smog_index": 18.243605946275583,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.25,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0,
+        "embedding_similarity": 1.000000238418579,
+        "nli_forward": 0.9928160905838013,
+        "nli_backward": 0.9928160905838013,
+        "nli_mean": 0.9928160905838013,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "5d6cc7826c34ff1cc8c75409f53f9b184d2d32c39f8d563097ba4569bc9532e4",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 7.315789473684211,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0000000000000009,
+        "embedding_similarity": 0.9999999403953552,
+        "nli_forward": 0.9840632677078247,
+        "nli_backward": 0.9840632677078247,
+        "nli_mean": 0.9840632677078247,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "981cbba7153415deb4030e6fabffe976a75669bb1957f43be0b5d594470d0e85",
+      "readability": {
+        "flesch_reading_ease": -44.314117647058794,
+        "flesch_kincaid_grade": 23.66352941176471,
+        "gunning_fog": 27.976470588235294,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 8.058823529411764,
+        "technical_term_count": 7
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0,
+        "embedding_similarity": 1.0000001192092896,
+        "nli_forward": 0.9931846261024475,
+        "nli_backward": 0.9931846261024475,
+        "nli_mean": 0.9931846261024475,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "c16faa725e82018f89c42328c814af1746d63df223fa645035414f848c35158a",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 28.652631578947364,
+        "smog_index": 21.19438992294339,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.7894736842105265,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9999999999999992,
+        "embedding_similarity": 1.0,
+        "nli_forward": 0.9912932515144348,
+        "nli_backward": 0.9912932515144348,
+        "nli_mean": 0.9912932515144348,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "940362237b1ca08a2cc49608effcf23667fa02c134b9cf2eb53b658b403ee4f0",
+      "readability": {
+        "flesch_reading_ease": -13.534999999999997,
+        "flesch_kincaid_grade": 19.618888888888893,
+        "gunning_fog": 27.200000000000003,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 18.0,
+        "avg_word_length": 7.055555555555555,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 1.0000000000000002,
+        "embedding_similarity": 1.0,
+        "nli_forward": 0.9869790077209473,
+        "nli_backward": 0.9869790077209473,
+        "nli_mean": 0.9869790077209473,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": false,
+      "output_sha256": "f7286e56a0b25656a90655e0dd1ed53b94db0479d51420d4cb4490a21353b444",
+      "readability": {
+        "flesch_reading_ease": 20.380000000000024,
+        "flesch_kincaid_grade": 14.64,
+        "gunning_fog": 20.917647058823533,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 6.0,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9999999999999992,
+        "embedding_similarity": 1.0000001192092896,
+        "nli_forward": 0.9925366640090942,
+        "nli_backward": 0.9925366640090942,
+        "nli_mean": 0.9925366640090942,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_v7_rule_based": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9dd6c4997904cf6d75d7b5a44d38a111b1e54409e71dbf11c37791270ddf9ea6",
+      "readability": {
+        "flesch_reading_ease": 0.24500000000000455,
+        "flesch_kincaid_grade": 17.2,
+        "gunning_fog": 16.400000000000002,
+        "smog_index": 14.554592549557764,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 6.1875,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6868858922649338,
+        "embedding_similarity": 0.9532153606414795,
+        "nli_forward": 0.9968892931938171,
+        "nli_backward": 0.9943845272064209,
+        "nli_mean": 0.995636910200119,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "92f2c3c62326e35d77696290b502edcee5447277c77ccdc5cdd73e3ac31d08d3",
+      "readability": {
+        "flesch_reading_ease": 13.897368421052647,
+        "flesch_kincaid_grade": 16.04105263157895,
+        "gunning_fog": 18.126315789473683,
+        "smog_index": 15.903189008614273,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.368421052631579,
+        "technical_term_count": 5
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.586346645690157,
+        "embedding_similarity": 0.9474817514419556,
+        "nli_forward": 0.9980410933494568,
+        "nli_backward": 0.9979541301727295,
+        "nli_mean": 0.9979976117610931,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "722b9c9ed0a1400bab1ac12a61d2a8e5385d0af87ecc0f408b8ca2770a8d585d",
+      "readability": {
+        "flesch_reading_ease": -4.50235294117644,
+        "flesch_kincaid_grade": 18.11058823529412,
+        "gunning_fog": 20.917647058823533,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 6.9411764705882355,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7025997416361692,
+        "embedding_similarity": 0.966478705406189,
+        "nli_forward": 0.997707724571228,
+        "nli_backward": 0.9978867173194885,
+        "nli_mean": 0.9977972209453583,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "8fbe6a801b8d8f93b9dee89f7c585664eac032ecff021fb6fe8129a135506583",
+      "readability": {
+        "flesch_reading_ease": -4.134999999999991,
+        "flesch_kincaid_grade": 18.307777777777783,
+        "gunning_fog": 24.977777777777778,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 18.0,
+        "avg_word_length": 6.388888888888889,
+        "technical_term_count": 0
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6433611671987809,
+        "embedding_similarity": 0.9277520179748535,
+        "nli_forward": 0.9970148801803589,
+        "nli_backward": 0.9883711934089661,
+        "nli_mean": 0.9926930367946625,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "a739ba58bb89c80fc589a54de315fde05a8087d35a92bc351ddc112c1dad5a17",
+      "readability": {
+        "flesch_reading_ease": -0.14999999999997726,
+        "flesch_kincaid_grade": 17.006666666666664,
+        "gunning_fog": 22.0,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 15.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 1
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.441566450066022,
+        "embedding_similarity": 0.8388141393661499,
+        "nli_forward": 0.9974308609962463,
+        "nli_backward": 0.9925105571746826,
+        "nli_mean": 0.9949707090854645,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "56c8754410d97fcfa2e135159c97c1c46a340bcbfc51553f2b93d14bce1c576f",
+      "readability": {
+        "flesch_reading_ease": 31.97,
+        "flesch_kincaid_grade": 12.775000000000002,
+        "gunning_fog": 16.400000000000002,
+        "smog_index": 14.554592549557764,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 5.6875,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7114977811307575,
+        "embedding_similarity": 0.8595941662788391,
+        "nli_forward": 0.991563081741333,
+        "nli_backward": 0.9891608357429504,
+        "nli_mean": 0.9903619587421417,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_v7_lexical_only": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2fcc877fac08bb833fd5b415af8d69e4f4416f3bfce12e0644d2ba0f3aebcbaf",
+      "readability": {
+        "flesch_reading_ease": -31.47999999999999,
+        "flesch_kincaid_grade": 21.625000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8836351388995085,
+        "embedding_similarity": 0.9991485476493835,
+        "nli_forward": 0.9951105713844299,
+        "nli_backward": 0.9952566027641296,
+        "nli_mean": 0.9951835870742798,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "ac9a55a68a6948365c4b7e709f41919a1cf4d2269da61eabb6ed1fbd0339339f",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 7.157894736842105,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9011114231649515,
+        "embedding_similarity": 0.9962981939315796,
+        "nli_forward": 0.9911231994628906,
+        "nli_backward": 0.9905393123626709,
+        "nli_mean": 0.9908312559127808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9cf574037513c75faf251b0a122a65cdfc173f78b1c9cc9893df127d92626fa5",
+      "readability": {
+        "flesch_reading_ease": -39.33764705882351,
+        "flesch_kincaid_grade": 22.969411764705885,
+        "gunning_fog": 27.976470588235294,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 7.9411764705882355,
+        "technical_term_count": 7
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8901087250340664,
+        "embedding_similarity": 0.9875363111495972,
+        "nli_forward": 0.9936919212341309,
+        "nli_backward": 0.9901638627052307,
+        "nli_mean": 0.9919278919696808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "48a4ba35c48e56a6fd8c2aeda39065633c0a3a320ebe25ffced265859742fcef",
+      "readability": {
+        "flesch_reading_ease": -17.271052631578925,
+        "flesch_kincaid_grade": 20.388421052631582,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.631578947368421,
+        "technical_term_count": 1
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286253,
+        "embedding_similarity": 0.9933620095252991,
+        "nli_forward": 0.875916063785553,
+        "nli_backward": 0.012052124366164207,
+        "nli_mean": 0.4439840940758586,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "d0f875b05c3641b2729fb96205f6d8a9eb4a32097997f86263c73a2c23f38d4f",
+      "readability": {
+        "flesch_reading_ease": -4.134999999999991,
+        "flesch_kincaid_grade": 18.307777777777783,
+        "gunning_fog": 24.977777777777778,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 18.0,
+        "avg_word_length": 6.888888888888889,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8958999951937023,
+        "embedding_similarity": 0.9879748821258545,
+        "nli_forward": 0.9271584749221802,
+        "nli_backward": 0.16441203653812408,
+        "nli_mean": 0.5457852557301521,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "93f65d0a61fb21e5c7df8b13c4d12478ff61541839554c4ec1e37a2a147a04fc",
+      "readability": {
+        "flesch_reading_ease": 30.332941176470626,
+        "flesch_kincaid_grade": 13.251764705882355,
+        "gunning_fog": 20.917647058823533,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 5.882352941176471,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286263,
+        "embedding_similarity": 0.9784539937973022,
+        "nli_forward": 0.9942483901977539,
+        "nli_backward": 0.9934870004653931,
+        "nli_mean": 0.9938676953315735,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_v7_full_pipeline": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2fcc877fac08bb833fd5b415af8d69e4f4416f3bfce12e0644d2ba0f3aebcbaf",
+      "readability": {
+        "flesch_reading_ease": -31.47999999999999,
+        "flesch_kincaid_grade": 21.625000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8836351388995085,
+        "embedding_similarity": 0.9991485476493835,
+        "nli_forward": 0.9951105713844299,
+        "nli_backward": 0.9952566027641296,
+        "nli_mean": 0.9951835870742798,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2013966fe344de365b5d9ab942003af0ad6b6669e31e6ec4267e1af2e0b37493",
+      "readability": {
+        "flesch_reading_ease": -23.19999999999996,
+        "flesch_kincaid_grade": 18.731111111111115,
+        "gunning_fog": 23.6,
+        "smog_index": 15.247664890283005,
+        "avg_sentence_length": 9.0,
+        "avg_word_length": 7.388888888888889,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.85261963219329,
+        "embedding_similarity": 0.9852124452590942,
+        "nli_forward": 0.9903574585914612,
+        "nli_backward": 0.9918770790100098,
+        "nli_mean": 0.9911172688007355,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9cf574037513c75faf251b0a122a65cdfc173f78b1c9cc9893df127d92626fa5",
+      "readability": {
+        "flesch_reading_ease": -39.33764705882351,
+        "flesch_kincaid_grade": 22.969411764705885,
+        "gunning_fog": 27.976470588235294,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 7.9411764705882355,
+        "technical_term_count": 7
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8901087250340664,
+        "embedding_similarity": 0.9875363111495972,
+        "nli_forward": 0.9936919212341309,
+        "nli_backward": 0.9901638627052307,
+        "nli_mean": 0.9919278919696808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "48a4ba35c48e56a6fd8c2aeda39065633c0a3a320ebe25ffced265859742fcef",
+      "readability": {
+        "flesch_reading_ease": -17.271052631578925,
+        "flesch_kincaid_grade": 20.388421052631582,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.631578947368421,
+        "technical_term_count": 1
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286253,
+        "embedding_similarity": 0.9933620095252991,
+        "nli_forward": 0.875916063785553,
+        "nli_backward": 0.012052124366164207,
+        "nli_mean": 0.4439840940758586,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "fce2590e077c492998773f174483f6ce8d93928ace2e7347f3d939f5f73cc5b3",
+      "readability": {
+        "flesch_reading_ease": -22.70999999999995,
+        "flesch_kincaid_grade": 20.153333333333332,
+        "gunning_fog": 27.33333333333334,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 15.0,
+        "avg_word_length": 7.6,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6601667904194328,
+        "embedding_similarity": 0.9838264584541321,
+        "nli_forward": 0.9874837398529053,
+        "nli_backward": 0.37461596727371216,
+        "nli_mean": 0.6810498535633087,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9198d453e90d610ce88f899bec4bfe6705d0062c4a40471dae68ecdadb4c5912",
+      "readability": {
+        "flesch_reading_ease": 21.39500000000001,
+        "flesch_kincaid_grade": 14.250000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 6.1875,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7854411546403511,
+        "embedding_similarity": 0.9734250903129578,
+        "nli_forward": 0.9960818886756897,
+        "nli_backward": 0.9955234527587891,
+        "nli_mean": 0.9958026707172394,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_v7_full_rules": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2fcc877fac08bb833fd5b415af8d69e4f4416f3bfce12e0644d2ba0f3aebcbaf",
+      "readability": {
+        "flesch_reading_ease": -31.47999999999999,
+        "flesch_kincaid_grade": 21.625000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8836351388995085,
+        "embedding_similarity": 0.9991485476493835,
+        "nli_forward": 0.9951105713844299,
+        "nli_backward": 0.9952566027641296,
+        "nli_mean": 0.9951835870742798,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "ac9a55a68a6948365c4b7e709f41919a1cf4d2269da61eabb6ed1fbd0339339f",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 7.157894736842105,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9011114231649515,
+        "embedding_similarity": 0.9962981939315796,
+        "nli_forward": 0.9911231994628906,
+        "nli_backward": 0.9905393123626709,
+        "nli_mean": 0.9908312559127808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9cf574037513c75faf251b0a122a65cdfc173f78b1c9cc9893df127d92626fa5",
+      "readability": {
+        "flesch_reading_ease": -39.33764705882351,
+        "flesch_kincaid_grade": 22.969411764705885,
+        "gunning_fog": 27.976470588235294,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 7.9411764705882355,
+        "technical_term_count": 7
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8901087250340664,
+        "embedding_similarity": 0.9875363111495972,
+        "nli_forward": 0.9936919212341309,
+        "nli_backward": 0.9901638627052307,
+        "nli_mean": 0.9919278919696808,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "48a4ba35c48e56a6fd8c2aeda39065633c0a3a320ebe25ffced265859742fcef",
+      "readability": {
+        "flesch_reading_ease": -17.271052631578925,
+        "flesch_kincaid_grade": 20.388421052631582,
+        "gunning_fog": 26.54736842105263,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.631578947368421,
+        "technical_term_count": 1
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286253,
+        "embedding_similarity": 0.9933620095252991,
+        "nli_forward": 0.875916063785553,
+        "nli_backward": 0.012052124366164207,
+        "nli_mean": 0.4439840940758586,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "fce2590e077c492998773f174483f6ce8d93928ace2e7347f3d939f5f73cc5b3",
+      "readability": {
+        "flesch_reading_ease": -22.70999999999995,
+        "flesch_kincaid_grade": 20.153333333333332,
+        "gunning_fog": 27.33333333333334,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 15.0,
+        "avg_word_length": 7.6,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6601667904194328,
+        "embedding_similarity": 0.9838264584541321,
+        "nli_forward": 0.9874837398529053,
+        "nli_backward": 0.37461596727371216,
+        "nli_mean": 0.6810498535633087,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "9198d453e90d610ce88f899bec4bfe6705d0062c4a40471dae68ecdadb4c5912",
+      "readability": {
+        "flesch_reading_ease": 21.39500000000001,
+        "flesch_kincaid_grade": 14.250000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 6.1875,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7854411546403511,
+        "embedding_similarity": 0.9734250903129578,
+        "nli_forward": 0.9960818886756897,
+        "nli_backward": 0.9955234527587891,
+        "nli_mean": 0.9958026707172394,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_context_full_pipeline": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2fcc877fac08bb833fd5b415af8d69e4f4416f3bfce12e0644d2ba0f3aebcbaf",
+      "readability": {
+        "flesch_reading_ease": -31.47999999999999,
+        "flesch_kincaid_grade": 21.625000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8836351388995085,
+        "embedding_similarity": 0.9991485476493835,
+        "nli_forward": 0.9951105713844299,
+        "nli_backward": 0.9952566027641296,
+        "nli_mean": 0.9951835870742798,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "b538c89c2d63e6ee89b89c1201266bd9706aaa61c832ca10ad65d76a8405e525",
+      "readability": {
+        "flesch_reading_ease": -27.89999999999995,
+        "flesch_kincaid_grade": 19.386666666666667,
+        "gunning_fog": 23.6,
+        "smog_index": 15.247664890283005,
+        "avg_sentence_length": 9.0,
+        "avg_word_length": 7.722222222222222,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.85261963219329,
+        "embedding_similarity": 0.9707216024398804,
+        "nli_forward": 0.7403014302253723,
+        "nli_backward": 0.957122802734375,
+        "nli_mean": 0.8487121164798737,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "92bdd07918ea2be8c95f4f45713d1d9355c80a13a36c75323a51f9e133f3fab8",
+      "readability": {
+        "flesch_reading_ease": -39.33764705882351,
+        "flesch_kincaid_grade": 22.969411764705885,
+        "gunning_fog": 25.623529411764707,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 7.9411764705882355,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8901087250340664,
+        "embedding_similarity": 0.9963173866271973,
+        "nli_forward": 0.9937698245048523,
+        "nli_backward": 0.9911326766014099,
+        "nli_mean": 0.9924512505531311,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "057309cc2d29f788f408395aa602a2740588786bd9dab0193970d9cf1ba3a749",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 28.652631578947364,
+        "smog_index": 21.19438992294339,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.631578947368421,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286263,
+        "embedding_similarity": 0.9885904788970947,
+        "nli_forward": 0.9953853487968445,
+        "nli_backward": 0.9949349761009216,
+        "nli_mean": 0.9951601624488831,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "ea2661e3384d5e4f7e83c1d64e6b977b79bb72929931cfbec5d20efe6f00d442",
+      "readability": {
+        "flesch_reading_ease": -28.349999999999966,
+        "flesch_kincaid_grade": 20.94,
+        "gunning_fog": 27.33333333333334,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 15.0,
+        "avg_word_length": 7.466666666666667,
+        "technical_term_count": 3
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6601667904194328,
+        "embedding_similarity": 0.952580451965332,
+        "nli_forward": 0.9944461584091187,
+        "nli_backward": 0.9847864508628845,
+        "nli_mean": 0.9896163046360016,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "114c7332dc28b0774ff8a06e61f61309af11fbc60fd38de01f513b5bebb20118",
+      "readability": {
+        "flesch_reading_ease": 21.39500000000001,
+        "flesch_kincaid_grade": 14.250000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 6.0625,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7854411546403511,
+        "embedding_similarity": 0.9562339782714844,
+        "nli_forward": 0.9963415265083313,
+        "nli_backward": 0.996227502822876,
+        "nli_mean": 0.9962845146656036,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ],
+  "after_context_full_precision": [
+    {
+      "id": "cs-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "2fcc877fac08bb833fd5b415af8d69e4f4416f3bfce12e0644d2ba0f3aebcbaf",
+      "readability": {
+        "flesch_reading_ease": -31.47999999999999,
+        "flesch_kincaid_grade": 21.625000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 7.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8836351388995085,
+        "embedding_similarity": 0.9991485476493835,
+        "nli_forward": 0.9951105713844299,
+        "nli_backward": 0.9952566027641296,
+        "nli_mean": 0.9951835870742798,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "cs-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "b538c89c2d63e6ee89b89c1201266bd9706aaa61c832ca10ad65d76a8405e525",
+      "readability": {
+        "flesch_reading_ease": -27.89999999999995,
+        "flesch_kincaid_grade": 19.386666666666667,
+        "gunning_fog": 23.6,
+        "smog_index": 15.247664890283005,
+        "avg_sentence_length": 9.0,
+        "avg_word_length": 7.722222222222222,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.85261963219329,
+        "embedding_similarity": 0.9707216024398804,
+        "nli_forward": 0.7403014302253723,
+        "nli_backward": 0.957122802734375,
+        "nli_mean": 0.8487121164798737,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "92bdd07918ea2be8c95f4f45713d1d9355c80a13a36c75323a51f9e133f3fab8",
+      "readability": {
+        "flesch_reading_ease": -39.33764705882351,
+        "flesch_kincaid_grade": 22.969411764705885,
+        "gunning_fog": 25.623529411764707,
+        "smog_index": 19.287186520377343,
+        "avg_sentence_length": 17.0,
+        "avg_word_length": 7.9411764705882355,
+        "technical_term_count": 6
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.8901087250340664,
+        "embedding_similarity": 0.9963173866271973,
+        "nli_forward": 0.9937698245048523,
+        "nli_backward": 0.9911326766014099,
+        "nli_mean": 0.9924512505531311,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "corp-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "057309cc2d29f788f408395aa602a2740588786bd9dab0193970d9cf1ba3a749",
+      "readability": {
+        "flesch_reading_ease": -26.176315789473648,
+        "flesch_kincaid_grade": 21.63052631578947,
+        "gunning_fog": 28.652631578947364,
+        "smog_index": 21.19438992294339,
+        "avg_sentence_length": 19.0,
+        "avg_word_length": 6.631578947368421,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.9101113851286263,
+        "embedding_similarity": 0.9885904788970947,
+        "nli_forward": 0.9953853487968445,
+        "nli_backward": 0.9949349761009216,
+        "nli_mean": 0.9951601624488831,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-01",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "6191e907cb2b2466b7d9934728ffc6df6eb546e9cbc1807d834a3d57e54f3fc7",
+      "readability": {
+        "flesch_reading_ease": -39.62999999999997,
+        "flesch_kincaid_grade": 22.51333333333334,
+        "gunning_fog": 30.0,
+        "smog_index": 20.267338824336647,
+        "avg_sentence_length": 15.0,
+        "avg_word_length": 8.0,
+        "technical_term_count": 4
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.6601667904194328,
+        "embedding_similarity": 0.9867405891418457,
+        "nli_forward": 0.9968359470367432,
+        "nli_backward": 0.9932531714439392,
+        "nli_mean": 0.9950445592403412,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    },
+    {
+      "id": "polsci-02",
+      "panel": "status_report_authored_smoke",
+      "changed": true,
+      "output_sha256": "114c7332dc28b0774ff8a06e61f61309af11fbc60fd38de01f513b5bebb20118",
+      "readability": {
+        "flesch_reading_ease": 21.39500000000001,
+        "flesch_kincaid_grade": 14.250000000000004,
+        "gunning_fog": 21.400000000000002,
+        "smog_index": 17.122413403193683,
+        "avg_sentence_length": 16.0,
+        "avg_word_length": 6.0625,
+        "technical_term_count": 2
+      },
+      "preservation": {
+        "tfidf_cosine_similarity": 0.7854411546403511,
+        "embedding_similarity": 0.9562339782714844,
+        "nli_forward": 0.9963415265083313,
+        "nli_backward": 0.996227502822876,
+        "nli_mean": 0.9962845146656036,
+        "numbers_preserved": 1.0,
+        "dates_preserved": 1.0,
+        "entities_preserved": 1.0,
+        "negations_preserved": 1.0,
+        "tenses_preserved": 1.0
+      },
+      "reference": {}
+    }
+  ]
+}

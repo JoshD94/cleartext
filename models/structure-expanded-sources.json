@@ -1,0 +1,75 @@
+{
+  "commit": "07862e5d90cb1e7691616d05e8c7c783b0f597f9",
+  "files": {
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/LICENSE",
+      "sha256": "50a945a502b721cdf4cdf70f6c37c8b08c5960c10b06f85d2dfdd605b443c453",
+      "bytes": 1076
+    },
+    "README.md": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/README.md",
+      "sha256": "9d63d691e0be5c67cac64c595896a42d14c9e775783f54802ea48103dc150fb2",
+      "bytes": 4723
+    },
+    "ACL2021/train.complex": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/ACL2021/train.complex",
+      "sha256": "8be1380abfc8b3f5b5d0f55cc5e379ecdff772238772c34a7b707d2bd8a1f19a",
+      "bytes": 1531998
+    },
+    "ACL2021/train.simple": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/ACL2021/train.simple",
+      "sha256": "cf66d5bf6522287ef82fc0a3244b124233f0d59eaa17c76e60011471f0921bbc",
+      "bytes": 1422909
+    },
+    "ACL2021/valid.complex": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/ACL2021/valid.complex",
+      "sha256": "8fe5988ce951a38ae7d58400a1dbcc8a69cb6e4d62c41fb1756dfdd72a6f17b8",
+      "bytes": 4535
+    },
+    "ACL2021/valid.simple": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/ACL2021/valid.simple",
+      "sha256": "673a9da48c19ef9f8f37cd54dcff3d425cfd22b8ca4ba57357e4e35c1ebf2dad",
+      "bytes": 4405
+    },
+    "ACL2021/test.complex.txt": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/ACL2021/test.complex.txt",
+      "sha256": "2a7fcbadd802df36e41206c7872ef8e76ca94810ff70c0a4314bbb47c0da36d2",
+      "bytes": 82978
+    },
+    "ACL2021/test.simple.txt": {
+      "url": "https://raw.githubusercontent.com/serenayj/DeSSE/07862e5d90cb1e7691616d05e8c7c783b0f597f9/ACL2021/test.simple.txt",
+      "sha256": "ff5ce56675559a8ca6e63beed11d82bf97a7a6c8d1a9da1e81cd67466ee369a0",
+      "bytes": 80612
+    }
+  },
+  "dataset": "DeSSE",
+  "license": "MIT",
+  "paper": "https://aclanthology.org/2021.acl-long.303/",
+  "annotation": "Published crowdsourced decompositions; not project human approval",
+  "wikisplit": {
+    "commit": "80f5bddf42d1a68201b7b107ee4b8d86d82e9fde",
+    "files": {
+      "test.tsv": {
+        "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/test.tsv",
+        "sha256": "88c3eff253f7ff3fcce9370bb54f750bc35f646c1b6d2a45df2b993c96670f7f",
+        "bytes": 1926782
+      },
+      "tune.tsv": {
+        "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/tune.tsv",
+        "sha256": "67118f483438fc9f0ba12e63dc37f0eeff8bbad1873157509ced7e3e46582312",
+        "bytes": 1928137
+      },
+      "train.tsv.zip": {
+        "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/train.tsv.zip",
+        "sha256": "42234243209fbb8f11405372284d634728faf47eafd5799cefb932c06c7b3a54",
+        "bytes": 96439435
+      },
+      "validation.tsv": {
+        "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/validation.tsv",
+        "sha256": "63931ff45b7d95d60480bdcd466d69894fc02a0ec975cab8d0955e9b8cceb922",
+        "bytes": 1912947
+      }
+    },
+    "annotation": "Automatically mined Wikipedia edits, not human correctness labels"
+  }
+}

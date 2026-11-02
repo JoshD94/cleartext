@@ -3,6 +3,7 @@ import re
 from lemminflect import getInflection
 from .features import nlp
 from .lexical import NEG,MODAL
+from .protected_literals import literal_spans
 # Authored prototype inventory, not mined from PPDB or a trained phrase generator.
 PHRASES=[
  ('in the event that','if'),('despite the fact that','although'),
@@ -58,8 +59,10 @@ def structural(text):
 def phrase_rewrite(text,complexity):
     matches=[]
     doc=nlp()(text)
+    code=literal_spans(text)
     for source,target in PHRASES:
         for m in re.finditer(r'(?<!\w)'+re.escape(source)+r'(?!\w)',text,re.I):
+            if any(m.start()<span.end and m.end()>span.start for span in code):continue
             if any(m.start()<e.end_char and m.end()>e.start_char for e in doc.ents):continue
             old=complexity(source);new=complexity(target)
             matches.append({'start':m.start(),'end':m.end(),'source':m.group(),'replacement':initial(target) if m.group()[0].isupper() else target,

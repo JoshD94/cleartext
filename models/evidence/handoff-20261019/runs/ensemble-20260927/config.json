@@ -1,0 +1,20 @@
+{
+  "semcor_params": {
+    "alpha": 1.0,
+    "shrink": 0.0,
+    "nb": 3.0,
+    "vector": 8.0
+  },
+  "semcor_temperature": 2.0,
+  "gloss_temperature": 0.2,
+  "sense_weights": [
+    1.0,
+    0.0
+  ],
+  "sense_evidence": 3.0,
+  "threshold": 0.22500000000000003,
+  "min_gain": 0.02,
+  "difficulty_cutoff": 0.3,
+  "stacker_C": 3.0,
+  "error_cost": 0.01
+}

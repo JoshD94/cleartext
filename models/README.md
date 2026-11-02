@@ -6,6 +6,8 @@ The current default is v7. The stronger 52-feature ranker and six inspection blo
 
 [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) indexes the results and limits of each experiment. [docs/cleartext-steps.html](docs/cleartext-steps.html) and [docs/report.txt](docs/report.txt) describe the earlier pipeline; use the experiment documents for subsequent changes.
 
+[docs/HANDOFF-20261019.md](docs/HANDOFF-20261019.md) covers the merge handoff and remaining Google Doc tasks. [evidence/handoff-20261019/](evidence/handoff-20261019/) preserves historical settings, aggregate results and artifact fingerprints; raw datasets and model binaries remain local.
+
 ## Current stack
 
 1. Parse the input with spaCy. Optional structure and phrase rules run before word selection.
@@ -110,6 +112,16 @@ Open `http://127.0.0.1:8770`. The strictness control sets the minimum acceptance
 
 ## Results and evaluation limits
 
+The [combined-pipeline comparison](docs/PIPELINE_BENCHMARK.md) connects the sentence
+generator and word models to the teammate evaluator, with separate stage
+ablations, changed-output metrics and precision/coverage policies.
+
+The [October 28 improvement sprint](docs/IMPROVEMENT_SPRINT_20261028.md) adds code
+preservation, bounded grammar follow-up and explicit benchmark completeness checks.
+Its optional sentence selector recovers one extra split on 128 current-model
+development inputs while retaining all baseline edits. The report separates these
+measured changes from experimental candidate repairs and remaining limits.
+
 - TSAR 2022 test, 373 sentences: 158 correct replacements from 219 edits (72.1%). v5 without BERT: 152 of 238 (63.9%). The dictionary baseline gets 85 of 196 (43.4%).
 - Word meaning, SemCor test: 67.6% (61.8% without BERT). Fit, SWORDS cross-validated AUC: 0.808 (0.779 without BERT).
 - Hard-word detection, CWI 2018 test: F1 0.78. The first detector got 0.38.
@@ -134,3 +146,33 @@ uvx ruff check --select F,E9 .
 Tests exercise candidate provenance, exact target offsets, complete-span pooling, grammar fallback, protected term occurrences, output rollback and disabled novel gates. They do not substitute for independent sentence-level judgments.
 
 Experiment caches require matching source and input fingerprints to resume. Code cleanup changes source hashes even when behavior is unchanged. Keep completed outputs with their saved source snapshots; use a new cache directory for experiments under changed source.
+
+## Learned sentence structure experiments
+
+[Input grammar correction](docs/GRAMMAR_PREPROCESSING.md) is an optional local,
+rule-based stage before simplification. It fixes selected article, contraction
+and verb-agreement errors while recording each correction. Its first development
+trial corrected five of 96 inputs and left the number of shorter splits unchanged.
+
+[The input/output quality pass](docs/STRUCTURE_QUALITY.md) separates inherited
+grammar problems from meaning lost during splitting. It shares discourse checks
+between training and generation and tests a narrowly screened training pool on
+the complete existing development panels.
+
+The separate [structural experiment suite](docs/STRUCTURE_EXPERIMENTS.md) trains a
+rewrite ranker, a CRF edit tagger and a T5-small encoder–decoder on bounded public
+sentence-splitting pairs. It compares raw and filtered outputs with the existing
+rules and identity on held-out data. It requires the optional dependencies in
+`requirements-structure.txt` and leaves the demo defaults unchanged.
+
+[Continued T5 training](docs/STRUCTURE_CONTINUATION.md) adds filtered published
+DeSSE annotations and additional WikiSplit edits, preserves saved weights and
+compares the continuation with its initializer under identical checks.
+
+[Checked candidate search](docs/STRUCTURE_SEARCH.md) reuses that checkpoint and
+tries four model candidates with additional sentence-boundary checks and bounded
+comma repairs. It is an opt-in experiment with a standalone prediction command.
+
+The [learned meaning experiment](docs/STRUCTURE_MEANING.md) compares both NLI
+directions and trains a small paraphrase classifier on public PAWS labels.
+An optional prediction flag rolls back rejected rewrites to the original text.

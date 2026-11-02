@@ -1,0 +1,69 @@
+{
+  "scope": "All BenchLS is reused development. No labels used for sense scoring or term detection.",
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7",
+    "runs/ensemble-context-similarity-20261002/config.json": "a5d0f72a4a6e8b7e2c38b30d1445c54c851d9488e74c8e4cdac84ebf11f74cb1",
+    "runs/ensemble-20260927/sense_model.pkl": "4816f89a9b55ef975402d2bfb3b40920e7bd2d4173b5a93a520ca2704fd5c7f5",
+    "runs/ensemble-v7-20260928/bert_senses.npz": "892b6bdbf6f94820863819f28dbd69f731f844d3202de51ad8f60afd9056c7e9"
+  },
+  "source_sha256": {
+    "scripts/experiments/cache_detail_senses.py": "7a2395c08f7a35b3e3613334203e848baf42ec4346bcfed05168fae5b83153bc",
+    "src/cleartext/detail_preservation.py": "61550d5df3d07f0c550f677b0eb5a7deed73e48452ed4b3beb8c26430010ee8c",
+    "src/cleartext/technical_terms.py": "483d8b746edcd6f07a810232dbcd98cefa8fa257b628c1c4dbb9d9c1d6d2575b",
+    "src/cleartext/ensemble.py": "e3b3ec900bc2950d95aeeea8e988d1bf5cc5df915b59dbde7a29b6939fbd8f03",
+    "src/cleartext/ensemble_pipeline.py": "ac4ed69113d2cd987bf955ebe9fb3a7be991b97501995b7e882a16e8fededbd2",
+    "src/cleartext/context_window.py": "a30d6f6178d18b28d2b5d79dc039a85ef6a36bf630fbaf520ad84949aeae16f8",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/generation.py": "710852d038860c35fddae29f0e68f6d2f761877deb9537acf33170e8f3d27882",
+    "src/cleartext/lexical.py": "66cf816e96d369b68de74c0d038f6e0d77d32c724fb0ea69b1fc352bab73afe8",
+    "src/cleartext/features.py": "062f03fad04b478ec5fd0b43a5bd1313e516bbc70c314f287b902ddf40b1baf9"
+  },
+  "config": {
+    "semcor_params": {
+      "alpha": 1.0,
+      "shrink": 0.0,
+      "nb": 3.0,
+      "vector": 8.0
+    },
+    "semcor_temperature": 2.0,
+    "gloss_temperature": 0.2,
+    "sense_weights": [
+      1.0,
+      0.0
+    ],
+    "sense_evidence": 3.0,
+    "sense_model": "runs/ensemble-20260927/sense_model.pkl",
+    "checker": "runs/ensemble-v7-20260928/checker.pkl",
+    "generator": "expanded",
+    "difficulty_cutoff": 0.3,
+    "error_cost": 0.05,
+    "tiered": false,
+    "stacker_C": 0.1,
+    "decision": "runs/ensemble-context-similarity-20261002/decision.pkl",
+    "decision_threshold": 0.45,
+    "detector": "runs/ensemble-v5-20260927/detector.pkl",
+    "decision_features": "prompted_similarity",
+    "noun_threshold": 0.8,
+    "hardness_alpha": 0.5,
+    "sentence_model": "runs/ensemble-v5-20260927/sentence_model.pkl",
+    "max_word_edits": 1,
+    "meaning_floor": 0.1,
+    "bert_sense": {
+      "vectors": "runs/ensemble-v7-20260928/bert_senses.npz",
+      "weight": 0.2,
+      "temperature": 0.02,
+      "target_window": true
+    },
+    "bert_fit": true
+  },
+  "meaning_parity_tolerance": 1e-05,
+  "tsar_gold_used": false,
+  "cases": 929,
+  "protected_targets": 0,
+  "proposal_spans": 2522,
+  "meaning_parity_max_error": 4.938952974375965e-08,
+  "records_sha256": "2ac5048ee7b82f16db1d4b105de1d536cf888bba7c05def92abfa2c3150bf717",
+  "elapsed_seconds": 67.6049918649951
+}

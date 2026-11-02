@@ -1,0 +1,38 @@
+{
+  "v5 features": {
+    "dev_net": 150.0,
+    "dev_nets": [
+      150,
+      147,
+      153
+    ],
+    "dev_log_loss": 0.26494908701532266,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 187,
+      "correct": 119,
+      "wrong": 68,
+      "net": 51,
+      "precision": 0.636,
+      "n": 373
+    }
+  },
+  "+ target part of speech": {
+    "dev_net": 162.66666666666666,
+    "dev_nets": [
+      170,
+      154,
+      164
+    ],
+    "dev_log_loss": 0.26266471495907356,
+    "threshold": 0.4,
+    "tsar": {
+      "edits": 239,
+      "correct": 152,
+      "wrong": 87,
+      "net": 65,
+      "precision": 0.636,
+      "n": 373
+    }
+  }
+}

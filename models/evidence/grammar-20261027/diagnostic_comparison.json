@@ -1,0 +1,30 @@
+{
+  "panel": "Authored diagnostic expectations, not accuracy or held-out quality labels",
+  "expected_n": 14,
+  "grammar_stage_matches": 14,
+  "baseline_full_pipeline_matches": 4,
+  "preprocessed_full_pipeline_matches": 13,
+  "full_pipeline_mismatch_ids": [
+    "authored-13"
+  ],
+  "remaining_issue": "Both splitter conditions remove backticks in authored-13; grammar preprocessing itself leaves inline code unchanged.",
+  "validation": {
+    "focused_pytest_passed": 157,
+    "ruff_F_E9": "passed",
+    "defaults": "No correction unless grammar_corrector supplied; running demo unchanged"
+  },
+  "host": "Yoga",
+  "session": "cleartext-grammar-20261027",
+  "memory_max_gib": 3,
+  "download": {
+    "url": "https://languagetool.org/download/LanguageTool-6.6.zip",
+    "observed_sha256": "53600506b399bb5ffe1e4c8dec794fd378212f14aaf38ccef9b6f89314d11631"
+  },
+  "initial_run": "Initial v1 result preserved locally. v2 allows only a/an edits inside DATE/TIME spans; other detected entity spans remain protected. Final diagnostic collection uses authored fixtures; two public illustrative sentences in the first run are local only.",
+  "source_receipts": {
+    "models/src/cleartext/grammar_preprocessing.py": "f0d9b45ddf7ff38ae2c87bdad8a9f8467ec9057ef657c4f6e8102c85e7a8d3a6",
+    "models/src/cleartext/grammar_experiment.py": "adaeee3938e359c13d09f7a772b0833dca85e308ea7c5a0171a20b32889db054",
+    "models/src/cleartext/ensemble_pipeline.py": "4e86b9cbacf8ce48b1568fa51527ec007e2fcb0113e19c97b93daffa4a7f3887",
+    "models/src/cleartext/structure/seq2seq.py": "73d699c69b2196249fe14bd79e17c17a9be729cfe260aae17fcf1f2d441b8902"
+  }
+}

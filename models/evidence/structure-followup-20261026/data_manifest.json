@@ -1,0 +1,28 @@
+{
+  "dataset": "WikiSplit",
+  "commit": "80f5bddf42d1a68201b7b107ee4b8d86d82e9fde",
+  "files": {
+    "validation.tsv": {
+      "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/validation.tsv",
+      "sha256": "63931ff45b7d95d60480bdcd466d69894fc02a0ec975cab8d0955e9b8cceb922",
+      "bytes": 1912947
+    }
+  },
+  "previous_data_sha256": "deaed2ed37c7311c8a53d178fad43213409553c94a72871a60504ccfbf024443",
+  "counts": {
+    "test": {
+      "scanned": 5000,
+      "eligible": 4371,
+      "filtered": 626,
+      "within_split_duplicate": 3,
+      "selected": 256
+    }
+  },
+  "split_policy": "Reuse previous train/dev unchanged; fresh evaluation on official validation.tsv after excluding all previous selected source/full-target keys",
+  "selection": "Same fixed eligibility filters and SHA256 seed 4701 as pilot",
+  "limitations": [
+    "No near-duplicate or pretraining-overlap exclusion",
+    "Automatically mined references are noisy",
+    "Previous test is development evidence for the revised clause check"
+  ]
+}

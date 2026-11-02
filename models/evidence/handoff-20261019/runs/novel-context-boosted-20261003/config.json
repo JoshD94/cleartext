@@ -1,0 +1,20 @@
+{
+  "feature_names": [
+    "context_vector",
+    "argument_fit",
+    "bigram",
+    "bert_slot",
+    "bert_slot_relative",
+    "vector_source_candidate",
+    "vector_candidate_missing"
+  ],
+  "context_threshold": null,
+  "candidate_limit": 3,
+  "base_run": "runs/ensemble-building-blocks-20261002",
+  "antonym_support_limit": 0.1,
+  "policy": "Fallback only after WordNet abstains; positive complexity gain, dictionary and mechanical checks required.",
+  "experimental": true,
+  "semantic_certified": false,
+  "estimator": "hist_gradient_boosting",
+  "deployment_enabled": false
+}

@@ -1,0 +1,728 @@
+{
+  "scope": "Automatic development diagnostics, no full-pipeline accuracy estimate",
+  "n_inputs": 6,
+  "scored_matrix_rows": 60,
+  "unique_scored_text_pairs": 27,
+  "systems": {
+    "before_original": {
+      "n": 6,
+      "changed": 0,
+      "readability.avg_sentence_length": {
+        "mean": 17.666666666666668,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 7.078273707143676,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 20.713911822038757,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -21.97945820433434,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 25.8656862745098,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 19.560404290903765,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 4.333333333333333,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 1.0000000695387523,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.9901454846064249,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9901454846064249,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.9901454846064249,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 1.0,
+        "n": 6
+      }
+    },
+    "before_rule_based": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 16.833333333333332,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 6.428914402018118,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 16.57351421855292,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": 6.220835913312707,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 19.803623437679168,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 16.42406457241575,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.0,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9155560235182444,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.9933779935042063,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9964411556720734,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.9949095745881399,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.6287096129978034,
+        "n": 6
+      }
+    },
+    "before_lexical_only": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 17.666666666666668,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 6.916981997477354,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 19.695483602797847,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -14.67784571723424,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 24.72777204449031,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 19.055671633295777,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.8333333333333335,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9904623230298361,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.6909851565336188,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9628747701644897,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.8269299633490542,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.89849634209158,
+        "n": 6
+      }
+    },
+    "after_v7_original": {
+      "n": 6,
+      "changed": 0,
+      "readability.avg_sentence_length": {
+        "mean": 17.666666666666668,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 7.078273707143676,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 20.713911822038757,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -21.97945820433434,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 25.8656862745098,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 19.560404290903765,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 4.333333333333333,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 1.0000000695387523,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.9901454846064249,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9901454846064249,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.9901454846064249,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 1.0,
+        "n": 6
+      }
+    },
+    "after_v7_rule_based": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 16.833333333333332,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 6.428914402018118,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 16.57351421855292,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": 6.220835913312707,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 19.803623437679168,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 16.42406457241575,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.0,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9155560235182444,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.9933779935042063,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9964411556720734,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.9949095745881399,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.6287096129978034,
+        "n": 6
+      }
+    },
+    "after_v7_lexical_only": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 17.666666666666668,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 6.916981997477354,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 19.695483602797847,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -14.67784571723424,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 24.72777204449031,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 19.055671633295777,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.8333333333333335,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9904623230298361,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.6909851565336188,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9628747701644897,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.8269299633490542,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.89849634209158,
+        "n": 6
+      }
+    },
+    "after_v7_full_pipeline": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 15.333333333333334,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 7.124857384474257,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 19.686212876963655,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -18.76728328173372,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 24.70952872377021,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 18.2190593109535,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.8333333333333335,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9870851437250773,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.7265815148130059,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9731069405873617,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.8498442277001838,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.8303471377192123,
+        "n": 6
+      }
+    },
+    "after_v7_full_rules": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 17.0,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 7.0863583591331265,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 20.169448744410047,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -19.26333591331267,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 25.200756793945647,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 19.055671633295777,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.8333333333333335,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9889327685038248,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.7263585537051162,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9732345640659332,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.8497965588855246,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.838429102881156,
+        "n": 6
+      }
+    },
+    "after_context_full_pipeline": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 15.333333333333334,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 7.1373573844742575,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 20.133600791193672,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -21.974827141382843,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 24.66824905400757,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 18.21020911006141,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 3.8333333333333335,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9772654076417288,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.9865768353144327,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.9525591433048248,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.9695679893096288,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.8303471377192125,
+        "n": 6
+      }
+    },
+    "after_context_full_precision": {
+      "n": 6,
+      "changed": 6,
+      "readability.avg_sentence_length": {
+        "mean": 15.333333333333334,
+        "n": 6
+      },
+      "readability.avg_word_length": {
+        "mean": 7.226246273363146,
+        "n": 6
+      },
+      "readability.flesch_kincaid_grade": {
+        "mean": 20.395823013415896,
+        "n": 6
+      },
+      "readability.flesch_reading_ease": {
+        "mean": -23.85482714138284,
+        "n": 6
+      },
+      "readability.gunning_fog": {
+        "mean": 25.112693498452014,
+        "n": 6
+      },
+      "readability.smog_index": {
+        "mean": 18.37356782738796,
+        "n": 6
+      },
+      "readability.technical_term_count": {
+        "mean": 4.0,
+        "n": 6
+      },
+      "preservation.dates_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.embedding_similarity": {
+        "mean": 0.9829587638378143,
+        "n": 6
+      },
+      "preservation.entities_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.negations_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.nli_backward": {
+        "mean": 0.9879879554112753,
+        "n": 6
+      },
+      "preservation.nli_forward": {
+        "mean": 0.952957441409429,
+        "n": 6
+      },
+      "preservation.nli_mean": {
+        "mean": 0.9704726984103521,
+        "n": 6
+      },
+      "preservation.numbers_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tenses_preserved": {
+        "mean": 1.0,
+        "n": 6
+      },
+      "preservation.tfidf_cosine_similarity": {
+        "mean": 0.8303471377192125,
+        "n": 6
+      }
+    }
+  }
+}

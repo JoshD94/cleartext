@@ -1,0 +1,27 @@
+{
+  "selected_step": 441,
+  "steps_completed": 441,
+  "training_examples_seen": 3523,
+  "elapsed_seconds": 945.8231661999598,
+  "selection_score_before": 48.78194731598511,
+  "selection_score_after": 48.80797325260915,
+  "selection_delta": 0.026025936624044732,
+  "weights_sha256": "3de186eee031e8812b019a9040775884798d01baabb072728bd03ac89f1503ac",
+  "saved_weights_reproduced_n": 96,
+  "benchmark_examples": 197,
+  "benchmark_inputs_removed": 0,
+  "quarantined_training_pairs": 95,
+  "retained_training_pairs": 3523,
+  "new_warning_candidate_inputs": 0,
+  "known_meaning_loss_outputs_blocked_by_guard": 3,
+  "posttraining_changed_outputs_inspected": 4,
+  "qualitative_change_categories": {
+    "lost_useful_split": 1,
+    "avoided_bad_fragment": 1,
+    "stopped_minor_nonstructural_edit": 1,
+    "recovered_split_with_grammar_repair": 1
+  },
+  "decision": "Mixed development result. Proxy selects441by0.026points; keep trained checkpoint experimental, do not promote it over old checkpoint or into demo. Shared guard repair independently blocks3known meaning-loss cases. No broad quality claim.",
+  "tests": "229 distinct focused tests passed across relevant suites;13quality tests after final filter revision.",
+  "limitations": "Development selection and comparison, no fresh test. Small mixed changes. Overlap and rule checks do not establish general quality. Screening is confounded with additional training."
+}

@@ -1,0 +1,77 @@
+{
+  "inf": {
+    "dev_nets": [
+      150,
+      133,
+      146
+    ],
+    "tsar": {
+      "edits": 187,
+      "correct": 118,
+      "wrong": 69,
+      "net": 49,
+      "precision": 0.631,
+      "n": 373
+    }
+  },
+  "0.2": {
+    "dev_nets": [
+      147,
+      129,
+      142
+    ],
+    "tsar": {
+      "edits": 186,
+      "correct": 118,
+      "wrong": 68,
+      "net": 50,
+      "precision": 0.634,
+      "n": 373
+    }
+  },
+  "0.1": {
+    "dev_nets": [
+      141,
+      125,
+      137
+    ],
+    "tsar": {
+      "edits": 184,
+      "correct": 118,
+      "wrong": 66,
+      "net": 52,
+      "precision": 0.641,
+      "n": 373
+    }
+  },
+  "0.05": {
+    "dev_nets": [
+      136,
+      118,
+      135
+    ],
+    "tsar": {
+      "edits": 179,
+      "correct": 115,
+      "wrong": 64,
+      "net": 51,
+      "precision": 0.642,
+      "n": 373
+    }
+  },
+  "0.0": {
+    "dev_nets": [
+      107,
+      100,
+      104
+    ],
+    "tsar": {
+      "edits": 160,
+      "correct": 98,
+      "wrong": 62,
+      "net": 36,
+      "precision": 0.613,
+      "n": 373
+    }
+  }
+}

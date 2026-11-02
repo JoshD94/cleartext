@@ -1,0 +1,41 @@
+{
+  "model": "/home/joshuadirga/.local/state/cleartext/structure-expanded-20261026/run/seq2seq",
+  "revision": null,
+  "initial_checkpoint": {
+    "path": "/home/joshuadirga/.local/state/cleartext/structure-expanded-20261026/run/seq2seq",
+    "files_sha256": {
+      "config.json": "b3bd1865a130794492da2b0c09ff6fe1f24e0abf40fab58e66ffc0544687e69f",
+      "generation_config.json": "8145d7eecabff8e16a9876617a6d52728e9b8fbe24c426e6bf9ebbd6bfb87737",
+      "model.safetensors": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+      "selection.json": "78ead43517550327551310a1c1acba1cfa1d0b8e19d588b7ecfde81cd953d2fb",
+      "special_tokens_map.json": "7a1985a994c41886db38c719d2a3d2f40606663cc19d7c5d6a85d349320e06d2",
+      "spiece.model": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86",
+      "tokenizer.json": "5a7876b84ab62cc0c51bef27f984d0ef39129b87315212495a39b7ce26c56222",
+      "tokenizer_config.json": "5a2f7eae3977ceae2a10f3231be54bee4734f1a1265fcf1c6633bc5b3c18a8a7"
+    }
+  },
+  "optimizer_state": "New optimizer; this is weight initialization, not optimizer/step resumption",
+  "device": "cpu",
+  "seed": 4701,
+  "max_steps": 906,
+  "batch_size": 2,
+  "optimizer": "adafactor",
+  "learning_rate": 0.0001,
+  "warmup_steps": 90,
+  "accumulation_steps": 4,
+  "effective_batch_size": 8,
+  "max_source_tokens": 192,
+  "max_target_tokens": 256,
+  "training_pairs": 3618,
+  "training_domains": {
+    "student_essays": 1516,
+    "general": 2102
+  },
+  "length_filtered_training_pairs": 0,
+  "dev_pairs": 101,
+  "selection": "Highest decoded development score, then lowest dev loss; step zero included; test not used",
+  "validation_interval": 453,
+  "cpu_threads": 2,
+  "prefix": "split sentence: ",
+  "trainable_parameters": 60506624
+}

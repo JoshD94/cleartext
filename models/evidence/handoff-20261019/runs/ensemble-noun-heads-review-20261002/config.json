@@ -1,0 +1,39 @@
+{
+  "semcor_params": {
+    "alpha": 1.0,
+    "shrink": 0.0,
+    "nb": 3.0,
+    "vector": 8.0
+  },
+  "semcor_temperature": 2.0,
+  "gloss_temperature": 0.2,
+  "sense_weights": [
+    1.0,
+    0.0
+  ],
+  "sense_evidence": 3.0,
+  "sense_model": "runs/ensemble-20260927/sense_model.pkl",
+  "checker": "runs/ensemble-v7-20260928/checker.pkl",
+  "generator": "expanded",
+  "difficulty_cutoff": 0.3,
+  "error_cost": 0.05,
+  "tiered": false,
+  "stacker_C": 0.1,
+  "decision": "runs/ensemble-noun-heads-review-20261002/decision.pkl",
+  "decision_threshold": 0.45,
+  "detector": "runs/ensemble-v5-20260927/detector.pkl",
+  "decision_features": "relations",
+  "noun_threshold": 0.8,
+  "hardness_alpha": 0.5,
+  "sentence_model": "runs/ensemble-v5-20260927/sentence_model.pkl",
+  "max_word_edits": 1,
+  "meaning_floor": 0.1,
+  "bert_sense": {
+    "vectors": "runs/ensemble-v7-20260928/bert_senses.npz",
+    "weight": 0.2,
+    "temperature": 0.02,
+    "target_window": true
+  },
+  "bert_fit": true,
+  "noun_phrase_heads": true
+}

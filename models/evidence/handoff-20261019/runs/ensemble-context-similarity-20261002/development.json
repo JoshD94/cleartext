@@ -1,0 +1,114 @@
+{
+  "scope": "Reused BenchLS development, fixed target-word folds/threshold/floor. No TSAR or new labels.",
+  "repeats": [
+    {
+      "seed": 0,
+      "prompted": {
+        "edits": 638,
+        "correct": 506,
+        "wrong": 132,
+        "net": 374,
+        "precision": 0.793,
+        "n": 929,
+        "coverage": 0.6867599569429494,
+        "log_loss": 0.2220023387021795
+      },
+      "similarity": {
+        "edits": 642,
+        "correct": 514,
+        "wrong": 128,
+        "net": 386,
+        "precision": 0.801,
+        "n": 929,
+        "coverage": 0.6910656620021528,
+        "log_loss": 0.21387256043853822
+      },
+      "net_delta": 12,
+      "log_loss_delta": -0.00812977826364128
+    },
+    {
+      "seed": 1,
+      "prompted": {
+        "edits": 647,
+        "correct": 510,
+        "wrong": 137,
+        "net": 373,
+        "precision": 0.788,
+        "n": 929,
+        "coverage": 0.6964477933261571,
+        "log_loss": 0.22207810323087498
+      },
+      "similarity": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6856835306781486,
+        "log_loss": 0.2136336165336077
+      },
+      "net_delta": 8,
+      "log_loss_delta": -0.008444486697267273
+    },
+    {
+      "seed": 2,
+      "prompted": {
+        "edits": 653,
+        "correct": 514,
+        "wrong": 139,
+        "net": 375,
+        "precision": 0.787,
+        "n": 929,
+        "coverage": 0.7029063509149623,
+        "log_loss": 0.22122567827000036
+      },
+      "similarity": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.796,
+        "n": 929,
+        "coverage": 0.6953713670613563,
+        "log_loss": 0.21326099188900266
+      },
+      "net_delta": 7,
+      "log_loss_delta": -0.007964686380997704
+    }
+  ],
+  "mean_net_delta": 9.0,
+  "mean_log_loss_delta": -0.008179650447302086,
+  "noise_bar_passed": true,
+  "noise_bar": "net +5 or log-loss -0.001",
+  "feature_shapes": {
+    "prompted": [
+      14617,
+      51
+    ],
+    "similarity": [
+      14617,
+      52
+    ]
+  },
+  "threshold": 0.45,
+  "meaning_floor": 0.1,
+  "default_changed": false,
+  "saved_run": "runs/ensemble-context-similarity-20261002",
+  "source_sha256": {
+    "scripts/experiments/refine_context_similarity.py": "046db871c19ed62cdeb7cde601b8f288e8081b14656c0bca0341aa078f10cb99",
+    "scripts/experiments/refine_relations.py": "bacee1bced40429090dc28660e0d152504527881730993f72aa18d9d68eae875",
+    "src/cleartext/context_similarity.py": "7cb40625caec09c7cf53575c2e34bba3bd5f2cc337571f24db5a7cafb7cb5691",
+    "src/cleartext/prompted_relations.py": "52aa1da10c306cd78de596d7ac59d43ece39e25ed9f8306db3cb19263cb659f3",
+    "src/cleartext/relations.py": "c6e776b553f06cf895a8013a6a6f1e35cf94b30eca36a5368b15cbda98ea8e8c",
+    "src/cleartext/refine.py": "4bc710d3a93c4d4e30d9e20bbfe3f8976b6ec79c05524d3d0e995a8e51990216",
+    "src/cleartext/bert_candidates.py": "c4e8fd633279a2fcddae26af55fac91aba0a049ed10ba906485a0a3ff2e7b2da"
+  },
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7",
+    "outputs/context-similarity-cache-review-20261002/records.jsonl": "6c4412716c6d05ea326de2f6f4b1b28ccde972857a2957ff3312cf44402b99fe",
+    "outputs/context-similarity-cache-review-20261002/summary.json": "967982acbe1ae6e1aaf8ba787855a2f75b342b9e22e773362eb5be8da2665ca8"
+  }
+}

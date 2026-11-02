@@ -1,0 +1,7 @@
+{
+  "initial_sha256": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+  "manifest_sha256": "a5648676619db42062552661273287f10651abfdabad7909e7fe86cd96e09547",
+  "max_steps": 906,
+  "validation_interval": 453,
+  "protocol": "Two equal panels: aligned prior dev and compatible subset of input-sampled broad dev. Changed-reference scoring substitutes identity for non-splitting outputs. Copy-reference scoring uses actual outputs. Higher mean overlap wins; lower loss breaks ties."
+}

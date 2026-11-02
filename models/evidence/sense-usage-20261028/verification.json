@@ -1,0 +1,26 @@
+{
+  "host": "yoga",
+  "tmux": "cleartext-sense-usage-r2-20261028",
+  "memory_cap_bytes": 2147483648,
+  "cpu_quota_percent": 200,
+  "available_memory_min_bytes": 5957148672,
+  "successful_exit": 0,
+  "source_matches_fit_snapshot": true,
+  "prefix_52_columns_exact": true,
+  "baseline_fold_probability_max_abs_delta": {
+    "0": 1.6631140908884845e-13,
+    "1": 5.149769499723789e-13,
+    "2": 2.6645352591003757e-14
+  },
+  "candidate_ceiling_counts_reproduced": true,
+  "tests_passed": 29,
+  "lint": "Ruff F,E9 passed",
+  "model_retained": false,
+  "native_verification": "Not run because the variant failed the development adoption bar.",
+  "failed_attempt": {
+    "directory": "development",
+    "manifest_sha256": "befbd0906cbdb6718c61405e0985119556c98543f286f8bd45afa0583f252818",
+    "stage": "Feature construction, before fitting",
+    "reason": "Literal target lemma check rejected WordNet morphological ambiguity for found/find and bound/bind."
+  }
+}

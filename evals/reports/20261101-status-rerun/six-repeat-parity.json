@@ -1,0 +1,74 @@
+{
+  "comparisons": 42,
+  "all_equal": true,
+  "same_output_metric_residuals": {
+    "readability.flesch_reading_ease": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "readability.flesch_kincaid_grade": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "readability.gunning_fog": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "readability.smog_index": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "readability.avg_sentence_length": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "readability.avg_word_length": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "readability.technical_term_count": {
+      "n": 42,
+      "max_abs_difference": 0
+    },
+    "preservation.tfidf_cosine_similarity": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.embedding_similarity": {
+      "n": 42,
+      "max_abs_difference": 2.980232238769531e-07
+    },
+    "preservation.nli_forward": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.nli_backward": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.nli_mean": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.numbers_preserved": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.dates_preserved": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.entities_preserved": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.negations_preserved": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    },
+    "preservation.tenses_preserved": {
+      "n": 42,
+      "max_abs_difference": 0.0
+    }
+  }
+}

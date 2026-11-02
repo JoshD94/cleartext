@@ -1,0 +1,58 @@
+[
+  {
+    "id": "two_attributions_preserved",
+    "source": "Alice thinks that Bob works here and she hopes that Carol will join him.",
+    "candidate": "Alice thinks that Bob works here. She hopes that Carol will join him.",
+    "expected_equivalence": true,
+    "note": "Authored diagnostic expectation, not a human rating or training example. Both reporting predicates and their complements remain."
+  },
+  {
+    "id": "two_attributions_with_but",
+    "source": "Alice believes that Bob works here, but Carol says that Dave works elsewhere.",
+    "candidate": "Alice believes that Bob works here. But Carol says that Dave works elsewhere.",
+    "expected_equivalence": true,
+    "note": "Authored diagnostic expectation. Both speakers and their claims remain."
+  },
+  {
+    "id": "attribution_removed",
+    "source": "Alice thinks that Bob works here.",
+    "candidate": "Alice thinks. Bob works here.",
+    "expected_equivalence": false,
+    "note": "Authored diagnostic expectation. Belief becomes an asserted fact."
+  },
+  {
+    "id": "negated_complement_removed",
+    "source": "We do not realize that families are affected by the war.",
+    "candidate": "We do not realize. Families are affected by the war.",
+    "expected_equivalence": false,
+    "note": "Authored diagnostic expectation. The object of realize is detached."
+  },
+  {
+    "id": "safe_independent_clauses",
+    "source": "Alice reviewed the report and Bob checked the figures.",
+    "candidate": "Alice reviewed the report. Bob checked the figures.",
+    "expected_equivalence": true,
+    "note": "Authored diagnostic expectation. Ordinary independent coordination."
+  },
+  {
+    "id": "shared_passive",
+    "source": "The report was prepared and approved by Alice.",
+    "candidate": "The report was prepared by Alice. The report was approved by Alice.",
+    "expected_equivalence": true,
+    "note": "Authored diagnostic expectation. Shared auxiliary and actor are repeated."
+  },
+  {
+    "id": "roles_reversed",
+    "source": "Alice reviewed the report and Bob checked the figures.",
+    "candidate": "Bob reviewed the report. Alice checked the figures.",
+    "expected_equivalence": false,
+    "note": "Authored diagnostic expectation. The actors are swapped."
+  },
+  {
+    "id": "relative_clause_explicit_subject",
+    "source": "The server, which stores customer records, stopped responding.",
+    "candidate": "The server stores customer records. The server stopped responding.",
+    "expected_equivalence": true,
+    "note": "Authored diagnostic expectation. Both predicates keep the server as subject."
+  }
+]

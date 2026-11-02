@@ -1,0 +1,11 @@
+{
+  "input_sha256": {
+    "/home/joshuadirga/.local/state/cleartext/grammar-20261027/comparison-v2/outputs.json": "b85f2dfe3e562be1d445575c92b1c413de92e84113fd5843f4bf3fc979d48cc4",
+    "/home/joshuadirga/.local/state/cleartext/grammar-20261027/comparison-v2/diagnostics.json": "da0c895966851ce20f504c94f47e05d26e737eaeb12aa69fc563b803d3ddea95",
+    "/home/joshuadirga/.local/state/cleartext/eligibility-audit-20261028/all-candidates.json": "7d44d6acf6e220a9845bd70ee017d033950b33e9cbe5562c5c78fea25233a856"
+  },
+  "source_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/scripts/experiments/audit_literal_preservation.py": "3738c4f643ec867d9abd18d9af448f1f89eefb6748d217b915174c323db7a1ec",
+    "/home/joshuadirga/Documents/projects/cleartext/models/src/cleartext/protected_literals.py": "2a0b77c1f39bb95af1cda4c3712e127ec86cb06ac524cfe8dad305cf3eb86ed3"
+  }
+}

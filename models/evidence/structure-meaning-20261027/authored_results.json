@@ -1,0 +1,133 @@
+{
+  "purpose": "Authored agent diagnostic expectations only, not training labels or human evaluation",
+  "results": [
+    {
+      "id": "split",
+      "expected_equivalence": true,
+      "accepted": false,
+      "paraphrase_probability": 0.4947741840695608,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "passive",
+      "expected_equivalence": true,
+      "accepted": true,
+      "paraphrase_probability": 0.5638880178274163,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "relative",
+      "expected_equivalence": true,
+      "accepted": true,
+      "paraphrase_probability": 0.5633172591442089,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "conditional-kept",
+      "expected_equivalence": true,
+      "accepted": true,
+      "paraphrase_probability": 0.5628306039643853,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "attribution-kept",
+      "expected_equivalence": true,
+      "accepted": true,
+      "paraphrase_probability": 0.5638073646556938,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "modal-kept",
+      "expected_equivalence": true,
+      "accepted": true,
+      "paraphrase_probability": 0.56354081771079,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "negation-kept",
+      "expected_equivalence": true,
+      "accepted": true,
+      "paraphrase_probability": 0.5636657917056278,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "numbers-kept",
+      "expected_equivalence": true,
+      "accepted": false,
+      "paraphrase_probability": 0.4642290942503197,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "roles-swapped",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.0794960100366956,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "attribution-dropped",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.5031130676512169,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "negation-dropped",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.0749585754587572,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "modal-promoted",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.30715451076113476,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "numbers-swapped",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.4559835786233379,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "condition-dropped",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.5398014379006231,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "time-reversed",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.07642822425828974,
+      "threshold": 0.55,
+      "semantic_certified": false
+    },
+    {
+      "id": "doubt-promoted",
+      "expected_equivalence": false,
+      "accepted": false,
+      "paraphrase_probability": 0.30757794582406744,
+      "threshold": 0.55,
+      "semantic_certified": false
+    }
+  ]
+}

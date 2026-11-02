@@ -1,0 +1,48 @@
+{
+  "n": 24,
+  "metrics": {
+    "baseline": {
+      "technical": {
+        "n": 8,
+        "raw_changed": 7,
+        "filtered_changed": 1,
+        "tense_rejections": 2
+      },
+      "corporate": {
+        "n": 8,
+        "raw_changed": 4,
+        "filtered_changed": 0,
+        "tense_rejections": 0
+      },
+      "political": {
+        "n": 8,
+        "raw_changed": 5,
+        "filtered_changed": 0,
+        "tense_rejections": 1
+      }
+    },
+    "continued": {
+      "technical": {
+        "n": 8,
+        "raw_changed": 7,
+        "filtered_changed": 1,
+        "tense_rejections": 1
+      },
+      "corporate": {
+        "n": 8,
+        "raw_changed": 2,
+        "filtered_changed": 0,
+        "tense_rejections": 0
+      },
+      "political": {
+        "n": 8,
+        "raw_changed": 4,
+        "filtered_changed": 1,
+        "tense_rejections": 0
+      }
+    }
+  },
+  "label_status": "Unreviewed development inputs. Counts measure coverage, not quality. No human model ratings or reference text.",
+  "domain_test_predictions": 0,
+  "blind_variants": 26
+}

@@ -1,0 +1,38 @@
+{
+  "v2": {
+    "dev_net": 147.33333333333334,
+    "dev_nets": [
+      164,
+      132,
+      146
+    ],
+    "dev_log_loss": 0.2667389868643129,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 181,
+      "correct": 114,
+      "wrong": 67,
+      "net": 47,
+      "precision": 0.63,
+      "n": 373
+    }
+  },
+  "v5": {
+    "dev_net": 150.0,
+    "dev_nets": [
+      150,
+      147,
+      153
+    ],
+    "dev_log_loss": 0.26494908701532266,
+    "threshold": 0.45,
+    "tsar": {
+      "edits": 187,
+      "correct": 119,
+      "wrong": 68,
+      "net": 51,
+      "precision": 0.636,
+      "n": 373
+    }
+  }
+}

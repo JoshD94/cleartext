@@ -1,0 +1,26 @@
+{
+  "policy_sha256_before_test": "1660c72f6450a627b6b56409b0f42c00dd850fa6f56e39411a23edad7a869afa",
+  "baseline": {
+    "n": 373,
+    "edits": 219,
+    "correct": 158,
+    "precision": 0.7214611872146118,
+    "coverage": 0.5871313672922251,
+    "wilson95": [
+      0.6586626604854288,
+      0.7766243840050199
+    ]
+  },
+  "selected": {
+    "n": 373,
+    "edits": 63,
+    "correct": 55,
+    "precision": 0.873015873015873,
+    "coverage": 0.16890080428954424,
+    "wilson95": [
+      0.7689296552173035,
+      0.9342267514386327
+    ]
+  },
+  "scope": "Target-word-supplied lexical substitution. Listed matches are not sentence-level meaning/grammar labels. TSAR has been reused previously."
+}

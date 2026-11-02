@@ -1,0 +1,35 @@
+{
+  "host": "Yoga",
+  "memory_cap_gib": 4,
+  "threads_model": 4,
+  "cpu_quota_percent": 400,
+  "matrix_v7_initial_cpu_quota_percent": 300,
+  "change_utc": "2026-11-01T22:38:54.125812+00:00",
+  "reason": "Load15 6.32,6.5GBavailable during firstmatrixarm; use four available CPUcores without changing decoding or modelinputs. Persistent coordinator uses4cores for nextprocess.",
+  "monitor": "20secondMemAvailablechecks; stop own scope below2GiB",
+  "metric_cache_plan": "Score all complete 202-input configurations when the first native generation job exits; final scoring validates all ten configurations and reuses only these same-source, same-artifact fresh pairs.",
+  "score_warm_coordinator_replaced_utc": "2026-11-01T23:11:09.966998+00:00",
+  "score_warm_replacement_reason": "Old coordinator was still waiting with no native scorer or output. Replacement includes every already-complete configuration, reducing final score latency without another heavy slot.",
+  "scoring_threads_change": {
+    "utc": "2026-11-01T23:24:04.644970+00:00",
+    "from": 2,
+    "to": 4,
+    "cpu_quota_from": 200,
+    "cpu_quota_to": 400,
+    "reason": "Meaning scoring dominates remaining time; Yoga load15 below12 and more than6GBavailable. Retain completed same-machine metrics; no model, input, metric function or numeric threshold changed.",
+    "retained_pairs": 65,
+    "retained_cache_sha256": "8f6d6fdb7aea9cfbeb1f3e39800641670b1ad1d040f4034457f00fedcd6033eb",
+    "interrupted_attempt_exit": "143"
+  },
+  "strict_tail_scoring": {
+    "utc": "2026-11-01T23:45:24.867283+00:00",
+    "host": "Yoga",
+    "session": "cleartext-strict-tail-score-20261101",
+    "peak_ram_estimate_gib": 2,
+    "memory_cap_gib": 3,
+    "cpu_threads": 2,
+    "matrix": "five explicit inputs x contextual_precision; five pairs disjoint from every warm prediction",
+    "exit": 0,
+    "reason": "Compute remaining five unique metric pairs in otherwise free heavy slot. Final score validates all2020rows and549+5 fresh pairs; no historical caches."
+  }
+}

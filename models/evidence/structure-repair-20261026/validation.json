@@ -1,0 +1,27 @@
+{
+  "focused_pytest": {
+    "passed": 124,
+    "seconds": 10.17,
+    "files": [
+      "test_structure.py",
+      "test_structure_review.py",
+      "test_invariants.py",
+      "test_ensemble.py",
+      "test_technical_terms.py",
+      "test_preservation.py"
+    ]
+  },
+  "ruff": "Passed for structure modules and two changed structural test files",
+  "diff_check": "Passed",
+  "demo_api": {
+    "preview_cases_passed": 7,
+    "live_cases_passed": 7,
+    "exact_trace": true,
+    "preferred_backend": "rules"
+  },
+  "browser": "Live ranker example rendered the expected split and trace; own tab closed",
+  "bundle": "SHA256 and standalone CLI prediction passed; temporary extraction removed",
+  "local_checkpoint_continuation": "Tiny model performed a gradient step, saved reloadable new weights and preserved input checkpoint; no Hub lookup",
+  "project_t5_training_run": false,
+  "human_quality_improvement_established": false
+}

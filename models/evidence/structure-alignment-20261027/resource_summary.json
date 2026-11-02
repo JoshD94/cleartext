@@ -1,0 +1,11 @@
+{
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "tmux": "cleartext-alignment-20261027",
+  "memory_cap_gb": 4,
+  "cpu_threads": 2,
+  "resource_samples": 59,
+  "minimum_available_mb": 5258,
+  "maximum_15min_load": 6.19921875,
+  "training_peak_rss_kb": 1427440,
+  "training_elapsed_seconds": 2056.9855340770446
+}

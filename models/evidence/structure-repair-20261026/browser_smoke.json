@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "backend": "ranker",
+  "structure": true,
+  "source": "The server checks each request and sends a response to the client.",
+  "output": "The server checks each request. The server sends a response to the client.",
+  "displayed_trace": true,
+  "tab_closed": true
+}

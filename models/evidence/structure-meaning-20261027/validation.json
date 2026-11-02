@@ -1,0 +1,25 @@
+{
+  "tests": {
+    "passed": 177,
+    "elapsed_seconds": 16.05,
+    "command": "OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 models/.venv/bin/python -m pytest models/tests/test_structure.py models/tests/test_structure_expanded.py models/tests/test_structure_review.py models/tests/test_structure_search.py models/tests/test_structure_meaning.py models/tests/test_proposal_evidence.py models/tests/test_building_blocks.py models/tests/test_preservation.py models/tests/test_invariants.py -q"
+  },
+  "ruff": "0.17.2, F and E9 passed for changed Python files",
+  "whitespace": "git diff --check passed",
+  "real_cli_smoke": {
+    "exit": 0,
+    "model_candidates": 4,
+    "selected_origin": "meaning_rollback",
+    "meaning_accepted": false,
+    "returned_original": true,
+    "diagnostic": "This is a false rejection of an authored valid split, not a quality gain"
+  },
+  "original_t5_sha256": "43024edcf6d47e0019aaa8e90852007faf7485b95d7cd67f972569adbe141cec",
+  "continued_t5_sha256": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+  "checkpoints_unchanged": true,
+  "demo_http_status": 200,
+  "demo_defaults_changed": false,
+  "domain_test_predictions": 0,
+  "new_human_ratings": 0,
+  "agents_launched": 0
+}

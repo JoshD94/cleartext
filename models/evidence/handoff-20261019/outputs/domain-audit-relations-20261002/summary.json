@@ -1,0 +1,68 @@
+{
+  "notice": "Ungraded diagnostics, separate from train/dev/test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+  "overall": {
+    "sentences": 13,
+    "changed_sentences": 12,
+    "change_coverage": 0.9230769230769231,
+    "word_edits": 12,
+    "detected_targets": 24,
+    "scored_candidates": 349,
+    "latency_median_seconds": 2.9071848751045763,
+    "latency_max_seconds": 18.27608281094581,
+    "human_precision": null
+  },
+  "baselines": {
+    "dictionary": {
+      "sentences": 13,
+      "changed_sentences": 4,
+      "change_coverage": 0.3076923076923077,
+      "human_precision": null
+    },
+    "identity": {
+      "sentences": 13,
+      "changed_sentences": 0,
+      "change_coverage": 0.0,
+      "human_precision": null
+    }
+  },
+  "by_domain": {
+    "computer_science": {
+      "sentences": 4,
+      "changed_sentences": 4,
+      "change_coverage": 1.0,
+      "word_edits": 4,
+      "detected_targets": 7,
+      "scored_candidates": 46,
+      "latency_median_seconds": 1.9994345185696147,
+      "latency_max_seconds": 18.27608281094581,
+      "human_precision": null
+    },
+    "corporate_communication": {
+      "sentences": 5,
+      "changed_sentences": 4,
+      "change_coverage": 0.8,
+      "word_edits": 4,
+      "detected_targets": 8,
+      "scored_candidates": 184,
+      "latency_median_seconds": 2.9071848751045763,
+      "latency_max_seconds": 16.614592349971645,
+      "human_precision": null
+    },
+    "political_science": {
+      "sentences": 4,
+      "changed_sentences": 4,
+      "change_coverage": 1.0,
+      "word_edits": 4,
+      "detected_targets": 9,
+      "scored_candidates": 119,
+      "latency_median_seconds": 3.712728173006326,
+      "latency_max_seconds": 6.726500217919238,
+      "human_precision": null
+    }
+  },
+  "source_kinds": [
+    "authored_diagnostic",
+    "owner_example"
+  ],
+  "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+}
