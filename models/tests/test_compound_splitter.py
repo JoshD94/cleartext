@@ -69,6 +69,8 @@ def test_actual_parser_splits_and_retains_source_details(splitter, source, expec
     "The gateway uses Diffie-Hellman keys, and the client stores QUIC packets.",
     "The gateway uses Diffie-Hellman keys, and the client stores each response.",
     "The server checks requests but sends responses.",
+    # Known parser failure: the main predicate is mistaken for a noun phrase.
+    "The server, which stores records, checks requests, and the client displays results.",
     "In 2025, Alice left and Bob stayed.",
     'Alice said "Bob left and Carol stayed."',
     "The server checks `a and b` and sends the response.",
@@ -98,7 +100,10 @@ def test_rollback_when_final_checks_fail(splitter, monkeypatch):
 
     monkeypatch.setattr(splitter, "validate", reject)
     source = "The store closed early, and the workers went home."
-    assert splitter.predict(source)["output"] == source
+    result = splitter.predict(source)
+    assert result["output"] == source
+    assert result["accepted_count"] == 0
+    assert all(not d["accepted"] for d in result["boundaries"])
 
 
 def test_import_and_predict_do_not_load_generative_libraries(splitter):
@@ -127,3 +132,105 @@ def test_eval_variants_keep_old_ladder_and_use_local_splitter(monkeypatch):
     for name in model_adapter.COMPOUND_SYSTEMS:
         assert runner.SYSTEMS[name](text) == expected
     assert model_adapter._ABLATION_KWARGS == original_toggles
+
+
+@pytest.mark.parametrize("source,expected", [
+    ("Alice, who wrote the report, checked the figures, and Bob signed the document.",
+     "Alice, who wrote the report, checked the figures. Bob signed the document."),
+    ("Alice checked the report, and the analyst who wrote it reviewed the figures.",
+     "Alice checked the report. The analyst who wrote it reviewed the figures."),
+    ("Alice, who wrote and revised the report, checked the figures, and Bob signed the document.",
+     "Alice, who wrote and revised the report, checked the figures. Bob signed the document."),
+])
+def test_relative_clause_stays_with_its_noun(splitter, source, expected):
+    result = splitter.predict(source)
+    assert result["output"] == expected, result
+    assert result["checks"]["checks"]["relative_attachments"]
+    assert result["accepted_count"] == 1
+    assert result["boundaries"][-1]["reason"] == "accepted"
+
+
+@pytest.mark.parametrize("source", [
+    "The analyst who checked the report and reviewed the figures left.",
+    "Alice said that the server stores records, and the client displays results.",
+    "If Alice checks the report, Bob reviews the figures, and Carol writes the summary.",
+    "The server, which stores records, checks requests and sends responses.",
+])
+def test_embedded_coordination_and_shared_scope_still_abstain(splitter, source):
+    result = splitter.predict(source)
+    assert result["output"] == source, result
+    assert result["accepted_count"] == 0
+    assert all(d["reason"] and not d["accepted"] for d in result["boundaries"])
+
+
+def test_joint_subject_guard_rejects_separate_events(splitter):
+    checks = splitter.validate("Alice and Bob lifted the piano.",
+                               "Alice lifted the piano. Bob lifted the piano.")
+    assert not checks["pass"]
+    assert "subject_groups" in checks["failed"]
+    assert not splitter.validate("Alice praised Bob.", "Bob praised Alice.")["pass"]
+    assert not splitter.validate("The server may check requests and send responses.",
+                                 "The server may check requests. The server sends responses.")["pass"]
+
+
+def test_length_policy_gates_original_clause_lengths():
+    source = "The store closed early, and the workers went home."
+    result = DependencyCompoundSplitter(min_sentence_words=20).predict(source)
+    assert result["output"] == source
+    assert result["boundaries"][0]["reason"] == "sentence_too_short"
+    result = DependencyCompoundSplitter(min_clause_words=5).predict(source)
+    assert result["output"] == source
+    assert result["boundaries"][0]["reason"] == "clause_too_short"
+    assert result["boundaries"][0]["left_words"] == 4
+    assert result["boundaries"][0]["right_words"] == 4
+    result = DependencyCompoundSplitter(9, 4).predict(source)
+    assert result["output"] != source
+    assert result["length_policy"] == {"min_sentence_words": 9, "min_clause_words": 4}
+    # Copied subjects do not inflate the original right-clause length.
+    result = DependencyCompoundSplitter(min_clause_words=5).predict(
+        "The server checks each request and sends a response.")
+    assert result["accepted_count"] == 0
+
+
+@pytest.mark.parametrize("kwargs", [
+    {"min_sentence_words": -1}, {"min_clause_words": 1.5},
+    {"min_clause_words": True}, {"min_sentence_words": "20"},
+])
+def test_invalid_length_policy(kwargs):
+    with pytest.raises(ValueError, match="nonnegative integer"):
+        DependencyCompoundSplitter(**kwargs)
+
+
+def test_diagnostics_separate_detection_from_acceptance(splitter):
+    source = "Alice bought bread and milk.\nThe store closed early, and the workers went home."
+    result = splitter.predict(source)
+    assert result["candidate_count"] == 2
+    assert result["accepted_count"] == 1
+    rejected, accepted = result["boundaries"]
+    assert rejected["reason"] == "not_matrix_coordination"
+    assert accepted["accepted"]
+    for boundary in result["boundaries"]:
+        assert source[boundary["offset"]:].startswith(boundary["connector"])
+    assert "score" not in result  # Checks/lengths are not calibrated confidence.
+
+
+def test_passage_rollback_clears_boundary_acceptance(monkeypatch):
+    model = DependencyCompoundSplitter()
+    validate = model.validate
+
+    def reject_passage(source, output):
+        checks = validate(source, output)
+        if "\n" in source and source != output:
+            # Override only the final passage check, after a sentence edit passed.
+            checks["pass"] = False
+            checks["failed"] = ["authored_passage_rejection"]
+        return checks
+
+    monkeypatch.setattr(model, "validate", reject_passage)
+    source = "The store closed early, and the workers went home.\nBob waited."
+    result = model.predict(source)
+    assert result["raw"] != source
+    assert result["output"] == source
+    assert not result["edits"] and result["accepted_count"] == 0
+    assert result["boundaries"][0]["reason"] == "passage_rollback"
+    assert not result["boundaries"][0]["accepted"]
