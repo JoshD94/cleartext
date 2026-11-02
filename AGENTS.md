@@ -23,7 +23,9 @@ account and host workflow before remote changes or substantial compute.
 Yoga is the default development host. Native jobs need no GUI or browser.
 Use `models/.venv/bin/python` and `PYTHONPATH=models/src:.`. Environments,
 weights, caches and raw experiment inputs are deliberately excluded from Git.
-Do not infer that a missing artifact calls for retraining or downloading data.
+Do not infer that a missing artifact calls for retraining or downloading data. On a new host, set NLTK_DATA and HF_HUB_CACHE for isolated
+offline resources; Hugging Face refs/main must contain the exact revision with
+no trailing newline.
 Consult `models/README.md` and the relevant experiment manifest first.
 
 ## Verification
