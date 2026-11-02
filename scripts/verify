@@ -36,6 +36,7 @@ mkdir -p "$evidence"
   models/tests/test_preservation.py \
   evals/test_pipeline_benchmark.py \
   evals/test_adapter_ladder.py \
+  evals/test_checkpoints.py \
   --junitxml="$evidence/pytest.xml" | tee "$evidence/pytest.log"
 git diff --check
 printf 'PASS: focused offline checks; evidence %s\n' "$evidence"

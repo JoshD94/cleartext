@@ -70,6 +70,11 @@ versions, input/model/source hashes and completion/failure receipts.
 - `compound_only` and `compound_full_guarded` select the opt-in dependency
   compound splitter. Week 7 `structure_only` retains the old rules; neither name
   selects T5. Passive conversion and negation rewriting belong to teammates.
+- The 90-passage native ladder exceeded a 75-minute Yoga queue limit while
+  computing lexical-only. Whole-system logging/checkpoints lose partial work.
+  Use per-passage checkpoints and bounded batches; bind resume data to frozen
+  source, input, model and runtime signatures. Automatic scores remain pending
+  until the complete expected matrix is present. Raw checkpoints stay local.
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
