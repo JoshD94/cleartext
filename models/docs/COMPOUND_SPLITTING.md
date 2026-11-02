@@ -127,3 +127,21 @@ be complete; editing, adding or duplicating an incomplete sentence fails. This
 is preservation of existing fragments, not grammar correction. It was motivated
 by inspected development data and tested with separate authored fragment cases;
 its coverage and pipeline effect require a fresh replay.
+
+The [fragment-fix coverage replay](../../evals/reports/20261102-compound-boundaries/r2-coverage.json)
+at `68b4fe6` accepted one sourced passage (1/90), with 0/18 authored passages;
+the illustrative length filter gave the same counts. Verification passed 484
+tests and 13 subtests. Full native scoring was stopped by the queue's 75-minute
+limit after `original` and `rule_based` completed; `lexical_only` was still
+computing. These partial results do not establish a complete pipeline quality
+gain. The failed job and both completed system files are retained locally.
+
+Recovery uses `python -m evals.checkpointed_week7 --plan PATH --state PATH`
+with a frozen local plan and external state directory. Each bounded batch saves
+generated outputs, scored cells and exact source/output metric pairs. It validates
+source/input/model/runtime identities before importing the two completed systems.
+Logs show prediction/scoring/save progress for each passage and arm. CPU thread
+limits apply to the recovery job; production inference stays unchanged. A
+successful batch can leave the matrix incomplete: only `success.json` plus all
+900 expected sourced cells permits aggregate reporting. Keep per-batch receipts
+and all raw state outside Git. Do not present a partial batch as a full benchmark.
