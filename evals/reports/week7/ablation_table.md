@@ -145,9 +145,11 @@ not these rules.
   structural proposal checks, reparsed lexical checks, rejection reasons,
   and combined-word checks together. There is no arm that disables only
   the phrase stage's restrictions.
-- **Authored 18-passage model arms**: the Week 7 passage set
-  (`evals/data/week7_passages.json`) has baseline arms only (Source B).
-  Model arms on these exact passages need the demo server or artifacts.
+- **Model arms on both Week 7 sets**: the authored 18-passage set
+  (`evals/data/week7_passages.json`) and the 90-passage sourced set
+  (`evals/data/week7_sourced_passages.json`) have baseline arms only
+  (Sources B and C in test_results.md). Model arms on these passages
+  need the demo server or artifacts; the runbook covers both files.
 
 ## Reproduce
 

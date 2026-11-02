@@ -83,14 +83,92 @@ values are identical to the previously stored local run (0/6 diffs for
 both systems), so the Week 7 runner change (output capture) altered no
 metric.
 
+## Results, source C: local baselines on the 90 sourced passages
+
+`evals/data/week7_sourced_passages.json`: 90 passages, 30 per domain,
+sampled Nov 1 with a fixed seeded protocol (seed 4701). Unit: 2
+consecutive sentences, 40-100 words, no sentence overlap, no overlap
+with the 18-set. Every passage is asserted verbatim against its source
+file, and no window spans removed content: figures, tables, headings,
+and page furniture are hard breaks in the cleaned text. Each entry
+carries its source title, URL, and sentence span.
+
+Sources:
+
+- CS (30, 10 each): RFC 9000 (QUIC, May 2021), RFC 8446 (TLS 1.3,
+  Aug 2018), RFC 9110 (HTTP Semantics, Jun 2022), from the rfc-editor
+  .txt files. Body only (sections 1 through References).
+- Corporate (30, 10 each): Apple FY2025 10-K (accession
+  0000320193-25-000079, period ended Sep 27, 2025), Amazon FY2024 10-K
+  (0001018724-25-000004, Dec 31, 2024), Microsoft FY2025 10-K
+  (0000950170-25-100235, Jun 30, 2025), from SEC EDGAR. Apple and
+  Amazon from the complete-submission .txt; Microsoft from the primary
+  .htm document (supplied as a browser-saved .mhtml, decoded from
+  Windows-1252; zero replacement characters after decoding). Body
+  only (Item 1 Business through Signatures), financial tables dropped.
+- Political science (30, 10 each): Biden inaugural 2021, Bush
+  inaugural 2001, Biden State of the Union 2024, from the American
+  Presidency Project. Stage directions, applause lines, and speaker
+  labels stripped; salutation, banter, and quoted-lyric windows
+  excluded.
+
+Eligible windows per document (after cleaning): RFC 9000 1019 of 2468
+sentences, RFC 8446 448 of 1159, RFC 9110 1152 of 2113, Apple 491 of
+982, Amazon 688 of 1341, Microsoft 722 of 1904, Biden inaugural 40 of
+160, Bush inaugural 23 of 94, SOTU 84 of 587.
+
+Run Nov 1 on this machine, full suite.
+`evals/results/week7-sourced/eval_results.json` (+ `.md`, local only,
+gitignored). Model arms on the 90 are still pending (Yoga; see
+RUNBOOK_JOSHUA.md). Baselines only here.
+
+| System | Flesch | FKGL | Fog | Tech terms | TF-IDF | Embedding | NLI bwd | Entities |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Original | 38.32 | 14.11 | 17.92 | 2.63 | 1.00 | 1.00 | 0.99 | 1.00 |
+| Dictionary | 38.79 | 14.05 | 17.83 | 2.63 | 1.00 | 1.00 | 0.99 | 0.99 |
+
+Per-domain originals, with dictionary coverage:
+
+| Domain | FKGL | Flesch | Tech terms | Dictionary changed |
+| --- | ---: | ---: | ---: | ---: |
+| Computer science | 13.14 | 42.60 | 4.07 | 8 / 30 |
+| Corporate | 17.33 | 16.83 | 2.60 | 5 / 30 |
+| Political science | 11.87 | 55.52 | 1.23 | 1 / 30 |
+
+Findings:
+
+- Real prose is far less dense than the authored set: FKGL 14.11
+  here vs 19.17 on the 18. The authored set was built jargon-dense by
+  construction and flatters the dictionary; this set is the honest
+  baseline.
+- The dictionary's coverage problem is the finding. It changes 14 of
+  90, nearly all single-word swaps, and 2 of the 14 degrade the text:
+  cs-s06 "an implementation should" becomes "an carrying out
+  should", and cs-s26 "MUST implement the Connection header field"
+  becomes "MUST carry out the Connection header field". NLI stays
+  0.99 because the swaps are small; the grammar and meaning damage is
+  visible only by reading the outputs. On real text its inventory
+  rarely fires, and when it does it can misfire.
+- Corporate is the hardest panel by grade level (FKGL 17.33); CS is
+  densest in technical terms (4.07 per passage); polsci speeches are
+  the easiest (FKGL 11.87, 1.23 terms).
+- The two entity-check dips (cs-s06 0.50, cs-s25 0.67) are the same
+  string-check artifact as before: bracketed references and the
+  "But," swap trip the entity check while NLI stays 0.99. Not model
+  errors.
+
 ## Limitations, stated plainly
 
 - Small panels: 8 inputs per source in Source A, 6 per domain in
   Source B. No significance claims; differences of one input move the
-  means.
+  means. Source C (30 per domain) supports domain comparisons, not
+  fine-grained claims.
 - Reused development inputs, not held-out benchmarks: DeSSE, ASSET,
   and the domain panel were all inspected during development. No human
   quality labels were collected.
+- The polsci sources were transcribed from fetched pages: passages are
+  asserted verbatim against the saved files, but the saved files were
+  not independently re-verified against the live pages.
 - The combined system's *outputs* are not stored anywhere in git
   (evidence keeps hashes). Text-level verification of the flagged
   cases still has to happen on Yoga; see error_analysis.md.
@@ -103,6 +181,12 @@ metric.
 # Baselines on the Week 7 set (runs anywhere with evals deps):
 python evals/run_evals.py --passages data/week7_passages.json \
   --systems original,rule_based --out results/week7 \
+  --embedding-model all-MiniLM-L6-v2 \
+  --nli-model MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
+
+# Baselines on the sourced set (runs anywhere with evals deps):
+python evals/run_evals.py --passages data/week7_sourced_passages.json \
+  --systems original,rule_based --out results/week7-sourced \
   --embedding-model all-MiniLM-L6-v2 \
   --nli-model MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli
 
