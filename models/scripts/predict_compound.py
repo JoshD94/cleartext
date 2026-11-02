@@ -14,9 +14,15 @@ from cleartext.structure.compound import DependencyCompoundSplitter
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--details", action="store_true")
+    parser.add_argument("--min-sentence-words", type=int, default=0)
+    parser.add_argument("--min-clause-words", type=int, default=0)
     parser.add_argument("text")
     args = parser.parse_args()
-    result = DependencyCompoundSplitter().predict(args.text)
+    try:
+        splitter = DependencyCompoundSplitter(args.min_sentence_words, args.min_clause_words)
+    except ValueError as exc:
+        parser.error(str(exc))
+    result = splitter.predict(args.text)
     print(json.dumps(result, indent=2) if args.details else result["output"])
 
 
