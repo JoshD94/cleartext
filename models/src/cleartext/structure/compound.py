@@ -94,6 +94,12 @@ class DependencyCompoundSplitter:
         checks["checks"]["sentence_count"] = (
             len(list(old.sents)) <= len(list(new.sents)) <= 2 * len(list(old.sents))
         )
+        # An untouched footnote/fragment elsewhere must not veto a checked split.
+        # Match exact text AND multiplicity: no new, edited or duplicated fragment
+        # is allowed. Sentence-level proposals still have to be complete clauses.
+        old_fragments = Counter(s.text.strip() for s in old.sents if not complete_clause(s))
+        new_fragments = Counter(s.text.strip() for s in new.sents if not complete_clause(s))
+        checks["checks"]["complete_clauses"] = old_fragments == new_fragments
         checks["checks"].update(discourse_checks(old, new))
         checks["checks"]["code_literals"] = preserved_literals(source, output)["pass"]
         checks["checks"]["subject_groups"] = _subject_groups(old) == _subject_groups(new)

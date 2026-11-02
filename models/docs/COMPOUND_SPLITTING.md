@@ -110,3 +110,20 @@ Parser failures remain: the small parser mistakes the main verb in
 for part of a noun phrase, so the splitter abstains. Authored examples and tests
 establish mechanism behavior only. The earlier 0/108 result belongs to the first
 implementation; a fresh comparison is required before claiming benchmark gain.
+
+The [boundary follow-up replay](../../evals/reports/20261102-compound-boundaries/r1-coverage.json)
+at commit `388fe23` still changed 0/18 authored and 0/90 sourced passages,
+including with the illustrative 20/6 length policy. All 479 verification tests
+and 13 subtests passed. Three authored relative-clause controls now split, and
+the known joint-subject false acceptance is rejected; those are mechanism
+improvements, with no measured benchmark gain. Native embedding/NLI scoring
+was skipped because neither panel produced different outputs.
+
+The diagnostics also exposed a passage-level false rejection: an untouched
+footnote can fail completeness and veto an otherwise checked split in another
+sentence. The next fix permits only the exact same incomplete sentences, with
+the same multiplicity, in source and output. Proposed split halves must still
+be complete; editing, adding or duplicating an incomplete sentence fails. This
+is preservation of existing fragments, not grammar correction. It was motivated
+by inspected development data and tested with separate authored fragment cases;
+its coverage and pipeline effect require a fresh replay.
