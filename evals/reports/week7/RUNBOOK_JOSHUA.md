@@ -5,6 +5,14 @@ with the trained artifacts (Yoga). This is the one-command version of
 the remaining gap: phrase_only unexecuted, and no model numbers on
 the 18 authored passages or the 90 sourced passages.
 
+Note (Nov 1): PR #8 already reports model numbers on the 18 passages
+through Joshua's own ten-configuration replay
+(`evals/reports/20261101-status-rerun/`, cited as Source D in
+`test_results.md`). What is still open here is the LADDER arms below
+(standalone phrase_only, old-rules structure_only), the model arms on
+the 90 sourced passages, and the text review. Do not re-run the 18-set
+ten-configuration replay; run the ladder commands.
+
 ## Prerequisite
 
 Kea-Roy's branch must be pushed first (`kea-roy/week7-evals`, from the

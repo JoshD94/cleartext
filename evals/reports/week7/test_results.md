@@ -157,6 +157,58 @@ Findings:
   "But," swap trip the entity check while NLI stays 0.99. Not model
   errors.
 
+## Results, source D: Joshua's Nov 1 replay on the 18 passages (PR #8)
+
+Joshua's replay, branch `josh/structural-models-20261026` commit
+`85d1c18`, PR #8, evidence
+`evals/reports/20261101-status-rerun/README.md`. Ten configurations on
+202 unique inputs (the 190-input frozen panel plus the 6 submitted
+passages plus the 12 additional Week 7 passages), scored with this
+eval framework's functions. All-input means, n = 18. This answers the
+18-passage model question through Joshua's own ten-configuration
+harness, NOT through the Week 7 ladder: there is no standalone
+`phrase_only` arm and no old-rules `structure_only` arm in this replay.
+Those ladder arms remain unexecuted; see ablation_table.md and
+RUNBOOK_JOSHUA.md.
+
+| Configuration | Changed / 18 | Reading grade | Embedding | NLI backward |
+| --- | ---: | ---: | ---: | ---: |
+| Original | 0 | 19.17 | 1.00 | 0.99 |
+| Dictionary baseline | 9 | 17.64 | 0.97 | 0.99 |
+| v7 words only | 18 | 18.62 | 0.98 | 0.71 |
+| T5 structure only | 4 | 18.07 | 1.00 | 0.99 |
+| v7 words + T5 | 18 | 17.53 | 0.98 | 0.71 |
+| v7 + phrases + T5, unchecked | 18 | 15.67 | 0.98 | 0.73 |
+| v7 + phrases + T5, checked | 18 | 17.72 | 0.98 | 0.73 |
+| v7 + phrase/structure rules | 18 | 18.81 | 0.98 | 0.72 |
+| Contextual + phrases + T5, .45 | 18 | 17.88 | 0.98 | 0.94 |
+| Contextual + phrases + T5, .80 | 16 | 18.04 | 0.98 | 0.94 |
+
+What this adds:
+
+- The trained stages move the 18-set grade only slightly (v7 words
+  18.62, checked full 17.72) while backward NLI stays near 0.71 for
+  every lexical-bearing arm: the CS-heavy authored set loses meaning
+  the same way the benchmark domain panel did (Source A). The
+  contextual variant is the exception (0.94), at the cost of less
+  simplification. The T5-only arm again shows the coverage problem:
+  4 of 18 changed, preservation near perfect.
+- Cross-checks: the dictionary (9 changed, 17.64) and original (19.17)
+  reproduce the local Source B baselines exactly. The six-passage
+  replay reproduces the Oct 21 numbers (49 of 51 means within 1e-12;
+  the two TF-IDF differences come from a documented tokenization fix),
+  and the evaluator CWI baseline reproduces exactly (F1 0.619085).
+- The frozen 190-input replay moves almost nothing: checked-stack
+  grade 10.7733 to 10.7614, backward NLI 0.9050 to 0.9051, 3 outputs
+  differ. Runtime residuals on identical text (backward NLI up to
+  0.00249 across Mac/CPU runs) exceed that movement, so the replay
+  claims no semantic gain. One retained failure is noted: the T5
+  output for cs-02 misses a capital at a new sentence boundary.
+- Numeric per-input records for the 18 and the 190 are committed
+  beside the replay report (`week7_18_metrics.jsonl`,
+  `matrix_190_metrics.jsonl`). Output texts are still local-only, so
+  the text review in the Yoga packet is still open.
+
 ## Limitations, stated plainly
 
 - Small panels: 8 inputs per source in Source A, 6 per domain in
@@ -169,9 +221,11 @@ Findings:
 - The polsci sources were transcribed from fetched pages: passages are
   asserted verbatim against the saved files, but the saved files were
   not independently re-verified against the live pages.
-- The combined system's *outputs* are not stored anywhere in git
-  (evidence keeps hashes). Text-level verification of the flagged
-  cases still has to happen on Yoga; see error_analysis.md.
+- The combined system's *output texts* are not stored anywhere in
+  git (benchmark evidence keeps hashes; the PR #8 replay commits
+  numeric per-input records but keeps raw texts local). Text-level
+  verification of the flagged cases still has to happen on Yoga; see
+  error_analysis.md.
 - No phrase-only arm exists yet; phrases are measured only inside the
   full combinations.
 
