@@ -1,0 +1,380 @@
+{
+  "structure_only__compound_only": {
+    "before": "structure_only",
+    "after": "compound_only",
+    "n": 90,
+    "different_outputs": 1,
+    "identical_outputs": 89,
+    "groups": {
+      "all": {
+        "n": 90,
+        "metrics": {
+          "readability.flesch_reading_ease": {
+            "before": 38.319100104674355,
+            "after": 38.30521424608849,
+            "delta": -0.013885858585865662
+          },
+          "readability.flesch_kincaid_grade": {
+            "before": 14.114790003787219,
+            "after": 14.11617474003862,
+            "delta": 0.0013847362514010086
+          },
+          "readability.gunning_fog": {
+            "before": 17.922769874703132,
+            "after": 17.924424943913756,
+            "delta": 0.0016550692106243048
+          },
+          "readability.smog_index": {
+            "before": 15.299243445430134,
+            "after": 15.299243445430134,
+            "delta": 0.0
+          },
+          "readability.avg_sentence_length": {
+            "before": 24.957777777777775,
+            "after": 24.955555555555556,
+            "delta": -0.002222222222219017
+          },
+          "readability.avg_word_length": {
+            "before": 4.992858192593868,
+            "after": 4.993419359821702,
+            "delta": 0.0005611672278336144
+          },
+          "readability.technical_term_count": {
+            "before": 2.6333333333333333,
+            "after": 2.6333333333333333,
+            "delta": 0.0
+          },
+          "preservation.tfidf_cosine_similarity": {
+            "before": 1.0000000000000002,
+            "after": 0.999959477300105,
+            "delta": -4.0522699895184644e-05
+          },
+          "preservation.embedding_similarity": {
+            "before": 1.0000000543064542,
+            "after": 0.9999405370818244,
+            "delta": -5.951722462982367e-05
+          },
+          "preservation.nli_forward": {
+            "before": 0.9858787192238702,
+            "after": 0.9859287924236722,
+            "delta": 5.0073199801992097e-05
+          },
+          "preservation.nli_backward": {
+            "before": 0.9858787192238702,
+            "after": 0.9858647293514675,
+            "delta": -1.3989872402642156e-05
+          },
+          "preservation.nli_mean": {
+            "before": 0.9858787192238702,
+            "after": 0.9858967608875698,
+            "delta": 1.804166369967497e-05
+          },
+          "preservation.numbers_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.dates_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.entities_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.negations_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.tenses_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          }
+        }
+      },
+      "incrementally_changed": {
+        "n": 1,
+        "metrics": {
+          "readability.flesch_reading_ease": {
+            "before": 32.6227272727273,
+            "after": 31.37300000000002,
+            "delta": -1.2497272727272843
+          },
+          "readability.flesch_kincaid_grade": {
+            "before": 11.441818181818181,
+            "after": 11.566444444444446,
+            "delta": 0.12462626262626486
+          },
+          "readability.gunning_fog": {
+            "before": 16.763636363636362,
+            "after": 16.912592592592592,
+            "delta": 0.14895622895623006
+          },
+          "readability.smog_index": {
+            "before": 13.662883650711645,
+            "after": 13.662883650711645,
+            "delta": 0.0
+          },
+          "readability.avg_sentence_length": {
+            "before": 11.0,
+            "after": 10.8,
+            "delta": -0.1999999999999993
+          },
+          "readability.avg_word_length": {
+            "before": 5.7272727272727275,
+            "after": 5.777777777777778,
+            "delta": 0.050505050505050164
+          },
+          "readability.technical_term_count": {
+            "before": 3.0,
+            "after": 3.0,
+            "delta": 0.0
+          },
+          "preservation.tfidf_cosine_similarity": {
+            "before": 0.9999999999999998,
+            "after": 0.9963529570094306,
+            "delta": -0.0036470429905691715
+          },
+          "preservation.embedding_similarity": {
+            "before": 1.0000001192092896,
+            "after": 0.9946435689926147,
+            "delta": -0.005356550216674805
+          },
+          "preservation.nli_forward": {
+            "before": 0.9768391251564026,
+            "after": 0.9813457131385803,
+            "delta": 0.004506587982177734
+          },
+          "preservation.nli_backward": {
+            "before": 0.9768391251564026,
+            "after": 0.9755800366401672,
+            "delta": -0.0012590885162353516
+          },
+          "preservation.nli_mean": {
+            "before": 0.9768391251564026,
+            "after": 0.9784628748893738,
+            "delta": 0.0016237497329711914
+          },
+          "preservation.numbers_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.dates_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.entities_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.negations_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.tenses_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          }
+        }
+      }
+    }
+  },
+  "full_guarded__compound_full_guarded": {
+    "before": "full_guarded",
+    "after": "compound_full_guarded",
+    "n": 90,
+    "different_outputs": 1,
+    "identical_outputs": 89,
+    "groups": {
+      "all": {
+        "n": 90,
+        "metrics": {
+          "readability.flesch_reading_ease": {
+            "before": 39.485783679332634,
+            "after": 39.471897820746776,
+            "delta": -0.013885858585858557
+          },
+          "readability.flesch_kincaid_grade": {
+            "before": 13.94792062418555,
+            "after": 13.949305360436954,
+            "delta": 0.0013847362514045614
+          },
+          "readability.gunning_fog": {
+            "before": 17.676830813409023,
+            "after": 17.67848588261965,
+            "delta": 0.0016550692106278575
+          },
+          "readability.smog_index": {
+            "before": 15.083314778002098,
+            "after": 15.083314778002098,
+            "delta": 0.0
+          },
+          "readability.avg_sentence_length": {
+            "before": 24.94111111111111,
+            "after": 24.93888888888889,
+            "delta": -0.002222222222219017
+          },
+          "readability.avg_word_length": {
+            "before": 4.962185923914831,
+            "after": 4.962743350027813,
+            "delta": 0.0005574261129819291
+          },
+          "readability.technical_term_count": {
+            "before": 2.3444444444444446,
+            "after": 2.3444444444444446,
+            "delta": 0.0
+          },
+          "preservation.tfidf_cosine_similarity": {
+            "before": 0.9795566856977044,
+            "after": 0.9795089060459502,
+            "delta": -4.77796517541762e-05
+          },
+          "preservation.embedding_similarity": {
+            "before": 0.9911877062585619,
+            "after": 0.9911280943287744,
+            "delta": -5.961192978753971e-05
+          },
+          "preservation.nli_forward": {
+            "before": 0.8388114276342094,
+            "after": 0.8387947492611905,
+            "delta": -1.667837301888575e-05
+          },
+          "preservation.nli_backward": {
+            "before": 0.8357332869329386,
+            "after": 0.8355879842200213,
+            "delta": -0.00014530271291723906
+          },
+          "preservation.nli_mean": {
+            "before": 0.837272357283574,
+            "after": 0.8371913667406059,
+            "delta": -8.09905429680624e-05
+          },
+          "preservation.numbers_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.dates_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.entities_preserved": {
+            "before": 0.9861111111111112,
+            "after": 0.9861111111111112,
+            "delta": 0.0
+          },
+          "preservation.negations_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.tenses_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          }
+        }
+      },
+      "incrementally_changed": {
+        "n": 1,
+        "metrics": {
+          "readability.flesch_reading_ease": {
+            "before": 32.6227272727273,
+            "after": 31.37300000000002,
+            "delta": -1.2497272727272843
+          },
+          "readability.flesch_kincaid_grade": {
+            "before": 11.441818181818181,
+            "after": 11.566444444444446,
+            "delta": 0.12462626262626486
+          },
+          "readability.gunning_fog": {
+            "before": 16.763636363636362,
+            "after": 16.912592592592592,
+            "delta": 0.14895622895623006
+          },
+          "readability.smog_index": {
+            "before": 13.662883650711645,
+            "after": 13.662883650711645,
+            "delta": 0.0
+          },
+          "readability.avg_sentence_length": {
+            "before": 11.0,
+            "after": 10.8,
+            "delta": -0.1999999999999993
+          },
+          "readability.avg_word_length": {
+            "before": 5.709090909090909,
+            "after": 5.7592592592592595,
+            "delta": 0.05016835016835053
+          },
+          "readability.technical_term_count": {
+            "before": 2.0,
+            "after": 2.0,
+            "delta": 0.0
+          },
+          "preservation.tfidf_cosine_similarity": {
+            "before": 0.9832563966231415,
+            "after": 0.9789562279652602,
+            "delta": -0.004300168657881298
+          },
+          "preservation.embedding_similarity": {
+            "before": 0.9988067746162415,
+            "after": 0.9934417009353638,
+            "delta": -0.0053650736808776855
+          },
+          "preservation.nli_forward": {
+            "before": 0.12335533648729324,
+            "after": 0.1218542829155922,
+            "delta": -0.0015010535717010498
+          },
+          "preservation.nli_backward": {
+            "before": 0.20729941129684448,
+            "after": 0.19422216713428497,
+            "delta": -0.01307724416255951
+          },
+          "preservation.nli_mean": {
+            "before": 0.16532737389206886,
+            "after": 0.15803822502493858,
+            "delta": -0.0072891488671302795
+          },
+          "preservation.numbers_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.dates_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.entities_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.negations_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          },
+          "preservation.tenses_preserved": {
+            "before": 1.0,
+            "after": 1.0,
+            "delta": 0.0
+          }
+        }
+      }
+    }
+  }
+}
