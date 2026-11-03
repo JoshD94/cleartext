@@ -145,3 +145,13 @@ limits apply to the recovery job; production inference stays unchanged. A
 successful batch can leave the matrix incomplete: only `success.json` plus all
 900 expected sourced cells permits aggregate reporting. Keep per-batch receipts
 and all raw state outside Git. Do not present a partial batch as a full benchmark.
+
+The [completed native replay](../../evals/reports/20261102-compound-boundaries/native/README.md)
+now contains all **900/900** sourced cells. Verification passed 490 tests and
+13 subtests. Compound-only changes 1/90 inputs; the compound guarded pipeline
+differs from the existing guarded pipeline on that same one input. Average
+Flesch reading ease moves from 39.485784 to 39.471898 and grade from 13.947921
+to 13.949305: no measured average readability gain. Paired changed-only metrics,
+domain aggregates, exact eight-arm ladder and frozen provenance are linked in
+that report. The feature remains opt-in. These inspected development results
+do not establish semantic accuracy or justify relaxing the guards.
