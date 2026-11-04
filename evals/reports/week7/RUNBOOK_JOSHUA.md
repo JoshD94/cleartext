@@ -1,5 +1,13 @@
 # Runbook for Joshua: model arms on the Week 7 passage sets
 
+Status (Nov 3): DONE. Joshua ran both ladder commands on Yoga, Nov 2;
+result files were shared Nov 3 and are cited as Source E in
+`test_results.md`, with text-review verdicts in `error_analysis.md`
+(Finding 6). Still open: text review of the benchmark-panel packet
+cases (output texts only on Yoga) and the PR #9 compound-split
+passage text. Do not re-run the commands below; they are kept as the
+record of what ran.
+
 Kea-Roy's Week 7 ladder harness is ready; the model arms need a machine
 with the trained artifacts (Yoga). This is the one-command version of
 the remaining gap: phrase_only unexecuted, and no model numbers on

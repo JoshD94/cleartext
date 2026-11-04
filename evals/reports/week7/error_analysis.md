@@ -16,13 +16,17 @@ panel (evidence file `evidence_error_flags.json`, 68 flags, 27 unique
 inputs), and to the local baseline run on the 18 authored passages.
 
 **Stage 2 — rubric review.** Each flagged case is coded against the
-taxonomy below. Model output *texts* are not available on this machine:
-the benchmark evidence stores output hashes only, and predictions live on
-Yoga. Model cases below are therefore **signal-coded** (flag pattern +
-the benchmark report's diagnostic notes), not text-verified; the rubric is
-written so Joshua or Chhoeng can re-apply it to the texts on Yoga and
+taxonomy below. Model output *texts* for the 190-input benchmark panel
+are not available on this machine: the benchmark evidence stores
+output hashes only, and predictions live on Yoga. Model cases from
+that panel below are therefore **signal-coded** (flag pattern +
+the benchmark report's diagnostic notes), not text-verified; the rubric
+is written so Joshua or Chhoeng can re-apply it to the texts on Yoga and
 confirm or overturn each code. The dictionary baseline's outputs *were*
-reviewed as text here, since they run locally.
+reviewed as text here, since they run locally. Output texts for the
+ladder runs on the 18 and 90 Week 7 sets were shared Nov 3 and every
+flagged case in them was read as text; those verdicts are in Finding 6
+and are text-verified, not signal-coded.
 
 ## Taxonomy
 
@@ -51,6 +55,9 @@ edits. Examples:
   Classic E1 signature: the output is entailed by the original but the
   reverse fails, meaning some detail of the original does not survive.
   Which detail is unknown: the output text was not stored.
+  Text-verified Nov 3 (Finding 6): the only edit is ameliorate to
+  improve, and no detail is lost. Recoded E0. The E1 signature was a
+  metric failure, not a text failure.
 - **quic-rfc9000-3** (domain, CS): forward 0.83, backward 0.015. E1.
 - **quic-rfc9000-1** (domain, CS): forward 0.41, backward 0.49. Both
   directions low: the output diverges from the original more broadly
@@ -69,6 +76,10 @@ constituents.") scores backward 0.165 lexical-only but 0.374 in the
 combined arm. The combined output differs from the lexical-only output
 and preserves more. The structure stage (or the combined edit selection)
 helped here; it is still flagged, still E1-candidate, but less badly.
+Text-verified Nov 3 (Finding 6): the lexical error is ubiquitous to
+present, E2 mild, and the combined output adds the clean phrase edit
+(a large number of to many). The difference is the phrase stage, not
+structure: `structure_only` changed nothing on this set.
 
 ## Finding 2: guardrails catch a distinct subset
 
@@ -89,7 +100,11 @@ Five inputs are flagged *only* in `full_no_guardrails`:
 Net: on the 190 inputs, guardrails change 14 outputs (155 vs 141
 changed) and remove exactly the 5 worst unguarded-only failures, at no
 measurable cost to average preservation. Their value is concentrated,
-not average.
+not average. Ladder guardrail verdicts on the 90 sourced passages
+(text-verified, Finding 6) show the same shape with a qualification:
+guardrails blocked 2 significant errors and 3 mild ones, but missed
+3 cases where the guarded output is worse, all technical-term
+substitutions the meaning check passed.
 
 ## Finding 3: the structure-only arm is clean but narrow
 
@@ -115,6 +130,9 @@ numeric items and word boundaries), extended to entity spans.
 The one genuine mechanical failure: **biden-inaugural2021-0** fails
 `tenses_preserved` in all arms at NLI ~0.97 (E4, tense shift in the
 output; text review to confirm).
+
+Two sourced ladder flags (cs-s01, cs-s07) fail only
+`entities_preserved` at NLI ~0.99, the same signature, coded E0.
 
 ## Finding 5: dictionary baseline — no correctness errors, severe under-coverage
 
@@ -148,6 +166,72 @@ capitalized-span heuristic, and it treats the sentence-initial words
 "Prior" (original) and "Before" (output) as entities. Neither is a
 named entity; the substitution is correct and nothing was lost.
 
+## Finding 6: ladder text review (text-verified, Nov 3)
+
+Every flagged output from the Nov 2 ladder runs on the 18 authored
+and 90 sourced passages was read as text, plus all four phrase_only
+edits and all ten passages where guarded and unguarded outputs
+differ. Codes below are text-verified. The pattern from Finding 1
+holds and sharpens: every genuine error is a single-word lexical
+substitution. No structure or phrase edit produced a flagged error.
+
+**Authored set (lexical arms, 5 low-backward flags).** Four are real
+sense errors, all E2: polsci-01 ubiquitous to present (mild),
+cs-04 retransmit to carry (significant: a sender retransmits packets,
+it does not carry them), cs-06 compiler to program (the compiled
+program does not eliminate its own dead code), corp-06 subsidiary to
+company (entity shift). One is a false alarm: corp-02 ameliorate to
+improve, coded E0 (see Finding 1 correction). By domain: CS 2, corp 2
+(one E0), polsci 1. `full_guarded` and `full_no_guardrails` produce
+identical outputs on all 18, so guardrails changed nothing on this
+set; the polsci-01 guarded improvement over lexical-only is the
+phrase edit, not a guardrail.
+
+**Sourced set (lexical arms, 14 low-backward flags).** Twelve are
+genuine errors and two are borderline. Technical-term confusion:
+cs-s08 handshake to acknowledgement (significant), cs-s14
+authenticating to certifying (significant), cs-s30 authenticate to
+demonstrate, cs-s06 algorithms to rules. Near-synonym
+over-broadening: corp-s09 reliability to responsibility (significant,
+inside a 10-K assertion), corp-s28 attractiveness to quality,
+corp-s30 estimated to calculated, cs-s23 interoperability to ability.
+Rhetorical diction: polsci-s19 generous to big, polsci-s18 eternity to
+time (also E5: the output repeats "time and time"), polsci-s22
+hostages to prisoners (significant: the sentence already
+distinguishes released prisoners from released hostages), polsci-s30
+tutoring to teaching (mild). Borderline: cs-s04 bidirectional to
+duplex (the inline definition, "which allow both endpoints to send
+data", preserves the term's meaning) and corp-s12 procure to secure.
+NLI magnitudes exaggerate throughout (0.02 to 0.45 for one changed
+word) but the direction is right in nearly every case.
+
+**Guardrail divergences (10 sourced passages).** Guardrails blocked
+2 significant errors: cs-s09 (unguarded rewrote the quoted spec term
+"Probing" to "Examining"; guarded output changes only initial to
+first) and corp-s18 (unguarded rewrote "accruals" to "increases";
+guarded output changes only evaluate to assess). They blocked 3 mild
+ones (cs-s29, corp-s25, polsci-s17). They missed 3 where the guarded
+output is worse: cs-s08 (guarded output carries the handshake error;
+unguarded output changes only containing to including), cs-s05
+(guarded output reads "An end SHOULD", from endpoint to end;
+unguarded output is clean), corp-s04 (guarded output changes the
+term of art "performance obligations" to "responsibilities";
+unguarded output changes only allocated to assigned). One divergence
+is neutral (corp-s01: each run changes a different occurrence of
+"restricted" to "limited", both fine) and one favors unguarded
+(polsci-s04: unguarded peril to danger is a clean simplification;
+guarded restore to improve is a mild shift). Net: guardrails help
+more than they hurt, with a technical-term blind spot in the meaning
+check.
+
+**Phrase and dictionary.** All four phrase_only edits are clean:
+polsci-01 a large number of to many, polsci-02 prior to to before,
+corp-05 Prior to to Before, corp-s24 with the exception of to except.
+The dictionary baseline's two degrading sourced edits reproduced
+exactly on Yoga (cs-s06 "an carrying out should", cs-s26 "MUST carry
+out the Connection header field"), so those failures are stable
+across machines, not environment quirks.
+
 ## What still needs text review (on Yoga)
 
 1. The 8 "both directions low" cases (quic-rfc9000-1, asset-valid-663/
@@ -156,8 +240,13 @@ named entity; the substitution is correct and nothing was lost.
 2. asset-valid-219's guarded output: confirm the geographic-detail loss
    the benchmark note records.
 3. biden-inaugural2021-0: confirm the tense shift.
-4. polsci-01's combined output: confirm what the structure stage changed
-   versus lexical-only, and whether the remaining loss is E1.
+4. The PR #9 compound-split passage: the single changed sourced
+   passage is metrics-only in the committed evidence; its split text
+   is unreviewed.
+
+Done (text-verified Nov 3, Finding 6): polsci-01's combined output,
+all ladder flags on the 18 and 90, all phrase edits, all guardrail
+divergences.
 
 ## Error counts (signal-coded, 190 inputs)
 
@@ -171,3 +260,20 @@ named entity; the substitution is correct and nothing was lost.
 Counts overlap: most flagged inputs are shared across arms (Finding 1).
 "Check-only" = failed explicit check with backward NLI >= 0.50, mostly
 E0 entity artifacts.
+
+## Error counts (text-verified, ladder runs, Nov 2)
+
+| Set / arm | Changed | Flagged inputs | Real errors (E2/E5) | Borderline | E0 artifacts |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Authored / lexical_only | 18 | 5 | 4 | 0 | 1 |
+| Authored / full_guarded | 18 | 6 | 4 | 0 | 2 |
+| Sourced / lexical_only | 85 | 16 | 12 | 2 | 2 |
+| Sourced / full_guarded | 85 | 16 | 12 | 2 | 2 |
+| Sourced / full_no_guardrails | 85 | 17 | 13 | 2 | 2 |
+
+Authored full_guarded adds the corp-05 entity artifact to the lexical
+flags; its low-backward flags are the same five. Sourced
+full_no_guardrails adds cs-s09 and corp-s18 (both blocked by
+guardrails) and drops cs-s08 (guarded-only flag). "Real errors" counts
+low-backward flags read as genuine sense errors; borderline counts
+cs-s04 and corp-s12.

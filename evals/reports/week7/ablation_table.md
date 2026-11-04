@@ -29,6 +29,14 @@ full suite (embedding + bidirectional NLI). Model arms cannot run on this
 machine: trained artifacts are git-excluded and no demo server is reachable
 from here. See "Reproduce" below.
 
+**Source E: ladder arms on both Week 7 sets (Yoga).** Executed Nov 2
+by Joshua Dirga via `RUNBOOK_JOSHUA.md`: all eight ladder arms on the
+18 authored passages and the 90 sourced passages, full suite, outputs
+captured per passage. Result files shared Nov 3 (not committed). This
+source closes the phrase_only and structure_only gaps and puts model
+arms on the 90. Full tables below; text-review verdicts in
+error_analysis.md (Finding 6).
+
 ## Source A: ten-system comparison, all 190 inputs
 
 FKGL is the all-input mean. Embedding / NLI are changed-only means
@@ -61,7 +69,8 @@ Reading the ablation:
 - **Phrase rules add nothing measurable here.** Full-checked (phrases on)
   and lexical+structural (phrases off) are identical on changed counts
   and means. The phrase stage's contribution is not visible at this
-  granularity; the phrase-only arm below is still unexecuted.
+  granularity; the executed phrase-only arm (Source E) changes 3 of 18
+  authored and 1 of 90 sourced passages, all four edits clean.
 - **NLI backward is the sensitive direction.** Every model arm sits near
   0.87 backward vs 0.90+ mean: outputs entail the original less often than
   the reverse, the signature of dropped detail.
@@ -131,25 +140,89 @@ generator's ~10% on the benchmark panel. The structure stage's
 contribution in the combined system comes from the trained generator,
 not these rules.
 
+## Source E: ladder arms on both Week 7 sets (Yoga, Nov 2)
+
+All-input means. The 18-set and 90-set runs used the same eight arms,
+full suite, outputs captured per passage.
+
+| System | Changed / 18 | FKGL (18) | NLI bwd (18) | Changed / 90 | FKGL (90) | NLI bwd (90) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Original | 0 | 19.17 | 0.99 | 0 | 14.11 | 0.99 |
+| Dictionary | 9 | 17.64 | 0.99 | 14 | 14.05 | 0.99 |
+| lexical_only | 18 | 18.62 | 0.71 | 85 | 13.95 | 0.84 |
+| phrase_only | 3 | 19.38 | 0.99 | 1 | 14.11 | 0.99 |
+| structure_only | 0 | 19.17 | 0.99 | 0 | 14.11 | 0.99 |
+| lexical_structural | 18 | 18.62 | 0.71 | 85 | 13.95 | 0.84 |
+| full_guarded | 18 | 18.81 | 0.72 | 85 | 13.95 | 0.84 |
+| full_no_guardrails | 18 | 18.81 | 0.72 | 85 | 13.95 | 0.83 |
+
+Reading the ladder:
+
+- **Structure contributes nothing measurable on either set.**
+  `structure_only` changed 0 of 108 passages, and
+  `lexical_structural` outputs are identical to `lexical_only` on
+  every passage in both sets. The old rules are inert here; the only
+  structure contribution anywhere in the evidence is the T5
+  generator's 20/190 in Source A.
+- **Phrase contributes four clean edits.** `phrase_only` changed 3
+  of 18 (polsci-01, polsci-02, corp-05) and 1 of 90 (corp-s24), all
+  read as text and meaning-preserving. Its one sourced edit
+  ("with the exception of" to "except") is the only phrase change
+  on real prose. The inventory rarely fires, and when it fires it
+  is safe.
+- **Guardrails are inert on the authored set and selective on the
+  sourced set.** `full_guarded` and `full_no_guardrails` produce
+  identical outputs on all 18 authored passages. On the 90 they
+  differ on 10 passages: guardrails blocked 2 significant errors
+  (cs-s09, corp-s18) and 3 mild ones, but missed 3 cases where the
+  guarded output is worse (cs-s08, cs-s05, corp-s04). Per-case
+  verdicts are in error_analysis.md (Finding 6). The guardrail
+  meaning check has a technical-term blind spot: it passed
+  "handshake" to "acknowledgement" and "obligations" to
+  "responsibilities".
+- **The lexical stage is the whole story on these sets.** Every
+  flagged meaning error in Source E is a single-word lexical
+  substitution (Finding 6). The sourced panel preserves better
+  than the authored panel (0.84 vs 0.71 backward NLI), because
+  authored density punishes the lexical stage more than real
+  prose does.
+
+## Follow-up: non-LLM compound splitting (PR #9, Week 8)
+
+Joshua's assigned rule (long compound sentences without an LLM) is a
+spaCy-parser plus deterministic-edits splitter (`DependencyCompoundSplitter`,
+opt-in as `structure_rewriter`; no T5, no new training). Evidence:
+`models/docs/COMPOUND_SPLITTING.md` and
+`evals/reports/20261102-compound-boundaries/` in PR #9. On the same
+two panels it changed 0 of 18 authored and 1 of 90 sourced passages,
+with no measured average readability gain, and its own README reports
+that plainly. The single changed passage's text is not committed
+(metrics only), so the split itself is unreviewed. `structure_only`
+keeps its old-rules meaning; the new arms are `compound_only` and
+`compound_full_guarded`. This follow-up does not change any Week 7
+number above.
+
 ## Gaps (not run anywhere yet)
 
-- **phrase_only**: defined in `evals/model_adapter.py` and verified
-  over the HTTP transport against a mock server
-  (`evals/test_adapter_ladder.py`, 4 tests pass), but never executed
-  against the real pipeline. It needs `phrase_model.pkl`
-  (`runs/context-20260924/`, git-excluded, absent on this machine) for
-  the `complexity` scorer inside `phrase_rewrite`, plus the spaCy
-  environment. The runbook in this directory (`RUNBOOK_JOSHUA.md`) is
-  the one-command path on Yoga.
 - **phrase + guardrails-off separately**: `full_no_guardrails` disables
   structural proposal checks, reparsed lexical checks, rejection reasons,
   and combined-word checks together. There is no arm that disables only
   the phrase stage's restrictions.
-- **Model arms on both Week 7 sets**: the authored 18-passage set
-  (`evals/data/week7_passages.json`) and the 90-passage sourced set
-  (`evals/data/week7_sourced_passages.json`) have baseline arms only
-  (Sources B and C in test_results.md). Model arms on these passages
-  need the demo server or artifacts; the runbook covers both files.
+- **Benchmark-panel text review**: the 8 both-directions-low cases, the
+  asset-valid-219 guarded output, and the biden-inaugural2021-0 tense
+  shift (see error_analysis.md) still need output texts, which live
+  only on Yoga. The ladder text review (Finding 6) does not cover
+  them.
+- **Compound-split passage text**: PR #9's single changed sourced
+  passage is metrics-only in the committed evidence; its split text
+  is unreviewed.
+- **Guardrail check over HTTP**: `full_no_guardrails` over HTTP raises
+  a clear error, since the demo server exposes no guardrail switch
+  (see "Reproduce" below). Unaffected by the Nov 2 runs, which used
+  the local transport.
+
+Closed gaps (executed Nov 2, Source E): standalone `phrase_only`,
+old-rules `structure_only`, and model arms on both Week 7 sets.
 
 ## Reproduce
 

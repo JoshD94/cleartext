@@ -119,8 +119,8 @@ sentences, RFC 8446 448 of 1159, RFC 9110 1152 of 2113, Apple 491 of
 
 Run Nov 1 on this machine, full suite.
 `evals/results/week7-sourced/eval_results.json` (+ `.md`, local only,
-gitignored). Model arms on the 90 are still pending (Yoga; see
-RUNBOOK_JOSHUA.md). Baselines only here.
+gitignored). Model arms on the 90 were run Nov 2 on Yoga; see
+Source E below. Baselines only here.
 
 | System | Flesch | FKGL | Fog | Tech terms | TF-IDF | Embedding | NLI bwd | Entities |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -168,8 +168,7 @@ eval framework's functions. All-input means, n = 18. This answers the
 18-passage model question through Joshua's own ten-configuration
 harness, NOT through the Week 7 ladder: there is no standalone
 `phrase_only` arm and no old-rules `structure_only` arm in this replay.
-Those ladder arms remain unexecuted; see ablation_table.md and
-RUNBOOK_JOSHUA.md.
+Those ladder arms are now executed; see Source E below.
 
 | Configuration | Changed / 18 | Reading grade | Embedding | NLI backward |
 | --- | ---: | ---: | ---: | ---: |
@@ -209,6 +208,66 @@ What this adds:
   `matrix_190_metrics.jsonl`). Output texts are still local-only, so
   the text review in the Yoga packet is still open.
 
+## Results, source E: ladder arms on both sets (Yoga, Nov 2)
+
+Joshua ran the Week 7 ladder harness (`RUNBOOK_JOSHUA.md`) on Yoga,
+Nov 2, 20:11 UTC: all eight arms on the 18 authored passages and on
+the 90 sourced passages, full suite, outputs captured per passage.
+Result files shared Nov 3 (not committed to the repo). This closes
+the ladder gap: standalone `phrase_only` and old-rules
+`structure_only` are now executed, and model arms exist on the 90.
+
+18 authored passages (all-input means):
+
+| System | Changed / 18 | FKGL | Flesch | TF-IDF | Embedding | NLI backward |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Original | 0 | 19.17 | 0.15 | 1.00 | 1.00 | 0.99 |
+| Dictionary | 9 | 17.64 | 10.33 | 0.86 | 0.97 | 0.99 |
+| lexical_only | 18 | 18.62 | 4.06 | 0.93 | 0.98 | 0.71 |
+| phrase_only | 3 | 19.38 | -1.85 | 0.97 | 1.00 | 0.99 |
+| structure_only | 0 | 19.17 | 0.15 | 1.00 | 1.00 | 0.99 |
+| lexical_structural | 18 | 18.62 | 4.06 | 0.93 | 0.98 | 0.71 |
+| full_guarded | 18 | 18.81 | 2.20 | 0.91 | 0.98 | 0.72 |
+| full_no_guardrails | 18 | 18.81 | 2.20 | 0.91 | 0.98 | 0.72 |
+
+90 sourced passages (all-input means):
+
+| System | Changed / 90 | FKGL | Flesch | TF-IDF | Embedding | NLI backward |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Original | 0 | 14.11 | 38.32 | 1.00 | 1.00 | 0.99 |
+| Dictionary | 14 | 14.05 | 38.79 | 1.00 | 1.00 | 0.99 |
+| lexical_only | 85 | 13.95 | 39.51 | 0.98 | 0.99 | 0.84 |
+| phrase_only | 1 | 14.11 | 38.29 | 1.00 | 1.00 | 0.99 |
+| structure_only | 0 | 14.11 | 38.32 | 1.00 | 1.00 | 0.99 |
+| lexical_structural | 85 | 13.95 | 39.51 | 0.98 | 0.99 | 0.84 |
+| full_guarded | 85 | 13.95 | 39.49 | 0.98 | 0.99 | 0.84 |
+| full_no_guardrails | 85 | 13.95 | 39.47 | 0.98 | 0.99 | 0.83 |
+
+What this establishes:
+
+- `structure_only` (old rules) changed 0 of 108 passages across both
+  sets, confirming the scratch-environment result (Source C in
+  ablation_table.md). The structure stage contributes nothing on
+  these panels, good or bad.
+- `phrase_only` executed, finally: 3 of 18 authored (polsci-01,
+  polsci-02, corp-05) and 1 of 90 sourced (corp-s24). All four edits
+  were read as text and preserve meaning. The phrase stage is real
+  but narrow: the 10-pair inventory rarely fires on real prose.
+- `lexical_structural` outputs are identical to `lexical_only` on
+  every passage in both sets. `full_guarded` outputs are identical to
+  `full_no_guardrails` on all 18 authored passages, and differ on 10
+  of 90 sourced passages (cs-s05, cs-s08, cs-s09, cs-s29, corp-s01,
+  corp-s04, corp-s18, corp-s25, polsci-s04, polsci-s17). Guardrails
+  were inert on the authored set and active on a tenth of the sourced
+  set; the per-case verdicts are in error_analysis.md (Finding 6).
+- The sourced panel preserves better than the authored panel (NLI
+  backward 0.84 vs 0.71 for lexical arms), the same pattern as the
+  benchmark domain panel: authored density punishes the lexical
+  stage more than real prose does.
+- PR #9 republishes this sourced ladder table and adds two opt-in
+  compound-splitter arms (`compound_only`, `compound_full_guarded`);
+  see the follow-up note in ablation_table.md.
+
 ## Limitations, stated plainly
 
 - Small panels: 8 inputs per source in Source A, 6 per domain in
@@ -221,13 +280,15 @@ What this adds:
 - The polsci sources were transcribed from fetched pages: passages are
   asserted verbatim against the saved files, but the saved files were
   not independently re-verified against the live pages.
-- The combined system's *output texts* are not stored anywhere in
-  git (benchmark evidence keeps hashes; the PR #8 replay commits
-  numeric per-input records but keeps raw texts local). Text-level
-  verification of the flagged cases still has to happen on Yoga; see
-  error_analysis.md.
-- No phrase-only arm exists yet; phrases are measured only inside the
-  full combinations.
+- The combined system's *output texts* are not stored in git
+  (benchmark evidence keeps hashes; the PR #8 replay commits
+  numeric per-input records but keeps raw texts local). Output texts
+  for the ladder runs (Source E) exist as files shared Nov 3 and were
+  text-reviewed; see error_analysis.md. Benchmark-panel output texts
+  remain local-only on Yoga.
+- The phrase-only arm is executed (Source E). Phrases are still
+  measured only inside the full combinations in the benchmark
+  replay (Source D).
 
 ## Reproduce
 
