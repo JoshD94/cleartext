@@ -22,6 +22,7 @@ mkdir -p "$evidence"
   models/tests/test_candidate_coverage_manifest.py \
   models/tests/test_slot_memory.py \
   models/tests/test_structure.py \
+  models/tests/test_compound_splitter.py \
   models/tests/test_structure_alignment.py \
   models/tests/test_structure_audit.py \
   models/tests/test_structure_expanded.py \
@@ -34,6 +35,8 @@ mkdir -p "$evidence"
   models/tests/test_sense_usage.py \
   models/tests/test_preservation.py \
   evals/test_pipeline_benchmark.py \
+  evals/test_adapter_ladder.py \
+  evals/test_checkpoints.py \
   --junitxml="$evidence/pytest.xml" | tee "$evidence/pytest.log"
 git diff --check
 printf 'PASS: focused offline checks; evidence %s\n' "$evidence"
