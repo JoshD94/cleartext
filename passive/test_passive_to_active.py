@@ -1,6 +1,6 @@
 """Run with:  python test_passive_to_active.py   (or pytest)"""
 
-from passive_to_active import to_active
+from passive_to_active import PassiveToActive, to_active
 
 CASES = [
     # --- tenses
@@ -35,17 +35,37 @@ CASES = [
      "The committee decided that the event would be canceled."),
     ("The results were analyzed by researchers, and the paper was published by Nature.",
      "Researchers analyzed the results, and Nature published the paper."),
+    # --- questions
+    ("Was the cake eaten by John?", "Did John eat the cake?"),
+    ("Were the cookies baked by your mom?", "Did your mom bake the cookies?"),
+    ("Is the letter written by your sister?", "Does your sister write the letter?"),
+    ("Has the house been sold by the owners?", "Have the owners sold the house?"),
+    ("Is the house being painted by the workers?", "Are the workers painting the house?"),
+    ("Will the game be won by our team?", "Will our team win the game?"),
+    ("Wasn't the email read by the manager?", "Didn't the manager read the email?"),
+    ("Was I helped by them?", "Did they help me?"),
+    ("Why was the cake eaten by John?", "Why did John eat the cake?"),
+    ("When will the report be finished by Maria?", "When will Maria finish the report?"),
+    ("Who was the cake eaten by?", "Who ate the cake?"),
+    ("By whom was the letter written?", "Who wrote the letter?"),
+    ("What was eaten by John?", "What did John eat?"),
+    ("Which song was sung by them?", "Which song did they sing?"),
+    ("Who was helped by them?", "Who did they help?"),
+    ("How was the bridge built by the engineers?", "How did the engineers build the bridge?"),
+    ("Can the form be signed by a parent?", "Can a parent sign the form?"),
     # --- left alone
     ("Mistakes were made.", "Mistakes were made."),
-    ("Was the cake eaten by John?", "Was the cake eaten by John?"),
+    ("Was the cake eaten?", "Was the cake eaten?"),
+    ("Is John happy?", "Is John happy?"),
     ("John ate the cake.", "John ate the cake."),
 ]
 
 
 def test_cases():
+    # placeholder=None: test the core rules; agentless passives stay unchanged.
     failures = []
     for src, expected in CASES:
-        got = to_active(src).output
+        got = to_active(src, placeholder=None).output
         if got != expected:
             failures.append((src, expected, got))
     for src, exp, got in failures:
@@ -54,13 +74,71 @@ def test_cases():
     assert not failures
 
 
+AUTO_CASES = [
+    # --- converted: "people" for general present-tense facts
+    ("English is spoken in Canada.", "People speak English in Canada."),
+    ("Rice is eaten in many countries.", "People eat rice in many countries."),
+    # --- converted: "someone" for everything else
+    ("The thief was caught.", "Someone caught the thief."),
+    ("Mistakes were made.", "Someone made mistakes."),
+    ("The house was built in 1900.", "Someone built the house in 1900."),
+    ("The car has been stolen.", "Someone has stolen the car."),
+    ("The form must be signed.", "Someone must sign the form."),
+    ("The window wasn't closed.", "Someone didn't close the window."),
+    ("Was the thief caught?", "Did someone catch the thief?"),
+    # --- left alone: states, not actions
+    ("She was born in 1990.", "She was born in 1990."),
+    ("They are married.", "They are married."),
+    ("The store is located downtown.", "The store is located downtown."),
+    ("The table is made of wood.", "The table is made of wood."),
+    ("He is known for his music.", "He is known for his music."),
+    ("I am interested in art.", "I am interested in art."),
+    # --- left alone: followed by another verb
+    ("He is said to be rich.", "He is said to be rich."),
+    ("You are not allowed to smoke here.", "You are not allowed to smoke here."),
+    # --- a "by" phrase still wins
+    ("The table was made by my father.", "My father made the table."),
+]
+
+
 def test_placeholder():
-    assert to_active("Mistakes were made.", placeholder="someone").output == "Someone made mistakes."
+    assert to_active("Mistakes were made.", placeholder="they").output == "They made mistakes."
+    assert to_active("Mistakes were made.", placeholder=None).output == "Mistakes were made."
+    assert to_active("Mistakes were made.").output == "Someone made mistakes."  # default: auto
+
+
+def test_class():
+    p2a = PassiveToActive()
+    assert p2a.transform("The cake was eaten by John.") == "John ate the cake."
+    assert p2a.transform("John ate the cake.") == "John ate the cake."
+    assert p2a.transform("The thief was caught.") == "Someone caught the thief."
+    assert p2a.transform("") == ""
+    assert p2a.transform_text(
+        "The thief was caught. He was sent to jail by the judge. It rained."
+    ) == "Someone caught the thief. The judge sent him to jail. It rained."
+    assert p2a.is_passive("The cake was eaten by John.")
+    assert p2a.is_passive("Was the cake eaten by John?")
+    assert p2a.is_passive("She was born in 1990.")
+    assert not p2a.is_passive("John ate the cake.")
+    assert PassiveToActive(placeholder=None).transform("The thief was caught.") == "The thief was caught."
+    print("class tests passed")
+
+
+def test_auto_placeholder():
+    failures = []
+    for src, expected in AUTO_CASES:
+        got = to_active(src, placeholder="auto").output
+        if got != expected:
+            failures.append((src, expected, got))
+    for src, exp, got in failures:
+        print(f"FAIL  {src}\n      expected: {exp}\n      got:      {got}")
+    print(f"{len(AUTO_CASES) - len(failures)}/{len(AUTO_CASES)} auto-placeholder cases passed")
+    assert not failures
 
 
 if __name__ == "__main__":
-    try:
-        test_cases()
-    except AssertionError:
-        pass
-    test_placeholder()
+    for test in (test_cases, test_placeholder, test_auto_placeholder, test_class):
+        try:
+            test()
+        except AssertionError:
+            print(f"{test.__name__} FAILED")

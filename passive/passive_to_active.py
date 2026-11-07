@@ -4,11 +4,16 @@ Rule-based passive -> active voice converter.
 Uses spaCy's dependency parse to find passive clauses and lemminflect to
 re-conjugate the verb.
 
-    "The cake was eaten by John."      -> "John ate the cake."
-    "The house has been sold by them." -> "They have sold the house."
-    "Mistakes were made."              -> unchanged (no agent), or
-                                          "Someone made mistakes." with
-                                          placeholder="someone"
+    from passive_to_active import PassiveToActive
+
+    p2a = PassiveToActive()
+    p2a.transform("The cake was eaten by John.")       # "John ate the cake."
+    p2a.transform("The house has been sold by them.")  # "They have sold the house."
+    p2a.transform("Mistakes were made.")               # "Someone made mistakes."
+    p2a.transform("She was born in 1990.")             # unchanged (a state)
+
+The PassiveToActive class at the bottom of this file is the public API.
+Everything above it is internal.
 
 Setup:
     pip install spacy lemminflect
@@ -18,7 +23,7 @@ Setup:
 from dataclasses import dataclass, field
 
 import spacy
-from lemminflect import getInflection
+from lemminflect import getAllLemmas, getInflection
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -29,7 +34,29 @@ OBJ_TO_SUBJ = {v: k for k, v in SUBJ_TO_OBJ.items()}
 
 MODALS = {"will", "would", "can", "could", "may", "might", "shall", "should", "must"}
 REL_PRONOUNS = {"that", "which", "who", "whom"}
-NO_SPACE_BEFORE = {",", ".", ";", ":", "?", "!", "'s", "n't", "'", ")", "%"}
+# Passives that describe a state rather than an action. Without a "by"
+# phrase these have no natural active form ("She was born in 1990" is not
+# "Someone bore her in 1990"), so they are never given a placeholder subject.
+# None of these block conversion when there IS a "by" phrase.
+STATIVE_LEMMAS = {
+    "bear", "marry", "divorce", "engage", "locate", "situate", "base",
+    "suppose", "involve", "relate", "dress", "name", "call", "compose",
+    "interest", "concern", "tire", "bore", "scare", "frighten", "worry",
+    "please", "satisfy", "disappoint", "excite", "amaze", "shock", "embarrass",
+    "confuse", "puzzle", "delight", "thrill", "upset", "annoy", "depress",
+}
+# Lemmas that are stative only with a certain preposition:
+# "made of wood", "known for his music", "covered in dust".
+STATIVE_WITH_PREP = {
+    "make": {"of", "from"},
+    "know": {"for", "as"},
+    "cover": {"in", "with"},
+    "fill": {"with"},
+    "use": {"to"},
+    "equip": {"with"},
+}
+
+NO_SPACE_BEFORE ={",", ".", ";", ":", "?", "!", "'s", "n't", "'", ")", "%"}
 
 
 @dataclass
@@ -80,6 +107,24 @@ def tense_of(tag):
     return "past" if tag == "VBD" else "pres"
 
 
+def is_real_proper_noun(tok):
+    """
+    Capitalized words at the start of a sentence are often mis-tagged as
+    proper nouns ("Rice is eaten..."). Treat a sentence-initial "proper noun"
+    as a common noun if it's in the English dictionary and isn't part of a
+    longer name. Trade-off: names that are also words ("Bill", "Mark") get
+    lowercased when they start a sentence alone.
+    """
+    if tok.pos_ != "PROPN":
+        return False
+    if tok.i != tok.sent.start:
+        return True
+    nxt = tok.doc[tok.i + 1] if tok.i + 1 < len(tok.doc) else None
+    if nxt is not None and nxt.text[:1].isupper():  # "Apple Music", "New York"
+        return True
+    return not getAllLemmas(tok.text.lower())
+
+
 def phrase(tokens, case_map, lower_first=False):
     words = []
     for i, t in enumerate(tokens):
@@ -88,7 +133,7 @@ def phrase(tokens, case_map, lower_first=False):
             w = case_map[w.lower()]
             if w == "i":
                 w = "I"
-        elif i == 0 and lower_first and t.pos_ != "PROPN" and w != "I":
+        elif i == 0 and lower_first and w != "I" and not is_real_proper_noun(t):
             w = w.lower()
         words.append(w)
     return words
@@ -127,7 +172,7 @@ def find_passives(doc):
         yield tok, subj, auxpass
 
 
-def build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn):
+def build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn, question=False):
     """
     Map the passive verb group onto an active one.
 
@@ -151,9 +196,10 @@ def build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn):
 
     if not other and form in ("VBD", "VBZ", "VBP"):
         # The passive "be" was the finite verb.
-        if neg:  # "was not eaten" -> "did not eat"
+        if neg or question:  # "was not eaten" -> "did not eat"; questions need "do"
             words.append(agree("do", tense_of(form), pn))
-            words.append(neg.text)
+            if neg:
+                words.append(neg.text)
             words.extend(a.text for a in inner_adverbs)
             words.append(lemma)
             return words
@@ -168,10 +214,42 @@ def build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn):
     return words
 
 
-def convert_one(doc, placeholder=None):
+def agentless_skip_reason(verb, auxpass, auxes, placeholder):
+    """Why an agentless passive should be left alone, or None to convert it."""
+    if not placeholder:
+        return "no agent (no 'by ...' phrase)"
+    if verb.lemma_ in STATIVE_LEMMAS:
+        return "describes a state, not an action"
+    preps = {c.lower_ for c in verb.children if c.dep_ in ("prep", "aux")}
+    if preps & STATIVE_WITH_PREP.get(verb.lemma_, set()):
+        return "describes a state, not an action"
+    if any(c.dep_ in ("xcomp", "oprd") for c in verb.children):
+        # "is said to be rich", "are not allowed to smoke", "is located downtown"
+        return "passive with a following verb or complement"
+    return None
+
+
+def choose_placeholder(auxpass, auxes, placeholder):
+    """
+    placeholder="auto": "people" for general facts in the simple present
+    ("English is spoken in Canada" -> "People speak English in Canada"),
+    "someone" for everything else ("The thief was caught" -> "Someone caught
+    the thief"). Any other value is used as given.
+    """
+    if placeholder != "auto":
+        return placeholder
+    simple_present = auxpass.tag_ in ("VBZ", "VBP") and len(auxes) == 1
+    return "people" if simple_present else "someone"
+
+
+def convert_one(doc, placeholder=None, question_prefix=None):
     """
     Convert the first convertible passive clause.
     Returns (new_text, before_clause, after_clause, skipped) or None.
+
+    question_prefix: when set (a list of words, possibly empty, such as
+    ["Why"]), `doc` is a statement made from a question, and the result is
+    put back into question order.
     """
     skipped = []
     for verb, subj, auxpass in find_passives(doc):
@@ -192,9 +270,11 @@ def convert_one(doc, placeholder=None):
         agent_obj = None
         if agent is not None:
             agent_obj = next((c for c in agent.children if c.dep_ == "pobj"), None)
-        if agent_obj is None and not placeholder:
-            skipped.append((clause, "no agent (no 'by ...' phrase)"))
-            continue
+        if agent_obj is None:
+            reason = agentless_skip_reason(verb, auxpass, auxes, placeholder)
+            if reason:
+                skipped.append((clause, reason))
+                continue
 
         neg = next((c for c in verb.children if c.dep_ == "neg"), None)
         inner_adverbs = [
@@ -203,8 +283,17 @@ def convert_one(doc, placeholder=None):
         ]
         particle = next((c for c in verb.children if c.dep_ == "prt"), None)
 
+        # "What was eaten by John?" -> "What did John eat?"
+        wh_subject = (
+            question_prefix is None
+            and doc[-1].text == "?"
+            and subj.left_edge.i == 0
+            and subj.left_edge.tag_ in ("WDT", "WP", "WP$")
+        )
+        question = question_prefix is not None or wh_subject
+
         # New subject = old agent (or placeholder).
-        sentence_start = subj.left_edge.i == subj.sent.start
+        sentence_start = subj.left_edge.i == subj.sent.start and not question
         if agent_obj is not None:
             new_subj_toks = list(agent_obj.subtree)
             new_subj = phrase(new_subj_toks, OBJ_TO_SUBJ)
@@ -213,14 +302,15 @@ def convert_one(doc, placeholder=None):
                 pn = {"i": "1sg", "he": "3sg", "she": "3sg"}.get(
                     OBJ_TO_SUBJ[agent_obj.lower_], "pl")
         else:
-            new_subj = [placeholder]
-            pn = "3sg"
+            word = choose_placeholder(auxpass, auxes, placeholder)
+            new_subj = [word]
+            pn = "pl" if word in ("people", "they", "we", "you") else "3sg"
         if sentence_start and new_subj:
             new_subj[0] = new_subj[0][0].upper() + new_subj[0][1:]
 
         # New object = old subject.
         subj_toks = list(subj.subtree)
-        relative = len(subj_toks) == 1 and subj.lower_ in REL_PRONOUNS
+        relative = len(subj_toks) == 1 and subj.lower_ in REL_PRONOUNS and not wh_subject
         # "It was decided by X that ..." -> "X decided that ...": the "it"
         # is a placeholder for the that-clause, so it is dropped.
         expletive = subj.lower_ == "it" and any(
@@ -228,9 +318,11 @@ def convert_one(doc, placeholder=None):
         if relative or expletive:
             new_obj = []
         else:
-            new_obj = phrase(subj_toks, SUBJ_TO_OBJ, lower_first=sentence_start)
+            new_obj = phrase(subj_toks, SUBJ_TO_OBJ,
+                             lower_first=sentence_start or question_prefix is not None)
 
-        verb_group = build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn)
+        verb_group = build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn,
+                                      question=question)
         if particle is not None:
             verb_group.append(particle.text)
 
@@ -243,6 +335,21 @@ def convert_one(doc, placeholder=None):
         if agent is not None:
             removed |= {t.i for t in agent.subtree}
         removed.discard(verb.i)
+
+        if question:
+            # Front the first helper verb: "did John eat", "has she sold".
+            front, tail = verb_group[0], verb_group[1:]
+            if tail and tail[0] == "n't":  # "didn't John eat"
+                front, tail = front + "n't", tail[1:]
+            after = [t.text for t in doc
+                     if t.i > verb.i and t.i not in removed and not t.is_punct]
+            if wh_subject:
+                words = new_obj + [front] + new_subj + tail + after + ["?"]
+            else:
+                words = list(question_prefix) + [front] + new_subj + tail + new_obj + after + ["?"]
+            words[0] = words[0][0].upper() + words[0][1:]
+            text = detokenize(words)
+            return text, clause, text, skipped
 
         words, clause_words = [], []
         for t in doc:
@@ -266,13 +373,108 @@ def convert_one(doc, placeholder=None):
     return None, None, None, skipped
 
 
-def to_active(text, placeholder=None, max_passes=5):
-    """
-    Convert passive clauses in `text` to active voice.
+FRONTABLE = {"am", "is", "are", "was", "were", "has", "have", "had"} | MODALS
+VERB_PART = {"be", "been", "being", "not", "n't"}
+WH_AGENT_PLACEHOLDER = "someone"
 
-    placeholder: if set (e.g. "someone"), agentless passives are converted
-                 using it as the subject. Otherwise they are left unchanged.
+
+def question_to_statement(text):
     """
+    Undo the inversion in a passive question so it can be parsed reliably.
+
+        "Was the cake eaten by John?"   -> ([], None, "the cake was eaten by John.")
+        "Why was the cake eaten by X?"  -> (["Why"], None, "the cake was eaten by X.")
+        "Who was the cake eaten by?"    -> ([], ["Who"], "the cake was eaten by someone.")
+        "By whom was the cake eaten?"   -> ([], ["Who"], "the cake was eaten by someone.")
+
+    Returns (prefix, wh_agent, statement), or None if `text` isn't an
+    inverted question.
+    """
+    toks = list(nlp(text))
+    if len(toks) < 4 or toks[-1].text != "?":
+        return None
+    aux_i = next((i for i, t in enumerate(toks) if t.lower_ in FRONTABLE), None)
+    if aux_i is None or aux_i > 3:
+        return None
+    prefix = [t.text for t in toks[:aux_i]]
+
+    j = aux_i + 1
+    neg = []
+    if toks[j].lower_ == "n't":
+        neg, j = [toks[j].text], j + 1
+
+    # The subject runs until the next verb part, adverb or participle.
+    k = j
+    while k < len(toks) - 1 and not (
+        toks[k].lower_ in VERB_PART or toks[k].tag_ in ("VBN", "VBD", "RB", "MD")
+    ):
+        k += 1
+    if k == j:
+        return None
+    subj = [t.text for t in toks[j:k]]
+    rest = [t.text for t in toks[k:-1]]
+    if subj[0] != "I" and toks[j].pos_ != "PROPN":
+        subj[0] = subj[0].lower()
+
+    # A question word asking about the agent: "By whom ...?" / "Who ... by?"
+    wh_agent = None
+    if len(prefix) >= 2 and prefix[0].lower() == "by":
+        wh_agent, prefix = prefix[1:], []
+    elif prefix and rest and rest[-1].lower() == "by":
+        wh_agent, prefix, rest = prefix, [], rest[:-1]
+    if wh_agent:
+        wh_agent = ["Who" if w.lower() == "whom" else w for w in wh_agent]
+        rest += ["by", WH_AGENT_PLACEHOLDER]
+
+    statement = detokenize(subj + [toks[aux_i].lower_] + neg + rest + ["."])
+    return prefix, wh_agent, statement
+
+
+def question_to_active(text, placeholder=None):
+    """Convert an inverted passive question. Returns a Result or None."""
+    parsed = question_to_statement(text)
+    if parsed is None:
+        return None
+    prefix, wh_agent, statement = parsed
+    doc = nlp(statement)
+    result = Result(original=text, output=text)
+
+    if wh_agent:
+        # "the cake was eaten by someone." -> "Someone ate the cake." -> "Who ate the cake?"
+        new_text, before, _, skipped = convert_one(doc)
+        if new_text is None or not new_text.lower().startswith(WH_AGENT_PLACEHOLDER):
+            result.skipped = skipped or [(text, "could not convert question")]
+            return result
+        wh = " ".join(wh_agent)
+        new_text = wh[0].upper() + wh[1:] + new_text[len(WH_AGENT_PLACEHOLDER):]
+        new_text = new_text.rstrip(".") + "?"
+    else:
+        new_text, before, _, skipped = convert_one(doc, placeholder, question_prefix=prefix)
+        if new_text is None:
+            result.skipped = skipped
+            return result
+
+    result.output = new_text
+    result.changes.append((text, new_text))
+    return result
+
+
+def to_active(text, placeholder="auto", max_passes=5):
+    """
+    Convert passive clauses in one sentence to active voice.
+
+    placeholder: what to do with passives that have no "by" phrase.
+        "auto" (default) - use "people" for general present-tense facts and
+                           "someone" otherwise; skip passives that describe
+                           a state ("She was born in 1990").
+        None             - leave them unchanged.
+        any word       - use that word as the subject (state passives are
+                         still skipped).
+    """
+    question = question_to_active(text, placeholder)
+    if question is not None:
+        return question
+
     result = Result(original=text, output=text)
     current = text
     for _ in range(max_passes):
@@ -287,12 +489,76 @@ def to_active(text, placeholder=None, max_passes=5):
     return result
 
 
+# ------------------------------------------------------------ public API
+
+class PassiveToActive:
+    """
+    Turns passive sentences into active ones. This is the piece to plug
+    into the bigger simplification tool.
+
+        from passive_to_active import PassiveToActive
+
+        p2a = PassiveToActive()
+        p2a.transform("The cake was eaten by John.")    # "John ate the cake."
+        p2a.transform("John ate the cake.")             # unchanged
+        p2a.transform_text("The thief was caught. He was sent to jail by the judge.")
+        # "Someone caught the thief. The judge sent him to jail."
+
+    Sentences that aren't passive, or can't be converted safely, come back
+    exactly as they went in, so it's safe to run on every sentence.
+
+    placeholder: subject for passives with no "by" phrase.
+        "auto" (default) - "people" for general facts, "someone" otherwise
+        None             - leave those sentences unchanged
+        any word         - always use that word
+    """
+
+    name = "passive_to_active"
+
+    def __init__(self, placeholder="auto"):
+        self.placeholder = placeholder
+
+    def transform(self, sentence):
+        """One sentence in, one sentence out."""
+        if not sentence or not sentence.strip():
+            return sentence
+        return to_active(sentence, placeholder=self.placeholder).output
+
+    def transform_text(self, text):
+        """A paragraph or longer text: splits it into sentences and transforms each."""
+        out = []
+        for sent in nlp(text).sents:
+            trailing = sent.text_with_ws[len(sent.text):]
+            out.append(self.transform(sent.text) + trailing)
+        return "".join(out)
+
+    def is_passive(self, sentence):
+        """True if the sentence contains a passive clause (converted or not)."""
+        if any(True for _ in find_passives(nlp(sentence))):
+            return True
+        parsed = question_to_statement(sentence)
+        return bool(parsed) and any(True for _ in find_passives(nlp(parsed[2])))
+
+    def explain(self, sentence):
+        """
+        Full details for debugging: a Result with .output, .changed,
+        .changes (before/after clauses) and .skipped (clause, reason).
+        """
+        return to_active(sentence, placeholder=self.placeholder)
+
+
 if __name__ == "__main__":
     import sys
 
-    sentences = sys.argv[1:] or ["The cake was eaten by John."]
+    args = sys.argv[1:]
+    placeholder = "auto"
+    if args and args[0].startswith("--placeholder="):
+        value = args.pop(0).split("=", 1)[1]
+        placeholder = None if value.lower() == "none" else value
+    p2a = PassiveToActive(placeholder=placeholder)
+    sentences = args or ["The cake was eaten by John."]
     for s in sentences:
-        r = to_active(s)
+        r = p2a.explain(s)
         print(f"{s}\n  -> {r.output}")
         for clause, reason in r.skipped:
             print(f"     (skipped: {reason})")
