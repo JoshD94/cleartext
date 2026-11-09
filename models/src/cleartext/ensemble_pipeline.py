@@ -14,7 +14,7 @@ from .features import nlp, pronunciations, word_features, sentence_features
 from wordfreq import zipf_frequency
 from .lexical import guardrails, PROTECTED
 from .generation import WordNetGenerator
-from .rewrites import structural, phrase_rewrite
+from .rewrites import structural, phrase_rewrite, negation_rewrite
 from .phrase_complexity import phrase_features
 from . import ensemble as E
 from . import detection as D
@@ -533,6 +533,7 @@ class EnsembleClearText:
         structure_rewriter=None,
         grammar_corrector=None,
         guardrails=True,
+        negation=False,
     ):
         original_text = text
         grammar_details = {}
@@ -557,6 +558,37 @@ class EnsembleClearText:
             from .technical_terms import detect_terms, preserved_terms
 
             term_spans = detect_terms(original_doc)
+        # Negation runs before structure: structural() abstains on any
+        # sentence containing "not", so de-negating first lets it fire
+        # on sentences it would otherwise skip. Opt-in: new stages stay
+        # off until the team adopts them (see models/docs/NEGATION.md).
+        negation_details = {"on": False}
+        if negation:
+            before = current
+            current, changes = negation_rewrite(current)
+            negation_details = {
+                "on": True,
+                "before": before,
+                "after": current,
+                "changed": bool(changes),
+                "rules": [c.get("rule") for c in changes],
+            }
+            edits += changes
+            if (
+                protect_terms
+                and not preserved_terms(original_doc, current, term_spans)["pass"]
+            ):
+                current = before
+                if changes:
+                    edits = edits[: -len(changes)]
+                blocked_term_stages.append("negation")
+                negation_details.update(
+                    {
+                        "after": before,
+                        "changed": False,
+                        "reason": "A detected technical term would change.",
+                    }
+                )
         if structure:
             if structure_rewriter is None:
                 current, changes = structural(current)
@@ -699,8 +731,18 @@ class EnsembleClearText:
         literal_blocked = guardrails and not literal_check["pass"]
         if literal_blocked:
             discarded_structure = dict(structure_details)
+            discarded_negation = dict(negation_details)
             current = text
             edits = []
+            if negation_details["on"]:
+                negation_details = {
+                    **negation_details,
+                    "after": text,
+                    "changed": False,
+                    "reason": "A code snippet would change.",
+                    "blocked_by": "code_literals",
+                    "attempt": discarded_negation,
+                }
             if structure_details["on"]:
                 structure_details = {
                     **structure_details, "after": text, "changed": False,
@@ -737,9 +779,10 @@ class EnsembleClearText:
             "edits": grammar_edits + edits,
             "trace": trace,
             "structure": structure_details,
+            "negation": negation_details,
             **levels,
             **term_details,
             **grammar_details,
             **literal_details,
-            "limits": "At most one syntax rule, one phrase and one word edit. Fit is a probability, not a meaning certificate.",
+            "limits": "At most one negation edit per sentence, one syntax rule, one phrase and one word edit. Fit is a probability, not a meaning certificate.",
         }
