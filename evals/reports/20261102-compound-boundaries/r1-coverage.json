@@ -1,0 +1,82 @@
+{
+  "head": "388fe23ec8b3329cfb44ce17d1d75d0cbfec19a3",
+  "baseline_head": "d16296ba3e22f356554945dd03d377794883e7f7",
+  "host": "joshuadirga-Yoga-7-14IRL8",
+  "python": "3.12.14",
+  "parser": {
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0"
+  },
+  "panels": {
+    "authored": {
+      "passages": 18,
+      "before_changed": 0,
+      "after_changed": 0,
+      "after_long_only_changed": 0,
+      "different_from_before": 0,
+      "accepted_boundaries": 0,
+      "boundary_reasons": {
+        "embedded_scope_crosses_or_is_unsupported": 1,
+        "negation_modality_or_correlative": 3
+      }
+    },
+    "sourced": {
+      "passages": 90,
+      "before_changed": 0,
+      "after_changed": 0,
+      "after_long_only_changed": 0,
+      "different_from_before": 0,
+      "accepted_boundaries": 0,
+      "boundary_reasons": {
+        "literal_quote_or_parenthetical": 59,
+        "embedded_scope_crosses_or_is_unsupported": 11,
+        "negation_modality_or_correlative": 75,
+        "not_matrix_coordination": 45,
+        "unsupported_sentence_shape": 6,
+        "passage_rollback": 1,
+        "unsafe_shared_subject_or_predicate": 1
+      }
+    }
+  },
+  "authored_mechanism_controls": [
+    {
+      "source": "Alice, who wrote the report, checked the figures, and Bob signed the document.",
+      "before": "Alice, who wrote the report, checked the figures, and Bob signed the document.",
+      "after": "Alice, who wrote the report, checked the figures. Bob signed the document."
+    },
+    {
+      "source": "Alice checked the report, and the analyst who wrote it reviewed the figures.",
+      "before": "Alice checked the report, and the analyst who wrote it reviewed the figures.",
+      "after": "Alice checked the report. The analyst who wrote it reviewed the figures."
+    },
+    {
+      "source": "Alice, who wrote and revised the report, checked the figures, and Bob signed the document.",
+      "before": "Alice, who wrote and revised the report, checked the figures, and Bob signed the document.",
+      "after": "Alice, who wrote and revised the report, checked the figures. Bob signed the document."
+    }
+  ],
+  "joint_subject_bad_candidate": {
+    "before_pass": true,
+    "after_pass": false,
+    "after_failed": [
+      "subject_groups"
+    ]
+  },
+  "all_frozen_inputs_rechecked": true,
+  "limits": "Coverage and authored mechanism checks, not semantic accuracy. These 108 inspected passages are development data. Thresholds 20/6 are illustrative eligibility settings, not tuned quality cutoffs.",
+  "verification": {
+    "entrypoint": "scripts/verify",
+    "tests_passed": 479,
+    "subtests_passed": 13
+  },
+  "job": {
+    "id": "cea8158c7fc5",
+    "runtime_seconds": 73.28802943229675,
+    "peak_ram_gib": 0.911590576171875
+  },
+  "scoring": {
+    "native_embedding_and_nli_rerun": false,
+    "reason": "No panel outputs differed from the baseline splitter.",
+    "changed_only_metrics": null
+  }
+}

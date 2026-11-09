@@ -86,6 +86,12 @@ def main():
             sys.exit(2)
     _ = default_ablation_order  # keep import used / documented
 
+    from evals.model_adapter import COMPOUND_SYSTEMS, register_compound_systems
+    if set(system_names) & set(COMPOUND_SYSTEMS):
+        if args.model_url:
+            ap.error("compound variants require local import; the demo is unchanged")
+        register_compound_systems(system_names, run=args.model_run)
+
     results = run_evaluation(system_names, passages,
                              embedding_model=args.embedding_model,
                              nli_model=args.nli_model)
