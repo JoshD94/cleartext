@@ -1,0 +1,93 @@
+{
+ "phase": "A",
+ "design": "one-factor-at-a-time screen from the v7 baseline (Week 7 full_guarded)",
+ "why": "Each non-baseline level changed alone isolates its main effect on FK and NLI at 10 configs instead of 192; factors that move FK or NLI go to phase B.",
+ "unavailable_levels": {
+  "phrases=simpleppdb": "no SimplePPDB phrase inventory on main; the authored inventory is not mined from PPDB"
+ },
+ "excluded": {
+  "passive": "teammate branch pending; add via FACTORS/LEGACY and rerun incrementally"
+ },
+ "configs": [
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "off",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "off",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "on",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "on",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "on"
+  }
+ ]
+}
