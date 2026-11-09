@@ -199,3 +199,22 @@ def test_sari_matches_reference_implementation():
     assert corpus_sari(["a b c."], ["a b c."], [["a b c."]]) == pytest.approx(100.0)
     with pytest.raises(ValueError):
         corpus_sari(["a"], ["a", "b"], [["a"]])
+
+
+def test_versus_baseline_flags_active_levels():
+    base, other, quiet = S.config_id(S.BASELINE), S.config_id({**S.BASELINE, "words": "off"}), \
+        S.config_id({**S.BASELINE, "grammar": "on"})
+    passages = [{"id": str(k), "original": "x"} for k in range(4)]
+    outs = lambda text: {p["id"]: {"output": text} for p in passages}
+    complete = {base: (outs("a"), {}), other: (outs("b"), {}), quiet: (outs("a"), {})}
+    summaries = {base: summary(13.0), other: summary(13.01), quiet: summary(13.0)}
+    result = S.versus_baseline(passages, complete, summaries)
+    assert result[other]["active"] and result[other]["outputs_differ"] == 4
+    assert not result[quiet]["active"] and result[quiet]["fk_grade"] == 0
+
+
+def test_noninitial_entities_ignore_sentence_starts():
+    src = "However, Alice met Bob. Similarly the cat sat."
+    assert S.noninitial_entities_preserved(src, "But, Alice met Bob. Also the cat sat.") == 1.0
+    assert S.noninitial_entities_preserved(src, "However, she met Bob. Similarly the cat sat.") == 0.5
+    assert S.noninitial_entities_preserved("No names here.", "None.") == 1.0

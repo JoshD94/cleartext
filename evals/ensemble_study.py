@@ -622,6 +622,19 @@ def _mean(values):
     return sum(values) / len(values) if values else None
 
 
+def noninitial_entities_preserved(original, output):
+    """Alternative (post hoc) entity check: capitalized spans that do not start
+    a sentence, so discourse words like "However" are not counted as names."""
+    import re
+    from .preservation import _ENTITY_RE, split_sentences
+    starts = {a + len(original[a:b]) - len(original[a:b].lstrip("\"'([“‘ \n\t")) for a, b in split_sentences(original)}
+    items = list(dict.fromkeys(m.group() for m in _ENTITY_RE.finditer(original) if m.start() not in starts))
+    if not items:
+        return 1.0
+    low = output.lower()
+    return sum(bool(re.search(r"(?<!\w)" + re.escape(e.lower()) + r"(?!\w)", low)) for e in items) / len(items)
+
+
 def summarize(passages, outputs, metrics):
     """Aggregate one config: outputs/metrics are {passage_id: ...}."""
     rows = [(p, outputs[p["id"]], metrics.get(p["id"])) for p in passages]
@@ -645,6 +658,7 @@ def summarize(passages, outputs, metrics):
         "sent_nli_mean": _mean(sent), "sent_nli_below_080": sum(v is None or v < 0.80 for v in sent),
         "sent_nli_changed_min_mean": _mean(m["sentence_nli"]["sent_nli_changed_min"] for _, _, m in rows if m),
         "entities": _mean(pres(m, "entities_preserved") for _, _, m in rows),
+        "entities_noninitial": _mean(noninitial_entities_preserved(p["original"], o["output"]) for p, o, _ in rows),
         "numbers_all": all(pres(m, "numbers_preserved") == 1.0 for _, _, m in rows),
         "numbers_failed": sum(pres(m, "numbers_preserved") != 1.0 for _, _, m in rows),
         "negations_all": all(pres(m, "negations_preserved") == 1.0 for _, _, m in rows),
@@ -659,14 +673,14 @@ def summarize(passages, outputs, metrics):
     return out
 
 
-def gates(summary, rule_based_entities, nli_key="nli_mean", below_key="nli_below_080"):
+def gates(summary, rule_based_entities, nli_key="nli_mean", below_key="nli_below_080", entity_key="entities"):
     """Frozen SELECTION_RULE.md gates. Keys are swappable only for labeled alternatives."""
     limit = 0.05 * summary["n"]
     return {
         "nli_mean_ge_095": summary[nli_key] is not None and summary[nli_key] >= 0.95,
         "nli_below_080_le_5pct": summary[below_key] <= limit,
         "numbers_negations_all": summary["numbers_all"] and summary["negations_all"],
-        "entities_ge_rule_based": summary["entities"] is not None and summary["entities"] >= rule_based_entities,
+        "entities_ge_rule_based": summary[entity_key] is not None and summary[entity_key] >= rule_based_entities,
     }
 
 
@@ -733,6 +747,23 @@ def collect(states, plan, panel, names, need_metrics=True):
     return passages, complete, pending
 
 
+def versus_baseline(passages, complete, summaries, base=None):
+    """Paired differences from the v7 baseline and the pre-registered activity test."""
+    base = base or config_id(BASELINE)
+    if base not in complete:
+        return {}
+    b, out = summaries[base], {}
+    for name, (outputs, _) in complete.items():
+        s = summaries[name]
+        delta = {k: (s[k] - b[k]) if s[k] is not None and b[k] is not None else None
+                 for k in ("fk_grade", "nli_mean", "sent_nli_mean")}
+        differs = sum(outputs[p["id"]]["output"] != complete[base][0][p["id"]]["output"] for p in passages)
+        active = (abs(delta["fk_grade"] or 0) >= 0.02 or abs(delta["nli_mean"] or 0) >= 0.005
+                  or abs(delta["sent_nli_mean"] or 0) >= 0.005 or differs >= 3)
+        out[name] = {**delta, "outputs_differ": differs, "active": active}
+    return out
+
+
 def report(args):
     from .readability import flesch_kincaid_grade
     from .sari import corpus_sari
@@ -757,9 +788,23 @@ def report(args):
         "configs": summaries, "pending": pending, "asset_sari": sari, "asset_fk_grade": asset_fk,
         "gates": {n: gates(s, rb) for n, s in summaries.items() if n not in REFERENCES},
         "frozen_selection": select(summaries, rb, sari),
+        # Post hoc, labeled alternatives (SELECTION_RULE.md stays frozen).
+        "alternative_noninitial_entities": {
+            "rule": "Frozen gates 1-3; gate 4 uses non-sentence-initial capitalized spans vs rule_based",
+            "rule_based_entities": summaries["rule_based"]["entities_noninitial"],
+            "gates": {n: gates(s, summaries["rule_based"]["entities_noninitial"], entity_key="entities_noninitial")
+                      for n, s in summaries.items() if n not in REFERENCES},
+            "selection": select(summaries, summaries["rule_based"]["entities_noninitial"], sari,
+                                entity_key="entities_noninitial")},
+        "alternative_sentence_nli": {
+            "rule": "Gates 1-2 on sentence-level aligned NLI; gate 4 on non-sentence-initial entities",
+            "selection": select(summaries, summaries["rule_based"]["entities_noninitial"], sari,
+                                nli_key="sent_nli_mean", below_key="sent_nli_below_080",
+                                entity_key="entities_noninitial")},
         "pareto_fk_vs_nli": pareto({n: s for n, s in summaries.items()}),
         "pareto_fk_vs_sentence_nli": pareto(summaries, y="sent_nli_mean"),
         "rule_based_entities": rb,
+        "versus_baseline": versus_baseline(passages, complete, summaries),
         "signatures": dict(zip(("generation", "scoring"), signatures(plan))),
     }
     args.out.mkdir(parents=True, exist_ok=True)

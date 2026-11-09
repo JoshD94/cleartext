@@ -1,0 +1,79 @@
+{
+ "phase": "B",
+ "design": "full factorial over the phase A active levels: words {v7, contextual, off} x structure {rules, t5, compound_tagger}; other factors at baseline",
+ "why": "Phase A activity test (DESIGN.md): active = words=contextual, words=off, structure=t5, structure=compound_tagger. Inactive: phrases=off (1 passage), structure=off (0; old rules never fire), negation=on (0), grammar=on (0; LanguageTool changes 0/449 inputs), terms=on (0). 3x3 = 9 configs <= 40, so the rule selects the full factorial; it checks every words x structure interaction.",
+ "configs": [
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  }
+ ]
+}
