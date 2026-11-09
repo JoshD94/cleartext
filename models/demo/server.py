@@ -105,6 +105,11 @@ def trace(text, opts, structure_details, pipeline_result=None):
     out = {}
     rollback = bool((pipeline_result or {}).get("literal_preservation", {}).get("blocked"))
     current = text
+    # 0. Negation: flatten "not un-" before structure sees the sentence
+    neg = (pipeline_result or {}).get("negation", {"on": False})
+    out["negation"] = neg
+    if neg.get("on"):
+        current = neg["after"]
     # 1. Sentence structure
     out["structure"] = structure_details
     if structure_details["on"]:
@@ -263,6 +268,7 @@ def simplify(req):
         "max_edits": int(clamp(req.get("max_edits"), 0, 5, 1)),
         "structure": bool(req.get("structure")),
         "phrases": bool(req.get("phrases")),
+        "negation": bool(req.get("negation")),
     }
     backend = req.get("structure_backend", "rules")
     if backend not in {"rules", "ranker"}:
@@ -282,6 +288,7 @@ def simplify(req):
             text,
             structure=opts["structure"],
             phrases=opts["phrases"],
+            negation=opts["negation"],
             max_word_edits=opts["max_edits"],
             structure_rewriter=RANKER if backend == "ranker" else None,
         )
