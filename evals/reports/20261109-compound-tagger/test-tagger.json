@@ -1,0 +1,33 @@
+{
+  "unlabelled_sentences": 3138,
+  "unlabelled_split": 218,
+  "positive_sentences": 431,
+  "positive_split": 86,
+  "positive_boundary_correct": 82,
+  "positive_exact": 57,
+  "positive_recall": 0.1902552204176334,
+  "positive_boundary_precision": 0.9534883720930233,
+  "positive_exact_rate_of_splits": 0.6627906976744186,
+  "unlabelled_split_rate": 0.06947100063734862,
+  "boundary_reasons": {
+    "not_matrix_coordination": 2837,
+    "embedded_scope_crosses_or_is_unsupported": 628,
+    "literal_quote_or_parenthetical": 608,
+    "unsafe_shared_subject_or_predicate": 414,
+    "accepted": 304,
+    "leading_modifier_scope": 273,
+    "negation_modality_or_correlative": 93,
+    "relative_requires_independent_subjects": 80,
+    "preservation_check_failed": 74,
+    "incomplete_clause": 50,
+    "unsupported_sentence_shape": 30,
+    "purpose_or_missing_clause": 30,
+    "so_requires_comma": 29
+  },
+  "file": "test.tsv",
+  "guards": "scoped",
+  "limit": 0,
+  "tagger": "boundary-tagger.joblib (local)",
+  "threshold": 0.4,
+  "seconds": 150.3
+}

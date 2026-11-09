@@ -1,0 +1,33 @@
+{
+  "unlabelled_sentences": 3138,
+  "unlabelled_split": 70,
+  "positive_sentences": 431,
+  "positive_split": 34,
+  "positive_boundary_correct": 33,
+  "positive_exact": 25,
+  "positive_recall": 0.0765661252900232,
+  "positive_boundary_precision": 0.9705882352941176,
+  "positive_exact_rate_of_splits": 0.7352941176470589,
+  "unlabelled_split_rate": 0.022307202039515615,
+  "boundary_reasons": {
+    "literal_quote_or_parenthetical": 1977,
+    "not_matrix_coordination": 1696,
+    "negation_modality_or_correlative": 698,
+    "embedded_scope_crosses_or_is_unsupported": 472,
+    "unsafe_shared_subject_or_predicate": 261,
+    "leading_modifier_scope": 124,
+    "accepted": 104,
+    "relative_requires_independent_subjects": 87,
+    "unsupported_sentence_shape": 30,
+    "incomplete_clause": 20,
+    "purpose_or_missing_clause": 18,
+    "so_requires_comma": 14,
+    "preservation_check_failed": 5
+  },
+  "file": "test.tsv",
+  "guards": "strict",
+  "limit": 0,
+  "tagger": null,
+  "threshold": null,
+  "seconds": 141.6
+}

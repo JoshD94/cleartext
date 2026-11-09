@@ -23,6 +23,7 @@ mkdir -p "$evidence"
   models/tests/test_slot_memory.py \
   models/tests/test_structure.py \
   models/tests/test_compound_splitter.py \
+  models/tests/test_boundary_tagger.py \
   models/tests/test_structure_alignment.py \
   models/tests/test_structure_audit.py \
   models/tests/test_structure_expanded.py \

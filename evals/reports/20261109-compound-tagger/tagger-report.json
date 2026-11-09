@@ -1,0 +1,173 @@
+{
+  "train_sentences": 71395,
+  "train_connectors": 109683,
+  "train_positives": 8992,
+  "tune_sentences": 3694,
+  "tune_connectors": 5693,
+  "tune_positives": 455,
+  "stride": 10,
+  "unlabelled_weight": 0.3,
+  "threshold": 0.4,
+  "curve": {
+    "0.2": {
+      "labelled_precision": 0.8822170900692841,
+      "labelled_recall": 0.8395604395604396,
+      "unlabelled_flag_rate": 0.3012535382126971
+    },
+    "0.3": {
+      "labelled_precision": 0.9269662921348315,
+      "labelled_recall": 0.7252747252747253,
+      "unlabelled_flag_rate": 0.21269712899312576
+    },
+    "0.4": {
+      "labelled_precision": 0.9493243243243243,
+      "labelled_recall": 0.6175824175824176,
+      "unlabelled_flag_rate": 0.14233724221593205
+    },
+    "0.5": {
+      "labelled_precision": 0.9802955665024631,
+      "labelled_recall": 0.43736263736263736,
+      "unlabelled_flag_rate": 0.08572583906186818
+    },
+    "0.6": {
+      "labelled_precision": 1.0,
+      "labelled_recall": 0.23076923076923078,
+      "unlabelled_flag_rate": 0.043671653861706426
+    },
+    "0.7": {
+      "labelled_precision": 1.0,
+      "labelled_recall": 0.04395604395604396,
+      "unlabelled_flag_rate": 0.006267691063485645
+    },
+    "0.8": {
+      "labelled_precision": 0.0,
+      "labelled_recall": 0.0,
+      "unlabelled_flag_rate": 0.0
+    }
+  },
+  "top_split": [
+    [
+      "next_word=one",
+      1.208
+    ],
+    [
+      "conn+comma+next=soTrueADJ",
+      1.065
+    ],
+    [
+      "right_words=3",
+      1.008
+    ],
+    [
+      "right_words=2",
+      0.994
+    ],
+    [
+      "next_word=two",
+      0.93
+    ],
+    [
+      "left_words=3",
+      0.909
+    ],
+    [
+      "next_word=several",
+      0.833
+    ],
+    [
+      "next_word=much",
+      0.806
+    ],
+    [
+      "left_words=4",
+      0.8
+    ],
+    [
+      "left_words=2",
+      0.761
+    ],
+    [
+      "prev_tag=CD",
+      0.76
+    ],
+    [
+      "comma_before",
+      0.754
+    ],
+    [
+      "prev_tag=NNPS",
+      0.735
+    ],
+    [
+      "right_words=4",
+      0.722
+    ],
+    [
+      "conn+comma+next=soTrueNOUN",
+      0.706
+    ]
+  ],
+  "top_keep": [
+    [
+      "dep=mark",
+      -0.843
+    ],
+    [
+      "next_tag=WDT",
+      -0.847
+    ],
+    [
+      "next_word=who",
+      -0.858
+    ],
+    [
+      "prev_tag=CC",
+      -0.886
+    ],
+    [
+      "left_words=9",
+      -0.891
+    ],
+    [
+      "next2_tag=.",
+      -0.902
+    ],
+    [
+      "next_word=therefore",
+      -0.927
+    ],
+    [
+      "head_dep=nmod",
+      -0.957
+    ],
+    [
+      "head_dep=dep",
+      -1.188
+    ],
+    [
+      "next_word=so",
+      -1.265
+    ],
+    [
+      "left_words=0",
+      -1.667
+    ],
+    [
+      "right_words=10",
+      -1.767
+    ],
+    [
+      "left_words=10",
+      -1.779
+    ],
+    [
+      "right_words=0",
+      -1.785
+    ],
+    [
+      "prev_tag=:",
+      -2.203
+    ]
+  ],
+  "seconds": 183.9
+}
