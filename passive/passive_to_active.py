@@ -56,7 +56,15 @@ STATIVE_WITH_PREP = {
     "equip": {"with"},
 }
 
-NO_SPACE_BEFORE ={",", ".", ";", ":", "?", "!", "'s", "n't", "'", ")", "%"}
+# "get" + participle phrases that are idioms, not passives: "I got lost"
+# isn't "Someone lost me". Only checked for get-passives without "by", so
+# "The keys were lost" -> "Someone lost the keys" still works.
+GET_IDIOMS = {
+    "lose", "stick", "dress", "change", "rid", "hurt", "injure", "start",
+    "wet", "go", "acquaint", "accustom", "settle", "carry",
+}
+
+NO_SPACE_BEFORE = {",", ".", ";", ":", "?", "!", "'s", "n't", "'", ")", "%"}
 
 
 @dataclass
@@ -214,12 +222,22 @@ def build_verb_group(verb, auxpass, auxes, neg, inner_adverbs, pn, question=Fals
     return words
 
 
+GET_FORMS = {"get", "gets", "got", "gotten", "getting"}
+
+
+def passive_aux_lemma(auxpass):
+    """'be' or 'get'. spaCy sometimes fails to lemmatize 'getting'/'gotten'."""
+    return "get" if auxpass.lower_ in GET_FORMS else auxpass.lemma_
+
+
 def agentless_skip_reason(verb, auxpass, auxes, placeholder):
     """Why an agentless passive should be left alone, or None to convert it."""
     if not placeholder:
         return "no agent (no 'by ...' phrase)"
     if verb.lemma_ in STATIVE_LEMMAS:
         return "describes a state, not an action"
+    if passive_aux_lemma(auxpass) == "get" and verb.lemma_ in GET_IDIOMS:
+        return "get + participle idiom, not a passive"
     preps = {c.lower_ for c in verb.children if c.dep_ in ("prep", "aux")}
     if preps & STATIVE_WITH_PREP.get(verb.lemma_, set()):
         return "describes a state, not an action"
@@ -262,8 +280,11 @@ def convert_one(doc, placeholder=None, question_prefix=None):
         if any(a.i < subj.i for a in auxes):
             skipped.append((clause, "question or inverted word order"))
             continue
-        if any(a.lower_ in ("to", "get", "got", "gets") for a in auxes) or auxpass.lemma_ != "be":
-            skipped.append((clause, "infinitive or get-passive"))
+        if any(a.lower_ == "to" for a in auxes):
+            skipped.append((clause, "infinitive passive"))
+            continue
+        if passive_aux_lemma(auxpass) not in ("be", "get"):
+            skipped.append((clause, "unrecognized passive helper verb"))
             continue
 
         agent = next((c for c in verb.children if c.dep_ == "agent"), None)
@@ -373,8 +394,10 @@ def convert_one(doc, placeholder=None, question_prefix=None):
     return None, None, None, skipped
 
 
-FRONTABLE = {"am", "is", "are", "was", "were", "has", "have", "had"} | MODALS
-VERB_PART = {"be", "been", "being", "not", "n't"}
+FRONTABLE = {"am", "is", "are", "was", "were", "has", "have", "had",
+             "do", "does", "did"} | MODALS
+VERB_PART = {"be", "been", "being", "not", "n't",
+             "get", "gets", "got", "gotten", "getting"}
 WH_AGENT_PLACEHOLDER = "someone"
 
 

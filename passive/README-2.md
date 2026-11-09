@@ -145,13 +145,30 @@ The small spaCy model often misparses inverted questions, so for questions like 
 
 When the question word asks about the agent ("Who … by?", "By whom …?"), a placeholder agent is used in step 1 and then replaced by "Who". Questions where the question word is the passive subject ("What was eaten by John?") parse correctly already and are converted directly.
 
+### "get" passives
+
+"get" works like "be" as the passive helper, so the same verb rules apply:
+
+| Passive                                       | Active                                  |
+|-----------------------------------------------|-----------------------------------------|
+| He got fired by his boss.                     | His boss fired him.                     |
+| She is getting promoted by the company.       | The company is promoting her.           |
+| He has gotten paid by the client.             | The client has paid him.                |
+| He didn't get chosen by the coach.            | The coach didn't choose him.            |
+| Did he get fired by his boss?                 | Did his boss fire him?                  |
+| My phone got stolen yesterday.                | Someone stole my phone yesterday.       |
+
+Many "get" + participle phrases are idioms rather than passives: "I got lost", "We got stuck", "He got dressed", "I got hurt". Without a "by" phrase these are left alone. The list is `GET_IDIOMS` near the top of `passive_to_active.py`. The state verbs in `STATIVE_LEMMAS` ("got married", "got tired") are skipped too.
+
+Causatives like "I got my hair cut" (someone else cut it) are a different structure and are left unchanged.
+
 ## What it leaves unchanged
 
 | Case                              | Example                        | Why                                   |
 |-----------------------------------|--------------------------------|---------------------------------------|
 | No "by" phrase, with `placeholder=None` | Mistakes were made.      | No one to use as the subject          |
 | State passives                    | She was born in 1990.          | No natural active form                |
-| "get" passives                    | He got fired by his boss.      | Not handled yet                       |
+| "get" idioms (no "by")            | I got lost.                    | Not really a passive                  |
 | Infinitive passives               | The form needs to be signed.   | Not handled yet                       |
 
 Each skipped clause is listed in `result.skipped` with a reason.
@@ -171,10 +188,10 @@ Each skipped clause is listed in `result.skipped` with a reason.
 | File                          | Contents                                  |
 |-------------------------------|-------------------------------------------|
 | `passive_to_active.py`        | The converter (`PassiveToActive` is the public API) |
-| `test_passive_to_active.py`   | 46 test sentences, plus 18 for passives without "by" |
+| `test_passive_to_active.py`   | 81 test sentences, plus tests for the `PassiveToActive` class |
 
 ## Next steps
 
 - Run the converter on a few hundred sentences from our target texts and add each failure to the tests.
-- Handle "get" passives and infinitive passives.
+- Handle infinitive passives ("The form needs to be signed").
 - Merge into the main tool through `PassiveToActive`, and combine with the other simplification rules (sentence splitting, relative clauses) and the lexical simplification step.

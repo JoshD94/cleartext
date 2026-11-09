@@ -53,6 +53,15 @@ CASES = [
     ("Who was helped by them?", "Who did they help?"),
     ("How was the bridge built by the engineers?", "How did the engineers build the bridge?"),
     ("Can the form be signed by a parent?", "Can a parent sign the form?"),
+    # --- get-passives
+    ("He got fired by his boss.", "His boss fired him."),
+    ("He gets bullied by older kids.", "Older kids bully him."),
+    ("She is getting promoted by the company.", "The company is promoting her."),
+    ("He has gotten paid by the client.", "The client has paid him."),
+    ("The kids will get punished by their parents.", "Their parents will punish the kids."),
+    ("He didn't get chosen by the coach.", "The coach didn't choose him."),
+    ("Did he get fired by his boss?", "Did his boss fire him?"),
+    ("Why did the game get canceled by the school?", "Why did the school cancel the game?"),
     # --- left alone
     ("Mistakes were made.", "Mistakes were made."),
     ("Was the cake eaten?", "Was the cake eaten?"),
@@ -96,6 +105,17 @@ AUTO_CASES = [
     # --- left alone: followed by another verb
     ("He is said to be rich.", "He is said to be rich."),
     ("You are not allowed to smoke here.", "You are not allowed to smoke here."),
+    # --- get-passives without "by"
+    ("My phone got stolen yesterday.", "Someone stole my phone yesterday."),
+    ("The window got broken.", "Someone broke the window."),
+    ("Did the package get delivered?", "Did someone deliver the package?"),
+    # --- left alone: get + participle idioms and states
+    ("I got lost.", "I got lost."),
+    ("We got stuck in traffic.", "We got stuck in traffic."),
+    ("They got married last year.", "They got married last year."),
+    ("He got dressed quickly.", "He got dressed quickly."),
+    ("She got used to the cold.", "She got used to the cold."),
+    ("I got my hair cut.", "I got my hair cut."),
     # --- a "by" phrase still wins
     ("The table was made by my father.", "My father made the table."),
 ]
