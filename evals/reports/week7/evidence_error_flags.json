@@ -1,0 +1,594 @@
+{
+ "provenance": {
+  "branch": "josh/structural-models-20261026",
+  "commit": "085015fceb50859aa7d8bc7b639cdccfc1d9c5f8"
+ },
+ "flags": [
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-2226",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9841246604919434,
+   "nli_backward": 0.2520461082458496,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-5012",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9941250085830688,
+   "nli_backward": 0.995057225227356,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-128",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9123808145523071,
+   "nli_backward": 0.41476261615753174,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-3664",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9969856142997742,
+   "nli_backward": 0.9970064759254456,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-7215",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.994559109210968,
+   "nli_backward": 0.9944878220558167,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-5487",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9967100620269775,
+   "nli_backward": 0.9952530860900879,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "desse-train-8123",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9563217759132385,
+   "nli_backward": 0.010221929289400578,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "quic-rfc9000-1",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.40665316581726074,
+   "nli_backward": 0.4929697513580322,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "quic-rfc9000-3",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.8288092613220215,
+   "nli_backward": 0.015018025413155556,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "biden-inaugural2021-0",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.9699462056159973,
+   "nli_backward": 0.9675974249839783,
+   "failed_checks": [
+    "tenses_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "biden-inaugural2021-3",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.9186933040618896,
+   "nli_backward": 0.25252512097358704,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "corp-02",
+   "panel": "authored_smoke",
+   "nli_forward": 0.8754981160163879,
+   "nli_backward": 0.012168536894023418,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "polsci-01",
+   "panel": "authored_smoke",
+   "nli_forward": 0.987494170665741,
+   "nli_backward": 0.3737087547779083,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-781",
+   "panel": "asset_validation",
+   "nli_forward": 0.9956843852996826,
+   "nli_backward": 0.9916776418685913,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-663",
+   "panel": "asset_validation",
+   "nli_forward": 0.12800392508506775,
+   "nli_backward": 0.07038545608520508,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-1723",
+   "panel": "asset_validation",
+   "nli_forward": 0.9944856762886047,
+   "nli_backward": 0.9927780032157898,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-778",
+   "panel": "asset_validation",
+   "nli_forward": 0.9508854746818542,
+   "nli_backward": 0.3734152615070343,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-1222",
+   "panel": "asset_validation",
+   "nli_forward": 0.9665560126304626,
+   "nli_backward": 0.3749064803123474,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-790",
+   "panel": "asset_validation",
+   "nli_forward": 0.9896194338798523,
+   "nli_backward": 0.01369295734912157,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-1782",
+   "panel": "asset_validation",
+   "nli_forward": 0.6790841221809387,
+   "nli_backward": 0.006480976473540068,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-565",
+   "panel": "asset_validation",
+   "nli_forward": 0.8524265885353088,
+   "nli_backward": 0.07978051155805588,
+   "failed_checks": []
+  },
+  {
+   "system": "full_pipeline",
+   "id": "asset-valid-278",
+   "panel": "asset_validation",
+   "nli_forward": 0.3806453049182892,
+   "nli_backward": 0.003431255230680108,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-2226",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9841246604919434,
+   "nli_backward": 0.2520461082458496,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-5012",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9941250085830688,
+   "nli_backward": 0.995057225227356,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-128",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9123808145523071,
+   "nli_backward": 0.41476261615753174,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-5830",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9001185297966003,
+   "nli_backward": 0.036317434161901474,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-10769",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.14184054732322693,
+   "nli_backward": 0.013191230595111847,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-3664",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9969856142997742,
+   "nli_backward": 0.9970064759254456,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-7215",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.994559109210968,
+   "nli_backward": 0.9944878220558167,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-5487",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9967100620269775,
+   "nli_backward": 0.9952530860900879,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "desse-train-5938",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9799667000770569,
+   "nli_backward": 0.002088426612317562,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "quic-rfc9000-3",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.8288092613220215,
+   "nli_backward": 0.015018025413155556,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "biden-inaugural2021-0",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.9699462056159973,
+   "nli_backward": 0.9675974249839783,
+   "failed_checks": [
+    "tenses_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "biden-inaugural2021-3",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.9606958627700806,
+   "nli_backward": 0.4462363123893738,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "corp-02",
+   "panel": "authored_smoke",
+   "nli_forward": 0.8754981160163879,
+   "nli_backward": 0.012168536894023418,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "polsci-01",
+   "panel": "authored_smoke",
+   "nli_forward": 0.987494170665741,
+   "nli_backward": 0.3737087547779083,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-781",
+   "panel": "asset_validation",
+   "nli_forward": 0.9956843852996826,
+   "nli_backward": 0.9916776418685913,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-663",
+   "panel": "asset_validation",
+   "nli_forward": 0.12800392508506775,
+   "nli_backward": 0.07038545608520508,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-1723",
+   "panel": "asset_validation",
+   "nli_forward": 0.9944856762886047,
+   "nli_backward": 0.9927780032157898,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-1270",
+   "panel": "asset_validation",
+   "nli_forward": 0.7143084406852722,
+   "nli_backward": 0.06265731900930405,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-778",
+   "panel": "asset_validation",
+   "nli_forward": 0.9508854746818542,
+   "nli_backward": 0.3734152615070343,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-1222",
+   "panel": "asset_validation",
+   "nli_forward": 0.9763675332069397,
+   "nli_backward": 0.4125800132751465,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-1782",
+   "panel": "asset_validation",
+   "nli_forward": 0.800663411617279,
+   "nli_backward": 0.007379421032965183,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-219",
+   "panel": "asset_validation",
+   "nli_forward": 0.7245524525642395,
+   "nli_backward": 0.46663329005241394,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-565",
+   "panel": "asset_validation",
+   "nli_forward": 0.8524265885353088,
+   "nli_backward": 0.07978051155805588,
+   "failed_checks": []
+  },
+  {
+   "system": "full_no_guardrails",
+   "id": "asset-valid-278",
+   "panel": "asset_validation",
+   "nli_forward": 0.3806453049182892,
+   "nli_backward": 0.003431255230680108,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-2226",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9841246604919434,
+   "nli_backward": 0.2520461082458496,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-5012",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9941250085830688,
+   "nli_backward": 0.995057225227356,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-128",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9123808145523071,
+   "nli_backward": 0.41476261615753174,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-3664",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9969856142997742,
+   "nli_backward": 0.9970064759254456,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-7215",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.994559109210968,
+   "nli_backward": 0.9944878220558167,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-5487",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9943416118621826,
+   "nli_backward": 0.9943709969520569,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "desse-train-8123",
+   "panel": "desse_reused_dev",
+   "nli_forward": 0.9563217759132385,
+   "nli_backward": 0.010221929289400578,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "quic-rfc9000-1",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.40665316581726074,
+   "nli_backward": 0.4929697513580322,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "quic-rfc9000-3",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.8288092613220215,
+   "nli_backward": 0.015018025413155556,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "biden-inaugural2021-0",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.9699462056159973,
+   "nli_backward": 0.9675974249839783,
+   "failed_checks": [
+    "tenses_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "biden-inaugural2021-3",
+   "panel": "domain_reused_dev",
+   "nli_forward": 0.9186933040618896,
+   "nli_backward": 0.25252512097358704,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "corp-02",
+   "panel": "authored_smoke",
+   "nli_forward": 0.8754981160163879,
+   "nli_backward": 0.012168536894023418,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "polsci-01",
+   "panel": "authored_smoke",
+   "nli_forward": 0.9274897575378418,
+   "nli_backward": 0.1647433042526245,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-781",
+   "panel": "asset_validation",
+   "nli_forward": 0.9956843852996826,
+   "nli_backward": 0.9916776418685913,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-663",
+   "panel": "asset_validation",
+   "nli_forward": 0.12800392508506775,
+   "nli_backward": 0.07038545608520508,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-1723",
+   "panel": "asset_validation",
+   "nli_forward": 0.9944856762886047,
+   "nli_backward": 0.9927780032157898,
+   "failed_checks": [
+    "entities_preserved"
+   ]
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-778",
+   "panel": "asset_validation",
+   "nli_forward": 0.9508854746818542,
+   "nli_backward": 0.3734152615070343,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-1222",
+   "panel": "asset_validation",
+   "nli_forward": 0.9665560126304626,
+   "nli_backward": 0.3749064803123474,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-790",
+   "panel": "asset_validation",
+   "nli_forward": 0.9896194338798523,
+   "nli_backward": 0.01369295734912157,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-1782",
+   "panel": "asset_validation",
+   "nli_forward": 0.6790841221809387,
+   "nli_backward": 0.006480976473540068,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-565",
+   "panel": "asset_validation",
+   "nli_forward": 0.8524265885353088,
+   "nli_backward": 0.07978051155805588,
+   "failed_checks": []
+  },
+  {
+   "system": "lexical_only",
+   "id": "asset-valid-278",
+   "panel": "asset_validation",
+   "nli_forward": 0.3806453049182892,
+   "nli_backward": 0.003431255230680108,
+   "failed_checks": []
+  }
+ ]
+}
