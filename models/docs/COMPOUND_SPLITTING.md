@@ -155,3 +155,28 @@ to 13.949305: no measured average readability gain. Paired changed-only metrics,
 domain aggregates, exact eight-arm ladder and frozen provenance are linked in
 that report. The feature remains opt-in. These inspected development results
 do not establish semantic accuracy or justify relaxing the guards.
+
+
+## November 9: scoped guards and a connector tagger
+
+`DependencyCompoundSplitter()` now defaults to `guards="scoped"`. Quotes,
+brackets, code spans, negation and modals veto only a boundary inside them or
+on a predicate they scope over; the operator, count and negation checks catch
+the rest. `guards="strict"` replays the November 2 behaviour. Possessive
+apostrophes are no longer read as quotes.
+
+`DependencyCompoundSplitter(tagger="path/to/boundary-tagger.joblib")` adds a
+logistic-regression tagger (`structure/boundary_tagger.py`) trained on
+WikiSplit by `models/scripts/train_compound_tagger.py`. It only adds
+boundaries: below its threshold the hand-written rules decide. Above it, the
+matrix-coordination and relative-clause vetoes are replaced by narrower
+checks: the connector must join predicates, embedded clauses stay on their
+head's side, leading adverbial clauses still abstain, and a copied subject is
+only its core noun phrase with no modifier between it and the verb. The
+preservation checks are unchanged. The model file is a local artifact.
+
+Held-out WikiSplit recall at the person's connector rises from 7.7% (strict)
+to 19.0% with 95% boundary precision, and Week 7 sourced coverage from 1/90 to
+6/90 passages. See the [November 9 report](../../evals/reports/20261109-compound-tagger/README.md),
+including its note that the test set was inspected while fixing four failure
+patterns. Trailing modifiers shared by both clauses are not detected.

@@ -37,6 +37,15 @@ def splitter():
      "The server checks each request. But the server sends a response."),
     ("The report was reviewed, and the figures were checked.",
      "The report was reviewed. The figures were checked."),
+    # Scoped guards: negation and brackets on one side no longer veto.
+    ("The store closed, but the workers did not leave.",
+     "The store closed. But the workers did not leave."),
+    ("The store closed (early), and the workers went home.",
+     "The store closed (early). The workers went home."),
+    ("The server checks `a and b` and sends the response.",
+     "The server checks `a and b`. The server sends the response."),
+    ("The ships sailed for Jardines' fleet, and the ports stayed open.",
+     "The ships sailed for Jardines' fleet. The ports stayed open."),
 ])
 def test_actual_parser_splits_and_retains_source_details(splitter, source, expected):
     result = splitter.predict(source)
@@ -55,7 +64,6 @@ def test_actual_parser_splits_and_retains_source_details(splitter, source, expec
     "Alice hopes to leave and Bob stays.",
     "The server, which stores records, checks requests and sends responses.",
     "The server may check requests and send responses.",
-    "The store closed, but the workers did not leave.",
     "Either Alice leaves or Bob stays.",
     "Alice left so that Bob could stay.",
     "Alice worked so hard that Bob stayed.",
@@ -73,8 +81,6 @@ def test_actual_parser_splits_and_retains_source_details(splitter, source, expec
     "The server, which stores records, checks requests, and the client displays results.",
     "In 2025, Alice left and Bob stayed.",
     'Alice said "Bob left and Carol stayed."',
-    "The server checks `a and b` and sends the response.",
-    "The store closed (early), and the workers went home.",
     "The store closed early and the workers went home?",
 ])
 def test_ambiguous_scope_fragments_and_literals_abstain(splitter, source):
@@ -255,3 +261,64 @@ def test_new_or_modified_fragments_still_fail_validation(splitter, source, outpu
     result = splitter.validate(source, output)
     assert not result["pass"]
     assert not result["checks"]["complete_clauses"]
+
+
+def test_strict_guards_replay_november_2_behaviour():
+    source = "The store closed, but the workers did not leave."
+    assert DependencyCompoundSplitter(guards="strict").predict(source)["output"] == source
+    with pytest.raises(ValueError):
+        DependencyCompoundSplitter(guards="loose")
+
+
+class FixedTagger:
+    """Stands in for a trained BoundaryTagger with one score for every connector."""
+
+    def __init__(self, score, threshold=0.4):
+        self.value, self.threshold = score, threshold
+
+    def score(self, doc, join):
+        return self.value
+
+
+@pytest.mark.parametrize("source,expected", [
+    # A modifier after the first verb no longer blocks a copied subject.
+    ("The team began training at the stadium in 2009 and began competing in 2012.",
+     "The team began training at the stadium in 2009. The team began competing in 2012."),
+    # Only the subject's core noun phrase is copied, not its relative clause.
+    ("The analyst, who joined in 2019, wrote the report and presented it in March.",
+     "The analyst, who joined in 2019, wrote the report. The analyst presented it in March."),
+])
+def test_confident_tagger_relaxes_hand_written_vetoes(source, expected):
+    assert DependencyCompoundSplitter().predict(source)["output"] == source
+    result = DependencyCompoundSplitter(tagger=FixedTagger(0.9)).predict(source)
+    assert result["output"] == expected, result
+    assert result["boundaries"][0]["tagger_score"] == 0.9
+
+
+@pytest.mark.parametrize("source", [
+    "Alice bought bread and milk.",
+    "In 2025, Alice left and Bob stayed.",
+    "If the store closes early, Alice leaves and Bob stays.",
+    "Alice said that Bob left and Carol stayed.",
+    "The server may check requests and send responses.",
+    "The server carefully checks requests and sends responses.",
+    "Cicak - Man is the first Malaysian movie and features almost 40% CGI footage.",
+    'Alice said "Bob left and Carol stayed."',
+    "The server checks `a and b`.",
+    # Held-out WikiSplit review failures (November 9).
+    "He became the children's editor for the News Chronicle and from 1954 presented a music programme.",
+    "James Curran was a native of The Liberties, an area which had experienced drug problems since the 1980s, and gave Curran a disgust for drugs.",
+    "Shi Qian stole the hen and was caught by the Zhus but Yang Xiong and Shi Xiu escaped.",
+    "Their eldest son, Louis Henri, would eventually become the Regent of France for Louis XV, but was himself ruled by his mistress, Madame de Prie.",
+])
+def test_confident_tagger_keeps_scope_and_preservation_checks(source):
+    result = DependencyCompoundSplitter(tagger=FixedTagger(0.9)).predict(source)
+    assert result["output"] == source, result
+
+
+def test_tagger_only_adds_boundaries():
+    source = "The store closed early, and the workers went home."
+    result = DependencyCompoundSplitter(tagger=FixedTagger(0.0)).predict(source)
+    assert result["output"] == "The store closed early. The workers went home."
+    with pytest.raises(ValueError):
+        DependencyCompoundSplitter(guards="strict", tagger=FixedTagger(0.9))

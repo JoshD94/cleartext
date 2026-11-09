@@ -70,6 +70,9 @@ versions, input/model/source hashes and completion/failure receipts.
 - `compound_only` and `compound_full_guarded` select the opt-in dependency
   compound splitter. Week 7 `structure_only` retains the old rules; neither name
   selects T5. Passive conversion and negation rewriting belong to teammates.
+  Since November 9 these arms use scoped guards and no tagger; the November 2
+  results used today's `guards="strict"`. The WikiSplit tagger model is a
+  local artifact (see `evals/reports/20261109-compound-tagger/`).
 - The 90-passage native ladder exceeded a 75-minute Yoga queue limit while
   computing lexical-only. Whole-system logging/checkpoints lose partial work.
   Use per-passage checkpoints and bounded batches; bind resume data to frozen

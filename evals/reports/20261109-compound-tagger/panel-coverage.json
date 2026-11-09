@@ -1,0 +1,80 @@
+{
+  "authored": {
+    "strict": {
+      "passages": 18,
+      "changed": 0,
+      "accepted_boundaries": 0,
+      "reasons": {
+        "negation_modality_or_correlative": 3,
+        "embedded_scope_crosses_or_is_unsupported": 1
+      }
+    },
+    "scoped": {
+      "passages": 18,
+      "changed": 1,
+      "accepted_boundaries": 1,
+      "reasons": {
+        "embedded_scope_crosses_or_is_unsupported": 2,
+        "not_matrix_coordination": 1,
+        "accepted": 1
+      }
+    },
+    "scoped_tagger": {
+      "passages": 18,
+      "changed": 3,
+      "accepted_boundaries": 3,
+      "reasons": {
+        "accepted": 3,
+        "embedded_scope_crosses_or_is_unsupported": 1
+      }
+    }
+  },
+  "sourced": {
+    "strict": {
+      "passages": 90,
+      "changed": 1,
+      "accepted_boundaries": 1,
+      "reasons": {
+        "negation_modality_or_correlative": 75,
+        "literal_quote_or_parenthetical": 59,
+        "not_matrix_coordination": 45,
+        "embedded_scope_crosses_or_is_unsupported": 11,
+        "unsupported_sentence_shape": 6,
+        "accepted": 1,
+        "unsafe_shared_subject_or_predicate": 1
+      }
+    },
+    "scoped": {
+      "passages": 90,
+      "changed": 3,
+      "accepted_boundaries": 3,
+      "reasons": {
+        "not_matrix_coordination": 116,
+        "literal_quote_or_parenthetical": 41,
+        "embedded_scope_crosses_or_is_unsupported": 20,
+        "unsupported_sentence_shape": 6,
+        "negation_modality_or_correlative": 4,
+        "relative_requires_independent_subjects": 3,
+        "accepted": 3,
+        "so_requires_comma": 3,
+        "unsafe_shared_subject_or_predicate": 2
+      }
+    },
+    "scoped_tagger": {
+      "passages": 90,
+      "changed": 6,
+      "accepted_boundaries": 6,
+      "reasons": {
+        "not_matrix_coordination": 112,
+        "literal_quote_or_parenthetical": 41,
+        "embedded_scope_crosses_or_is_unsupported": 20,
+        "accepted": 6,
+        "unsupported_sentence_shape": 6,
+        "negation_modality_or_correlative": 4,
+        "so_requires_comma": 3,
+        "unsafe_shared_subject_or_predicate": 2,
+        "relative_requires_independent_subjects": 1
+      }
+    }
+  }
+}

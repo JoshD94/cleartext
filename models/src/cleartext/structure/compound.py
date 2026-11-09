@@ -5,10 +5,12 @@ The parser is the existing spaCy en_core_web_sm model. Ambiguous scope abstains.
 """
 
 from collections import Counter
+from pathlib import Path
 
 from ..features import nlp
 from ..lexical import MODAL, NEG
 from ..protected_literals import literal_spans, preserved_literals
+from .boundary_tagger import BoundaryTagger
 from .common import complete_clause, structure_checks
 from .discourse import discourse_checks
 
@@ -65,6 +67,32 @@ def _subject_groups(doc):
     return groups
 
 
+def _enclosed(doc, source):
+    """Character ranges inside quotes, brackets or code literals.
+
+    Returns None when quotes or brackets are unbalanced, so the caller abstains.
+    """
+    ranges = [(span.start, span.end) for span in literal_spans(source)]
+    opened, quote = [], None
+    for t in doc:
+        if t.text in {"(", "["}:
+            opened.append(t.idx)
+        elif t.text in {")", "]"}:
+            if not opened:
+                return None
+            ranges.append((opened.pop(), t.idx + 1))
+        elif t.is_quote and t.tag_ != "POS":
+            # Possessive apostrophes ("Jardines' fleet") are not quotes.
+            if quote is None:
+                quote = t.idx
+            else:
+                ranges.append((quote, t.idx + 1))
+                quote = None
+    if opened or quote is not None:
+        return None
+    return ranges
+
+
 def _relative_attachments(doc):
     return Counter(
         (t.dep_, t.lemma_.lower(), t.head.lemma_.lower())
@@ -79,7 +107,21 @@ class DependencyCompoundSplitter:
     rule_name = "dependency compound split"
     supports_passages = True
 
-    def __init__(self, min_sentence_words=0, min_clause_words=0):
+    def __init__(self, min_sentence_words=0, min_clause_words=0, guards="scoped", tagger=None):
+        # "strict" replays the November 2 behaviour: any quote, bracket,
+        # negation or modal in a sentence vetoes every boundary in it.
+        # "scoped" only vetoes boundaries inside quotes/brackets/literals and
+        # leaves negation/modal scope to the operator and count checks.
+        if guards not in {"scoped", "strict"}:
+            raise ValueError("guards must be 'scoped' or 'strict'")
+        self.guards = guards
+        # Optional BoundaryTagger (or path to one): a trained tagger replaces the
+        # hand-written matrix/relative-clause vetoes. Preservation checks stay.
+        if isinstance(tagger, (str, Path)):
+            tagger = BoundaryTagger.load(tagger)
+        if tagger is not None and guards != "scoped":
+            raise ValueError("a tagger requires scoped guards")
+        self.tagger = tagger
         for name, value in (("min_sentence_words", min_sentence_words),
                             ("min_clause_words", min_clause_words)):
             if type(value) is not int or value < 0:
@@ -127,17 +169,41 @@ class DependencyCompoundSplitter:
             return rejected_sentence("sentence_too_short")
         # Quoted speech, parentheticals and protected literals need their own
         # boundary policy. Sentences containing them still abstain entirely.
-        if literal_spans(source) or any(t.is_quote or t.text in {"(", ")", ";", ":"} for t in doc):
-            return rejected_sentence("literal_quote_or_parenthetical")
-        if any(t.lower_ in NEG | MODAL | {"either", "neither", "both"} for t in doc):
-            return rejected_sentence("negation_modality_or_correlative")
+        enclosed = []
+        if self.guards == "strict":
+            if literal_spans(source) or any(t.is_quote or t.text in {"(", ")", ";", ":"} for t in doc):
+                return rejected_sentence("literal_quote_or_parenthetical")
+            if any(t.lower_ in NEG | MODAL | {"either", "neither", "both"} for t in doc):
+                return rejected_sentence("negation_modality_or_correlative")
+        else:
+            # Semicolons and colons already mark a clause boundary whose scope
+            # this stage does not model.
+            enclosed = _enclosed(doc, source)
+            if enclosed is None or any(t.text in {";", ":"} for t in doc):
+                return rejected_sentence("literal_quote_or_parenthetical")
         root = sentences[0].root
         for join in joins:
             detail = {"connector": join.lower_, "offset": join.idx,
                       "sentence_words": word_count, "accepted": False}
             diagnostics.append(detail)
+            if any(start <= join.idx < end for start, end in enclosed):
+                detail["reason"] = "literal_quote_or_parenthetical"
+                continue
+            # A correlative before the connector ("both A and B", "either ...")
+            # binds the two halves together.
+            if any(t.lower_ in {"either", "neither", "both"} for t in doc[:join.i]):
+                detail["reason"] = "negation_modality_or_correlative"
+                continue
             is_so = join.lower_ == "so"
-            if not is_so and (join.dep_ != "cc" or not _matrix(join.head, root)):
+            # The tagger only adds boundaries: below its threshold the
+            # hand-written vetoes decide, exactly as without a tagger.
+            tagged = False
+            if self.tagger is not None:
+                detail["tagger_score"] = round(self.tagger.score(doc, join), 4)
+                tagged = detail["tagger_score"] >= self.tagger.threshold
+            # Tagged boundaries may join embedded-level predicates, never nouns.
+            if not is_so and (join.dep_ != "cc" or (not tagged and not _matrix(join.head, root))
+                              or join.head.pos_ not in {"VERB", "AUX", "ADJ"}):
                 detail["reason"] = "not_matrix_coordination"
                 continue
             # A comma + so can be parsed as a backward ccomp, rather than conj.
@@ -164,12 +230,28 @@ class DependencyCompoundSplitter:
                      or all(x.i > join.i for x in [t.head, *t.subtree]))
                 for t in embedded
             )
-            if embedded and not (backward_so or local_relatives):
+            if tagged:
+                # Any embedded clause must sit wholly on its head's side, and
+                # a leading adverbial clause ("If X, A and B") scopes over both.
+                local_relatives = bool(embedded) and all(
+                    t.dep_ in {"relcl", "acl"} for t in embedded)
+                if any(
+                    (min(x.i for x in t.subtree) < join.i) != (max(x.i for x in t.subtree) < join.i)
+                    or (t.head.i < join.i) != (t.i < join.i)
+                    or (t.dep_ == "advcl" and t.i < t.head.i)
+                    for t in embedded
+                ):
+                    detail["reason"] = "embedded_scope_crosses_or_is_unsupported"
+                    continue
+            elif embedded and not (backward_so or local_relatives):
                 detail["reason"] = "embedded_scope_crosses_or_is_unsupported"
                 continue
             subject_positions = [t.i for t in doc[:join.i] if t.dep_ in SUBJECTS]
+            # Only sentence-level modifiers scope over both halves; an adverb
+            # inside the subject ("Almost all children") does not.
             if not subject_positions or any(
                 t.dep_ in {"prep", "advmod", "npadvmod"} and t.i < min(subject_positions)
+                and (t.head == root or not tagged)
                 for t in doc[:join.i]
             ):
                 detail["reason"] = "leading_modifier_scope"
@@ -186,12 +268,13 @@ class DependencyCompoundSplitter:
             prefix = ""
             right_predicates = [
                 t for t in doc[join.i + 1:]
-                if t.pos_ in {"VERB", "AUX"} and t.dep_ == "conj" and _matrix(t, root)
+                if t.pos_ in {"VERB", "AUX"} and t.dep_ == "conj"
+                and (_matrix(t, root) if not tagged else t.head.i < join.i)
             ]
             explicit = any(
                 c.dep_ in SUBJECTS for t in right_predicates for c in t.children
             )
-            if local_relatives and (
+            if not tagged and local_relatives and (
                 is_so or len(right_predicates) != 1 or not explicit
                 or not any(c.dep_ in SUBJECTS for c in root.children)
                 or not _finite(root) or not _finite(right_predicates[0])
@@ -217,27 +300,65 @@ class DependencyCompoundSplitter:
                     for t in subject_tokens
                 ):
                     continue
+                if tagged:
+                    # Copy only the subject's core noun phrase, never its
+                    # relative clause, appositive or parenthetical.
+                    core, start = [], subject.i
+                    for t in reversed(list(subject.lefts)):
+                        if t.dep_ not in {"det", "compound", "amod", "poss"} or t.right_edge.i != start - 1:
+                            break
+                        core.append(t)
+                        start = t.left_edge.i
+                    # Never copy part of a hyphenated or attached name.
+                    if start > 0 and (not doc[start - 1].whitespace_ or doc[start - 1].text == "-"):
+                        continue
+                    subject_tokens = list(doc[start:subject.i + 1])
                 if any(t.dep_ in {"conj", "preconj", "nummod"} for t in subject_tokens):
                     continue
-                if any(t.dep_ in {"aux", "auxpass", "advmod", "npadvmod", "prep"} for t in root.children):
+                # Untagged: no modifier on the first predicate at all. Tagged:
+                # only modifiers before it, which could scope over both verbs.
+                if any(t.dep_ in {"aux", "auxpass", "advmod", "npadvmod", "prep"}
+                       and (not tagged or (t.i < root.i and t.dep_ not in {"aux", "auxpass"}))
+                       for t in root.children):
                     continue
                 objects = {"dobj", "obj", "iobj", "attr", "oprd"}
                 if bool(any(c.dep_ in objects for c in root.children)) != bool(
                     any(c.dep_ in objects for c in right_predicates[0].children)
                 ):
                     continue
-                if any(c.dep_ in {"advmod", "npadvmod", "prep"} for c in right_predicates[0].children):
+                # Tagged: a modifier before the second verb would sit between
+                # the copied subject and its verb ("He from 1954 presented").
+                if any(c.dep_ in {"advmod", "npadvmod", "prep"} and (not tagged or c.i < right_predicates[0].i)
+                       for c in right_predicates[0].children):
+                    continue
+                # A relative clause ending at the connector may own the second
+                # verb, so the root subject is not safely the one to copy.
+                if any(t.dep_ in {"relcl", "acl"} and root.i < t.i < join.i for t in doc):
                     continue
                 first, last = min(t.i for t in subject_tokens), max(t.i for t in subject_tokens)
                 if last >= root.i:
                     continue
                 prefix = doc[first:last + 1].text + " "
+            # A second half that opens with its verb has no subject of its own,
+            # however the parser labels a later reflexive ("But was himself ...").
+            if not prefix and join.i + 1 < len(doc) and doc[join.i + 1].pos_ in {"AUX", "VERB"}:
+                detail["reason"] = "incomplete_clause"
+                continue
             right = prefix + right
             left_doc, right_doc = nlp()(left + "."), nlp()(_capitalized(right))
             if not all(
                 len(list(d.sents)) == 1 and complete_clause(next(iter(d.sents)))
                 for d in (left_doc, right_doc)
             ):
+                detail["reason"] = "incomplete_clause"
+                continue
+            # The first half must not end in an unfinished coordination
+            # ("caught by the Zhus but Yang Xiong.").
+            # A contrastive connector between nouns is almost always a parse
+            # error that hides a clause boundary.
+            if any(t.dep_ == "cc" and not any(c.dep_ == "conj" for c in t.head.children) for t in left_doc) or (
+                tagged and any(t.lower_ in {"but", "yet"} and t.dep_ == "cc"
+                               and t.head.pos_ in {"NOUN", "PROPN", "PRON"} for t in doc[:join.i])):
                 detail["reason"] = "incomplete_clause"
                 continue
             # Retain contrast and consequence rather than deleting the relation.
