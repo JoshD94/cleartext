@@ -218,3 +218,22 @@ def test_noninitial_entities_ignore_sentence_starts():
     assert S.noninitial_entities_preserved(src, "But, Alice met Bob. Also the cat sat.") == 1.0
     assert S.noninitial_entities_preserved(src, "However, she met Bob. Similarly the cat sat.") == 0.5
     assert S.noninitial_entities_preserved("No names here.", "None.") == 1.0
+
+
+def test_sari_zero_division_convention_penalizes_copying():
+    src, refs = ["The feline sat on the mat."], [["The cat sat on the mat.", "A cat sat on the mat."]]
+    copy_hf = corpus_sari(src, src, refs, zero_division=1)
+    copy_orig = corpus_sari(src, src, refs, zero_division=0)
+    edit_orig = corpus_sari(src, ["The cat sat on the mat."], refs, zero_division=0)
+    assert copy_orig < copy_hf and edit_orig > copy_orig
+
+
+def test_recommended_config_settings(tmp_path):
+    chosen = S.settings(S.ROOT / "evals/reports/20261109-ensemble-study/recommended-config.json")
+    assert chosen["analyze"] == {"structure": True, "phrases": True, "words": False,
+                                 "negation": False, "guardrails": True}
+    assert chosen["t5"].endswith("seq2seq") and chosen["run"].endswith("ensemble-v7-20260928")
+    bad = tmp_path / "bad.json"
+    bad.write_text(json.dumps({"factors": {"structure": "t5"}}))
+    with pytest.raises(ValueError, match="structure_checkpoint"):
+        S.settings(bad)

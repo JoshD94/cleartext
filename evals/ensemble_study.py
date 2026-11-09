@@ -773,19 +773,24 @@ def report(args):
         names += [n for n in design_names(design) if n not in names]
     passages, complete, pending = collect(args.state, plan, "sourced", names)
     summaries = {n: summarize(passages, *complete[n]) for n in complete}
-    sari, asset_fk = {}, {}
+    sari, sari_hf, asset_fk = {}, {}, {}
     if "asset_test" in plan["panels"]:
         asset, asset_complete, _ = collect(args.state, plan, "asset_test", names, need_metrics=False)
         for name, (outputs, _) in asset_complete.items():
             preds = [outputs[p["id"]]["output"] for p in asset]
-            sari[name] = corpus_sari([p["original"] for p in asset], preds, [p["references"] for p in asset])
+            args3 = ([p["original"] for p in asset], preds, [p["references"] for p in asset])
+            sari[name] = corpus_sari(*args3, zero_division=0)
+            sari_hf[name] = corpus_sari(*args3, zero_division=1)
             asset_fk[name] = _mean(flesch_kincaid_grade(t) for t in preds)
     rb = summaries["rule_based"]["entities"]
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "panel": {"name": "sourced", "n": len(passages), "sha256": plan["panel_sha256"]["sourced"]},
         "asset_test_n": len(load_panel(plan, "asset_test")) if "asset_test" in plan["panels"] else None,
-        "configs": summaries, "pending": pending, "asset_sari": sari, "asset_fk_grade": asset_fk,
+        "configs": summaries, "pending": pending, "asset_sari": sari, "asset_sari_evaluate_convention": sari_hf,
+        "asset_sari_note": "asset_sari uses the original Xu et al. 0/0=0 convention (ranking/tie-break); "
+                           "asset_sari_evaluate_convention uses Hugging Face evaluate's 0/0=1, which rewards copying.",
+        "asset_fk_grade": asset_fk,
         "gates": {n: gates(s, rb) for n, s in summaries.items() if n not in REFERENCES},
         "frozen_selection": select(summaries, rb, sari),
         # Post hoc, labeled alternatives (SELECTION_RULE.md stays frozen).
@@ -832,6 +837,39 @@ def markdown(result):
             f"{s['numbers_failed']}/{s['negations_failed']} | {gate} | "
             f"{'' if sari is None else f'{sari:.2f}'} |")
     return head + "\n".join(lines) + "\n\n◆ = on the FK/passage-NLI Pareto frontier.\n"
+
+
+def settings(path):
+    """analyze() settings for a study config file such as recommended-config.json."""
+    raw = json.loads(Path(path).read_text())
+    config = normalize(raw["factors"])
+    if config["grammar"] == "on" or config["structure"] == "compound_tagger":
+        raise ValueError("This loader covers the recommended stages; use StudyGenerator for others")
+    checkpoint = raw.get("structure_checkpoint", {}).get("path")
+    if config["structure"] == "t5" and not checkpoint:
+        raise ValueError("structure=t5 needs structure_checkpoint.path")
+    run = raw.get("pipeline_run", "models/runs/ensemble-v7-20260928")
+    if config["words"] == "contextual":
+        run = raw.get("contextual_run", "models/runs/ensemble-context-similarity-20261002")
+    return {"run": str(ROOT / run), "technical_terms": config["terms"] == "on",
+            "t5": str(Path(checkpoint).expanduser()) if config["structure"] == "t5" else None,
+            "analyze": {"structure": config["structure"] != "off", "phrases": config["phrases"] != "off",
+                        "words": config["words"] != "off", "negation": config["negation"] == "on",
+                        "guardrails": raw.get("guardrails", True)}}
+
+
+def simplifier(path):
+    """Opt-in text -> output callable for a study config file; loads local models."""
+    from cleartext.ensemble_pipeline import EnsembleClearText
+    chosen = settings(path)
+    pipe = EnsembleClearText.load(Path(chosen["run"]))
+    pipe.technical_terms = chosen["technical_terms"]
+    rewriter = None
+    if chosen["t5"]:
+        from cleartext.structure.seq2seq import SentenceGenerator
+        from .pipeline_benchmark import SentencewiseGenerator
+        rewriter = SentencewiseGenerator(SentenceGenerator(chosen["t5"], device="cpu"))
+    return lambda text: pipe.analyze(text, structure_rewriter=rewriter, **chosen["analyze"])["output"]
 
 
 def main():

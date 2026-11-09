@@ -7,6 +7,10 @@ Text is lowercased and tokenized with the sacrebleu 13a rules (reimplemented
 here, no extra dependency). Scores are 0-100. This is distinct from the
 single-reference proxy in `cleartext.structure.common.sari`; EASSE's corpus
 SARI aggregates differently and is not expected to match exactly.
+
+`zero_division` sets 0/0 for empty keep/delete/add sets. `evaluate` uses 1,
+which rewards copying the source (no deletions -> deletion precision 1); the
+original Xu et al. script uses 0. Report which one a number uses.
 """
 
 import re
@@ -39,7 +43,7 @@ def _ngrams(tokens, n):
     return [" ".join(tokens[i:i + n]) for i in range(len(tokens) - n + 1)]
 
 
-def _sari_ngram(sgrams, cgrams, rgramslist, numref):
+def _sari_ngram(sgrams, cgrams, rgramslist, numref, zero=1):
     rgramsall = [g for rgrams in rgramslist for g in rgrams]
     rgramcounter = Counter(rgramsall)
     sgramcounter = Counter(sgrams)
@@ -55,9 +59,9 @@ def _sari_ngram(sgrams, cgrams, rgramslist, numref):
     for keepgram in keepgramcounter_rep:
         keeptmpscore1 += keepgramcountergood_rep[keepgram] / keepgramcounter_rep[keepgram]
         keeptmpscore2 += keepgramcountergood_rep[keepgram]
-    keepscore_precision = keeptmpscore1 / len(keepgramcounter_rep) if keepgramcounter_rep else 1
+    keepscore_precision = keeptmpscore1 / len(keepgramcounter_rep) if keepgramcounter_rep else zero
     keepscore_recall = (keeptmpscore2 / sum(keepgramcounterall_rep.values())
-                        if keepgramcounterall_rep else 1)
+                        if keepgramcounterall_rep else zero)
     keepscore = 0
     if keepscore_precision > 0 or keepscore_recall > 0:
         keepscore = (2 * keepscore_precision * keepscore_recall
@@ -69,14 +73,14 @@ def _sari_ngram(sgrams, cgrams, rgramslist, numref):
     deltmpscore1 = 0
     for delgram in delgramcounter_rep:
         deltmpscore1 += delgramcountergood_rep[delgram] / delgramcounter_rep[delgram]
-    delscore_precision = deltmpscore1 / len(delgramcounter_rep) if delgramcounter_rep else 1
+    delscore_precision = deltmpscore1 / len(delgramcounter_rep) if delgramcounter_rep else zero
 
     # ADDITION
     addgramcounter = set(cgramcounter) - set(sgramcounter)
     addgramcountergood = set(addgramcounter) & set(rgramcounter)
     addgramcounterall = set(rgramcounter) - set(sgramcounter)
-    addscore_precision = len(addgramcountergood) / len(addgramcounter) if addgramcounter else 1
-    addscore_recall = len(addgramcountergood) / len(addgramcounterall) if addgramcounterall else 1
+    addscore_precision = len(addgramcountergood) / len(addgramcounter) if addgramcounter else zero
+    addscore_recall = len(addgramcountergood) / len(addgramcounterall) if addgramcounterall else zero
     addscore = 0
     if addscore_precision > 0 or addscore_recall > 0:
         addscore = (2 * addscore_precision * addscore_recall
@@ -84,23 +88,25 @@ def _sari_ngram(sgrams, cgrams, rgramslist, numref):
     return keepscore, delscore_precision, addscore
 
 
-def sentence_sari(source, prediction, references):
+def sentence_sari(source, prediction, references, zero_division=1):
     """SARI for one sentence, 0-1 (multiply by 100 for the usual scale)."""
     s, c = _normalize(source).split(), _normalize(prediction).split()
     refs = [_normalize(r).split() for r in references]
     keep, dele, add = [], [], []
     for n in range(1, 5):
-        k, d, a = _sari_ngram(_ngrams(s, n), _ngrams(c, n), [_ngrams(r, n) for r in refs], len(refs))
+        k, d, a = _sari_ngram(_ngrams(s, n), _ngrams(c, n), [_ngrams(r, n) for r in refs], len(refs),
+                              zero_division)
         keep.append(k)
         dele.append(d)
         add.append(a)
     return (sum(keep) / 4 + sum(dele) / 4 + sum(add) / 4) / 3
 
 
-def corpus_sari(sources, predictions, references):
+def corpus_sari(sources, predictions, references, zero_division=1):
     """Mean sentence SARI on the 0-100 scale; references[i] lists sentence i's refs."""
     if not (len(sources) == len(predictions) == len(references)) or not sources:
         raise ValueError("sources, predictions and references must align and be nonempty")
     if len({len(r) for r in references}) != 1:
         raise ValueError("every sentence needs the same number of references")
-    return 100 * sum(sentence_sari(s, p, r) for s, p, r in zip(sources, predictions, references)) / len(sources)
+    return 100 * sum(sentence_sari(s, p, r, zero_division)
+                     for s, p, r in zip(sources, predictions, references)) / len(sources)
