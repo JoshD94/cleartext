@@ -1,0 +1,84 @@
+{
+  "repeats": [
+    {
+      "seed": 0,
+      "baseline": {
+        "edits": 642,
+        "correct": 513,
+        "wrong": 129,
+        "net": 384,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6910656620021528
+      },
+      "grammar_guard": {
+        "edits": 639,
+        "correct": 510,
+        "wrong": 129,
+        "net": 381,
+        "precision": 0.798,
+        "n": 929,
+        "coverage": 0.6878363832077503
+      },
+      "net_delta": -3
+    },
+    {
+      "seed": 1,
+      "baseline": {
+        "edits": 637,
+        "correct": 509,
+        "wrong": 128,
+        "net": 381,
+        "precision": 0.799,
+        "n": 929,
+        "coverage": 0.6856835306781486
+      },
+      "grammar_guard": {
+        "edits": 634,
+        "correct": 506,
+        "wrong": 128,
+        "net": 378,
+        "precision": 0.798,
+        "n": 929,
+        "coverage": 0.682454251883746
+      },
+      "net_delta": -3
+    },
+    {
+      "seed": 2,
+      "baseline": {
+        "edits": 646,
+        "correct": 514,
+        "wrong": 132,
+        "net": 382,
+        "precision": 0.796,
+        "n": 929,
+        "coverage": 0.6953713670613563
+      },
+      "grammar_guard": {
+        "edits": 643,
+        "correct": 511,
+        "wrong": 132,
+        "net": 379,
+        "precision": 0.795,
+        "n": 929,
+        "coverage": 0.6921420882669537
+      },
+      "net_delta": -3
+    }
+  ],
+  "mean_net_delta": -3.0,
+  "grammar_candidates_checked": 690,
+  "grammar_candidates_rejected": 5,
+  "native_cases": 19,
+  "native_rollbacks": 0,
+  "gloss_annotations": 50,
+  "gloss_statuses": {
+    "available": 24,
+    "ambiguous": 23,
+    "unavailable": 3
+  },
+  "semantic_certified": false,
+  "default_changed": false,
+  "model_weights_changed": false
+}

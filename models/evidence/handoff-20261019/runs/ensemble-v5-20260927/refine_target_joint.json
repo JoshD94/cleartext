@@ -1,0 +1,878 @@
+{
+  "rows": [
+    {
+      "rule": [
+        0,
+        0.39,
+        0
+      ],
+      "bench": 188,
+      "bench_edits": 866,
+      "cwi_net": -114,
+      "cwi_hard": 48,
+      "cwi_edits": 210
+    },
+    {
+      "rule": [
+        0,
+        0.39,
+        0.6
+      ],
+      "bench": 188,
+      "bench_edits": 859,
+      "cwi_net": -112,
+      "cwi_hard": 48,
+      "cwi_edits": 208
+    },
+    {
+      "rule": [
+        0,
+        0.39,
+        0.7
+      ],
+      "bench": 186,
+      "bench_edits": 850,
+      "cwi_net": -103,
+      "cwi_hard": 50,
+      "cwi_edits": 203
+    },
+    {
+      "rule": [
+        0,
+        0.39,
+        0.8
+      ],
+      "bench": 189,
+      "bench_edits": 841,
+      "cwi_net": -93,
+      "cwi_hard": 53,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        0,
+        0.5,
+        0
+      ],
+      "bench": 181,
+      "bench_edits": 852,
+      "cwi_net": -107,
+      "cwi_hard": 50,
+      "cwi_edits": 207
+    },
+    {
+      "rule": [
+        0,
+        0.5,
+        0.6
+      ],
+      "bench": 180,
+      "bench_edits": 847,
+      "cwi_net": -108,
+      "cwi_hard": 49,
+      "cwi_edits": 206
+    },
+    {
+      "rule": [
+        0,
+        0.5,
+        0.7
+      ],
+      "bench": 178,
+      "bench_edits": 836,
+      "cwi_net": -98,
+      "cwi_hard": 51,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        0,
+        0.5,
+        0.8
+      ],
+      "bench": 179,
+      "bench_edits": 821,
+      "cwi_net": -85,
+      "cwi_hard": 55,
+      "cwi_edits": 195
+    },
+    {
+      "rule": [
+        0,
+        0.6,
+        0
+      ],
+      "bench": 176,
+      "bench_edits": 840,
+      "cwi_net": -99,
+      "cwi_hard": 53,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        0,
+        0.6,
+        0.6
+      ],
+      "bench": 176,
+      "bench_edits": 840,
+      "cwi_net": -99,
+      "cwi_hard": 53,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        0,
+        0.6,
+        0.7
+      ],
+      "bench": 174,
+      "bench_edits": 829,
+      "cwi_net": -91,
+      "cwi_hard": 54,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        0,
+        0.6,
+        0.8
+      ],
+      "bench": 175,
+      "bench_edits": 811,
+      "cwi_net": -77,
+      "cwi_hard": 58,
+      "cwi_edits": 193
+    },
+    {
+      "rule": [
+        0.5,
+        0.39,
+        0
+      ],
+      "bench": 189,
+      "bench_edits": 866,
+      "cwi_net": -88,
+      "cwi_hard": 61,
+      "cwi_edits": 210
+    },
+    {
+      "rule": [
+        0.5,
+        0.39,
+        0.6
+      ],
+      "bench": 187,
+      "bench_edits": 859,
+      "cwi_net": -88,
+      "cwi_hard": 60,
+      "cwi_edits": 208
+    },
+    {
+      "rule": [
+        0.5,
+        0.39,
+        0.7
+      ],
+      "bench": 183,
+      "bench_edits": 850,
+      "cwi_net": -81,
+      "cwi_hard": 61,
+      "cwi_edits": 203
+    },
+    {
+      "rule": [
+        0.5,
+        0.39,
+        0.8
+      ],
+      "bench": 186,
+      "bench_edits": 841,
+      "cwi_net": -75,
+      "cwi_hard": 62,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        0.5,
+        0.5,
+        0
+      ],
+      "bench": 182,
+      "bench_edits": 852,
+      "cwi_net": -85,
+      "cwi_hard": 61,
+      "cwi_edits": 207
+    },
+    {
+      "rule": [
+        0.5,
+        0.5,
+        0.6
+      ],
+      "bench": 181,
+      "bench_edits": 847,
+      "cwi_net": -86,
+      "cwi_hard": 60,
+      "cwi_edits": 206
+    },
+    {
+      "rule": [
+        0.5,
+        0.5,
+        0.7
+      ],
+      "bench": 177,
+      "bench_edits": 836,
+      "cwi_net": -78,
+      "cwi_hard": 61,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        0.5,
+        0.5,
+        0.8
+      ],
+      "bench": 179,
+      "bench_edits": 821,
+      "cwi_net": -71,
+      "cwi_hard": 62,
+      "cwi_edits": 195
+    },
+    {
+      "rule": [
+        0.5,
+        0.6,
+        0
+      ],
+      "bench": 176,
+      "bench_edits": 840,
+      "cwi_net": -81,
+      "cwi_hard": 62,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        0.5,
+        0.6,
+        0.6
+      ],
+      "bench": 176,
+      "bench_edits": 840,
+      "cwi_net": -81,
+      "cwi_hard": 62,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        0.5,
+        0.6,
+        0.7
+      ],
+      "bench": 172,
+      "bench_edits": 829,
+      "cwi_net": -75,
+      "cwi_hard": 62,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        0.5,
+        0.6,
+        0.8
+      ],
+      "bench": 174,
+      "bench_edits": 811,
+      "cwi_net": -67,
+      "cwi_hard": 63,
+      "cwi_edits": 193
+    },
+    {
+      "rule": [
+        1,
+        0.39,
+        0
+      ],
+      "bench": 184,
+      "bench_edits": 866,
+      "cwi_net": -69,
+      "cwi_hard": 71,
+      "cwi_edits": 211
+    },
+    {
+      "rule": [
+        1,
+        0.39,
+        0.6
+      ],
+      "bench": 182,
+      "bench_edits": 859,
+      "cwi_net": -67,
+      "cwi_hard": 71,
+      "cwi_edits": 209
+    },
+    {
+      "rule": [
+        1,
+        0.39,
+        0.7
+      ],
+      "bench": 178,
+      "bench_edits": 850,
+      "cwi_net": -64,
+      "cwi_hard": 70,
+      "cwi_edits": 204
+    },
+    {
+      "rule": [
+        1,
+        0.39,
+        0.8
+      ],
+      "bench": 180,
+      "bench_edits": 841,
+      "cwi_net": -62,
+      "cwi_hard": 69,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        1,
+        0.5,
+        0
+      ],
+      "bench": 179,
+      "bench_edits": 852,
+      "cwi_net": -65,
+      "cwi_hard": 71,
+      "cwi_edits": 207
+    },
+    {
+      "rule": [
+        1,
+        0.5,
+        0.6
+      ],
+      "bench": 178,
+      "bench_edits": 847,
+      "cwi_net": -64,
+      "cwi_hard": 71,
+      "cwi_edits": 206
+    },
+    {
+      "rule": [
+        1,
+        0.5,
+        0.7
+      ],
+      "bench": 174,
+      "bench_edits": 836,
+      "cwi_net": -60,
+      "cwi_hard": 70,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        1,
+        0.5,
+        0.8
+      ],
+      "bench": 175,
+      "bench_edits": 821,
+      "cwi_net": -57,
+      "cwi_hard": 69,
+      "cwi_edits": 195
+    },
+    {
+      "rule": [
+        1,
+        0.6,
+        0
+      ],
+      "bench": 175,
+      "bench_edits": 840,
+      "cwi_net": -63,
+      "cwi_hard": 71,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        1,
+        0.6,
+        0.6
+      ],
+      "bench": 175,
+      "bench_edits": 840,
+      "cwi_net": -63,
+      "cwi_hard": 71,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        1,
+        0.6,
+        0.7
+      ],
+      "bench": 171,
+      "bench_edits": 829,
+      "cwi_net": -59,
+      "cwi_hard": 70,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        1,
+        0.6,
+        0.8
+      ],
+      "bench": 172,
+      "bench_edits": 811,
+      "cwi_net": -55,
+      "cwi_hard": 69,
+      "cwi_edits": 193
+    },
+    {
+      "rule": [
+        2,
+        0.39,
+        0
+      ],
+      "bench": 171,
+      "bench_edits": 866,
+      "cwi_net": -59,
+      "cwi_hard": 76,
+      "cwi_edits": 211
+    },
+    {
+      "rule": [
+        2,
+        0.39,
+        0.6
+      ],
+      "bench": 169,
+      "bench_edits": 859,
+      "cwi_net": -57,
+      "cwi_hard": 76,
+      "cwi_edits": 209
+    },
+    {
+      "rule": [
+        2,
+        0.39,
+        0.7
+      ],
+      "bench": 165,
+      "bench_edits": 850,
+      "cwi_net": -52,
+      "cwi_hard": 76,
+      "cwi_edits": 204
+    },
+    {
+      "rule": [
+        2,
+        0.39,
+        0.8
+      ],
+      "bench": 168,
+      "bench_edits": 841,
+      "cwi_net": -50,
+      "cwi_hard": 75,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        2,
+        0.5,
+        0
+      ],
+      "bench": 166,
+      "bench_edits": 852,
+      "cwi_net": -55,
+      "cwi_hard": 76,
+      "cwi_edits": 207
+    },
+    {
+      "rule": [
+        2,
+        0.5,
+        0.6
+      ],
+      "bench": 165,
+      "bench_edits": 847,
+      "cwi_net": -54,
+      "cwi_hard": 76,
+      "cwi_edits": 206
+    },
+    {
+      "rule": [
+        2,
+        0.5,
+        0.7
+      ],
+      "bench": 161,
+      "bench_edits": 836,
+      "cwi_net": -48,
+      "cwi_hard": 76,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        2,
+        0.5,
+        0.8
+      ],
+      "bench": 163,
+      "bench_edits": 821,
+      "cwi_net": -45,
+      "cwi_hard": 75,
+      "cwi_edits": 195
+    },
+    {
+      "rule": [
+        2,
+        0.6,
+        0
+      ],
+      "bench": 163,
+      "bench_edits": 840,
+      "cwi_net": -53,
+      "cwi_hard": 76,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        2,
+        0.6,
+        0.6
+      ],
+      "bench": 163,
+      "bench_edits": 840,
+      "cwi_net": -53,
+      "cwi_hard": 76,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        2,
+        0.6,
+        0.7
+      ],
+      "bench": 159,
+      "bench_edits": 829,
+      "cwi_net": -47,
+      "cwi_hard": 76,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        2,
+        0.6,
+        0.8
+      ],
+      "bench": 160,
+      "bench_edits": 811,
+      "cwi_net": -43,
+      "cwi_hard": 75,
+      "cwi_edits": 193
+    },
+    {
+      "rule": [
+        4,
+        0.39,
+        0
+      ],
+      "bench": 166,
+      "bench_edits": 866,
+      "cwi_net": -49,
+      "cwi_hard": 81,
+      "cwi_edits": 211
+    },
+    {
+      "rule": [
+        4,
+        0.39,
+        0.6
+      ],
+      "bench": 164,
+      "bench_edits": 859,
+      "cwi_net": -47,
+      "cwi_hard": 81,
+      "cwi_edits": 209
+    },
+    {
+      "rule": [
+        4,
+        0.39,
+        0.7
+      ],
+      "bench": 160,
+      "bench_edits": 850,
+      "cwi_net": -42,
+      "cwi_hard": 81,
+      "cwi_edits": 204
+    },
+    {
+      "rule": [
+        4,
+        0.39,
+        0.8
+      ],
+      "bench": 161,
+      "bench_edits": 841,
+      "cwi_net": -40,
+      "cwi_hard": 80,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        4,
+        0.5,
+        0
+      ],
+      "bench": 162,
+      "bench_edits": 852,
+      "cwi_net": -45,
+      "cwi_hard": 81,
+      "cwi_edits": 207
+    },
+    {
+      "rule": [
+        4,
+        0.5,
+        0.6
+      ],
+      "bench": 161,
+      "bench_edits": 847,
+      "cwi_net": -44,
+      "cwi_hard": 81,
+      "cwi_edits": 206
+    },
+    {
+      "rule": [
+        4,
+        0.5,
+        0.7
+      ],
+      "bench": 157,
+      "bench_edits": 836,
+      "cwi_net": -38,
+      "cwi_hard": 81,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        4,
+        0.5,
+        0.8
+      ],
+      "bench": 157,
+      "bench_edits": 821,
+      "cwi_net": -35,
+      "cwi_hard": 80,
+      "cwi_edits": 195
+    },
+    {
+      "rule": [
+        4,
+        0.6,
+        0
+      ],
+      "bench": 159,
+      "bench_edits": 840,
+      "cwi_net": -43,
+      "cwi_hard": 81,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        4,
+        0.6,
+        0.6
+      ],
+      "bench": 159,
+      "bench_edits": 840,
+      "cwi_net": -43,
+      "cwi_hard": 81,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        4,
+        0.6,
+        0.7
+      ],
+      "bench": 155,
+      "bench_edits": 829,
+      "cwi_net": -37,
+      "cwi_hard": 81,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        4,
+        0.6,
+        0.8
+      ],
+      "bench": 154,
+      "bench_edits": 811,
+      "cwi_net": -33,
+      "cwi_hard": 80,
+      "cwi_edits": 193
+    },
+    {
+      "rule": [
+        8,
+        0.39,
+        0
+      ],
+      "bench": 165,
+      "bench_edits": 866,
+      "cwi_net": -43,
+      "cwi_hard": 84,
+      "cwi_edits": 211
+    },
+    {
+      "rule": [
+        8,
+        0.39,
+        0.6
+      ],
+      "bench": 163,
+      "bench_edits": 859,
+      "cwi_net": -41,
+      "cwi_hard": 84,
+      "cwi_edits": 209
+    },
+    {
+      "rule": [
+        8,
+        0.39,
+        0.7
+      ],
+      "bench": 159,
+      "bench_edits": 850,
+      "cwi_net": -36,
+      "cwi_hard": 84,
+      "cwi_edits": 204
+    },
+    {
+      "rule": [
+        8,
+        0.39,
+        0.8
+      ],
+      "bench": 160,
+      "bench_edits": 841,
+      "cwi_net": -34,
+      "cwi_hard": 83,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        8,
+        0.5,
+        0
+      ],
+      "bench": 161,
+      "bench_edits": 852,
+      "cwi_net": -39,
+      "cwi_hard": 84,
+      "cwi_edits": 207
+    },
+    {
+      "rule": [
+        8,
+        0.5,
+        0.6
+      ],
+      "bench": 160,
+      "bench_edits": 847,
+      "cwi_net": -38,
+      "cwi_hard": 84,
+      "cwi_edits": 206
+    },
+    {
+      "rule": [
+        8,
+        0.5,
+        0.7
+      ],
+      "bench": 156,
+      "bench_edits": 836,
+      "cwi_net": -32,
+      "cwi_hard": 84,
+      "cwi_edits": 200
+    },
+    {
+      "rule": [
+        8,
+        0.5,
+        0.8
+      ],
+      "bench": 156,
+      "bench_edits": 821,
+      "cwi_net": -29,
+      "cwi_hard": 83,
+      "cwi_edits": 195
+    },
+    {
+      "rule": [
+        8,
+        0.6,
+        0
+      ],
+      "bench": 158,
+      "bench_edits": 840,
+      "cwi_net": -37,
+      "cwi_hard": 84,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        8,
+        0.6,
+        0.6
+      ],
+      "bench": 158,
+      "bench_edits": 840,
+      "cwi_net": -37,
+      "cwi_hard": 84,
+      "cwi_edits": 205
+    },
+    {
+      "rule": [
+        8,
+        0.6,
+        0.7
+      ],
+      "bench": 154,
+      "bench_edits": 829,
+      "cwi_net": -31,
+      "cwi_hard": 84,
+      "cwi_edits": 199
+    },
+    {
+      "rule": [
+        8,
+        0.6,
+        0.8
+      ],
+      "bench": 153,
+      "bench_edits": 811,
+      "cwi_net": -27,
+      "cwi_hard": 83,
+      "cwi_edits": 193
+    }
+  ],
+  "current": [
+    0,
+    0.39,
+    0
+  ],
+  "chosen": [
+    0.5,
+    0.39,
+    0
+  ]
+}

@@ -1,0 +1,481 @@
+{
+ "provenance": {
+  "branch": "josh/structural-models-20261026",
+  "commit": "085015fceb50859aa7d8bc7b639cdccfc1d9c5f8",
+  "evidence": "models/evidence/pipeline-20261027/combined_per_example_metrics.json",
+  "inputs": "190 (domain panel: 24 = 8 per source)",
+  "note": "Executed Oct 27-28 on Yoga; numbers computed here from the stored per-example metrics."
+ },
+ "systems": {
+  "original": {
+   "computer_science": {
+    "n": 8,
+    "changed": 0,
+    "fkgl_mean": 13.764,
+    "embedding_changed_mean": null,
+    "nli_backward_changed_mean": null,
+    "nli_mean_changed_mean": null,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 0,
+    "fkgl_mean": 17.222,
+    "embedding_changed_mean": null,
+    "nli_backward_changed_mean": null,
+    "nli_mean_changed_mean": null,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 0,
+    "fkgl_mean": 13.006,
+    "embedding_changed_mean": null,
+    "nli_backward_changed_mean": null,
+    "nli_mean_changed_mean": null,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   }
+  },
+  "rule_based": {
+   "computer_science": {
+    "n": 8,
+    "changed": 0,
+    "fkgl_mean": 13.764,
+    "embedding_changed_mean": null,
+    "nli_backward_changed_mean": null,
+    "nli_mean_changed_mean": null,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 0,
+    "fkgl_mean": 17.222,
+    "embedding_changed_mean": null,
+    "nli_backward_changed_mean": null,
+    "nli_mean_changed_mean": null,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 0,
+    "fkgl_mean": 13.006,
+    "embedding_changed_mean": null,
+    "nli_backward_changed_mean": null,
+    "nli_mean_changed_mean": null,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   }
+  },
+  "lexical_only": {
+   "computer_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 13.491,
+    "embedding_changed_mean": 0.9757,
+    "nli_backward_changed_mean": 0.7335,
+    "nli_mean_changed_mean": 0.7959,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 4,
+    "fkgl_mean": 16.924,
+    "embedding_changed_mean": 0.9969,
+    "nli_backward_changed_mean": 0.9888,
+    "nli_mean_changed_mean": 0.9904,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 12.9,
+    "embedding_changed_mean": 0.9669,
+    "nli_backward_changed_mean": 0.8234,
+    "nli_mean_changed_mean": 0.8481,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 1
+    }
+   }
+  },
+  "structural_only": {
+   "computer_science": {
+    "n": 8,
+    "changed": 1,
+    "fkgl_mean": 13.764,
+    "embedding_changed_mean": 0.9996,
+    "nli_backward_changed_mean": 0.9924,
+    "nli_mean_changed_mean": 0.9921,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 1,
+    "fkgl_mean": 16.518,
+    "embedding_changed_mean": 0.9937,
+    "nli_backward_changed_mean": 0.9877,
+    "nli_mean_changed_mean": 0.9781,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 1,
+    "fkgl_mean": 12.031,
+    "embedding_changed_mean": 0.9803,
+    "nli_backward_changed_mean": 0.9799,
+    "nli_mean_changed_mean": 0.983,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   }
+  },
+  "lexical_structural": {
+   "computer_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 13.491,
+    "embedding_changed_mean": 0.9758,
+    "nli_backward_changed_mean": 0.7336,
+    "nli_mean_changed_mean": 0.796,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 4,
+    "fkgl_mean": 16.224,
+    "embedding_changed_mean": 0.9952,
+    "nli_backward_changed_mean": 0.9913,
+    "nli_mean_changed_mean": 0.9913,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 11.925,
+    "embedding_changed_mean": 0.9629,
+    "nli_backward_changed_mean": 0.824,
+    "nli_mean_changed_mean": 0.8496,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 1
+    }
+   }
+  },
+  "full_no_guardrails": {
+   "computer_science": {
+    "n": 8,
+    "changed": 7,
+    "fkgl_mean": 10.554,
+    "embedding_changed_mean": 0.9602,
+    "nli_backward_changed_mean": 0.8372,
+    "nli_mean_changed_mean": 0.8764,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 5,
+    "fkgl_mean": 14.442,
+    "embedding_changed_mean": 0.9952,
+    "nli_backward_changed_mean": 0.9891,
+    "nli_mean_changed_mean": 0.99,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 7,
+    "fkgl_mean": 10.926,
+    "embedding_changed_mean": 0.9658,
+    "nli_backward_changed_mean": 0.876,
+    "nli_mean_changed_mean": 0.8872,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 1
+    }
+   }
+  },
+  "full_pipeline": {
+   "computer_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 13.491,
+    "embedding_changed_mean": 0.9758,
+    "nli_backward_changed_mean": 0.7336,
+    "nli_mean_changed_mean": 0.796,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 4,
+    "fkgl_mean": 16.224,
+    "embedding_changed_mean": 0.9952,
+    "nli_backward_changed_mean": 0.9913,
+    "nli_mean_changed_mean": 0.9913,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 11.925,
+    "embedding_changed_mean": 0.9629,
+    "nli_backward_changed_mean": 0.824,
+    "nli_mean_changed_mean": 0.8496,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 1
+    }
+   }
+  },
+  "full_rules": {
+   "computer_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 13.491,
+    "embedding_changed_mean": 0.9757,
+    "nli_backward_changed_mean": 0.7335,
+    "nli_mean_changed_mean": 0.7959,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 4,
+    "fkgl_mean": 16.924,
+    "embedding_changed_mean": 0.9969,
+    "nli_backward_changed_mean": 0.9888,
+    "nli_mean_changed_mean": 0.9904,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 12.9,
+    "embedding_changed_mean": 0.9669,
+    "nli_backward_changed_mean": 0.8234,
+    "nli_mean_changed_mean": 0.8481,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 1
+    }
+   }
+  },
+  "contextual_default": {
+   "computer_science": {
+    "n": 8,
+    "changed": 5,
+    "fkgl_mean": 13.777,
+    "embedding_changed_mean": 0.9775,
+    "nli_backward_changed_mean": 0.7877,
+    "nli_mean_changed_mean": 0.7858,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 4,
+    "fkgl_mean": 16.224,
+    "embedding_changed_mean": 0.9952,
+    "nli_backward_changed_mean": 0.9913,
+    "nli_mean_changed_mean": 0.9913,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 6,
+    "fkgl_mean": 11.913,
+    "embedding_changed_mean": 0.9802,
+    "nli_backward_changed_mean": 0.9466,
+    "nli_mean_changed_mean": 0.9426,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 1
+    }
+   }
+  },
+  "contextual_precision": {
+   "computer_science": {
+    "n": 8,
+    "changed": 3,
+    "fkgl_mean": 13.719,
+    "embedding_changed_mean": 0.9874,
+    "nli_backward_changed_mean": 0.7978,
+    "nli_mean_changed_mean": 0.7588,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "corporate_communication": {
+    "n": 8,
+    "changed": 3,
+    "fkgl_mean": 16.224,
+    "embedding_changed_mean": 0.9949,
+    "nli_backward_changed_mean": 0.9905,
+    "nli_mean_changed_mean": 0.9904,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   },
+   "political_science": {
+    "n": 8,
+    "changed": 3,
+    "fkgl_mean": 12.096,
+    "embedding_changed_mean": 0.9875,
+    "nli_backward_changed_mean": 0.9719,
+    "nli_mean_changed_mean": 0.9753,
+    "explicit_failures": {
+     "numbers_preserved": 0,
+     "dates_preserved": 0,
+     "entities_preserved": 0,
+     "negations_preserved": 0,
+     "tenses_preserved": 0
+    }
+   }
+  }
+ }
+}

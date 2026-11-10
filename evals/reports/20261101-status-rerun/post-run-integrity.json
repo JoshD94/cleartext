@@ -1,0 +1,57 @@
+{
+  "evaluation_artifacts_checked": 18,
+  "metric_sources_checked": 3,
+  "implicit_resources_checked": 107,
+  "all_match_after_run": true,
+  "model_sources_checked_after_generation": true,
+  "matrix_score_exit": 0,
+  "matrix_checks": {
+    "matrix_190": {
+      "input_n": 190,
+      "system_n": 10,
+      "prediction_n": 1900,
+      "panel_counts": {
+        "desse_reused_dev": 96,
+        "domain_reused_dev": 24,
+        "authored_smoke": 6,
+        "asset_validation": 64
+      },
+      "systems": [
+        "original",
+        "rule_based",
+        "lexical_only",
+        "structural_only",
+        "lexical_structural",
+        "full_no_guardrails",
+        "full_pipeline",
+        "full_rules",
+        "contextual_default",
+        "contextual_precision"
+      ],
+      "complete": true,
+      "limits": "Checks input/reference alignment and completeness only. No output quality verdict or accuracy labels."
+    },
+    "week7_18": {
+      "input_n": 18,
+      "system_n": 10,
+      "prediction_n": 180,
+      "panel_counts": {
+        "week7_authored_smoke": 18
+      },
+      "systems": [
+        "original",
+        "rule_based",
+        "lexical_only",
+        "structural_only",
+        "lexical_structural",
+        "full_no_guardrails",
+        "full_pipeline",
+        "full_rules",
+        "contextual_default",
+        "contextual_precision"
+      ],
+      "complete": true,
+      "limits": "Checks input/reference alignment and completeness only. No output quality verdict or accuracy labels."
+    }
+  }
+}

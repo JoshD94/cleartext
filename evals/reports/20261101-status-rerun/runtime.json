@@ -1,0 +1,23 @@
+{
+  "inference_models_loaded_in_final_process": false,
+  "torch_num_threads": 4,
+  "host": "Yoga",
+  "python": "3.12.14",
+  "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "sentence-transformers": "6.2.0",
+    "textstat": "0.7.13",
+    "pyphen": "0.18.1",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "wordfreq": "3.1.1",
+    "spacy": "3.8.16",
+    "lemminflect": "0.2.3"
+  },
+  "embedding_devices": {},
+  "nli_devices": {},
+  "runtime_wrapper_sha256": "48840b9d7896cd31c67efd4e15474525497d66f726bdd775653761c41e184f26"
+}

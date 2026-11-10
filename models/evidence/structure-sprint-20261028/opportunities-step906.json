@@ -1,0 +1,22 @@
+{
+  "scope": "All saved reused-development rows. Mechanism counts, no quality labels or policy changes.",
+  "input_sha256": "3b3161acc99974e691eb8d371c58feee1989c4f043a2b543eb6df5210f69f55b",
+  "script_sha256": "fafa7d77279f89804511f1eb4d359f97a9e2a447d0d285363e473dba8a46a53f",
+  "counts": {
+    "inputs": 128,
+    "retained_baseline_copy": 73,
+    "baseline_copies": 74,
+    "copy_has_shorter_split": 57,
+    "copy_shorter_pool_all_fail_existing_checks": 45,
+    "retained_baseline_edit": 54,
+    "copy_shorter_split_passes_existing_checks": 12,
+    "copy_shorter_existing_passes_but_extra_checks_block": 11,
+    "source_anchored_copy_fallback": 1,
+    "copy_added_split": 1,
+    "copy_no_shorter_split_in_saved_pool": 17
+  },
+  "extra_blockers_rows_nonexclusive": {
+    "source_anchored_words": 9,
+    "participant_events": 11
+  }
+}

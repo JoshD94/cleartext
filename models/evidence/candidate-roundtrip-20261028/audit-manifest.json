@@ -1,0 +1,20 @@
+{
+  "scope": "All 929 BenchLS cases are reused development. Dictionary support and list matches do not grade full-sentence meaning.",
+  "input_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7",
+    "/home/joshuadirga/nltk_data/corpora/wordnet.zip": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+    "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/lemminflect/resources/lemma_lu.csv.gz": "fd6f807e796da07f2a430d073cefae17004f7147abda065bb48b129dc29a850f",
+    "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/lemminflect/resources/lemma_overrides.csv": "f9968d1cc7689350d738c85ee59490cc23efe8cf4ad5a7d5092f070b5fc46c9f",
+    "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/lemminflect/resources/infl_lu.csv.gz": "8c44bd5bec62488bef043f98b0cab022a431d6cb03954864ea70334530908ba7",
+    "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/lemminflect/resources/infl_overrides.csv": "c6ccfd2f17d706cf259c6cf96cbb89b5a641a584c2456755808425821c7652e8"
+  },
+  "source_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/scripts/experiments/candidate_coverage_roundtrip.py": "688ec0382076e8be382fe3a89ea7f6db8771eb0d7dda63a2d4473cf92c54cd4e",
+    "/home/joshuadirga/Documents/projects/cleartext/models/src/cleartext/candidate_morphology.py": "1fe4eab21d03461ec7a5b2c793adb8fe5f818fcdbea50573c55cb098eda593fc",
+    "/home/joshuadirga/Documents/projects/cleartext/models/src/cleartext/coverage_lexicon.py": "070aec5830ca06db3df1a7b48ab7a0fc7e84b3a444ecddd8034df4a20cb1b3d5"
+  },
+  "model_imports": false,
+  "new_labels": false,
+  "tsar_used": false,
+  "default_changed": false
+}

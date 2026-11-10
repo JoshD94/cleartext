@@ -1,0 +1,8 @@
+{
+  "filename": "cleartext-t5-continued-20261026.tar.gz",
+  "bytes": 225721722,
+  "sha256": "f831fbe6368d87b19daca590bf8121ef57f0aa528beadabcf9dbea58f82c6674",
+  "model_sha256": "36787b852ab88f1d61673465d63046b293b4bf53a9929fa0afc077bb592b7756",
+  "initializer_unchanged": true,
+  "contains_training_rows": false
+}

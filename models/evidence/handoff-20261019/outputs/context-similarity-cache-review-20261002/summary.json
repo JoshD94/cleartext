@@ -1,0 +1,29 @@
+{
+  "scope": "Existing BenchLS development candidates. No labels used in scoring, fitting, gold generation or TSAR.",
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "outputs/bert-candidate-coverage-20261002/records.jsonl": "b702749ac07cb14695ddd0dcd193d8d2074a3571dec2773acebafea72b920ea7"
+  },
+  "source_sha256": {
+    "scripts/experiments/cache_replacement_similarity.py": "c4435f3ee1753dc265abd918c7a07ddd0e6b99486e46525d6d6627ab72fa8df9",
+    "src/cleartext/context_similarity.py": "7cb40625caec09c7cf53575c2e34bba3bd5f2cc337571f24db5a7cafb7cb5691",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/complete_slot.py": "c1880dbaf7aa78e2619d6a433370d26d3ecfa808a31adb5ba9a759801eaa91cd",
+    "src/cleartext/prompted_relations.py": "52aa1da10c306cd78de596d7ac59d43ece39e25ed9f8306db3cb19263cb659f3"
+  },
+  "model": "bert-base-uncased",
+  "layers": "last four mean",
+  "limit": 256,
+  "batch_size": 16,
+  "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "numpy": "2.5.3"
+  },
+  "cases": 929,
+  "candidate_rows": 14617,
+  "records_sha256": "6c4412716c6d05ea326de2f6f4b1b28ccde972857a2957ff3312cf44402b99fe",
+  "elapsed_seconds": 900.2234723720467,
+  "default_changed": false
+}

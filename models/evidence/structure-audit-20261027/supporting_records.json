@@ -1,0 +1,20 @@
+{
+  "purpose": "Supporting counts from previously inspected local outputs. No quality labels.",
+  "domain_dev": {
+    "input_sha256": "84f96a5457a085ff0b90f85b7226cf2be9e5254f0ece45a14f44eff499c44533",
+    "n": 24,
+    "baseline_raw_changes": 13,
+    "baseline_final_changes": 2,
+    "failures_on_raw_changes": {
+      "argument_roles": 3,
+      "complete_clauses": 9,
+      "complement_scope": 2,
+      "predicate_tense": 1
+    }
+  },
+  "training_conflicts_seen_in_selected_continuation": {
+    "algorithm": "Same seed4701 shuffle, first2400 rows; selected step300, effectivebatch8, fewer than one epoch.",
+    "all_current_gate_conflicts": 231,
+    "complement_scope_conflicts": 227
+  }
+}

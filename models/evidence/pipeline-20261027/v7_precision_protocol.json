@@ -1,0 +1,43 @@
+{
+  "target_precision": 0.9,
+  "minimum_coverage_each_repeat": 0.2,
+  "selection": "Lowest threshold achieving target precision and minimum coverage in every repeat; otherwise highest minimum precision among eligible thresholds.",
+  "folds": 10,
+  "repeats": 3,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "threshold_grid": [
+    0.45,
+    0.475,
+    0.5,
+    0.525,
+    0.55,
+    0.575,
+    0.6,
+    0.625,
+    0.65,
+    0.675,
+    0.7,
+    0.725,
+    0.75,
+    0.775,
+    0.8,
+    0.825,
+    0.85,
+    0.875,
+    0.9,
+    0.925,
+    0.95,
+    0.975
+  ],
+  "data": "All 929 BenchLS cases are reused development, grouped by target word. TSAR reused exploratory test, opened only after policy freeze.",
+  "model": "Same AverageDecision family and cached v7 features, no architecture or weight changes to deployed models",
+  "source_sha256": "50f70c411751c2c99f4642041fe8498fbd0ba3230d49956c744ae9356b06d42d",
+  "cache_sha256": {
+    "refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d"
+  }
+}

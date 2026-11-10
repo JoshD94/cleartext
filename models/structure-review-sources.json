@@ -1,0 +1,77 @@
+[
+  {
+    "id": "json-rfc8259",
+    "domain": "technical",
+    "split": "train",
+    "format": "rfc",
+    "url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+    "sha256": "61a5378f4255c720beb2a4b4a63b29540147c140f36988bf086291989b4cd2d7"
+  },
+  {
+    "id": "microsoft-ar2025",
+    "domain": "corporate",
+    "split": "train",
+    "format": "html",
+    "url": "https://www.microsoft.com/investor/reports/ar25/",
+    "sha256": "564154a15ac28c0f7f72f304ae26b74c29cfca9f3eafe8d59595776769d621ca",
+    "start_at": "Microsoft is a technology company"
+  },
+  {
+    "id": "obama-inaugural2009",
+    "domain": "political",
+    "split": "train",
+    "format": "html",
+    "url": "https://www.govinfo.gov/content/pkg/DCPD-200900001/html/DCPD-200900001.htm",
+    "sha256": "d8c42495d3745fa95d818290867c01ac8832fb33415f40802cf2c3af6a331fb5"
+  },
+  {
+    "id": "quic-rfc9000",
+    "domain": "technical",
+    "split": "dev",
+    "format": "rfc",
+    "url": "https://www.rfc-editor.org/rfc/rfc9000.txt",
+    "sha256": "f88aae47f8b18e102024916e975e919201d8dde689cba79b01079eaedd402e22"
+  },
+  {
+    "id": "apple-10k2025",
+    "domain": "corporate",
+    "split": "dev",
+    "format": "pdf",
+    "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2025/ar/_10-K-2025-As-Filed.pdf",
+    "sha256": "3eb270b22acb7d8d8e9c32a43dc221dec3345f8e4bca02755fdbc1ee16c823de",
+    "start_at": "The Company designs, manufactures and markets"
+  },
+  {
+    "id": "biden-inaugural2021",
+    "domain": "political",
+    "split": "dev",
+    "format": "html",
+    "url": "https://www.govinfo.gov/content/pkg/DCPD-202100048/html/DCPD-202100048.htm",
+    "sha256": "558c0877990aecbe59fdb293dfd4c0ce0789e89437ac17029b8e5556f42113e2"
+  },
+  {
+    "id": "http2-rfc9113",
+    "domain": "technical",
+    "split": "test",
+    "format": "rfc",
+    "url": "https://www.rfc-editor.org/rfc/rfc9113.txt",
+    "sha256": "a00ef91b64e111a282e77ec66980f5242e77c0bb5e33e0927e3b6757080506de"
+  },
+  {
+    "id": "nvidia-ar2025",
+    "domain": "corporate",
+    "split": "test",
+    "format": "pdf",
+    "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/annual/NVIDIA-2025-Annual-Report.pdf",
+    "sha256": "757b344ab62ba282f6e44e0702e8ce5f190d88fb23b5e0a2beaf4cb277a395cc",
+    "start_at": "We specialize in markets"
+  },
+  {
+    "id": "obama-inaugural2013",
+    "domain": "political",
+    "split": "test",
+    "format": "html",
+    "url": "https://www.govinfo.gov/content/pkg/DCPD-201300032/html/DCPD-201300032.htm",
+    "sha256": "47833bf661cb5823372beb3da1bc7b6eacb635285b1e5cb25cd4eefe891f9a2b"
+  }
+]

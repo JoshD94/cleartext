@@ -1,0 +1,13 @@
+{
+  "counts": {
+    "native_guard_candidate_argument_roles": 41,
+    "native_guard_cases_with_passing_listed_candidate": 1,
+    "guard_cases": 35,
+    "native_guard_candidate_entity_roles": 18,
+    "meaning_cases": 82,
+    "native_guard_candidate_entities": 3
+  },
+  "maximum_sense_fit_disagreement": 0.0,
+  "semantic_accuracy_measured": false,
+  "records_sha256": "2e3e2811bb32be0818d29fb3256b002819c571746f1937a280a5688f7cd415de"
+}

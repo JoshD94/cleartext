@@ -1,0 +1,54 @@
+{
+  "dataset": "WikiSplit",
+  "commit": "80f5bddf42d1a68201b7b107ee4b8d86d82e9fde",
+  "files": {
+    "test.tsv": {
+      "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/test.tsv",
+      "sha256": "88c3eff253f7ff3fcce9370bb54f750bc35f646c1b6d2a45df2b993c96670f7f",
+      "bytes": 1926782
+    },
+    "tune.tsv": {
+      "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/tune.tsv",
+      "sha256": "67118f483438fc9f0ba12e63dc37f0eeff8bbad1873157509ced7e3e46582312",
+      "bytes": 1928137
+    },
+    "train.tsv.zip": {
+      "url": "https://raw.githubusercontent.com/google-research-datasets/wiki-split/80f5bddf42d1a68201b7b107ee4b8d86d82e9fde/train.tsv.zip",
+      "sha256": "42234243209fbb8f11405372284d634728faf47eafd5799cefb932c06c7b3a54",
+      "bytes": 96439435
+    }
+  },
+  "selection": "Deterministic SHA256 sample, seed string 4701, after fixed filters",
+  "train_scan_limit": 50000,
+  "counts": {
+    "test": {
+      "scanned": 5000,
+      "eligible": 4348,
+      "filtered": 646,
+      "within_split_duplicate": 6,
+      "selected": 128
+    },
+    "dev": {
+      "scanned": 5000,
+      "eligible": 4359,
+      "filtered": 637,
+      "within_split_duplicate": 4,
+      "selected": 128
+    },
+    "train": {
+      "scanned": 50000,
+      "eligible": 43257,
+      "filtered": 6226,
+      "within_split_duplicate": 512,
+      "cross_split_overlap": 5,
+      "selected": 2000
+    }
+  },
+  "split_policy": "Official train/tune/test; remove normalized source/full-target overlap from earlier splits; validation.tsv unused",
+  "limitations": [
+    "Automatically mined pairs contain noise",
+    "No human correctness labels",
+    "Near-duplicate and pretraining overlap not excluded",
+    "Length/overlap filters narrow the task"
+  ]
+}

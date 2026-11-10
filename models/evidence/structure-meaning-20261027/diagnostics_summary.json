@@ -1,0 +1,63 @@
+{
+  "purpose": "Development diagnostics only, not independent simplification quality",
+  "new_human_ratings": 0,
+  "authored": {
+    "n": 16,
+    "match_authored_expectation": 14,
+    "false_accepts": [],
+    "false_rejections": [
+      "split",
+      "numbers-kept"
+    ]
+  },
+  "previous_outputs": {
+    "dev-v2/dev.jsonl": {
+      "input_sha256": "380fa073844cf166ee38c908eb5c6490e7ee7cc02d0b9efa4dbe0ffd256e4a1f",
+      "n": 128,
+      "label": "Previously inspected; now development",
+      "baseline": {
+        "changed_after": 52,
+        "changed_before": 52,
+        "development_sari_before": 54.078705335762635,
+        "development_sari_after": 54.078705335762635
+      },
+      "search": {
+        "changed_after": 52,
+        "changed_before": 53,
+        "rolled_back": 1,
+        "development_sari_before": 54.199273821420846,
+        "development_sari_after": 53.92371827981509
+      }
+    },
+    "test-v2/test.jsonl": {
+      "input_sha256": "7e8faf53bacb945ceb05e6ac58ff745434c10bb31dfbd73f508c611d143016f8",
+      "n": 128,
+      "label": "Previously inspected; now development",
+      "baseline": {
+        "changed_after": 19,
+        "changed_before": 19,
+        "development_sari_before": 37.03055051671231,
+        "development_sari_after": 37.03055051671231
+      },
+      "search": {
+        "changed_after": 19,
+        "changed_before": 19,
+        "development_sari_before": 36.35567893534201,
+        "development_sari_after": 36.35567893534201
+      }
+    },
+    "dev-v2/domain_dev.jsonl": {
+      "input_sha256": "84f96a5457a085ff0b90f85b7226cf2be9e5254f0ece45a14f44eff499c44533",
+      "n": 24,
+      "label": "Previously inspected; now development",
+      "baseline": {
+        "changed_after": 2,
+        "changed_before": 2
+      },
+      "search": {
+        "changed_after": 2,
+        "changed_before": 2
+      }
+    }
+  }
+}

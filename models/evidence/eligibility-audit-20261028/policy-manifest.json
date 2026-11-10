@@ -1,0 +1,18 @@
+{
+  "input_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "/home/joshuadirga/Documents/projects/cleartext/models/data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "/home/joshuadirga/.local/state/cleartext/eligibility-audit-20261028/guard-comparison-yoga/summary.json": "e1347d31dedc95c13235ce2c732b7e878c66ced2cc4200a751895cc8883459df",
+    "/home/joshuadirga/.local/state/cleartext/eligibility-audit-20261028/guard-comparison-yoga/manifest.json": "c7d499f633302490d21222eb70a276578396fb4f5f374560e90ed906f892fab6",
+    "/home/joshuadirga/.local/state/cleartext/eligibility-audit-20261028/guard-comparison-yoga/records.jsonl": "3a089be0631bdd5163b98e88240da6cc6b28ce8d89bd0d327d01737f2502e6b3",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/feature-keys.json": "c8010a40dab33c313c666ba283a72d7f38dd862deae387f006c82064fc94f061",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/summary.json": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/similarity-seed0.npz": "edc248ec5c942d5fa9588c8b38690481e3725b0032c2c6a50aae4e56dc8faaaf",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/similarity-seed1.npz": "a03f56a7ecfee53082b4c644aea2a3bc4b779051fc657dbb2cef55cfbfcb8b42",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/detail-preservation-final-20261002/similarity-seed2.npz": "68a2ae0de0ce91a736f0121d69edcc58fb162da7a3419b0f615bfd51912fe38d"
+  },
+  "source_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/scripts/experiments/evaluate_entity_guards.py": "c4eada673c0fb89bda178b725dac29159ced0c61749b8cf46ce24f3e6a3a2ad9",
+    "/home/joshuadirga/Documents/projects/cleartext/models/scripts/experiments/ablate_meaning_floor.py": "7d642a700e5aaea8d0519386b618709da0303d9a023415ee2a47102f5483ec89"
+  }
+}

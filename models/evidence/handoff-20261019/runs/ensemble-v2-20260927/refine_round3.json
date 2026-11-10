@@ -1,0 +1,58 @@
+{
+  "round 2 features": {
+    "C": 0.1,
+    "threshold": 0.35,
+    "benchls_dev": {
+      "edits": 267,
+      "correct": 167,
+      "wrong": 100,
+      "net": 67,
+      "precision": 0.625,
+      "n": 424
+    },
+    "benchls_holdout": {
+      "edits": 358,
+      "correct": 200,
+      "wrong": 158,
+      "net": 42,
+      "precision": 0.559,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 218,
+      "correct": 111,
+      "wrong": 107,
+      "net": 4,
+      "precision": 0.509,
+      "n": 373
+    }
+  },
+  "+ listwise, prefix, spelling": {
+    "C": 0.03,
+    "threshold": 0.4,
+    "benchls_dev": {
+      "edits": 253,
+      "correct": 161,
+      "wrong": 92,
+      "net": 69,
+      "precision": 0.636,
+      "n": 424
+    },
+    "benchls_holdout": {
+      "edits": 341,
+      "correct": 193,
+      "wrong": 148,
+      "net": 45,
+      "precision": 0.566,
+      "n": 505
+    },
+    "tsar_test": {
+      "edits": 218,
+      "correct": 116,
+      "wrong": 102,
+      "net": 14,
+      "precision": 0.532,
+      "n": 373
+    }
+  }
+}

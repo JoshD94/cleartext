@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{margin:0;color:var(--foreground);font-family:var(--font-sans,system-ui);font-size:15px;line-height:1.5}
+h3{font-size:21px;margin:0 0 8px;font-weight:650}p{margin:0 0 16px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+button{font:inherit;padding:7px 12px;background:transparent;color:var(--foreground);border:1px solid var(--border);border-radius:var(--radius,8px);cursor:pointer}
+button[aria-pressed="true"]{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)}
+.bar{display:flex;height:20px;overflow:hidden;border-radius:6px;margin:0 0 16px}
+.seg{transition:width .2s}.copy{background:var(--chart-1,#5484c4)}.blocked{background:var(--chart-2,#bd8935)}.returned{background:var(--chart-3,#4d9c79)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--border);padding:16px;border-radius:var(--radius,8px)}
+.value{font-size:30px;line-height:1.15;font-weight:650;margin:0 0 8px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.label{font-size:14px}.note{font-size:13px;color:var(--muted-foreground);margin:0}
+</style></head><body>
+<h3>Where sentence changes disappear</h3>
+<p id="description">The published dataset proposes a change for 97 of the 128 inputs.</p>
+<div class="controls" aria-label="Sample selection"><button aria-pressed="true" data-view="edited">97 with changed references</button><button aria-pressed="false" data-view="all">All 128 inputs</button></div>
+<div class="bar" role="img" aria-label="46 copied, 32 rejected changes, 19 returned changes"><div class="seg copy" style="width:47.4227%"></div><div class="seg blocked" style="width:32.9897%"></div><div class="seg returned" style="width:19.5876%"></div></div>
+<div class="stats"><div class="stat"><div class="value" id="copy">46</div><div class="label"><span class="dot copy"></span>Model copied before checks</div></div><div class="stat"><div class="value" id="blocked">32</div><div class="label"><span class="dot blocked"></span>Proposed change rejected</div></div><div class="stat"><div class="value" id="returned">19</div><div class="label"><span class="dot returned"></span>Change returned</div></div></div>
+<p class="note">Previously inspected development material. A published rewrite can be unsuitable, and a returned change can still be wrong. These counts locate bottlenecks; they are not accuracy scores.</p>
+<script>
+const views={edited:{n:97,counts:[46,32,19],text:"The published dataset proposes a change for 97 of the 128 inputs."},all:{n:128,counts:[76,33,19],text:"All 128 inputs, including 31 whose published reference keeps the original."}};
+for(const button of document.querySelectorAll("button"))button.addEventListener("click",()=>{
+ const view=views[button.dataset.view];
+ document.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
+ ["copy","blocked","returned"].forEach((id,i)=>document.getElementById(id).textContent=view.counts[i]);
+ document.querySelectorAll(".seg").forEach((s,i)=>s.style.width=100*view.counts[i]/view.n+"%");
+ document.getElementById("description").textContent=view.text;
+ document.querySelector(".bar").setAttribute("aria-label",view.counts[0]+" copied, "+view.counts[1]+" rejected changes, "+view.counts[2]+" returned changes");
+});
+for(const view of Object.values(views))console.assert(view.counts.reduce((a,b)=>a+b,0)===view.n,"Count mismatch");
+</script></body></html>

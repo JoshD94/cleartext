@@ -1,0 +1,68 @@
+{
+  "notice": "Ungraded diagnostics, separate from train/dev/test. Coverage counts changed sentences, not correct edits. Model probabilities and rule checks do not certify meaning preservation. Target probes bypass detection for inspection.",
+  "overall": {
+    "sentences": 13,
+    "changed_sentences": 13,
+    "change_coverage": 1.0,
+    "word_edits": 13,
+    "detected_targets": 24,
+    "scored_candidates": 346,
+    "latency_median_seconds": 1.5502687949920073,
+    "latency_max_seconds": 7.458643928985111,
+    "human_precision": null
+  },
+  "baselines": {
+    "dictionary": {
+      "sentences": 13,
+      "changed_sentences": 4,
+      "change_coverage": 0.3076923076923077,
+      "human_precision": null
+    },
+    "identity": {
+      "sentences": 13,
+      "changed_sentences": 0,
+      "change_coverage": 0.0,
+      "human_precision": null
+    }
+  },
+  "by_domain": {
+    "computer_science": {
+      "sentences": 4,
+      "changed_sentences": 4,
+      "change_coverage": 1.0,
+      "word_edits": 4,
+      "detected_targets": 7,
+      "scored_candidates": 46,
+      "latency_median_seconds": 1.0423860240262002,
+      "latency_max_seconds": 7.000385747058317,
+      "human_precision": null
+    },
+    "corporate_communication": {
+      "sentences": 5,
+      "changed_sentences": 5,
+      "change_coverage": 1.0,
+      "word_edits": 5,
+      "detected_targets": 8,
+      "scored_candidates": 184,
+      "latency_median_seconds": 1.0633459370583296,
+      "latency_max_seconds": 7.458643928985111,
+      "human_precision": null
+    },
+    "political_science": {
+      "sentences": 4,
+      "changed_sentences": 4,
+      "change_coverage": 1.0,
+      "word_edits": 4,
+      "detected_targets": 9,
+      "scored_candidates": 116,
+      "latency_median_seconds": 1.7369765970506705,
+      "latency_max_seconds": 3.145434176083654,
+      "human_precision": null
+    }
+  },
+  "source_kinds": [
+    "authored_diagnostic",
+    "owner_example"
+  ],
+  "latency_scope": "End-to-end lexical analyze; excludes loading, baselines and extra target probes. First sentence includes lazy BERT loading; shared CPU, no controlled speed claim."
+}

@@ -1,0 +1,580 @@
+[
+  {
+    "source": "The server checks each request and sends a response to the client.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The server checks each request. The server sends a response to the client.",
+      "output": "The server checks each request. The server sends a response to the client.",
+      "score": 42.1951608261815,
+      "candidate_count": 3,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "editor": {
+      "raw": "The server checks each request. She sends a response to the client.",
+      "output": "The server checks each request and sends a response to the client.",
+      "score": 0.31844805441418295,
+      "tags": [
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"DELETE\", [\".\", \"She\"]]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]"
+      ],
+      "raw_checks": {
+        "pass": false,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": false,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [
+          "argument_roles"
+        ],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "seq2seq": {
+      "raw": "The server checks each request and sends a response to the client.",
+      "output": "The server checks each request and sends a response to the client.",
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true,
+          "generation_terminated": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    }
+  },
+  {
+    "source": "The server, which stores customer records, stopped responding.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The server, which stores customer records, stopped responding.",
+      "output": "The server, which stores customer records, stopped responding.",
+      "score": 0.0,
+      "candidate_count": 1,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "editor": {
+      "raw": "The server. It stores customer records, stopped responding.",
+      "output": "The server, which stores customer records, stopped responding.",
+      "score": 0.35558987705208667,
+      "tags": [
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"DELETE\", [\".\", \"It\"]]",
+        "[\"DELETE\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]"
+      ],
+      "raw_checks": {
+        "pass": false,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": false,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": false
+        },
+        "failed": [
+          "argument_roles",
+          "complete_clauses"
+        ],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "seq2seq": {
+      "raw": "The server, which stores customer records, stopped responding.",
+      "output": "The server, which stores customer records, stopped responding.",
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true,
+          "generation_terminated": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    }
+  },
+  {
+    "source": "The report was reviewed by the committee.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The committee reviewed the report.",
+      "output": "The committee reviewed the report.",
+      "score": 30.689213585592633,
+      "candidate_count": 2,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "editor": {
+      "raw": "The report was reviewed by the committee.",
+      "output": "The report was reviewed by the committee.",
+      "score": 0.0,
+      "tags": [
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]"
+      ],
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "seq2seq": {
+      "raw": "The report was reviewed by the committee.",
+      "output": "The report was reviewed by the committee.",
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true,
+          "generation_terminated": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    }
+  },
+  {
+    "source": "The company may reduce spending, but it will not close the factory.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The company may reduce spending. It will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "score": 47.5036884857731,
+      "candidate_count": 3,
+      "raw_checks": {
+        "pass": false,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": false,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [
+          "logical_connectives"
+        ],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "editor": {
+      "raw": "The company may reduce spending. However, it will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "score": 0.46073828180988285,
+      "tags": [
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", [\".\", \"However\"]]",
+        "[\"DELETE\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]"
+      ],
+      "raw_checks": {
+        "pass": false,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": false,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [
+          "logical_connectives"
+        ],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "seq2seq": {
+      "raw": "The company may reduce spending, but it will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true,
+          "generation_terminated": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    }
+  },
+  {
+    "source": "The neural network processed 500 records, and the analyst checked the results.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The neural network processed 500 records. The analyst checked the results.",
+      "output": "The neural network processed 500 records. The analyst checked the results.",
+      "score": 48.20074640590278,
+      "candidate_count": 3,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "editor": {
+      "raw": "The neural network processed 500 records. The analyst checked the results.",
+      "output": "The neural network processed 500 records. The analyst checked the results.",
+      "score": 0.634146114460366,
+      "tags": [
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"DELETE\", [\".\"]]",
+        "[\"DELETE\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]"
+      ],
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "seq2seq": {
+      "raw": "The neural network processed 500 records. The analyst checked the results.",
+      "output": "The neural network processed 500 records. The analyst checked the results.",
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true,
+          "generation_terminated": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    }
+  },
+  {
+    "source": "Only users who have administrator access can delete the records.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "Only users who have administrator access can delete the records.",
+      "output": "Only users who have administrator access can delete the records.",
+      "score": 0.0,
+      "candidate_count": 1,
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "editor": {
+      "raw": "Only users who have administrator access can delete the records.",
+      "output": "Only users who have administrator access can delete the records.",
+      "score": 0.0,
+      "tags": [
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]",
+        "[\"KEEP\", []]"
+      ],
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    },
+    "seq2seq": {
+      "raw": "Only users who have administrator access can delete the records.",
+      "output": "Only users who have administrator access can delete the records.",
+      "raw_checks": {
+        "pass": true,
+        "checks": {
+          "numbers": true,
+          "negation": true,
+          "modality": true,
+          "entities": true,
+          "technical_phrases": true,
+          "content_retained": true,
+          "no_new_content": true,
+          "argument_roles": true,
+          "operator_scope": true,
+          "logical_connectives": true,
+          "sentence_count": true,
+          "complete_clauses": true,
+          "generation_terminated": true
+        },
+        "failed": [],
+        "content_recall": 1.0,
+        "semantic_certified": false
+      }
+    }
+  }
+]

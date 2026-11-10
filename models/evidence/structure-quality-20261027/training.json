@@ -1,0 +1,137 @@
+{
+  "model": "/home/joshuadirga/.local/state/cleartext/structure-alignment-20261027/run-v2/seq2seq",
+  "revision": null,
+  "initial_checkpoint": {
+    "path": "/home/joshuadirga/.local/state/cleartext/structure-alignment-20261027/run-v2/seq2seq",
+    "files_sha256": {
+      "config.json": "7a2bb022a2d1a3f7f838dcc7cfac2348960b1994cd90df57c978d44d2bf9e55a",
+      "generation_config.json": "30fe82ed19d93a7088b7be3cae58bbf152c80130b25e98cb75c346cae823e8fe",
+      "model.safetensors": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+      "selection.json": "e0e3ae8188a48e9397b685481004324216d7541c80d69d770bdc25c6c3989b9f",
+      "tokenizer.json": "71c33c3bf57bf2e19b4f8ac686ad8d182a79f7cd1a4921889437c453420223f1",
+      "tokenizer_config.json": "715b964e335a4ec18dbde91231e6ec950f29ef2e5cd433a85bc29321814a2c8a"
+    }
+  },
+  "optimizer_state": "New optimizer; this is weight initialization, not optimizer/step resumption",
+  "device": "cpu",
+  "seed": 4701,
+  "max_steps": 441,
+  "batch_size": 2,
+  "optimizer": "adafactor",
+  "learning_rate": 0.0001,
+  "warmup_steps": 44,
+  "accumulation_steps": 4,
+  "effective_batch_size": 8,
+  "max_source_tokens": 192,
+  "max_target_tokens": 256,
+  "training_pairs": 3523,
+  "training_domains": {
+    "student_essays": 1441,
+    "general": 2082
+  },
+  "length_filtered_training_pairs": 0,
+  "dev_pairs": 101,
+  "selection": "Highest decoded development score, then lowest dev loss; step zero included; test not used",
+  "validation_interval": 441,
+  "cpu_threads": 2,
+  "prefix": "split sentence: ",
+  "trainable_parameters": 60506624,
+  "steps_completed": 441,
+  "training_examples_seen": 3523,
+  "history": [
+    {
+      "step": 0,
+      "dev_loss": 0.17240341880671303,
+      "decoded": {
+        "score": 48.78194731598511,
+        "panels": {
+          "aligned_dev": {
+            "n": 101,
+            "changed": 56,
+            "shorter_splits": 56,
+            "copy_reference_n": 32,
+            "copy_references_kept": 32,
+            "all_reference_sari": 62.864898266009796,
+            "compatible_n": 101,
+            "compatible_structural_score": 62.864898266009796,
+            "raw_changed_rejections": 4
+          },
+          "broad_dev": {
+            "n": 96,
+            "changed": 11,
+            "shorter_splits": 10,
+            "copy_reference_n": 6,
+            "copy_references_kept": 6,
+            "all_reference_sari": 32.32417695030008,
+            "compatible_n": 12,
+            "compatible_structural_score": 34.69899636596042,
+            "raw_changed_rejections": 15
+          }
+        }
+      }
+    },
+    {
+      "step": 441,
+      "dev_loss": 0.180790495077048,
+      "decoded": {
+        "score": 48.80797325260915,
+        "panels": {
+          "aligned_dev": {
+            "n": 101,
+            "changed": 54,
+            "shorter_splits": 54,
+            "copy_reference_n": 32,
+            "copy_references_kept": 32,
+            "all_reference_sari": 61.725566024637416,
+            "compatible_n": 101,
+            "compatible_structural_score": 61.725566024637416,
+            "raw_changed_rejections": 4
+          },
+          "broad_dev": {
+            "n": 96,
+            "changed": 11,
+            "shorter_splits": 11,
+            "copy_reference_n": 6,
+            "copy_references_kept": 6,
+            "all_reference_sari": 31.847760892405905,
+            "compatible_n": 12,
+            "compatible_structural_score": 35.89038048058089,
+            "raw_changed_rejections": 15
+          }
+        }
+      }
+    }
+  ],
+  "selected": {
+    "step": 441,
+    "dev_loss": 0.180790495077048,
+    "decoded": {
+      "score": 48.80797325260915,
+      "panels": {
+        "aligned_dev": {
+          "n": 101,
+          "changed": 54,
+          "shorter_splits": 54,
+          "copy_reference_n": 32,
+          "copy_references_kept": 32,
+          "all_reference_sari": 61.725566024637416,
+          "compatible_n": 101,
+          "compatible_structural_score": 61.725566024637416,
+          "raw_changed_rejections": 4
+        },
+        "broad_dev": {
+          "n": 96,
+          "changed": 11,
+          "shorter_splits": 11,
+          "copy_reference_n": 6,
+          "copy_references_kept": 6,
+          "all_reference_sari": 31.847760892405905,
+          "compatible_n": 12,
+          "compatible_structural_score": 35.89038048058089,
+          "raw_changed_rejections": 15
+        }
+      }
+    }
+  },
+  "elapsed_seconds": 945.8231661999598
+}

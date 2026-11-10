@@ -1,0 +1,8 @@
+{
+  "filename": "cleartext-structure-quality-20261027.tar",
+  "bytes": 244490240,
+  "sha256": "4308daee2e643196439a467f960f7886fc64bfcc59b9543cefccbc8686ef0276",
+  "weights_sha256": "3de186eee031e8812b019a9040775884798d01baabb072728bd03ac89f1503ac",
+  "location": "Local experiment directory only; not uploaded",
+  "contents": "Selected candidate weights/tokenizer, instructions and aggregate metadata. No raw public pairs or decoded outputs."
+}

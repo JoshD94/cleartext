@@ -1,0 +1,36 @@
+{
+  "evaluated_commit": "73ea633",
+  "host": "yoga",
+  "jobs": {
+    "tagger_training": "0b8df8346f5b",
+    "final_eval": "34ba6864009d"
+  },
+  "tagger_sha256": "47e9cb2578cfa9d6adb7fb3529c3b5b9623b84f94281dd44f46154616f21182b",
+  "tagger_training": {
+    "data": "WikiSplit train.tsv.zip, every 10th line",
+    "stride": 10,
+    "threshold": 0.4
+  },
+  "data_sha256": {
+    "train.tsv.zip": "42234243209fbb8f11405372284d634728faf47eafd5799cefb932c06c7b3a54",
+    "tune.tsv": "67118f483438fc9f0ba12e63dc37f0eeff8bbad1873157509ced7e3e46582312",
+    "test.tsv": "88c3eff253f7ff3fcce9370bb54f750bc35f646c1b6d2a45df2b993c96670f7f"
+  },
+  "packages": {
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0",
+    "scikit-learn": "1.9.1",
+    "sacremoses": "0.2.0"
+  },
+  "verify": "516 tests + 13 subtests passed",
+  "test_set_inspection": "Two 40-sentence samples of held-out test splits were read by hand (seeds 4701 and 20261109) and four guard fixes followed. Test numbers are therefore inspected, not pristine held-out results.",
+  "first_run_before_fixes": {
+    "commit": "d622fcf",
+    "test_tagger": {
+      "positive_recall": 0.2158,
+      "positive_boundary_precision": 0.9588,
+      "unlabelled_split_rate": 0.0771
+    }
+  },
+  "raw_outputs": "Per-sentence outputs, the tagger model and panel edits stay local; only aggregates are committed."
+}

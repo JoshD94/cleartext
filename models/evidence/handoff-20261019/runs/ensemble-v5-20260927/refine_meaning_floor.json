@@ -1,0 +1,122 @@
+{
+  "0.0": {
+    "dev_nets": [
+      170,
+      154,
+      164
+    ],
+    "tsar": {
+      "edits": 239,
+      "correct": 152,
+      "wrong": 87,
+      "net": 65,
+      "precision": 0.636,
+      "n": 373
+    }
+  },
+  "0.05": {
+    "dev_nets": [
+      170,
+      154,
+      164
+    ],
+    "tsar": {
+      "edits": 239,
+      "correct": 152,
+      "wrong": 87,
+      "net": 65,
+      "precision": 0.636,
+      "n": 373
+    }
+  },
+  "0.1": {
+    "dev_nets": [
+      175,
+      162,
+      169
+    ],
+    "tsar": {
+      "edits": 238,
+      "correct": 152,
+      "wrong": 86,
+      "net": 66,
+      "precision": 0.639,
+      "n": 373
+    }
+  },
+  "0.15": {
+    "dev_nets": [
+      170,
+      160,
+      165
+    ],
+    "tsar": {
+      "edits": 237,
+      "correct": 151,
+      "wrong": 86,
+      "net": 65,
+      "precision": 0.637,
+      "n": 373
+    }
+  },
+  "0.2": {
+    "dev_nets": [
+      165,
+      157,
+      158
+    ],
+    "tsar": {
+      "edits": 233,
+      "correct": 150,
+      "wrong": 83,
+      "net": 67,
+      "precision": 0.644,
+      "n": 373
+    }
+  },
+  "0.25": {
+    "dev_nets": [
+      165,
+      157,
+      153
+    ],
+    "tsar": {
+      "edits": 232,
+      "correct": 149,
+      "wrong": 83,
+      "net": 66,
+      "precision": 0.642,
+      "n": 373
+    }
+  },
+  "0.3": {
+    "dev_nets": [
+      166,
+      167,
+      160
+    ],
+    "tsar": {
+      "edits": 229,
+      "correct": 148,
+      "wrong": 81,
+      "net": 67,
+      "precision": 0.646,
+      "n": 373
+    }
+  },
+  "0.4": {
+    "dev_nets": [
+      155,
+      159,
+      156
+    ],
+    "tsar": {
+      "edits": 222,
+      "correct": 142,
+      "wrong": 80,
+      "net": 62,
+      "precision": 0.64,
+      "n": 373
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "initial_development_source": "9944e20011e7b85d5b559fae4f5caaeb49585808",
+  "final_inference_source": "1fce73e07333173ad5abd2351aa6452fe6b68fb9",
+  "development_counterexample": "apple-10k2025-3: lower beam2 plus comma repair exposed a noun-list fragment that passed parser checks",
+  "development_change": "Only primary-beam punctuation repairs allowed; lower beams must pass as generated",
+  "interrupted_test": "Stopped intentionally before reading its outputs or metrics; all128selected pairs excluded from the new final test sample",
+  "excluded_interrupted_sample_data_sha256": "13d9af141892b96b94af13aa5060693c1e5a51bdba77b23d45638f7126380ece",
+  "final_test_data_sha256": "ab893eb5f60cb5597ef65cb53c411f022fcacdd6fdc346e3c06a9f64c6d2525e",
+  "final_development_and_test_identical_inference_module_hashes": true,
+  "test_driven_changes": false,
+  "new_training": false,
+  "human_ratings": 0,
+  "reserved_domain_test_predictions": 0
+}

@@ -1,0 +1,18 @@
+[
+  {"id":"split","source":"Alice reviewed the report and Bob checked the figures.","candidate":"Alice reviewed the report. Bob checked the figures.","expected_equivalence":true},
+  {"id":"passive","source":"The report was reviewed by Alice.","candidate":"Alice reviewed the report.","expected_equivalence":true},
+  {"id":"relative","source":"The server, which stores records, stopped responding.","candidate":"The server stores records. The server stopped responding.","expected_equivalence":true},
+  {"id":"conditional-kept","source":"If the connection fails, the client retries.","candidate":"The client retries if the connection fails.","expected_equivalence":true},
+  {"id":"attribution-kept","source":"Alice said that the server failed.","candidate":"The server failed, Alice said.","expected_equivalence":true},
+  {"id":"modal-kept","source":"The company may reduce spending, but it will not close the factory.","candidate":"The company may reduce spending. It will not close the factory.","expected_equivalence":true},
+  {"id":"negation-kept","source":"Bob did not approve the request.","candidate":"The request was not approved by Bob.","expected_equivalence":true},
+  {"id":"numbers-kept","source":"Alice checked 20 records and Bob checked 10 records.","candidate":"Alice checked 20 records. Bob checked 10 records.","expected_equivalence":true},
+  {"id":"roles-swapped","source":"Alice congratulated Bob.","candidate":"Bob congratulated Alice.","expected_equivalence":false},
+  {"id":"attribution-dropped","source":"Alice said that the server failed.","candidate":"The server failed.","expected_equivalence":false},
+  {"id":"negation-dropped","source":"Bob did not approve the request.","candidate":"Bob approved the request.","expected_equivalence":false},
+  {"id":"modal-promoted","source":"The company may close the factory.","candidate":"The company will close the factory.","expected_equivalence":false},
+  {"id":"numbers-swapped","source":"Alice checked 20 records and Bob checked 10 records.","candidate":"Alice checked 10 records. Bob checked 20 records.","expected_equivalence":false},
+  {"id":"condition-dropped","source":"If the connection fails, the client retries.","candidate":"The client retries.","expected_equivalence":false},
+  {"id":"time-reversed","source":"Alice arrived before Bob left.","candidate":"Bob left before Alice arrived.","expected_equivalence":false},
+  {"id":"doubt-promoted","source":"Alice doubted that the server was secure.","candidate":"Alice doubted it. The server was secure.","expected_equivalence":false}
+]

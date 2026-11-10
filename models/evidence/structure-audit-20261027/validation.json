@@ -1,0 +1,18 @@
+{
+  "tests": {
+    "passed": 181,
+    "seconds": 12.16,
+    "command": "OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 models/.venv/bin/python -m pytest models/tests/test_structure.py models/tests/test_structure_expanded.py models/tests/test_structure_review.py models/tests/test_structure_search.py models/tests/test_structure_meaning.py models/tests/test_structure_audit.py models/tests/test_proposal_evidence.py models/tests/test_building_blocks.py models/tests/test_preservation.py models/tests/test_invariants.py -q"
+  },
+  "ruff_F_E9": "passed",
+  "whitespace": "passed",
+  "audit_source_hashes_match_frozen_run": true,
+  "new_audit_tests": 4,
+  "new_human_ratings": 0,
+  "runtime_changes": false,
+  "html_preview": {
+    "status": "unavailable",
+    "attempts": 3,
+    "error": "Headless Chrome could not render the page: the page did not finish loading within 20 seconds."
+  }
+}

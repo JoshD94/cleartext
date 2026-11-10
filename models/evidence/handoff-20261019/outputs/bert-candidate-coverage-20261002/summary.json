@@ -1,0 +1,24 @@
+{
+  "scope": "Reused BenchLS development candidate recall only. Listed-gold matches are not human precision. Proposals are unaccepted; no fitting, TSAR, or synthetic gold.",
+  "cases": 929,
+  "top_k": 20,
+  "baseline_covered_cases": 807,
+  "union_covered_cases": 895,
+  "rescued_cases": 88,
+  "added_candidate_rows": 12326,
+  "added_listed_gold_rows": 1638,
+  "novel_rows_without_wordnet_senses": 12326,
+  "default_changed": false,
+  "input_sha256": {
+    "data/cache/refine-v7-benchls-dev.pkl": "af6e6b4c9b51e88b50c9ed1cda1a3a979d684e38edc3d8e830fbc95c4bbe2f4e",
+    "data/cache/refine-v7-benchls-holdout.pkl": "f39e0e5256c20559adcfa7eaa1f05aa95e0ace08dfaa2c391b026f3b1e3af62d",
+    "data/raw/BenchLS.zip": "3299fd8113e3da65d149c9327c56bc53bab44fd891cc167e0ed85546f9cb653a"
+  },
+  "source_sha256": {
+    "scripts/experiments/audit_bert_candidates.py": "2d789fe20aa30d98d918d4aa8f89bbb294870d335f76c0030a7d63b0238b7316",
+    "src/cleartext/bert_candidates.py": "c4e8fd633279a2fcddae26af55fac91aba0a049ed10ba906485a0a3ff2e7b2da",
+    "src/cleartext/complete_slot.py": "c1880dbaf7aa78e2619d6a433370d26d3ecfa808a31adb5ba9a759801eaa91cd",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/generation.py": "710852d038860c35fddae29f0e68f6d2f761877deb9537acf33170e8f3d27882"
+  }
+}

@@ -1,0 +1,614 @@
+{
+  "threshold": 0.8,
+  "selected_development": {
+    "threshold": 0.8,
+    "repeats": [
+      {
+        "n": 929,
+        "edits": 306,
+        "correct": 278,
+        "precision": 0.9084967320261438,
+        "coverage": 0.3293864370290635
+      },
+      {
+        "n": 929,
+        "edits": 292,
+        "correct": 265,
+        "precision": 0.9075342465753424,
+        "coverage": 0.3143164693218515
+      },
+      {
+        "n": 929,
+        "edits": 299,
+        "correct": 270,
+        "precision": 0.903010033444816,
+        "coverage": 0.3218514531754575
+      }
+    ]
+  },
+  "target_precision": 0.9,
+  "minimum_coverage": 0.2,
+  "selection": "Lowest threshold meeting both constraints in all3saved target-word-grouped10foldrepeats; no TSAR or pipeline predictions read",
+  "scope": "Reused BenchLS development only, no full-sentence accuracy claim",
+  "grid": [
+    {
+      "threshold": 0.45,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 642,
+          "correct": 514,
+          "precision": 0.8006230529595015,
+          "coverage": 0.6910656620021528
+        },
+        {
+          "n": 929,
+          "edits": 637,
+          "correct": 509,
+          "precision": 0.7990580847723705,
+          "coverage": 0.6856835306781486
+        },
+        {
+          "n": 929,
+          "edits": 646,
+          "correct": 514,
+          "precision": 0.7956656346749226,
+          "coverage": 0.6953713670613563
+        }
+      ]
+    },
+    {
+      "threshold": 0.475,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 629,
+          "correct": 505,
+          "precision": 0.8028616852146264,
+          "coverage": 0.6770721205597416
+        },
+        {
+          "n": 929,
+          "edits": 621,
+          "correct": 501,
+          "precision": 0.8067632850241546,
+          "coverage": 0.6684607104413348
+        },
+        {
+          "n": 929,
+          "edits": 631,
+          "correct": 508,
+          "precision": 0.8050713153724247,
+          "coverage": 0.6792249730893434
+        }
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 607,
+          "correct": 497,
+          "precision": 0.8187808896210873,
+          "coverage": 0.6533907427341227
+        },
+        {
+          "n": 929,
+          "edits": 604,
+          "correct": 492,
+          "precision": 0.8145695364238411,
+          "coverage": 0.6501614639397201
+        },
+        {
+          "n": 929,
+          "edits": 607,
+          "correct": 496,
+          "precision": 0.8171334431630972,
+          "coverage": 0.6533907427341227
+        }
+      ]
+    },
+    {
+      "threshold": 0.525,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 587,
+          "correct": 484,
+          "precision": 0.8245315161839863,
+          "coverage": 0.6318622174381054
+        },
+        {
+          "n": 929,
+          "edits": 587,
+          "correct": 482,
+          "precision": 0.8211243611584327,
+          "coverage": 0.6318622174381054
+        },
+        {
+          "n": 929,
+          "edits": 584,
+          "correct": 481,
+          "precision": 0.8236301369863014,
+          "coverage": 0.628632938643703
+        }
+      ]
+    },
+    {
+      "threshold": 0.55,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 563,
+          "correct": 471,
+          "precision": 0.8365896980461812,
+          "coverage": 0.6060279870828849
+        },
+        {
+          "n": 929,
+          "edits": 565,
+          "correct": 468,
+          "precision": 0.8283185840707965,
+          "coverage": 0.6081808396124866
+        },
+        {
+          "n": 929,
+          "edits": 570,
+          "correct": 476,
+          "precision": 0.8350877192982457,
+          "coverage": 0.6135629709364908
+        }
+      ]
+    },
+    {
+      "threshold": 0.575,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 549,
+          "correct": 461,
+          "precision": 0.8397085610200364,
+          "coverage": 0.5909580193756727
+        },
+        {
+          "n": 929,
+          "edits": 549,
+          "correct": 461,
+          "precision": 0.8397085610200364,
+          "coverage": 0.5909580193756727
+        },
+        {
+          "n": 929,
+          "edits": 552,
+          "correct": 464,
+          "precision": 0.8405797101449275,
+          "coverage": 0.5941872981700753
+        }
+      ]
+    },
+    {
+      "threshold": 0.6,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 530,
+          "correct": 452,
+          "precision": 0.8528301886792453,
+          "coverage": 0.5705059203444564
+        },
+        {
+          "n": 929,
+          "edits": 529,
+          "correct": 452,
+          "precision": 0.8544423440453687,
+          "coverage": 0.5694294940796556
+        },
+        {
+          "n": 929,
+          "edits": 532,
+          "correct": 451,
+          "precision": 0.8477443609022557,
+          "coverage": 0.5726587728740581
+        }
+      ]
+    },
+    {
+      "threshold": 0.625,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 507,
+          "correct": 438,
+          "precision": 0.863905325443787,
+          "coverage": 0.5457481162540366
+        },
+        {
+          "n": 929,
+          "edits": 508,
+          "correct": 438,
+          "precision": 0.8622047244094488,
+          "coverage": 0.5468245425188375
+        },
+        {
+          "n": 929,
+          "edits": 515,
+          "correct": 443,
+          "precision": 0.8601941747572815,
+          "coverage": 0.5543595263724435
+        }
+      ]
+    },
+    {
+      "threshold": 0.65,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 485,
+          "correct": 419,
+          "precision": 0.8639175257731959,
+          "coverage": 0.5220667384284177
+        },
+        {
+          "n": 929,
+          "edits": 484,
+          "correct": 420,
+          "precision": 0.8677685950413223,
+          "coverage": 0.5209903121636168
+        },
+        {
+          "n": 929,
+          "edits": 490,
+          "correct": 425,
+          "precision": 0.8673469387755102,
+          "coverage": 0.527448869752422
+        }
+      ]
+    },
+    {
+      "threshold": 0.675,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 471,
+          "correct": 409,
+          "precision": 0.8683651804670913,
+          "coverage": 0.5069967707212056
+        },
+        {
+          "n": 929,
+          "edits": 468,
+          "correct": 406,
+          "precision": 0.8675213675213675,
+          "coverage": 0.503767491926803
+        },
+        {
+          "n": 929,
+          "edits": 468,
+          "correct": 407,
+          "precision": 0.8696581196581197,
+          "coverage": 0.503767491926803
+        }
+      ]
+    },
+    {
+      "threshold": 0.7,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 446,
+          "correct": 394,
+          "precision": 0.8834080717488789,
+          "coverage": 0.48008611410118407
+        },
+        {
+          "n": 929,
+          "edits": 435,
+          "correct": 377,
+          "precision": 0.8666666666666667,
+          "coverage": 0.4682454251883746
+        },
+        {
+          "n": 929,
+          "edits": 444,
+          "correct": 388,
+          "precision": 0.8738738738738738,
+          "coverage": 0.47793326157158234
+        }
+      ]
+    },
+    {
+      "threshold": 0.725,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 412,
+          "correct": 365,
+          "precision": 0.8859223300970874,
+          "coverage": 0.4434876210979548
+        },
+        {
+          "n": 929,
+          "edits": 404,
+          "correct": 356,
+          "precision": 0.8811881188118812,
+          "coverage": 0.43487621097954793
+        },
+        {
+          "n": 929,
+          "edits": 412,
+          "correct": 369,
+          "precision": 0.8956310679611651,
+          "coverage": 0.4434876210979548
+        }
+      ]
+    },
+    {
+      "threshold": 0.75,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 378,
+          "correct": 337,
+          "precision": 0.8915343915343915,
+          "coverage": 0.4068891280947255
+        },
+        {
+          "n": 929,
+          "edits": 374,
+          "correct": 333,
+          "precision": 0.8903743315508021,
+          "coverage": 0.4025834230355221
+        },
+        {
+          "n": 929,
+          "edits": 377,
+          "correct": 339,
+          "precision": 0.8992042440318302,
+          "coverage": 0.4058127018299246
+        }
+      ]
+    },
+    {
+      "threshold": 0.775,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 344,
+          "correct": 313,
+          "precision": 0.9098837209302325,
+          "coverage": 0.37029063509149623
+        },
+        {
+          "n": 929,
+          "edits": 334,
+          "correct": 297,
+          "precision": 0.8892215568862275,
+          "coverage": 0.3595263724434876
+        },
+        {
+          "n": 929,
+          "edits": 342,
+          "correct": 309,
+          "precision": 0.9035087719298246,
+          "coverage": 0.3681377825618945
+        }
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 306,
+          "correct": 278,
+          "precision": 0.9084967320261438,
+          "coverage": 0.3293864370290635
+        },
+        {
+          "n": 929,
+          "edits": 292,
+          "correct": 265,
+          "precision": 0.9075342465753424,
+          "coverage": 0.3143164693218515
+        },
+        {
+          "n": 929,
+          "edits": 299,
+          "correct": 270,
+          "precision": 0.903010033444816,
+          "coverage": 0.3218514531754575
+        }
+      ]
+    },
+    {
+      "threshold": 0.825,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 246,
+          "correct": 225,
+          "precision": 0.9146341463414634,
+          "coverage": 0.26480086114101187
+        },
+        {
+          "n": 929,
+          "edits": 238,
+          "correct": 221,
+          "precision": 0.9285714285714286,
+          "coverage": 0.25618945102260493
+        },
+        {
+          "n": 929,
+          "edits": 255,
+          "correct": 234,
+          "precision": 0.9176470588235294,
+          "coverage": 0.2744886975242196
+        }
+      ]
+    },
+    {
+      "threshold": 0.85,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 195,
+          "correct": 183,
+          "precision": 0.9384615384615385,
+          "coverage": 0.20990312163616792
+        },
+        {
+          "n": 929,
+          "edits": 187,
+          "correct": 177,
+          "precision": 0.946524064171123,
+          "coverage": 0.20129171151776104
+        },
+        {
+          "n": 929,
+          "edits": 192,
+          "correct": 180,
+          "precision": 0.9375,
+          "coverage": 0.20667384284176535
+        }
+      ]
+    },
+    {
+      "threshold": 0.875,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 134,
+          "correct": 126,
+          "precision": 0.9402985074626866,
+          "coverage": 0.1442411194833154
+        },
+        {
+          "n": 929,
+          "edits": 147,
+          "correct": 139,
+          "precision": 0.9455782312925171,
+          "coverage": 0.15823466092572658
+        },
+        {
+          "n": 929,
+          "edits": 136,
+          "correct": 130,
+          "precision": 0.9558823529411765,
+          "coverage": 0.14639397201291712
+        }
+      ]
+    },
+    {
+      "threshold": 0.9,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 74,
+          "correct": 70,
+          "precision": 0.9459459459459459,
+          "coverage": 0.07965554359526372
+        },
+        {
+          "n": 929,
+          "edits": 76,
+          "correct": 72,
+          "precision": 0.9473684210526315,
+          "coverage": 0.08180839612486544
+        },
+        {
+          "n": 929,
+          "edits": 86,
+          "correct": 81,
+          "precision": 0.9418604651162791,
+          "coverage": 0.09257265877287406
+        }
+      ]
+    },
+    {
+      "threshold": 0.925,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 39,
+          "correct": 35,
+          "precision": 0.8974358974358975,
+          "coverage": 0.04198062432723358
+        },
+        {
+          "n": 929,
+          "edits": 32,
+          "correct": 29,
+          "precision": 0.90625,
+          "coverage": 0.03444564047362755
+        },
+        {
+          "n": 929,
+          "edits": 27,
+          "correct": 25,
+          "precision": 0.9259259259259259,
+          "coverage": 0.02906350914962325
+        }
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 5,
+          "correct": 5,
+          "precision": 1.0,
+          "coverage": 0.005382131324004306
+        },
+        {
+          "n": 929,
+          "edits": 5,
+          "correct": 4,
+          "precision": 0.8,
+          "coverage": 0.005382131324004306
+        },
+        {
+          "n": 929,
+          "edits": 5,
+          "correct": 5,
+          "precision": 1.0,
+          "coverage": 0.005382131324004306
+        }
+      ]
+    },
+    {
+      "threshold": 0.975,
+      "repeats": [
+        {
+          "n": 929,
+          "edits": 0,
+          "correct": 0,
+          "precision": null,
+          "coverage": 0.0
+        },
+        {
+          "n": 929,
+          "edits": 0,
+          "correct": 0,
+          "precision": null,
+          "coverage": 0.0
+        },
+        {
+          "n": 929,
+          "edits": 0,
+          "correct": 0,
+          "precision": null,
+          "coverage": 0.0
+        }
+      ]
+    }
+  ],
+  "historical_selection_reproduction": "All929original selections reproduced in all3repeats",
+  "input_sha256": {
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/context-similarity-dev-20261002/summary.json": "01f83a97c57ea825e5f7dc02303eb379910438f98a974c8bcbee7856d88a3ef6",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/context-similarity-dev-20261002/similarity-seed0.npz": "945a0960e3cda3d1d3fd30a74b8fabca15f22941a50db211b9df5f93c0b80c0a",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/context-similarity-dev-20261002/similarity-seed1.npz": "304d5a5b1224661307489780331cd98b1110220cd1dfedf46dff8bc3d626947b",
+    "/home/joshuadirga/Documents/projects/cleartext/models/outputs/context-similarity-dev-20261002/similarity-seed2.npz": "057be43c4d8a46d5456e4673e6a7ddf052b941e1ebebd0e112ce4817ac6f741a"
+  }
+}

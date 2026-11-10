@@ -1,0 +1,92 @@
+[
+  {
+    "domain": "computer_science",
+    "id": "cs-01",
+    "original": "We utilize a heterogeneous ensemble of neural architectures to facilitate robust generalization across disparate data distributions."
+  },
+  {
+    "domain": "computer_science",
+    "id": "cs-02",
+    "original": "The methodology employs stochastic gradient descent to mitigate overfitting, and empirical results corroborate a substantial amelioration in convergence speed."
+  },
+  {
+    "domain": "corporate_communication",
+    "id": "corp-01",
+    "original": "Management anticipates that the proliferation of supply-chain disruptions will exacerbate margin deterioration, notwithstanding prior mitigation endeavors."
+  },
+  {
+    "domain": "corporate_communication",
+    "id": "corp-02",
+    "original": "The company will commence a restructuring initiative in order to expedite operational efficiency and ameliorate shareholder value, effective January 15, 2026."
+  },
+  {
+    "domain": "political_science",
+    "id": "polsci-01",
+    "original": "The legislation seeks to disseminate pragmatic reforms that mitigate ubiquitous regulatory fluctuations affecting a large number of constituents."
+  },
+  {
+    "domain": "political_science",
+    "id": "polsci-02",
+    "original": "Members deliberated the paradigm at length; nevertheless, no consensus was ascertained prior to the adjournment on March 3, 2026."
+  },
+  {
+    "domain": "computer_science",
+    "id": "cs-03",
+    "original": "Because the cache does not invalidate stale entries until the 30-second TTL expires, clients may observe inconsistent results when the underlying dataset is modified concurrently by multiple writers."
+  },
+  {
+    "domain": "computer_science",
+    "id": "cs-04",
+    "original": "The protocol requires that the sender retransmit any packet that is not acknowledged within 200 milliseconds, but it does not guarantee that duplicate packets will never be delivered to the application layer."
+  },
+  {
+    "domain": "computer_science",
+    "id": "cs-05",
+    "original": "To mitigate the risk of catastrophic forgetting, the training procedure interleaves 5,000 previously seen examples with each batch of 512 new examples while the learning rate decays from 0.001 to 0.0001 over 40 epochs."
+  },
+  {
+    "domain": "computer_science",
+    "id": "cs-06",
+    "original": "The compiler eliminates dead code before register allocation, which reduces the size of the generated binary, although it cannot remove branches whose conditions depend on runtime input."
+  },
+  {
+    "domain": "corporate_communication",
+    "id": "corp-03",
+    "original": "The corporation disclosed that operating expenses rose 12 percent year over year, driven primarily by elevated logistics costs, while net income fell to $340 million from $412 million in the prior period."
+  },
+  {
+    "domain": "corporate_communication",
+    "id": "corp-04",
+    "original": "Employees who do not enroll in the revised benefits program by January 31, 2027, will automatically retain their current coverage, but they will not be eligible for the supplemental dental plan."
+  },
+  {
+    "domain": "corporate_communication",
+    "id": "corp-05",
+    "original": "Prior to the commencement of the fiscal year, the audit committee retained an independent firm to evaluate internal controls, notwithstanding management's assertion that existing procedures were adequate."
+  },
+  {
+    "domain": "corporate_communication",
+    "id": "corp-06",
+    "original": "The subsidiary, which employs approximately 2,400 workers across three facilities, announced that it would consolidate operations in order to reduce overhead, a decision that will eliminate 180 positions by June 2027."
+  },
+  {
+    "domain": "political_science",
+    "id": "polsci-03",
+    "original": "The treaty obligates signatories to refrain from the threat or use of force against the territorial integrity of any state, except when authorized by the Security Council acting under Chapter VII."
+  },
+  {
+    "domain": "political_science",
+    "id": "polsci-04",
+    "original": "Legislators who supported the amendment argued that it would expand access to the ballot, whereas opponents contended that it would undermine confidence in electoral administration without addressing documented irregularities."
+  },
+  {
+    "domain": "political_science",
+    "id": "polsci-05",
+    "original": "Under the doctrine of judicial review, established in 1803, courts may invalidate legislation that conflicts with constitutional provisions, a power the framers did not enumerate explicitly in the text."
+  },
+  {
+    "domain": "political_science",
+    "id": "polsci-06",
+    "original": "The coalition collapsed after the smaller parties withdrew their support, despite the prime minister's commitment to renegotiate the budget agreement before the parliamentary recess began on Friday."
+  }
+]

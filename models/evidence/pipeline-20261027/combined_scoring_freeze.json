@@ -1,0 +1,30 @@
+{
+  "predictions_sha256": "6ab0a39656b4d701317a8f579562e917d1bbcab3e4a764c24f1ca63aa89dba00",
+  "embedding_model": "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding",
+  "nli_model": "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli",
+  "evaluation_model_artifacts": {
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/model.safetensors": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/tokenizer_config.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/special_tokens_map.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/config.json": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/config_sentence_transformers.json": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/README.md": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/sentence_bert_config.json": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/modules.json": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/embedding/1_Pooling/config.json": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/model.safetensors": "06d6fd89edd4f97816831626daafbdb0b029cf63bae8edc0bccab1d64e2e7707",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/added_tokens.json": "dc046d04c9b0ada7ae6f1dc89c465801799acdf0c9a6aab8c15a1b2d5ca4e91f",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/tokenizer_config.json": "557b3d33d3f41b81ad769244e506549e98a1857d41dd58160aacd4d98d710b5a",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/special_tokens_map.json": "9463f61e1b109a8eb4688b829260d7c6b1e6dff04c98ff7269bb89e2b92369b9",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/config.json": "a6c616d6dabeacf90fd0e776c741d3f0f30a05533ccf0bd3b5b62e94cfaa8d57",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/tokenizer.json": "05402ffae6dd382a8491b1d29bfc139bec5d332662e86a026f433ce54c25c202",
+    "/Users/joshuadirga/.local/state/cleartext/pipeline-eval-20261027/evaluation_models/nli/spm.model": "c679fbf93643d19aab7ee10c0b99e460bdbc02fedf34b92b05af343b4af586fd"
+  },
+  "metric_code_sha256": {
+    "pipeline_benchmark.py": "32ce16a98475b321888f90f5721913f77116d0ae97bfb6d23c81c9ab3f16ef04",
+    "preservation.py": "a5d6ff5f38758b8a92c77e5aeb9b045fc2694662693a30e7c2190d948de0476b",
+    "readability.py": "398f313ac014a25d8cee1b3c1c347a753ce2f051ea1eeb4cb642580aba194fc9"
+  }
+}

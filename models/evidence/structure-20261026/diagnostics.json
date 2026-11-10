@@ -1,0 +1,143 @@
+[
+  {
+    "source": "The server checks each request and sends a response to the client.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The server checks each request. The server sends a response to the client.",
+      "output": "The server checks each request. The server sends a response to the client.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "editor": {
+      "raw": "The server checks each request. She sends a response to the client.",
+      "output": "The server checks each request and sends a response to the client.",
+      "failed_checks": [
+        "argument_roles"
+      ],
+      "semantic_certified": false
+    },
+    "seq2seq": {
+      "raw": "The server checks each request and sends a response to the client.",
+      "output": "The server checks each request and sends a response to the client.",
+      "failed_checks": [],
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The server, which stores customer records, stopped responding.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The server, which stores customer records, stopped responding.",
+      "output": "The server, which stores customer records, stopped responding.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "editor": {
+      "raw": "The server. It stores customer records, stopped responding.",
+      "output": "The server, which stores customer records, stopped responding.",
+      "failed_checks": [
+        "argument_roles",
+        "complete_clauses"
+      ],
+      "semantic_certified": false
+    },
+    "seq2seq": {
+      "raw": "The server, which stores customer records, stopped responding.",
+      "output": "The server, which stores customer records, stopped responding.",
+      "failed_checks": [],
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The report was reviewed by the committee.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The committee reviewed the report.",
+      "output": "The committee reviewed the report.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "editor": {
+      "raw": "The report was reviewed by the committee.",
+      "output": "The report was reviewed by the committee.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "seq2seq": {
+      "raw": "The report was reviewed by the committee.",
+      "output": "The report was reviewed by the committee.",
+      "failed_checks": [],
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The company may reduce spending, but it will not close the factory.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The company may reduce spending. It will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "failed_checks": [
+        "logical_connectives"
+      ],
+      "semantic_certified": false
+    },
+    "editor": {
+      "raw": "The company may reduce spending. However, it will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "failed_checks": [
+        "logical_connectives"
+      ],
+      "semantic_certified": false
+    },
+    "seq2seq": {
+      "raw": "The company may reduce spending, but it will not close the factory.",
+      "output": "The company may reduce spending, but it will not close the factory.",
+      "failed_checks": [],
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "The neural network processed 500 records, and the analyst checked the results.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "The neural network processed 500 records. The analyst checked the results.",
+      "output": "The neural network processed 500 records. The analyst checked the results.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "editor": {
+      "raw": "The neural network processed 500 records. The analyst checked the results.",
+      "output": "The neural network processed 500 records. The analyst checked the results.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "seq2seq": {
+      "raw": "The neural network processed 500 records. The analyst checked the results.",
+      "output": "The neural network processed 500 records. The analyst checked the results.",
+      "failed_checks": [],
+      "semantic_certified": false
+    }
+  },
+  {
+    "source": "Only users who have administrator access can delete the records.",
+    "label_status": "Authored diagnostic, not training data or scored gold",
+    "ranker": {
+      "raw": "Only users who have administrator access can delete the records.",
+      "output": "Only users who have administrator access can delete the records.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "editor": {
+      "raw": "Only users who have administrator access can delete the records.",
+      "output": "Only users who have administrator access can delete the records.",
+      "failed_checks": [],
+      "semantic_certified": false
+    },
+    "seq2seq": {
+      "raw": "Only users who have administrator access can delete the records.",
+      "output": "Only users who have administrator access can delete the records.",
+      "failed_checks": [],
+      "semantic_certified": false
+    }
+  }
+]

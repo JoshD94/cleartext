@@ -1,0 +1,41 @@
+{
+  "training_policy": "training-grammar-v2",
+  "additional_training_error_rules": [
+    "EVERYDAY_EVERY_DAY",
+    "IVE_CONTRACTION",
+    "POSSESSIVE_APOSTROPHE",
+    "UPPERCASE_SENTENCE_START"
+  ],
+  "prior_data_sha256": "35587e382003a2c4ccc5a783f03aafcec59a995cfb254860867f27a4e44ad2ef",
+  "reserved_exclusion_sha256": "7d09d3406ec0440e2666d80e46879d49d5f090905b3d21f6f5dae7c6732d9f4d",
+  "grammar_cache_sha256": "edb83ab5744db6733d5f6c8dc575a832fb2d640d385d831d72e3be77e820e16e",
+  "data_sha256": "06d3c218ae28948c9ef4137f8d1f570aac4cdcbe3987699e01eb4ed7c3c94e3c",
+  "counts": {
+    "train": 3523,
+    "dev": 101,
+    "broad_dev": 96
+  },
+  "quarantined_training": 95,
+  "quarantine_reasons": {
+    "source:flagged": 65,
+    "reference:flagged": 63,
+    "source:selected_review_rule": 15,
+    "reference:selected_review_rule": 23,
+    "uncertainty_scope": 1
+  },
+  "retained_training_datasets": {
+    "DeSSE": 1441,
+    "WikiSplit": 2082
+  },
+  "retained_copies": 958,
+  "retained_pairs_with_review_only_warnings": 620,
+  "evaluation_panels_unchanged": true,
+  "training": {
+    "epochs": 1,
+    "learning_rate": 0.0001,
+    "effective_batch_size": 8,
+    "seed": 4701
+  },
+  "selection": "Existing equal-panel decoded structural overlap, with original reference compatibility annotations, then lower dev loss; initializer included. No evaluation input removed. One complete screened-data epoch only.",
+  "limits": "Quarantined pairs retain original published labels. No fabricated copies or grammar-corrected labels. No-covered-issue training rows can still have errors. This continuation is not a causal ablation of screening versus extra training."
+}

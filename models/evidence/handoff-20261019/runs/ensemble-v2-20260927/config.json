@@ -1,0 +1,22 @@
+{
+  "semcor_params": {
+    "alpha": 1.0,
+    "shrink": 0.0,
+    "nb": 3.0,
+    "vector": 8.0
+  },
+  "semcor_temperature": 2.0,
+  "gloss_temperature": 0.2,
+  "sense_weights": [
+    1.0,
+    0.0
+  ],
+  "sense_evidence": 3.0,
+  "sense_model": "runs/ensemble-20260927/sense_model.pkl",
+  "checker": "runs/ensemble-v2-20260927/checker.pkl",
+  "generator": "expanded",
+  "difficulty_cutoff": 0.3,
+  "error_cost": 0.05,
+  "tiered": true,
+  "stacker_C": 0.1
+}

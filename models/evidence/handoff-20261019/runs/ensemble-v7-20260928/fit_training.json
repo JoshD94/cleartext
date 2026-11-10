@@ -1,0 +1,30 @@
+{
+  "comparison": {
+    "BERT meaning only": {
+      "auc_generated": 0.7906202748614464,
+      "log_loss_generated": 0.3817546374437202
+    },
+    "BERT meaning and slot": {
+      "auc_generated": 0.8082669197626654,
+      "log_loss_generated": 0.36910511642634963
+    }
+  },
+  "reference_v5_auc": 0.7789,
+  "weights": {
+    "sense_fit": 0.35146906927184424,
+    "round_trip": 0.0023421149350620076,
+    "first_sense": 0.14559491233376118,
+    "candidate_sense_rank": 0.12095644214079122,
+    "swords_checker": 0.4406680768499476,
+    "context_vector": 0.17272173096090443,
+    "argument_fit": 0.04875954725047527,
+    "bigram": 0.2045187166572748,
+    "wordnet_member": -0.2392739834541463,
+    "source=hypernym": 0.025309098393303035,
+    "source=similar": -0.05235036047301739,
+    "multiword=True": -0.07663229927004313,
+    "pos_fallback=True": -0.14407361989232118,
+    "bert_slot": 0.6761279957297034,
+    "bert_slot_relative": -0.08163810327758025
+  }
+}

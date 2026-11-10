@@ -1,0 +1,37 @@
+{
+  "host": "mac",
+  "coordinating_host": "yoga",
+  "session": "cleartext-structure-906-20261028",
+  "why": "Yoga 15-minute load over 12. Mac normal memory pressure and over 10 GiB free disk; estimated test peak 1.2 GiB.",
+  "tests_passed": 35,
+  "tests_seconds": null,
+  "test_log_sha256": "38dddb948b4f21f268f521a2a41d84d9db5c9477f7827076a226294080de311b",
+  "pressure_samples": [
+    "1",
+    "1"
+  ],
+  "source_sha256": {
+    "models/src/cleartext/protected_literals.py": "2a0b77c1f39bb95af1cda4c3712e127ec86cb06ac524cfe8dad305cf3eb86ed3",
+    "models/src/cleartext/lexical.py": "2fc6f4f30d1466132b7c72a769548dd3bdfe7a04700648a11ac49863d39ec228",
+    "models/src/cleartext/ensemble_pipeline.py": "d613e45c7b15f7d911822bd0c3f0d75a8cf4c84946e43216380a513bd2759289",
+    "models/src/cleartext/rewrites.py": "d663d1b6a88b4aedc482b76557b51845c22c342c3e663fc884a244552b3d794a",
+    "models/demo/server.py": "b64038fc712891e57a10d321c3951352916ab081951e22ddb71caf209346890c",
+    "models/tests/test_literal_pipeline.py": "2cd8e2fa1e11b31026a40b5b3603c7c1ea6881788af21d0d5c51bc75f274dc65",
+    "models/tests/test_protected_literals.py": "884f54ef4afae27dc2dfe0dec1ef6a821d0bffbe775a95c0cf707fa8ab86574e",
+    "models/scripts/experiments/audit_literal_preservation.py": "3738c4f643ec867d9abd18d9af448f1f89eefb6748d217b915174c323db7a1ec"
+  },
+  "native_model_inference": false,
+  "saved_output_replay_only": true,
+  "new_semantic_labels": false,
+  "weights_changed": false,
+  "demo_restarted": false,
+  "combined_suite_tests_passed": 242,
+  "combined_suite_subtests_passed": 4,
+  "combined_suite_seconds": 19.95,
+  "notes": "30 extraction fixtures and 5 pipeline/demo integration tests passed within combined suite. Earlier 28-test result predates review fixes. Combined test log to be copied from Mac.",
+  "package_versions": {
+    "transformers": "5.17.0",
+    "tokenizers": "0.23.2",
+    "torch": "2.14.1"
+  }
+}

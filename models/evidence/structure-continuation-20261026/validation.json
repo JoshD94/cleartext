@@ -1,0 +1,29 @@
+{
+  "focused_tests_passed": 155,
+  "focused_tests_seconds": 8.69,
+  "ruff": "passed",
+  "diff_check": "passed",
+  "regressions": [
+    "Source-group split separation",
+    "Cached file corruption",
+    "Parallel file alignment",
+    "Missing facts and discourse relations",
+    "Changed tense and dropped modality",
+    "Untouched released holdout sources excluded from additional mining",
+    "Step-zero checkpoint retention",
+    "Existing weights/evaluation preservation",
+    "No test scoring before completed training",
+    "Dropped embedded claim attribution, including coordinated complements",
+    "Retained reporting predicate when repeating attribution across a split",
+    "Backward parser attachments in repaired comma splices"
+  ],
+  "human_model_ratings": 0,
+  "domain_human_references": 0,
+  "live_demo_default_changed": false,
+  "training_code_commit": "24a7e0589206161ce8547fd33e58042866d19335",
+  "validation_code_commit": "974d5a3206514a26b12350f0f11cc5a7f1e40faa",
+  "scope_guard_heldout_evaluation": false,
+  "artifact_archive_sha256_verified_on_yoga": true,
+  "original_weights_sha256_unchanged": true,
+  "demo_http_status": 200
+}

@@ -1,0 +1,19 @@
+{
+  "purpose": "Previously inspected data only, development diagnosis. No fitting or promotion.",
+  "analyses": [
+    "saved raw/copy/rejection funnels",
+    "all saved four-beam candidates and reference-overlap oracle ceilings",
+    "current baseline gates on prepared train/dev/test targets",
+    "selected-step shuffled training exposure",
+    "teacher-forced reference versus copy loss on current 128 dev and 128 previously inspected test rows",
+    "eight authored gate probes, expectations are not human labels"
+  ],
+  "frozen_before_run": true,
+  "host": "yoga",
+  "session": "cleartext-audit-20261027",
+  "peak_ram_estimate_gb": 2,
+  "memory_cap_gb": 4,
+  "resources": "9.1 GB available, pick-host selected Yoga; unrelated cleanup scan preserved. Mac normal pressure checked earlier; Yoga fits.",
+  "runtime_changes": false,
+  "followup": "Repeat with added sentence-count and reference-eligibility strata, plus an offline first-passing-change counterfactual. V1 preserved. No policy adopted or threshold tuned."
+}

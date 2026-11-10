@@ -1,0 +1,301 @@
+{
+  "context_fit": {
+    "selected": "Gradient boosting",
+    "threshold": 0.1,
+    "results": [
+      {
+        "name": "Logistic regression",
+        "dev": {
+          "precision": 0.5,
+          "recall": 0.0017006802721088435,
+          "f1": 0.003389830508474576,
+          "auc": 0.6352811552636619,
+          "acceptance": 0.00040346984062941297,
+          "n": 4957
+        },
+        "test": {
+          "precision": 0.5909090909090909,
+          "recall": 0.0029318899413622013,
+          "f1": 0.0058348294434470375,
+          "auc": 0.6476702195714921,
+          "acceptance": 0.0004813477737665463,
+          "n": 45705
+        }
+      },
+      {
+        "name": "Gradient boosting",
+        "dev": {
+          "precision": 0.7647058823529411,
+          "recall": 0.022108843537414966,
+          "f1": 0.04297520661157025,
+          "auc": 0.6683350382954738,
+          "acceptance": 0.00342949364535001,
+          "n": 4957
+        },
+        "test": {
+          "precision": 0.4336283185840708,
+          "recall": 0.011050969778980605,
+          "f1": 0.021552672091488895,
+          "auc": 0.6582732332590223,
+          "acceptance": 0.002472377201619079,
+          "n": 45705
+        }
+      }
+    ],
+    "operating_dev": {
+      "threshold": 0.1,
+      "precision": 0.1940928270042194,
+      "recall": 0.5476190476190477,
+      "f1": 0.2866043613707165,
+      "auc": 0.6683350382954738,
+      "acceptance": 0.334678232802098,
+      "n": 4957
+    },
+    "operating_test": {
+      "precision": 0.15132624373548467,
+      "recall": 0.5584122688317547,
+      "f1": 0.23812271590690517,
+      "auc": 0.6582732332590223,
+      "acceptance": 0.3579914670167378,
+      "n": 45705
+    },
+    "curve": [
+      {
+        "threshold": 0.1,
+        "precision": 0.1940928270042194,
+        "recall": 0.5476190476190477,
+        "f1": 0.2866043613707165,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.334678232802098,
+        "n": 4957
+      },
+      {
+        "threshold": 0.15000000000000002,
+        "precision": 0.23002159827213822,
+        "recall": 0.3622448979591837,
+        "f1": 0.2813738441215324,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.18680653621141818,
+        "n": 4957
+      },
+      {
+        "threshold": 0.20000000000000004,
+        "precision": 0.2673992673992674,
+        "recall": 0.24829931972789115,
+        "f1": 0.25749559082892415,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.11014726649182974,
+        "n": 4957
+      },
+      {
+        "threshold": 0.25000000000000006,
+        "precision": 0.30149253731343284,
+        "recall": 0.1717687074829932,
+        "f1": 0.218851570964247,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.06758119830542667,
+        "n": 4957
+      },
+      {
+        "threshold": 0.30000000000000004,
+        "precision": 0.34951456310679613,
+        "recall": 0.12244897959183673,
+        "f1": 0.181360201511335,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.04155739358482954,
+        "n": 4957
+      },
+      {
+        "threshold": 0.3500000000000001,
+        "precision": 0.4126984126984127,
+        "recall": 0.08843537414965986,
+        "f1": 0.14565826330532214,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.025418599959653017,
+        "n": 4957
+      },
+      {
+        "threshold": 0.40000000000000013,
+        "precision": 0.4909090909090909,
+        "recall": 0.04591836734693878,
+        "f1": 0.08398133748055987,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.011095420617308857,
+        "n": 4957
+      },
+      {
+        "threshold": 0.45000000000000007,
+        "precision": 0.56,
+        "recall": 0.023809523809523808,
+        "f1": 0.04567699836867863,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.005043373007867662,
+        "n": 4957
+      },
+      {
+        "threshold": 0.5000000000000001,
+        "precision": 0.7647058823529411,
+        "recall": 0.022108843537414966,
+        "f1": 0.04297520661157025,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.00342949364535001,
+        "n": 4957
+      },
+      {
+        "threshold": 0.5500000000000002,
+        "precision": 0.6363636363636364,
+        "recall": 0.011904761904761904,
+        "f1": 0.02337228714524207,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0022190841234617713,
+        "n": 4957
+      },
+      {
+        "threshold": 0.6000000000000002,
+        "precision": 0.6666666666666666,
+        "recall": 0.006802721088435374,
+        "f1": 0.013468013468013467,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0012104095218882388,
+        "n": 4957
+      },
+      {
+        "threshold": 0.6500000000000001,
+        "precision": 0.5,
+        "recall": 0.003401360544217687,
+        "f1": 0.006756756756756757,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0008069396812588259,
+        "n": 4957
+      },
+      {
+        "threshold": 0.7000000000000002,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0,
+        "n": 4957
+      },
+      {
+        "threshold": 0.7500000000000002,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0,
+        "n": 4957
+      },
+      {
+        "threshold": 0.8000000000000002,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0,
+        "n": 4957
+      },
+      {
+        "threshold": 0.8500000000000002,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0,
+        "n": 4957
+      },
+      {
+        "threshold": 0.9000000000000002,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "auc": 0.6683350382954738,
+        "acceptance": 0.0,
+        "n": 4957
+      }
+    ],
+    "counts": {
+      "train_pairs": 18021,
+      "validation_pairs": 4957,
+      "test_pairs": 45705,
+      "train_contexts": 277,
+      "validation_contexts": 93,
+      "test_contexts": 762
+    },
+    "skipped": {
+      "dev": 0,
+      "test": 0
+    },
+    "label": "At least half of all judgments are TRUE. Custom binary diagnostic, not official SWORDS ranking scores."
+  },
+  "tsar": [
+    {
+      "name": "unchanged",
+      "n": 373,
+      "top1_gold_match": 0.0,
+      "edit_rate": 0.0,
+      "edited_gold_match": null,
+      "potential5": 0.0,
+      "runtime_seconds": 0.06053018569946289,
+      "official_evaluator_exit": 0,
+      "official_output": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_unchanged_predictions.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_unchanged_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.0\n\nMAP@3 = 0.0\nMAP@5 = 0.0\nMAP@10 = 0.0\n\nPotential@3 = 0.0\nPotential@5 = 0.0\nPotential@10 = 0.0\n\nAccuracy@1@top_gold_1 = 0.0\nAccuracy@2@top_gold_1 = 0.0\nAccuracy@3@top_gold_1 = 0.0\n\n________________________________\n",
+      "official_precision1": 0.0
+    },
+    {
+      "name": "dictionary",
+      "n": 373,
+      "top1_gold_match": 0.26005361930294907,
+      "edit_rate": 0.5844504021447721,
+      "edited_gold_match": 0.44495412844036697,
+      "potential5": 0.38605898123324395,
+      "runtime_seconds": 4.041165351867676,
+      "official_evaluator_exit": 0,
+      "official_output": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_dictionary_predictions.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_dictionary_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.26\n\nMAP@3 = 0.1285\nMAP@5 = 0.0824\nMAP@10 = 0.0427\n\nPotential@3 = 0.3619\nPotential@5 = 0.386\nPotential@10 = 0.3914\n\nAccuracy@1@top_gold_1 = 0.0991\nAccuracy@2@top_gold_1 = 0.1474\nAccuracy@3@top_gold_1 = 0.1554\n\n________________________________\n",
+      "official_precision1": 0.26
+    },
+    {
+      "name": "learned",
+      "n": 373,
+      "top1_gold_match": 0.22788203753351208,
+      "edit_rate": 0.5254691689008043,
+      "edited_gold_match": 0.4336734693877551,
+      "potential5": 0.3297587131367292,
+      "runtime_seconds": 4.032522439956665,
+      "official_evaluator_exit": 0,
+      "official_output": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_learned_predictions.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_learned_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.2278\n\nMAP@3 = 0.1087\nMAP@5 = 0.0693\nMAP@10 = 0.0356\n\nPotential@3 = 0.3109\nPotential@5 = 0.3297\nPotential@10 = 0.3351\n\nAccuracy@1@top_gold_1 = 0.0938\nAccuracy@2@top_gold_1 = 0.1179\nAccuracy@3@top_gold_1 = 0.1286\n\n________________________________\n",
+      "official_precision1": 0.2278
+    },
+    {
+      "name": "context",
+      "n": 373,
+      "top1_gold_match": 0.2225201072386059,
+      "edit_rate": 0.514745308310992,
+      "edited_gold_match": 0.4322916666666667,
+      "potential5": 0.32171581769436997,
+      "runtime_seconds": 3.9488325119018555,
+      "official_evaluator_exit": 0,
+      "official_output": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_context_predictions.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_context_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.2225\n\nMAP@3 = 0.1035\nMAP@5 = 0.0663\nMAP@10 = 0.0336\n\nPotential@3 = 0.3056\nPotential@5 = 0.3217\nPotential@10 = 0.327\n\nAccuracy@1@top_gold_1 = 0.0884\nAccuracy@2@top_gold_1 = 0.1152\nAccuracy@3@top_gold_1 = 0.126\n\n________________________________\n",
+      "official_precision1": 0.2225
+    },
+    {
+      "name": "guarded",
+      "n": 373,
+      "top1_gold_match": 0.2064343163538874,
+      "edit_rate": 0.4772117962466488,
+      "edited_gold_match": 0.43258426966292135,
+      "potential5": 0.2064343163538874,
+      "runtime_seconds": 3.701920986175537,
+      "official_evaluator_exit": 0,
+      "official_output": "=========   EVALUATION config.=========\nGOLD file = /home/joshuadirga/Documents/projects/cleartext/data/raw/tsar_test.tsv\nPREDICTION LABELS file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_guarded_predictions.tsv\nOUTPUT file = /home/joshuadirga/Documents/projects/cleartext/runs/initial-20260924/tsar_guarded_official.txt\n===============   RESULTS  =============\nMAP@1/Potential@1/Precision@1 = 0.2064\n\nMAP@3 = 0.0688\nMAP@5 = 0.0412\nMAP@10 = 0.0206\n\nPotential@3 = 0.2064\nPotential@5 = 0.2064\nPotential@10 = 0.2064\n\nAccuracy@1@top_gold_1 = 0.0777\nAccuracy@2@top_gold_1 = 0.0777\nAccuracy@3@top_gold_1 = 0.0777\n\n________________________________\n",
+      "official_precision1": 0.2064
+    }
+  ],
+  "candidate_coverage": 0.5254691689008043,
+  "duration_seconds": 38.30482482910156,
+  "settings": {
+    "min_gain": 0.02,
+    "min_fit": 0.1
+  },
+  "protected_terms_source": "Small hand-authored technical phrase list; not a complete jargon detector",
+  "scope": "Single target, single-word edits. No sentence restructuring. TSAR supplies the difficult target; full detection is evaluated separately."
+}

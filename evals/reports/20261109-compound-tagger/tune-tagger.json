@@ -1,0 +1,33 @@
+{
+  "unlabelled_sentences": 3239,
+  "unlabelled_split": 214,
+  "positive_sentences": 455,
+  "positive_split": 104,
+  "positive_boundary_correct": 96,
+  "positive_exact": 61,
+  "positive_recall": 0.210989010989011,
+  "positive_boundary_precision": 0.9230769230769231,
+  "positive_exact_rate_of_splits": 0.5865384615384616,
+  "unlabelled_split_rate": 0.06606977462179685,
+  "boundary_reasons": {
+    "not_matrix_coordination": 2875,
+    "literal_quote_or_parenthetical": 672,
+    "embedded_scope_crosses_or_is_unsupported": 636,
+    "unsafe_shared_subject_or_predicate": 407,
+    "accepted": 318,
+    "leading_modifier_scope": 274,
+    "relative_requires_independent_subjects": 109,
+    "negation_modality_or_correlative": 83,
+    "preservation_check_failed": 61,
+    "incomplete_clause": 45,
+    "so_requires_comma": 42,
+    "purpose_or_missing_clause": 30,
+    "unsupported_sentence_shape": 23
+  },
+  "file": "tune.tsv",
+  "guards": "scoped",
+  "limit": 0,
+  "tagger": "boundary-tagger.joblib (local)",
+  "threshold": 0.4,
+  "seconds": 137.1
+}

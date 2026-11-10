@@ -1,0 +1,165 @@
+{
+  "params": {
+    "nb": 3.0,
+    "vector": 5.0
+  },
+  "development": [
+    {
+      "params": {
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "ambiguous_accuracy": 0.6226711831599323,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6517064398906081,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6711804946500614,
+      "ambiguous_accuracy": 0.6220259698362771,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6511070318060915,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6757761796176109,
+      "ambiguous_accuracy": 0.6273086539237035,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6560146854980706,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "ambiguous_accuracy": 0.6361400112912332,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6642190836548908,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6831783897561832,
+      "ambiguous_accuracy": 0.6358174046294056,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6639193796126325,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6859147517979302,
+      "ambiguous_accuracy": 0.6389628195822243,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6668414940246506,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6836695316611121,
+      "ambiguous_accuracy": 0.6363819662876038,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6644438616865845,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6840905104367655,
+      "ambiguous_accuracy": 0.6368658762803452,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6648934177499719,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6865111383967725,
+      "ambiguous_accuracy": 0.6396483587386079,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6674783651144495,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6776355025434134,
+      "ambiguous_accuracy": 0.6294459230583112,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.6580002247780317,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6771794422031222,
+      "ambiguous_accuracy": 0.6289216872328414,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.657513205709362,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    },
+    {
+      "params": {
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6790387651289248,
+      "ambiguous_accuracy": 0.631058956367449,
+      "ambiguous_n": 24798,
+      "seen_lemma_accuracy": 0.659498744989323,
+      "seen_lemma_fraction": 0.9364322048763375,
+      "n": 28505
+    }
+  ],
+  "selected_dev": {
+    "params": {
+      "nb": 3.0,
+      "vector": 5.0
+    },
+    "accuracy": 0.6865111383967725,
+    "ambiguous_accuracy": 0.6396483587386079,
+    "ambiguous_n": 24798,
+    "seen_lemma_accuracy": 0.6674783651144495,
+    "seen_lemma_fraction": 0.9364322048763375,
+    "n": 28505
+  },
+  "description": "Maximum document-held-out development WSD accuracy; no SWORDS/TSAR scores used to fit or select this model."
+}

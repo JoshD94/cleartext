@@ -1,0 +1,30 @@
+{
+  "scope": "Ungraded boundary tests and existing BenchLS input geometry only. No fit, no substitute-accuracy measurement, no TSAR.",
+  "short_vector_max_abs_error": 0.0,
+  "lost_target_reproduced_and_corrected": true,
+  "benchls": {
+    "input_cases": 929,
+    "unresolved_targets": [],
+    "changed_windows": 0,
+    "fully_lost_targets": 0,
+    "partially_lost_targets": 0
+  },
+  "window_limit": 256,
+  "default_changed": false,
+  "base_run": "/home/joshuadirga/Documents/projects/cleartext/models/runs/ensemble-relations-20261002",
+  "saved_run": "/home/joshuadirga/Documents/projects/cleartext/models/runs/ensemble-relations-windowed-20261002",
+  "input_sha256": {
+    "data/raw/BenchLS.zip": "3299fd8113e3da65d149c9327c56bc53bab44fd891cc167e0ed85546f9cb653a",
+    "runs/ensemble-relations-20261002/config.json": "6e52f74dacc9a3741e3ed74c4e1a15432df4ac3755f690e1d4e9d8fc49a805b0"
+  },
+  "source_sha256": {
+    "scripts/experiments/check_context_windows.py": "de6421ccc7aa636444743f682a23d24100cf13e4f71340838d0efed1cb039836",
+    "src/cleartext/context_window.py": "a97e24e555157d28258685872bfc8cadc27eb6b85d17bfbe57ded77abde10ec6",
+    "src/cleartext/contextual.py": "ff12fe87f92dffc18f2a529ec1b23053bc5ba8d840fc5793b52a5fa0da23a8bd",
+    "src/cleartext/ensemble_pipeline.py": "1f172be559b8ac31e379a074f5fc1f77514b971cdd687111e44c82351aecc7fe"
+  },
+  "saved_artifact_sha256": {
+    "runs/ensemble-relations-windowed-20261002/config.json": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+    "runs/ensemble-relations-windowed-20261002/stacker.pkl": "ad6609e016fec96ba9bd1c99c200a969d5afebf0523c708031c221d249b28f4d"
+  }
+}

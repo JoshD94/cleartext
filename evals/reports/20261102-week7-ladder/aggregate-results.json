@@ -1,0 +1,2682 @@
+{
+  "implementation_head": "e0b9e941d2d633f4e86a6421ba9a9f843f76fa2e",
+  "date": "2026-11-02",
+  "host": "macOS arm64; CPU inference",
+  "verification": {
+    "job": "ea2c5dd50eff",
+    "passed": 463,
+    "subtests_passed": 13,
+    "failures": 0
+  },
+  "panels": {
+    "authored": {
+      "n": 18,
+      "systems": {
+        "original": {
+          "n": 18,
+          "changed": 0,
+          "unchanged": 18,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 0.1496113740788903,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 19.168524348226285,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 23.54748091109444,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 19.10933097406661,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.87037037037037,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.281853239220969,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 3.0,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 1.0000000000000002,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 1.0000000364250607,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9888835748036703,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.9888835748036703,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.9888835748036703,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.gunning_fog": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.smog_index": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_sentence_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_word_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.technical_term_count": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.embedding_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_forward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_backward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_mean": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.numbers_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.dates_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.entities_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.negations_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tenses_preserved": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 0
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 0
+            }
+          }
+        },
+        "rule_based": {
+          "n": 18,
+          "changed": 9,
+          "unchanged": 9,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 10.331911671445107,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 17.637885667401104,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 21.308429315702618,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 17.92992281140482,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.425925925925927,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.050234889109654,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 2.5,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.8611822370199099,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9707699616750082,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9925175375408597,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.9914499190118577,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.9919837282763587,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 0.9444444444444444,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 9,
+              "mean": 9.837329060589461
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 9,
+              "mean": 16.377320708036166
+            },
+            "readability.gunning_fog": {
+              "n": 9,
+              "mean": 20.263816548589332
+            },
+            "readability.smog_index": {
+              "n": 9,
+              "mean": 16.873508917613883
+            },
+            "readability.avg_sentence_length": {
+              "n": 9,
+              "mean": 18.074074074074073
+            },
+            "readability.avg_word_length": {
+              "n": 9,
+              "mean": 6.2750381306704925
+            },
+            "readability.technical_term_count": {
+              "n": 9,
+              "mean": 2.6666666666666665
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 9,
+              "mean": 0.7223644740398193
+            },
+            "preservation.embedding_similarity": {
+              "n": 9,
+              "mean": 0.9415398571226332
+            },
+            "preservation.nli_forward": {
+              "n": 9,
+              "mean": 0.995641655392117
+            },
+            "preservation.nli_backward": {
+              "n": 9,
+              "mean": 0.9935064183341132
+            },
+            "preservation.nli_mean": {
+              "n": 9,
+              "mean": 0.9945740368631151
+            },
+            "preservation.numbers_preserved": {
+              "n": 9,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 9,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 9,
+              "mean": 0.8888888888888888
+            },
+            "preservation.negations_preserved": {
+              "n": 9,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 9,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 3
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 4
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 2
+            }
+          }
+        },
+        "lexical_only": {
+          "n": 18,
+          "changed": 18,
+          "unchanged": 0,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 4.058326386243426,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 18.623337147948014,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 22.783569586139006,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 18.661607353909876,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.87037037037037,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.182036222571505,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 2.388888888888889,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.9332191687455195,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9848886628945669,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9536803166071574,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.7113852926219503,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.8325328046145538,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 18,
+              "mean": 4.058326386243426
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 18,
+              "mean": 18.623337147948014
+            },
+            "readability.gunning_fog": {
+              "n": 18,
+              "mean": 22.783569586139006
+            },
+            "readability.smog_index": {
+              "n": 18,
+              "mean": 18.661607353909876
+            },
+            "readability.avg_sentence_length": {
+              "n": 18,
+              "mean": 23.87037037037037
+            },
+            "readability.avg_word_length": {
+              "n": 18,
+              "mean": 6.182036222571505
+            },
+            "readability.technical_term_count": {
+              "n": 18,
+              "mean": 2.388888888888889
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 18,
+              "mean": 0.9332191687455195
+            },
+            "preservation.embedding_similarity": {
+              "n": 18,
+              "mean": 0.9848886628945669
+            },
+            "preservation.nli_forward": {
+              "n": 18,
+              "mean": 0.9536803166071574
+            },
+            "preservation.nli_backward": {
+              "n": 18,
+              "mean": 0.7113852926219503
+            },
+            "preservation.nli_mean": {
+              "n": 18,
+              "mean": 0.8325328046145538
+            },
+            "preservation.numbers_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.negations_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 18,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 6
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 6
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 6
+            }
+          }
+        },
+        "phrase_only": {
+          "n": 18,
+          "changed": 3,
+          "unchanged": 15,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": -1.8498188253513048,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 19.378396934487757,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 23.742432775980944,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 19.10933097406661,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.592592592592595,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.352284942291561,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 3.0,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.9747490358365556,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9994227555063036,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9898715813954672,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.9895061453183492,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.9896888633569082,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 0.9444444444444444,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 3,
+              "mean": -10.482692307692275
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 3,
+              "mean": 19.4415811965812
+            },
+            "readability.gunning_fog": {
+              "n": 3,
+              "mean": 26.241025641025644
+            },
+            "readability.smog_index": {
+              "n": 3,
+              "mean": 19.821962714490812
+            },
+            "readability.avg_sentence_length": {
+              "n": 3,
+              "mean": 19.0
+            },
+            "readability.avg_word_length": {
+              "n": 3,
+              "mean": 6.934935897435897
+            },
+            "readability.technical_term_count": {
+              "n": 3,
+              "mean": 3.3333333333333335
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 3,
+              "mean": 0.8484942150193323
+            },
+            "preservation.embedding_similarity": {
+              "n": 3,
+              "mean": 0.996536393960317
+            },
+            "preservation.nli_forward": {
+              "n": 3,
+              "mean": 0.9952740669250488
+            },
+            "preservation.nli_backward": {
+              "n": 3,
+              "mean": 0.9930814504623413
+            },
+            "preservation.nli_mean": {
+              "n": 3,
+              "mean": 0.9941777586936951
+            },
+            "preservation.numbers_preserved": {
+              "n": 3,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 3,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 3,
+              "mean": 0.6666666666666666
+            },
+            "preservation.negations_preserved": {
+              "n": 3,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 3,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 1
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 2
+            }
+          }
+        },
+        "structure_only": {
+          "n": 18,
+          "changed": 0,
+          "unchanged": 18,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 0.1496113740788903,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 19.168524348226285,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 23.54748091109444,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 19.10933097406661,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.87037037037037,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.281853239220969,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 3.0,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 1.0000000000000002,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 1.0000000364250607,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9888835748036703,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.9888835748036703,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.9888835748036703,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.gunning_fog": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.smog_index": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_sentence_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_word_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.technical_term_count": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.embedding_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_forward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_backward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_mean": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.numbers_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.dates_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.entities_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.negations_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tenses_preserved": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 0
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 0
+            }
+          }
+        },
+        "lexical_structural": {
+          "n": 18,
+          "changed": 18,
+          "unchanged": 0,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 4.058326386243426,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 18.623337147948014,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 22.783569586139006,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 18.661607353909876,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.87037037037037,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.182036222571505,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 2.388888888888889,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.9332191687455195,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9848886628945669,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9536803166071574,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.7113852926219503,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.8325328046145538,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 18,
+              "mean": 4.058326386243426
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 18,
+              "mean": 18.623337147948014
+            },
+            "readability.gunning_fog": {
+              "n": 18,
+              "mean": 22.783569586139006
+            },
+            "readability.smog_index": {
+              "n": 18,
+              "mean": 18.661607353909876
+            },
+            "readability.avg_sentence_length": {
+              "n": 18,
+              "mean": 23.87037037037037
+            },
+            "readability.avg_word_length": {
+              "n": 18,
+              "mean": 6.182036222571505
+            },
+            "readability.technical_term_count": {
+              "n": 18,
+              "mean": 2.388888888888889
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 18,
+              "mean": 0.9332191687455195
+            },
+            "preservation.embedding_similarity": {
+              "n": 18,
+              "mean": 0.9848886628945669
+            },
+            "preservation.nli_forward": {
+              "n": 18,
+              "mean": 0.9536803166071574
+            },
+            "preservation.nli_backward": {
+              "n": 18,
+              "mean": 0.7113852926219503
+            },
+            "preservation.nli_mean": {
+              "n": 18,
+              "mean": 0.8325328046145538
+            },
+            "preservation.numbers_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.negations_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 18,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 6
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 6
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 6
+            }
+          }
+        },
+        "full_guarded": {
+          "n": 18,
+          "changed": 18,
+          "unchanged": 0,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 2.2045946114822406,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 18.812887731714284,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 22.950664534279706,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 18.661607353909876,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.592592592592595,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.250049299122164,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 2.388888888888889,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.909422656087449,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9842557741536034,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9574801027774811,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.7235154703052508,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.8404977865413659,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 0.9444444444444444,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 18,
+              "mean": 2.2045946114822406
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 18,
+              "mean": 18.812887731714284
+            },
+            "readability.gunning_fog": {
+              "n": 18,
+              "mean": 22.950664534279706
+            },
+            "readability.smog_index": {
+              "n": 18,
+              "mean": 18.661607353909876
+            },
+            "readability.avg_sentence_length": {
+              "n": 18,
+              "mean": 23.592592592592595
+            },
+            "readability.avg_word_length": {
+              "n": 18,
+              "mean": 6.250049299122164
+            },
+            "readability.technical_term_count": {
+              "n": 18,
+              "mean": 2.388888888888889
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 18,
+              "mean": 0.909422656087449
+            },
+            "preservation.embedding_similarity": {
+              "n": 18,
+              "mean": 0.9842557741536034
+            },
+            "preservation.nli_forward": {
+              "n": 18,
+              "mean": 0.9574801027774811
+            },
+            "preservation.nli_backward": {
+              "n": 18,
+              "mean": 0.7235154703052508
+            },
+            "preservation.nli_mean": {
+              "n": 18,
+              "mean": 0.8404977865413659
+            },
+            "preservation.numbers_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 18,
+              "mean": 0.9444444444444444
+            },
+            "preservation.negations_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 18,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 6
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 6
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 6
+            }
+          }
+        },
+        "full_no_guardrails": {
+          "n": 18,
+          "changed": 18,
+          "unchanged": 0,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 2.2045946114822406,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 18.812887731714284,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 22.950664534279706,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 18.661607353909876,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.592592592592595,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.250049299122164,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 2.388888888888889,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.909422656087449,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9842557741536034,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9574801027774811,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.7235154703052508,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.8404977865413659,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 0.9444444444444444,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 18,
+              "mean": 2.2045946114822406
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 18,
+              "mean": 18.812887731714284
+            },
+            "readability.gunning_fog": {
+              "n": 18,
+              "mean": 22.950664534279706
+            },
+            "readability.smog_index": {
+              "n": 18,
+              "mean": 18.661607353909876
+            },
+            "readability.avg_sentence_length": {
+              "n": 18,
+              "mean": 23.592592592592595
+            },
+            "readability.avg_word_length": {
+              "n": 18,
+              "mean": 6.250049299122164
+            },
+            "readability.technical_term_count": {
+              "n": 18,
+              "mean": 2.388888888888889
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 18,
+              "mean": 0.909422656087449
+            },
+            "preservation.embedding_similarity": {
+              "n": 18,
+              "mean": 0.9842557741536034
+            },
+            "preservation.nli_forward": {
+              "n": 18,
+              "mean": 0.9574801027774811
+            },
+            "preservation.nli_backward": {
+              "n": 18,
+              "mean": 0.7235154703052508
+            },
+            "preservation.nli_mean": {
+              "n": 18,
+              "mean": 0.8404977865413659
+            },
+            "preservation.numbers_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 18,
+              "mean": 0.9444444444444444
+            },
+            "preservation.negations_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 18,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 6
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 6
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 6
+            }
+          }
+        },
+        "compound_only": {
+          "n": 18,
+          "changed": 0,
+          "unchanged": 18,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 0.1496113740788903,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 19.168524348226285,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 23.54748091109444,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 19.10933097406661,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.87037037037037,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.281853239220969,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 3.0,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 1.0000000000000002,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 1.0000000364250607,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9888835748036703,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.9888835748036703,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.9888835748036703,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.gunning_fog": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.smog_index": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_sentence_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_word_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.technical_term_count": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.embedding_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_forward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_backward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_mean": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.numbers_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.dates_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.entities_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.negations_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tenses_preserved": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 0
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 0
+            }
+          }
+        },
+        "compound_full_guarded": {
+          "n": 18,
+          "changed": 18,
+          "unchanged": 0,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 2.2045946114822406,
+            "readability.flesch_reading_ease.n": 18,
+            "readability.flesch_kincaid_grade.mean": 18.812887731714284,
+            "readability.flesch_kincaid_grade.n": 18,
+            "readability.gunning_fog.mean": 22.950664534279706,
+            "readability.gunning_fog.n": 18,
+            "readability.smog_index.mean": 18.661607353909876,
+            "readability.smog_index.n": 18,
+            "readability.avg_sentence_length.mean": 23.592592592592595,
+            "readability.avg_sentence_length.n": 18,
+            "readability.avg_word_length.mean": 6.250049299122164,
+            "readability.avg_word_length.n": 18,
+            "readability.technical_term_count.mean": 2.388888888888889,
+            "readability.technical_term_count.n": 18,
+            "preservation.tfidf_cosine_similarity.mean": 0.909422656087449,
+            "preservation.tfidf_cosine_similarity.n": 18,
+            "preservation.embedding_similarity.mean": 0.9842557741536034,
+            "preservation.embedding_similarity.n": 18,
+            "preservation.nli_forward.mean": 0.9574801027774811,
+            "preservation.nli_forward.n": 18,
+            "preservation.nli_backward.mean": 0.7235154703052508,
+            "preservation.nli_backward.n": 18,
+            "preservation.nli_mean.mean": 0.8404977865413659,
+            "preservation.nli_mean.n": 18,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 18,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 18,
+            "preservation.entities_preserved.mean": 0.9444444444444444,
+            "preservation.entities_preserved.n": 18,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 18,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 18
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 18,
+              "mean": 2.2045946114822406
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 18,
+              "mean": 18.812887731714284
+            },
+            "readability.gunning_fog": {
+              "n": 18,
+              "mean": 22.950664534279706
+            },
+            "readability.smog_index": {
+              "n": 18,
+              "mean": 18.661607353909876
+            },
+            "readability.avg_sentence_length": {
+              "n": 18,
+              "mean": 23.592592592592595
+            },
+            "readability.avg_word_length": {
+              "n": 18,
+              "mean": 6.250049299122164
+            },
+            "readability.technical_term_count": {
+              "n": 18,
+              "mean": 2.388888888888889
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 18,
+              "mean": 0.909422656087449
+            },
+            "preservation.embedding_similarity": {
+              "n": 18,
+              "mean": 0.9842557741536034
+            },
+            "preservation.nli_forward": {
+              "n": 18,
+              "mean": 0.9574801027774811
+            },
+            "preservation.nli_backward": {
+              "n": 18,
+              "mean": 0.7235154703052508
+            },
+            "preservation.nli_mean": {
+              "n": 18,
+              "mean": 0.8404977865413659
+            },
+            "preservation.numbers_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 18,
+              "mean": 0.9444444444444444
+            },
+            "preservation.negations_preserved": {
+              "n": 18,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 18,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 6,
+              "changed": 6
+            },
+            "corporate_communication": {
+              "n": 6,
+              "changed": 6
+            },
+            "political_science": {
+              "n": 6,
+              "changed": 6
+            }
+          }
+        }
+      },
+      "phrase_model_present": true,
+      "phrase_inventory_input_counts": {
+        "in the event that": 0,
+        "despite the fact that": 0,
+        "at the present time": 0,
+        "with the exception of": 0,
+        "a large number of": 1,
+        "on a daily basis": 0,
+        "in close proximity to": 0,
+        "in order to": 2,
+        "prior to": 2,
+        "subsequent to": 0
+      },
+      "prediction_rows": 180,
+      "compound_incremental_changes": 0,
+      "job": "25d8659bbfc0"
+    },
+    "sourced": {
+      "n": 90,
+      "systems": {
+        "original": {
+          "n": 90,
+          "changed": 0,
+          "unchanged": 90,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 38.319100104674355,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 14.114790003787219,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.922769874703132,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.299243445430134,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.957777777777775,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.992858192593868,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.6333333333333333,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 1.0000000000000002,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 1.0000000238418578,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.9858823378880819,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.9858823378880819,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.9858823378880819,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.gunning_fog": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.smog_index": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_sentence_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_word_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.technical_term_count": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.embedding_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_forward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_backward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_mean": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.numbers_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.dates_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.entities_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.negations_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tenses_preserved": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 0
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 0
+            }
+          }
+        },
+        "rule_based": {
+          "n": 90,
+          "changed": 14,
+          "unchanged": 76,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 38.79067931494722,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 14.048784154302524,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.83246174512392,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.226804049385967,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.95685185185185,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.977498410220952,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.6333333333333333,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9954076330552555,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.9995225436157651,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.9867447992165883,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.9867312749226888,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.9867380370696386,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 0.9907407407407408,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 14,
+              "mean": 33.43655634594671
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 14,
+              "mean": 14.816647085711141
+            },
+            "readability.gunning_fog": {
+              "n": 14,
+              "mean": 18.451930487270392
+            },
+            "readability.smog_index": {
+              "n": 14,
+              "mean": 15.832311581212517
+            },
+            "readability.avg_sentence_length": {
+              "n": 14,
+              "mean": 25.041666666666664
+            },
+            "readability.avg_word_length": {
+              "n": 14,
+              "mean": 5.264571539415077
+            },
+            "readability.technical_term_count": {
+              "n": 14,
+              "mean": 3.2857142857142856
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 14,
+              "mean": 0.9704776410694984
+            },
+            "preservation.embedding_similarity": {
+              "n": 14,
+              "mean": 0.9969305225781032
+            },
+            "preservation.nli_forward": {
+              "n": 14,
+              "mean": 0.9925931479249682
+            },
+            "preservation.nli_backward": {
+              "n": 14,
+              "mean": 0.992506206035614
+            },
+            "preservation.nli_mean": {
+              "n": 14,
+              "mean": 0.9925496769802911
+            },
+            "preservation.numbers_preserved": {
+              "n": 14,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 14,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 14,
+              "mean": 0.9404761904761905
+            },
+            "preservation.negations_preserved": {
+              "n": 14,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 14,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 8
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 5
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 1
+            }
+          }
+        },
+        "lexical_only": {
+          "n": 90,
+          "changed": 85,
+          "unchanged": 5,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 39.50824539104435,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 13.948928131693057,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.684698681276892,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.089934064931498,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.957777777777775,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.960947185176091,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.3444444444444446,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9803462640697981,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.9912062227725983,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.8387373052951362,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.8358377676871088,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.8372875364911225,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 0.9861111111111112,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 85,
+              "mean": 38.21905701391767
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 85,
+              "mean": 14.193156649289474
+            },
+            "readability.gunning_fog": {
+              "n": 85,
+              "mean": 17.978639132387777
+            },
+            "readability.smog_index": {
+              "n": 85,
+              "mean": 15.345084802438853
+            },
+            "readability.avg_sentence_length": {
+              "n": 85,
+              "mean": 25.21705882352941
+            },
+            "readability.avg_word_length": {
+              "n": 85,
+              "mean": 5.003753593062298
+            },
+            "readability.technical_term_count": {
+              "n": 85,
+              "mean": 2.4235294117647057
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 85,
+              "mean": 0.9791901619562567
+            },
+            "preservation.embedding_similarity": {
+              "n": 85,
+              "mean": 0.9906889424604528
+            },
+            "preservation.nli_forward": {
+              "n": 85,
+              "mean": 0.8303082181688617
+            },
+            "preservation.nli_backward": {
+              "n": 85,
+              "mean": 0.827238119525068
+            },
+            "preservation.nli_mean": {
+              "n": 85,
+              "mean": 0.8287731688469648
+            },
+            "preservation.numbers_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 85,
+              "mean": 0.9852941176470589
+            },
+            "preservation.negations_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 85,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 30
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 29
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 26
+            }
+          }
+        },
+        "phrase_only": {
+          "n": 90,
+          "changed": 1,
+          "unchanged": 89,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 38.29473298755723,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 14.114048262045475,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.914902006835263,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.292624158500738,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.94111111111111,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.994074408810085,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.6333333333333333,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9992122338705187,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.9999861339728038,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.9858900712596046,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.9858384761545393,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.985864273707072,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 1,
+              "mean": 25.716959459459474
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 1,
+              "mean": 14.268243243243244
+            },
+            "readability.gunning_fog": {
+              "n": 1,
+              "mean": 19.291891891891893
+            },
+            "readability.smog_index": {
+              "n": 1,
+              "mean": 16.52667757954773
+            },
+            "readability.avg_sentence_length": {
+              "n": 1,
+              "mean": 18.5
+            },
+            "readability.avg_word_length": {
+              "n": 1,
+              "mean": 5.45945945945946
+            },
+            "readability.technical_term_count": {
+              "n": 1,
+              "mean": 2.0
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 1,
+              "mean": 0.92910104834666
+            },
+            "preservation.embedding_similarity": {
+              "n": 1,
+              "mean": 0.9987499117851257
+            },
+            "preservation.nli_forward": {
+              "n": 1,
+              "mean": 0.9914236664772034
+            },
+            "preservation.nli_backward": {
+              "n": 1,
+              "mean": 0.9867801070213318
+            },
+            "preservation.nli_mean": {
+              "n": 1,
+              "mean": 0.9891018867492676
+            },
+            "preservation.numbers_preserved": {
+              "n": 1,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 1,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 1,
+              "mean": 1.0
+            },
+            "preservation.negations_preserved": {
+              "n": 1,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 1,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 1
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 0
+            }
+          }
+        },
+        "structure_only": {
+          "n": 90,
+          "changed": 0,
+          "unchanged": 90,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 38.319100104674355,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 14.114790003787219,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.922769874703132,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.299243445430134,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.957777777777775,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.992858192593868,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.6333333333333333,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 1.0000000000000002,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 1.0000000238418578,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.9858823378880819,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.9858823378880819,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.9858823378880819,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.gunning_fog": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.smog_index": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_sentence_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_word_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.technical_term_count": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.embedding_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_forward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_backward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_mean": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.numbers_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.dates_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.entities_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.negations_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tenses_preserved": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 0
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 0
+            }
+          }
+        },
+        "lexical_structural": {
+          "n": 90,
+          "changed": 85,
+          "unchanged": 5,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 39.50824539104435,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 13.948928131693057,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.684698681276892,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.089934064931498,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.957777777777775,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.960947185176091,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.3444444444444446,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9803462640697981,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.9912062227725983,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.8387373052951362,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.8358377676871088,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.8372875364911225,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 0.9861111111111112,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 85,
+              "mean": 38.21905701391767
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 85,
+              "mean": 14.193156649289474
+            },
+            "readability.gunning_fog": {
+              "n": 85,
+              "mean": 17.978639132387777
+            },
+            "readability.smog_index": {
+              "n": 85,
+              "mean": 15.345084802438853
+            },
+            "readability.avg_sentence_length": {
+              "n": 85,
+              "mean": 25.21705882352941
+            },
+            "readability.avg_word_length": {
+              "n": 85,
+              "mean": 5.003753593062298
+            },
+            "readability.technical_term_count": {
+              "n": 85,
+              "mean": 2.4235294117647057
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 85,
+              "mean": 0.9791901619562567
+            },
+            "preservation.embedding_similarity": {
+              "n": 85,
+              "mean": 0.9906889424604528
+            },
+            "preservation.nli_forward": {
+              "n": 85,
+              "mean": 0.8303082181688617
+            },
+            "preservation.nli_backward": {
+              "n": 85,
+              "mean": 0.827238119525068
+            },
+            "preservation.nli_mean": {
+              "n": 85,
+              "mean": 0.8287731688469648
+            },
+            "preservation.numbers_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 85,
+              "mean": 0.9852941176470589
+            },
+            "preservation.negations_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 85,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 30
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 29
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 26
+            }
+          }
+        },
+        "full_guarded": {
+          "n": 90,
+          "changed": 85,
+          "unchanged": 5,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 39.485783679332634,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 13.94792062418555,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.676830813409023,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.083314778002098,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.94111111111111,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.962185923914831,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.3444444444444446,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9795566856977044,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.991187674469418,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.8387529448916514,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.8358277580804295,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.8372903514860405,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 0.9861111111111112,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 85,
+              "mean": 38.195274025046444
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 85,
+              "mean": 14.192089876634466
+            },
+            "readability.gunning_fog": {
+              "n": 85,
+              "mean": 17.970308448762975
+            },
+            "readability.smog_index": {
+              "n": 85,
+              "mean": 15.33807614569008
+            },
+            "readability.avg_sentence_length": {
+              "n": 85,
+              "mean": 25.19941176470588
+            },
+            "readability.avg_word_length": {
+              "n": 85,
+              "mean": 5.005065198785668
+            },
+            "readability.technical_term_count": {
+              "n": 85,
+              "mean": 2.4235294117647057
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 85,
+              "mean": 0.9783541377975693
+            },
+            "preservation.embedding_similarity": {
+              "n": 85,
+              "mean": 0.9906693030806148
+            },
+            "preservation.nli_forward": {
+              "n": 85,
+              "mean": 0.8303247777416426
+            },
+            "preservation.nli_backward": {
+              "n": 85,
+              "mean": 0.8272275211179958
+            },
+            "preservation.nli_mean": {
+              "n": 85,
+              "mean": 0.8287761494298191
+            },
+            "preservation.numbers_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 85,
+              "mean": 0.9852941176470589
+            },
+            "preservation.negations_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 85,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 30
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 29
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 26
+            }
+          }
+        },
+        "full_no_guardrails": {
+          "n": 90,
+          "changed": 85,
+          "unchanged": 5,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 39.470516211861984,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 13.951430284082297,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.716529125432917,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.111261745251436,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.946666666666665,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.960460943299092,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.311111111111111,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9794333088095578,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.9917262421713935,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.8314994452314244,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.833021433527271,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.8322604393793477,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 0.9824074074074075,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 85,
+              "mean": 38.17910847125399
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 85,
+              "mean": 14.195805987113374
+            },
+            "readability.gunning_fog": {
+              "n": 85,
+              "mean": 18.012341955611802
+            },
+            "readability.smog_index": {
+              "n": 85,
+              "mean": 15.367667052189379
+            },
+            "readability.avg_sentence_length": {
+              "n": 85,
+              "mean": 25.205294117647057
+            },
+            "readability.avg_word_length": {
+              "n": 85,
+              "mean": 5.003238748721944
+            },
+            "readability.technical_term_count": {
+              "n": 85,
+              "mean": 2.388235294117647
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 85,
+              "mean": 0.9782235034454141
+            },
+            "preservation.embedding_similarity": {
+              "n": 85,
+              "mean": 0.9912395512356478
+            },
+            "preservation.nli_forward": {
+              "n": 85,
+              "mean": 0.822644601630814
+            },
+            "preservation.nli_backward": {
+              "n": 85,
+              "mean": 0.8242561186499455
+            },
+            "preservation.nli_mean": {
+              "n": 85,
+              "mean": 0.8234503601403798
+            },
+            "preservation.numbers_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 85,
+              "mean": 0.9813725490196079
+            },
+            "preservation.negations_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 85,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 30
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 29
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 26
+            }
+          }
+        },
+        "compound_only": {
+          "n": 90,
+          "changed": 0,
+          "unchanged": 90,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 38.319100104674355,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 14.114790003787219,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.922769874703132,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.299243445430134,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.957777777777775,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.992858192593868,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.6333333333333333,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 1.0000000000000002,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 1.0000000238418578,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.9858823378880819,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.9858823378880819,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.9858823378880819,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 1.0,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.gunning_fog": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.smog_index": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_sentence_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.avg_word_length": {
+              "n": 0,
+              "mean": null
+            },
+            "readability.technical_term_count": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.embedding_similarity": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_forward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_backward": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.nli_mean": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.numbers_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.dates_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.entities_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.negations_preserved": {
+              "n": 0,
+              "mean": null
+            },
+            "preservation.tenses_preserved": {
+              "n": 0,
+              "mean": null
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 0
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 0
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 0
+            }
+          }
+        },
+        "compound_full_guarded": {
+          "n": 90,
+          "changed": 85,
+          "unchanged": 5,
+          "aggregate": {
+            "readability.flesch_reading_ease.mean": 39.485783679332634,
+            "readability.flesch_reading_ease.n": 90,
+            "readability.flesch_kincaid_grade.mean": 13.94792062418555,
+            "readability.flesch_kincaid_grade.n": 90,
+            "readability.gunning_fog.mean": 17.676830813409023,
+            "readability.gunning_fog.n": 90,
+            "readability.smog_index.mean": 15.083314778002098,
+            "readability.smog_index.n": 90,
+            "readability.avg_sentence_length.mean": 24.94111111111111,
+            "readability.avg_sentence_length.n": 90,
+            "readability.avg_word_length.mean": 4.962185923914831,
+            "readability.avg_word_length.n": 90,
+            "readability.technical_term_count.mean": 2.3444444444444446,
+            "readability.technical_term_count.n": 90,
+            "preservation.tfidf_cosine_similarity.mean": 0.9795566856977044,
+            "preservation.tfidf_cosine_similarity.n": 90,
+            "preservation.embedding_similarity.mean": 0.991187674469418,
+            "preservation.embedding_similarity.n": 90,
+            "preservation.nli_forward.mean": 0.8387529448916514,
+            "preservation.nli_forward.n": 90,
+            "preservation.nli_backward.mean": 0.8358277580804295,
+            "preservation.nli_backward.n": 90,
+            "preservation.nli_mean.mean": 0.8372903514860405,
+            "preservation.nli_mean.n": 90,
+            "preservation.numbers_preserved.mean": 1.0,
+            "preservation.numbers_preserved.n": 90,
+            "preservation.dates_preserved.mean": 1.0,
+            "preservation.dates_preserved.n": 90,
+            "preservation.entities_preserved.mean": 0.9861111111111112,
+            "preservation.entities_preserved.n": 90,
+            "preservation.negations_preserved.mean": 1.0,
+            "preservation.negations_preserved.n": 90,
+            "preservation.tenses_preserved.mean": 1.0,
+            "preservation.tenses_preserved.n": 90
+          },
+          "changed_only": {
+            "readability.flesch_reading_ease": {
+              "n": 85,
+              "mean": 38.195274025046444
+            },
+            "readability.flesch_kincaid_grade": {
+              "n": 85,
+              "mean": 14.192089876634466
+            },
+            "readability.gunning_fog": {
+              "n": 85,
+              "mean": 17.970308448762975
+            },
+            "readability.smog_index": {
+              "n": 85,
+              "mean": 15.33807614569008
+            },
+            "readability.avg_sentence_length": {
+              "n": 85,
+              "mean": 25.19941176470588
+            },
+            "readability.avg_word_length": {
+              "n": 85,
+              "mean": 5.005065198785668
+            },
+            "readability.technical_term_count": {
+              "n": 85,
+              "mean": 2.4235294117647057
+            },
+            "preservation.tfidf_cosine_similarity": {
+              "n": 85,
+              "mean": 0.9783541377975693
+            },
+            "preservation.embedding_similarity": {
+              "n": 85,
+              "mean": 0.9906693030806148
+            },
+            "preservation.nli_forward": {
+              "n": 85,
+              "mean": 0.8303247777416426
+            },
+            "preservation.nli_backward": {
+              "n": 85,
+              "mean": 0.8272275211179958
+            },
+            "preservation.nli_mean": {
+              "n": 85,
+              "mean": 0.8287761494298191
+            },
+            "preservation.numbers_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.dates_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.entities_preserved": {
+              "n": 85,
+              "mean": 0.9852941176470589
+            },
+            "preservation.negations_preserved": {
+              "n": 85,
+              "mean": 1.0
+            },
+            "preservation.tenses_preserved": {
+              "n": 85,
+              "mean": 1.0
+            }
+          },
+          "domains": {
+            "computer_science": {
+              "n": 30,
+              "changed": 30
+            },
+            "corporate_communication": {
+              "n": 30,
+              "changed": 29
+            },
+            "political_science": {
+              "n": 30,
+              "changed": 26
+            }
+          }
+        }
+      },
+      "phrase_model_present": true,
+      "phrase_inventory_input_counts": {
+        "in the event that": 0,
+        "despite the fact that": 0,
+        "at the present time": 0,
+        "with the exception of": 1,
+        "a large number of": 0,
+        "on a daily basis": 0,
+        "in close proximity to": 0,
+        "in order to": 2,
+        "prior to": 0,
+        "subsequent to": 0
+      },
+      "prediction_rows": 900,
+      "compound_incremental_changes": 0,
+      "job": "11580fd15da6"
+    }
+  },
+  "coverage_audit": {
+    "passages": 108,
+    "sentences": 215,
+    "sentences_with_coordinator": 131,
+    "survive_basic_filters": 9,
+    "changed_passages": 0,
+    "coordinator_sentence_flags": {
+      "has_coordinator": 131,
+      "has_negation_or_modal": 66,
+      "has_embedded_clause": 108,
+      "has_literal_or_quotes_or_parenthetical": 41,
+      "period_terminated": 126,
+      "over_120_tokens": 0
+    },
+    "positive_controls": [
+      {
+        "input": "The store closed early, and the workers went home.",
+        "output": "The store closed early. The workers went home.",
+        "edits": [
+          {
+            "connector": "and",
+            "copied_subject": "",
+            "before": "The store closed early, and the workers went home.",
+            "after": "The store closed early. The workers went home."
+          }
+        ],
+        "checks": {
+          "pass": true,
+          "checks": {
+            "numbers": true,
+            "negation": true,
+            "modality": true,
+            "entities": true,
+            "technical_phrases": true,
+            "content_retained": true,
+            "no_new_content": true,
+            "argument_roles": true,
+            "operator_scope": true,
+            "finite_predicates": true,
+            "logical_connectives": true,
+            "sentence_count": true,
+            "complete_clauses": true,
+            "discourse_markers": true,
+            "uncertainty_scope": true,
+            "code_literals": true
+          },
+          "failed": [],
+          "content_recall": 1.0,
+          "semantic_certified": false
+        }
+      },
+      {
+        "input": "The store closed early, but the workers stayed outside.",
+        "output": "The store closed early. But the workers stayed outside.",
+        "edits": [
+          {
+            "connector": "but",
+            "copied_subject": "",
+            "before": "The store closed early, but the workers stayed outside.",
+            "after": "The store closed early. But the workers stayed outside."
+          }
+        ],
+        "checks": {
+          "pass": true,
+          "checks": {
+            "numbers": true,
+            "negation": true,
+            "modality": true,
+            "entities": true,
+            "technical_phrases": true,
+            "content_retained": true,
+            "no_new_content": true,
+            "argument_roles": true,
+            "operator_scope": true,
+            "finite_predicates": true,
+            "logical_connectives": true,
+            "sentence_count": true,
+            "complete_clauses": true,
+            "discourse_markers": true,
+            "uncertainty_scope": true,
+            "code_literals": true
+          },
+          "failed": [],
+          "content_recall": 1.0,
+          "semantic_certified": false
+        }
+      },
+      {
+        "input": "The store closed early, so the workers went home.",
+        "output": "The store closed early. So the workers went home.",
+        "edits": [
+          {
+            "connector": "so",
+            "copied_subject": "",
+            "before": "The store closed early, so the workers went home.",
+            "after": "The store closed early. So the workers went home."
+          }
+        ],
+        "checks": {
+          "pass": true,
+          "checks": {
+            "numbers": true,
+            "negation": true,
+            "modality": true,
+            "entities": true,
+            "technical_phrases": true,
+            "content_retained": true,
+            "no_new_content": true,
+            "argument_roles": true,
+            "operator_scope": true,
+            "finite_predicates": true,
+            "logical_connectives": true,
+            "sentence_count": true,
+            "complete_clauses": true,
+            "discourse_markers": true,
+            "uncertainty_scope": true,
+            "code_literals": true
+          },
+          "failed": [],
+          "content_recall": 1.0,
+          "semantic_certified": false
+        }
+      }
+    ],
+    "limits": "Descriptive overlapping features; not human accuracy or a claim that each flag caused abstention."
+  },
+  "interpretation": "The compound splitter produces no incremental changes on these 108 passages. Existing lexical/phrase gains belong to the baseline pipeline. Automatic metrics do not estimate human correctness or semantic accuracy. Positive controls are mechanism checks, not held-out quality evidence."
+}

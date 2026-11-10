@@ -1,0 +1,212 @@
+{
+  "selected": "Random forest",
+  "criterion": "development MAE",
+  "comparisons": [
+    {
+      "name": "Mean",
+      "dev": {
+        "mae": 0.10489314402558146,
+        "rmse": 0.1375036097963178,
+        "pearson": null,
+        "spearman": null
+      },
+      "fit_seconds": 0.058,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "Frequency",
+      "dev": {
+        "mae": 0.08196495717847803,
+        "rmse": 0.10784113168305492,
+        "pearson": 0.6255864436128801,
+        "spearman": 0.6365927066361856
+      },
+      "fit_seconds": 0.011,
+      "warnings": [],
+      "features": [
+        "zipf"
+      ]
+    },
+    {
+      "name": "Ridge",
+      "dev": {
+        "mae": 0.07506304130375445,
+        "rmse": 0.09851946396788433,
+        "pearson": 0.703396002648912,
+        "spearman": 0.6811414280180164
+      },
+      "fit_seconds": 0.06,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "Elastic net",
+      "dev": {
+        "mae": 0.07503224833833337,
+        "rmse": 0.09852797162166363,
+        "pearson": 0.7035246301089508,
+        "spearman": 0.6816870998244162
+      },
+      "fit_seconds": 0.086,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "Random forest",
+      "dev": {
+        "mae": 0.06924182004155172,
+        "rmse": 0.09194170452105313,
+        "pearson": 0.7453250167953398,
+        "spearman": 0.7184212415391915
+      },
+      "fit_seconds": 1.065,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "Gradient boosting",
+      "dev": {
+        "mae": 0.06940817716825301,
+        "rmse": 0.0925632220713566,
+        "pearson": 0.7411673383639357,
+        "spearman": 0.7125398302390641
+      },
+      "fit_seconds": 0.371,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "SVR",
+      "dev": {
+        "mae": 0.0724542489618768,
+        "rmse": 0.09710636174012073,
+        "pearson": 0.7089071102964135,
+        "spearman": 0.7062732986309087
+      },
+      "fit_seconds": 2.715,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "kNN",
+      "dev": {
+        "mae": 0.0732041180017452,
+        "rmse": 0.0995177639741786,
+        "pearson": 0.6973328430944563,
+        "spearman": 0.6946977206529265
+      },
+      "fit_seconds": 0.068,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    },
+    {
+      "name": "Small MLP",
+      "dev": {
+        "mae": 0.07380385586278862,
+        "rmse": 0.09932886401313135,
+        "pearson": 0.6921046648317315,
+        "spearman": 0.6927664735904762
+      },
+      "fit_seconds": 1.709,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated",
+        "pos",
+        "dependency",
+        "lemma_zipf",
+        "local_zipf",
+        "sentence_length",
+        "is_entity"
+      ]
+    }
+  ]
+}

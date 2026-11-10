@@ -1,0 +1,164 @@
+{
+  "selected": "Gradient boosting",
+  "criterion": "development MAE",
+  "comparisons": [
+    {
+      "name": "Mean",
+      "dev": {
+        "mae": 0.10489314402558146,
+        "rmse": 0.1375036097963178,
+        "pearson": null,
+        "spearman": null
+      },
+      "fit_seconds": 0.058,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "Frequency",
+      "dev": {
+        "mae": 0.08196495717847803,
+        "rmse": 0.10784113168305492,
+        "pearson": 0.6255864436128801,
+        "spearman": 0.6365927066361856
+      },
+      "fit_seconds": 0.029,
+      "warnings": [],
+      "features": [
+        "zipf"
+      ]
+    },
+    {
+      "name": "Ridge",
+      "dev": {
+        "mae": 0.07732991812325127,
+        "rmse": 0.10236874839337695,
+        "pearson": 0.6737160391322206,
+        "spearman": 0.6450008086271595
+      },
+      "fit_seconds": 0.066,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "Elastic net",
+      "dev": {
+        "mae": 0.07736696797172926,
+        "rmse": 0.10240905055472961,
+        "pearson": 0.6735555038144385,
+        "spearman": 0.6456376312879097
+      },
+      "fit_seconds": 0.052,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "Random forest",
+      "dev": {
+        "mae": 0.0734113984340743,
+        "rmse": 0.097756223719159,
+        "pearson": 0.7034841378683286,
+        "spearman": 0.6634418801446045
+      },
+      "fit_seconds": 0.433,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "Gradient boosting",
+      "dev": {
+        "mae": 0.07248574806168076,
+        "rmse": 0.09638175738613196,
+        "pearson": 0.7141805844578095,
+        "spearman": 0.6767642357143321
+      },
+      "fit_seconds": 0.344,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "SVR",
+      "dev": {
+        "mae": 0.07251823468754419,
+        "rmse": 0.09629893121238679,
+        "pearson": 0.7156914228925229,
+        "spearman": 0.6749659813142866
+      },
+      "fit_seconds": 1.985,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "kNN",
+      "dev": {
+        "mae": 0.08081867384711094,
+        "rmse": 0.10471642259951047,
+        "pearson": 0.6617923118087609,
+        "spearman": 0.632268356418248
+      },
+      "fit_seconds": 0.059,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    },
+    {
+      "name": "Small MLP",
+      "dev": {
+        "mae": 0.07304865345096104,
+        "rmse": 0.09711608053332459,
+        "pearson": 0.7129605408468214,
+        "spearman": 0.6772711554726524
+      },
+      "fit_seconds": 0.631,
+      "warnings": [],
+      "features": [
+        "zipf",
+        "length",
+        "syllables",
+        "frequency_missing",
+        "syllables_estimated"
+      ]
+    }
+  ]
+}

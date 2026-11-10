@@ -1,0 +1,254 @@
+{
+  "/home/joshuadirga/.cache/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/vocab.txt": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/.cache/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer_config.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/.cache/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/.cache/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/model.safetensors": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/.cache/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594/config.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/nltk_data/corpora/wordnet.zip": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/nltk_data/corpora/cmudict.zip": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/meta.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/__init__.py": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/accuracy.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/LICENSES_SOURCES": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/meta.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/README.md": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/tokenizer": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/config.cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/LICENSE": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/attribute_ruler/patterns": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/parser/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/parser/moves": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/parser/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/vocab/vectors.cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/vocab/strings.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/vocab/vectors": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/vocab/lookups.bin": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/vocab/key2row": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/senter/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/senter/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/ner/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/ner/moves": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/ner/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/tagger/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/tagger/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/tok2vec/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/tok2vec/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/lemmatizer/lookups/lookups.bin": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/meta.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/__init__.py": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/accuracy.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/LICENSES_SOURCES": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/meta.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/README.md": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/tokenizer": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/config.cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/LICENSE": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/attribute_ruler/patterns": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/parser/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/parser/moves": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/parser/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/vocab/vectors.cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/vocab/strings.json": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/vocab/vectors": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/vocab/lookups.bin": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/vocab/key2row": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/senter/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/senter/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/ner/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/ner/moves": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/ner/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/tagger/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/tagger/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/tok2vec/model": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/tok2vec/cfg": {
+    "exists": true,
+    "match": true
+  },
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/lemmatizer/lookups/lookups.bin": {
+    "exists": true,
+    "match": true
+  }
+}

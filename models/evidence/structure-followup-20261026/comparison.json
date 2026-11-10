@@ -1,0 +1,400 @@
+{
+  "metrics": {
+    "dev": {
+      "identity": {
+        "n": 128,
+        "sari": 30.50649800934784,
+        "changed": 0,
+        "change_rate": 0.0,
+        "split_rate": 0.015625,
+        "max_sentence_words": 27.453125,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.90625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 12
+        },
+        "semantic_certified": false
+      },
+      "existing_rules": {
+        "n": 128,
+        "sari": 32.03170296163998,
+        "changed": 4,
+        "change_rate": 0.03125,
+        "split_rate": 0.046875,
+        "max_sentence_words": 27.15625,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.90625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 12
+        },
+        "semantic_certified": false
+      },
+      "ranker_raw": {
+        "n": 128,
+        "sari": 52.33249741703585,
+        "changed": 117,
+        "change_rate": 0.9140625,
+        "split_rate": 0.9296875,
+        "max_sentence_words": 16.96875,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.328125,
+        "content_recall": 0.998415069152661,
+        "check_failures": {
+          "complete_clauses": 75,
+          "argument_roles": 29,
+          "numbers": 1,
+          "logical_connectives": 6,
+          "content_retained": 4,
+          "no_new_content": 1
+        },
+        "semantic_certified": false
+      },
+      "ranker": {
+        "n": 128,
+        "sari": 40.45710672784287,
+        "changed": 50,
+        "change_rate": 0.390625,
+        "split_rate": 0.390625,
+        "max_sentence_words": 23.4453125,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9140625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 11
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.04031283291988075,
+        "latency_p95_seconds": 0.3450376210152159,
+        "sari_delta_vs_identity": {
+          "mean_delta": 9.950608718495024,
+          "ci95": [
+            7.024124207523233,
+            13.203333324608844
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 8.42540376620288,
+          "ci95": [
+            5.815492575178148,
+            11.383391180341963
+          ],
+          "resamples": 1000
+        }
+      },
+      "editor_raw": {
+        "n": 128,
+        "sari": 43.55335715002522,
+        "changed": 55,
+        "change_rate": 0.4296875,
+        "split_rate": 0.4296875,
+        "max_sentence_words": 22.90625,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.671875,
+        "content_recall": 0.9991536458333333,
+        "check_failures": {
+          "argument_roles": 16,
+          "complete_clauses": 27,
+          "logical_connectives": 7,
+          "entities": 2,
+          "content_retained": 2,
+          "no_new_content": 1
+        },
+        "semantic_certified": false
+      },
+      "editor": {
+        "n": 128,
+        "sari": 36.34812591268031,
+        "changed": 21,
+        "change_rate": 0.1640625,
+        "split_rate": 0.1640625,
+        "max_sentence_words": 25.8046875,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.9140625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 11
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.005207521608099341,
+        "latency_p95_seconds": 0.04454869965556997,
+        "sari_delta_vs_identity": {
+          "mean_delta": 5.8416279033324665,
+          "ci95": [
+            3.4752771958609197,
+            8.533582475783424
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 4.316422951040323,
+          "ci95": [
+            2.354728397566263,
+            6.6715331030020275
+          ],
+          "resamples": 1000
+        }
+      },
+      "seq2seq_raw": {
+        "n": 128,
+        "sari": 57.33777041960787,
+        "changed": 107,
+        "change_rate": 0.8359375,
+        "split_rate": 0.8359375,
+        "max_sentence_words": 17.75,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.484375,
+        "content_recall": 0.9892219080490052,
+        "check_failures": {
+          "logical_connectives": 7,
+          "argument_roles": 29,
+          "complete_clauses": 29,
+          "entities": 9,
+          "content_retained": 13,
+          "no_new_content": 9,
+          "numbers": 1
+        },
+        "semantic_certified": false
+      },
+      "seq2seq": {
+        "n": 128,
+        "sari": 44.77004744409942,
+        "changed": 48,
+        "change_rate": 0.375,
+        "split_rate": 0.390625,
+        "max_sentence_words": 23.3203125,
+        "source_words": 27.6015625,
+        "check_pass_rate": 0.90625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 12
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.748195979045704,
+        "latency_p95_seconds": 25.560446212626864,
+        "sari_delta_vs_identity": {
+          "mean_delta": 14.263549434751582,
+          "ci95": [
+            10.77404556393742,
+            18.217073260732906
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 12.738344482459437,
+          "ci95": [
+            9.400231686630956,
+            16.63076224606084
+          ],
+          "resamples": 1000
+        }
+      }
+    },
+    "test": {
+      "identity": {
+        "n": 256,
+        "sari": 30.410439085146045,
+        "changed": 0,
+        "change_rate": 0.0,
+        "split_rate": 0.03515625,
+        "max_sentence_words": 27.77734375,
+        "source_words": 28.25,
+        "check_pass_rate": 0.9140625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 22
+        },
+        "semantic_certified": false
+      },
+      "existing_rules": {
+        "n": 256,
+        "sari": 31.61369114383411,
+        "changed": 8,
+        "change_rate": 0.03125,
+        "split_rate": 0.0625,
+        "max_sentence_words": 27.47265625,
+        "source_words": 28.25,
+        "check_pass_rate": 0.91015625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 22,
+          "argument_roles": 1
+        },
+        "semantic_certified": false
+      },
+      "ranker_raw": {
+        "n": 256,
+        "sari": 51.754334978370125,
+        "changed": 234,
+        "change_rate": 0.9140625,
+        "split_rate": 0.9375,
+        "max_sentence_words": 17.66015625,
+        "source_words": 28.25,
+        "check_pass_rate": 0.39453125,
+        "content_recall": 0.9972414874577549,
+        "check_failures": {
+          "argument_roles": 51,
+          "logical_connectives": 18,
+          "complete_clauses": 119,
+          "operator_scope": 1,
+          "content_retained": 11,
+          "numbers": 5,
+          "no_new_content": 5,
+          "entities": 6
+        },
+        "semantic_certified": false
+      },
+      "ranker": {
+        "n": 256,
+        "sari": 42.108080937437975,
+        "changed": 104,
+        "change_rate": 0.40625,
+        "split_rate": 0.43359375,
+        "max_sentence_words": 23.2421875,
+        "source_words": 28.25,
+        "check_pass_rate": 0.91796875,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 21
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.04007543751504272,
+        "latency_p95_seconds": 0.3988145313342102,
+        "sari_delta_vs_identity": {
+          "mean_delta": 11.697641852291936,
+          "ci95": [
+            9.22411726931371,
+            14.134195765074788
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 10.494389793603872,
+          "ci95": [
+            8.267100278758315,
+            12.831808595815737
+          ],
+          "resamples": 1000
+        }
+      },
+      "editor_raw": {
+        "n": 256,
+        "sari": 44.507148952091725,
+        "changed": 113,
+        "change_rate": 0.44140625,
+        "split_rate": 0.453125,
+        "max_sentence_words": 23.19921875,
+        "source_words": 28.25,
+        "check_pass_rate": 0.68359375,
+        "content_recall": 0.9987232206576636,
+        "check_failures": {
+          "argument_roles": 27,
+          "complete_clauses": 55,
+          "logical_connectives": 14,
+          "content_retained": 6,
+          "entities": 2,
+          "no_new_content": 1
+        },
+        "semantic_certified": false
+      },
+      "editor": {
+        "n": 256,
+        "sari": 37.91092952848281,
+        "changed": 47,
+        "change_rate": 0.18359375,
+        "split_rate": 0.20703125,
+        "max_sentence_words": 25.91796875,
+        "source_words": 28.25,
+        "check_pass_rate": 0.9140625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 22
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.005542937433347106,
+        "latency_p95_seconds": 0.025768009771127254,
+        "sari_delta_vs_identity": {
+          "mean_delta": 7.500490443336773,
+          "ci95": [
+            5.534601112004734,
+            9.708050323381135
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 6.297238384648709,
+          "ci95": [
+            4.256776859136997,
+            8.555315136994537
+          ],
+          "resamples": 1000
+        }
+      },
+      "seq2seq_raw": {
+        "n": 256,
+        "sari": 59.74827708045269,
+        "changed": 224,
+        "change_rate": 0.875,
+        "split_rate": 0.8828125,
+        "max_sentence_words": 17.8828125,
+        "source_words": 28.25,
+        "check_pass_rate": 0.49609375,
+        "content_recall": 0.9913615782384265,
+        "check_failures": {
+          "argument_roles": 76,
+          "logical_connectives": 19,
+          "complete_clauses": 52,
+          "content_retained": 20,
+          "entities": 6,
+          "no_new_content": 8,
+          "numbers": 1
+        },
+        "semantic_certified": false
+      },
+      "seq2seq": {
+        "n": 256,
+        "sari": 45.52531001638107,
+        "changed": 102,
+        "change_rate": 0.3984375,
+        "split_rate": 0.43359375,
+        "max_sentence_words": 23.328125,
+        "source_words": 28.25,
+        "check_pass_rate": 0.9140625,
+        "content_recall": 1.0,
+        "check_failures": {
+          "complete_clauses": 22
+        },
+        "semantic_certified": false,
+        "latency_median_seconds": 0.7167983334511518,
+        "latency_p95_seconds": 102.71333348908229,
+        "sari_delta_vs_identity": {
+          "mean_delta": 15.114870931235028,
+          "ci95": [
+            12.48334034709353,
+            17.711733971888837
+          ],
+          "resamples": 1000
+        },
+        "sari_delta_vs_existing_rules": {
+          "mean_delta": 13.911618872546963,
+          "ci95": [
+            11.437758069561847,
+            16.478400189299062
+          ],
+          "resamples": 1000
+        }
+      }
+    }
+  },
+  "host": "dhcp-vl2041-56205.eduroam.cornell.edu",
+  "python": "3.12.13",
+  "limitations": [
+    "Bounded general-domain WikiSplit pilot, not technical-domain validation",
+    "Single-reference overlap scores do not establish meaning or fluency",
+    "Checks are parser-dependent and conservative; raw and filtered outputs both reported",
+    "No model automatically adopted into the v7 demo",
+    "Pretraining contamination not ruled out"
+  ]
+}

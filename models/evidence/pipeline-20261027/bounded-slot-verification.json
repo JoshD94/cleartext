@@ -1,0 +1,27 @@
+{
+  "helper_sha256": "0e21245bd1280ad9c95390a828bad3a3f44473e012af799039114623dd79bafd",
+  "comparisons": [
+    {
+      "characters": 27,
+      "candidates": 3,
+      "maximum_log_probability_error": 0.0,
+      "legacy_seconds_including_initial_load": 3.6692283330485225,
+      "bounded_seconds": 0.030869125155732036
+    },
+    {
+      "characters": 4006,
+      "candidates": 1,
+      "maximum_log_probability_error": 4.76837158203125e-06,
+      "legacy_seconds_including_initial_load": 0.09152891696430743,
+      "bounded_seconds": 0.07190824998542666
+    },
+    {
+      "characters": 23,
+      "candidates": 2,
+      "maximum_log_probability_error": 0.0,
+      "legacy_seconds_including_initial_load": 0.023230375023558736,
+      "bounded_seconds": 0.01918854098767042
+    }
+  ],
+  "scope": "Real BERT numerical equivalence on fixed short, long-window and literal-pad examples; not model accuracy."
+}

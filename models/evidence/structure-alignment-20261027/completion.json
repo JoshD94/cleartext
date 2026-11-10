@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-27T15:26:15.396367-04:00",
+  "training_completed": true,
+  "selected_step": 906,
+  "selected_sha256": "667acaaef2867a6e7141ac6b99a20e9d82df276e7d95bd95af01633a4fd7fcff",
+  "reserved_comparisons_completed": 1,
+  "test_n": 96,
+  "returned_outputs_differing": 3,
+  "normalized_outputs_differing": 3,
+  "test_outputs_sha256": "a512eff60b200ddeedb8db11cf707633778e4e95e07aa0e21917bcb7f42a22fe",
+  "decision": "Keep the selected continued checkpoint as an experimental artifact. Preserve v7 demo defaults.",
+  "reason": "Small reference-overlap and splitting gains; bootstrap interval touches zero, no independent grammaticality or meaning ratings.",
+  "domain_test_used": false,
+  "post_test_model_or_threshold_changes": false,
+  "future_exclude_files": [
+    "/home/joshuadirga/.local/state/cleartext/structure-alignment-20261027/run-v2/data.json",
+    "/home/joshuadirga/.local/state/cleartext/structure-alignment-20261027/run-v2/reserved_test.json"
+  ]
+}

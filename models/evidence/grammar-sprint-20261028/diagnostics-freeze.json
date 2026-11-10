@@ -1,0 +1,27 @@
+{
+  "policy": "local-grammar-v3",
+  "saved_diagnostics_sha256": "da0c895966851ce20f504c94f47e05d26e737eaeb12aa69fc563b803d3ddea95",
+  "corrector_source_sha256": "d7391623d7b6216583c03b142e8ae96584e3091a9701cca85eb1274608ecb305",
+  "experiment_source_sha256": "f29e22c6a37f40ad4ef4e646a08d0d432dbfc7f479610a192c4a0db12e6ac0dc",
+  "input_ids": [
+    "authored-0",
+    "authored-1",
+    "authored-2",
+    "authored-3",
+    "authored-4",
+    "authored-5",
+    "authored-6",
+    "authored-7",
+    "authored-8",
+    "authored-9",
+    "authored-10",
+    "authored-11",
+    "authored-12",
+    "authored-13",
+    "authored-14",
+    "authored-15",
+    "authored-16"
+  ],
+  "n": 17,
+  "scope": "All 17 original authored diagnostics, separate from the unchanged 96-input panel. Original expected strings and report-only cases retained. Mechanism checks, no semantic accuracy labels."
+}

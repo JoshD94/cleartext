@@ -1,0 +1,20 @@
+{
+  "name": "ensemble-study-20261109-winner",
+  "status": "opt-in; demo, runner and EnsembleClearText defaults are unchanged",
+  "selected_by": "SELECTION_RULE.md (frozen 8d10cb3) on the 90 sourced development passages",
+  "factors": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off"
+  },
+  "pipeline_run": "models/runs/ensemble-v7-20260928",
+  "structure_checkpoint": {
+    "path": "~/.local/state/cleartext/structure-quality-v2-20261027/run/seq2seq",
+    "model_sha256": "3de186eee031e8812b019a9040775884798d01baabb072728bd03ac89f1503ac",
+    "note": "Screened step-441 T5 checkpoint, local artifact outside Git, applied sentence by sentence with its generation checks"
+  },
+  "guardrails": true
+}

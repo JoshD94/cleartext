@@ -1,0 +1,1132 @@
+{
+  "scope": "Historical run settings and aggregate results, captured 2026-10-19. Per-example material is excluded. No experiment was rerun.",
+  "files": [
+    {
+      "source": "runs/context-20260924/metrics.json",
+      "source_sha256": "0444c6dae4594c5b2ef14ee0118dbc64711c76d654a3c565bc934877f9d3cb25",
+      "copy": "runs/context-20260924/metrics.json",
+      "copy_sha256": "37bd940b280e619e1da6827665c003831b9adb71cfd51a7fa3d5e6ab35430ae3",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/context-20260924/phrase_metrics.json",
+      "source_sha256": "f97ffdeaae27896a6867c4a3a7b9cd9a8c3f543854e38b65091a2f573530a7bb",
+      "copy": "runs/context-20260924/phrase_metrics.json",
+      "copy_sha256": "cdda9abe1d3d47aa19a08a307d5ca347cd84cb256beba23aac7bd400343fda2a",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/context-20260924/phrase_selection.json",
+      "source_sha256": "388ac3f232036169bf0e5117a8020a79b8ce1d0f9e88bfbd32ea6a05d0e77cf9",
+      "copy": "runs/context-20260924/phrase_selection.json",
+      "copy_sha256": "19bd7f529dd4831f963634eb0b90d98e2338153e1dfd5c0f8111d4f2f5839d65",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/context-20260924/selection.json",
+      "source_sha256": "ce6b814c3aa4cd2f0b5a4616f7fbd9639ac2c2163218aebf848fe84767457018",
+      "copy": "runs/context-20260924/selection.json",
+      "copy_sha256": "1e94a1bc90244b45a1457276373231ade57641549a7856c73a4fe47339564cb3",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-20260927/config.json",
+      "source_sha256": "9c1b9f15276ece78553a6f2e4639a1ee2d2d07405e25a604ecf3a50a293a5b11",
+      "copy": "runs/ensemble-20260927/config.json",
+      "copy_sha256": "b42923c5b77dd6fe398ed831c29ecb20e05e87cf1dfbe38da4a41b7765577f2b",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-20260927/evaluation.json",
+      "source_sha256": "fc0bd8ce93013d0ea4358a6b029259bde21a0732c4dac4fecc06ca1e0b408795",
+      "copy": "runs/ensemble-20260927/evaluation.json",
+      "copy_sha256": "213492997f14fd0e9c824fcae9f328cea370fb6c28e594cffc569da7aa4d12f7",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-20260927/fit_selection.json",
+      "source_sha256": "c74f7f0e9b4ae2d46319aebffd7ab504c5264bec80f91a7f7d50c5307c643663",
+      "copy": "runs/ensemble-20260927/fit_selection.json",
+      "copy_sha256": "a222611a2356ca1ff32ac415eb85d1d6340630fb90ce5a18c2e4fdf1820cb3b5",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-20260927/sense_metrics.json",
+      "source_sha256": "dc94848b00d21ac985511c032ee20dbb8a85f02d614218bfda5a0eac35387431",
+      "copy": "runs/ensemble-20260927/sense_metrics.json",
+      "copy_sha256": "ccab05ac9d6fa529314913cc307138aeccf8967ffcb3878dc43abad25bebc22f",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-20260927/sense_selection.json",
+      "source_sha256": "bde3401633db604cf7a6d6a5e6349a2f888455ee3d337489a5f6510b0e439e26",
+      "copy": "runs/ensemble-20260927/sense_selection.json",
+      "copy_sha256": "d59e0c1ee03b7075ca43275d37e6d532626173c8a5f90fedaf54caec9ad276d0",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-building-blocks-20261002/config.json",
+      "source_sha256": "68788392c5beea0d15e24034c74f0165139c7015c2f3797a1777c16629dfecba",
+      "copy": "runs/ensemble-building-blocks-20261002/config.json",
+      "copy_sha256": "68788392c5beea0d15e24034c74f0165139c7015c2f3797a1777c16629dfecba",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-complete-slot-20261002/config.json",
+      "source_sha256": "133e2cf8990aeabbf0fe299533ea841c42322e0fb60b5d53de1dcb6364915a2a",
+      "copy": "runs/ensemble-complete-slot-20261002/config.json",
+      "copy_sha256": "133e2cf8990aeabbf0fe299533ea841c42322e0fb60b5d53de1dcb6364915a2a",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-complete-slot-20261002/development.json",
+      "source_sha256": "cef38c22ccf36cdaba02e6fab53d096c5e6592d739b771be8b6c6dff2d50056d",
+      "copy": "runs/ensemble-complete-slot-20261002/development.json",
+      "copy_sha256": "cef38c22ccf36cdaba02e6fab53d096c5e6592d739b771be8b6c6dff2d50056d",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-complete-slot-20261002/validation.json",
+      "source_sha256": "88c7f2efef685d7a576d3bb2fb06f715000e74a737e1915724e96cef7ba7fd4e",
+      "copy": "runs/ensemble-complete-slot-20261002/validation.json",
+      "copy_sha256": "3d3ae9da40f6a39afe72519b3159610db1db09e1f0596fbde09685171e1fbaaf",
+      "removed_fields": [
+        "/text",
+        "/words",
+        "/legacy_scores",
+        "/untruncated_reference_scores",
+        "/complete_scores",
+        "/affected_rows/0/target"
+      ]
+    },
+    {
+      "source": "runs/ensemble-context-similarity-20261002/config.json",
+      "source_sha256": "a5d0f72a4a6e8b7e2c38b30d1445c54c851d9488e74c8e4cdac84ebf11f74cb1",
+      "copy": "runs/ensemble-context-similarity-20261002/config.json",
+      "copy_sha256": "a5d0f72a4a6e8b7e2c38b30d1445c54c851d9488e74c8e4cdac84ebf11f74cb1",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-context-similarity-20261002/development.json",
+      "source_sha256": "01f83a97c57ea825e5f7dc02303eb379910438f98a974c8bcbee7856d88a3ef6",
+      "copy": "runs/ensemble-context-similarity-20261002/development.json",
+      "copy_sha256": "01f83a97c57ea825e5f7dc02303eb379910438f98a974c8bcbee7856d88a3ef6",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-noun-heads-20261002/config.json",
+      "source_sha256": "fa98fba8654d4c01316ec11bbc578f4fde2d2d728b6082c555aab30113c108f0",
+      "copy": "runs/ensemble-noun-heads-20261002/config.json",
+      "copy_sha256": "fa98fba8654d4c01316ec11bbc578f4fde2d2d728b6082c555aab30113c108f0",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-noun-heads-20261002/development.json",
+      "source_sha256": "89451bd4ba20723735b5603009e25de4010ae854a19cef92ff031dc2bd7dc577",
+      "copy": "runs/ensemble-noun-heads-20261002/development.json",
+      "copy_sha256": "89451bd4ba20723735b5603009e25de4010ae854a19cef92ff031dc2bd7dc577",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-noun-heads-frozen-20261002/config.json",
+      "source_sha256": "9823d2454979dc00425d7eb63d9b9a95b3630db7012e183fb6619aad976a831f",
+      "copy": "runs/ensemble-noun-heads-frozen-20261002/config.json",
+      "copy_sha256": "9823d2454979dc00425d7eb63d9b9a95b3630db7012e183fb6619aad976a831f",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-noun-heads-frozen-20261002/development.json",
+      "source_sha256": "861728e192ffe5484c7623faeb3989d4e8b6b39204aeb7f9effd74648a084dd3",
+      "copy": "runs/ensemble-noun-heads-frozen-20261002/development.json",
+      "copy_sha256": "861728e192ffe5484c7623faeb3989d4e8b6b39204aeb7f9effd74648a084dd3",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-noun-heads-review-20261002/config.json",
+      "source_sha256": "524f4333218f7247fde83e0326c12090bbb731f91e1f4b7639daad9355f63cb8",
+      "copy": "runs/ensemble-noun-heads-review-20261002/config.json",
+      "copy_sha256": "524f4333218f7247fde83e0326c12090bbb731f91e1f4b7639daad9355f63cb8",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-noun-heads-review-20261002/development.json",
+      "source_sha256": "a6346ab292d6a048c4f295333abe6144f28930c249cbc5497cada3d2625e9825",
+      "copy": "runs/ensemble-noun-heads-review-20261002/development.json",
+      "copy_sha256": "a6346ab292d6a048c4f295333abe6144f28930c249cbc5497cada3d2625e9825",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-prompted-relations-20261002/config.json",
+      "source_sha256": "ced20c750adeb42ca3fb9d45f3d8ecfcb6acf93d63fb9b42561e394741d022e3",
+      "copy": "runs/ensemble-prompted-relations-20261002/config.json",
+      "copy_sha256": "ced20c750adeb42ca3fb9d45f3d8ecfcb6acf93d63fb9b42561e394741d022e3",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-prompted-relations-20261002/development.json",
+      "source_sha256": "ee7381048b1f0b212fc69f716551beea7268913ec5180fe2eeb14f9592f39845",
+      "copy": "runs/ensemble-prompted-relations-20261002/development.json",
+      "copy_sha256": "ee7381048b1f0b212fc69f716551beea7268913ec5180fe2eeb14f9592f39845",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-relations-20261002/config.json",
+      "source_sha256": "6e52f74dacc9a3741e3ed74c4e1a15432df4ac3755f690e1d4e9d8fc49a805b0",
+      "copy": "runs/ensemble-relations-20261002/config.json",
+      "copy_sha256": "6e52f74dacc9a3741e3ed74c4e1a15432df4ac3755f690e1d4e9d8fc49a805b0",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-relations-20261002/development.json",
+      "source_sha256": "baa51c4342dc69688d9c022c469fce9900f029dd9cf9c2c2baf5cc74b2ec4b77",
+      "copy": "runs/ensemble-relations-20261002/development.json",
+      "copy_sha256": "baa51c4342dc69688d9c022c469fce9900f029dd9cf9c2c2baf5cc74b2ec4b77",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-relations-windowed-20261002/config.json",
+      "source_sha256": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+      "copy": "runs/ensemble-relations-windowed-20261002/config.json",
+      "copy_sha256": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-relations-windowed-20261002/window-validation.json",
+      "source_sha256": "fd23fdbb6ef7b278a91e8c1b11ed4279f0f8e9287c0d2b55992695d91aa7ff90",
+      "copy": "runs/ensemble-relations-windowed-20261002/window-validation.json",
+      "copy_sha256": "fd23fdbb6ef7b278a91e8c1b11ed4279f0f8e9287c0d2b55992695d91aa7ff90",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-technical-terms-20261002/config.json",
+      "source_sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "copy": "runs/ensemble-technical-terms-20261002/config.json",
+      "copy_sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-technical-terms-20261002/development.json",
+      "source_sha256": "b3d87069b9eadcc18080b585035f101b7f06305437e0de8c4342ebb0d5e2deb4",
+      "copy": "runs/ensemble-technical-terms-20261002/development.json",
+      "copy_sha256": "b3d87069b9eadcc18080b585035f101b7f06305437e0de8c4342ebb0d5e2deb4",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-technical-terms-final-20261002/config.json",
+      "source_sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "copy": "runs/ensemble-technical-terms-final-20261002/config.json",
+      "copy_sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-technical-terms-final-20261002/development.json",
+      "source_sha256": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+      "copy": "runs/ensemble-technical-terms-final-20261002/development.json",
+      "copy_sha256": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-term-replay-20261002/config.json",
+      "source_sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "copy": "runs/ensemble-term-replay-20261002/config.json",
+      "copy_sha256": "647d469b840207cbe632e31f0f2cdbc64be93d633071524acc3d831ffc9e0667",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-term-replay-20261002/development.json",
+      "source_sha256": "780964a1210cf752f471e8304658cce2ccf7c53eeaa1b219b939156f8ff1f47b",
+      "copy": "runs/ensemble-term-replay-20261002/development.json",
+      "copy_sha256": "780964a1210cf752f471e8304658cce2ccf7c53eeaa1b219b939156f8ff1f47b",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/config.json",
+      "source_sha256": "f2747b885ccc234d7b12a7efd529b2e0588365a94f9fb74098ff8507f0949abe",
+      "copy": "runs/ensemble-v2-20260927/config.json",
+      "copy_sha256": "2a09c8134158841a1ae076b3e9983ac1d28b736cc3b5cad95b61e7812730516f",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/evaluation.json",
+      "source_sha256": "745a0476e9077f59a700d2b8590ceb1bc6ee6c75eb54328575f0480375fdd22c",
+      "copy": "runs/ensemble-v2-20260927/evaluation.json",
+      "copy_sha256": "93baf50dd2bec4940b23fff1e21a21e228e116ce67d3d6297ceb397890f3c0eb",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/fit_selection.json",
+      "source_sha256": "f4092b4aef7939ae1ae488fbf62b9d3b2e2298fe77ebac78fcd3fae0ae3c270c",
+      "copy": "runs/ensemble-v2-20260927/fit_selection.json",
+      "copy_sha256": "73bcea389e31add49931a95135f756d7e4f119066ea732d30ec909a197d7a21a",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/refine_round1.json",
+      "source_sha256": "021cd2fc3024c3c9f4b34c631119e193d43188f3b302ba66b044e78fdcb41cd7",
+      "copy": "runs/ensemble-v2-20260927/refine_round1.json",
+      "copy_sha256": "80d299b5468ca9a9ce529fc9730578b91a4c295e520a8d0736d6a8db8d4cae36",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/refine_round2.json",
+      "source_sha256": "51bccbb446865034d992cff6895ddecf59b45924a4d89d45a305290207fd8494",
+      "copy": "runs/ensemble-v2-20260927/refine_round2.json",
+      "copy_sha256": "5513b848e50e13fc46a11dc2180c6fa67d67212a17d79b1559ab41ac6a79271d",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/refine_round3.json",
+      "source_sha256": "45892ea1b32927435c848e744ca89e3da05b2897c4438f7a0c1ca168dbd96f88",
+      "copy": "runs/ensemble-v2-20260927/refine_round3.json",
+      "copy_sha256": "6fcd938121872dacb96e656eb14afe761de43e8f3471359a9c2a19a024628d04",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v2-20260927/refine_round4.json",
+      "source_sha256": "8665f3291fd474ddaba640a76eff66fab1635c76be114743bbc0407bd38f691d",
+      "copy": "runs/ensemble-v2-20260927/refine_round4.json",
+      "copy_sha256": "df84e368508ccf77740305ca0ea4ab8d5b8d654fe205dcee12c178eb3b64a05b",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/config.json",
+      "source_sha256": "35771a177700fa6da31eeaaa6531ed07f8a267dab59d4cf43ccb387e8f5d808b",
+      "copy": "runs/ensemble-v3-20260927/config.json",
+      "copy_sha256": "6662da8e0e7ec89d8a71febdc56ea3286e6a0e2726732b56a019bd2c064f1dbb",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/evaluation.json",
+      "source_sha256": "ab5c81f6bb8fc0488e66421791ffe78bdf7e23013b8bd24925279c1090e8bbdc",
+      "copy": "runs/ensemble-v3-20260927/evaluation.json",
+      "copy_sha256": "01694f4de5202c0573d59c12d7c791c483d421e269bbd2782fe31222db1775e1",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/refine_detection.json",
+      "source_sha256": "3f14c24f5b6af9730ba2a61209e3f4f095f3fc2fe038fffc03c0a3be8efb81bc",
+      "copy": "runs/ensemble-v3-20260927/refine_detection.json",
+      "copy_sha256": "3e1b0023dfb99594d72ab862c8f088a2d94d996e97b6c30548707cebc51f188a",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/refine_round5.json",
+      "source_sha256": "2e822a31eec6149e6f5bd18b472e8d389fb4d96fcef3fc1926acb8fc2812d903",
+      "copy": "runs/ensemble-v3-20260927/refine_round5.json",
+      "copy_sha256": "1b1db13e9ad9fbb176216f0f56defad25cc74ec60b2a99eecb62810aef9fb154",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/refine_round6.json",
+      "source_sha256": "de05337e7bf550916874b4e33931be5c9d382199e758c009d90c06c167c8e348",
+      "copy": "runs/ensemble-v3-20260927/refine_round6.json",
+      "copy_sha256": "61556fcbe41ffc6c5a2a077a13f568a338019ccdc955b78ea04d34c3d4d25f30",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/refine_round7.json",
+      "source_sha256": "f6701fb3c6de15b74fa2ad22f5998e3b223d8fc76135e277da38b63449549e6c",
+      "copy": "runs/ensemble-v3-20260927/refine_round7.json",
+      "copy_sha256": "30e867398df17d2f5d28113bdd2ac14ed1ffd764aa97c79d15958ac90ef91b03",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v3-20260927/refine_target_choice.json",
+      "source_sha256": "abcec1317f0fbced3681818ca868e7600fdb2436aac4ecd1f9b7ad32433fc5ca",
+      "copy": "runs/ensemble-v3-20260927/refine_target_choice.json",
+      "copy_sha256": "06edd54ef8130fab93a3efc941a3c375274775d28d10939aebc835ac5c6889cc",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v4-20260927/config.json",
+      "source_sha256": "abb0c4aeb2a26da7674268c70ae70030182fc0a1674de2409e9bb420603d9ef2",
+      "copy": "runs/ensemble-v4-20260927/config.json",
+      "copy_sha256": "cd279242202375615f964f165ba38b6bfc251fd4a14f12a7bc58bcb3ea0eac07",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v4-20260927/evaluation.json",
+      "source_sha256": "eb27c5ba4ebb7d2c8d915c252446855caeac7e0c536822ba08fabc9e7f273652",
+      "copy": "runs/ensemble-v4-20260927/evaluation.json",
+      "copy_sha256": "4cb97e9e2e9b653d23e32e5e3a18142ded0ba8da493e8b8bb4f237049a123e16",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-v4-20260927/refine_round8.json",
+      "source_sha256": "3db344b758bddac5e4f656e452d128bd66517e1c7fe4182fd9ef6a05589ea61c",
+      "copy": "runs/ensemble-v4-20260927/refine_round8.json",
+      "copy_sha256": "fb19f3e151ed327a0620a759580096368dea29be4cf2ae07ecb7be9ab832aa70",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/bert_compare.json",
+      "source_sha256": "a4e8eed7c22bb4cb917068e46eefc655ba3e10295f7b11f2cb770e4b830fb906",
+      "copy": "runs/ensemble-v5-20260927/bert_compare.json",
+      "copy_sha256": "1fd7c2ed6c814ee65b3b2e818daa47ad57c3f626e8a18aadbfaedde50b85842c",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/config.json",
+      "source_sha256": "fea5252bc4e1b1d768142169113c3a9e3fe78cb0a8532771faac80cedbee4443",
+      "copy": "runs/ensemble-v5-20260927/config.json",
+      "copy_sha256": "24abd3fd58fc97c689ae4fc46ac0966dae8f5bf736841275812c5629378b91c8",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/evaluation.json",
+      "source_sha256": "3178ba8c9340cbcf6ef2f6c2140d4b5978689025bf729698c5ea04da45716508",
+      "copy": "runs/ensemble-v5-20260927/evaluation.json",
+      "copy_sha256": "9d9fea7dfa097bb9e91c63d85c3042b717ec5d3cca5bb44baa9451323009c8f4",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/fit_training.json",
+      "source_sha256": "e1121b8b3e40b41a75f3d00e363f7aad5c8add43a91cc607b79e3147c81a9af8",
+      "copy": "runs/ensemble-v5-20260927/fit_training.json",
+      "copy_sha256": "0c3cc3bb32a83a7409563911e4f6dc4cec5e3bd0c99b92db663872bcdddb5e13",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_adjective_reading.json",
+      "source_sha256": "d4a6b9eaa2cc22d0413cb90eae60e76c0bf1256a9b8ef1bcbd066743b8fc6913",
+      "copy": "runs/ensemble-v5-20260927/refine_adjective_reading.json",
+      "copy_sha256": "154591236bc55e084ad72497076026a1486ac76b488e8479a3e90dcfd2fc8e86",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_checker.json",
+      "source_sha256": "79adf5eb8bec373b0cb790d77e81a20059ffa64095e7e0397c9fe220b3338625",
+      "copy": "runs/ensemble-v5-20260927/refine_checker.json",
+      "copy_sha256": "62dc3996b9e26b92836a1deb84a3c40cc8f7898a739bb3abc337cdd0f615b1f4",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_detector2.json",
+      "source_sha256": "83c414e4a4d7cf4a4a411265d5085f11ea1f27fa3f86062b386d8e1a0c065d96",
+      "copy": "runs/ensemble-v5-20260927/refine_detector2.json",
+      "copy_sha256": "9e6bb50fa386d8ffab3b03ebf08daa69a33bc2c3690e56508451d4b8a7388854",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_level_guard.json",
+      "source_sha256": "cd0d9d79ddb281ffe947bbc54946afdc1e8225ee854455a4eac02d6399d769b5",
+      "copy": "runs/ensemble-v5-20260927/refine_level_guard.json",
+      "copy_sha256": "93ac0800414410bc6947704bca50325f3b57811ea2c8ea8769362b2173e46ab1",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_meaning_floor.json",
+      "source_sha256": "2f511cbd977180a2c02dc4b67511e8006a9fc79d3ce4716e2892bb14d27db755",
+      "copy": "runs/ensemble-v5-20260927/refine_meaning_floor.json",
+      "copy_sha256": "4389739ed1b0d7b6b3c20ff0db7d6c72ea1e762e8860d09c0877ea68617d3d12",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_round10.json",
+      "source_sha256": "2ca9f0a7a74adaba9a915d8bcbecdd3602803eeb2dc764dc052c2ed573df2e99",
+      "copy": "runs/ensemble-v5-20260927/refine_round10.json",
+      "copy_sha256": "62bdb7089637d95c81528d7e696c6cf65376f7710d74593681188131f6fb5807",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_round12.json",
+      "source_sha256": "967e246b0fe9004bc89cddcf0cfdfa0445d382d25bfe76827bc3f67ec76302e0",
+      "copy": "runs/ensemble-v5-20260927/refine_round12.json",
+      "copy_sha256": "9fdeb64a9ab53a9005f50bba7da6a3ae5d1078a9764cdb522cbbb0180f90baa2",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_round9.json",
+      "source_sha256": "99bb962826ce2ee817364b88ea9e23aef8b68622e470c53e71c9563126b503d8",
+      "copy": "runs/ensemble-v5-20260927/refine_round9.json",
+      "copy_sha256": "165e7c68851bb2a54abe35d9bfee09548413218bdb49735abbad887f5e20a532",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_sentence.json",
+      "source_sha256": "31a6108ea46f4860a14cbbc7e5ae698cfee7ee956aa23ad877c488223a583c38",
+      "copy": "runs/ensemble-v5-20260927/refine_sentence.json",
+      "copy_sha256": "fff95a497a5faeecbc34a32090f889e6484cfe55aa36997190ee2c2883032ff2",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_target_choice.json",
+      "source_sha256": "fca3102a15436975042d31b2323fbc2ef2d5d0282b7192ee728aec05cef381f2",
+      "copy": "runs/ensemble-v5-20260927/refine_target_choice.json",
+      "copy_sha256": "c8e6cf2d3fc55835c5051bbdbd6218d746a1e00df5366c7a2a6d2e7ad362d51a",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_target_cwi.json",
+      "source_sha256": "678458e7f24ceb61108df3ae6daae741b946b259bb4be99d47ff4e94914816aa",
+      "copy": "runs/ensemble-v5-20260927/refine_target_cwi.json",
+      "copy_sha256": "f95896f1f0df84ba4e4528aceadd4c0ace6a32a003979c758d5d5d6003d18ea2",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v5-20260927/refine_target_joint.json",
+      "source_sha256": "bf213ea6d8461e1afa5cb0330a2a9253a64b41ce76c30ec4f9b0828d0210fc80",
+      "copy": "runs/ensemble-v5-20260927/refine_target_joint.json",
+      "copy_sha256": "588ebe3130f9b70aa587c212f64a1be8b600c4a29ec108eee9ec52e97ef35183",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v6-20260927/config.json",
+      "source_sha256": "e5c52d50bb41a46fc32cbe2a477bb43b842307f223121eca8f683f85453875b8",
+      "copy": "runs/ensemble-v6-20260927/config.json",
+      "copy_sha256": "4fd044c76bc171119e9beb57fac340d10c6809f1f86d0180057aa811afd27eaa",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v6-20260927/evaluation.json",
+      "source_sha256": "6ed3f76618c95caf2f9b00ea83f338aa6712e16a40329d57adeb18219515199c",
+      "copy": "runs/ensemble-v6-20260927/evaluation.json",
+      "copy_sha256": "f75e9e27c70bcee2454444f9a478bc5137aa3ba2c3b21e30ced9a73394eb0b98",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-v6-20260927/meaning_training.json",
+      "source_sha256": "4300c8b3ffebfaadb8bc399eba991720b39234f15476df9a082931c62cf8ec60",
+      "copy": "runs/ensemble-v6-20260927/meaning_training.json",
+      "copy_sha256": "65b8c54dc717a634ea5fe183176f3f399a29f376c430757cb718db4ed65c8580",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v6-20260927/refine_round11.json",
+      "source_sha256": "eca34eee6545487430d04ef79fe800b690cf7c152f22467d4adff095836dbc1a",
+      "copy": "runs/ensemble-v6-20260927/refine_round11.json",
+      "copy_sha256": "bc4ae7971586f09077e84240ec6ba1ec7a6ea240f37c6030663c124fa1c5d5ef",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v7-20260928/bert_sense.json",
+      "source_sha256": "6a224537dcb55f332094e9e22cdbf11bbe4122cc26f25185750e92bc95f9dc41",
+      "copy": "runs/ensemble-v7-20260928/bert_sense.json",
+      "copy_sha256": "5fe714e7711909bec9cf559b5e237253c614dbba9a8751ab4d43c71de9997d92",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v7-20260928/config.json",
+      "source_sha256": "46c34f06768b67a1589de057444ab8febe3f1dd949b1d1fc6697d5f097b514a0",
+      "copy": "runs/ensemble-v7-20260928/config.json",
+      "copy_sha256": "6d1d870307f8bdddb717a8651264b9d11174075f3b4649319fe377dead462f31",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v7-20260928/evaluation.json",
+      "source_sha256": "633790225e30ebde74152379a6a8072f6478a3fecdb1040decabd91abf8cfefe",
+      "copy": "runs/ensemble-v7-20260928/evaluation.json",
+      "copy_sha256": "5a942dadbd662c7d1852509fbc80b47ec50252cc589630720078e7be8ff13c56",
+      "removed_fields": [
+        "/tsar_outputs",
+        "/samples"
+      ]
+    },
+    {
+      "source": "runs/ensemble-v7-20260928/fit_training.json",
+      "source_sha256": "5f03c80c07835d7ea3bd29ed645b62d7e77aa27ee00a87c50380addd48ff7589",
+      "copy": "runs/ensemble-v7-20260928/fit_training.json",
+      "copy_sha256": "c851baba86faad4888c0434956dce6657c93ccb924c48d85750c995229d9d006",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-v7-20260928/refine_bert_decision.json",
+      "source_sha256": "a7ff96f794223ae3856a28303c8de7471ed4c8bb6b26ae06de76b7bae6b6c703",
+      "copy": "runs/ensemble-v7-20260928/refine_bert_decision.json",
+      "copy_sha256": "54e7ec5708d4a0d7d985ed0daf3b809a3c723d92c6e62c4226ca650f43dfa8de",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-windowed-20261002/config.json",
+      "source_sha256": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+      "copy": "runs/ensemble-windowed-20261002/config.json",
+      "copy_sha256": "b00897c905de0dfa1d975f3e6b65f04d0baf7869ece0b50f76e6d6cfc286c7ec",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/ensemble-windowed-20261002/window-validation.json",
+      "source_sha256": "913c3543ee69c27a4301d812078c10f7fe83895d2921bc5b96da481b142f16a6",
+      "copy": "runs/ensemble-windowed-20261002/window-validation.json",
+      "copy_sha256": "913c3543ee69c27a4301d812078c10f7fe83895d2921bc5b96da481b142f16a6",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/initial-20260924/context_selection.json",
+      "source_sha256": "47bd456d88926effb1531b936a4cf5c2fc1bbcb43c3321fe3a2d53d606432797",
+      "copy": "runs/initial-20260924/context_selection.json",
+      "copy_sha256": "6a5ad0849d35fe603931161d67691b72f15d24f5c9b763f677e627acd82b5ad5",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/initial-20260924/fit_selection.json",
+      "source_sha256": "f14bd41aab9f2dc6c9c0c6994f28f98c635201e18c02cfd10fcd1efdc98e9e54",
+      "copy": "runs/initial-20260924/fit_selection.json",
+      "copy_sha256": "8ffbda4dea157882fa9b79fd0550b2ba25e44bf108da67c031479421bf258994",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/initial-20260924/lexical.json",
+      "source_sha256": "f9476ccdcdcf3ffddc8582bcbf45b11388533191c8ea01d7a57716c7db815f35",
+      "copy": "runs/initial-20260924/lexical.json",
+      "copy_sha256": "1a32520cd02e44ce05c24bbf7945ae5401f437a027c9246ac1d58cc36f0e6b0a",
+      "removed_fields": [
+        "/outputs",
+        "/review",
+        "/guardrail_probes"
+      ]
+    },
+    {
+      "source": "runs/initial-20260924/report_summary.json",
+      "source_sha256": "b52430b6e6b193cc26bd4faceccf915b05fe1b96bd2dd6047be9498c063ccd1a",
+      "copy": "runs/initial-20260924/report_summary.json",
+      "copy_sha256": "02515ee7b7993c841d5cf239d105b15ee65f9338002037e9cc9b009c2b1bdafc",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/initial-20260924/sentence_selection.json",
+      "source_sha256": "59f9383aa33f7ccae3f74f49624d4cd36aaca2fd0ca1dbe126af567c3fab2dfa",
+      "copy": "runs/initial-20260924/sentence_selection.json",
+      "copy_sha256": "8b8215391c3fb410ad5cce0a4615a154b426a65ee49c37d2af0db87521a4609f",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/initial-20260924/training.json",
+      "source_sha256": "81717e233d9c7023376bf223d21cd1bf9d82e8c3c007a12daff1619586ca6bdd",
+      "copy": "runs/initial-20260924/training.json",
+      "copy_sha256": "72611f609001bd6b1c08a787cac36b8a4a6fed57023a7ce56ab4fe0f9bbbfdaa",
+      "removed_fields": [
+        "/word/test_predictions",
+        "/context",
+        "/sentence"
+      ]
+    },
+    {
+      "source": "runs/initial-20260924/training_partial.json",
+      "source_sha256": "53101d43d5cad591aeefa186c56fbd7a3f2a880ab687216463a6ba29029760d8",
+      "copy": "runs/initial-20260924/training_partial.json",
+      "copy_sha256": "9022d6599a44468828347a8d54d568ad06fd3421ecc1d6834e4a806777e49fa9",
+      "removed_fields": [
+        "/word/test_predictions",
+        "/context"
+      ]
+    },
+    {
+      "source": "runs/initial-20260924/word_selection.json",
+      "source_sha256": "1dda72a19bab3101439df300e73c131daab012898b8edf3134ba6a3abf7ec2ab",
+      "copy": "runs/initial-20260924/word_selection.json",
+      "copy_sha256": "770abf3b4d9db70575d60c0f80cb14b662e9a06d28b54eff8000b77437c9f79f",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/novel-context-boosted-20261003/config.json",
+      "source_sha256": "6fd6cc1aeac4841d8c65d51998b2dc70020153341cf64ec68b5c2293e1aa2b14",
+      "copy": "runs/novel-context-boosted-20261003/config.json",
+      "copy_sha256": "6fd6cc1aeac4841d8c65d51998b2dc70020153341cf64ec68b5c2293e1aa2b14",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/novel-context-boosted-20261003/development.json",
+      "source_sha256": "a1fb20ef4573a170e5318259598b10c4bf15abd1a6c6c67b2ca44ccba17318bc",
+      "copy": "runs/novel-context-boosted-20261003/development.json",
+      "copy_sha256": "4367186e1f865937f53a9ab32fef429fd2f06bf330002125e06c6c6b93756ddd",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "runs/novel-context-similarity-20261003/config.json",
+      "source_sha256": "29186a7048c4e4d59dbf362d58ee1df29e33ba00ad70f17a9d571fb0437818ae",
+      "copy": "runs/novel-context-similarity-20261003/config.json",
+      "copy_sha256": "29186a7048c4e4d59dbf362d58ee1df29e33ba00ad70f17a9d571fb0437818ae",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/novel-context-similarity-20261003/development.json",
+      "source_sha256": "8f8bc773fdd18bd2fb3c32954f0c46b8d94427ee47a2f68d119c96a89f4bcce5",
+      "copy": "runs/novel-context-similarity-20261003/development.json",
+      "copy_sha256": "e15699748bb6bb84edb518aff609727d74db1bbfb3c7fc75e51019749f87e48b",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "runs/novel-context-validator-20261003/config.json",
+      "source_sha256": "360832fd7c50f2430d729ffbcc78915d46dcd22b54a718654fa8fe1ed745d394",
+      "copy": "runs/novel-context-validator-20261003/config.json",
+      "copy_sha256": "360832fd7c50f2430d729ffbcc78915d46dcd22b54a718654fa8fe1ed745d394",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/novel-context-validator-20261003/development.json",
+      "source_sha256": "887d894ccceddc9b3e7d6e471448ea78341d77d413001b09c2023ed3719ce96a",
+      "copy": "runs/novel-context-validator-20261003/development.json",
+      "copy_sha256": "e96685893d0c3d631e05f9babd23a88d7c69119e128ce14ac30240c7a82079c6",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "runs/semcor-20260924/evaluation.json",
+      "source_sha256": "3bf7fb54064062797c24d8fe24c418c68849b1ea83005f378fcb584594b30007",
+      "copy": "runs/semcor-20260924/evaluation.json",
+      "copy_sha256": "f23450cd2cf3a6a68a8d840318d9c95407684375159fc7078f80d3c74bf402c5",
+      "removed_fields": [
+        "/outputs",
+        "/samples",
+        "/composed",
+        "/banks"
+      ]
+    },
+    {
+      "source": "runs/semcor-20260924/manifest.json",
+      "source_sha256": "67c7fdccced58910d9da3d002d2d81281712a909912ea1c83c7df6a52941fe53",
+      "copy": "runs/semcor-20260924/manifest.json",
+      "copy_sha256": "a0c57517759468bdabf0bdae73c0be9130ddaf165acc6b9f8b217b12d4ff06b3",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/semcor-20260924/metrics.json",
+      "source_sha256": "1ae100a91ea00c66a0f0ef926900921d72b398d235476cc8bc214408fca314ca",
+      "copy": "runs/semcor-20260924/metrics.json",
+      "copy_sha256": "44b69204fb976b88529be2fb429e9dc373339e4c612098b4adf0d3099e32e1f0",
+      "removed_fields": []
+    },
+    {
+      "source": "runs/semcor-20260924/selection.json",
+      "source_sha256": "9c53dc37dc7f08ead09b8ce4e320c10440abccacbce11fc7fd2ad05def554940",
+      "copy": "runs/semcor-20260924/selection.json",
+      "copy_sha256": "ec86bf3316ba7209ccefc3a94a4f4603404cda3fed30fef8809a546a7b5109d8",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/bert-candidate-coverage-20261002/summary.json",
+      "source_sha256": "e2c6b0eb0016f9ede953d613dceb8f3d19be561e7e704dd644452ffc662876d8",
+      "copy": "outputs/bert-candidate-coverage-20261002/summary.json",
+      "copy_sha256": "e2c6b0eb0016f9ede953d613dceb8f3d19be561e7e704dd644452ffc662876d8",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/candidate-limits-20261003/summary.json",
+      "source_sha256": "102f0818fe4d2baf03b8fd0d9be6f6eb649b0eaa6b4eae015aed2dc497c7373f",
+      "copy": "outputs/candidate-limits-20261003/summary.json",
+      "copy_sha256": "102f0818fe4d2baf03b8fd0d9be6f6eb649b0eaa6b4eae015aed2dc497c7373f",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/complete-slot-check-20261002/summary.json",
+      "source_sha256": "88c7f2efef685d7a576d3bb2fb06f715000e74a737e1915724e96cef7ba7fd4e",
+      "copy": "outputs/complete-slot-check-20261002/summary.json",
+      "copy_sha256": "3d3ae9da40f6a39afe72519b3159610db1db09e1f0596fbde09685171e1fbaaf",
+      "removed_fields": [
+        "/text",
+        "/words",
+        "/legacy_scores",
+        "/untruncated_reference_scores",
+        "/complete_scores",
+        "/affected_rows/0/target"
+      ]
+    },
+    {
+      "source": "outputs/complete-slot-dev-20261002/summary.json",
+      "source_sha256": "cef38c22ccf36cdaba02e6fab53d096c5e6592d739b771be8b6c6dff2d50056d",
+      "copy": "outputs/complete-slot-dev-20261002/summary.json",
+      "copy_sha256": "cef38c22ccf36cdaba02e6fab53d096c5e6592d739b771be8b6c6dff2d50056d",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/context-similarity-cache-review-20261002/summary.json",
+      "source_sha256": "967982acbe1ae6e1aaf8ba787855a2f75b342b9e22e773362eb5be8da2665ca8",
+      "copy": "outputs/context-similarity-cache-review-20261002/summary.json",
+      "copy_sha256": "f51e8f42282dc43819993550af9f98def8695e29845aa434d053f36e298526cf",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/context-similarity-dev-20261002/summary.json",
+      "source_sha256": "01f83a97c57ea825e5f7dc02303eb379910438f98a974c8bcbee7856d88a3ef6",
+      "copy": "outputs/context-similarity-dev-20261002/summary.json",
+      "copy_sha256": "01f83a97c57ea825e5f7dc02303eb379910438f98a974c8bcbee7856d88a3ef6",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/context-window-check-20261002/summary.json",
+      "source_sha256": "fd23fdbb6ef7b278a91e8c1b11ed4279f0f8e9287c0d2b55992695d91aa7ff90",
+      "copy": "outputs/context-window-check-20261002/summary.json",
+      "copy_sha256": "fd23fdbb6ef7b278a91e8c1b11ed4279f0f8e9287c0d2b55992695d91aa7ff90",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/context-window-check-review-20261002/summary.json",
+      "source_sha256": "913c3543ee69c27a4301d812078c10f7fe83895d2921bc5b96da481b142f16a6",
+      "copy": "outputs/context-window-check-review-20261002/summary.json",
+      "copy_sha256": "913c3543ee69c27a4301d812078c10f7fe83895d2921bc5b96da481b142f16a6",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/detail-preservation-dev-review-20261002/summary.json",
+      "source_sha256": "b3d87069b9eadcc18080b585035f101b7f06305437e0de8c4342ebb0d5e2deb4",
+      "copy": "outputs/detail-preservation-dev-review-20261002/summary.json",
+      "copy_sha256": "b3d87069b9eadcc18080b585035f101b7f06305437e0de8c4342ebb0d5e2deb4",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/detail-preservation-final-20261002/summary.json",
+      "source_sha256": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+      "copy": "outputs/detail-preservation-final-20261002/summary.json",
+      "copy_sha256": "e4719031cdbddd589756b50d92c35e204b733cc9635933aa308973471fe488ce",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/detail-preservation-replay-20261002/summary.json",
+      "source_sha256": "780964a1210cf752f471e8304658cce2ccf7c53eeaa1b219b939156f8ff1f47b",
+      "copy": "outputs/detail-preservation-replay-20261002/summary.json",
+      "copy_sha256": "780964a1210cf752f471e8304658cce2ccf7c53eeaa1b219b939156f8ff1f47b",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/detail-senses-cache-20261002/summary.json",
+      "source_sha256": "d27a7373399e8d2225de24c95e501d62240871a5f5c8bb53d0ab86f46b03ba5b",
+      "copy": "outputs/detail-senses-cache-20261002/summary.json",
+      "copy_sha256": "d27a7373399e8d2225de24c95e501d62240871a5f5c8bb53d0ab86f46b03ba5b",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/detail-senses-cache-review-20261002/summary.json",
+      "source_sha256": "cb6ce1a2b3da5b185396dea3adbe1bde2b18a2cc143e967377b6cf94a5bd1a01",
+      "copy": "outputs/detail-senses-cache-review-20261002/summary.json",
+      "copy_sha256": "cb6ce1a2b3da5b185396dea3adbe1bde2b18a2cc143e967377b6cf94a5bd1a01",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/detail-senses-final-20261002/summary.json",
+      "source_sha256": "dc4716c61bdd4d67b6b3d077faccd41ee3ef312af819bdf39201d0ebd795cd13",
+      "copy": "outputs/detail-senses-final-20261002/summary.json",
+      "copy_sha256": "dc4716c61bdd4d67b6b3d077faccd41ee3ef312af819bdf39201d0ebd795cd13",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-complete-slot-20261002/summary.json",
+      "source_sha256": "c40398d26321fd7850c48f065fa544b9da73fe63a9f683b8cb333af6369779a9",
+      "copy": "outputs/domain-audit-complete-slot-20261002/summary.json",
+      "copy_sha256": "c40398d26321fd7850c48f065fa544b9da73fe63a9f683b8cb333af6369779a9",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-context-similarity-20261002/summary.json",
+      "source_sha256": "7b9a2b6d359c1a66d0b3fa36217a4ea2366fa19f6389571250925a287b034fe5",
+      "copy": "outputs/domain-audit-context-similarity-20261002/summary.json",
+      "copy_sha256": "7b9a2b6d359c1a66d0b3fa36217a4ea2366fa19f6389571250925a287b034fe5",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-default-sense-contrast-20261003/summary.json",
+      "source_sha256": "fdd47982fe98165119bfdcbc5dce5249de51bdd3f03d09da6a77b6010553c158",
+      "copy": "outputs/domain-audit-default-sense-contrast-20261003/summary.json",
+      "copy_sha256": "fdd47982fe98165119bfdcbc5dce5249de51bdd3f03d09da6a77b6010553c158",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-detail-20261002/summary.json",
+      "source_sha256": "665556659d15603b5065dc8494fd5f1febd3166ec2a42231acd980b8b1dd9cf5",
+      "copy": "outputs/domain-audit-detail-20261002/summary.json",
+      "copy_sha256": "665556659d15603b5065dc8494fd5f1febd3166ec2a42231acd980b8b1dd9cf5",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-detail-review-20261002/summary.json",
+      "source_sha256": "d6885046e0dd4998429d5eb3ecbbcd67ae958eff52fdb89bd6d87c2619b8ffc7",
+      "copy": "outputs/domain-audit-detail-review-20261002/summary.json",
+      "copy_sha256": "d6885046e0dd4998429d5eb3ecbbcd67ae958eff52fdb89bd6d87c2619b8ffc7",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-noun-heads-20261002/summary.json",
+      "source_sha256": "d70282568fc964deab8018e80977020cd3baaf3f3605ce64d928a5cd016077d3",
+      "copy": "outputs/domain-audit-noun-heads-20261002/summary.json",
+      "copy_sha256": "d70282568fc964deab8018e80977020cd3baaf3f3605ce64d928a5cd016077d3",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-noun-heads-frozen-20261002/summary.json",
+      "source_sha256": "26661a9c86c30b433137dccd4350746c429deac21cee6179bf1115ef34b78d87",
+      "copy": "outputs/domain-audit-noun-heads-frozen-20261002/summary.json",
+      "copy_sha256": "26661a9c86c30b433137dccd4350746c429deac21cee6179bf1115ef34b78d87",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-noun-heads-review-20261002/summary.json",
+      "source_sha256": "ab64f181a79dcf5f869db48c4b657cf5b632a0e32a45caaf0e92c9b7c4fd5923",
+      "copy": "outputs/domain-audit-noun-heads-review-20261002/summary.json",
+      "copy_sha256": "ab64f181a79dcf5f869db48c4b657cf5b632a0e32a45caaf0e92c9b7c4fd5923",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-prompted-relations-20261002/summary.json",
+      "source_sha256": "8833a54d79295cad7698373b0fc29f96fc567ef4ff325a4acb29fad6b02e534a",
+      "copy": "outputs/domain-audit-prompted-relations-20261002/summary.json",
+      "copy_sha256": "8833a54d79295cad7698373b0fc29f96fc567ef4ff325a4acb29fad6b02e534a",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-relations-20261002/summary.json",
+      "source_sha256": "548037efda8bf23b5c9c5847c09817b1fc042844baf3c930bcf852fc4e102aae",
+      "copy": "outputs/domain-audit-relations-20261002/summary.json",
+      "copy_sha256": "548037efda8bf23b5c9c5847c09817b1fc042844baf3c930bcf852fc4e102aae",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-technical-terms-20261002/summary.json",
+      "source_sha256": "b8adf40ec9e1bfabbbfa1f43f28884641446a337871ea1cb01d9edc5db198843",
+      "copy": "outputs/domain-audit-technical-terms-20261002/summary.json",
+      "copy_sha256": "b8adf40ec9e1bfabbbfa1f43f28884641446a337871ea1cb01d9edc5db198843",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-technical-terms-final-20261002/summary.json",
+      "source_sha256": "20f7dfdc9b6bc8eeb1d2b8d8bc7aa3cb128c2e7cfbf5391d91b8a6aeaa925b6a",
+      "copy": "outputs/domain-audit-technical-terms-final-20261002/summary.json",
+      "copy_sha256": "20f7dfdc9b6bc8eeb1d2b8d8bc7aa3cb128c2e7cfbf5391d91b8a6aeaa925b6a",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-v7-20261002/summary.json",
+      "source_sha256": "885ace18d224956d81c84b9b007d5e9b46d60a61e195e8bc63edd6220d50a1f7",
+      "copy": "outputs/domain-audit-v7-20261002/summary.json",
+      "copy_sha256": "885ace18d224956d81c84b9b007d5e9b46d60a61e195e8bc63edd6220d50a1f7",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-v7-fixed-20261002/summary.json",
+      "source_sha256": "838e7ce6768480e972e71664e5d76882f53f9da4ce5ab021329d42db4f63b79c",
+      "copy": "outputs/domain-audit-v7-fixed-20261002/summary.json",
+      "copy_sha256": "838e7ce6768480e972e71664e5d76882f53f9da4ce5ab021329d42db4f63b79c",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-v7-relations-check-20261002/summary.json",
+      "source_sha256": "2ee1d81bbc8514da7b6145c8332ab2232535cc13ebaca8ff3eabc8c51dfc827f",
+      "copy": "outputs/domain-audit-v7-relations-check-20261002/summary.json",
+      "copy_sha256": "2ee1d81bbc8514da7b6145c8332ab2232535cc13ebaca8ff3eabc8c51dfc827f",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-v7-review-20261002/summary.json",
+      "source_sha256": "703a3b6b4dd79dc24c9108b9f62d1574e2e8df3954aff9494c6aa2cf91d33df5",
+      "copy": "outputs/domain-audit-v7-review-20261002/summary.json",
+      "copy_sha256": "703a3b6b4dd79dc24c9108b9f62d1574e2e8df3954aff9494c6aa2cf91d33df5",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-v7-safety-blocks-20261002/summary.json",
+      "source_sha256": "33cf17f7eaeb9d165651d1a00d7e31f01acc905d872e9a10eee71c44cc5771dd",
+      "copy": "outputs/domain-audit-v7-safety-blocks-20261002/summary.json",
+      "copy_sha256": "33cf17f7eaeb9d165651d1a00d7e31f01acc905d872e9a10eee71c44cc5771dd",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/domain-audit-windowed-review-20261002/summary.json",
+      "source_sha256": "5605ad58d2a05c5ad22c0a1bef18706c80a47b5b39f3b74aae92ff9496a6e204",
+      "copy": "outputs/domain-audit-windowed-review-20261002/summary.json",
+      "copy_sha256": "5605ad58d2a05c5ad22c0a1bef18706c80a47b5b39f3b74aae92ff9496a6e204",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/noun-head-dev-20261002/summary.json",
+      "source_sha256": "89451bd4ba20723735b5603009e25de4010ae854a19cef92ff031dc2bd7dc577",
+      "copy": "outputs/noun-head-dev-20261002/summary.json",
+      "copy_sha256": "89451bd4ba20723735b5603009e25de4010ae854a19cef92ff031dc2bd7dc577",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/noun-head-dev-review-20261002/summary.json",
+      "source_sha256": "a6346ab292d6a048c4f295333abe6144f28930c249cbc5497cada3d2625e9825",
+      "copy": "outputs/noun-head-dev-review-20261002/summary.json",
+      "copy_sha256": "a6346ab292d6a048c4f295333abe6144f28930c249cbc5497cada3d2625e9825",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/noun-head-frozen-dev-20261002/summary.json",
+      "source_sha256": "861728e192ffe5484c7623faeb3989d4e8b6b39204aeb7f9effd74648a084dd3",
+      "copy": "outputs/noun-head-frozen-dev-20261002/summary.json",
+      "copy_sha256": "861728e192ffe5484c7623faeb3989d4e8b6b39204aeb7f9effd74648a084dd3",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/novel-context-boosted-20261003/summary.json",
+      "source_sha256": "a1fb20ef4573a170e5318259598b10c4bf15abd1a6c6c67b2ca44ccba17318bc",
+      "copy": "outputs/novel-context-boosted-20261003/summary.json",
+      "copy_sha256": "4367186e1f865937f53a9ab32fef429fd2f06bf330002125e06c6c6b93756ddd",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/novel-context-similarity-20261003/summary.json",
+      "source_sha256": "8f8bc773fdd18bd2fb3c32954f0c46b8d94427ee47a2f68d119c96a89f4bcce5",
+      "copy": "outputs/novel-context-similarity-20261003/summary.json",
+      "copy_sha256": "e15699748bb6bb84edb518aff609727d74db1bbfb3c7fc75e51019749f87e48b",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/novel-context-training-20261003/summary.json",
+      "source_sha256": "887d894ccceddc9b3e7d6e471448ea78341d77d413001b09c2023ed3719ce96a",
+      "copy": "outputs/novel-context-training-20261003/summary.json",
+      "copy_sha256": "e96685893d0c3d631e05f9babd23a88d7c69119e128ce14ac30240c7a82079c6",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/novel-fallback-comparison-20261003/summary.json",
+      "source_sha256": "371e609f24069b91177a748bd5a7ffdd79ee17c03217c9ae696056ec69592a22",
+      "copy": "outputs/novel-fallback-comparison-20261003/summary.json",
+      "copy_sha256": "9ef8ea899104f7930550022a0f68d4766ba7b1974ae4b9b37c8ffdd908eb0a38",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/novel-fallback-domain-review-20261003/summary.json",
+      "source_sha256": "1bfc401e8c9ff8dbb42bad0c23891cea65bfe153109dbc518ae133fdeb2838aa",
+      "copy": "outputs/novel-fallback-domain-review-20261003/summary.json",
+      "copy_sha256": "5e71f0aac21893a4f8ea8eeb4f433a193e2a83f23a29bc1fbfd38ad7d46966b9",
+      "removed_fields": [
+        "/cases",
+        "/shadow_changes",
+        "/retained_baseline_changed_sentences"
+      ]
+    },
+    {
+      "source": "outputs/novel-similarity-comparison-20261003/summary.json",
+      "source_sha256": "490ac397db6984ec821c8e2a236f76977975a06bf0a2d7f1b5d2c7b41954c83d",
+      "copy": "outputs/novel-similarity-comparison-20261003/summary.json",
+      "copy_sha256": "8c698fcfd129b19885c1abd11094fe3de0a34edd8344ee30ca79211a3a32c00f",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/novel-similarity-domain-continuation-20261003/summary.json",
+      "source_sha256": "969d2afb5e7a8b3e2aa8df55711b79dafbe9cd72cebea116d0a33ef251f4f0a0",
+      "copy": "outputs/novel-similarity-domain-continuation-20261003/summary.json",
+      "copy_sha256": "629d80b25942f5b1474f403d22f00bb1954fd9c93f042f4495e0537e3bff237d",
+      "removed_fields": [
+        "/cases",
+        "/shadow_changes",
+        "/safe_changes",
+        "/retained_baseline_changed_sentences"
+      ]
+    },
+    {
+      "source": "outputs/parliament-audit-20261003/summary.json",
+      "source_sha256": "a5ee7a3d974013c261fadea71a269e9cc76b26b8e0af24a21b312f9f383dc161",
+      "copy": "outputs/parliament-audit-20261003/summary.json",
+      "copy_sha256": "a5ee7a3d974013c261fadea71a269e9cc76b26b8e0af24a21b312f9f383dc161",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/prompted-relations-dev-20261002/summary.json",
+      "source_sha256": "ee7381048b1f0b212fc69f716551beea7268913ec5180fe2eeb14f9592f39845",
+      "copy": "outputs/prompted-relations-dev-20261002/summary.json",
+      "copy_sha256": "ee7381048b1f0b212fc69f716551beea7268913ec5180fe2eeb14f9592f39845",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/prompted-specificity-dev-20261002/summary.json",
+      "source_sha256": "ad053b5841d4ee982effc3dedfed76e9a4f65d3b2f2a3d00688d0d9c8f53f3eb",
+      "copy": "outputs/prompted-specificity-dev-20261002/summary.json",
+      "copy_sha256": "ad053b5841d4ee982effc3dedfed76e9a4f65d3b2f2a3d00688d0d9c8f53f3eb",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/proposal-review-20261003/summary.json",
+      "source_sha256": "85023b9f15fd92b6a626006a095bd7b13d9e43b4b7138518c240bd5a6b67b7b6",
+      "copy": "outputs/proposal-review-20261003/summary.json",
+      "copy_sha256": "5e336309ab85a42c8c3e14bf94eda01f76e4a2b89ecece52f029b8c13bfe1466",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/proposal-validation-20261003/summary.json",
+      "source_sha256": "6340235417a922b2c591195bf5f1a75f6761cdad961d87af45c20aa66e2c8d72",
+      "copy": "outputs/proposal-validation-20261003/summary.json",
+      "copy_sha256": "6340235417a922b2c591195bf5f1a75f6761cdad961d87af45c20aa66e2c8d72",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/relation-features-dev-review-20261002/summary.json",
+      "source_sha256": "baa51c4342dc69688d9c022c469fce9900f029dd9cf9c2c2baf5cc74b2ec4b77",
+      "copy": "outputs/relation-features-dev-review-20261002/summary.json",
+      "copy_sha256": "baa51c4342dc69688d9c022c469fce9900f029dd9cf9c2c2baf5cc74b2ec4b77",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/rewritten-sense-contrast-dev-20261003/summary.json",
+      "source_sha256": "b56b2a5ff8bab8a527f1f446a61bc084881da466f59177eec17b56e538084691",
+      "copy": "outputs/rewritten-sense-contrast-dev-20261003/summary.json",
+      "copy_sha256": "6f5011ec4125c3c0962568af9d3c1c264bfbd24ab19434d49a1d3e3e0eec509f",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/sense-contrast-dev-review-20261003/summary.json",
+      "source_sha256": "e9cd3c245ccda07d8cbd94370d66adf4e15f70ff890df324fa0c66400bb31ad2",
+      "copy": "outputs/sense-contrast-dev-review-20261003/summary.json",
+      "copy_sha256": "265104ec88835ae50961c5b083053a3b15cef1564f7887fc613e7b2e86f4da63",
+      "removed_fields": [
+        "/native_checks"
+      ]
+    },
+    {
+      "source": "outputs/six-blocks-check-20261002/summary.json",
+      "source_sha256": "fbe3266296a783039686c275ba698099818b43a54618b6f3740a260ea71efa0e",
+      "copy": "outputs/six-blocks-check-20261002/summary.json",
+      "copy_sha256": "fbe3266296a783039686c275ba698099818b43a54618b6f3740a260ea71efa0e",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/six-blocks-final-20261002/summary.json",
+      "source_sha256": "bf3cd3491c19f52f12db114c87dd3da7422ef726b2c4793a4cc02ec26319a415",
+      "copy": "outputs/six-blocks-final-20261002/summary.json",
+      "copy_sha256": "bf3cd3491c19f52f12db114c87dd3da7422ef726b2c4793a4cc02ec26319a415",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/term-span-audit-20261002/summary.json",
+      "source_sha256": "a17915bae93165ea8dd191b7f41cf6ea37a257cc0196bca6b2ea619b090a00de",
+      "copy": "outputs/term-span-audit-20261002/summary.json",
+      "copy_sha256": "a17915bae93165ea8dd191b7f41cf6ea37a257cc0196bca6b2ea619b090a00de",
+      "removed_fields": []
+    },
+    {
+      "source": "outputs/term-span-audit-final-20261002/summary.json",
+      "source_sha256": "d3f7ab1c630a8008a719c454fc6788afd48ecc1c81ef45c414e156e0acd2f351",
+      "copy": "outputs/term-span-audit-final-20261002/summary.json",
+      "copy_sha256": "d3f7ab1c630a8008a719c454fc6788afd48ecc1c81ef45c414e156e0acd2f351",
+      "removed_fields": []
+    }
+  ]
+}

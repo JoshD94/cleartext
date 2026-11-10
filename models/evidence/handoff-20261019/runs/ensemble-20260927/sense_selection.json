@@ -1,0 +1,2517 @@
+{
+  "semcor_params": {
+    "alpha": 1.0,
+    "shrink": 0.0,
+    "nb": 3.0,
+    "vector": 8.0
+  },
+  "semcor_temperature": 2.0,
+  "gloss_temperature": 0.2,
+  "sense_weights": [
+    1.0,
+    0.0
+  ],
+  "sense_evidence": 3.0,
+  "grid": [
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9455619323167809,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6711804946500614,
+      "log_likelihood": -0.9647339445294528,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6757761796176109,
+      "log_likelihood": -1.0464943267628437,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6781968075776179,
+      "log_likelihood": -1.146809571755864,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9146499303861874,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6831783897561832,
+      "log_likelihood": -0.9394180593654778,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6859147517979302,
+      "log_likelihood": -1.026120274019118,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6867917909138748,
+      "log_likelihood": -1.1299100581923591,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6836695316611121,
+      "log_likelihood": -0.9909041409284792,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6840905104367655,
+      "log_likelihood": -1.023511681193607,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6865111383967725,
+      "log_likelihood": -1.1151758777593248,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6875285037712682,
+      "log_likelihood": -1.2206359236463427,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6776355025434134,
+      "log_likelihood": -1.2643914901881492,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6771794422031222,
+      "log_likelihood": -1.3017319655569182,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6790387651289248,
+      "log_likelihood": -1.394399091099452,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6809682511840028,
+      "log_likelihood": -1.4965695474795444,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9455619323167809,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6580599894755306,
+      "log_likelihood": -0.9298827349725988,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6634274688651114,
+      "log_likelihood": -0.9177243680404953,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6660235046483073,
+      "log_likelihood": -0.9159662556172432,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9146499303861874,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.669952639887739,
+      "log_likelihood": -0.9027649700154435,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6726890019294861,
+      "log_likelihood": -0.8953089813517463,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6741975092089108,
+      "log_likelihood": -0.8973000012994689,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6836695316611121,
+      "log_likelihood": -0.9909041409284792,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6701631292755656,
+      "log_likelihood": -0.9838175691991018,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6729696544465883,
+      "log_likelihood": -0.9816366396653232,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6746535695492019,
+      "log_likelihood": -0.9871390779252412,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6776355025434134,
+      "log_likelihood": -1.2643914901881492,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6634274688651114,
+      "log_likelihood": -1.260062788746136,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6655323627433783,
+      "log_likelihood": -1.2604661747542685,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6664444834239607,
+      "log_likelihood": -1.267132722866238,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9455619323167809,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.658165234169444,
+      "log_likelihood": -0.9294733097101243,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6645500789335205,
+      "log_likelihood": -0.9165561233008591,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6675670934923698,
+      "log_likelihood": -0.9139925156975325,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9146499303861874,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6698824767584635,
+      "log_likelihood": -0.902312458472498,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6734257147868795,
+      "log_likelihood": -0.8940114440043907,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.675600771794422,
+      "log_likelihood": -0.8951009464833807,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6836695316611121,
+      "log_likelihood": -0.9909041409284792,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6704788633573058,
+      "log_likelihood": -0.9831021090277808,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6734607963515172,
+      "log_likelihood": -0.9796966066833697,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6756709349236976,
+      "log_likelihood": -0.9839430831601155,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6776355025434134,
+      "log_likelihood": -1.2643914901881492,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6637782845114892,
+      "log_likelihood": -1.2590107333089782,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6658831783897562,
+      "log_likelihood": -1.257695166735183,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6679529907033853,
+      "log_likelihood": -1.262633769479287,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9455619323167809,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6577442553937906,
+      "log_likelihood": -0.9294949382406446,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6631818979126469,
+      "log_likelihood": -0.917657022145839,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6668303806349763,
+      "log_likelihood": -0.9173471367302356,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9146499303861874,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6701982108402035,
+      "log_likelihood": -0.902492453321796,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6721627784599193,
+      "log_likelihood": -0.8953334989947657,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6746535695492019,
+      "log_likelihood": -0.898600763182739,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6836695316611121,
+      "log_likelihood": -0.9909041409284792,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6706893527451324,
+      "log_likelihood": -0.982995649357588,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6735660410454306,
+      "log_likelihood": -0.9800552641515552,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6750745483248553,
+      "log_likelihood": -0.985612165024589,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6776355025434134,
+      "log_likelihood": -1.2643914901881492,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6637432029468514,
+      "log_likelihood": -1.2583333667009997,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.666409401859323,
+      "log_likelihood": -1.2564264216728813,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 0.5,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6686195404315033,
+      "log_likelihood": -1.2614491853930456,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9506844610464824,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6712155762146992,
+      "log_likelihood": -0.9471079335437115,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6758814243115243,
+      "log_likelihood": -1.0194556313420946,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6785827047886336,
+      "log_likelihood": -1.1175924341680166,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9165415689658971,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6831433081915453,
+      "log_likelihood": -0.9202303526967331,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6859147517979302,
+      "log_likelihood": -0.9982291998159954,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6866514646553237,
+      "log_likelihood": -1.1000976605477577,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6829679003683564,
+      "log_likelihood": -0.9881933793741272,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6834239607086476,
+      "log_likelihood": -1.0028941614664664,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6860550780564814,
+      "log_likelihood": -1.0871140610105048,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6877039115944571,
+      "log_likelihood": -1.191267137074398,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6767584634274688,
+      "log_likelihood": -1.2587892255479127,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6763725662164533,
+      "log_likelihood": -1.2810493822591469,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6786528679179091,
+      "log_likelihood": -1.3673777640084483,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6804420277144361,
+      "log_likelihood": -1.4693165699381712,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9506844610464824,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6582003157340818,
+      "log_likelihood": -0.9292544562383671,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6634625504297492,
+      "log_likelihood": -0.9109708146730815,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6660936677775828,
+      "log_likelihood": -0.9051886009061044,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9165415689658971,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6698473951938256,
+      "log_likelihood": -0.8994079746951452,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6725837572355727,
+      "log_likelihood": -0.8863939936772216,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6745483248552886,
+      "log_likelihood": -0.8847578234574051,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6829679003683564,
+      "log_likelihood": -0.9881933793741272,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6693211717242589,
+      "log_likelihood": -0.9768082083272166,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6725135941062972,
+      "log_likelihood": -0.9700963328482619,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6740571829503595,
+      "log_likelihood": -0.9726581619778573,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6767584634274688,
+      "log_likelihood": -1.2587892255479127,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6624451850552535,
+      "log_likelihood": -1.2510121605186764,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6651464655323628,
+      "log_likelihood": -1.247734355442319,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6659884230836696,
+      "log_likelihood": -1.2519981804746785,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9506844610464824,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6585511313804596,
+      "log_likelihood": -0.9290190287678155,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6647956498859849,
+      "log_likelihood": -0.9101480247371532,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6673566041045431,
+      "log_likelihood": -0.9036610522108255,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9165415689658971,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6703736186633924,
+      "log_likelihood": -0.8991386829132287,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6735660410454306,
+      "log_likelihood": -0.8854648812129335,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6752499561480442,
+      "log_likelihood": -0.8830392425414343,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6829679003683564,
+      "log_likelihood": -0.9881933793741272,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6698824767584635,
+      "log_likelihood": -0.976283210448204,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6735309594807929,
+      "log_likelihood": -0.9685455161916564,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6752499561480442,
+      "log_likelihood": -0.9699797960206071,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6767584634274688,
+      "log_likelihood": -1.2587892255479127,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6626556744430802,
+      "log_likelihood": -1.2501441218214204,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6653920364848273,
+      "log_likelihood": -1.2453464684500315,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6674267672338187,
+      "log_likelihood": -1.2480168896800572,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9506844610464824,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6577442553937906,
+      "log_likelihood": -0.9298932147242656,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6635677951236625,
+      "log_likelihood": -0.9131164470809234,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6663392387300474,
+      "log_likelihood": -0.9096989569214076,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6834590422732854,
+      "log_likelihood": -0.9165415689658971,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.670268373969479,
+      "log_likelihood": -0.9001567012779312,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6724785125416594,
+      "log_likelihood": -0.8886290742494428,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6740221013857218,
+      "log_likelihood": -0.8891920665342155,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6829679003683564,
+      "log_likelihood": -0.9881933793741272,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.669952639887739,
+      "log_likelihood": -0.976952422579482,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6729696544465883,
+      "log_likelihood": -0.9706202914526099,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6747588142431152,
+      "log_likelihood": -0.9741434089841572,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6767584634274688,
+      "log_likelihood": -1.2587892255479127,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6629363269601825,
+      "log_likelihood": -1.2501615443421115,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6656376074372917,
+      "log_likelihood": -1.245625793464499,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 1.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6674267672338187,
+      "log_likelihood": -1.249084248961405,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9711051692687277,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6712857393439747,
+      "log_likelihood": -0.9379452115205145,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6757060164883354,
+      "log_likelihood": -0.9971795034304102,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6785476232239958,
+      "log_likelihood": -1.0920249712804357,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824767584634275,
+      "log_likelihood": -0.9316327280978969,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6833537975793721,
+      "log_likelihood": -0.9082464301105695,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6857744255393791,
+      "log_likelihood": -0.9743262084463364,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6866865462199614,
+      "log_likelihood": -1.073276697383927,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824065953341519,
+      "log_likelihood": -0.9957042931186685,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6827574109805298,
+      "log_likelihood": -0.988048083788067,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.68496754955271,
+      "log_likelihood": -1.0623231185075335,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6867216277845992,
+      "log_likelihood": -1.1642873304418278,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6754955271005086,
+      "log_likelihood": -1.2613356234107227,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6751797930187686,
+      "log_likelihood": -1.2654281291159772,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6778459919312402,
+      "log_likelihood": -1.3434635301894338,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 0.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6790387651289248,
+      "log_likelihood": -1.444307904746656,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9711051692687277,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.658480968251184,
+      "log_likelihood": -0.9419683859928863,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6639536923346782,
+      "log_likelihood": -0.9151787243822408,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6672864409752675,
+      "log_likelihood": -0.9035756293641954,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824767584634275,
+      "log_likelihood": -0.9316327280978969,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6701982108402035,
+      "log_likelihood": -0.9075228269302625,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6731450622697772,
+      "log_likelihood": -0.8868649327634929,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6751447114541309,
+      "log_likelihood": -0.8800379506942939,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824065953341519,
+      "log_likelihood": -0.9957042931186685,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.66914576390107,
+      "log_likelihood": -0.9787464318536281,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6713559024732503,
+      "log_likelihood": -0.9659559112763265,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6733906332222417,
+      "log_likelihood": -0.9644096952944297,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6754955271005086,
+      "log_likelihood": -1.2613356234107227,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6612173302929311,
+      "log_likelihood": -1.2492697032048983,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6634274688651114,
+      "log_likelihood": -1.2412386823666737,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 1.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.665251710226276,
+      "log_likelihood": -1.2422539668373267,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9711051692687277,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6590422732853886,
+      "log_likelihood": -0.9418360972721561,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6649710577091739,
+      "log_likelihood": -0.9145347300852852,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6675320119277319,
+      "log_likelihood": -0.9022398587554216,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824767584634275,
+      "log_likelihood": -0.9316327280978969,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6705139449219435,
+      "log_likelihood": -0.9073715795139465,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6735309594807929,
+      "log_likelihood": -0.8861524827417842,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6755306086651465,
+      "log_likelihood": -0.8785683814534521,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824065953341519,
+      "log_likelihood": -0.9957042931186685,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6692510085949833,
+      "log_likelihood": -0.978358386186502,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6721978600245571,
+      "log_likelihood": -0.964669421541203,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6741273460796352,
+      "log_likelihood": -0.9620566428496464,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6754955271005086,
+      "log_likelihood": -1.2613356234107227,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.66170847219786,
+      "log_likelihood": -1.248541461734378,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6640589370285914,
+      "log_likelihood": -1.2391392367025842,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 3.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6659533415190317,
+      "log_likelihood": -1.2386374034744114,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.671741799684266,
+      "log_likelihood": -0.9711051692687277,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.658480968251184,
+      "log_likelihood": -0.94355246847689,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6635677951236625,
+      "log_likelihood": -0.9193381841901652,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 0.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6648658130152605,
+      "log_likelihood": -0.9108837206051553,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824767584634275,
+      "log_likelihood": -0.9316327280978969,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6703385370987546,
+      "log_likelihood": -0.9092235555066741,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6716365549903526,
+      "log_likelihood": -0.8911415847623285,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 1.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6737414488686195,
+      "log_likelihood": -0.8873203569563588,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6824065953341519,
+      "log_likelihood": -0.9957042931186685,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.668970356077881,
+      "log_likelihood": -0.9798052837789387,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.6708296790036835,
+      "log_likelihood": -0.9684539650255646,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 3.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6732853885283283,
+      "log_likelihood": -0.9686681061632114,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 0.0
+      },
+      "accuracy": 0.6754955271005086,
+      "log_likelihood": -1.2613356234107227,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 2.0
+      },
+      "accuracy": 0.6617435537624978,
+      "log_likelihood": -1.2492451917534777,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 5.0
+      },
+      "accuracy": 0.663006490089458,
+      "log_likelihood": -1.24094003667254,
+      "n": 28505
+    },
+    {
+      "params": {
+        "alpha": 2.0,
+        "shrink": 10.0,
+        "nb": 6.0,
+        "vector": 8.0
+      },
+      "accuracy": 0.6652166286616383,
+      "log_likelihood": -1.2418887218893153,
+      "n": 28505
+    }
+  ],
+  "mixture": [
+    {
+      "semcor_weight": 0.0,
+      "evidence": 0.0,
+      "accuracy": 0.38596737414488685,
+      "log_likelihood": -1.5577788466008065,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.0,
+      "evidence": 1.0,
+      "accuracy": 0.38596737414488685,
+      "log_likelihood": -1.5577788466008065,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.0,
+      "evidence": 3.0,
+      "accuracy": 0.38596737414488685,
+      "log_likelihood": -1.5577788466008065,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.0,
+      "evidence": 10.0,
+      "accuracy": 0.38596737414488685,
+      "log_likelihood": -1.5577788466008065,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.0,
+      "evidence": 30.0,
+      "accuracy": 0.38596737414488685,
+      "log_likelihood": -1.5577788466008065,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.1,
+      "evidence": 0.0,
+      "accuracy": 0.5275916505876163,
+      "log_likelihood": -1.386722056294129,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.1,
+      "evidence": 1.0,
+      "accuracy": 0.5217330292931065,
+      "log_likelihood": -1.3904946883796991,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.1,
+      "evidence": 3.0,
+      "accuracy": 0.5143308191545343,
+      "log_likelihood": -1.3955785698365015,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.1,
+      "evidence": 10.0,
+      "accuracy": 0.5017365374495703,
+      "log_likelihood": -1.4063072227072013,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.1,
+      "evidence": 30.0,
+      "accuracy": 0.4824065953341519,
+      "log_likelihood": -1.4220711933584866,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.2,
+      "evidence": 0.0,
+      "accuracy": 0.6341343623925627,
+      "log_likelihood": -1.2734181524868726,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.2,
+      "evidence": 1.0,
+      "accuracy": 0.6293281880371865,
+      "log_likelihood": -1.2791412985551025,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.2,
+      "evidence": 3.0,
+      "accuracy": 0.6223118751096299,
+      "log_likelihood": -1.28728990984673,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.2,
+      "evidence": 10.0,
+      "accuracy": 0.6056832134713208,
+      "log_likelihood": -1.304914643817755,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.2,
+      "evidence": 30.0,
+      "accuracy": 0.5797579372039993,
+      "log_likelihood": -1.3312360572718462,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.3,
+      "evidence": 0.0,
+      "accuracy": 0.664620242062796,
+      "log_likelihood": -1.1868423211598749,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.3,
+      "evidence": 1.0,
+      "accuracy": 0.6611120855990177,
+      "log_likelihood": -1.1934209547200514,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.3,
+      "evidence": 3.0,
+      "accuracy": 0.6548324855288545,
+      "log_likelihood": -1.203502174398114,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.3,
+      "evidence": 10.0,
+      "accuracy": 0.6404490440273636,
+      "log_likelihood": -1.2259623080583615,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.3,
+      "evidence": 30.0,
+      "accuracy": 0.6166988247675846,
+      "log_likelihood": -1.2601144189445646,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.4,
+      "evidence": 0.0,
+      "accuracy": 0.6716014734257147,
+      "log_likelihood": -1.117224359340988,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.4,
+      "evidence": 1.0,
+      "accuracy": 0.6703385370987546,
+      "log_likelihood": -1.1237837192974067,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.4,
+      "evidence": 3.0,
+      "accuracy": 0.6649710577091739,
+      "log_likelihood": -1.1349765156813822,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.4,
+      "evidence": 10.0,
+      "accuracy": 0.6534292229433433,
+      "log_likelihood": -1.1608544063995863,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.4,
+      "evidence": 30.0,
+      "accuracy": 0.6337133836169093,
+      "log_likelihood": -1.2010224677395762,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.5,
+      "evidence": 0.0,
+      "accuracy": 0.6744430801613752,
+      "log_likelihood": -1.060020609082169,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.5,
+      "evidence": 1.0,
+      "accuracy": 0.6741273460796352,
+      "log_likelihood": -1.0657166105643523,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.5,
+      "evidence": 3.0,
+      "accuracy": 0.6713559024732503,
+      "log_likelihood": -1.0773245125700508,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.5,
+      "evidence": 10.0,
+      "accuracy": 0.6603052096123487,
+      "log_likelihood": -1.1055019709541838,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.5,
+      "evidence": 30.0,
+      "accuracy": 0.6417821434835994,
+      "log_likelihood": -1.1503220912917673,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.6,
+      "evidence": 0.0,
+      "accuracy": 0.6745132432906508,
+      "log_likelihood": -1.0129029871724098,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.6,
+      "evidence": 1.0,
+      "accuracy": 0.674969303630942,
+      "log_likelihood": -1.0167766627206212,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.6,
+      "evidence": 3.0,
+      "accuracy": 0.6729345728819506,
+      "log_likelihood": -1.0281225059056918,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.6,
+      "evidence": 10.0,
+      "accuracy": 0.6655674443080162,
+      "log_likelihood": -1.0576109650767216,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.6,
+      "evidence": 30.0,
+      "accuracy": 0.6491492720575338,
+      "log_likelihood": -1.1059589205664462,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.7,
+      "evidence": 0.0,
+      "accuracy": 0.6744079985967374,
+      "log_likelihood": -0.9748842405329997,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.7,
+      "evidence": 1.0,
+      "accuracy": 0.6745132432906508,
+      "log_likelihood": -0.9756602788687884,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.7,
+      "evidence": 3.0,
+      "accuracy": 0.6737414488686195,
+      "log_likelihood": -0.985987315760153,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.7,
+      "evidence": 10.0,
+      "accuracy": 0.6682336432204876,
+      "log_likelihood": -1.015802453015235,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.7,
+      "evidence": 30.0,
+      "accuracy": 0.6535695492018944,
+      "log_likelihood": -1.0666641888523671,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.8,
+      "evidence": 0.0,
+      "accuracy": 0.6741975092089108,
+      "log_likelihood": -0.94629926897641,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.8,
+      "evidence": 1.0,
+      "accuracy": 0.6746184879845641,
+      "log_likelihood": -0.941957456020977,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.8,
+      "evidence": 3.0,
+      "accuracy": 0.6742676723381863,
+      "log_likelihood": -0.9502710451266222,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.8,
+      "evidence": 10.0,
+      "accuracy": 0.6695316611120856,
+      "log_likelihood": -0.9792779073155867,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.8,
+      "evidence": 30.0,
+      "accuracy": 0.6561655849850904,
+      "log_likelihood": -1.0316336165024496,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.9,
+      "evidence": 0.0,
+      "accuracy": 0.6739519382564463,
+      "log_likelihood": -0.930144882278674,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.9,
+      "evidence": 1.0,
+      "accuracy": 0.6741975092089108,
+      "log_likelihood": -0.9165614576237935,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.9,
+      "evidence": 3.0,
+      "accuracy": 0.6743378354674618,
+      "log_likelihood": -0.9212049134147949,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.9,
+      "evidence": 10.0,
+      "accuracy": 0.6708647605683213,
+      "log_likelihood": -0.9477711369926256,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 0.9,
+      "evidence": 30.0,
+      "accuracy": 0.6591124364146641,
+      "log_likelihood": -1.0004134914961833,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 1.0,
+      "evidence": 0.0,
+      "accuracy": 0.6877039115944571,
+      "log_likelihood": -0.9479294455700684,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 1.0,
+      "evidence": 1.0,
+      "accuracy": 0.6741624276442729,
+      "log_likelihood": -0.9068452989446851,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 1.0,
+      "evidence": 3.0,
+      "accuracy": 0.6745834064199263,
+      "log_likelihood": -0.902344916964838,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 1.0,
+      "evidence": 10.0,
+      "accuracy": 0.6716014734257147,
+      "log_likelihood": -0.9223261600175219,
+      "n": 28505
+    },
+    {
+      "semcor_weight": 1.0,
+      "evidence": 30.0,
+      "accuracy": 0.66139273811612,
+      "log_likelihood": -0.9731421438282457,
+      "n": 28505
+    }
+  ],
+  "criterion": "SemCor document-held-out dev: accuracy for SemCor parameters, log-likelihood for temperatures and mixture weight"
+}

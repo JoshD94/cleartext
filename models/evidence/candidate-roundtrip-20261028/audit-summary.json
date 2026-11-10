@@ -1,0 +1,21 @@
+{
+  "cases": 929,
+  "changed_cases": 2,
+  "reason_counts": {
+    "outside_inflected_verbs": 695,
+    "valid_roundtrip": 225,
+    "unresolved_target": 6,
+    "equivalent_sense_inventory": 1,
+    "unique_dictionary_roundtrip": 2
+  },
+  "changed_ids": [
+    "benchls-310",
+    "benchls-141"
+  ],
+  "newly_dictionary_covered_generation_misses": 2,
+  "native_generation_parity_checked": false,
+  "meaning_accuracy": null,
+  "accepted_edits": 0,
+  "records_sha256": "f0a886475c43dbdb87ab2f828fe00793334a43a5c51a9d718f2494394bc782c6",
+  "manifest_sha256": "3e29b162445593374209d6032da8e75b4bd0c0039c9fdc09d4d4da5a9fdc9f5b"
+}

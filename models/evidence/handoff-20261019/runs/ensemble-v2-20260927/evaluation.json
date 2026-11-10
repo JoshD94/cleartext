@@ -1,0 +1,306 @@
+{
+  "swords_test": {
+    "generated": {
+      "auc": 0.7679337664112192,
+      "error_cost": 0.05,
+      "tiered": true,
+      "targets": 720,
+      "edits": 108,
+      "correct": 54,
+      "wrong": 54
+    },
+    "synonym_only_auc": 0.7813980605692468,
+    "by_source": {
+      "synonym": {
+        "pairs": 3422,
+        "positive_rate": 0.19579193454120397
+      },
+      "hypernym": {
+        "pairs": 2225,
+        "positive_rate": 0.1352808988764045
+      },
+      "similar": {
+        "pairs": 837,
+        "positive_rate": 0.2031063321385902
+      }
+    },
+    "all_costs": [
+      {
+        "error_cost": 0.0,
+        "tiered": false,
+        "targets": 720,
+        "edits": 494,
+        "correct": 167,
+        "wrong": 327
+      },
+      {
+        "error_cost": 0.01,
+        "tiered": false,
+        "targets": 720,
+        "edits": 262,
+        "correct": 126,
+        "wrong": 136
+      },
+      {
+        "error_cost": 0.02,
+        "tiered": false,
+        "targets": 720,
+        "edits": 188,
+        "correct": 95,
+        "wrong": 93
+      },
+      {
+        "error_cost": 0.03,
+        "tiered": false,
+        "targets": 720,
+        "edits": 145,
+        "correct": 72,
+        "wrong": 73
+      },
+      {
+        "error_cost": 0.05,
+        "tiered": false,
+        "targets": 720,
+        "edits": 108,
+        "correct": 57,
+        "wrong": 51
+      },
+      {
+        "error_cost": 0.075,
+        "tiered": false,
+        "targets": 720,
+        "edits": 83,
+        "correct": 44,
+        "wrong": 39
+      },
+      {
+        "error_cost": 0.1,
+        "tiered": false,
+        "targets": 720,
+        "edits": 65,
+        "correct": 36,
+        "wrong": 29
+      },
+      {
+        "error_cost": 0.15,
+        "tiered": false,
+        "targets": 720,
+        "edits": 42,
+        "correct": 24,
+        "wrong": 18
+      },
+      {
+        "error_cost": 0.2,
+        "tiered": false,
+        "targets": 720,
+        "edits": 24,
+        "correct": 15,
+        "wrong": 9
+      },
+      {
+        "error_cost": 0.3,
+        "tiered": false,
+        "targets": 720,
+        "edits": 12,
+        "correct": 4,
+        "wrong": 8
+      },
+      {
+        "error_cost": 0.0,
+        "tiered": true,
+        "targets": 720,
+        "edits": 494,
+        "correct": 162,
+        "wrong": 332
+      },
+      {
+        "error_cost": 0.01,
+        "tiered": true,
+        "targets": 720,
+        "edits": 262,
+        "correct": 122,
+        "wrong": 140
+      },
+      {
+        "error_cost": 0.02,
+        "tiered": true,
+        "targets": 720,
+        "edits": 188,
+        "correct": 93,
+        "wrong": 95
+      },
+      {
+        "error_cost": 0.03,
+        "tiered": true,
+        "targets": 720,
+        "edits": 145,
+        "correct": 69,
+        "wrong": 76
+      },
+      {
+        "error_cost": 0.05,
+        "tiered": true,
+        "targets": 720,
+        "edits": 108,
+        "correct": 54,
+        "wrong": 54
+      },
+      {
+        "error_cost": 0.075,
+        "tiered": true,
+        "targets": 720,
+        "edits": 83,
+        "correct": 43,
+        "wrong": 40
+      },
+      {
+        "error_cost": 0.1,
+        "tiered": true,
+        "targets": 720,
+        "edits": 65,
+        "correct": 34,
+        "wrong": 31
+      },
+      {
+        "error_cost": 0.15,
+        "tiered": true,
+        "targets": 720,
+        "edits": 42,
+        "correct": 22,
+        "wrong": 20
+      },
+      {
+        "error_cost": 0.2,
+        "tiered": true,
+        "targets": 720,
+        "edits": 24,
+        "correct": 13,
+        "wrong": 11
+      },
+      {
+        "error_cost": 0.3,
+        "tiered": true,
+        "targets": 720,
+        "edits": 12,
+        "correct": 3,
+        "wrong": 9
+      }
+    ],
+    "members_auc": {
+      "sense_fit": 0.7393799384977569,
+      "round_trip": 0.6034305207875581,
+      "first_sense": 0.7255195433736474,
+      "candidate_sense_rank": 0.5549740886492488,
+      "swords_checker": 0.711424172084241,
+      "context_vector": 0.5438880525979177,
+      "argument_fit": 0.5136391976658871,
+      "bigram": 0.6054648484678488,
+      "source=hypernym": 0.45185317869031094,
+      "source=similar": 0.5120779389285054,
+      "multiword=True": 0.4950917456850913,
+      "pos_fallback=True": 0.4979799431234656
+    }
+  },
+  "tsar": {
+    "dictionary_basic": {
+      "n": 373,
+      "edits": 196,
+      "correct": 85,
+      "match_among_edits": 0.4336734693877551,
+      "wrong_edits": 111,
+      "gold_generated": 196,
+      "no_candidates": 84
+    },
+    "previous_sense_and_guards": {
+      "n": 373,
+      "edits": 97,
+      "correct": 52,
+      "match_among_edits": 0.5360824742268041,
+      "wrong_edits": 45,
+      "gold_generated": 196,
+      "no_candidates": 84
+    },
+    "ensemble_v1": {
+      "n": 373,
+      "edits": 180,
+      "correct": 87,
+      "match_among_edits": 0.48333333333333334,
+      "wrong_edits": 93,
+      "gold_generated": 196,
+      "no_candidates": 84
+    },
+    "ensemble_v2": {
+      "n": 373,
+      "edits": 223,
+      "correct": 119,
+      "match_among_edits": 0.5336322869955157,
+      "wrong_edits": 104,
+      "gold_generated": 310,
+      "no_candidates": 10
+    },
+    "v2_correct_by_source": {
+      "synonym": 65,
+      "hypernym": 42,
+      "similar": 12
+    },
+    "v2_edits_by_source": {
+      "synonym": 118,
+      "hypernym": 91,
+      "similar": 14
+    },
+    "diagnostic_sweep": [
+      {
+        "error_cost": 0.0,
+        "edits": 345,
+        "correct": 144
+      },
+      {
+        "error_cost": 0.01,
+        "edits": 334,
+        "correct": 140
+      },
+      {
+        "error_cost": 0.02,
+        "edits": 309,
+        "correct": 127
+      },
+      {
+        "error_cost": 0.03,
+        "edits": 283,
+        "correct": 123
+      },
+      {
+        "error_cost": 0.05,
+        "edits": 253,
+        "correct": 115
+      },
+      {
+        "error_cost": 0.075,
+        "edits": 222,
+        "correct": 101
+      },
+      {
+        "error_cost": 0.1,
+        "edits": 194,
+        "correct": 89
+      },
+      {
+        "error_cost": 0.15,
+        "edits": 138,
+        "correct": 69
+      },
+      {
+        "error_cost": 0.2,
+        "edits": 115,
+        "correct": 55
+      },
+      {
+        "error_cost": 0.3,
+        "edits": 76,
+        "correct": 37
+      }
+    ]
+  },
+  "note": "SWORDS test and TSAR test were used in earlier experiments; exploratory only. No labels from them fit or selected any model.",
+  "runtime_seconds": 46.75811147689819
+}

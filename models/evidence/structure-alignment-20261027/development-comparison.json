@@ -1,0 +1,72 @@
+{
+  "stage": "Reused development, not held-out evaluation",
+  "comparisons": {
+    "aligned_dev": {
+      "n": 101,
+      "epochs": [
+        {
+          "step": 453,
+          "overlap_delta_bootstrap": {
+            "mean_delta": -0.2743863072545131,
+            "ci95": [
+              -1.984851780360885,
+              1.2515556993918706
+            ],
+            "resamples": 1000
+          },
+          "output_changed_vs_initializer": 3
+        },
+        {
+          "step": 906,
+          "overlap_delta_bootstrap": {
+            "mean_delta": 2.534515415458016,
+            "ci95": [
+              0.6086388208713344,
+              4.7894917119189815
+            ],
+            "resamples": 1000
+          },
+          "output_changed_vs_initializer": 5
+        }
+      ]
+    },
+    "broad_dev": {
+      "n": 96,
+      "epochs": [
+        {
+          "step": 453,
+          "overlap_delta_bootstrap": {
+            "mean_delta": 0.7475192644924399,
+            "ci95": [
+              -0.377751699870033,
+              2.3092534511416276
+            ],
+            "resamples": 1000
+          },
+          "output_changed_vs_initializer": 3
+        },
+        {
+          "step": 906,
+          "overlap_delta_bootstrap": {
+            "mean_delta": 1.3087263347189975,
+            "ci95": [
+              0.012410213240131881,
+              3.029810334060053
+            ],
+            "resamples": 1000
+          },
+          "output_changed_vs_initializer": 4
+        }
+      ]
+    }
+  },
+  "trace_sha256": {
+    "decoded-dev-0.json": "c8716620e8d478ec73cf4568633ba64b4cb18085c9fe6960b340cdd93e06156f",
+    "decoded-dev-1.json": "d9c53ead77393a8f3b18c1dddada3b94f40fef6ea616155ec8fb01a3bcd29ef7",
+    "decoded-dev-2.json": "cb17066fcffc0625094b30d0fe8e9e03204f775bb0bfd355bc1927733f0b3a55"
+  },
+  "limitations": [
+    "Both panels were used for checkpoint selection. Bootstrap intervals here are development diagnostics.",
+    "Reference overlap is not correctness, grammaticality or ease of reading."
+  ]
+}
