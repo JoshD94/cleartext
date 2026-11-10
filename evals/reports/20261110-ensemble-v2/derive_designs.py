@@ -1,6 +1,7 @@
-"""Derive the phase C2 interaction design from phase C activity results (DESIGN.md rule).
+"""Derive designs mechanically from the DESIGN.md rules.
 
-    python derive_designs.py aggregate-ofat.json design-interactions.json
+    python derive_designs.py aggregate-ofat.json design-interactions.json   # phase C2
+    python derive_designs.py --ablation aggregate.json design-ablation.json # phase D, from the best
 """
 
 import json
@@ -48,7 +49,52 @@ def interactions(active, words=("v7", "contextual", "off")):
     return names
 
 
+def ablation(best):
+    """Phase D: remove or replace each component of the best config one at a time."""
+    b = S.parse_id(best)
+    changes = [("structure", l) for l in ("off", "rules", "t5", "compound_tagger", "t5+compound_tagger")]
+    if "t5" in b["structure"]:
+        changes += [("structure", "t5_raw"), ("structure", "t5_unchecked")]
+    changes += [("phrases", l) for l in S.FACTORS["phrases"]]
+    changes += [("passive", l) for l in S.FACTORS["passive"]]
+    changes += [("words", l) for l in ("v7", "contextual", "contextual_veto", "off")]
+    changes += [("negation", "on"), ("grammar", "on"), ("terms", "on")]
+    rows = [{"remove_or_replace": f"{k}: {b[k]} -> {v}", "id": S.config_id({**b, k: v}),
+             "config": S.normalize({**b, k: v})} for k, v in changes if b[k] != v]
+    # Stage chain in pipeline order: passive, structure, authored phrases, finder, words.
+    off = S.normalize({"words": "off", "phrases": "off", "structure": "off"})
+    steps, current = [("all stages off", dict(off))], dict(off)
+    finder = b["phrases"].split("+")[-1] if b["phrases"] not in ("authored", "off") else None
+    authored = b["phrases"] in ("authored", "authored+simpleppdb", "authored+crf")
+    for title, key, value in (("+ passive", "passive", b["passive"]),
+                              ("+ structure", "structure", b["structure"]),
+                              ("+ authored phrases", "phrases", "authored" if authored else "off"),
+                              ("+ Chhoeng's finder", "phrases", b["phrases"] if finder else None),
+                              ("+ words", "words", b["words"])):
+        if value is None or current[key] == value:
+            continue
+        current = {**current, key: value}
+        steps.append((f"{title} ({value.replace('_', ' ')})", dict(current)))
+    assert S.config_id(current) == best
+    configs = [S.normalize(b)] + [r["config"] for r in rows] + [c for _, c in steps]
+    names = [S.config_id(c) for c in configs]
+    return {"phase": "D (ablations from the best ensemble)", "rule": "DESIGN.md, phase D", "best": best,
+            "ablations": rows,
+            "chain": {"stages": ["original"] + [t for t, _ in steps], "configs": [S.config_id(c) for _, c in steps]},
+            "key_configs": ["original", "rule_based", V, S.config_id({**S.parse_id(W), "words": "contextual"}),
+                            S.config_id({**S.parse_id(W), "words": "contextual_veto"}), W, best],
+            "configs": [c for k, c in enumerate(configs) if names[k] not in names[:k]]}
+
+
 def main():
+    if sys.argv[1] == "--ablation":
+        agg = json.loads(Path(sys.argv[2]).read_text())
+        out = ablation(agg["frozen_selection"]["winner"])
+        out["key_configs"] = list(dict.fromkeys(out["key_configs"]))
+        out["new_configs"] = [S.config_id(c) for c in out["configs"] if S.config_id(c) not in agg["configs"]]
+        Path(sys.argv[3]).write_text(json.dumps(out, indent=1) + "\n")
+        print(out["best"], len(out["configs"]), "configs,", len(out["new_configs"]), "new")
+        return
     agg = json.loads(Path(sys.argv[1]).read_text())
     active = active_levels(agg)
     known = set(agg["configs"])

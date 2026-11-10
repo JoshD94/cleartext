@@ -1,0 +1,23 @@
+{
+ "phase": "ASSET tie-break (frozen rule: configs tied with the C/C2 winner)",
+ "configs": [
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5_raw",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  }
+ ]
+}
