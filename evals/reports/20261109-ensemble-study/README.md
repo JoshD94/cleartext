@@ -1,7 +1,7 @@
 # Non-LLM ensemble study, November 9, 2026
 
 Which combination of the existing non-LLM stages simplifies the 90 sourced
-development passages most, without failing the meaning gates? Sixteen configs
+development passages most, without failing the meaning gates? Fourteen configs
 plus `original` and `rule_based` ran on the same 90 passages as Week 7
 (30 each from computer science, corporate communication and political
 science). The finalists also ran on all 359 ASSET test sentences. No LLM is
@@ -89,7 +89,7 @@ read, and the selection rule was committed before any scoring run.
 - **ASSET finalists** ([design-asset.json](design-asset.json)): the three
   configs that pass, the two Pareto configs nearest the NLI gate, and the
   v7 and contextual baselines.
-- **Not run:** 192 − 16 configs. SimplePPDB phrases are not on main, so that
+- **Not run:** 178 of the 192 configs. SimplePPDB phrases are not on main, so that
   level was skipped. Passive-to-active is excluded until the teammate branch
   lands (see "Adding passive" below).
 
@@ -125,6 +125,11 @@ Notes:
 - SARI is HF `evaluate`'s port of Xu et al. 2016 with 0/0 = 0, as in the
   original script. Under `evaluate`'s 0/0 = 1 convention the untouched
   source scores 53.8 and outranks every system; both are in the JSON.
+- **Disclosure:** the harness committed before scoring (`31f2334`) used
+  0/0 = 1 for the tie-break. It was switched to 0/0 = 0 in `c940ad9`, after
+  the ASSET scores were in. The frozen winner does not depend on SARI (no tie),
+  but alt 2 below does: under the pre-registered 0/0 = 1 convention, words
+  off + t5 (52.50) beats contextual + t5 (47.98).
 
 ## Gate calibration and labeled alternative rankings
 
@@ -143,7 +148,7 @@ The frozen file is unchanged. Two calibration problems showed up:
 |---|---|---|
 | Frozen rule | words off + t5 | Passing: words off + {t5, compound_tagger, rules} |
 | Alt 1: gate 4 on non-initial entities | words off + t5 | Same passing set |
-| Alt 2: alt 1 + gates 1–2 on sentence-level NLI | contextual + t5 | Tied with words off + t5 within 0.1 grade; SARI 39.8 vs 24.2 breaks the tie |
+| Alt 2: alt 1 + gates 1–2 on sentence-level NLI | contextual + t5 (0/0 = 0) or words off + t5 (pre-registered 0/0 = 1) | Tied with words off + t5 within 0.1 grade; the SARI tie-break flips with the convention: 39.8 vs 24.2 (0/0 = 0), 47.98 vs 52.50 (0/0 = 1) |
 
 Alt 2 is looser than it looks: sentence-level means are diluted by
 unchanged sentences. It is the ranking to use if Joshua decides the
