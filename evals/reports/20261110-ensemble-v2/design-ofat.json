@@ -1,0 +1,155 @@
+{
+ "phase": "C (v2 OFAT)",
+ "design": "one-factor-at-a-time for the new levels from the frozen Nov 9 winner (W) and from the v7 baseline (V)",
+ "bases": {
+  "W": "words=off|phrases=authored|structure=t5|negation=off|grammar=off|terms=off",
+  "V": "words=v7|phrases=authored|structure=rules|negation=off|grammar=off|terms=off"
+ },
+ "why": "Isolates each new level's main effect on both the meaning-safe winner and the word-substituting v7 stack; W and V are regenerated under the new source tree as a reproduction check against the Nov 9 cells.",
+ "configs": [
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "on"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "agentive"
+  },
+  {
+   "words": "off",
+   "phrases": "simpleppdb",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored+simpleppdb",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "crf",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored+crf",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "on"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "agentive"
+  },
+  {
+   "words": "v7",
+   "phrases": "simpleppdb",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored+simpleppdb",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "crf",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored+crf",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  }
+ ]
+}

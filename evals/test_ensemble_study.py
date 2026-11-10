@@ -12,11 +12,11 @@ from evals.sari import corpus_sari
 
 def test_ofat_design_covers_every_single_change_once():
     rows = S.ofat()
-    assert rows[0] == S.BASELINE
+    assert rows[0] == S.normalize(S.BASELINE)
     assert len(rows) == 1 + sum(len(v) - 1 for v in S.FACTORS.values())
     assert len({S.config_id(r) for r in rows}) == len(rows)
     for row in rows[1:]:
-        assert sum(row[k] != S.BASELINE[k] for k in S.FACTORS) == 1
+        assert sum(row[k] != S.normalize(S.BASELINE)[k] for k in S.FACTORS) == 1
 
 
 def test_factorial_and_ids_round_trip():
@@ -27,7 +27,7 @@ def test_factorial_and_ids_round_trip():
     with pytest.raises(ValueError):
         S.normalize({"words": "llm"})
     with pytest.raises(ValueError):
-        S.normalize({"passive": "on"})
+        S.normalize({"passive": "maybe"})
 
 
 def test_adding_a_later_factor_keeps_existing_ids(monkeypatch):
@@ -237,3 +237,47 @@ def test_recommended_config_settings(tmp_path):
     bad.write_text(json.dumps({"factors": {"structure": "t5"}}))
     with pytest.raises(ValueError, match="structure_checkpoint"):
         S.settings(bad)
+
+
+def test_passive_and_new_levels_keep_nov9_ids():
+    winner = {"words": "off", "phrases": "authored", "structure": "t5"}
+    assert S.config_id(winner) == ("words=off|phrases=authored|structure=t5|negation=off|"
+                                   "grammar=off|terms=off")
+    assert S.config_id({**winner, "passive": "on"}).endswith("|passive=on")
+    assert S.parse_id(S.config_id({**winner, "phrases": "authored+crf"}))["phrases"] == "authored+crf"
+
+
+def test_paired_delta_bootstrap():
+    out = S.paired_delta([1.0, 2.0, 3.0, 4.0], [1.0, 1.0, 1.0, 1.0], resamples=2000)
+    assert out["mean"] == pytest.approx(1.5) and out["passages_nonzero"] == 3
+    assert out["ci95"][0] < 1.5 < out["ci95"][1]
+    assert S.paired_delta([1.0, None], [0.5, 0.5])["n"] == 1
+    zero = S.paired_delta([2.0, 2.0], [2.0, 2.0])
+    assert zero["ci95"] == [0.0, 0.0] and zero["passages_nonzero"] == 0
+
+
+def test_memo_fallback_reads_old_state_and_writes_new(tmp_path):
+    old = S.DiskMemo(tmp_path / "old", "t5", "o" * 64)
+    old["A b."] = {"output": "A b.", "raw": "A. B."}
+    memo = S.DiskMemo(tmp_path / "new", "t5", "n" * 64, (tmp_path / "old", "o" * 64))
+    assert "A b." in memo and memo["A b."]["raw"] == "A. B."
+    memo["C d."] = {"output": "C d.", "raw": "C d."}
+    assert "C d." not in old and S.DiskMemo(tmp_path / "new", "t5", "n" * 64)["C d."]["raw"] == "C d."
+
+
+def test_state_signatures_come_from_batch_receipts(tmp_path):
+    (tmp_path / "batches").mkdir()
+    for k in range(2):
+        (tmp_path / "batches" / f"{k}.json").write_text(json.dumps(
+            {"generation_signature": "g" * 64, "scoring_signature": "s" * 64}))
+    assert S.state_signatures(tmp_path) == ("g" * 64, "s" * 64)
+    (tmp_path / "batches" / "2.json").write_text(json.dumps(
+        {"generation_signature": "h" * 64, "scoring_signature": "s" * 64}))
+    with pytest.raises(ValueError, match="signature pairs"):
+        S.state_signatures(tmp_path)
+
+
+def test_ast_check_ignores_only_analyze():
+    base = "class EnsembleClearText:\n    def analyze(self):\n        return 1\n    def decide(self):\n        return 2\n"
+    assert S._without_analyze(base.encode()) == S._without_analyze(base.replace("return 1", "return 3").encode())
+    assert S._without_analyze(base.encode()) != S._without_analyze(base.replace("return 2", "return 3").encode())

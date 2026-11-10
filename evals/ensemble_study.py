@@ -15,6 +15,11 @@ A factor added later (e.g. passive-to-active) goes in FACTORS with its legacy
 level in LEGACY: configs at that level keep their old IDs, so a rerun only adds
 cells. `report` accepts several state dirs and refuses to merge conflicting
 outputs for the same cell.
+
+`freeze --reuse-state OLD` lets a new plan read OLD's T5, grammar and lexical
+decision memos and its metrics, only after checking that everything those
+caches depend on is unchanged (see reuse_compatibility). Outputs are never
+reused: old cells come in through `report --state OLD --state NEW`.
 """
 
 import argparse
@@ -37,17 +42,24 @@ from .checkpoints import digest, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Level order matters only for display. "simpleppdb" phrases are not on main.
+# Level order matters only for display. Levels after the first four rows' old
+# ones were added on 2026-11-10 (ensemble v2): Chhoeng's phrase finder as
+# "simpleppdb" (his SimplePPDB list) and "crf" (his default sources: manual,
+# verified and the CRF detector with phrase_replacer.py), alone or after the
+# authored rules; stacked/ablated T5; and a vetoed contextual word stage.
 FACTORS = {
-    "words": ("v7", "contextual", "off"),
-    "phrases": ("authored", "off"),
-    "structure": ("rules", "t5", "compound_tagger", "off"),
+    "words": ("v7", "contextual", "off", "contextual_veto"),
+    "phrases": ("authored", "off", "simpleppdb", "authored+simpleppdb", "crf", "authored+crf"),
+    "structure": ("rules", "t5", "compound_tagger", "off", "t5+compound_tagger", "t5_raw",
+                  "t5_unchecked"),
     "negation": ("off", "on"),
     "grammar": ("off", "on"),
     "terms": ("off", "on"),
+    "passive": ("off", "on", "agentive"),
 }
 # Factors added after the first run, with the level that reproduces old behaviour.
-LEGACY = {}
+LEGACY = {"passive": "off"}
+FINDER_SOURCES = {"simpleppdb": ("simpleppdb",), "crf": ("manual", "verified", "model")}
 BASELINE = {"words": "v7", "phrases": "authored", "structure": "rules",
             "negation": "off", "grammar": "off", "terms": "off"}
 REFERENCES = ("original", "rule_based")
@@ -135,9 +147,19 @@ def _run_dependencies(run):
     return [p for p in found if p.is_file()]
 
 
+def teammate_sources():
+    """Chhoeng's stage code and data (passive/, pos_tag/), loaded by teammate_stages."""
+    names = ["pos_tag.py", "phrase_finder.py", "phrase_model.py", "phrase_replacer.py",
+             "manual_phrases.csv", "verified_phrases.csv", "simpleppdb_phrases.csv",
+             "learned_replacements.csv", "phrase_crf.crfsuite", "phrase_crf.json",
+             "replacer_settings.json"]
+    return [ROOT / "passive/passive_to_active.py", *(ROOT / "pos_tag" / n for n in names)]
+
+
 def generation_sources():
     return sorted([*(ROOT / "models/src/cleartext").rglob("*.py"), ROOT / "evals/baselines.py",
-                   ROOT / "evals/pipeline_benchmark.py", ROOT / "evals/data/simplification_dict.json"])
+                   ROOT / "evals/pipeline_benchmark.py", ROOT / "evals/data/simplification_dict.json",
+                   *teammate_sources()])
 
 
 def scoring_sources():
@@ -159,11 +181,19 @@ def freeze(args):
         "languagetool": {"dir": str(args.languagetool.resolve()), "java": str(args.java.resolve()),
                          "port": args.languagetool_port},
     }
+    if args.teammate_nli:
+        # phrase_replacer.py's BERT, similarity and NLI models, pinned to local snapshots.
+        generation["teammate_models"] = {"bert": str(args.encoder.resolve()),
+                                         "similarity": str(args.embedding.resolve()),
+                                         "nli": str(args.teammate_nli.resolve())}
+        generation["teammate_packages"] = {n: version(n) for n in ("python-crfsuite",)}
     artifacts = []
     for run in generation["runs"].values():
         artifacts += _run_dependencies(run)
     for key in ("t5", "tagger", "encoder"):
         artifacts += _files(generation[key])
+    for path in generation.get("teammate_models", {}).values():
+        artifacts += _files(path)
     artifacts += _files(Path(generation["languagetool"]["dir"]) / "languagetool-server.jar")
     evaluation = {"embedding": str(args.embedding.resolve()), "nli": str(args.nli.resolve())}
     eval_artifacts = _files(args.embedding) + _files(args.nli)
@@ -180,6 +210,8 @@ def freeze(args):
         "scoring_sources_sha256": {str(p): sha(p) for p in scoring_sources()},
         "runtime": runtime(),
     }
+    if args.reuse_state:
+        plan["reuse"] = reuse_compatibility(args.reuse_state.resolve(), plan)
     state.mkdir(parents=True, exist_ok=True)
     path = state / "plan.json"
     if path.exists():
@@ -187,6 +219,65 @@ def freeze(args):
     write_json(path, plan)
     print(f"Froze {path}: {len(plan['generation_artifacts_sha256'])} generation and "
           f"{len(plan['evaluation_artifacts_sha256'])} evaluation artifacts")
+
+
+def _source_at(head, path):
+    rel = Path(path).relative_to(ROOT)
+    return subprocess.run(["git", "show", f"{head}:{rel}"], cwd=ROOT, capture_output=True,
+                          check=True).stdout
+
+
+def _without_analyze(source):
+    """ensemble_pipeline.py's AST minus EnsembleClearText.analyze (the only
+    function the memoized stages do not call)."""
+    import ast
+    tree = ast.parse(source)
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ClassDef) and node.name == "EnsembleClearText":
+            node.body = [n for n in node.body if not (isinstance(n, ast.FunctionDef) and n.name == "analyze")]
+    return hashlib.sha256(ast.dump(tree).encode()).hexdigest()
+
+
+def reuse_compatibility(old_state, plan):
+    """Allow memo/metric reuse from old_state only if their inputs are unchanged.
+
+    T5 sentence outputs, grammar corrections and lexical decision rows depend
+    on the frozen artifacts, the runtime, every source file except
+    ensemble_pipeline.analyze (new opt-in stages live there and in new files)
+    and the memo code in StudyGenerator, which keeps the same keys and values.
+    Metrics are reused only under an identical scoring signature.
+    """
+    old = json.loads((old_state / "plan.json").read_text())
+    problems = []
+    if old["runtime"] != plan["runtime"]:
+        problems.append("runtime")
+    for key in ("runs", "t5", "tagger", "encoder", "nltk_data", "languagetool"):
+        if old["generation"][key] != plan["generation"][key]:
+            problems.append(f"generation.{key}")
+    for path, digest_ in old["generation_artifacts_sha256"].items():
+        if plan["generation_artifacts_sha256"].get(path) != digest_:
+            problems.append(f"artifact {path}")
+    pipeline = str(ROOT / "models/src/cleartext/ensemble_pipeline.py")
+    for path, digest_ in old["generation_sources_sha256"].items():
+        if path == pipeline:
+            continue
+        if plan["generation_sources_sha256"].get(path) != digest_:
+            problems.append(f"source {path}")
+    old_pipeline = _source_at(old["head"], pipeline)
+    if hashlib.sha256(old_pipeline).hexdigest() != old["generation_sources_sha256"][pipeline]:
+        problems.append("old ensemble_pipeline.py is not the frozen one")
+    same_pipeline = _without_analyze(old_pipeline) == _without_analyze(Path(pipeline).read_bytes())
+    if not same_pipeline:
+        problems.append("ensemble_pipeline.py changed outside analyze()")
+    added = sorted(set(plan["generation_sources_sha256"]) - set(old["generation_sources_sha256"]))
+    if problems:
+        raise SystemExit("Cannot reuse " + str(old_state) + ": " + "; ".join(problems))
+    old_gen, old_score = state_signatures(old_state)
+    return {"state": str(old_state), "generation_signature": old_gen, "scoring_signature": old_score,
+            "memos": ["t5", "grammar", "decisions"],
+            "metrics": old_score == signatures(plan)[1],
+            "ensemble_pipeline_without_analyze_sha256": _without_analyze(old_pipeline),
+            "sources_added": added, "old_head": old["head"]}
 
 
 def runtime():
@@ -227,6 +318,21 @@ def signatures(plan):
     return gen, score
 
 
+def state_signatures(state):
+    """The (generation, scoring) signatures a state's batches ran under.
+
+    Read from batch receipts, because signatures() hashes the current harness
+    source and so changes for older states once StudyGenerator is edited.
+    """
+    found = {(r["generation_signature"], r["scoring_signature"])
+             for r in (json.loads(p.read_text()) for p in (Path(state) / "batches").glob("*.json"))}
+    if not found:
+        return signatures(json.loads((Path(state) / "plan.json").read_text()))
+    if len(found) != 1:
+        raise ValueError(f"{state} has batches under {len(found)} signature pairs")
+    return found.pop()
+
+
 # --- storage ------------------------------------------------------------------
 
 def _plain(value):
@@ -236,15 +342,17 @@ def _plain(value):
 class StudyStore:
     """Outputs keyed by generation signature; metrics by scoring signature."""
 
-    def __init__(self, root, generation_signature, scoring_signature):
+    def __init__(self, root, generation_signature, scoring_signature, metric_fallback=None):
         self.root = Path(root)
         self.gen, self.score = generation_signature, scoring_signature
+        # Another state's root with the same scoring signature (plan["reuse"]).
+        self.metric_fallback = Path(metric_fallback) if metric_fallback else None
 
     def _output_path(self, passage, name):
         return self.root / "outputs" / self.gen[:16] / (digest([passage["id"], name]) + ".json")
 
-    def _metric_path(self, source, output):
-        return self.root / "metrics" / self.score[:16] / (digest([source, output]) + ".json")
+    def _metric_path(self, source, output, root=None):
+        return (root or self.root) / "metrics" / self.score[:16] / (digest([source, output]) + ".json")
 
     def _identity(self, passage, name):
         return {"signature": self.gen, "id": passage["id"], "config": name,
@@ -268,6 +376,8 @@ class StudyStore:
 
     def metrics(self, source, output):
         path = self._metric_path(source, output)
+        if not path.exists() and self.metric_fallback:
+            path = self._metric_path(source, output, self.metric_fallback)
         if not path.exists():
             return None
         value = json.loads(path.read_text())
@@ -284,17 +394,21 @@ class StudyStore:
 class DiskMemo:
     """JSON memo for deterministic stage calls, keyed by exact input."""
 
-    def __init__(self, root, namespace, signature):
+    def __init__(self, root, namespace, signature, fallback=None):
         self.dir = Path(root) / "memo" / signature[:16] / namespace
         self.signature = signature
+        # Read-only (root, signature) of a compatible older state (plan["reuse"]).
+        self.fallback = DiskMemo(fallback[0], namespace, fallback[1]) if fallback else None
 
     def _path(self, key):
         return self.dir / (digest(key) + ".json")
 
     def __contains__(self, key):
-        return self._path(key).exists()
+        return self._path(key).exists() or (self.fallback is not None and key in self.fallback)
 
     def __getitem__(self, key):
+        if not self._path(key).exists() and self.fallback is not None:
+            return self.fallback[key]
         value = json.loads(self._path(key).read_text())
         if value["key"] != key or value["signature"] != self.signature:
             raise ValueError("Memo identity changed")
@@ -313,13 +427,17 @@ class StudyGenerator:
         self.plan, self.state, self.signature, self.threads = plan, Path(state), signature, threads
         self.pipes, self.decisions, self.dirty = {}, {}, set()
         self._t5 = self._compound = self._grammar = self._dictionary = None
+        self._remembered_t5, self._structure, self._passive, self._finders = None, {}, {}, {}
+        self._veto = None
+        reuse = plan.get("reuse")
+        self.fallback = (reuse["state"], reuse["generation_signature"]) if reuse else None
 
     def _limit_threads(self):
         import torch
         torch.set_num_threads(self.threads)
 
     def pipe(self, level):
-        level = "v7" if level == "off" else level
+        level = {"off": "v7", "contextual_veto": "contextual"}.get(level, level)
         if level in self.pipes:
             return self.pipes[level]
         import nltk
@@ -370,19 +488,21 @@ class StudyGenerator:
         self.pipes[level] = pipe
         return pipe
 
-    def _decision_path(self, level, passage):
-        return (self.state / "memo" / self.signature[:16] / "decisions" / level
-                / (digest([passage["id"], passage["original"]]) + ".pkl"))
+    def _decision_path(self, level, passage, root=None, signature=None):
+        return (Path(root or self.state) / "memo" / (signature or self.signature)[:16] / "decisions"
+                / level / (digest([passage["id"], passage["original"]]) + ".pkl"))
 
     def begin(self, passage):
         """Bound memory to one passage and reload its persisted decision rows."""
         self.decisions = {}
         self.dirty = set()
         for level in self.plan["generation"]["runs"]:
-            path = self._decision_path(level, passage)
+            path, signature = self._decision_path(level, passage), self.signature
+            if not path.exists() and self.fallback:
+                path, signature = self._decision_path(level, passage, *self.fallback), self.fallback[1]
             if path.exists():
                 value = pickle.loads(path.read_bytes())
-                if value["signature"] != self.signature or value["id"] != passage["id"]:
+                if value["signature"] != signature or value["id"] != passage["id"]:
                     raise ValueError("Decision cache identity changed")
                 self.decisions[level] = value["cache"]
 
@@ -396,24 +516,39 @@ class StudyGenerator:
             temporary.replace(path)
         self.dirty = set()
 
+    def _t5_generator(self):
+        if self._remembered_t5 is None:
+            generator = []  # Loaded on the first memo miss only.
+            memo = DiskMemo(self.state, "t5", self.signature, self.fallback)
+            study = self
+
+            class Remembered:
+                def predict(_, sentence):
+                    if sentence not in memo:
+                        if not generator:
+                            from cleartext.structure.seq2seq import SentenceGenerator
+                            generator.append(SentenceGenerator(study.plan["generation"]["t5"], device="cpu"))
+                            study._limit_threads()
+                        result = generator[0].predict(sentence)
+                        memo[sentence] = {"output": result["output"], "raw": result["raw"]}
+                    return memo[sentence]
+
+            self._remembered_t5 = Remembered()
+        return self._remembered_t5
+
     def structure_rewriter(self, level):
-        if level == "t5":
-            if self._t5 is None:
-                from cleartext.structure.seq2seq import SentenceGenerator
+        """t5: per-sentence generation checks, then the passage structure checks.
+        t5_raw drops the generation checks; t5_unchecked drops both."""
+        if level in ("t5", "t5_raw", "t5_unchecked"):
+            if level not in self._structure:
                 from evals.pipeline_benchmark import SentencewiseGenerator
-                generator = SentenceGenerator(self.plan["generation"]["t5"], device="cpu")
-                self._limit_threads()
-                memo = DiskMemo(self.state, "t5", self.signature)
-
-                class Remembered:
-                    def predict(_, sentence):
-                        if sentence not in memo:
-                            result = generator.predict(sentence)
-                            memo[sentence] = {"output": result["output"], "raw": result["raw"]}
-                        return memo[sentence]
-
-                self._t5 = SentencewiseGenerator(Remembered(), cache={})
-            return self._t5
+                model = SentencewiseGenerator(self._t5_generator(), guarded=level == "t5", cache={})
+                if level == "t5_unchecked":
+                    model.validate = lambda source, output: {"pass": True, "checks": {}, "failed": []}
+                self._structure[level] = model
+            return self._structure[level]
+        if level == "t5+compound_tagger":
+            return [self.structure_rewriter("t5"), self.structure_rewriter("compound_tagger")]
         if level == "compound_tagger":
             if self._compound is None:
                 from cleartext.structure.compound import DependencyCompoundSplitter
@@ -422,11 +557,53 @@ class StudyGenerator:
             return self._compound
         return None
 
+    def passive(self, level):
+        if level == "off":
+            return None
+        if level not in self._passive:
+            from cleartext.teammate_stages import PassiveStage
+            self._passive[level] = PassiveStage(placeholder="auto" if level == "on" else None)
+        return self._passive[level]
+
+    def phrase_finder(self, level):
+        """Chhoeng's finder for a phrases level, memoized per input text."""
+        name = level.split("+")[-1]
+        if name not in FINDER_SOURCES:
+            return None
+        if name not in self._finders:
+            memo = DiskMemo(self.state, "finder-" + name, self.signature)
+            study, stage = self, []
+
+            class Remembered:
+                def rewrite(_, text):
+                    if text not in memo:
+                        if not stage:
+                            from cleartext.teammate_stages import PhraseFinderStage
+                            stage.append(PhraseFinderStage(FINDER_SOURCES[name],
+                                                           study.plan["generation"]["teammate_models"]))
+                            study._limit_threads()
+                        output, edits = stage[0].rewrite(text)
+                        memo[text] = {"output": output, "edits": edits}
+                    value = memo[text]
+                    return value["output"], copy.deepcopy(value["edits"])
+
+            self._finders[name] = Remembered()
+        return self._finders[name]
+
+    def word_veto(self, level):
+        if level != "contextual_veto":
+            return None
+        if self._veto is None:
+            from cleartext.teammate_stages import EntailmentVeto
+            self._veto = EntailmentVeto(model=self.plan["generation"]["teammate_models"]["nli"])
+            self._limit_threads()
+        return self._veto
+
     def grammar(self):
         if self._grammar is None:
             from cleartext.grammar_preprocessing import GrammarCorrector
             corrector = GrammarCorrector(server=f"http://127.0.0.1:{self.plan['generation']['languagetool']['port']}")
-            memo = DiskMemo(self.state, "grammar", self.signature)
+            memo = DiskMemo(self.state, "grammar", self.signature, self.fallback)
 
             class Remembered:
                 def correct(_, text):
@@ -456,12 +633,15 @@ class StudyGenerator:
             result = pipe.analyze(
                 text,
                 structure=config["structure"] != "off",
-                phrases=config["phrases"] != "off",
+                phrases=config["phrases"] in ("authored", "authored+simpleppdb", "authored+crf"),
                 words=config["words"] != "off",
                 structure_rewriter=self.structure_rewriter(config["structure"]),
                 grammar_corrector=self.grammar() if config["grammar"] == "on" else None,
                 guardrails=True,
                 negation=config["negation"] == "on",
+                passive_converter=self.passive(config["passive"]),
+                phrase_finder=self.phrase_finder(config["phrases"]),
+                word_veto=self.word_veto(config["words"]),
             )
         finally:
             pipe.technical_terms = previous
@@ -537,7 +717,8 @@ def run(args):
     shard, shards = map(int, args.shard.split("/"))
     selected = [p for k, p in enumerate(passages) if k % shards == shard]
     state = args.state
-    store = StudyStore(state, gen_sig, score_sig)
+    reuse = plan.get("reuse") or {}
+    store = StudyStore(state, gen_sig, score_sig, reuse.get("state") if reuse.get("metrics") else None)
     import torch
     torch.set_num_threads(args.threads)
     try:
@@ -719,8 +900,7 @@ def collect(states, plan, panel, names, need_metrics=True):
     passages = load_panel(plan, panel)
     stores = []
     for state in states:
-        state_plan = json.loads((Path(state) / "plan.json").read_text())
-        stores.append(StudyStore(state, *signatures(state_plan)))
+        stores.append(StudyStore(state, *state_signatures(state)))
     complete, pending = {}, []
     for name in names:
         outputs, metrics, ok = {}, {}, True
@@ -764,6 +944,38 @@ def versus_baseline(passages, complete, summaries, base=None):
     return out
 
 
+def paired_delta(values, base, resamples=10000, seed=20261110):
+    """Mean per-passage difference (values - base) with a percentile bootstrap 95% CI."""
+    import numpy as np
+    pairs = [(v, b) for v, b in zip(values, base) if v is not None and b is not None]
+    d = np.array([v - b for v, b in pairs], dtype=float)
+    means = d[np.random.default_rng(seed).integers(0, len(d), (resamples, len(d)))].mean(axis=1)
+    return {"mean": float(d.mean()), "ci95": [float(np.percentile(means, 2.5)), float(np.percentile(means, 97.5))],
+            "n": len(d), "passages_nonzero": int((np.abs(d) > 1e-12).sum())}
+
+
+def per_passage(passages, complete):
+    """Per-passage FK and passage NLI (numbers only; no text) for each complete config."""
+    out = {}
+    for name, (_, metrics) in complete.items():
+        out[name] = {"fk_grade": [metrics[p["id"]]["readability"]["flesch_kincaid_grade"] for p in passages],
+                     "nli_mean": [metrics[p["id"]]["preservation"]["nli_mean"] for p in passages]}
+    return out
+
+
+def versus_best(passages, complete, best, per):
+    """Paired deltas from the best config and the passages each config changes relative to it."""
+    if best not in complete:
+        return {}
+    out = {}
+    for name, (outputs, _) in complete.items():
+        changed = [p["id"] for p in passages if outputs[p["id"]]["output"] != complete[best][0][p["id"]]["output"]]
+        out[name] = {"fk_grade": paired_delta(per[name]["fk_grade"], per[best]["fk_grade"]),
+                     "nli_mean": paired_delta(per[name]["nli_mean"], per[best]["nli_mean"]),
+                     "outputs_differ": len(changed), "passages_differ": changed}
+    return out
+
+
 def report(args):
     from .readability import flesch_kincaid_grade
     from .sari import corpus_sari
@@ -783,6 +995,10 @@ def report(args):
             sari_hf[name] = corpus_sari(*args3, zero_division=1)
             asset_fk[name] = _mean(flesch_kincaid_grade(t) for t in preds)
     rb = summaries["rule_based"]["entities"]
+    per = per_passage(passages, complete)
+    # The tie-break convention pre-registered with the harness (31f2334) is
+    # evaluate's 0/0=1; the Xu 0/0=0 ranking is reported alongside (PR #13 disclosure).
+    tiebreak = sari_hf if args.tiebreak == "evaluate" else sari
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "panel": {"name": "sourced", "n": len(passages), "sha256": plan["panel_sha256"]["sourced"]},
@@ -792,25 +1008,36 @@ def report(args):
                            "asset_sari_evaluate_convention uses Hugging Face evaluate's 0/0=1, which rewards copying.",
         "asset_fk_grade": asset_fk,
         "gates": {n: gates(s, rb) for n, s in summaries.items() if n not in REFERENCES},
-        "frozen_selection": select(summaries, rb, sari),
+        "tiebreak_sari_convention": "0/0=1 (evaluate)" if args.tiebreak == "evaluate" else "0/0=0 (Xu)",
+        "frozen_selection": select(summaries, rb, tiebreak),
+        "frozen_selection_other_sari_convention": select(summaries, rb, sari if tiebreak is sari_hf else sari_hf),
         # Post hoc, labeled alternatives (SELECTION_RULE.md stays frozen).
         "alternative_noninitial_entities": {
             "rule": "Frozen gates 1-3; gate 4 uses non-sentence-initial capitalized spans vs rule_based",
             "rule_based_entities": summaries["rule_based"]["entities_noninitial"],
             "gates": {n: gates(s, summaries["rule_based"]["entities_noninitial"], entity_key="entities_noninitial")
                       for n, s in summaries.items() if n not in REFERENCES},
-            "selection": select(summaries, summaries["rule_based"]["entities_noninitial"], sari,
+            "selection": select(summaries, summaries["rule_based"]["entities_noninitial"], tiebreak,
                                 entity_key="entities_noninitial")},
         "alternative_sentence_nli": {
             "rule": "Gates 1-2 on sentence-level aligned NLI; gate 4 on non-sentence-initial entities",
-            "selection": select(summaries, summaries["rule_based"]["entities_noninitial"], sari,
+            "selection": select(summaries, summaries["rule_based"]["entities_noninitial"], tiebreak,
                                 nli_key="sent_nli_mean", below_key="sent_nli_below_080",
-                                entity_key="entities_noninitial")},
+                                entity_key="entities_noninitial"),
+            "selection_other_sari_convention": select(
+                summaries, summaries["rule_based"]["entities_noninitial"],
+                sari if tiebreak is sari_hf else sari_hf, nli_key="sent_nli_mean",
+                below_key="sent_nli_below_080", entity_key="entities_noninitial")},
         "pareto_fk_vs_nli": pareto({n: s for n, s in summaries.items()}),
         "pareto_fk_vs_sentence_nli": pareto(summaries, y="sent_nli_mean"),
         "rule_based_entities": rb,
         "versus_baseline": versus_baseline(passages, complete, summaries),
-        "signatures": dict(zip(("generation", "scoring"), signatures(plan))),
+        "versus_bases": {b: versus_baseline(passages, complete, summaries, base=b) for b in args.base},
+        "passage_ids": [p["id"] for p in passages],
+        "per_passage": per,
+        "versus_best": {"best": args.best, "rows": versus_best(passages, complete, args.best, per)}
+        if args.best else None,
+        "signatures": {str(s): dict(zip(("generation", "scoring"), state_signatures(s))) for s in args.state},
     }
     args.out.mkdir(parents=True, exist_ok=True)
     write_json(args.out / "aggregate-results.json", result)
@@ -881,6 +1108,9 @@ def main():
         f.add_argument("--" + name, type=Path, required=True)
     f.add_argument("--asset", type=Path)
     f.add_argument("--languagetool-port", type=int, default=8797)
+    f.add_argument("--teammate-nli", type=Path, help="local cross-encoder/nli-deberta-v3-small for "
+                   "Chhoeng's phrase replacer and the word veto")
+    f.add_argument("--reuse-state", type=Path, help="older state whose memos/metrics may be reused")
     r = sub.add_parser("run")
     r.add_argument("--plan", type=Path, required=True)
     r.add_argument("--state", type=Path, required=True)
@@ -898,6 +1128,10 @@ def main():
     p.add_argument("--state", type=Path, action="append", required=True)
     p.add_argument("--design", type=Path, action="append", required=True)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--base", action="append", default=[], help="extra base config IDs for the activity test")
+    p.add_argument("--best", help="config ID that paired ablation deltas are measured from")
+    p.add_argument("--tiebreak", choices=("evaluate", "xu"), default="evaluate",
+                   help="SARI convention for the frozen tie-break (pre-registered: evaluate, 0/0=1)")
     args = ap.parse_args()
     {"freeze": freeze, "run": run, "grammar-memo": grammar_memo, "report": report}[args.command](args)
 

@@ -1,0 +1,439 @@
+{
+ "phase": "D (ablations from the best ensemble), pre-registered for best = W",
+ "best": "words=off|phrases=authored|structure=t5|negation=off|grammar=off|terms=off",
+ "why": "Removes or replaces each component of the best config one at a time; used as-is if the best after phase C is still W, otherwise the same rule is re-derived for the new best.",
+ "ablations": [
+  {
+   "remove_or_replace": "structure: t5 -> off",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "off",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "structure: t5 -> rules",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "rules",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "structure: t5 -> compound_tagger",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "compound_tagger",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "structure: t5 -> t5+compound_tagger",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "structure: t5 -> t5_raw",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5_raw",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "structure: t5 -> t5_unchecked",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5_unchecked",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "phrases: authored -> off",
+   "config": {
+    "words": "off",
+    "phrases": "off",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "phrases: authored -> simpleppdb",
+   "config": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "phrases: authored -> authored+simpleppdb",
+   "config": {
+    "words": "off",
+    "phrases": "authored+simpleppdb",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "phrases: authored -> crf",
+   "config": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "phrases: authored -> authored+crf",
+   "config": {
+    "words": "off",
+    "phrases": "authored+crf",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "passive: off -> on",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "on"
+   }
+  },
+  {
+   "remove_or_replace": "passive: off -> agentive",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "agentive"
+   }
+  },
+  {
+   "remove_or_replace": "words: off -> v7",
+   "config": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "words: off -> contextual",
+   "config": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "words: off -> contextual_veto",
+   "config": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "negation: off -> on",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "on",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "grammar: off -> on",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "on",
+    "terms": "off",
+    "passive": "off"
+   }
+  },
+  {
+   "remove_or_replace": "terms: off -> on",
+   "config": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "on",
+    "passive": "off"
+   }
+  }
+ ],
+ "chain": {
+  "stages": [
+   "original",
+   "all stages off",
+   "+ structure (t5)",
+   "+ phrases (authored)"
+  ],
+  "configs": [
+   "words=off|phrases=off|structure=off|negation=off|grammar=off|terms=off",
+   "words=off|phrases=off|structure=t5|negation=off|grammar=off|terms=off",
+   "words=off|phrases=authored|structure=t5|negation=off|grammar=off|terms=off"
+  ]
+ },
+ "configs": [
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "off",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5_raw",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5_unchecked",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "off",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "simpleppdb",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored+simpleppdb",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "crf",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored+crf",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "on"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "agentive"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "contextual_veto",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "on",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "on",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "on",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "off",
+   "structure": "off",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  }
+ ]
+}
