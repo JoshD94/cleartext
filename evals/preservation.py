@@ -256,12 +256,26 @@ def nli_entailment(original, simplified,
     The pipeline is cached across calls.
     """
     none = {"nli_forward": None, "nli_backward": None, "nli_mean": None}
-    try:
-        from transformers import pipeline
-    except ImportError:
-        warnings.warn("transformers not installed; skipping NLI entailment.")
+    if _nli_pipe(model_name) is None:
         return none
+    fwd = entailment_probability(original, simplified, model_name)
+    bwd = entailment_probability(simplified, original, model_name)
+    vals = [v for v in (fwd, bwd) if v is not None]
+    return {
+        "nli_forward": fwd,
+        "nli_backward": bwd,
+        "nli_mean": sum(vals) / len(vals) if vals else None,
+    }
+
+
+def _nli_pipe(model_name):
+    """Cached NLI pipeline, or None (with a warning) when unavailable."""
     if model_name not in _NLI_PIPES:
+        try:
+            from transformers import pipeline
+        except ImportError:
+            warnings.warn("transformers not installed; skipping NLI entailment.")
+            return None
         try:
             _NLI_PIPES[model_name] = pipeline(
                 "text-classification", model=model_name,
@@ -269,38 +283,171 @@ def nli_entailment(original, simplified,
             )
         except Exception as exc:
             warnings.warn(f"could not load NLI model {model_name}: {exc}")
-            return none
-    pipe = _NLI_PIPES[model_name]
-
-    def entail_prob(premise, hypothesis):
-        try:
-            encoded = pipe.tokenizer(premise, hypothesis, truncation=False)
-            limits = [pipe.tokenizer.model_max_length,
-                      getattr(pipe.model.config, "max_position_embeddings", 512)]
-            if len(encoded["input_ids"]) > min(limits):
-                warnings.warn("NLI pair exceeds token limit; abstaining without truncation")
-                return None
-            scores = pipe({"text": premise, "text_pair": hypothesis}, truncation=False)
-        except Exception:
             return None
-        # single input -> flat list of {"label","score"} dicts
-        if isinstance(scores, dict):
-            scores = [scores]
-        for s in scores:
-            if isinstance(s, dict) and "entail" in s.get("label", "").lower():
-                return float(s["score"])
-        # Generic LABEL_n names have no reliable entailment ordering.
-        warnings.warn("NLI model does not expose a named entailment label; abstaining")
-        return None
+    return _NLI_PIPES[model_name]
 
-    fwd = entail_prob(original, simplified)
-    bwd = entail_prob(simplified, original)
-    vals = [v for v in (fwd, bwd) if v is not None]
-    return {
-        "nli_forward": fwd,
-        "nli_backward": bwd,
-        "nli_mean": sum(vals) / len(vals) if vals else None,
+
+def entailment_probability(premise, hypothesis,
+                           model_name="MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"):
+    """P(premise entails hypothesis); None when unavailable or too long."""
+    pipe = _nli_pipe(model_name)
+    if pipe is None:
+        return None
+    try:
+        encoded = pipe.tokenizer(premise, hypothesis, truncation=False)
+        limits = [pipe.tokenizer.model_max_length,
+                  getattr(pipe.model.config, "max_position_embeddings", 512)]
+        if len(encoded["input_ids"]) > min(limits):
+            warnings.warn("NLI pair exceeds token limit; abstaining without truncation")
+            return None
+        scores = pipe({"text": premise, "text_pair": hypothesis}, truncation=False)
+    except Exception:
+        return None
+    # single input -> flat list of {"label","score"} dicts
+    if isinstance(scores, dict):
+        scores = [scores]
+    for s in scores:
+        if isinstance(s, dict) and "entail" in s.get("label", "").lower():
+            return float(s["score"])
+    # Generic LABEL_n names have no reliable entailment ordering.
+    warnings.warn("NLI model does not expose a named entailment label; abstaining")
+    return None
+
+
+# --- Sentence-level aligned NLI (additional metric; passage-level NLI above is unchanged) ---
+_SENT_BREAK_RE = re.compile(r"[.!?][\"')\]]*\s+")
+_WORD_SPAN_RE = re.compile(r"\w+(?:'\w+)?")
+
+
+def split_sentences(text):
+    """Character spans of sentences: a break after .!? (and closing quotes or
+    brackets) followed by whitespace and an uppercase letter, digit, quote or
+    bracket. Dependency-free and applied identically to both texts."""
+    spans, start = [], 0
+    for m in _SENT_BREAK_RE.finditer(text):
+        following = text[m.end():m.end() + 1]
+        if following and (following.isupper() or following.isdigit() or following in "\"'([“‘"):
+            spans.append((start, m.end()))
+            start = m.end()
+    if text[start:].strip():
+        spans.append((start, len(text)))
+    return [(a, b) for a, b in spans if text[a:b].strip()]
+
+
+def align_sentences(original, simplified):
+    """Group source sentences with the output sentences that carry their words.
+
+    Word sequences are aligned with difflib; any shared word links its source
+    and output sentences, and linked sentences form one group (so a 1->2 split
+    is one group). An output sentence with no shared words is paired with the
+    unlinked source sentences between its neighbours, else joins the previous
+    group. A source sentence left with no output is a group with empty
+    hypothesis (dropped content). Returns [(source_text, output_text)].
+    """
+    from difflib import SequenceMatcher
+
+    src, out = split_sentences(original), split_sentences(simplified)
+    if not src:
+        return [("", simplified.strip())] if simplified.strip() else []
+
+    def words(text, spans):
+        rows = []
+        for m in _WORD_SPAN_RE.finditer(text):
+            sent = next((k for k, (a, b) in enumerate(spans) if a <= m.start() < b), None)
+            if sent is not None:
+                rows.append((m.group().lower(), sent))
+        return rows
+
+    a, b = words(original, src), words(simplified, out)
+    parent = {}
+
+    def find(x):
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(x, y):
+        parent[find(x)] = find(y)
+
+    matcher = SequenceMatcher(None, [w for w, _ in a], [w for w, _ in b], autojunk=False)
+    linked_src, linked_out = set(), set()
+    for block in matcher.get_matching_blocks():
+        for k in range(block.size):
+            i, j = a[block.a + k][1], b[block.b + k][1]
+            union(("s", i), ("o", j))
+            linked_src.add(i)
+            linked_out.add(j)
+    for j in range(len(out)):
+        if j in linked_out:
+            continue
+        prev = max((i for jj in range(j) if jj in linked_out
+                    for i in range(len(src)) if find(("s", i)) == find(("o", jj))), default=-1)
+        nxt = min((i for jj in range(j + 1, len(out)) if jj in linked_out
+                   for i in range(len(src)) if find(("s", i)) == find(("o", jj))), default=len(src))
+        gap = [i for i in range(prev + 1, nxt) if i not in linked_src]
+        if gap:
+            for i in gap:
+                union(("s", i), ("o", j))
+                linked_src.add(i)
+        elif prev >= 0:
+            union(("s", prev), ("o", j))
+        elif nxt < len(src):
+            union(("s", nxt), ("o", j))
+        else:
+            union(("s", 0), ("o", j))
+    groups = {}
+    for i in range(len(src)):
+        groups.setdefault(find(("s", i)), ([], []))[0].append(i)
+    for j in range(len(out)):
+        groups.setdefault(find(("o", j)), ([], []))[1].append(j)
+    rows = []
+    for s_idx, o_idx in sorted(groups.values(), key=lambda g: min(g[0]) if g[0] else len(src)):
+        source = " ".join(original[src[i][0]:src[i][1]].strip() for i in sorted(s_idx))
+        output = " ".join(simplified[out[j][0]:out[j][1]].strip() for j in sorted(o_idx))
+        rows.append((source, output))
+    return rows
+
+
+def sentence_nli(original, simplified, model_name="MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli",
+                 entail=None, detail=False):
+    """Bidirectional NLI on aligned sentence groups instead of whole passages.
+
+    Each group scores the mean of P(source entails output) and P(output
+    entails source); a dropped group scores 0. Passage summaries: mean and
+    minimum over groups, and the same over groups whose text changed.
+    `entail(premise, hypothesis)` defaults to entailment_probability.
+    """
+    entail = entail or (lambda p, h: entailment_probability(p, h, model_name))
+    scores, changed, abstained, rows = [], [], 0, []
+    for source, output in align_sentences(original, simplified):
+        if not output.strip() or not source.strip():
+            fwd = bwd = 0.0
+        else:
+            fwd, bwd = entail(source, output), entail(output, source)
+        vals = [v for v in (fwd, bwd) if v is not None]
+        mean = sum(vals) / len(vals) if vals else None
+        if detail:
+            rows.append({"source": source, "output": output, "forward": fwd,
+                         "backward": bwd, "mean": mean})
+        if mean is None:
+            abstained += 1
+            continue
+        scores.append(mean)
+        if source != output:
+            changed.append(mean)
+    report = {
+        "sent_nli_mean": sum(scores) / len(scores) if scores else None,
+        "sent_nli_min": min(scores) if scores else None,
+        "sent_nli_changed_mean": sum(changed) / len(changed) if changed else None,
+        "sent_nli_changed_min": min(changed) if changed else None,
+        "sent_nli_groups": len(scores) + abstained,
+        "sent_nli_abstained": abstained,
     }
+    if detail:
+        report["groups"] = rows
+    return report
 
 
 def _token_set(text):

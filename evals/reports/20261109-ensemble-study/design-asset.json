@@ -1,0 +1,62 @@
+{
+ "phase": "ASSET finalists",
+ "rule": "DESIGN.md step 3: top five under the frozen rule; only three pass, so the two remaining slots go to the FK/passage-NLI Pareto frontier configs closest to the NLI gate (contextual+t5 at 0.932, v7+t5 at 0.840). The v7 baseline, original and rule_based are always scored; the contextual baseline was generated as cache warm-up and is reported too.",
+ "configs": [
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "t5",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "v7",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  },
+  {
+   "words": "contextual",
+   "phrases": "authored",
+   "structure": "rules",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off"
+  }
+ ]
+}

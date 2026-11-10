@@ -61,6 +61,11 @@ versions, input/model/source hashes and completion/failure receipts.
   import a historical source archive against unchanged local model artifacts.
 - Report automatic metrics with denominators, abstentions and changed-only
   results. Embedding/NLI scores are not percentages of correct outputs.
+- `evals/ensemble_study.py` binds cached outputs to the source of
+  `StudyGenerator` and `models/src`; editing either needs a new frozen plan
+  and state dir. SARI there uses the 0/0=0 convention (`evaluate`'s 0/0=1
+  rewards copying). The November 9 study scored ASSET test outputs for
+  finalists; treat ASSET test as used, not fresh.
 - Previously inspected development panels cannot become independent test sets.
   Preserve reserved-domain restrictions and keep larger-panel raw text and
   predictions local. The six historical authored examples have public evidence.
