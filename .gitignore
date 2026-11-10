@@ -28,3 +28,6 @@ evaluation/*.csv
 .vscode/
 *.swp
 *.swo
+
+# Large phrase-table downloads
+*.tsv.gz
