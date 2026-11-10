@@ -1,0 +1,14 @@
+{
+ "phase": "ASSET tie-break 2 (configs tied with the C/C2 winner)",
+ "configs": [
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "agentive"
+  }
+ ]
+}
