@@ -1,0 +1,26 @@
+{
+  "name": "ensemble-v2-20261110-winner",
+  "status": "opt-in; demo, runner and EnsembleClearText defaults are unchanged",
+  "selected_by": "SELECTION_RULE.md (frozen 8d10cb3), tie-break ASSET SARI with the pre-registered evaluate 0/0=1 convention, over 69 configs on the 90 sourced development passages",
+  "factors": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "negation": "off",
+    "grammar": "off",
+    "terms": "off",
+    "passive": "off"
+  },
+  "pipeline_run": "models/runs/ensemble-v7-20260928",
+  "structure_checkpoint": {
+    "path": "~/.local/state/cleartext/structure-quality-v2-20261027/run/seq2seq",
+    "model_sha256": "3de186eee031e8812b019a9040775884798d01baabb072728bd03ac89f1503ac",
+    "note": "Screened step-441 T5 checkpoint, local artifact outside Git, applied sentence by sentence with its generation checks"
+  },
+  "compound_tagger": {
+    "path": "~/.local/state/cleartext/compound-coverage-20261109/boundary-tagger.joblib",
+    "sha256": "47e9cb2578cfa9d6adb7fb3529c3b5b9623b84f94281dd44f46154616f21182b",
+    "note": "PR #12 dependency compound splitter, scoped guards, WikiSplit boundary tagger (local artifact); runs on the T5 output"
+  },
+  "guardrails": true
+}

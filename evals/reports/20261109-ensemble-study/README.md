@@ -9,6 +9,9 @@ used in any stage. Raw outputs stay local; this folder holds aggregates only.
 
 ## Result
 
+Follow-up: [ensemble v2, November 10](../20261110-ensemble-v2/README.md) adds Chhoeng's passive and phrase stages, T5 + compound stacking and ablations.
+
+
 **Winner under the [frozen rule](SELECTION_RULE.md):
 `words=off, phrases=authored, structure=t5`** (negation, grammar and terms
 off). That is the screened step-441 T5 sentence splitter plus the authored

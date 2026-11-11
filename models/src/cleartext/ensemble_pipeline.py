@@ -534,6 +534,9 @@ class EnsembleClearText:
         grammar_corrector=None,
         guardrails=True,
         negation=False,
+        passive_converter=None,
+        phrase_finder=None,
+        word_veto=None,
     ):
         original_text = text
         grammar_details = {}
@@ -589,8 +592,46 @@ class EnsembleClearText:
                         "reason": "A detected technical term would change.",
                     }
                 )
+        # Chhoeng's passive-to-active stage (teammate_stages.PassiveStage),
+        # opt-in. It runs after negation and before structure so splitting
+        # sees the active clauses.
+        passive_details = {"on": False}
+        if passive_converter is not None:
+            before = current
+            current, changes = passive_converter.rewrite(current)
+            passive_details = {"on": True, "changed": bool(changes), "sentences": len(changes)}
+            edits += changes
+            if (
+                protect_terms
+                and not preserved_terms(original_doc, current, term_spans)["pass"]
+            ):
+                current = before
+                if changes:
+                    edits = edits[: -len(changes)]
+                blocked_term_stages.append("passive")
+                passive_details.update(
+                    {"changed": False, "reason": "A detected technical term would change."}
+                )
         if structure:
-            if structure_rewriter is None:
+            # Snapshot so a term-protection block reverts only this stage,
+            # keeping earlier negation/passive edits and their details true.
+            before_structure, edits_before_structure = current, list(edits)
+            if isinstance(structure_rewriter, (list, tuple)):
+                # Stacked learned backends, applied in order (opt-in).
+                from .structure.adapter import rewrite
+
+                staged, changes, stack = current, [], []
+                for model in structure_rewriter:
+                    staged, stage_changes, details = rewrite(staged, model, guard=guardrails)
+                    changes += stage_changes
+                    stack.append(details)
+                structure_details = {
+                    "backend": "+".join(d["backend"] for d in stack),
+                    "before": current, "after": staged, "changed": bool(changes),
+                    "stack": stack,
+                }
+                current = staged
+            elif structure_rewriter is None:
                 current, changes = structural(current)
                 structure_details = {
                     "backend": "rules",
@@ -611,12 +652,12 @@ class EnsembleClearText:
                 protect_terms
                 and not preserved_terms(original_doc, current, term_spans)["pass"]
             ):
-                current = text
-                edits = []
+                current = before_structure
+                edits = edits_before_structure
                 blocked_term_stages.append("structure")
                 structure_details.update(
                     {
-                        "after": text,
+                        "after": before_structure,
                         "changed": False,
                         "reason": "A detected technical term would change.",
                     }
@@ -631,6 +672,20 @@ class EnsembleClearText:
             ):
                 current = before
                 blocked_term_stages.append("phrase")
+                if changes:
+                    edits = edits[: -len(changes)]
+        # Chhoeng's phrase finder (teammate_stages.PhraseFinderStage), opt-in.
+        # After the authored phrase rules, so an authored edit wins an overlap.
+        if phrase_finder is not None:
+            before = current
+            current, changes = phrase_finder.rewrite(current)
+            edits += changes
+            if (
+                protect_terms
+                and not preserved_terms(original_doc, current, term_spans)["pass"]
+            ):
+                current = before
+                blocked_term_stages.append("phrase_finder")
                 if changes:
                     edits = edits[: -len(changes)]
         if words:
@@ -688,6 +743,24 @@ class EnsembleClearText:
                 [r for r in trace if r["selected"]],
                 key=lambda r: (self.tier(r["selected"]), -key(r)),
             )
+            if word_veto is not None:
+                # Opt-in meaning floor: word_veto(sentence, edited sentence)
+                # True drops that word's edit; the next accepted word may fill the slot.
+                tokens = {t.idx: t for t in doc}
+                kept = []
+                for r in accepted:
+                    if len(kept) == max_word_edits:
+                        break
+                    token = tokens[r["start"]]
+                    edited = apply_edits(doc, [(token, r["selected"]["word"])])
+                    sent = token.sent
+                    after = edited[sent.start_char : sent.end_char + len(edited) - len(doc.text)]
+                    if word_veto(sent.text, after):
+                        r["vetoed"] = r["selected"]
+                        r["selected"] = None
+                    else:
+                        kept.append(r)
+                accepted = kept
             chosen = accepted[:max_word_edits]
             if chosen:
                 # Each edit was guarded on its own. Several edits are applied together, then the combined sentence is
@@ -743,6 +816,9 @@ class EnsembleClearText:
                     "blocked_by": "code_literals",
                     "attempt": discarded_negation,
                 }
+            if passive_details["on"]:
+                passive_details = {**passive_details, "changed": False,
+                                   "blocked_by": "code_literals"}
             if structure_details["on"]:
                 structure_details = {
                     **structure_details, "after": text, "changed": False,
@@ -780,6 +856,7 @@ class EnsembleClearText:
             "trace": trace,
             "structure": structure_details,
             "negation": negation_details,
+            **({"passive": passive_details} if passive_details["on"] else {}),
             **levels,
             **term_details,
             **grammar_details,

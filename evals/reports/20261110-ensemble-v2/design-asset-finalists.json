@@ -1,0 +1,60 @@
+{
+ "phase": "ASSET finalists (frozen rule: top five passing plus every config tied with the winner; all passing top five are tied)",
+ "tied": [
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off",
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off|passive=agentive",
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=on",
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=on|terms=off",
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=on|grammar=off|terms=off",
+  "words=off|phrases=authored|structure=t5_raw|negation=off|grammar=off|terms=off",
+  "words=off|phrases=crf|structure=t5+compound_tagger|negation=off|grammar=off|terms=off",
+  "words=off|phrases=off|structure=t5+compound_tagger|negation=off|grammar=off|terms=off"
+ ],
+ "configs": [
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "on",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "on",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "authored",
+   "structure": "t5+compound_tagger",
+   "negation": "on",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "crf",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  },
+  {
+   "words": "off",
+   "phrases": "off",
+   "structure": "t5+compound_tagger",
+   "negation": "off",
+   "grammar": "off",
+   "terms": "off",
+   "passive": "off"
+  }
+ ]
+}

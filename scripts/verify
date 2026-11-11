@@ -32,6 +32,7 @@ mkdir -p "$evidence"
   models/tests/test_structure_review.py \
   models/tests/test_structure_search.py \
   models/tests/test_negation.py \
+  models/tests/test_teammate_stages.py \
   models/tests/structure_sprint_test_selection.py \
   models/tests/structure_sprint_test_native.py \
   models/tests/test_sense_usage.py \
