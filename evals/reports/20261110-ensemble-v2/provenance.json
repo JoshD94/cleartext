@@ -529,5 +529,11 @@
  },
  "t5_length_cutoff": "The SentenceGenerator cut-off (192 T5 tokens) never binds: longest panel sentence 134 tokens (197 sentences), longest ASSET test sentence 79 (361 spaCy sentences); so it was not ablated.",
  "local_state": "HOME/.local/state/cleartext/ensemble-v2-20261110 (plan, outputs, metrics, stage memos, batch receipts, driver logs); raw text and predictions stay there",
- "figures": "evals/reports/20261110-ensemble-v2/make_figures.py with matplotlib 3.10.7 / numpy 2.5.4 in HOME/.local/state/cleartext/ensemble-v2-20261110/plotvenv"
+ "figures": "evals/reports/20261110-ensemble-v2/make_figures.py with matplotlib 3.10.7 / numpy 2.5.4 in HOME/.local/state/cleartext/ensemble-v2-20261110/plotvenv",
+ "verify": {
+  "job": "6da0c6269ddd",
+  "commit": "9aa2212a18fea1a35885923ca65029de720c3b4e",
+  "result": "555 passed, 13 subtests passed (scripts/verify, includes models/tests/test_teammate_stages.py)",
+  "evidence": "HOME/.local/state/cleartext/ensemble-v2-20261110/verify"
+ }
 }
