@@ -613,6 +613,9 @@ class EnsembleClearText:
                     {"changed": False, "reason": "A detected technical term would change."}
                 )
         if structure:
+            # Snapshot so a term-protection block reverts only this stage,
+            # keeping earlier negation/passive edits and their details true.
+            before_structure, edits_before_structure = current, list(edits)
             if isinstance(structure_rewriter, (list, tuple)):
                 # Stacked learned backends, applied in order (opt-in).
                 from .structure.adapter import rewrite
@@ -649,12 +652,12 @@ class EnsembleClearText:
                 protect_terms
                 and not preserved_terms(original_doc, current, term_spans)["pass"]
             ):
-                current = text
-                edits = []
+                current = before_structure
+                edits = edits_before_structure
                 blocked_term_stages.append("structure")
                 structure_details.update(
                     {
-                        "after": text,
+                        "after": before_structure,
                         "changed": False,
                         "reason": "A detected technical term would change.",
                     }

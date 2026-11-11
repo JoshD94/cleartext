@@ -1004,7 +1004,7 @@ def report(args):
         "panel": {"name": "sourced", "n": len(passages), "sha256": plan["panel_sha256"]["sourced"]},
         "asset_test_n": len(load_panel(plan, "asset_test")) if "asset_test" in plan["panels"] else None,
         "configs": summaries, "pending": pending, "asset_sari": sari, "asset_sari_evaluate_convention": sari_hf,
-        "asset_sari_note": "asset_sari uses the original Xu et al. 0/0=0 convention (ranking/tie-break); "
+        "asset_sari_note": "asset_sari uses the original Xu et al. 0/0=0 convention (reported); the tie-break uses 0/0=1 (tiebreak_sari_convention); "
                            "asset_sari_evaluate_convention uses Hugging Face evaluate's 0/0=1, which rewards copying.",
         "asset_fk_grade": asset_fk,
         "gates": {n: gates(s, rb) for n, s in summaries.items() if n not in REFERENCES},

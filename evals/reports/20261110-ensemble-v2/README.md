@@ -154,13 +154,24 @@ alternative rankings.
 
 ## What was run (phases)
 
-| Phase | Design (committed before running) | Configs |
+| Phase | Design (committed before running, except where noted) | Configs |
 |---|---|---:|
 | C: OFAT for the 7 new levels from the Nov 9 winner and from v7 | [design-ofat.json](design-ofat.json) (pre-registration commit `30f9de2`) | 14 new |
 | W ablations (run alongside C) | [design-ablation-W.json](design-ablation-W.json) | 9 new |
 | C2: interactions (passive × structure × words, phrases × words, T5+compound × words); all 7 levels were active | [design-interactions.json](design-interactions.json), derived by [derive_designs.py](derive_designs.py) (`56625f7`) | 21 new |
 | D: ablations from the best after C/C2 | [design-ablation-t5compound.json](design-ablation-t5compound.json) (`26fcd7e`) | 12 new |
 | ASSET tie-break and finalists | design-asset-*.json | 13 configs × 359 sentences |
+
+Two ASSET designs were committed after their jobs ran: `design-asset-tie.json`
+(committed 16:38, after job `3aa861e9e18a` ran 16:17–16:21) and
+`design-asset-alternatives.json` (committed 19:02, after job `27ea172afedf`).
+Their configs follow mechanically from the pre-registered tie rule, and the
+alternatives set is labeled post hoc, so the winner is unaffected.
+
+Post-study fix: when term protection blocked the structure stage, the pipeline
+reset to the input text, silently dropping earlier negation/passive edits. It
+now reverts only the structure stage. This needs terms on together with
+negation or passive, which no reported config hit, so no result changes.
 
 ## Chhoeng's stages in the pipeline
 
