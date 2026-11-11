@@ -233,6 +233,18 @@ def test_recommended_config_settings(tmp_path):
     assert chosen["analyze"] == {"structure": True, "phrases": True, "words": False,
                                  "negation": False, "guardrails": True}
     assert chosen["t5"].endswith("seq2seq") and chosen["run"].endswith("ensemble-v7-20260928")
+    assert chosen["passive"] == "off" and chosen["phrase_finder"] is None and not chosen["word_veto"]
+    v2 = tmp_path / "v2.json"
+    v2.write_text(json.dumps({"factors": {"words": "off", "phrases": "authored+crf", "structure": "t5",
+                                          "passive": "agentive"},
+                              "structure_checkpoint": {"path": "~/t5"}}))
+    chosen = S.settings(v2)
+    assert chosen["passive"] is None and chosen["phrase_finder"] == ["manual", "verified", "model"]
+    assert chosen["analyze"]["phrases"] and chosen["compound_tagger"] is None
+    v2.write_text(json.dumps({"factors": {"words": "off", "structure": "t5+compound_tagger"},
+                              "structure_checkpoint": {"path": "~/t5"}}))
+    with pytest.raises(ValueError, match="compound_tagger.path"):
+        S.settings(v2)
     bad = tmp_path / "bad.json"
     bad.write_text(json.dumps({"factors": {"structure": "t5"}}))
     with pytest.raises(ValueError, match="structure_checkpoint"):

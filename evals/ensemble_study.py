@@ -1070,17 +1070,26 @@ def settings(path):
     """analyze() settings for a study config file such as recommended-config.json."""
     raw = json.loads(Path(path).read_text())
     config = normalize(raw["factors"])
-    if config["grammar"] == "on" or config["structure"] == "compound_tagger":
+    if config["grammar"] == "on" or config["structure"] in ("t5_raw", "t5_unchecked"):
         raise ValueError("This loader covers the recommended stages; use StudyGenerator for others")
     checkpoint = raw.get("structure_checkpoint", {}).get("path")
-    if config["structure"] == "t5" and not checkpoint:
+    if "t5" in config["structure"] and not checkpoint:
         raise ValueError("structure=t5 needs structure_checkpoint.path")
+    tagger = raw.get("compound_tagger", {}).get("path")
+    if "compound_tagger" in config["structure"] and not tagger:
+        raise ValueError("structure=compound_tagger needs compound_tagger.path")
     run = raw.get("pipeline_run", "models/runs/ensemble-v7-20260928")
-    if config["words"] == "contextual":
+    if config["words"] in ("contextual", "contextual_veto"):
         run = raw.get("contextual_run", "models/runs/ensemble-context-similarity-20261002")
+    finder = config["phrases"].split("+")[-1]
     return {"run": str(ROOT / run), "technical_terms": config["terms"] == "on",
-            "t5": str(Path(checkpoint).expanduser()) if config["structure"] == "t5" else None,
-            "analyze": {"structure": config["structure"] != "off", "phrases": config["phrases"] != "off",
+            "t5": str(Path(checkpoint).expanduser()) if "t5" in config["structure"] else None,
+            "compound_tagger": str(Path(tagger).expanduser()) if "compound_tagger" in config["structure"] else None,
+            "passive": {"on": "auto", "agentive": None}.get(config["passive"], "off"),
+            "phrase_finder": list(FINDER_SOURCES[finder]) if finder in FINDER_SOURCES else None,
+            "word_veto": config["words"] == "contextual_veto",
+            "analyze": {"structure": config["structure"] != "off",
+                        "phrases": config["phrases"] in ("authored", "authored+simpleppdb", "authored+crf"),
                         "words": config["words"] != "off", "negation": config["negation"] == "on",
                         "guardrails": raw.get("guardrails", True)}}
 
@@ -1091,12 +1100,20 @@ def simplifier(path):
     chosen = settings(path)
     pipe = EnsembleClearText.load(Path(chosen["run"]))
     pipe.technical_terms = chosen["technical_terms"]
-    rewriter = None
+    rewriters = []
     if chosen["t5"]:
         from cleartext.structure.seq2seq import SentenceGenerator
         from .pipeline_benchmark import SentencewiseGenerator
-        rewriter = SentencewiseGenerator(SentenceGenerator(chosen["t5"], device="cpu"))
-    return lambda text: pipe.analyze(text, structure_rewriter=rewriter, **chosen["analyze"])["output"]
+        rewriters.append(SentencewiseGenerator(SentenceGenerator(chosen["t5"], device="cpu")))
+    if chosen["compound_tagger"]:
+        from cleartext.structure.compound import DependencyCompoundSplitter
+        rewriters.append(DependencyCompoundSplitter(guards="scoped", tagger=chosen["compound_tagger"]))
+    rewriter = rewriters if len(rewriters) > 1 else (rewriters[0] if rewriters else None)
+    from cleartext import teammate_stages as T
+    extra = {"passive_converter": T.PassiveStage(chosen["passive"]) if chosen["passive"] != "off" else None,
+             "phrase_finder": T.PhraseFinderStage(chosen["phrase_finder"]) if chosen["phrase_finder"] else None,
+             "word_veto": T.EntailmentVeto() if chosen["word_veto"] else None}
+    return lambda text: pipe.analyze(text, structure_rewriter=rewriter, **chosen["analyze"], **extra)["output"]
 
 
 def main():

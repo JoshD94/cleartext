@@ -63,7 +63,8 @@ versions, input/model/source hashes and completion/failure receipts.
   results. Embedding/NLI scores are not percentages of correct outputs.
 - `evals/ensemble_study.py` binds cached outputs to the source of
   `StudyGenerator` and `models/src`; editing either needs a new frozen plan
-  and state dir. SARI there uses the 0/0=0 convention (`evaluate`'s 0/0=1
+  and state dir. Older states' signatures come from their batch receipts;
+  `freeze --reuse-state` reuses memos/metrics only after its compatibility check. SARI there uses the 0/0=0 convention (`evaluate`'s 0/0=1
   rewards copying). The November 9 study scored ASSET test outputs for
   finalists; treat ASSET test as used, not fresh.
 - Previously inspected development panels cannot become independent test sets.
@@ -75,6 +76,9 @@ versions, input/model/source hashes and completion/failure receipts.
 - `compound_only` and `compound_full_guarded` select the opt-in dependency
   compound splitter. Week 7 `structure_only` retains the old rules; neither name
   selects T5. Passive conversion and negation rewriting belong to teammates.
+  Chhoeng's `passive/` and `pos_tag/` code runs unchanged through
+  `cleartext/teammate_stages.py` (opt-in); never put those folders on
+  `sys.path`: `pos_tag/evaluate.py` shadows Hugging Face `evaluate`.
   Since November 9 these arms use scoped guards and no tagger; the November 2
   results used today's `guards="strict"`. The WikiSplit tagger model is a
   local artifact (see `evals/reports/20261109-compound-tagger/`).
