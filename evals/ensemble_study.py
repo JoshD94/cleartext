@@ -233,8 +233,10 @@ def freeze(args):
 
 def locked_ids(rows):
     """IDs in rows that belong to the locked test split of test set v3."""
-    path = ROOT / "evals/data/testset_v3/test_ids.txt"
-    test = set(path.read_text().split()) if path.exists() else set()
+    test = set()
+    for name in ("test_ids.txt", "onestop_test_ids.txt"):
+        path = ROOT / "evals/data/testset_v3" / name
+        test |= set(path.read_text().split()) if path.exists() else set()
     return sorted({r.get("id") for r in rows} & test)
 
 

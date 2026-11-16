@@ -643,6 +643,48 @@ def verify(args):
     print(f"{len(rows)} passages match the manifest")
 
 
+ONESTOP_COMMIT = "37f8db3945cd2f3cc0caafe45674147b224349be"
+ONESTOP = f"https://raw.githubusercontent.com/nishkalavallabhi/OneStopEnglishCorpus/{ONESTOP_COMMIT}/Sentence-Aligned/"
+
+
+def onestop_pairs(text):
+    """{advanced sentence: simplified sentence} from a Sentence-Aligned file."""
+    out = {}
+    for block in text.split("*******"):
+        lines = [line.strip() for line in block.strip().splitlines() if line.strip()]
+        if len(lines) == 2:
+            out.setdefault(lines[0], lines[1])
+    return out
+
+
+def onestop(args):
+    """OneStopEnglish (CC BY-SA 4.0) multi-reference set: advanced sentences
+    aligned to both an intermediate and an elementary version. Seeded split,
+    one third dev; the test part is locked like the passage panel."""
+    fetcher = Fetcher(args.state.resolve() / "raw" / "http", offline=args.offline)
+    ele = onestop_pairs(fetcher.get(ONESTOP + "ADV-ELE.txt"))
+    inter = onestop_pairs(fetcher.get(ONESTOP + "ADV-INT.txt"))
+    rows = [{"id": "ose-" + sha_text(adv)[:12], "original": adv, "references": [inter[adv], ele[adv]]}
+            for adv in sorted(ele) if adv in inter]
+    if len({r["id"] for r in rows}) != len(rows):
+        raise SystemExit("OneStopEnglish ID collision")
+    random.Random(f"{SEED}:onestop").shuffle(rows)
+    cut = round(len(rows) * DEV_FRACTION)
+    out = args.state.resolve() / "panel"
+    out.mkdir(parents=True, exist_ok=True)
+    for name, part in (("onestop-dev", rows[:cut]), ("onestop-test-LOCKED", rows[cut:])):
+        path = out / f"{name}.json"
+        if path.exists():
+            path.chmod(0o644)
+        path.write_text(json.dumps(part, indent=1, ensure_ascii=False))
+    (out / "onestop-test-LOCKED.json").chmod(0o444)
+    if args.write_manifest:
+        for name, part in (("dev", rows[:cut]), ("test", rows[cut:])):
+            (DATA / f"onestop_{name}_ids.txt").write_text("".join(r["id"] + "\n" for r in part))
+    print(f"OneStopEnglish @{ONESTOP_COMMIT[:7]}: {len(rows)} sentences with INT and ELE references; "
+          f"{cut} dev, {len(rows) - cut} test")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="command", required=True)
@@ -652,8 +694,12 @@ def main():
     b.add_argument("--write-manifest", action="store_true", help="(re)write the committed manifest and ID lists")
     v = sub.add_parser("verify")
     v.add_argument("--state", type=Path, required=True)
+    o = sub.add_parser("onestop")
+    o.add_argument("--state", type=Path, required=True)
+    o.add_argument("--offline", action="store_true")
+    o.add_argument("--write-manifest", action="store_true")
     args = ap.parse_args()
-    {"build": build, "verify": verify}[args.command](args)
+    {"build": build, "verify": verify, "onestop": onestop}[args.command](args)
 
 
 if __name__ == "__main__":
