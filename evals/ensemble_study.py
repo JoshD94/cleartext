@@ -173,6 +173,11 @@ def freeze(args):
     panels = {"sourced": ROOT / "evals/data/week7_sourced_passages.json"}
     if args.asset:
         panels["asset_test"] = args.asset.resolve()
+    for spec in args.panel or []:
+        name, path = spec.split("=", 1)
+        if name in panels:
+            raise SystemExit(f"Panel {name} already defined")
+        panels[name] = Path(path).resolve()
     generation = {
         "runs": {"v7": str(ROOT / "models/runs/ensemble-v7-20260928"),
                  "contextual": str(ROOT / "models/runs/ensemble-context-similarity-20261002")},
@@ -1124,6 +1129,8 @@ def main():
     for name in ("t5", "tagger", "encoder", "nltk-data", "languagetool", "java", "embedding", "nli"):
         f.add_argument("--" + name, type=Path, required=True)
     f.add_argument("--asset", type=Path)
+    f.add_argument("--panel", action="append", metavar="NAME=PATH",
+                   help="extra input panel (JSON rows with unique id and original), e.g. paper=paragraphs.json")
     f.add_argument("--languagetool-port", type=int, default=8797)
     f.add_argument("--teammate-nli", type=Path, help="local cross-encoder/nli-deberta-v3-small for "
                    "Chhoeng's phrase replacer and the word veto")
