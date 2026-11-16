@@ -25,24 +25,17 @@ if [ ! -f "$ST/run1/plan.json" ]; then
     --nli "$HUB/models--MoritzLaurer--DeBERTa-v3-base-mnli-fever-anli/snapshots/6f5cf0a2b59cabb106aca4c287eed12e357e90eb" \
     --panel "paper=$ST/paragraphs.json"
 fi
-# Phase 1: the winner and T5 unchecked (fast) on every paragraph, then their
-# sentence scores. Phase 2: v7 words (slow: BERT ranks every flagged word),
-# then sentence scores for all three configs. Finished work is skipped.
+# The winner and T5 unchecked on every paragraph (finished work is skipped),
+# then sentence scores: those two everywhere, v7 words wherever its output
+# exists. v7 generation (design-paper.json) was stopped after 18 paragraphs:
+# about 30 min per paragraph on a loaded Yoga; see README.
 run_design() {
   left=$(( BUDGET - ($(date +%s) - start) ))
   [ "$left" -gt 60 ] || exit 0
   /usr/bin/time -v $PY -m evals.ensemble_study run --plan "$ST/run1/plan.json" --state "$ST/run1" \
     --design "$1" --panel paper --max-seconds "$left" 2>&1 | tee -a "$ST/run.log"
 }
-score_configs() {
-  left=$(( BUDGET - ($(date +%s) - start) ))
-  [ "$left" -gt 60 ] || exit 0
-  /usr/bin/time -v $PY -m evals.paper_run score --plan "$ST/run1/plan.json" --state "$ST/run1" \
-    --configs "$1" --max-seconds "$left" 2>&1 | tee -a "$ST/run.log"
-}
-complete() {
-  python3 -c "import json,sys; sys.exit(0 if json.load(open('$ST/run1/sentences/receipt-$1.json'))['complete'] else 1)" 2>/dev/null
-}
-complete t5_unchecked+winner || { run_design "$ST/design-paper-fast.json"; score_configs winner,t5_unchecked; }
-run_design "$ST/design-paper.json"
-score_configs winner,t5_unchecked,v7_words
+run_design "$ST/design-paper-fast.json"
+left=$(( BUDGET - ($(date +%s) - start) ))
+/usr/bin/time -v $PY -m evals.paper_run score --plan "$ST/run1/plan.json" --state "$ST/run1" \
+  --configs winner,t5_unchecked --optional v7_words --max-seconds "$left" 2>&1 | tee -a "$ST/run.log"

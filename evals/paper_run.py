@@ -216,6 +216,7 @@ def score(args):
     plan, gen, score_sig, store, passages = open_state(args.plan, args.state)
     weights = json.loads((Path(__file__).parent / "trained_weights.json").read_text())
     names = {k: CONFIGS[k] for k in args.configs.split(",")}
+    optional = {k: CONFIGS[k] for k in args.optional.split(",") if k} if args.optional else {}
     deadline, scorer, started = time.monotonic() + args.max_seconds, None, time.monotonic()
     sentencize, done = _spacy_sentencizer(), 0
     code = code_signature()
@@ -224,6 +225,8 @@ def score(args):
         if any(e is None for e in entries.values()):
             print(f"{passage['id']}: outputs missing; run ensemble_study first")
             break
+        # Optional configs are scored on the paragraphs where their output exists.
+        entries.update({k: e for k, e in ((k, store.output(passage, v)) for k, v in optional.items()) if e})
         identity = {"generation": gen, "scoring": score_sig, "id": passage["id"], "code": code,
                     "outputs": {k: digest(e["output"]) for k, e in entries.items()}}
         path = _row_path(args.state, score_sig, passage)
@@ -241,7 +244,7 @@ def score(args):
         write_json(path, {"identity": identity, **rows})
         done += 1
         print(f"{time.strftime('%H:%M:%S')} +{time.monotonic() - started:.0f}s scored {passage['id']}", flush=True)
-    receipt = {"configs": sorted(names), "paragraphs": len(passages), "scored": done,
+    receipt = {"configs": sorted(names), "optional": sorted(optional), "paragraphs": len(passages), "scored": done,
                "complete": done == len(passages),
                "generation_signature": gen, "scoring_signature": score_sig}
     write_json(Path(args.state) / "sentences" / f"receipt-{'+'.join(sorted(names))}.json", receipt)
@@ -255,7 +258,8 @@ def _mean(values):
     return sum(values) / len(values) if values else None
 
 
-def load_rows(plan_path, state, configs=CONFIGS):
+def load_rows(plan_path, state, configs=CONFIGS, optional=()):
+    """Scored rows; every paragraph must carry `configs`, and may carry `optional`."""
     plan, gen, score_sig, store, passages = open_state(plan_path, state)
     rows = []
     for passage in passages:
@@ -263,11 +267,15 @@ def load_rows(plan_path, state, configs=CONFIGS):
         if not path.exists():
             raise SystemExit(f"Not scored yet: {passage['id']}")
         row = json.loads(path.read_text())
-        if sorted(row["configs"]) != sorted(configs):
-            raise SystemExit(f"{passage['id']} was scored for {sorted(row['configs'])}, not {sorted(configs)}")
-        for name, config in configs.items():
-            entry = store.output(passage, config)
+        present = set(row["configs"])
+        if not set(configs) <= present <= set(configs) | set(optional):
+            raise SystemExit(f"{passage['id']} was scored for {sorted(present)}, not {sorted(configs)}")
+        for name in list(row["configs"]):
+            entry = store.output(passage, CONFIGS[name])
             metrics = store.metrics(passage["original"], entry["output"])
+            if metrics is None and name in optional:
+                del row["configs"][name]  # Generated after its last paragraph-scoring pass.
+                continue
             if metrics is None:
                 raise SystemExit(f"Paragraph metrics missing: {passage['id']} {name}")
             row["configs"][name]["paragraph"] = metrics["preservation"]
@@ -288,20 +296,24 @@ def aggregate(rows):
     out = {"paragraphs": len(rows), "sentences": sum(len(r["sentences"]) for r in rows),
            "words": len(text(rows).split()), "fk_document_original": _fk(text(rows)),
            "configs": {}, "sections": []}
-    for name in rows[0]["configs"]:
-        sent = [s for r in rows for s in r["configs"][name]["rows"]]
+    names = list(dict.fromkeys(n for r in rows for n in r["configs"]))
+    for name in names:
+        covered = [r for r in rows if name in r["configs"]]
+        sent = [s for r in covered for s in r["configs"][name]["rows"]]
         changed = [s for s in sent if s["changed"]]
         stages = {}
         for s in changed:
             for stage in s["stages"]:
                 stages[stage] = stages.get(stage, 0) + 1
-        para = [r["configs"][name]["paragraph"] for r in rows]
+        para = [r["configs"][name]["paragraph"] for r in covered]
         out["configs"][name] = {
             "config": CONFIGS[name],
+            "paragraphs_scored": len(covered), "sentences_scored": len(sent),
+            "fk_scored_original": _fk(text(covered)),
             "sentences_changed": len(changed), "percent_changed": 100 * len(changed) / len(sent),
-            "paragraphs_changed": sum(r["configs"][name]["output"] != r["original"] for r in rows),
+            "paragraphs_changed": sum(r["configs"][name]["output"] != r["original"] for r in covered),
             "sentences_by_stage": dict(sorted(stages.items())),
-            "fk_document": _fk(text(rows, name)),
+            "fk_document": _fk(text(covered, name)),
             # FK means over sentences where FK is defined before and after (n given).
             "fk_sentence_n": len(fk_pairs(sent)),
             "fk_sentence_mean_before": _mean([s["fk_before"] for s in fk_pairs(sent)]),
@@ -341,9 +353,12 @@ def aggregate(rows):
         part = [r for r in rows if r["section"] == section]
         entry = {"section": section, "paragraphs": len(part), "sentences": sum(len(r["sentences"]) for r in part),
                  "fk_original": _fk(text(part))}
-        for name in rows[0]["configs"]:
-            entry[f"fk_{name}"] = _fk(text(part, name))
-            entry[f"changed_{name}"] = sum(s["changed"] for r in part for s in r["configs"][name]["rows"])
+        for name in names:
+            # FK only for a fully covered section; changes counted where scored.
+            full = all(name in r["configs"] for r in part)
+            entry[f"fk_{name}"] = _fk(text(part, name)) if full else None
+            entry[f"changed_{name}"] = sum(s["changed"] for r in part if name in r["configs"]
+                                           for s in r["configs"][name]["rows"])
         out["sections"].append(entry)
     return out
 
@@ -364,12 +379,22 @@ def markdown(summary):
     for s in summary["sections"]:
         sec += f"| {s['section']} | {s['sentences']} | {fmt(s['fk_original'])} | " + " | ".join(
             f"{fmt(s['fk_' + n])} | {s['changed_' + n]}" for n in names) + " |\n"
-    return head + body + stages + "\n" + sec
+    out = head + body + stages + ("\n" + sec if summary["sections"] else "")
+    for name, sub in summary.get("same_paragraphs", {}).items():
+        out += (f"\n### All configs on the {sub['paragraphs']} paragraphs scored for {name}\n\n"
+                + markdown({k: v for k, v in sub.items() if k != "sections"} | {"sections": []}))
+    return out
 
 
 def report(args):
-    rows = load_rows(args.plan, args.state, {k: CONFIGS[k] for k in args.configs.split(",")})
+    optional = [k for k in args.optional.split(",") if k] if args.optional else []
+    rows = load_rows(args.plan, args.state, {k: CONFIGS[k] for k in args.configs.split(",")}, optional)
     summary = aggregate(rows)
+    # Partly covered configs: every config again on just the paragraphs they cover.
+    for name in optional:
+        covered = [r for r in rows if name in r["configs"]]
+        if covered and len(covered) < len(rows):
+            summary.setdefault("same_paragraphs", {})[name] = aggregate(covered)
     write_json(Path(args.state) / "paper-rows.json", rows)
     args.out.mkdir(parents=True, exist_ok=True)
     write_json(args.out / "paper-summary.json", summary)
@@ -384,8 +409,10 @@ def main():
         p = sub.add_parser(name)
         p.add_argument("--plan", type=Path, required=True)
         p.add_argument("--state", type=Path, required=True)
-        p.add_argument("--configs", default=",".join(CONFIGS),
-                       help="comma-separated subset of " + ",".join(CONFIGS))
+        p.add_argument("--configs", default="winner,t5_unchecked",
+                       help="comma-separated required configs, from " + ",".join(CONFIGS))
+        p.add_argument("--optional", default="v7_words",
+                       help="configs scored only on paragraphs where their output exists")
         if name == "score":
             p.add_argument("--max-seconds", type=int, default=1500)
             p.add_argument("--threads", type=int, default=1)

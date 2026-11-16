@@ -75,10 +75,11 @@ def page_data(rows, summary):
 
 
 SUMMARY_ROWS = [
-    ("Sentences changed", lambda c, s: f"{c['sentences_changed']} / {s['sentences']} ({c['percent_changed']:.1f}%)"),
-    ("Paragraphs changed", lambda c, s: f"{c['paragraphs_changed']} / {s['paragraphs']}"),
+    ("Scored", lambda c, s: f"{c['paragraphs_scored']} / {s['paragraphs']} paragraphs"),
+    ("Sentences changed", lambda c, s: f"{c['sentences_changed']} / {c['sentences_scored']} ({c['percent_changed']:.1f}%)"),
+    ("Paragraphs changed", lambda c, s: f"{c['paragraphs_changed']} / {c['paragraphs_scored']}"),
     ("Changed by stage (sentences)", lambda c, s: ", ".join(f"{STAGES.get(k, k)} {v}" for k, v in c["sentences_by_stage"].items()) or "–"),
-    ("FK grade, whole paper", lambda c, s: f"{s['fk_document_original']:.2f} → {c['fk_document']:.2f}"),
+    ("FK grade, scored text", lambda c, s: f"{c['fk_scored_original']:.2f} → {c['fk_document']:.2f}"),
     ("FK grade, changed sentences", lambda c, s: "–" if c["fk_changed_before"] is None else f"{c['fk_changed_before']:.2f} → {c['fk_changed_after']:.2f}"),
     ("Sentence NLI, all (mean)", lambda c, s: f"{c['sentence_nli_mean']:.3f}"),
     ("Sentence NLI, changed (mean / min)", lambda c, s: "–" if c["sentence_nli_changed_mean"] is None else f"{c['sentence_nli_changed_mean']:.3f} / {c['sentence_nli_changed_min']:.3f}"),
@@ -158,7 +159,9 @@ function render(){
     for(const p of sec.paragraphs){
       let body='';
       for(const s of p.sentences){
-        const c=s.c[config]; n++; if(c.ch) ch++; if(c.fl.length) fl++;
+        const c=s.c[config]||null; n++; if(c&&c.ch) ch++; if(c&&c.fl.length) fl++;
+        if(!c){ if(view==='all') body+=`<div class="row same"><div class=o><span class=hd>Original</span>${s.o}</div>`+
+              `<div class=s><span class=empty>Not run for this config</span></div></div>`; continue; }
         if(view==='changed'&&!c.ch) continue;
         if(view==='flagged'&&!c.fl.length) continue;
         let info='';
@@ -178,7 +181,8 @@ function render(){
       if(body) rows+=`<div class=para>${p.label?`<p class=label>${esc(p.label)}</p>`:''}${body}</div>`;
     }
     const sm=D.summary.sections.find(x=>x.section===sec.name);
-    const meta=sm?`FK ${sm.fk_original.toFixed(1)} → ${sm['fk_'+config].toFixed(1)} · ${ch} of ${n} sentences changed${fl?` · ${fl} flagged`:''}`:'';
+    const after=sm&&sm['fk_'+config]!=null?sm['fk_'+config].toFixed(1):'–';
+    const meta=sm?`FK ${sm.fk_original.toFixed(1)} → ${after} · ${ch} of ${n} sentences changed${fl?` · ${fl} flagged`:''}`:'';
     if(rows||view==='all') out+=`<section><h2>${esc(sec.name||'')}</h2><p class=sec-meta>${meta}</p>${rows||''}</section>`;
   }
   root.innerHTML=out||'<p class=empty>Nothing to show for this view.</p>';

@@ -195,3 +195,29 @@ def test_rating_score_rejects_duplicate_ratings(tmp_path):
 def test_raw_text_pages_refuse_the_checkout():
     with pytest.raises(SystemExit):
         paper_page.refuse_checkout(paper_run.Path(paper_run.__file__).parent / "page.html")
+
+
+def test_aggregate_reports_partial_coverage_on_its_own_paragraphs():
+    def srow(text, changed):
+        return {"source": text, "output": text + (" Done." if changed else ""), "changed": changed,
+                "stages": ["word"] if changed else [], "fk_before": 10.0, "fk_after": 9.0 if changed else 10.0,
+                "nli_forward": 0.9, "nli_backward": 0.9, "nli_mean": 0.9, "flags": [],
+                "lost": {"numbers": [], "negations": [], "entities": []},
+                "kea_roy": {"S": 0.5, "U": 0.4, "P_meaning": 0.9}}
+    para = {"nli_mean": 0.95, "nli_forward": 0.95, "nli_backward": 0.95, "numbers_preserved": 1.0,
+            "negations_preserved": 1.0, "entities_preserved": 1.0}
+    rows = []
+    for k in range(3):
+        text = f"Sentence {k} is here."
+        configs = {"winner": {"output": text, "rows": [srow(text, False)], "paragraph": para}}
+        if k == 0:
+            configs["v7_words"] = {"output": text + " Done.", "rows": [srow(text, True)], "paragraph": para}
+        rows.append({"id": f"p{k}", "section": "S1" if k < 2 else "S2", "original": text,
+                     "sentences": [text], "configs": configs})
+    out = paper_run.aggregate(rows)
+    assert out["configs"]["winner"]["paragraphs_scored"] == 3
+    v7 = out["configs"]["v7_words"]
+    assert (v7["paragraphs_scored"], v7["sentences_scored"], v7["sentences_changed"]) == (1, 1, 1)
+    assert v7["percent_changed"] == 100.0
+    s1 = out["sections"][0]
+    assert s1["fk_v7_words"] is None and s1["changed_v7_words"] == 1 and s1["fk_winner"] is not None

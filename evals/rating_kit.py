@@ -24,7 +24,8 @@ from .paper_run import CONFIGS
 
 SEED = 20261116
 CONDITIONS = ("winner", "t5_unchecked", "v7_words", "control")
-QUOTAS = {"paper": {"winner": 7, "t5_unchecked": 5, "v7_words": 5, "control": 3},
+# Paper v7 words covers only 17 paragraphs (stopped for cost), so most v7 pairs come from the panel.
+QUOTAS = {"paper": {"winner": 7, "t5_unchecked": 6, "v7_words": 3, "control": 4},
           "panel": {"winner": 10, "t5_unchecked": 8, "v7_words": 8, "control": 4}}
 PAPER_WORDS = (8, 60)  # rateable sentence length in words
 
@@ -50,6 +51,8 @@ def paper_pool(rows, weights):
             unit = f"paper:{row['id']}#{k}"
             base = {"source": "paper", "unit": unit, "stratum": stratum, "original": source.strip()}
             for name in CONFIGS:
+                if name not in row["configs"]:  # v7 words covers only some paper paragraphs
+                    continue
                 s = row["configs"][name]["rows"][k]
                 if s["changed"] and s["output"].strip():
                     pool.append({**base, "condition": name, "config": CONFIGS[name], "simplified": s["output"],
@@ -226,14 +229,14 @@ progress();
 def form_html(items, kit):
     public = [{"item": i["item"]} for i in items]
     cards = []
-    for i in items:
+    for n, i in enumerate(items, start=1):
         o_html, s_html = word_diff_html(i["original"], i["simplified"])
         scales = "".join(
             f'<fieldset><legend>{title}</legend><p class=intro>{question}</p><div class=opts>' + "".join(
                 f'<label><input type=radio name="{i["item"]}-{key}" value={v}><b>{v}</b>{html.escape(anchor)}</label>'
                 for v, anchor in enumerate(anchors, start=1)) + "</div></fieldset>"
             for key, title, question, anchors in SCALES)
-        cards.append(f'<section class=card id="c-{i["item"]}"><p class=num>{i["item"]} of R{len(items):02d}</p>'
+        cards.append(f'<section class=card id="c-{i["item"]}"><p class=num>{i["item"]} · {n} of {len(items)}</p>'
                      f'<div class=hd>Original</div><div class=txt>{o_html}</div>'
                      f'<div class=hd>Simplified</div><div class=txt>{s_html}</div>{scales}'
                      f'<label class=hd for="t-{i["item"]}">Comment (optional)</label>'

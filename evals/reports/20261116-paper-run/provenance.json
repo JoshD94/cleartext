@@ -1,0 +1,426 @@
+{
+ "created": "2026-11-16",
+ "branch": "josh/paper-run-20261116",
+ "base": "3277afa",
+ "paper": {
+  "anthology": "2020.acl-main.424",
+  "url": "https://aclanthology.org/2020.acl-main.424.pdf",
+  "licence": "CC BY 4.0 (ACL Anthology footer: material published in or after 2016)",
+  "pdf_sha256": "0084e6dac4785c1db2046cb2b54f41ae484912ee9733a42e1ea35014e1967329",
+  "extractor": "poppler pdftohtml -xml -i -fontfullname, then evals/paper_extract.py",
+  "paragraphs_json_sha256": "74843715082a4a59219a12b54a8c32b7da761cac9cb7cdf9debd043a7f70c9ee",
+  "paragraphs": 76,
+  "words": 4756,
+  "sentences_spacy": 227
+ },
+ "plan": {
+  "sha256": "bd50d65db9c9113b001ce52080ed42a9710d14d4351bba12424594f1356c250e",
+  "head_at_freeze": "3277afae455c932244f6508b2ee902cea5614756",
+  "panel_sha256": {
+   "sourced": "8297856bb2009789b07f67c3b910d7257d190d1d3445cc9dbed8ebed42e76819",
+   "paper": "74843715082a4a59219a12b54a8c32b7da761cac9cb7cdf9debd043a7f70c9ee"
+  },
+  "runtime": {
+   "python": "3.12.14",
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "sentence-transformers": "6.2.0",
+    "textstat": "0.7.13",
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "lemminflect": "0.2.3",
+    "wordfreq": "3.1.1",
+    "joblib": "1.6.0"
+   }
+  },
+  "generation": {
+   "runs": {
+    "v7": "/home/joshuadirga/Documents/projects/cleartext-wt-paper/models/runs/ensemble-v7-20260928",
+    "contextual": "/home/joshuadirga/Documents/projects/cleartext-wt-paper/models/runs/ensemble-context-similarity-20261002"
+   },
+   "t5": "/home/joshuadirga/.local/state/cleartext/structure-quality-v2-20261027/run/seq2seq",
+   "tagger": "/home/joshuadirga/.local/state/cleartext/compound-coverage-20261109/boundary-tagger.joblib",
+   "encoder": "/home/joshuadirga/.cache/huggingface/hub/models--bert-base-uncased/snapshots/86b5e0934494bd15c9632b12f734a8a67f723594",
+   "nltk_data": "/home/joshuadirga/nltk_data",
+   "languagetool": {
+    "dir": "/home/joshuadirga/.local/state/cleartext/grammar-20261027/LanguageTool-6.6",
+    "java": "/home/joshuadirga/.local/share/meramu-android-toolchain/jdk-17.0.20.1+1/bin/java",
+    "port": 8797
+   }
+  },
+  "evaluation": {
+   "embedding": "/home/joshuadirga/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+   "nli": "/home/joshuadirga/.cache/huggingface/hub/models--MoritzLaurer--DeBERTa-v3-base-mnli-fever-anli/snapshots/6f5cf0a2b59cabb106aca4c287eed12e357e90eb"
+  },
+  "generation_artifacts": 33,
+  "evaluation_artifacts": 18
+ },
+ "signatures": {
+  "generation": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+  "scoring": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8"
+ },
+ "sentence_scoring_receipt": {
+  "configs": [
+   "t5_unchecked",
+   "winner"
+  ],
+  "optional": [
+   "v7_words"
+  ],
+  "paragraphs": 76,
+  "scored": 76,
+  "complete": true,
+  "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+  "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8"
+ },
+ "study_batch_receipts": [
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper.json",
+   "design_sha256": "0fc1eff65968c8f81b3db136a1d128e19354bf175ffc2aadbd830106a3f05ad2",
+   "configs": 5,
+   "seconds": 1630.0437101291027,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": false,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 1470.714762717951,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": false,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 1447.2189776950981,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": false,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 431.05560192093253,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": true,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 1.2054057279601693,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": true,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 1.148833739105612,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": true,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 1.3668655750807375,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": true,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 1.410695840837434,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": true,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper.json",
+   "design_sha256": "0fc1eff65968c8f81b3db136a1d128e19354bf175ffc2aadbd830106a3f05ad2",
+   "configs": 5,
+   "seconds": 2293.0123843750916,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": false,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper.json",
+   "design_sha256": "0fc1eff65968c8f81b3db136a1d128e19354bf175ffc2aadbd830106a3f05ad2",
+   "configs": 5,
+   "seconds": 1873.3885115811136,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": false,
+   "frozen_inputs_rechecked": true
+  },
+  {
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "panel": "paper",
+   "shard": "0/1",
+   "design": "/home/joshuadirga/.local/state/cleartext/paper-run-20261116/design-paper-fast.json",
+   "design_sha256": "71d0e91f91575f218c1d8f3d4db54e46cb222a67b1d5d205fc59268095aa9c75",
+   "configs": 4,
+   "seconds": 2.6816742268856615,
+   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
+   "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+   "shard_complete": true,
+   "frozen_inputs_rechecked": true
+  }
+ ],
+ "queue_receipts": [
+  {
+   "id": "6ac7d90fa7c0",
+   "name": "cleartext-paper-run",
+   "status": "failed",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794854624.1588273,
+   "finished": 1794854823.8926091,
+   "runtime": 198.83656358718872
+  },
+  {
+   "id": "a5c27d70f686",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794854824.4470265,
+   "finished": 1794856478.2211523,
+   "runtime": 1653.3664135932922
+  },
+  {
+   "id": "a61477c0a5c3",
+   "name": "cleartext-paper-run",
+   "status": "cancelled",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794856537.8029122,
+   "finished": 1794856731.2579408,
+   "runtime": 192.80189180374146
+  },
+  {
+   "id": "a60e75eb5a39",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794856751.7211947,
+   "finished": 1794858246.2346263,
+   "runtime": 1493.9543943405151
+  },
+  {
+   "id": "dcd4f9ddd8fe",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794858247.2781324,
+   "finished": 1794859716.7012215,
+   "runtime": 1468.8119435310364
+  },
+  {
+   "id": "8c0100462017",
+   "name": "cleartext-paper-run",
+   "status": "failed",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794859717.7059724,
+   "finished": 1794860257.1415741,
+   "runtime": 538.9781370162964
+  },
+  {
+   "id": "b57481421b4c",
+   "name": "cleartext-paper-run",
+   "status": "failed",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794860257.7129853,
+   "finished": 1794860274.1470404,
+   "runtime": 15.817339658737183
+  },
+  {
+   "id": "ff4cc87585f7",
+   "name": "cleartext-paper-run",
+   "status": "failed",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794860274.8885837,
+   "finished": 1794860288.7655573,
+   "runtime": 13.07768201828003
+  },
+  {
+   "id": "6dfac18f53bc",
+   "name": "cleartext-paper-run",
+   "status": "failed",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794860289.368432,
+   "finished": 1794860306.8324509,
+   "runtime": 16.924054384231567
+  },
+  {
+   "id": "91688a78b46f",
+   "name": "cleartext-paper-run",
+   "status": "cancelled",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794860352.0190709,
+   "finished": 1794860358.2310195,
+   "runtime": 5.667247295379639
+  },
+  {
+   "id": "4d41696d3cc5",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794860386.1231039,
+   "finished": 1794862822.2889395,
+   "runtime": 2435.3363313674927
+  },
+  {
+   "id": "9588639aa983",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794866284.6151624,
+   "finished": 1794868233.9207382,
+   "runtime": 1948.1547865867615
+  },
+  {
+   "id": "142b10ba2cc6",
+   "name": "cleartext-paper-run",
+   "status": "cancelled",
+   "priority": "later",
+   "ram": 4.5,
+   "finished": 1794868314.9800613,
+   "runtime": 0.0
+  },
+  {
+   "id": "f5df62d3ceaa",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "host": "yoga",
+   "priority": "later",
+   "ram": 4.5,
+   "started": 1794868979.5749311,
+   "finished": 1794869109.0273533,
+   "runtime": 124.73404908180237
+  },
+  {
+   "id": "08ec2c8e783f",
+   "name": "cleartext-paper-qa",
+   "status": "queued",
+   "priority": "later",
+   "ram": 1.5,
+   "runtime": 0.0
+  }
+ ],
+ "rating_kit": {
+  "kit": "paper-run-20261116-s20261116",
+  "seed": 20261116,
+  "quotas": {
+   "paper": {
+    "winner": 7,
+    "t5_unchecked": 6,
+    "v7_words": 3,
+    "control": 4
+   },
+   "panel": {
+    "winner": 10,
+    "t5_unchecked": 8,
+    "v7_words": 8,
+    "control": 4
+   }
+  },
+  "pool_sizes": {
+   "panel/control": 90,
+   "panel/t5_unchecked": 55,
+   "panel/v7_words": 89,
+   "panel/winner": 20,
+   "paper/control": 202,
+   "paper/t5_unchecked": 79,
+   "paper/v7_words": 15,
+   "paper/winner": 8
+  },
+  "panel_state": "~/.local/state/cleartext/ensemble-v2-20261110/run1 (cached Nov 10 outputs)",
+  "key_sha256": "40bcb7b1e298b2957e859309faceb22736990ce13b2b796d4c5170567f6692c9",
+  "form_sha256": "7adcc3ecafc9b191fed1540312b2764458f01755706057fe22c969b03cf8975e"
+ },
+ "v7_words": "generation stopped after 18 paragraphs (17 with paragraph metrics): 77-1860 s per paragraph on a loaded Yoga, ~30 h projected; not run on the Mac because batch.sh needs Yoga-only ignored artifacts (no --sync)",
+ "local_only": [
+  "source PDF and XML",
+  "paragraphs.json",
+  "run1/ (outputs, memos, metrics, sentence rows)",
+  "paper-reading.html",
+  "rating-kit/"
+ ]
+}
