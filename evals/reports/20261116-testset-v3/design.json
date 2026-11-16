@@ -1,0 +1,8 @@
+{
+ "note": "Test set v3 systems (PROTOCOL.md). original and rule_based are always run.",
+ "configs": [
+  "words=v7|phrases=authored|structure=rules|negation=off|grammar=off|terms=off",
+  "words=off|phrases=authored|structure=t5|negation=off|grammar=off|terms=off",
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off"
+ ]
+}
