@@ -491,9 +491,22 @@ def train_seq2seq(
 
 
 class SentenceGenerator:
-    def __init__(self, path, device="auto"):
+    # The trained run's decoding settings; instances may override them.
+    num_beams, max_new_tokens, no_repeat_ngram_size = 2, 256, 0
+    max_source_tokens, num_return_sequences = 192, 1
+
+    def __init__(self, path, device="auto", num_beams=2, max_new_tokens=256,
+                 no_repeat_ngram_size=0, max_source_tokens=192, num_return_sequences=1):
         from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
+        # Decoding settings (defaults are the trained run's). With
+        # num_return_sequences > 1, predict() also returns every beam as
+        # "candidates"; "raw"/"output" still come from the top beam.
+        if num_return_sequences > num_beams:
+            raise ValueError("num_return_sequences cannot exceed num_beams")
+        self.num_beams, self.max_new_tokens = num_beams, max_new_tokens
+        self.no_repeat_ngram_size, self.max_source_tokens = no_repeat_ngram_size, max_source_tokens
+        self.num_return_sequences = num_return_sequences
         self.device = choose_device(device)
         self.tokenizer = AutoTokenizer.from_pretrained(path, local_files_only=True)
         self.model = (
@@ -517,7 +530,7 @@ class SentenceGenerator:
         from ..features import nlp
 
         encoded = self.tokenizer(PREFIX + source, return_tensors="pt")
-        if encoded["input_ids"].shape[1] > 192:
+        if encoded["input_ids"].shape[1] > self.max_source_tokens:
             return {
                 "raw": source,
                 "output": source,
@@ -527,17 +540,27 @@ class SentenceGenerator:
         with torch.inference_mode():
             ids = self.model.generate(
                 **{k: v.to(self.device) for k, v in encoded.items()},
-                num_beams=2,
+                num_beams=self.num_beams,
                 do_sample=False,
-                max_new_tokens=256,
-                no_repeat_ngram_size=0,
+                max_new_tokens=self.max_new_tokens,
+                no_repeat_ngram_size=self.no_repeat_ngram_size,
+                num_return_sequences=self.num_return_sequences,
             )
-        raw = self.tokenizer.decode(ids[0], skip_special_tokens=True).strip()
-        terminated = self.tokenizer.eos_token_id in ids[0].tolist()[1:]
+        beams = [
+            (
+                self.tokenizer.decode(row, skip_special_tokens=True).strip(),
+                self.tokenizer.eos_token_id in row.tolist()[1:],
+            )
+            for row in ids
+        ]
+        raw, terminated = beams[0]
         old = doc if doc is not None else nlp()(source)
         checks = generation_checks(source, raw, old, terminated=terminated)
-        return {
+        result = {
             "raw": raw,
             "output": raw if checks["pass"] else source,
             "raw_checks": checks,
         }
+        if self.num_return_sequences > 1:
+            result["candidates"] = [{"raw": text, "terminated": done} for text, done in beams]
+        return result

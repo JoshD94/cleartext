@@ -1,0 +1,136 @@
+{
+ "note": "Phase 0: incumbent and November 10 levels",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {}
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5_unchecked"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "t5_unchecked"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5_raw"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "t5_raw"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "t5_only"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "compound_only"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "words_v7"
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "words_contextual"
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "words_contextual_veto"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "phrases_crf"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "phrases_simpleppdb"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "on"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "passive_on"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "agentive"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "passive_agentive"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "negation": "on"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "negation_on"
+  }
+ ]
+}

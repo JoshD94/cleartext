@@ -100,6 +100,29 @@ def _relative_attachments(doc):
     )
 
 
+def passage_checks(source, output):
+    """Structure checks for a whole passage whose sentences were split in place."""
+    old, new = nlp()(source), nlp()(output)
+    checks = structure_checks(source, output, old, new)
+    # Unlike the one-sentence learned adapter, passages may exceed 4 sentences.
+    checks["checks"]["sentence_count"] = (
+        len(list(old.sents)) <= len(list(new.sents)) <= 2 * len(list(old.sents))
+    )
+    # An untouched footnote/fragment elsewhere must not veto a checked split.
+    # Match exact text AND multiplicity: no new, edited or duplicated fragment
+    # is allowed. Sentence-level proposals still have to be complete clauses.
+    old_fragments = Counter(s.text.strip() for s in old.sents if not complete_clause(s))
+    new_fragments = Counter(s.text.strip() for s in new.sents if not complete_clause(s))
+    checks["checks"]["complete_clauses"] = old_fragments == new_fragments
+    checks["checks"].update(discourse_checks(old, new))
+    checks["checks"]["code_literals"] = preserved_literals(source, output)["pass"]
+    checks["checks"]["subject_groups"] = _subject_groups(old) == _subject_groups(new)
+    checks["checks"]["relative_attachments"] = _relative_attachments(old) == _relative_attachments(new)
+    checks["failed"] = [k for k, v in checks["checks"].items() if not v]
+    checks["pass"] = not checks["failed"]
+    return checks
+
+
 class DependencyCompoundSplitter:
     """One accepted boundary per source sentence; defaults remain unchanged."""
 
@@ -107,7 +130,8 @@ class DependencyCompoundSplitter:
     rule_name = "dependency compound split"
     supports_passages = True
 
-    def __init__(self, min_sentence_words=0, min_clause_words=0, guards="scoped", tagger=None):
+    def __init__(self, min_sentence_words=0, min_clause_words=0, guards="scoped", tagger=None,
+                 tagger_threshold=None):
         # "strict" replays the November 2 behaviour: any quote, bracket,
         # negation or modal in a sentence vetoes every boundary in it.
         # "scoped" only vetoes boundaries inside quotes/brackets/literals and
@@ -121,6 +145,11 @@ class DependencyCompoundSplitter:
             tagger = BoundaryTagger.load(tagger)
         if tagger is not None and guards != "scoped":
             raise ValueError("a tagger requires scoped guards")
+        if tagger_threshold is not None:
+            if tagger is None:
+                raise ValueError("tagger_threshold needs a tagger")
+            # Opt-in override of the artifact's tuned threshold (0.4), on a copy.
+            tagger = BoundaryTagger(tagger.vectorizer, tagger.model, tagger_threshold)
         self.tagger = tagger
         for name, value in (("min_sentence_words", min_sentence_words),
                             ("min_clause_words", min_clause_words)):
@@ -130,25 +159,7 @@ class DependencyCompoundSplitter:
         self.min_clause_words = min_clause_words
 
     def validate(self, source, output):
-        old, new = nlp()(source), nlp()(output)
-        checks = structure_checks(source, output, old, new)
-        # Unlike the one-sentence learned adapter, passages may exceed 4 sentences.
-        checks["checks"]["sentence_count"] = (
-            len(list(old.sents)) <= len(list(new.sents)) <= 2 * len(list(old.sents))
-        )
-        # An untouched footnote/fragment elsewhere must not veto a checked split.
-        # Match exact text AND multiplicity: no new, edited or duplicated fragment
-        # is allowed. Sentence-level proposals still have to be complete clauses.
-        old_fragments = Counter(s.text.strip() for s in old.sents if not complete_clause(s))
-        new_fragments = Counter(s.text.strip() for s in new.sents if not complete_clause(s))
-        checks["checks"]["complete_clauses"] = old_fragments == new_fragments
-        checks["checks"].update(discourse_checks(old, new))
-        checks["checks"]["code_literals"] = preserved_literals(source, output)["pass"]
-        checks["checks"]["subject_groups"] = _subject_groups(old) == _subject_groups(new)
-        checks["checks"]["relative_attachments"] = _relative_attachments(old) == _relative_attachments(new)
-        checks["failed"] = [k for k, v in checks["checks"].items() if not v]
-        checks["pass"] = not checks["failed"]
-        return checks
+        return passage_checks(source, output)
 
     def _sentence(self, source, diagnostics=None):
         diagnostics = diagnostics if diagnostics is not None else []

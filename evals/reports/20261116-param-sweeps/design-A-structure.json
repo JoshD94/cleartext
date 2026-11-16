@@ -1,0 +1,632 @@
+{
+ "note": "Phase A: T5 and compound, one at a time on the incumbent",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "modality"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "content_retained"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "content_retained"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "no_new_content"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "no_new_content"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "argument_roles"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "operator_scope"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "operator_scope"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "finite_predicates"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "finite_predicates"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "logical_connectives"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "logical_connectives"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "sentence_count"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "sentence_count"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "complete_clauses"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "complete_clauses"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "discourse_markers"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "discourse_markers"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "uncertainty_scope"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "uncertainty_scope"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "predicate_tense"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "predicate_tense"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "complement_scope"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "complement_scope"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "generation_terminated"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "generation_terminated"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "all_soft"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.passage": "passage"
+   },
+   "group": "t5.passage",
+   "value": "passage"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.passage": "off"
+   },
+   "group": "t5.passage",
+   "value": "off"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage"
+   },
+   "group": "t5.safe",
+   "value": null
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "group": "t5.safe",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.7
+   },
+   "group": "t5.safe",
+   "value": 0.7
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.8
+   },
+   "group": "t5.safe",
+   "value": 0.8
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.9
+   },
+   "group": "t5.safe",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.95
+   },
+   "group": "t5.safe",
+   "value": 0.95
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.min_words": 8
+   },
+   "group": "t5.min_words",
+   "value": 8
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.min_words": 12
+   },
+   "group": "t5.min_words",
+   "value": 12
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.min_words": 16
+   },
+   "group": "t5.min_words",
+   "value": 16
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.min_words": 20
+   },
+   "group": "t5.min_words",
+   "value": 20
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 1
+   },
+   "group": "t5.decoding",
+   "value": "beams1"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4
+   },
+   "group": "t5.decoding",
+   "value": "beams4"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.candidates": 2
+   },
+   "group": "t5.decoding",
+   "value": "beams2_try2"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4,
+    "t5.candidates": 4
+   },
+   "group": "t5.decoding",
+   "value": "beams4_try4"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.threshold": 0.2
+   },
+   "group": "cmp.threshold",
+   "value": 0.2
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.threshold": 0.3
+   },
+   "group": "cmp.threshold",
+   "value": 0.3
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.threshold": 0.5
+   },
+   "group": "cmp.threshold",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.threshold": 0.6
+   },
+   "group": "cmp.threshold",
+   "value": 0.6
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.min_sentence_words": 10
+   },
+   "group": "cmp.min_sentence_words",
+   "value": 10
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.min_sentence_words": 15
+   },
+   "group": "cmp.min_sentence_words",
+   "value": 15
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.min_clause_words": 3
+   },
+   "group": "cmp.min_clause_words",
+   "value": 3
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.min_clause_words": 5
+   },
+   "group": "cmp.min_clause_words",
+   "value": 5
+  }
+ ]
+}
