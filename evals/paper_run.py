@@ -194,10 +194,27 @@ def open_state(plan_path, state):
 
 
 def code_signature():
-    """Sources that sentence rows depend on beyond the study signatures."""
+    """What sentence rows depend on beyond the study signatures: this module's
+    scoring functions (not its report code), Kea-Roy's evaluator and weights."""
+    import hashlib
+    import inspect
     from .ensemble_study import sha
     here = Path(__file__).parent
-    return {name: sha(here / name) for name in ("paper_run.py", "evaluate_base.py", "trained_weights.json")}
+    scoring = (snapshots, _tokens, segments, _norm, _mean, _fk, kea_roy, lost_items, sentence_row, paragraph_rows)
+    source = "\n".join(inspect.getsource(f) for f in scoring) + repr((NLI_FLAG, STAGE_NAMES, _TOKEN.pattern))
+    return {"paper_run_scoring": hashlib.sha256(source.encode()).hexdigest(),
+            **{name: sha(here / name) for name in ("evaluate_base.py", "trained_weights.json")}}
+
+
+def expected_identity(passage, store, gen, score_sig, names, optional, code):
+    """Identity a paragraph's sentence rows must carry: signatures, code and the
+    digest of every required output and of every optional output that exists."""
+    entries = {k: store.output(passage, v) for k, v in names.items()}
+    if any(e is None for e in entries.values()):
+        return None, entries
+    entries.update({k: e for k, e in ((k, store.output(passage, v)) for k, v in optional.items()) if e})
+    return ({"generation": gen, "scoring": score_sig, "id": passage["id"], "code": code,
+             "outputs": {k: digest(e["output"]) for k, e in entries.items()}}, entries)
 
 
 def _spacy_sentencizer():
@@ -221,14 +238,11 @@ def score(args):
     sentencize, done = _spacy_sentencizer(), 0
     code = code_signature()
     for passage in passages:
-        entries = {k: store.output(passage, v) for k, v in names.items()}
-        if any(e is None for e in entries.values()):
+        # Optional configs are scored on the paragraphs where their output exists.
+        identity, entries = expected_identity(passage, store, gen, score_sig, names, optional, code)
+        if identity is None:
             print(f"{passage['id']}: outputs missing; run ensemble_study first")
             break
-        # Optional configs are scored on the paragraphs where their output exists.
-        entries.update({k: e for k, e in ((k, store.output(passage, v)) for k, v in optional.items()) if e})
-        identity = {"generation": gen, "scoring": score_sig, "id": passage["id"], "code": code,
-                    "outputs": {k: digest(e["output"]) for k, e in entries.items()}}
         path = _row_path(args.state, score_sig, passage)
         if path.exists() and json.loads(path.read_text())["identity"] == identity:
             done += 1
@@ -246,7 +260,7 @@ def score(args):
         print(f"{time.strftime('%H:%M:%S')} +{time.monotonic() - started:.0f}s scored {passage['id']}", flush=True)
     receipt = {"configs": sorted(names), "optional": sorted(optional), "paragraphs": len(passages), "scored": done,
                "complete": done == len(passages),
-               "generation_signature": gen, "scoring_signature": score_sig}
+               "generation_signature": gen, "scoring_signature": score_sig, "code": code}
     write_json(Path(args.state) / "sentences" / f"receipt-{'+'.join(sorted(names))}.json", receipt)
     print(json.dumps(receipt))
 
@@ -261,12 +275,17 @@ def _mean(values):
 def load_rows(plan_path, state, configs=CONFIGS, optional=()):
     """Scored rows; every paragraph must carry `configs`, and may carry `optional`."""
     plan, gen, score_sig, store, passages = open_state(plan_path, state)
-    rows = []
+    code, rows = code_signature(), []
+    optional_configs = {k: CONFIGS[k] for k in optional}
     for passage in passages:
         path = _row_path(state, score_sig, passage)
         if not path.exists():
             raise SystemExit(f"Not scored yet: {passage['id']}")
         row = json.loads(path.read_text())
+        expected, _ = expected_identity(passage, store, gen, score_sig, configs, optional_configs, code)
+        if row.pop("identity") != expected:
+            raise SystemExit(f"{passage['id']}: sentence rows are stale (code, signatures or outputs "
+                             "changed); rerun paper_run score")
         present = set(row["configs"])
         if not set(configs) <= present <= set(configs) | set(optional):
             raise SystemExit(f"{passage['id']} was scored for {sorted(present)}, not {sorted(configs)}")

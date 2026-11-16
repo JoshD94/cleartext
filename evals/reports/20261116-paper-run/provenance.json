@@ -75,7 +75,12 @@
   "scored": 76,
   "complete": true,
   "generation_signature": "ed9baaa82637f3a0c404861af05c0fdb241176549e527608724d947f8479b2d0",
-  "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8"
+  "scoring_signature": "d4b1571727021038c328eac58e4e57dbe183cf2af028164a3511becddffa07a8",
+  "code": {
+   "paper_run_scoring": "6b7b39ba4fc5f4bd0d816e515580f1f68d64d0ccfa8f01355ad7d1523205022b",
+   "evaluate_base.py": "693d773489ef5552d6e7a3be46721cdc5445586872c079577aaa847426605162",
+   "trained_weights.json": "5fb35f2cce441554c90b37b4b79fecaa28556099b36fdfc64087829bc10dd5fc"
+  }
  },
  "study_batch_receipts": [
   {
@@ -378,10 +383,17 @@
   {
    "id": "08ec2c8e783f",
    "name": "cleartext-paper-qa",
-   "status": "queued",
+   "status": "succeeded",
    "priority": "later",
    "ram": 1.5,
-   "runtime": 0.0
+   "runtime": 0.0,
+   "note": "headless Playwright QA of page and form, phone and desktop"
+  },
+  {
+   "id": "ce00ef0705e1",
+   "name": "cleartext-paper-run",
+   "status": "succeeded",
+   "note": "rescore at the committed scoring code"
   }
  ],
  "rating_kit": {
@@ -422,5 +434,10 @@
   "run1/ (outputs, memos, metrics, sentence rows)",
   "paper-reading.html",
   "rating-kit/"
- ]
+ ],
+ "code_signature": {
+  "paper_run_scoring": "6b7b39ba4fc5f4bd0d816e515580f1f68d64d0ccfa8f01355ad7d1523205022b",
+  "evaluate_base.py": "693d773489ef5552d6e7a3be46721cdc5445586872c079577aaa847426605162",
+  "trained_weights.json": "5fb35f2cce441554c90b37b4b79fecaa28556099b36fdfc64087829bc10dd5fc"
+ }
 }

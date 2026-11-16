@@ -45,19 +45,18 @@ What the reading page shows (local):
 
 - **The checks are why the winner is safe, and why it does little.** T5
   without checks lowers whole-paper FK by 1.2 grades, but 7 changed sentences
-  fall under NLI 0.80. In those sentences it silently deletes characters
-  outside its vocabulary (κ, §, ±, accents in "Aluísio"), cuts citations, and
-  once drops a number. This matches the November 10 ablation (−1.2 grade,
+  fall under NLI 0.80. In those sentences it silently deletes symbols outside
+  its vocabulary (Greek letters, section signs), cuts author names out of
+  citations, and once drops a number. This matches the November 10 ablation (−1.2 grade,
   fails numbers).
-- **NLI misses fluency breaks.** One winner compound split reads "We randomly
-  chose 100 original sentences from ASSET. , for each of them, we sampled one
-  system simplification." It scores NLI 0.99 and no flag. Human fluency
-  ratings are the check that would catch this.
+- **NLI misses fluency breaks.** One winner compound split leaves a stray
+  ", " at the start of its second sentence. It scores NLI 0.99 and gets no
+  flag. Human fluency ratings are the check that would catch this.
 - **v7 words costs meaning on technical prose** and barely moves FK (−0.15 on
   the text it scored).
-- The pipeline's spaCy sentencizer sometimes splits inside citations ("…;
-  Aluísio et al., 2008; …)") and splits the title at its colon. Sentence
-  counts and per-sentence scores follow those splits.
+- The pipeline's spaCy sentencizer sometimes splits inside parenthetical
+  citation lists, and splits the title at its colon. Sentence counts and
+  per-sentence scores follow those splits.
 
 **v7 words was stopped after 18 paragraphs.** On a loaded Yoga a v7 paragraph
 took 77 to 1,860 s, because BERT ranks every flagged word. The other 58
@@ -100,8 +99,9 @@ The rating kit takes most v7 pairs from the panel.
    negation.
 
 Paragraph metrics come from `ensemble_study run --panel paper`. Sentence rows
-are bound to the study's signatures and to the hashes of `paper_run.py`,
-`evaluate_base.py` and `trained_weights.json`. Queue: personal `later` priority
+carry the study's signatures, the digest of every output they score, and a
+code signature: `paper_run.py`'s scoring functions, `evaluate_base.py` and
+`trained_weights.json`. `report` refuses rows whose identity no longer matches. Queue: personal `later` priority
 on Yoga with one thread; IDs and receipts are in provenance.json.
 
 Configs: **winner** = `words=off, phrases=authored, structure=t5+compound_tagger`;
@@ -129,8 +129,11 @@ stays local.
 CSVs. It reports Krippendorff's alpha per dimension (interval and ordinal),
 human means per condition, and the Pearson and Spearman correlation of each
 automatic metric (FK change, FK after, Kea-Roy S and U, NLI) with the mean
-human rating. Tested against Krippendorff's (2011) published example
-(nominal 0.743, interval 0.849) and on fake rater CSVs.
+human rating. The correlations are given over all items, per source (paper
+sentences carry sentence NLI, panel passages carry passage NLI) and without
+controls. Duplicate ratings or rater names are an error. The alpha code is
+tested against Krippendorff's (2011) published example (nominal 0.743,
+ordinal 0.815, interval 0.849), and the scorer is tested on fake rater CSVs.
 
 ## Reproduce
 
