@@ -6,7 +6,7 @@ import re
 
 import pytest
 
-from evals import paper_extract, paper_run, rating_kit, rating_score
+from evals import paper_extract, paper_page, paper_run, rating_kit, rating_score
 
 
 def regex_sentences(text):
@@ -34,6 +34,14 @@ def test_snapshots_follow_structure_phrase_and_word_edits():
         {"stage": "word", "source": "trained", "replacement": "practiced"}]}
     assert [s for s, _ in paper_run.snapshots(ORIGINAL, entry)] == ["original", "t5", "phrase", "word"]
     assert paper_run.snapshots(ORIGINAL, entry)[-1][1] == final
+
+
+def test_snapshots_unrecorded_stage_ends_where_structure_begins():
+    passive = ORIGINAL.replace("The cat sat", "The cat was sitting")
+    split = passive.replace("mat, and the dog", "mat. The dog")
+    entry = {"output": split, "edits": [{"stage": "passive", "sentence": 0},
+                                         {"stage": "structure", "rule": "learned seq2seq", "before": passive, "after": split}]}
+    assert paper_run.snapshots(ORIGINAL, entry) == [("original", ORIGINAL), ("passive", passive), ("t5", split)]
 
 
 def test_snapshots_unrecorded_edit_ends_at_output():
@@ -111,7 +119,10 @@ def test_kit_sample_is_seeded_stratified_blind_and_unique():
     items = rating_kit.sample(fake_pool(), seed=7)
     again = rating_kit.sample(fake_pool(), seed=7)
     assert [i["item"] for i in items] == [i["item"] for i in again]
-    assert len(items) == 50 and len({i["unit"] for i in items}) == 50
+    assert len(items) == 50 and len({(i["original"], i["simplified"]) for i in items}) == 50
+    for cond in rating_kit.CONDITIONS:
+        units = [i["unit"] for i in items if i["condition"] == cond]
+        assert len(units) == len(set(units))
     counts = {}
     for i in items:
         counts[(i["source"], i["condition"])] = counts.get((i["source"], i["condition"]), 0) + 1
@@ -161,4 +172,26 @@ def test_krippendorff_alpha_matches_published_example():
     units = [[row[u] for row in data if row[u] is not None] for u in range(12)]
     assert rating_score.alpha(units, "nominal") == pytest.approx(0.743, abs=1e-3)
     assert rating_score.alpha(units, "interval") == pytest.approx(0.849, abs=1e-3)
+    assert rating_score.alpha(units, "ordinal") == pytest.approx(0.815, abs=1e-3)
     assert rating_score.alpha([[3, 3, 3], [1, 1]], "interval") == 1.0
+    assert rating_score.alpha([[3, 3], [3, 3]], "interval") is None
+
+
+def test_rating_score_rejects_duplicate_ratings(tmp_path):
+    items = rating_kit.sample(fake_pool(), seed=7)
+    key = tmp_path / "key.json"
+    key.write_text(json.dumps({"kit": "kit-test", "items": items}))
+    path = tmp_path / "a.csv"
+    path.write_text("rater,item,simplicity,meaning,fluency,comment\nx,R01,3,3,3,\nx,R01,4,4,4,\n")
+    with pytest.raises(ValueError, match="twice"):
+        rating_score.score(key, [path])
+    other = tmp_path / "b.csv"
+    other.write_text("rater,item,simplicity,meaning,fluency,comment\nx,R02,3,3,3,\n")
+    path.write_text("rater,item,simplicity,meaning,fluency,comment\nx,R01,3,3,3,\n")
+    with pytest.raises(ValueError, match="appears in"):
+        rating_score.score(key, [path, other])
+
+
+def test_raw_text_pages_refuse_the_checkout():
+    with pytest.raises(SystemExit):
+        paper_page.refuse_checkout(paper_run.Path(paper_run.__file__).parent / "page.html")

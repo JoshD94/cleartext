@@ -174,6 +174,8 @@ def freeze(args):
     if args.asset:
         panels["asset_test"] = args.asset.resolve()
     for spec in args.panel or []:
+        if "=" not in spec:
+            raise SystemExit(f"--panel expects NAME=PATH, got {spec!r}")
         name, path = spec.split("=", 1)
         if name in panels:
             raise SystemExit(f"Panel {name} already defined")

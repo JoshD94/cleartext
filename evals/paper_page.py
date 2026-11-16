@@ -221,8 +221,17 @@ substitution. Flags: changed sentence with NLI (mean of both directions) below 0
 """
 
 
+def refuse_checkout(path):
+    """Raw-text pages must stay outside the Git checkout."""
+    root = Path(__file__).resolve().parents[1]
+    path = Path(path).resolve()
+    if path == root or root in path.parents:
+        raise SystemExit(f"{path} is inside the checkout; raw text stays local")
+
+
 def main(argv=None):
     argv = argv or sys.argv[1:]
+    refuse_checkout(argv[2])
     rows = json.loads(Path(argv[0]).read_text())
     summary = json.loads(Path(argv[1]).read_text())
     Path(argv[2]).write_text(build(rows, summary))

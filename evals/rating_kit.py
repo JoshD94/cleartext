@@ -19,7 +19,7 @@ import random
 import re
 from pathlib import Path
 
-from .paper_page import word_diff_html
+from .paper_page import refuse_checkout, word_diff_html
 from .paper_run import CONFIGS
 
 SEED = 20261116
@@ -80,14 +80,21 @@ def panel_pool(passages, store, weights):
 
 
 def sample(pool, seed=SEED, quotas=QUOTAS):
-    """Seeded, stratified, unique-original sample; scarcest condition drawn first."""
+    """Seeded sample, stratified round-robin per (source, condition).
+
+    Each condition is an independent random draw from that config's own
+    changed outputs (controls: originals the winner left unchanged), so no
+    condition is restricted to what another left over. An original may appear
+    under more than one condition, never twice in one condition, and an
+    identical (original, simplified) pair is drawn once.
+    """
     rng = random.Random(seed)
-    used, chosen = set(), []
+    pairs, chosen = set(), []
     for source in quotas:
-        def candidates(cond):
-            return [p for p in pool if p["source"] == source and p["condition"] == cond]
-        for cond in sorted(quotas[source], key=lambda c: (len(candidates(c)), c)):
-            quota, cands = quotas[source][cond], candidates(cond)
+        for cond in CONDITIONS:
+            used = set()
+            quota = quotas[source][cond]
+            cands = [p for p in pool if p["source"] == source and p["condition"] == cond]
             rng.shuffle(cands)
             strata = sorted({p["stratum"] for p in cands})
             rng.shuffle(strata)
@@ -95,12 +102,14 @@ def sample(pool, seed=SEED, quotas=QUOTAS):
             picked = []
             while len(picked) < quota and any(queues.values()):
                 for s in strata:
-                    while queues[s] and queues[s][0]["unit"] in used:
+                    while queues[s] and (queues[s][0]["unit"] in used
+                                         or (queues[s][0]["original"], queues[s][0]["simplified"]) in pairs):
                         queues[s].pop(0)
                     if queues[s] and len(picked) < quota:
                         p = queues[s].pop(0)
                         picked.append(p)
                         used.add(p["unit"])
+                        pairs.add((p["original"], p["simplified"]))
             if len(picked) < quota:
                 raise ValueError(f"Only {len(picked)} {source}/{cond} pairs for a quota of {quota}")
             chosen += picked
@@ -164,7 +173,10 @@ const ITEMS = JSON.parse(document.getElementById('items').textContent);
 const KEY = 'cleartext-rating-' + document.body.dataset.kit;
 const DIMS = ['simplicity','meaning','fluency'];
 let state = {name:'', r:{}};
-try { const s = localStorage.getItem(KEY); if (s) state = JSON.parse(s); } catch (e) {}
+try {
+  const s = JSON.parse(localStorage.getItem(KEY) || 'null');
+  if (s && typeof s === 'object' && s.r && typeof s.r === 'object') state = {name: String(s.name || ''), r: s.r};
+} catch (e) {}
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
 function done(id){ const r = state.r[id] || {}; return DIMS.every(d => r[d]); }
 function progress(){
@@ -261,6 +273,7 @@ def build(args):
     pool = paper_pool(rows, weights) + panel_pool(passages, store, weights)
     items = sample(pool, args.seed)
     kit = f"paper-run-20261116-s{args.seed}"
+    refuse_checkout(args.out)
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "rating-form.html").write_text(form_html(items, kit))
     (args.out / "rating-key.json").write_text(json.dumps({"kit": kit, "seed": args.seed, "quotas": QUOTAS,

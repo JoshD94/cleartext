@@ -51,6 +51,8 @@ def snapshots(original, entry):
     for edit in entry.get("edits", []):
         stage = edit.get("stage")
         if stage == "structure":
+            # An earlier stage with no recorded text ended where structure began.
+            rows = [(s, edit["before"] if t is None else t) for s, t in rows]
             current = edit["after"]
             rows.append((STAGE_NAMES.get(edit.get("rule"), "structure"), current))
         elif stage == "phrase" and "start" in edit:
@@ -191,6 +193,13 @@ def open_state(plan_path, state):
     return plan, gen, score, StudyStore(state, gen, score), load_panel(plan, "paper")
 
 
+def code_signature():
+    """Sources that sentence rows depend on beyond the study signatures."""
+    from .ensemble_study import sha
+    here = Path(__file__).parent
+    return {name: sha(here / name) for name in ("paper_run.py", "evaluate_base.py", "trained_weights.json")}
+
+
 def _spacy_sentencizer():
     from cleartext.features import nlp
 
@@ -209,12 +218,13 @@ def score(args):
     names = {k: CONFIGS[k] for k in args.configs.split(",")}
     deadline, scorer, started = time.monotonic() + args.max_seconds, None, time.monotonic()
     sentencize, done = _spacy_sentencizer(), 0
+    code = code_signature()
     for passage in passages:
         entries = {k: store.output(passage, v) for k, v in names.items()}
         if any(e is None for e in entries.values()):
             print(f"{passage['id']}: outputs missing; run ensemble_study first")
             break
-        identity = {"generation": gen, "scoring": score_sig, "id": passage["id"],
+        identity = {"generation": gen, "scoring": score_sig, "id": passage["id"], "code": code,
                     "outputs": {k: digest(e["output"]) for k, e in entries.items()}}
         path = _row_path(args.state, score_sig, passage)
         if path.exists() and json.loads(path.read_text())["identity"] == identity:
@@ -265,6 +275,10 @@ def load_rows(plan_path, state, configs=CONFIGS):
     return rows
 
 
+def fk_pairs(sentences):
+    return [s for s in sentences if s["fk_before"] is not None and s["fk_after"] is not None]
+
+
 def aggregate(rows):
     sections = list(dict.fromkeys(r["section"] for r in rows))
 
@@ -288,15 +302,20 @@ def aggregate(rows):
             "paragraphs_changed": sum(r["configs"][name]["output"] != r["original"] for r in rows),
             "sentences_by_stage": dict(sorted(stages.items())),
             "fk_document": _fk(text(rows, name)),
-            "fk_sentence_mean_before": _mean([s["fk_before"] for s in sent]),
-            "fk_sentence_mean_after": _mean([s["fk_after"] for s in sent]),
-            "fk_changed_before": _mean([s["fk_before"] for s in changed]),
-            "fk_changed_after": _mean([s["fk_after"] for s in changed]),
+            # FK means over sentences where FK is defined before and after (n given).
+            "fk_sentence_n": len(fk_pairs(sent)),
+            "fk_sentence_mean_before": _mean([s["fk_before"] for s in fk_pairs(sent)]),
+            "fk_sentence_mean_after": _mean([s["fk_after"] for s in fk_pairs(sent)]),
+            "fk_changed_n": len(fk_pairs(changed)),
+            "fk_changed_before": _mean([s["fk_before"] for s in fk_pairs(changed)]),
+            "fk_changed_after": _mean([s["fk_after"] for s in fk_pairs(changed)]),
             "sentence_nli_mean": _mean([s["nli_mean"] for s in sent]),
             "sentence_nli_changed_mean": _mean([s["nli_mean"] for s in changed]),
             "sentence_nli_changed_min": min([s["nli_mean"] for s in changed if s["nli_mean"] is not None],
                                             default=None),
             "sentence_nli_abstained": sum(s["nli_mean"] is None for s in sent),
+            "sentence_nli_one_direction_abstained": sum(
+                (s["nli_forward"] is None) != (s["nli_backward"] is None) for s in sent),
             "sentence_nli_forward_changed_mean": _mean([s["nli_forward"] for s in changed]),
             "sentence_nli_backward_changed_mean": _mean([s["nli_backward"] for s in changed]),
             "changed_sentences_nli_below_0.80": sum("nli" in s["flags"] for s in sent),
@@ -343,8 +362,8 @@ def markdown(summary):
     sec = "| Section | Sentences | FK original | " + " | ".join(f"FK {n} | changed {n}" for n in names) + " |\n"
     sec += "|---|---:|---:|" + "---:|---:|" * len(names) + "\n"
     for s in summary["sections"]:
-        sec += f"| {s['section']} | {s['sentences']} | {s['fk_original']:.2f} | " + " | ".join(
-            f"{s['fk_' + n]:.2f} | {s['changed_' + n]}" for n in names) + " |\n"
+        sec += f"| {s['section']} | {s['sentences']} | {fmt(s['fk_original'])} | " + " | ".join(
+            f"{fmt(s['fk_' + n])} | {s['changed_' + n]}" for n in names) + " |\n"
     return head + body + stages + "\n" + sec
 
 

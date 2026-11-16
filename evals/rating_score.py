@@ -50,8 +50,8 @@ def alpha(units, level="interval"):
 
     observed = sum(o[c, k] * delta(c, k) for c in values for k in values) / n
     expected = sum(n_c[c] * n_c[k] * delta(c, k) for c in values for k in values) / (n * (n - 1))
-    if expected == 0:
-        return 1.0 if observed == 0 else None
+    if expected == 0:  # No variation at all: alpha is undefined.
+        return None
     return 1 - observed / expected
 
 
@@ -85,7 +85,7 @@ def spearman(x, y):
 
 
 def read_ratings(paths, items):
-    ratings = []  # (rater, item, dimension, value)
+    ratings, seen, raters = [], set(), {}  # ratings: (rater, item, dimension, value)
     for path in paths:
         with Path(path).open(newline="", encoding="utf-8") as stream:
             reader = csv.DictReader(stream)
@@ -95,12 +95,18 @@ def read_ratings(paths, items):
             for row in reader:
                 if row["item"] not in items:
                     raise ValueError(f"{path}: unknown item {row['item']}")
+                rater = row["rater"].strip() or Path(path).stem
+                if raters.setdefault(rater, path) != path:
+                    raise ValueError(f"Rater {rater} appears in {raters[rater]} and {path}")
+                if (rater, row["item"]) in seen:
+                    raise ValueError(f"{path}: {rater} rated {row['item']} twice")
+                seen.add((rater, row["item"]))
                 for dim in DIMENSIONS:
                     if row[dim].strip():
                         value = int(row[dim])
                         if not 1 <= value <= 5:
                             raise ValueError(f"{path}: {dim}={value} outside 1-5")
-                        ratings.append((row["rater"].strip() or Path(path).stem, row["item"], dim, value))
+                        ratings.append((rater, row["item"], dim, value))
     return ratings
 
 
@@ -117,19 +123,25 @@ def score(key_path, csv_paths):
     for rater, item, dim, value in ratings:
         by.setdefault((item, dim), {})[rater] = value
     out = {"kit": key.get("kit"), "raters": len(raters), "rater_names": raters,
-           "items_rated": len({i for i, _ in by}), "alpha": {}, "correlations": {}, "by_condition": {}}
+           "items_rated": len({i for i, _ in by}), "alpha": {}, "correlations": {},
+           "correlations_by_subset": {}, "by_condition": {}}
     for dim in DIMENSIONS:
         units = [list(by[i, dim].values()) for i in items if (i, dim) in by]
         out["alpha"][dim] = {level: alpha(units, level) for level in ("interval", "ordinal")}
         out["alpha"][dim]["units_with_2plus"] = sum(len(u) >= 2 for u in units)
         means = {i: _mean(list(by[i, dim].values())) for i in items if (i, dim) in by}
-        out["correlations"][dim] = {}
-        for metric in METRICS:
-            pairs = [(items[i]["metrics"].get(metric), m) for i, m in means.items()
-                     if items[i]["metrics"].get(metric) is not None]
-            x, y = [a for a, _ in pairs], [b for _, b in pairs]
-            out["correlations"][dim][metric] = {"n": len(pairs), "pearson": pearson(x, y),
-                                                "spearman": spearman(x, y)}
+        # Paper items carry sentence NLI, panel items passage NLI; controls have FK change 0
+        # by construction. So correlations are also reported per source and without controls.
+        subsets = {"all": lambda i: True, "paper": lambda i: i["source"] == "paper",
+                   "panel": lambda i: i["source"] == "panel", "changed_only": lambda i: i["condition"] != "control"}
+        for subset, keep in subsets.items():
+            target = out["correlations"] if subset == "all" else out["correlations_by_subset"].setdefault(subset, {})
+            target[dim] = {}
+            for metric in METRICS:
+                pairs = [(items[i]["metrics"].get(metric), m) for i, m in means.items()
+                         if keep(items[i]) and items[i]["metrics"].get(metric) is not None]
+                x, y = [a for a, _ in pairs], [b for _, b in pairs]
+                target[dim][metric] = {"n": len(pairs), "pearson": pearson(x, y), "spearman": spearman(x, y)}
         for cond in sorted({i["condition"] for i in items.values()}):
             vals = [m for i, m in means.items() if items[i]["condition"] == cond]
             out["by_condition"].setdefault(cond, {})[dim] = {"n": len(vals), "mean": _mean(vals)}
@@ -147,6 +159,11 @@ def markdown(result):
     for dim, rows in result["correlations"].items():
         for metric, c in rows.items():
             lines.append(f"| {dim} | {metric} | {c['n']} | {f(c['pearson'])} | {f(c['spearman'])} |")
+    for subset, dims in result["correlations_by_subset"].items():
+        lines += ["", f"Subset {subset}: Spearman per metric", "", "| Dimension | " + " | ".join(METRICS) + " |",
+                  "|---|" + "---:|" * len(METRICS)]
+        for dim, rows in dims.items():
+            lines.append(f"| {dim} | " + " | ".join(f"{f(c['spearman'])} (n={c['n']})" for c in rows.values()) + " |")
     lines += ["", "| Condition | " + " | ".join(DIMENSIONS) + " |", "|---|" + "---:|" * len(DIMENSIONS)]
     for cond, dims in result["by_condition"].items():
         lines.append(f"| {cond} | " + " | ".join(f"{f(d['mean'])} (n={d['n']})" for d in dims.values()) + " |")
