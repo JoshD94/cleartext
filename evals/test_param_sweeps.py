@@ -52,7 +52,7 @@ def test_design_names_and_groups(tmp_path):
         P.design_names(design)
 
 
-def test_locked_test_passages_are_refused(tmp_path, monkeypatch):
+def test_locked_test_passages_are_refused(tmp_path):
     rows = [{"id": "a", "original": "One. Two."}, {"id": "b", "original": "Three."}]
     ok = tmp_path / "dev.json"
     ok.write_text(json.dumps(rows))
@@ -65,27 +65,31 @@ def test_locked_test_passages_are_refused(tmp_path, monkeypatch):
     split.write_text(json.dumps(rows + [{"id": "c", "original": "Four.", "split": "test"}]))
     with pytest.raises(SystemExit):
         P.guard_panel(split)
-    monkeypatch.setattr(P, "locked_ids", lambda: {"b"})
+    test_id = (S.ROOT / "evals/data/testset_v3/test_ids.txt").read_text().split()[0]
+    renamed = tmp_path / "dev2.json"
+    renamed.write_text(json.dumps(rows + [{"id": test_id, "original": "Five."}]))
     with pytest.raises(SystemExit):
-        P.guard_panel(ok)
+        P.guard_panel(renamed)
 
 
-def test_selection_breaks_fk_ties_by_human_simplicity():
-    base = {"n": 20, "nli_mean": 0.97, "nli_below_080": 0, "numbers_all": True, "negations_all": True,
+def test_selection_breaks_fk_ties_by_kea_s():
+    base = {"n": 20, "nli_mean": 0.97, "nli_below_080": 0, "numbers_failed": 0, "negations_failed": 0,
             "entities": 0.9}
-    summaries = {"a": {**base, "fk_grade": 10.0}, "b": {**base, "fk_grade": 10.05},
-                 "c": {**base, "fk_grade": 9.0, "nli_mean": 0.90}, "rule_based": {**base, "fk_grade": 12}}
-    chosen = P.select(summaries, 0.8, {"a": 0.4, "b": 0.5, "c": 0.9, "rule_based": 0})
+    summaries = {"a": {**base, "fk_grade": 10.0, "kea_S": 0.4}, "b": {**base, "fk_grade": 10.05, "kea_S": 0.5},
+                 "c": {**base, "fk_grade": 9.0, "nli_mean": 0.90, "kea_S": 0.9},
+                 "rule_based": {**base, "fk_grade": 12, "kea_S": 0}}
+    chosen = P.select(summaries, 0.8)
     assert chosen["winner"] == "b" and chosen["tied"] == ["a", "b"] and "c" not in chosen["passing"]
 
 
-def test_adoption_needs_gates_a_clear_fk_drop_and_no_real_nli_loss():
+def test_adoption_needs_gates_over_edit_a_clear_fk_drop_and_no_real_nli_loss():
     row = {"fk_grade": {"mean": -0.3, "ci95": [-0.5, -0.1]}, "nli_mean": {"mean": -0.004, "ci95": [-0.01, 0]}}
-    assert P.adoption(row, True)["adopt"]
-    assert not P.adoption(row, False)["adopt"]
-    assert not P.adoption({**row, "fk_grade": {"mean": -0.05, "ci95": [-0.1, -0.01]}}, True)["adopt"]
-    assert not P.adoption({**row, "fk_grade": {"mean": -0.3, "ci95": [-0.6, 0.05]}}, True)["adopt"]
-    assert not P.adoption({**row, "nli_mean": {"mean": -0.02, "ci95": [-0.04, 0]}}, True)["adopt"]
+    assert P.adoption(row, True, True)["adopt"]
+    assert not P.adoption(row, False, True)["adopt"]
+    assert not P.adoption(row, True, False)["adopt"]
+    assert not P.adoption({**row, "fk_grade": {"mean": -0.05, "ci95": [-0.1, -0.01]}}, True, True)["adopt"]
+    assert not P.adoption({**row, "fk_grade": {"mean": -0.3, "ci95": [-0.6, 0.05]}}, True, True)["adopt"]
+    assert not P.adoption({**row, "nli_mean": {"mean": -0.02, "ci95": [-0.04, 0]}}, True, True)["adopt"]
 
 
 def test_phrase_rewrite_defaults_unchanged_and_cap_is_opt_in():

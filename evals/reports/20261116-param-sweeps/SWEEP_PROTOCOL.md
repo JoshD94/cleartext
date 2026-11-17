@@ -138,4 +138,52 @@ Everything goes in `README.md` in this folder, aggregates only:
 
 ## Amendments
 
-(none yet)
+### Amendment 1 (November 16, 2026, after the smoke run, before any dev output or score)
+
+Test set v3 landed on main in PR #18 (`dd74821`). Before this amendment, no
+config had been generated or scored on its dev split. The smoke results on
+the old 90-passage panel had been read; what they showed is stated below. To
+make the sweep's dev numbers the ones the locked-test verdict will use, this
+study adopts the v3 metric definitions
+([PROTOCOL.md](../20261116-testset-v3/PROTOCOL.md)), reusing `evals/testset_v3.py`:
+
+1. **Panel:** `dev` = the 100 dev passages (14 in each of six standard domains,
+   plus 16 Simple English `simple_control` passages). The local text was
+   checked against the manifest (`build_testset_v3 verify`: 300 match).
+   **OneStopEnglish dev** (181 sentences, two references) is the second
+   finalist SARI panel, alongside ASSET test. The harness also refuses any
+   row that `ensemble_study.locked_ids` matches (test IDs or test text
+   hashes). It has no unlock option.
+2. **Gate 4 uses the fixed entity check** (`preservation.extract_entities`, PR
+   #18), as in the v3 gates (`testset_v3.gates`). On the dev panel
+   `rule_based` is expected to score 1.0 here, so gate 4 in practice requires
+   that no entity be lost on any passage. The ranking with the old
+   capitalized-span check is reported as a **labeled alternative**.
+   *Disclosure:* on smoke, the "safe split" settings failed only gate 4 under
+   the old check, and they also fail it under the fixed check (0.9984 vs
+   1.0). This change is made for alignment with the locked-test judging, not
+   because of that result.
+3. **Human-calibrated score:** Kea-Roy's S from `evals/human_score.py` (the v3
+   co-primary readability score) replaces the S computed through
+   `evaluate_record`. It breaks the 0.1-grade FK ties and is reported with
+   paired CIs.
+4. **Bootstrap:** paired per-passage deltas use the v3 domain-stratified
+   bootstrap (`testset_v3.paired`: 10,000 resamples, seed 20261116) instead
+   of the unstratified one with seed 20261110.
+5. **Adoption** additionally requires (e) the v3 **over-edit gate** on the 16
+   simple controls: mean changed-token rate ≤ 0.10 and no control passage with
+   NLI < 0.80. The locked-test verdict checks the same gate.
+6. **Metric reuse:** the dev plan may read cached metrics from the test-set
+   worker's dev state, but only if the scoring signature is identical. Metrics
+   depend only on the exact (source, output) pair.
+
+The designs, the search space, the word screen (shard 0/3 of dev), the phase B
+rule and the budget are unchanged.
+
+Smoke findings already read (old panel, which selects nothing):
+- Waiving `complete_clauses` alone lowered FK by 0.54.
+- Trying 2 or 4 beams lowered FK by 0.12–0.16.
+- "Safe split" lowered FK by 1.15, failing only gate 4.
+- The tagger threshold 0.3, the authored-phrase settings and the v7 threshold
+  0.9 changed no output.
+- A zipf margin of 1.0 still failed gates 1 and 2.

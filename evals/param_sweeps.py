@@ -17,9 +17,10 @@ everything a stage reads: T5 beams per (sentence, beam width), word decision
 rows without the decision threshold or meaning floor (both reapplied per
 config), finder outputs per (sources, settings), NLI scores per pair.
 
-No panel may contain a locked test passage: freeze refuses files named
-*LOCKED* and any passage whose split is "test" or whose ID is in a
-testset_v3 test ID list.
+No panel may contain a locked test passage: freeze, run and report refuse
+files named *LOCKED*, any passage whose split is "test" and any passage that
+ensemble_study.locked_ids matches (test-set v3 test IDs or text hashes).
+There is no unlock option.
 """
 
 import argparse
@@ -171,14 +172,12 @@ def design_groups(path):
 
 # --- frozen plan --------------------------------------------------------------
 
-def locked_ids():
-    """Locked test IDs from any testset_v3 test list present in the checkout."""
-    found = set()
-    folder = ROOT / "evals/data/testset_v3"
-    for path in folder.glob("*") if folder.is_dir() else []:
-        if "test" in path.name.lower() and path.suffix in (".txt", ".ids"):
-            found |= {line.strip() for line in path.read_text().splitlines() if line.strip()}
-    return found
+def guard_rows(rows, label):
+    # ensemble_study.locked_ids matches test IDs and test text hashes and fails
+    # closed without the committed lists. This harness has no unlock option.
+    bad = [r["id"] for r in rows if r.get("split") == "test"] + S.locked_ids(rows)
+    if bad:
+        raise SystemExit(f"Refusing {label}: {len(bad)} locked test passages (e.g. {bad[0]})")
 
 
 def guard_panel(path):
@@ -186,10 +185,7 @@ def guard_panel(path):
     if "locked" in path.name.lower():
         raise SystemExit(f"Refusing locked panel {path}")
     rows = json.loads(path.read_text())
-    locked = locked_ids()
-    bad = [r["id"] for r in rows if r.get("split") == "test" or r["id"] in locked]
-    if bad:
-        raise SystemExit(f"Refusing {path}: {len(bad)} locked test passages (e.g. {bad[0]})")
+    guard_rows(rows, path)
     if len({r["id"] for r in rows}) != len(rows) or any(not r.get("original", "").strip() for r in rows):
         raise SystemExit(f"{path}: IDs must be unique and every passage needs text")
     return rows
@@ -640,39 +636,42 @@ def collect(states, plan, panel, names, need_metrics=True):
     return passages, complete, pending
 
 
-def human_simplicity(passages, outputs):
-    """Mean human-calibrated sentence simplicity S (evaluate_base with the
-    trained word and G/H/I weights from evals/trained_weights.json)."""
-    from .evaluate_base import evaluate_record
-    weights = json.loads((ROOT / "evals/trained_weights.json").read_text())
-    values = [evaluate_record({"original": p["original"], "simplified": outputs[p["id"]]["output"],
-                               "word_weights": weights["word_weights"],
-                               "sentence_weights": weights["sentence_weights"]})["S"] for p in passages]
-    return sum(values) / len(values)
+def config_rows(passages, complete):
+    """{name: [testset_v3.passage_row per passage]}: Week 7 metrics plus Kea-Roy's S,
+    the fixed and capitalized entity checks and the changed-token rate."""
+    from . import testset_v3 as T
+    for p in passages:
+        p.setdefault("kind", "standard")
+        p.setdefault("domain", "all")
+    return {n: [T.passage_row(p, outputs[p["id"]]["output"], metrics[p["id"]]) for p in passages]
+            for n, (outputs, metrics) in complete.items()}
 
 
-def select(summaries, rule_based_entities, tiebreak):
-    """Frozen gates; lowest FK; ties within 0.1 grade broken by the higher tiebreak value."""
-    passing = {n: s for n, s in summaries.items() if n not in S.REFERENCES
-               and all(S.gates(s, rule_based_entities).values())}
+def select(summaries, rule_based_entities, gate_rows=None):
+    """Frozen gates; lowest FK; ties within 0.1 grade broken by the higher Kea-Roy S."""
+    from . import testset_v3 as T
+    gate_rows = gate_rows or {n: T.gates(s, rule_based_entities) for n, s in summaries.items()}
+    passing = {n: s for n, s in summaries.items() if n not in S.REFERENCES and all(gate_rows[n].values())}
     if not passing:
         return {"winner": None, "passing": [], "tied": []}
     best = min(s["fk_grade"] for s in passing.values())
     tied = sorted(n for n, s in passing.items() if s["fk_grade"] <= best + 0.1)
-    winner = max(tied, key=lambda n: (tiebreak[n], -passing[n]["fk_grade"]))
+    winner = max(tied, key=lambda n: (passing[n]["kea_S"], -passing[n]["fk_grade"]))
     return {"winner": winner, "passing": sorted(passing, key=lambda n: passing[n]["fk_grade"]),
             "tied": tied}
 
 
-def adoption(row, gates_pass):
-    """Pre-registered adoption test against the incumbent (SWEEP_PROTOCOL.md)."""
+def adoption(row, gates_pass, over_edit_pass):
+    """Pre-registered adoption test against the incumbent (SWEEP_PROTOCOL.md, amendment 1)."""
     fk, nli = row["fk_grade"], row["nli_mean"]
-    return {"gates": gates_pass, "fk_beyond_tie": fk["mean"] <= -0.1,
-            "fk_ci_below_zero": fk["ci95"][1] < 0, "nli_mean_delta_ge_minus_001": nli["mean"] >= -0.01,
-            "adopt": gates_pass and fk["mean"] <= -0.1 and fk["ci95"][1] < 0 and nli["mean"] >= -0.01}
+    out = {"gates": gates_pass, "over_edit": over_edit_pass, "fk_beyond_tie": fk["mean"] <= -0.1,
+           "fk_ci_below_zero": fk["ci95"][1] < 0, "nli_mean_delta_ge_minus_001": nli["mean"] >= -0.01}
+    out["adopt"] = all(out.values())
+    return out
 
 
 def report(args):
+    from . import testset_v3 as T
     from .readability import flesch_kincaid_grade
     from .sari import corpus_sari
     plan = json.loads((args.state[0] / "plan.json").read_text())
@@ -681,45 +680,60 @@ def report(args):
         names += [n for n in design_names(design) if n not in names]
         groups.update(design_groups(design))
     passages, complete, pending = collect(args.state, plan, args.panel, names)
-    summaries = {n: S.summarize(passages, *complete[n]) for n in complete}
-    human = {n: human_simplicity(passages, complete[n][0]) for n in complete}
-    for n in summaries:
-        summaries[n]["human_simplicity"] = human[n]
-    rb = summaries["rule_based"]["entities"]
-    per = S.per_passage(passages, complete)
-    gate_rows = {n: S.gates(s, rb) for n, s in summaries.items() if n not in S.REFERENCES}
-    versus = S.versus_best(passages, complete, args.incumbent, per) if args.incumbent else {}
-    domains = sorted({p.get("domain") for p in passages if p.get("domain")})
-    by_domain = {}
-    for d in domains:
-        subset = [p for p in passages if p.get("domain") == d]
-        by_domain[d] = {n: {k: v for k, v in S.summarize(subset, *complete[n]).items()
-                            if k in ("n", "changed", "fk_grade", "nli_mean", "nli_below_080")}
-                        for n in complete}
-    sari, sari_hf, asset_fk = {}, {}, {}
-    if "asset_test" in plan["panels"]:
-        asset, asset_complete, _ = collect(args.state, plan, "asset_test", names, need_metrics=False)
-        for name, (outputs, _) in asset_complete.items():
-            preds = [outputs[p["id"]]["output"] for p in asset]
-            refs = ([p["original"] for p in asset], preds, [p["references"] for p in asset])
-            sari[name] = corpus_sari(*refs, zero_division=0)
-            sari_hf[name] = corpus_sari(*refs, zero_division=1)
-            asset_fk[name] = S._mean(flesch_kincaid_grade(t) for t in preds)
+    guard_rows(passages, args.panel)
+    rows = config_rows(passages, complete)
+    summaries = {n: {**T.summarize(r), "sentence_length": S._mean(
+        complete[n][1][p["id"]]["readability"]["avg_sentence_length"] for p in passages)} for n, r in rows.items()}
+    rb, rb_cap = summaries["rule_based"]["entities"], summaries["rule_based"]["entities_capitalized"]
+    gate_rows = {n: T.gates(s, rb) for n, s in summaries.items() if n not in S.REFERENCES}
+    # Labeled alternative: gate 4 with the pre-November 16 capitalized-span entity check.
+    old_gates = {n: T.gates({**s, "entities": s["entities_capitalized"]}, rb_cap)
+                 for n, s in summaries.items() if n not in S.REFERENCES}
+    controls = {n: T.summarize([x for x in r if x["kind"] == "simple_control"]) for n, r in rows.items()
+                if any(x["kind"] == "simple_control" for x in r)}
+    over_edit = {n: T.over_edit_gate(c) for n, c in controls.items()}
+    inc = args.incumbent
+    versus = {}
+    if inc in rows:
+        for n, r in rows.items():
+            differ = sum(a["changed"] != b["changed"] or complete[n][0][p["id"]]["output"] != complete[inc][0][p["id"]]["output"]
+                         for a, b, p in zip(r, rows[inc], passages))
+            v = {k: T.paired(r, rows[inc], k) for k in ("fk_grade", "kea_S", "nli_mean")}
+            v["outputs_differ"] = differ
+            if n not in S.REFERENCES:
+                v["adoption"] = adoption(v, all(gate_rows[n].values()),
+                                         all(over_edit.get(n, {"none": True}).values()))
+            versus[n] = v
+    domains = sorted({p["domain"] for p in passages})
+    by_domain = {d: {n: {k: v for k, v in T.summarize([x for x in r if x["domain"] == d]).items()
+                         if k in ("n", "changed", "fk_grade", "kea_S", "nli_mean", "nli_below_080")}
+                     for n, r in rows.items()} for d in domains}
+    sari = {}
+    for panel in [k for k in plan["panels"] if k in ("asset_test", "onestop_dev")]:
+        refs_panel, done, _ = collect(args.state, plan, panel, names, need_metrics=False)
+        sari[panel] = {}
+        for name, (outputs, _) in done.items():
+            preds = [outputs[p["id"]]["output"] for p in refs_panel]
+            data = ([p["original"] for p in refs_panel], preds, [p["references"] for p in refs_panel])
+            sari[panel][name] = {"xu": corpus_sari(*data, zero_division=0),
+                                 "evaluate": corpus_sari(*data, zero_division=1),
+                                 "fk_grade": S._mean(flesch_kincaid_grade(t) for t in preds), "n": len(preds)}
     result = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "panel": {"name": args.panel, "n": len(passages), "sha256": plan["panel_sha256"][args.panel]},
         "configs": summaries, "pending": pending, "groups": {n: list(g) for n, g in groups.items()},
         "gates": gate_rows, "rule_based_entities": rb,
-        "selection": select(summaries, rb, human),
-        "selection_note": "Frozen gates, lowest FK, 0.1-grade ties broken by human-calibrated S (SWEEP_PROTOCOL.md)",
+        "selection": select(summaries, rb, gate_rows),
+        "selection_note": "Frozen gates (fixed entity check, as test-set v3), lowest FK, 0.1-grade ties broken "
+                          "by Kea-Roy's S (SWEEP_PROTOCOL.md amendment 1)",
+        "alternative_capitalized_entities": {"rule_based_entities": rb_cap, "gates": old_gates,
+                                             "selection": select(summaries, rb_cap, old_gates)},
+        "simple_controls": controls, "over_edit_gate": over_edit,
         "pareto_fk_vs_nli": S.pareto(summaries),
-        "incumbent": args.incumbent,
-        "versus_incumbent": {n: {**{k: v for k, v in row.items() if k != "passages_differ"},
-                                 "adoption": adoption(row, all(gate_rows.get(n, {}).values()) if n in gate_rows else False)}
-                             for n, row in versus.items()},
-        "by_domain": by_domain,
-        "asset_sari_xu": sari, "asset_sari_evaluate": sari_hf, "asset_fk_grade": asset_fk,
-        "passage_ids": [p["id"] for p in passages], "per_passage": per,
+        "incumbent": inc, "versus_incumbent": versus, "by_domain": by_domain, "sari": sari,
+        "passage_ids": [p["id"] for p in passages],
+        "per_passage": {n: {k: [x[k] for x in r] for k in ("fk_grade", "kea_S", "nli_mean", "entities")}
+                        for n, r in rows.items()},
         "signatures": {str(s): dict(zip(("generation", "scoring"), S.state_signatures(s))) for s in args.state},
     }
     args.out.mkdir(parents=True, exist_ok=True)
@@ -743,23 +757,31 @@ def short(name, group=None):
     return ", ".join(parts) or "incumbent"
 
 
+def _ci(v, digits):
+    return f"{v['mean']:+.{digits}f} [{v['ci95'][0]:+.{digits}f}, {v['ci95'][1]:+.{digits}f}]"
+
+
 def markdown(result):
-    head = ("| Config | Changed | FK ↓ | ΔFK vs incumbent [95% CI] | NLI passage | ΔNLI [95% CI] | NLI<0.8 | "
-            "Entities | Num/neg fails | Human S ↑ | Gates |\n"
-            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|\n")
+    head = ("| Config | Changed | FK ↓ | ΔFK vs incumbent [95% CI] | Kea S ↑ | ΔS | NLI passage | ΔNLI [95% CI] | "
+            "NLI<0.8 | Entities (fixed / capitalized) | Num/neg fails | Controls changed-token rate | Gates |\n"
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|\n")
     lines, front = [], set(result["pareto_fk_vs_nli"])
-    versus = result["versus_incumbent"]
+    versus, controls = result["versus_incumbent"], result["simple_controls"]
     for name, s in sorted(result["configs"].items(), key=lambda kv: kv[1]["fk_grade"]):
         g = result["gates"].get(name)
         gate = "ref" if g is None else ("pass" if all(g.values()) else
                                         "fail " + ",".join(str(k + 1) for k, v in enumerate(g.values()) if not v))
+        if g is not None and not all(result["over_edit_gate"].get(name, {"none": True}).values()):
+            gate += " (over-edit fail)"
         v = versus.get(name)
-        dfk = f"{v['fk_grade']['mean']:+.3f} [{v['fk_grade']['ci95'][0]:+.3f}, {v['fk_grade']['ci95'][1]:+.3f}]" if v else ""
-        dnli = f"{v['nli_mean']['mean']:+.4f} [{v['nli_mean']['ci95'][0]:+.4f}, {v['nli_mean']['ci95'][1]:+.4f}]" if v else ""
         label = short(name, result["groups"].get(name)) + (" ◆" if name in front else "")
-        lines.append(f"| `{label}` | {s['changed']}/{s['n']} | {s['fk_grade']:.3f} | {dfk} | {s['nli_mean']:.4f} | "
-                     f"{dnli} | {s['nli_below_080']} | {s['entities']:.4f} | "
-                     f"{s['numbers_failed']}/{s['negations_failed']} | {s['human_simplicity']:.4f} | {gate} |")
+        rate = controls.get(name, {}).get("changed_token_rate")
+        lines.append(
+            f"| `{label}` | {s['changed']}/{s['n']} | {s['fk_grade']:.3f} | {_ci(v['fk_grade'], 3) if v else ''} | "
+            f"{s['kea_S']:.4f} | {_ci(v['kea_S'], 4) if v else ''} | {s['nli_mean']:.4f} | "
+            f"{_ci(v['nli_mean'], 4) if v else ''} | {s['nli_below_080']} | "
+            f"{s['entities']:.4f} / {s['entities_capitalized']:.4f} | {s['numbers_failed']}/{s['negations_failed']} | "
+            f"{'' if rate is None else f'{rate:.3f}'} | {gate} |")
     return head + "\n".join(lines) + "\n\n◆ = on the FK/passage-NLI Pareto frontier.\n"
 
 
