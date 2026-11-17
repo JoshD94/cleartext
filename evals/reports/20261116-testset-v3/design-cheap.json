@@ -1,0 +1,7 @@
+{
+ "note": "Cheap-first ordering (Nov 16, at Joshua's request): references plus the two T5 systems; v7 words runs afterwards from design.json.",
+ "configs": [
+  "words=off|phrases=authored|structure=t5|negation=off|grammar=off|terms=off",
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off"
+ ]
+}

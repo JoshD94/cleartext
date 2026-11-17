@@ -1,0 +1,198 @@
+{
+ "commits": {
+  "panel_and_split": "7d3afcc",
+  "onestop_split": "9e65067",
+  "protocol_and_metrics": "422109b",
+  "pr18_merge": "dd74821"
+ },
+ "plan": {
+  "head": "422109b9b10c5ab6a6941e46824a1585383c47c2",
+  "plan_sha256": "d12ca826c7af8a804d975b29e545acb4cd2bdb8a6ccd47e66faf32a5f6f88f7e",
+  "panels": [
+   "dev",
+   "onestop_dev"
+  ],
+  "panel_sha256": {
+   "dev": "5bf1cbe5342f154682d8bfeabb571c1f8ceea2a413ff3f0cd5acb190ee426cf2",
+   "onestop_dev": "2aa624888e9cd66bf8e27bf45ddf83077a7674849b787f9277694bf92e248131"
+  },
+  "unlock_test": false,
+  "runtime": {
+   "python": "3.12.14",
+   "host": "joshuadirga-Yoga-7-14IRL8",
+   "packages": {
+    "torch": "2.14.0+cpu",
+    "transformers": "5.17.0",
+    "sentence-transformers": "6.2.0",
+    "textstat": "0.7.13",
+    "spacy": "3.8.16",
+    "en-core-web-sm": "3.8.0",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1",
+    "lemminflect": "0.2.3",
+    "wordfreq": "3.1.1",
+    "joblib": "1.6.0"
+   }
+  },
+  "generation_artifacts": 33
+ },
+ "signatures": {
+  "generation": "f9d39decce175229a3dd138b3d46d5c20a0f81f12a821891e2fa398309c1e1d8",
+  "scoring": "5da52a723e81d7eaa103389f105cb252cdbae3bcc2e209a2d8eafcdda8ae62a8"
+ },
+ "batches": [
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1509.2154836910777
+  },
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1516.1515426279511
+  },
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1530.8020953088999
+  },
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1566.2957584890537
+  },
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1565.509009100031
+  },
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1592.220380992163
+  },
+  {
+   "panel": "dev",
+   "design": "design-cheap.json",
+   "shard_complete": false,
+   "seconds": 1541.2816878941376
+  },
+  {
+   "panel": "dev",
+   "design": "design-cheap.json",
+   "shard_complete": true,
+   "seconds": 1133.0315175019205
+  },
+  {
+   "panel": "onestop_dev",
+   "design": "design-cheap.json",
+   "shard_complete": true,
+   "seconds": 274.00842483504675
+  },
+  {
+   "panel": "dev",
+   "design": "design.json",
+   "shard_complete": false,
+   "seconds": 1575.023849077057
+  }
+ ],
+ "queue_jobs": [
+  {
+   "job": "2ec4dd1d746d",
+   "outcome": "failed",
+   "seconds": 63.29,
+   "log": "drive-attempt1-missing-models-data.log"
+  },
+  {
+   "job": "a7af2152595c",
+   "outcome": "failed",
+   "seconds": 19.75,
+   "log": "drive-attempt1-missing-models-data.log"
+  },
+  {
+   "job": "21ab44804a66",
+   "outcome": "succeeded",
+   "seconds": 1529.86,
+   "log": "drive.log"
+  },
+  {
+   "job": "b4b724c1f752",
+   "outcome": "succeeded",
+   "seconds": 1529.04,
+   "log": "drive.log"
+  },
+  {
+   "job": "427512bf1089",
+   "outcome": "succeeded",
+   "seconds": 1554.78,
+   "log": "drive.log"
+  },
+  {
+   "job": "6e53c3b045c8",
+   "outcome": "succeeded",
+   "seconds": 1710.76,
+   "log": "drive.log"
+  },
+  {
+   "job": "931ed6c3aa30",
+   "outcome": "succeeded",
+   "seconds": 1596.29,
+   "log": "drive.log"
+  },
+  {
+   "job": "9d61526176d0",
+   "outcome": "succeeded",
+   "seconds": 1636.36,
+   "log": "drive.log"
+  },
+  {
+   "job": "c6268d72cbd7",
+   "outcome": "failed",
+   "seconds": 1376.31,
+   "log": "drive.log"
+  },
+  {
+   "job": "1b6107708a84",
+   "outcome": "cancelled",
+   "seconds": 338.97,
+   "log": "drive.log"
+  },
+  {
+   "job": "27a2ce433419",
+   "outcome": "succeeded",
+   "seconds": 1585.01,
+   "log": "drive.log"
+  },
+  {
+   "job": "d547db88f5a1",
+   "outcome": "succeeded",
+   "seconds": 1169.15,
+   "log": "drive.log"
+  },
+  {
+   "job": "79fd785c0889",
+   "outcome": "succeeded",
+   "seconds": 289.73,
+   "log": "drive.log"
+  },
+  {
+   "job": "894ee4fca110",
+   "outcome": "succeeded",
+   "seconds": 1597.14,
+   "log": "drive.log"
+  }
+ ],
+ "notes": [
+  "Yoga CPU, one thread, PYTHONHASHSEED=0, offline models; personal job queue at later priority, <=25-minute checkpointed batches, one cleartext job at a time.",
+  "Jobs 2ec4dd1d746d and a7af2152595c failed: the worktree lacked the git-ignored models/data (v7 bigram cache); symlinked from the primary checkout, one-passage smoke passed, resubmitted.",
+  "Several jobs were stopped by the queue memory valve (host memory pressure from other work); per-passage checkpoints kept completed cells.",
+  "Job 1b6107708a84 was cancelled to reorder: references and the two T5 systems first (design-cheap.json), v7 words last (design.json).",
+  "Report generated from main after PR #18 (fixed entity check) against the state frozen at 422109b; report_sources_sha256 in aggregate-results.json."
+ ]
+}
