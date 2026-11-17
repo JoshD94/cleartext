@@ -205,3 +205,25 @@ and on 200 test passages they cost about 4–8 chunks per word config.
    the locked-test run. If the budget is tight, finalists that need cold word
    decisions on test are replaced by the next structure-only finalist under
    the same rule. The report states any such substitution.
+
+### Amendment 3 (November 17, 2026, after all dev scores, before the test split is unlocked)
+
+Post hoc and labeled as such. The dev selection followed the rule above:
+- Tie band: 13 configs passed every gate within 0.1 grade of the lowest FK.
+- Tie-break: Kea-Roy's S picked phase B's `all_active` config.
+- Adoption: that config failed (d), with Δ passage NLI −0.032. The rule's
+  recommendation is therefore **no change**.
+- Finalists under rule 5: the incumbent, and the lowest-FK config that passes
+  every gate (safe split + SimplePPDB ≥ 4.3).
+
+The tie-break favored the configs that make the most lexical edits, and
+those also lose the most NLI. Configs that pass the full adoption test were
+in the tie band but lost on S. So that the locked test also checks the
+setting the adoption test would accept, one finalist is **added post hoc**:
+the lowest-FK config that passes all of adoption rules (a)–(e). That is the
+safe split with a small-NLI floor of 0.5 (`t5.safe = 0.5`).
+
+This addition does not change the dev recommendation. The finalists and the
+test judging rule are in
+[../20261116-locked-test/FINALISTS.md](../20261116-locked-test/FINALISTS.md),
+committed before the test split is unlocked.
