@@ -14,7 +14,11 @@ file changes after test scores are read.
 | `nov9_t5` | `words=off, phrases=authored, structure=t5` | November 9 winner | 14.433 | 0.2519 | 0.9837 | 1 |
 | `incumbent` | `words=off, phrases=authored, structure=t5+compound_tagger` | November 10 (v2) winner; the dev rule's pick (**no change**) | 14.377 | 0.2527 | 0.9838 | 1 |
 | `F1` | incumbent with `phrases=simpleppdb`, `finder.ppdb_min=4.3`, T5 with every soft check waived (hard checks kept) | rule 5: lowest-FK config passing every dev gate | 12.790 | 0.2715 | 0.9548 | 4 |
-| `F2` | incumbent with the "safe split": soft checks waived, passage-aware check, small-NLI floor 0.5 per split | amendment 3 (post hoc): lowest-FK config passing the full adoption test | 12.851 | 0.2700 | 0.9746 | 2 |
+| `F2` | incumbent with the "safe split": every soft check waived per sentence and per passage (the `passage` mode then adds only its code-literal check), hard checks kept, small-NLI floor 0.5 per split | amendment 3 (post hoc): lowest-FK config passing the full adoption test | 12.851 | 0.2700 | 0.9746 | 2 |
+
+F1's rule 5 had an exact tie: the same config with `cmp.threshold=0.2` gives identical dev outputs. The simpler config, with one fewer changed parameter, was taken. On test the two could differ.
+
+As configured (`passage_waive` unset), a waiver applies at passage level too, so in F1 and F2 the passage check keeps only the hard checks. This is why `t5.safe = none` and `t5.waive = all_soft` are identical on dev. `finalists.json` is unchanged.
 
 The v7 word baseline is not run: it is too slow on 200 passages, and the
 gates already reject it on dev. Word configs did not complete on dev

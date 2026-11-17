@@ -153,7 +153,8 @@ study adopts the v3 metric definitions
    **OneStopEnglish dev** (181 sentences, two references) is the second
    finalist SARI panel, alongside ASSET test. The harness also refuses any
    row that `ensemble_study.locked_ids` matches (test IDs or test text
-   hashes). It has no unlock option.
+   hashes). It had no unlock option at the time; amendment 4 adds the one
+   pre-registered exception.
 2. **Gate 4 uses the fixed entity check** (`preservation.extract_entities`, PR
    #18), as in the v3 gates (`testset_v3.gates`). On the dev panel
    `rule_based` is expected to score 1.0 here, so gate 4 in practice requires
@@ -227,3 +228,25 @@ This addition does not change the dev recommendation. The finalists and the
 test judging rule are in
 [../20261116-locked-test/FINALISTS.md](../20261116-locked-test/FINALISTS.md),
 committed before the test split is unlocked.
+
+### Amendment 4 (November 17, 2026, before the test split is unlocked)
+
+Joshua approved a one-shot locked-test run for the finalists on 2026-11-16.
+This extends the scope beyond "the locked test split is never opened by this
+study", above. The exception is narrow:
+
+- `param_sweeps freeze --unlock-test` accepts only the committed, unmodified
+  [finalists.json](../20261116-locked-test/finalists.json), and only with
+  generation and scoring sources, artifacts and signatures identical to the
+  dev plan.
+- An unlocked plan runs only that design. `report` refuses it.
+- The judgement code (`param_sweeps final`) and the rule
+  ([FINALISTS.md](../20261116-locked-test/FINALISTS.md)) are committed
+  before the unlock.
+
+Corrections from the independent review, before the unlock:
+- The safe split's passage-aware check adds only the code-literal check (see
+  the README).
+- F1 was chosen from an exact tie, and the simpler config was taken.
+
+Neither correction changes a selection or a finalist.

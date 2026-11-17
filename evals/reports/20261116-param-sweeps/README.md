@@ -37,7 +37,7 @@ committed before unlocking):
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | incumbent | Nov 10 winner | 14.377 | — | 0.2527 | 0.9838 | — | 1 | 24.29 | 28.86 |
 | **F1** (rule) | safe split (every soft T5 check waived) + SimplePPDB phrases with ppdb ≥ 4.3 | 12.790 | −1.587 [−2.043, −1.200] | 0.2715 | 0.9548 | −0.029 [−0.054, −0.010] | 4 | 29.44 | 31.69 |
-| **F2** (post hoc, amendment 3) | safe split: soft checks waived, passage-aware check, small-NLI floor 0.5 per split | 12.851 | −1.526 [−1.980, −1.141] | 0.2700 | 0.9746 | −0.009 [−0.019, −0.002] | 2 | 28.54 | 31.19 |
+| **F2** (post hoc, amendment 3) | safe split: soft checks waived per sentence and per passage, hard checks kept, small-NLI floor 0.5 per split | 12.851 | −1.526 [−1.980, −1.141] | 0.2700 | 0.9746 | −0.009 [−0.019, −0.002] | 2 | 28.54 | 31.19 |
 | `nov9_t5` | Nov 9 winner (T5 only) | 14.433 | +0.056 [+0.016, +0.107] | 0.2519 | 0.9837 | −0.000 | 1 | 24.23 | 28.85 |
 | `original` | source | 14.627 | +0.250 | 0.2502 | 0.9861 | +0.002 | 0 | 20.45 | 27.70 |
 
@@ -81,6 +81,13 @@ and the alternative gate-4 ranking. Word screen: [screen-words.json](screen-word
 - **F2.** Amendment 3 added F2 after the dev scores were read, labeled post
   hoc, so that the locked test also checks the adoptable setting. It does
   not change the dev recommendation.
+- **The safe split's "passage-aware check" does almost nothing.** A waiver
+  applies at passage level too (`passage_waive` unset), so with every soft
+  check waived the passage-aware mode adds only its code-literal check.
+  `t5.safe = none` and `t5.waive = all_soft` give identical outputs on dev.
+  The hard checks are what keep these settings safe.
+- **F1's exact tie.** F1 has an exact dev tie with the same config plus
+  `cmp.threshold = 0.2`. The simpler config was taken.
 - **Gate 4** uses the fixed entity check (amendment 1). On dev, `rule_based`
   scores 1.0, so gate 4 means "never lose an entity". The ranking with the
   old capitalized check is in `alternative_capitalized_entities` and picks

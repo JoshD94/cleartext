@@ -146,6 +146,8 @@ def check(config, params):
     if "passive.placeholder" in params and (config.get("passive") != "on"
                                            or params["passive.placeholder"] not in ("someone", "people")):
         raise ValueError("passive.placeholder needs passive=on and someone|people")
+    if "t5.waive" in params and structure in ("t5_raw", "t5_unchecked"):
+        raise ValueError("t5.waive applies to the guarded T5 levels, not t5_raw/t5_unchecked")
     if params.get("t5.candidates", 1) > params.get("t5.beams", 2):
         raise ValueError("t5.candidates cannot exceed t5.beams")
     if params.get("t5.passage", "single") not in ("single", "passage", "off"):
@@ -178,7 +180,8 @@ def design_groups(path):
 
 def guard_rows(rows, label):
     # ensemble_study.locked_ids matches test IDs and test text hashes and fails
-    # closed without the committed lists. This harness has no unlock option.
+    # closed without the committed lists. Only a plan frozen with
+    # --unlock-test (committed finalists, dev-identical sources) skips this.
     bad = [r["id"] for r in rows if r.get("split") == "test"] + S.locked_ids(rows)
     if bad:
         raise SystemExit(f"Refusing {label}: {len(bad)} locked test passages (e.g. {bad[0]})")
@@ -676,6 +679,8 @@ def config_rows(passages, complete):
     """{name: [testset_v3.passage_row per passage]}: Week 7 metrics plus Kea-Roy's S,
     the fixed and capitalized entity checks and the changed-token rate."""
     from . import testset_v3 as T
+    if any("kind" in p for p in passages) and not any(p.get("kind") == "simple_control" for p in passages):
+        raise SystemExit("A test set v3 panel without simple_control passages cannot run the over-edit gate")
     for p in passages:
         p.setdefault("kind", "standard")
         p.setdefault("domain", "all")
@@ -711,6 +716,8 @@ def report(args):
     from .readability import flesch_kincaid_grade
     from .sari import corpus_sari
     plan = json.loads((args.state[0] / "plan.json").read_text())
+    if plan.get("unlock_test"):
+        raise SystemExit("This plan is unlocked for the locked-test run; use `final`")
     names, groups = [*S.REFERENCES], {}
     for design in args.design:
         names += [n for n in design_names(design) if n not in names]
@@ -778,6 +785,92 @@ def report(args):
     write_json(args.out / f"aggregate-{args.panel}.json", result)
     (args.out / f"results-{args.panel}.md").write_text(markdown(result))
     print(f"{len(summaries)} complete configs, {len(pending)} pending -> {args.out}")
+
+
+def sari_scores(states, plan, panel, systems, resamples=1000):
+    """Corpus SARI (Xu 0/0=0 with a sentence-bootstrap CI, evaluate 0/0=1) and output FK."""
+    import numpy as np
+    from . import testset_v3 as T
+    from .readability import flesch_kincaid_grade
+    from .sari import corpus_sari
+    rows, complete, pending = collect(states, plan, panel, list(systems.values()), need_metrics=False)
+    if pending:
+        raise SystemExit(f"Incomplete {panel} systems: {pending}")
+    sources, refs = [p["original"] for p in rows], [p["references"] for p in rows]
+    draws = np.random.default_rng(T.SEED).integers(0, len(rows), (resamples, len(rows)))
+    out = {"n": len(rows)}
+    for label, name in systems.items():
+        preds = [complete[name][0][p["id"]]["output"] for p in rows]
+        boot = [corpus_sari([sources[i] for i in d], [preds[i] for i in d], [refs[i] for i in d], zero_division=0)
+                for d in draws]
+        out[label] = {"sari_xu": corpus_sari(sources, preds, refs, zero_division=0),
+                      "sari_xu_ci95": [float(np.percentile(boot, 2.5)), float(np.percentile(boot, 97.5))],
+                      "sari_evaluate": corpus_sari(sources, preds, refs, zero_division=1),
+                      "fk_grade": S._mean(flesch_kincaid_grade(t) for t in preds)}
+    return out
+
+
+def final(args):
+    """Locked-test judgement for the committed finalists (FINALISTS.md), written
+    before the test split was unlocked: verdict R/M/O per system as in the test
+    set v3 PROTOCOL.md, head-to-head with the incumbent, SARI panels."""
+    from . import testset_v3 as T
+    plan = json.loads((args.state[0] / "plan.json").read_text())
+    if not plan.get("unlock_test"):
+        raise SystemExit("final reports only a plan unlocked for the committed finalists")
+    if S.sha(args.finalists) != plan["finalists"]["sha256"]:
+        raise SystemExit("The finalists file differs from the one the plan was unlocked with")
+    known = {"test", "onestop_test", "asset_test"}
+    if set(plan["panels"]) - known:
+        raise SystemExit(f"Unhandled panels: {sorted(set(plan['panels']) - known)}")
+    rows_json = json.loads(Path(args.finalists).read_text())["configs"]
+    systems = {}
+    for c in rows_json:
+        name = c if isinstance(c, str) else make_id(c["base"], c.get("params"))
+        systems[c if isinstance(c, str) else c["label"]] = name
+    passages, complete, pending = collect(args.state, plan, "test", list(systems.values()))
+    if pending:
+        raise SystemExit(f"Incomplete test systems: {pending}")
+    manifest = {p["id"]: p for p in json.loads(T.MANIFEST.read_text())["passages"]}
+    for p in passages:
+        p["kind"], p["domain"] = manifest[p["id"]]["kind"], manifest[p["id"]]["domain"]
+    rows = {label: config_rows(passages, {name: complete[name]})[name] for label, name in systems.items()}
+    std = {k: [x for x in r if x["kind"] == "standard"] for k, r in rows.items()}
+    ctl = {k: [x for x in r if x["kind"] == "simple_control"] for k, r in rows.items()}
+    rb = T.summarize(rows["rule_based"])["entities"]
+    out = {"panel": {"n": len(passages), "standard": len(std["original"]), "controls": len(ctl["original"]),
+                     "sha256": plan["panel_sha256"]["test"]},
+           "finalists": plan["finalists"], "systems": {}, "rule_based_entities": rb}
+    inc = args.incumbent_label
+    for label, r in rows.items():
+        summary, controls = T.summarize(r), T.summarize(ctl[label])
+        fk_o, s_o = T.paired(std[label], std["original"], "fk_grade"), T.paired(std[label], std["original"], "kea_S")
+        R = {"fk_vs_original": fk_o, "S_vs_original": s_o,
+             "pass": fk_o["ci95"][1] is not None and fk_o["ci95"][1] < 0 and s_o["ci95"][0] > 0}
+        M = T.gates(summary, rb)
+        O = T.over_edit_gate(controls)
+        row = {"all": summary, "standard": T.summarize(std[label]), "controls": controls,
+               "R": R, "M": {**M, "pass": all(M.values())}, "O": {**O, "pass": all(O.values())}}
+        row["verdict"] = "confirmed" if R["pass"] and row["M"]["pass"] and row["O"]["pass"] else "not confirmed"
+        if label != inc and label not in S.REFERENCES:
+            d = {k: T.paired(r, rows[inc], k) for k in ("fk_grade", "kea_S", "nli_mean")}
+            d["beats_incumbent"] = (row["verdict"] == "confirmed" and d["fk_grade"]["mean"] <= -0.10
+                                    and d["fk_grade"]["ci95"][1] < 0 and d["nli_mean"]["mean"] >= -0.010
+                                    and row["O"]["pass"])
+            d["no_worse_in_meaning_v3"] = d["nli_mean"]["ci95"][0] >= -0.005
+            row["versus_incumbent"] = d
+        out["systems"][label] = row
+    out["sari"] = {}
+    if "onestop_test" in plan["panels"]:
+        out["sari"]["onestop_test"] = T.onestop_scores(args.state, plan, "onestop_test", "test", systems)
+    if "asset_test" in plan["panels"]:
+        out["sari"]["asset_test"] = sari_scores(args.state, plan, "asset_test", systems)
+    out["per_passage"] = {k: {m: [x[m] for x in r] for m in ("fk_grade", "kea_S", "nli_mean", "entities")}
+                          for k, r in rows.items()}
+    out["passage_ids"] = [p["id"] for p in passages]
+    args.out.mkdir(parents=True, exist_ok=True)
+    write_json(args.out / "aggregate-test.json", out)
+    print(json.dumps({k: v["verdict"] for k, v in out["systems"].items()}))
 
 
 def short(name, group=None):
@@ -851,8 +944,13 @@ def main():
     p.add_argument("--panel", required=True)
     p.add_argument("--out", type=Path, required=True)
     p.add_argument("--incumbent", help="config ID that paired deltas and adoption are measured from")
+    q = sub.add_parser("final")
+    q.add_argument("--state", type=Path, action="append", required=True)
+    q.add_argument("--finalists", type=Path, required=True)
+    q.add_argument("--incumbent-label", default="incumbent")
+    q.add_argument("--out", type=Path, required=True)
     args = ap.parse_args()
-    {"freeze": freeze, "run": run, "report": report}[args.command](args)
+    {"freeze": freeze, "run": run, "report": report, "final": final}[args.command](args)
 
 
 if __name__ == "__main__":

@@ -32,6 +32,7 @@ def test_ids_round_trip_and_default_ids_match_the_study():
     (WINNER, {"t5.passage": "loose"}),
     ({**WINNER, "passive": "on"}, {"passive.placeholder": "they"}),
     (WINNER, {"no.such": 1}),
+    ({**WINNER, "structure": "t5_raw"}, {"t5.waive": ["complete_clauses"]}),
 ])
 def test_parameters_a_config_would_ignore_are_rejected(base, params):
     with pytest.raises(ValueError):
@@ -156,3 +157,9 @@ def test_unlock_needs_a_committed_finalists_file_and_runs_only_it(tmp_path):
     plan = {"panels": {}, "unlock_test": True, "finalists": found}
     with pytest.raises(SystemExit):
         P.preflight(plan, design=other)
+
+
+def test_v3_panels_need_controls_for_the_over_edit_gate():
+    rows = [{"id": "a", "original": "One.", "kind": "standard", "domain": "x"}]
+    with pytest.raises(SystemExit):
+        P.config_rows(rows, {})
