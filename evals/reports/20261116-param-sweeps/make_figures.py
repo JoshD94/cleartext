@@ -94,8 +94,11 @@ def curves(agg, prefix):
         ys = [s[n]["nli_mean"] for _, n in items]
         if numeric:
             ax.plot(xs, ys, color=BLUE, lw=1, zorder=2)
+        same = (s[inc]["fk_grade"], s[inc]["nli_mean"]) if inc in s else None
         for (value, name), x, y in zip(items, xs, ys):
             ax.scatter(x, y, s=18, color=BLUE if passes(agg, name) else MUTED, zorder=3)
+            if same and abs(x - same[0]) < 1e-9 and abs(y - same[1]) < 1e-9:
+                continue  # identical to the incumbent: no label (listed in the table)
             ax.annotate("none" if value is None else str(value).replace("_", " "), (x, y), xytext=(3, 3),
                         textcoords="offset points", fontsize=7, color=INK2)
         if inc in s:

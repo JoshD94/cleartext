@@ -714,7 +714,8 @@ def report(args):
     names, groups = [*S.REFERENCES], {}
     for design in args.design:
         names += [n for n in design_names(design) if n not in names]
-        groups.update(design_groups(design))
+        # A config keeps the label of the first design that names it (phase A before B).
+        groups = {**design_groups(design), **groups}
     passages, complete, pending = collect(args.state, plan, args.panel, names)
     if not plan.get("unlock_test"):
         guard_rows(passages, args.panel)
