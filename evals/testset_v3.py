@@ -253,7 +253,7 @@ def report(args):
     if onestop in plan["panels"]:
         result["onestop"] = {"panel": onestop, **onestop_scores(args.state, plan, onestop, args.manifest_split,
                                                                 systems)}
-    elif args.onestop_panel:
+    elif args.onestop_panel or args.final:
         raise SystemExit(f"Plan has no panel {onestop}")
     args.out.mkdir(parents=True, exist_ok=True)
     write_json(args.out / "aggregate-results.json", result)
