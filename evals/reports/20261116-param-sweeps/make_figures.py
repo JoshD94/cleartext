@@ -103,6 +103,7 @@ def curves(agg, prefix):
         ax.axhline(0.95, color=RED, lw=0.8, ls="--")
         ax.set_title(group, loc="left")
         ax.tick_params(labelsize=7)
+        ax.ticklabel_format(useOffset=False, style="plain")
     for ax in list(axes.flat)[len(groups):]:
         ax.axis("off")
     fig.supxlabel("Mean FK grade (lower is simpler)", color=INK2)
