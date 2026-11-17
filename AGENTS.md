@@ -93,6 +93,10 @@ versions, input/model/source hashes and completion/failure receipts.
   OneStopEnglish sentences, text local only. The **test split is locked**
   for one pre-registered final run; `ensemble_study freeze`/`run` refuse test
   IDs unless the plan was frozen with `--unlock-test`. Never pass it otherwise.
+- `evals/param_sweeps.py` (stage settings as config parameters; Nov 16 study)
+  unlocks test only via `freeze --unlock-test <committed finalists.json>
+  --dev-plan <dev plan>`. Editing `SweepGenerator` or `models/src` changes
+  its generation signature and invalidates cached outputs.
 - A Git worktree lacks the ignored `models/runs/` and `models/data/` (the v7
   bigram cache); symlink both from the primary checkout before running the
   pipeline there.

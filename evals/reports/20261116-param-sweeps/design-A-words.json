@@ -1,0 +1,332 @@
+{
+ "note": "Phase A: word settings, screened on a third first",
+ "configs": [
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.6
+   },
+   "group": "w.threshold.v7",
+   "value": 0.6
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.7
+   },
+   "group": "w.threshold.v7",
+   "value": 0.7
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.8
+   },
+   "group": "w.threshold.v7",
+   "value": 0.8
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.9
+   },
+   "group": "w.threshold.v7",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.6
+   },
+   "group": "w.threshold.contextual",
+   "value": 0.6
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.7
+   },
+   "group": "w.threshold.contextual",
+   "value": 0.7
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.8
+   },
+   "group": "w.threshold.contextual",
+   "value": 0.8
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.9
+   },
+   "group": "w.threshold.contextual",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.floor": 0.3
+   },
+   "group": "w.floor",
+   "value": 0.3
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.floor": 0.5
+   },
+   "group": "w.floor",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.detector": 0.5
+   },
+   "group": "w.detector",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.detector": 0.6
+   },
+   "group": "w.detector",
+   "value": 0.6
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.detector": 0.7
+   },
+   "group": "w.detector",
+   "value": 0.7
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.noun": 0.9
+   },
+   "group": "w.noun",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.min_gain": 0.1
+   },
+   "group": "w.min_gain",
+   "value": 0.1
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.min_gain": 0.2
+   },
+   "group": "w.min_gain",
+   "value": 0.2
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.zipf_margin": 0.5
+   },
+   "group": "w.zipf_margin",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.zipf_margin": 1.0
+   },
+   "group": "w.zipf_margin",
+   "value": 1.0
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.alpha": 0.0
+   },
+   "group": "w.alpha",
+   "value": 0.0
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.alpha": 2.0
+   },
+   "group": "w.alpha",
+   "value": 2.0
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.max_edits": 2
+   },
+   "group": "w.max_edits",
+   "value": 2
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto_refill": false
+   },
+   "group": "w.veto.no_refill",
+   "value": 0.575
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto": 0.75
+   },
+   "group": "w.veto",
+   "value": 0.75
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto": 0.75,
+    "w.veto_refill": false
+   },
+   "group": "w.veto.no_refill",
+   "value": 0.75
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto": 0.9
+   },
+   "group": "w.veto",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto": 0.9,
+    "w.veto_refill": false
+   },
+   "group": "w.veto.no_refill",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto": 0.97,
+    "w.veto_refill": false
+   },
+   "group": "w.veto.no_refill",
+   "value": 0.97
+  }
+ ]
+}

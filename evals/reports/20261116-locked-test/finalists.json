@@ -1,0 +1,84 @@
+{
+ "note": "Locked-test finalists, chosen from dev only (SWEEP_PROTOCOL.md rule + amendment 3). Committed before the test split is unlocked.",
+ "configs": [
+  "original",
+  "rule_based",
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5"
+   },
+   "params": {},
+   "label": "nov9_t5"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "label": "incumbent"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "finder.ppdb_min": 4.3
+   },
+   "label": "F1"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2"
+  }
+ ]
+}

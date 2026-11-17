@@ -41,6 +41,7 @@ mkdir -p "$evidence"
   evals/test_adapter_ladder.py \
   evals/test_checkpoints.py \
   evals/test_ensemble_study.py \
+  evals/test_param_sweeps.py \
   evals/test_paper_run.py \
   --junitxml="$evidence/pytest.xml" | tee "$evidence/pytest.log"
 git diff --check

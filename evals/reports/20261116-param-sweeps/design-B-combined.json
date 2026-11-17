@@ -1,0 +1,390 @@
+{
+ "note": "Phase B: factorial over the best settings",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "combined",
+   "value": "incumbent"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 4.3
+   },
+   "group": "combined",
+   "value": "finder"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 4.3,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "finder+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4,
+    "t5.candidates": 4
+   },
+   "group": "combined",
+   "value": "t5_decoding"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "t5_decoding+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "finder.ppdb_min": 4.3
+   },
+   "group": "combined",
+   "value": "t5_decoding+finder"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "finder.ppdb_min": 4.3,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "t5_decoding+finder+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ]
+   },
+   "group": "combined",
+   "value": "t5_acceptance"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "t5_acceptance+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "finder.ppdb_min": 4.3
+   },
+   "group": "combined",
+   "value": "t5_acceptance+finder"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "finder.ppdb_min": 4.3,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "t5_acceptance+finder+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "t5.beams": 4,
+    "t5.candidates": 4
+   },
+   "group": "combined",
+   "value": "t5_acceptance+t5_decoding"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "t5_acceptance+t5_decoding+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "finder.ppdb_min": 4.3
+   },
+   "group": "combined",
+   "value": "t5_acceptance+t5_decoding+finder"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "finder.ppdb_min": 4.3,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "t5_acceptance+t5_decoding+finder+compound"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger",
+    "passive": "agentive"
+   },
+   "params": {
+    "finder.ppdb_min": 4.3,
+    "t5.waive": [
+     "argument_roles",
+     "complement_scope",
+     "complete_clauses",
+     "content_retained",
+     "discourse_markers",
+     "finite_predicates",
+     "generation_terminated",
+     "logical_connectives",
+     "modality",
+     "no_new_content",
+     "operator_scope",
+     "predicate_tense",
+     "relative_attachments",
+     "sentence_count",
+     "subject_groups",
+     "uncertainty_scope"
+    ],
+    "t5.beams": 4,
+    "t5.candidates": 4,
+    "cmp.threshold": 0.2
+   },
+   "group": "combined",
+   "value": "all_active"
+  }
+ ]
+}

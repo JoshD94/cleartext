@@ -1,0 +1,226 @@
+{
+ "note": "Phase A: phrases and passive, one at a time",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.min_gain": 0.0
+   },
+   "group": "phr.min_gain",
+   "value": 0.0
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.min_gain": 0.05
+   },
+   "group": "phr.min_gain",
+   "value": 0.05
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.min_gain": 0.1
+   },
+   "group": "phr.min_gain",
+   "value": 0.1
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.max_edits": 2
+   },
+   "group": "phr.max_edits",
+   "value": 2
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.max_edits": 3
+   },
+   "group": "phr.max_edits",
+   "value": 3
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.model_threshold": 0.2
+   },
+   "group": "finder.model_threshold",
+   "value": 0.2
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.model_threshold": 0.4
+   },
+   "group": "finder.model_threshold",
+   "value": 0.4
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.model_threshold": 0.5
+   },
+   "group": "finder.model_threshold",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.model_threshold": 0.7
+   },
+   "group": "finder.model_threshold",
+   "value": 0.7
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.min_entailment": 0.75
+   },
+   "group": "finder.min_entailment",
+   "value": 0.75
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.min_entailment": 0.9
+   },
+   "group": "finder.min_entailment",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.sources": [
+     "manual",
+     "verified"
+    ]
+   },
+   "group": "finder.sources",
+   "value": "manual+verified"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 4.3
+   },
+   "group": "finder.ppdb_min",
+   "value": 4.3
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 4.5
+   },
+   "group": "finder.ppdb_min",
+   "value": 4.5
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 4.8
+   },
+   "group": "finder.ppdb_min",
+   "value": 4.8
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 5.0
+   },
+   "group": "finder.ppdb_min",
+   "value": 5.0
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "on"
+   },
+   "params": {
+    "passive.placeholder": "someone"
+   },
+   "group": "passive.placeholder",
+   "value": "someone"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "on"
+   },
+   "params": {
+    "passive.placeholder": "people"
+   },
+   "group": "passive.placeholder",
+   "value": "people"
+  }
+ ]
+}

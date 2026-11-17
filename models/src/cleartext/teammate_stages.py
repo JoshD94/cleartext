@@ -12,6 +12,8 @@ use (`pos_tag`, `phrase_model`, `phrase_replacer`). The folders are never put
 on `sys.path`: `pos_tag/evaluate.py` would shadow Hugging Face `evaluate`.
 """
 
+import contextlib
+import csv
 import importlib.util
 import os
 import sys
@@ -25,6 +27,13 @@ PHRASE_DIR = ROOT / "pos_tag"
 PHRASE_SOURCES = ("manual", "verified", "model", "simpleppdb")
 # phrase_finder.DEFAULT_SOURCES, his recommended setting.
 DEFAULT_PHRASE_SOURCES = ("manual", "verified", "model")
+# Opt-in PhraseFinderStage settings: the module global each one overrides
+# during a rewrite (his defaults: 0.3, replacer_settings.json's 0.575 and
+# 0.966, and 0.80). "ppdb_min" drops SimplePPDB matches below that ppdb score.
+FINDER_SETTINGS = {"model_threshold": ("finder", "MODEL_THRESHOLD"),
+                   "min_entailment": ("replacer", "MIN_ENTAILMENT"),
+                   "max_fluency_drop": ("replacer", "MAX_FLUENCY_DROP"),
+                   "min_similarity": ("replacer", "MIN_SIMILARITY")}
 
 
 def _load(name, path):
@@ -82,13 +91,21 @@ class PhraseFinderStage:
     (suggestion as given, capitalized at a sentence start, no inflection).
     models optionally maps "bert", "similarity" and "nli" to local paths for
     phrase_replacer.py's BERT_MODEL, SIMILARITY_MODEL and NLI_MODEL.
+    settings optionally overrides FINDER_SETTINGS (set only while rewriting,
+    so stages with different settings can share his modules) and "ppdb_min".
+    The ppdb filter runs after his overlap resolution, so a dropped SimplePPDB
+    match does not bring back a shorter one it displaced.
     """
 
-    def __init__(self, sources=DEFAULT_PHRASE_SOURCES, models=None):
+    def __init__(self, sources=DEFAULT_PHRASE_SOURCES, models=None, settings=None):
         sources = tuple(sources)
         unknown = set(sources) - set(PHRASE_SOURCES)
         if not sources or unknown:
             raise ValueError(f"Unknown phrase sources: {sorted(unknown) or 'none given'}")
+        self.settings = dict(settings or {})
+        unknown = set(self.settings) - set(FINDER_SETTINGS) - {"ppdb_min"}
+        if unknown:
+            raise ValueError(f"Unknown phrase finder settings: {sorted(unknown)}")
         self.sources = sources
         self.nlp = _load("pos_tag", PHRASE_DIR / "pos_tag.py").nlp
         _load("phrase_model", PHRASE_DIR / "phrase_model.py")
@@ -106,12 +123,38 @@ class PhraseFinderStage:
                 os.environ.pop("PHRASE_LISTS", None)
             else:
                 os.environ["PHRASE_LISTS"] = previous
+        self.modules = {"finder": self.finder, "replacer": replacer}
+        self.ppdb = None
+        if self.settings.get("ppdb_min") is not None:
+            with open(PHRASE_DIR / "simpleppdb_phrases.csv", newline="", encoding="utf-8") as f:
+                self.ppdb = {self.finder._normalize(r["complex"].strip()): float(r["ppdb"])
+                             for r in csv.DictReader(f)}
+
+    @contextlib.contextmanager
+    def _settings(self):
+        saved = []
+        try:
+            for key, value in self.settings.items():
+                if key in FINDER_SETTINGS:
+                    module, name = FINDER_SETTINGS[key]
+                    saved.append((self.modules[module], name, getattr(self.modules[module], name)))
+                    setattr(self.modules[module], name, value)
+            yield
+        finally:
+            for module, name, value in reversed(saved):
+                setattr(module, name, value)
+
+    def _kept(self, p):
+        if self.ppdb is None or p["source"] != "simpleppdb":
+            return True
+        return self.ppdb.get(p["pattern"], 0.0) >= self.settings["ppdb_min"]
 
     def rewrite(self, text):
         parts, edits, offset = [], [], 0
         for start, end in _sentences(self.nlp, text):
             sentence = text[start:end]
-            found = self.finder.find_complex_phrases(sentence)
+            with self._settings():
+                found = [p for p in self.finder.find_complex_phrases(sentence) if self._kept(p)]
             if "model" in self.sources and self.finder._model_status is False:
                 raise RuntimeError("The CRF phrase model is unavailable (python-crfsuite or phrase_crf.crfsuite)")
             output = sentence
@@ -146,5 +189,9 @@ class EntailmentVeto:
         if self.threshold is None:
             raise ValueError("No entailment threshold given or tuned")
 
+    def score(self, sentence, edited):
+        """His min(forward, backward) entailment probability."""
+        return self.replacer.entailment(sentence, edited)
+
     def __call__(self, sentence, edited):
-        return self.replacer.entailment(sentence, edited) < self.threshold
+        return self.score(sentence, edited) < self.threshold

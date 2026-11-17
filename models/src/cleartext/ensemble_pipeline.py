@@ -197,8 +197,21 @@ class EnsembleClearText:
         decision_threshold=0.5,
         context_difficulty=None,
         detector=None,
+        phrase_min_gain=0.02,
+        max_phrase_edits=1,
+        word_min_gain=None,
+        word_zipf_margin=None,
+        veto_refill=True,
     ):
         self.difficulty, self.fit, self.tiered = difficulty, fit, tiered
+        # Opt-in tuning knobs (param-sweeps study); defaults keep earlier behavior.
+        # Authored phrase rules: minimum predicted complexity gain and edits per passage.
+        self.phrase_min_gain, self.max_phrase_edits = phrase_min_gain, max_phrase_edits
+        # Word candidates: minimum difficulty gain and minimum zipf frequency
+        # margin over the target (None = no check), applied before guardrails.
+        self.word_min_gain, self.word_zipf_margin = word_min_gain, word_zipf_margin
+        # With a word veto, False stops a vetoed edit's slot from going to the next-ranked word.
+        self.veto_refill = veto_refill
         # With a decision model, it replaces the utility rule: pick the most probable guarded candidate above threshold.
         self.decision, self.decision_threshold, self.context_model = (
             decision,
@@ -447,6 +460,19 @@ class EnsembleClearText:
                 if row["word"].casefold() != token.text.casefold():
                     row["rejections"].append("technical_term_span")
 
+    def margin_rejections(self, token, rows):
+        """Opt-in candidate margins: difficulty gain and word frequency over the target."""
+        min_gain, margin = getattr(self, "word_min_gain", None), getattr(self, "word_zipf_margin", None)
+        if min_gain is not None:
+            for row in rows:
+                if row["gain"] < min_gain:
+                    row["rejections"].append("gain below margin")
+        if margin is not None:
+            target = zipf_frequency(token.text.lower(), "en")
+            for row in rows:
+                if zipf_frequency(row["word"].lower(), "en") < target + margin:
+                    row["rejections"].append("frequency below margin")
+
     def first_guarded(self, doc, rows, guard=True):
         """Most probable acceptable candidate that passes the safety checks. Checks (a re-parse each) run lazily,
         best first, and stop at the first pass; decision features never use them, so the choice is unchanged."""
@@ -478,6 +504,7 @@ class EnsembleClearText:
         if self.decision is not None:
             rows = self.decide(doc, token, slot, candidates)
             self.protect_term_target(doc, token, rows)
+            self.margin_rejections(token, rows)
             selected = self.first_guarded(doc, rows, guard)
             return {
                 "target": token.text,
@@ -664,7 +691,16 @@ class EnsembleClearText:
                 )
         if phrases and self.phrase_model is not None:
             before = current
-            current, changes = phrase_rewrite(current, self.complexity)
+            # Tuning options are passed only when set, so older callers and mocks see (text, scorer).
+            options = {
+                k: v
+                for k, v, default in (
+                    ("min_gain", getattr(self, "phrase_min_gain", 0.02), 0.02),
+                    ("max_edits", getattr(self, "max_phrase_edits", 1), 1),
+                )
+                if v != default
+            }
+            current, changes = phrase_rewrite(current, self.complexity, **options)
             edits += changes
             if (
                 protect_terms
@@ -748,6 +784,8 @@ class EnsembleClearText:
                 # True drops that word's edit; the next accepted word may fill the slot.
                 tokens = {t.idx: t for t in doc}
                 kept = []
+                if not getattr(self, "veto_refill", True):
+                    accepted = accepted[:max_word_edits]
                 for r in accepted:
                     if len(kept) == max_word_edits:
                         break

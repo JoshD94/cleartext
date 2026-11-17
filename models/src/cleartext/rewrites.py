@@ -56,7 +56,7 @@ def structural(text):
     output=initial(span(actor_tokens))+' '+forms[0]+' '+lower_article(span(patient_tokens))+'.'
     return output,[{'stage':'structure','rule':'explicit-agent passive','before':text,'after':output}]
 
-def phrase_rewrite(text,complexity):
+def phrase_rewrite(text,complexity,min_gain=.02,max_edits=1):
     matches=[]
     doc=nlp()(text)
     code=literal_spans(text)
@@ -68,11 +68,17 @@ def phrase_rewrite(text,complexity):
             matches.append({'start':m.start(),'end':m.end(),'source':m.group(),'replacement':initial(target) if m.group()[0].isupper() else target,
                             'before_complexity':old,'after_complexity':new,'gain':old-new,'stage':'phrase',
                             'complexity_note':'CompLex word/phrase regression; long expressions extrapolate beyond mostly two-word training targets.'})
-    # One phrase edit; favor greatest predicted reduction. Meanings supplied by authored rules.
-    matches=[m for m in matches if m['gain']>=.02]
+    # One phrase edit by default; favor greatest predicted reduction. Meanings supplied by authored rules.
+    # max_edits>1 (opt-in) keeps the next-best non-overlapping matches too.
+    matches=[m for m in matches if m['gain']>=min_gain]
     if not matches:return text,[]
-    best=max(matches,key=lambda m:m['gain'])
-    return text[:best['start']]+best['replacement']+text[best['end']:],[best]
+    chosen=[]
+    for m in sorted(matches,key=lambda m:-m['gain']):
+        if len(chosen)==max_edits:break
+        if not any(m['start']<c['end'] and c['start']<m['end'] for c in chosen):chosen.append(m)
+    for m in sorted(chosen,key=lambda m:-m['start']):
+        text=text[:m['start']]+m['replacement']+text[m['end']:]
+    return text,sorted(chosen,key=lambda m:m['start'])
 
 # Negation rule (team spec, Sentence Structure Rule tab): double negatives
 # and "not un-" constructions. "It is not uncommon" -> "It is common";

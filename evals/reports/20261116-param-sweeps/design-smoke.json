@@ -1,0 +1,397 @@
+{
+ "note": "Smoke only (old 90-passage panel, previously inspected): harness, reproduction and cost check. Selects nothing.",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {}
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5_unchecked"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "t5_unchecked"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5_raw"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "t5_raw"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "t5_only"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "compound_only"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "words_v7"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "phrases_crf"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "phrases_simpleppdb"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "on"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "passive_on"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "agentive"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "passive_agentive"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "negation": "on"
+   },
+   "params": {},
+   "group": "levels",
+   "value": "negation_on"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "complete_clauses"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "complete_clauses"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ]
+   },
+   "group": "t5.waive",
+   "value": "all_soft"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.passage": "passage"
+   },
+   "group": "t5.passage",
+   "value": "passage"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage"
+   },
+   "group": "t5.safe",
+   "value": null
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.8
+   },
+   "group": "t5.safe",
+   "value": 0.8
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.9
+   },
+   "group": "t5.safe",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.min_words": 12
+   },
+   "group": "t5.min_words",
+   "value": 12
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.candidates": 2
+   },
+   "group": "t5.decoding",
+   "value": "beams2_try2"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.beams": 4,
+    "t5.candidates": 4
+   },
+   "group": "t5.decoding",
+   "value": "beams4_try4"
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "cmp.threshold": 0.3
+   },
+   "group": "cmp.threshold",
+   "value": 0.3
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.min_gain": 0.0
+   },
+   "group": "phr.min_gain",
+   "value": 0.0
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "phr.max_edits": 2
+   },
+   "group": "phr.max_edits",
+   "value": 2
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "crf",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.model_threshold": 0.5
+   },
+   "group": "finder.model_threshold",
+   "value": 0.5
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "simpleppdb",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "finder.ppdb_min": 4.8
+   },
+   "group": "finder.ppdb_min",
+   "value": 4.8
+  },
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger",
+    "passive": "on"
+   },
+   "params": {
+    "passive.placeholder": "someone"
+   },
+   "group": "passive.placeholder",
+   "value": "someone"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.9
+   },
+   "group": "w.threshold.v7",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.zipf_margin": 1.0
+   },
+   "group": "w.zipf_margin",
+   "value": 1.0
+  }
+ ]
+}
