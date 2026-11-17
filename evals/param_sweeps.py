@@ -20,7 +20,11 @@ config), finder outputs per (sources, settings), NLI scores per pair.
 No panel may contain a locked test passage: freeze, run and report refuse
 files named *LOCKED*, any passage whose split is "test" and any passage that
 ensemble_study.locked_ids matches (test-set v3 test IDs or text hashes).
-There is no unlock option.
+The one exception is the pre-registered locked-test run: `freeze
+--unlock-test FINALISTS --dev-plan DEV` accepts a finalists design only if it
+is committed and unmodified in Git, and only with generation and scoring
+sources and artifacts identical to the dev plan's; `run` on that plan accepts
+only that design.
 """
 
 import argparse
@@ -180,8 +184,10 @@ def guard_rows(rows, label):
         raise SystemExit(f"Refusing {label}: {len(bad)} locked test passages (e.g. {bad[0]})")
 
 
-def guard_panel(path):
+def guard_panel(path, unlocked=False):
     path = Path(path)
+    if unlocked:
+        return json.loads(path.read_text())
     if "locked" in path.name.lower():
         raise SystemExit(f"Refusing locked panel {path}")
     rows = json.loads(path.read_text())
@@ -195,10 +201,11 @@ def freeze(args):
     state = args.state.resolve()
     if state == ROOT or ROOT in state.parents:
         raise SystemExit("State must be outside the checkout; raw text stays local.")
+    unlock = committed_finalists(args.unlock_test, args.dev_plan) if args.unlock_test else None
     panels = {}
     for item in args.panel:
         name, _, path = item.partition("=")
-        guard_panel(path)
+        guard_panel(path, unlocked=unlock is not None)
         panels[name] = Path(path).resolve()
     hub = {"bert": args.encoder, "similarity": args.embedding, "nli": args.teammate_nli}
     generation = {
@@ -237,6 +244,17 @@ def freeze(args):
         if old != signatures(plan)[1]:
             raise SystemExit("Scoring signature differs; metrics cannot be reused")
         plan["reuse_metrics"] = {"state": str(args.reuse_metrics.resolve()), "scoring_signature": old}
+    if unlock:
+        dev = json.loads(Path(args.dev_plan).read_text())
+        keys = ("generation", "evaluation", "generation_artifacts_sha256", "evaluation_artifacts_sha256",
+                "generation_sources_sha256", "scoring_sources_sha256", "runtime")
+        changed = [k for k in keys if plan[k] != dev[k]]
+        if changed:
+            raise SystemExit(f"Locked-test plan differs from the dev plan in {changed}; not unlocking")
+        if signatures(plan) != signatures(dev):
+            raise SystemExit("Locked-test signatures differ from the dev plan's; not unlocking")
+        plan["unlock_test"] = True
+        plan["finalists"] = unlock
     state.mkdir(parents=True, exist_ok=True)
     path = state / "plan.json"
     if path.exists():
@@ -288,9 +306,27 @@ def metric_fallbacks(plan):
     return found
 
 
-def preflight(plan, check_artifacts=False):
+def committed_finalists(path, dev_plan):
+    """Identity of a finalists design that Git tracks with no uncommitted change."""
+    if dev_plan is None:
+        raise SystemExit("--unlock-test needs --dev-plan")
+    path = Path(path).resolve()
+    rel = str(path.relative_to(ROOT))
+    git = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
+    if git("ls-files", "--error-unmatch", rel).returncode or git("diff", "--quiet", "HEAD", "--", rel).returncode:
+        raise SystemExit(f"{rel} must be committed and unmodified before the test split is unlocked")
+    return {"path": rel, "sha256": S.sha(path), "commit": git("log", "-1", "--format=%H", "--", rel).stdout.strip(),
+            "configs": design_names(path)}
+
+
+def preflight(plan, check_artifacts=False, design=None):
     for name, path in plan["panels"].items():
-        guard_panel(path)
+        guard_panel(path, unlocked=plan.get("unlock_test", False))
+    if plan.get("unlock_test"):
+        finalists = plan["finalists"]
+        if design is not None and (S.sha(design) != finalists["sha256"]
+                                   or design_names(design) != finalists["configs"]):
+            raise SystemExit("An unlocked plan runs only its committed finalists design")
     S.preflight(plan, check_artifacts)
 
 
@@ -529,7 +565,7 @@ class SweepGenerator(S.StudyGenerator):
 
 def run(args):
     plan = json.loads(args.plan.read_text())
-    preflight(plan, check_artifacts=not args.preflight)
+    preflight(plan, check_artifacts=not args.preflight, design=args.design)
     if args.preflight:
         print("Preflight passed")
         return
@@ -680,7 +716,8 @@ def report(args):
         names += [n for n in design_names(design) if n not in names]
         groups.update(design_groups(design))
     passages, complete, pending = collect(args.state, plan, args.panel, names)
-    guard_rows(passages, args.panel)
+    if not plan.get("unlock_test"):
+        guard_rows(passages, args.panel)
     rows = config_rows(passages, complete)
     summaries = {n: {**T.summarize(r), "sentence_length": S._mean(
         complete[n][1][p["id"]]["readability"]["avg_sentence_length"] for p in passages)} for n, r in rows.items()}
@@ -794,6 +831,9 @@ def main():
     for name in ("t5", "tagger", "encoder", "nltk-data", "embedding", "nli", "teammate-nli"):
         f.add_argument("--" + name, type=Path, required=True)
     f.add_argument("--reuse-metrics", type=Path, help="older state with an identical scoring signature")
+    f.add_argument("--unlock-test", type=Path, metavar="FINALISTS",
+                   help="locked-test run only: the committed finalists design")
+    f.add_argument("--dev-plan", type=Path, help="with --unlock-test: the dev plan whose sources must match")
     r = sub.add_parser("run")
     r.add_argument("--plan", type=Path, required=True)
     r.add_argument("--state", type=Path, required=True)

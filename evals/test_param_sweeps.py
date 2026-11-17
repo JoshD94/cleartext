@@ -136,3 +136,23 @@ def test_finder_settings_are_validated():
     assert set(FINDER_SETTINGS) == {"model_threshold", "min_entailment", "max_fluency_drop", "min_similarity"}
     with pytest.raises(ValueError):
         PhraseFinderStage(("manual",), settings={"temperature": 1})
+
+
+def test_unlock_needs_a_committed_finalists_file_and_runs_only_it(tmp_path):
+    loose = S.ROOT / "evals" / "_uncommitted_finalists_test.json"
+    loose.write_text(json.dumps({"configs": [{"base": WINNER}]}))
+    try:
+        with pytest.raises(SystemExit):
+            P.committed_finalists(loose, tmp_path / "dev-plan.json")
+    finally:
+        loose.unlink()
+    with pytest.raises(SystemExit):
+        P.committed_finalists(S.ROOT / "evals/reports/20261116-param-sweeps/design-0-references.json", None)
+    committed = S.ROOT / "evals/reports/20261116-param-sweeps/design-0-references.json"
+    found = P.committed_finalists(committed, tmp_path / "dev-plan.json")
+    assert found["configs"] == P.design_names(committed) and len(found["commit"]) == 40
+    other = tmp_path / "other.json"
+    other.write_text(json.dumps({"configs": [{"base": WINNER}]}))
+    plan = {"panels": {}, "unlock_test": True, "finalists": found}
+    with pytest.raises(SystemExit):
+        P.preflight(plan, design=other)
