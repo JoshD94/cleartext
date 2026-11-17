@@ -19,14 +19,14 @@ and names it as omitted.
 
 ## Result
 
-**On unseen text the winner still simplifies and keeps meaning, but by less
-than half the week 7 effect.** It passes every pre-registered gate and does
-not over-edit simple text.
+**On unseen text the winner still simplifies, by less than half the week 7
+effect, and passes every pre-registered meaning gate.** It does not over-edit
+simple text.
 
 | 100 dev passages (84 standard + 16 controls) | Original | Rule-based | Nov 9 winner (T5) | **v2 winner (T5 + compound)** |
 |---|---:|---:|---:|---:|
 | Flesch–Kincaid grade ↓ | 14.627 | 14.529 | 14.433 | **14.377** |
-| Kea-Roy simplicity S ↑ | 0.2502 | 0.2519 | 0.2518 | **0.2527** |
+| Kea-Roy simplicity S ↑ | 0.2502 | 0.2520 | 0.2519 | **0.2527** |
 | Passage NLI mean | 0.9861 | 0.9773 | 0.9837 | 0.9838 |
 | Passages with passage NLI < 0.80 | 0 | 1 | 1 | 1 |
 | Sentence-level NLI mean | 0.9888 | 0.9878 | 0.9882 | 0.9882 |
@@ -64,9 +64,9 @@ Against the other systems (paired, all 100 passages):
 ![Winner minus each system](figures/b-winner-deltas.png)
 
 - **The compound splitter adds a real but small gain on new text.** It is
-  simpler than the Nov 9 winner by 0.056 grade, with a CI that excludes 0,
-  and its NLI is identical. That is half of its week 7 effect (−0.112, CI
-  touching 0).
+  simpler than the Nov 9 winner by 0.056 grade, with a CI that excludes 0;
+  NLI differs by less than 0.0001. That is half of its week 7 effect
+  (−0.112, CI touching 0).
 - **It is not clearly simpler than the rule-based dictionary** (the CI crosses
   0). Rule-based touches 30 passages; one corporate passage falls to NLI
   0.21.
@@ -91,9 +91,13 @@ no control with NLI < 0.80).
 The FK gain is in the dense genres: computer science, corporate, health and
 legal, each about −0.3 to −0.4 grade. It is smaller in political speeches
 and science abstracts, where T5 alone changes nothing on dev and the compound
-splitter alone does the work. Each domain has only 14 passages, so these are
-point estimates; per-domain tables are in
-[aggregate-results.json](aggregate-results.json).
+splitter alone does the work.
+
+These domain means rest on very few edits. The winner changes 1 computer
+science passage, 2 corporate, 2 health, 4 legal, 2 political and 2 science
+passages, out of 14 in each domain. The computer science figure is a single
+passage that falls by 5.3 grades. Treat them as point estimates. Per-domain
+tables are in [aggregate-results.json](aggregate-results.json).
 
 ![FK change by domain](figures/d-domains.png)
 
@@ -112,8 +116,9 @@ each. 181 are dev; 363 test sentences are locked.
 | **v2 winner** | **28.86 [27.93, 30.05]** | 59.57 | 11.26 | 33 |
 
 The references average FK 11.06 (intermediate) and 10.57 (elementary). Both
-T5 systems beat copying under the Xu convention, and their CIs clear the
-original's. Under `evaluate`'s 0/0 = 1 convention, copying wins, as it does on
+T5 systems score above copying under the Xu convention. Their CI lower
+bounds (27.93) are above the original's point score (27.70), but the
+intervals overlap, and no paired test was run. Under `evaluate`'s 0/0 = 1 convention, copying wins, as it does on
 ASSET. Alignments come from cosine similarity, and the split is by sentence,
 so dev and test can share an article (PROTOCOL).
 

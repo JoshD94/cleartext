@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 import matplotlib
+import matplotlib.ticker
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
@@ -59,7 +60,8 @@ def dots(ax, rows, title, xlabel, highlight="v2_winner", zero=None):
         lo, hi = ci["ci95"]
         ax.plot([lo, hi], [y, y], color=color, linewidth=2, solid_capstyle="round", zorder=2)
         ax.scatter([ci["mean"]], [y], s=48, color=color, edgecolor=SURFACE, linewidth=2, zorder=3)
-        ax.annotate(f"{ci['mean']:.{digits}f}", (hi, y), xytext=(6, 0), textcoords="offset points", va="center",
+        right = max(hi, zero) if zero is not None else hi  # keep the label clear of the zero line
+        ax.annotate(f"{ci['mean']:.{digits}f}", (right, y), xytext=(6, 0), textcoords="offset points", va="center",
                     color=INK2, fontsize=9)
     if zero is not None:
         ax.axvline(zero, color=MUTED, linewidth=1, zorder=1)
@@ -69,6 +71,7 @@ def dots(ax, rows, title, xlabel, highlight="v2_winner", zero=None):
     ax.grid(axis="y", visible=False)
     ax.set_title(title, loc="left")
     ax.set_xlabel(xlabel)
+    ax.xaxis.set_major_locator(matplotlib.ticker.MaxNLocator(4))
 
 
 def fig_primary(agg):
@@ -121,12 +124,19 @@ def fig_domains(agg):
     present = next(iter(by.values()))
     systems = [(n, c) for n, c in (("v7_words", BLUE), ("nov9_t5", AQUA), ("v2_winner", ORANGE)) if n in present]
     domains = [d for d in DOMAINS if d in by]
-    fig, ax = plt.subplots(figsize=(9, 4.2))
+    fig, ax = plt.subplots(figsize=(10, 4.6))
     for k, (name, color) in enumerate(systems):
         ys = np.arange(len(domains)) + (k - (len(systems) - 1) / 2) * 0.22
         xs = [by[d][name]["fk_grade"] - by[d]["original"]["fk_grade"] for d in domains]
         ax.barh(ys, xs, height=0.2, color=color, label=LABELS[name], edgecolor=SURFACE, linewidth=1)
+        for y, x, d in zip(ys, xs, domains):
+            ax.annotate(f"{by[d][name]['changed']} changed" if x else "none changed", (0, y),
+                        xytext=(4, 0), textcoords="offset points", ha="left", va="center", color=INK2,
+                        fontsize=8)
     ax.axvline(0, color=MUTED, linewidth=1)
+    lo = ax.get_xlim()[0]
+    ax.set_xticks([t for t in ax.get_xticks() if lo <= t <= 0])
+    ax.set_xlim(lo, -lo * 0.3)  # room right of zero for the changed-passage counts
     ax.set_yticks(range(len(domains)), [f"{DOMAINS[d]} (n={by[d]['original']['n']})" for d in domains])
     ax.invert_yaxis()
     ax.grid(axis="y", visible=False)
