@@ -187,3 +187,21 @@ Smoke findings already read (old panel, which selects nothing):
 - The tagger threshold 0.3, the authored-phrase settings and the v7 threshold
   0.9 changed no output.
 - A zipf margin of 1.0 still failed gates 1 and 2.
+
+### Amendment 2 (November 17, 2026, before any full-panel word score was read)
+
+The orchestrator raised a budget concern after 21 of the 40 chunks: phase B
+and the locked-test run must still fit. Word decisions are the slow stage,
+and on 200 test passages they cost about 4–8 chunks per word config.
+
+1. The `w.threshold.v7 = 0.9` survivor is dropped. On the screen it was a
+   no-op that equals the incumbent (same FK and changed passages). Cells
+   already generated for it are ignored.
+2. The other three word survivors keep their running chunks. If they are not
+   complete on the full dev panel when those chunks end (3 more), they stop
+   and are reported as incomplete, and they enter neither phase B nor the
+   finalists.
+3. Priority from here: phase B and the finalists' SARI panels first, then
+   the locked-test run. If the budget is tight, finalists that need cold word
+   decisions on test are replaced by the next structure-only finalist under
+   the same rule. The report states any such substitution.
