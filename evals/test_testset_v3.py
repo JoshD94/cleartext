@@ -30,6 +30,12 @@ def test_entities_keep_names_at_sentence_start():
     assert extract_entities('The United States agreed. "Yes," said Biden.') == ["United States", "Biden"]
 
 
+def test_entities_keep_multiword_names_and_ly_names_at_sentence_start():
+    text = "United States leaders met. New York grew. Eli Lilly reported sales. Lilly said more."
+    assert extract_entities(text) == ["United States", "New York", "Eli Lilly", "Lilly"]
+    assert extract_entities("Similarly, the board agreed.") == []
+
+
 def test_entity_preservation_no_longer_penalises_a_dropped_however():
     source = "However, the board approved the merger with Contoso."
     output = "The board approved the merger with Contoso."
@@ -161,3 +167,22 @@ def test_freeze_and_run_refuse_locked_test_ids(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match="locked"):
         E.load_panel({"panels": {"x": str(panel)}}, "x")
     assert E.load_panel({"panels": {"x": str(panel)}, "unlock_test": True}, "x")[0]["id"] == test_id
+
+
+def test_lock_matches_renamed_test_text_and_fails_closed(tmp_path, monkeypatch):
+    import hashlib
+    sha = lambda t: hashlib.sha256(t.encode()).hexdigest()
+    data = tmp_path / "evals/data/testset_v3"
+    data.mkdir(parents=True)
+    (data / "manifest.json").write_text(json.dumps({"passages": [
+        {"id": "t1", "split": "test", "text_sha256": sha("held-out passage")},
+        {"id": "d1", "split": "dev", "text_sha256": sha("dev passage")}]}))
+    (data / "test_ids.txt").write_text("t1\n")
+    (data / "onestop_test_ids.txt").write_text("ose-" + sha("held-out sentence")[:12] + "\n")
+    monkeypatch.setattr(E, "ROOT", tmp_path)
+    rows = [{"id": "renamed", "original": "held-out passage"}, {"id": "x", "original": "held-out sentence"},
+            {"id": "d1", "original": "dev passage"}]
+    assert E.locked_ids(rows) == ["renamed", "x"]
+    (data / "onestop_test_ids.txt").unlink()
+    with pytest.raises(FileNotFoundError):
+        E.locked_ids(rows)

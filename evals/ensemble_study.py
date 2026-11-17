@@ -232,12 +232,20 @@ def freeze(args):
 
 
 def locked_ids(rows):
-    """IDs in rows that belong to the locked test split of test set v3."""
-    test = set()
-    for name in ("test_ids.txt", "onestop_test_ids.txt"):
-        path = ROOT / "evals/data/testset_v3" / name
-        test |= set(path.read_text().split()) if path.exists() else set()
-    return sorted({r.get("id") for r in rows} & test)
+    """IDs of rows that belong to the locked test split of test set v3, matched
+    by ID or by text (manifest SHA-256; a OneStopEnglish ID is its text hash),
+    so a renamed copy of a test passage is still locked. Fails closed if the
+    committed lists are missing."""
+    data = ROOT / "evals/data/testset_v3"
+    test = set((data / "test_ids.txt").read_text().split()) | set((data / "onestop_test_ids.txt").read_text().split())
+    hashes = {p["text_sha256"] for p in json.loads((data / "manifest.json").read_text())["passages"]
+              if p["split"] == "test"}
+    found = set()
+    for r in rows:
+        text = hashlib.sha256(r.get("original", "").encode()).hexdigest()
+        if r.get("id") in test or text in hashes or "ose-" + text[:12] in test:
+            found.add(r.get("id"))
+    return sorted(found, key=str)
 
 
 def _source_at(head, path):

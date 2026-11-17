@@ -120,3 +120,35 @@ deltas against each other system.
   than X" needs the passage-NLI delta CI lower bound ≥ −0.005.
 - OneStopEnglish test SARI and FK are reported for every system with CIs,
   without a gate.
+
+## Amendment 1 (2026-11-16, from the PR #18 agent review)
+
+Added after dev scoring had started on the plan frozen at `422109b`. The only
+scores looked at were from a dry run of the report code on the first 27 dev
+passages. No system, metric definition, gate or judgement rule changes.
+
+- **Entity check fix.** The common-word rule now applies only to
+  single-word spans. As first written it cut multi-word names to their last
+  word ("United States" → "States"). The `-ly` rule became a fixed list of
+  sentence adverbs, because it dropped names such as "Italy" and "Lilly". This
+  is what "capitalized only by position" was meant to mean.
+- **Dev run vs main.** The in-flight dev run keeps its frozen `422109b`
+  sources, so its scoring signature hashes the pre-fix `preservation.py`.
+  Every entity number in the dev report is recomputed from the texts at
+  report time with the fixed check. The cached Week 7 metrics it reuses
+  (readability, NLI, numbers, negations) do not depend on the entity code.
+- **Reference for the final run.** In place of "hash the same as the dev
+  run's plan": generation sources and artifacts must hash the same as the dev
+  plan. Scoring sources must hash the same as `main` after PR #18 merges,
+  where the only difference from the dev plan is the entity code in
+  `preservation.py`. The report-time files (`testset_v3.py`, `human_score.py`,
+  `evaluate_base.py`, `trained_weights.json`, `preservation.py`,
+  `readability.py`, `sari.py`) must also match the hashes the dev report
+  records in `report_sources_sha256`. Any difference is listed, and the
+  result is not called a confirmation.
+- **Reporting without v7.** If v7 words is not complete when the other four
+  systems are, the dev report may omit it (`--omit v7_words`) and say so.
+- **Wording.** The changed-token rate counts the longer side of each edited
+  run, so pure insertions count too. The study branch is
+  `josh/testset-v3-20261116`; the protocol merged through
+  `josh/testset-v3-split-20261116`.

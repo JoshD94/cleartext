@@ -481,8 +481,8 @@ def extract_entities_capitalized(text):
 
 
 # Words that are capitalized only because they open a sentence: function and
-# discourse words, -ly adverbs, and (in single-word spans) common English words
-# that the text never capitalizes mid-sentence.
+# discourse words (including common sentence adverbs), and, in single-word
+# spans, common English words that the text never capitalizes mid-sentence.
 _DISCOURSE = frozenset("""
     also although because besides but consequently finally first firstly further furthermore hence however
     indeed instead likewise meanwhile moreover nevertheless nonetheless notably otherwise overall rather
@@ -492,6 +492,9 @@ _DISCOURSE = frozenset("""
     such some many most several both either neither other another any all no not only our we they their it its
     his her he she you your i my us them one if as at by for from in into of on or and to with after before
     during under over between among about against upon through the a an
+    currently generally importantly initially ultimately unfortunately fortunately recently previously
+    historically traditionally increasingly primarily essentially conversely interestingly clearly
+    collectively respectively simply mostly usually often only just even really
 """.split())
 _COMMON_ZIPF = 4.5
 
@@ -513,10 +516,16 @@ def _sentence_starts(text):
     return starts
 
 
-def _initial_word_is_common(word, text):
+def _initial_word_is_common(word, text, single):
+    """Is a sentence-initial word capitalized only by position? Function and
+    discourse words always are; another word only in a single-word span, when
+    it is common English and never capitalized mid-sentence in the text (so
+    "United States", "New York" and "Italy" written mid-sentence stay names)."""
     low = word.lower()
-    if low in _DISCOURSE or (low.endswith("ly") and len(low) > 4):
+    if low in _DISCOURSE:
         return True
+    if not single:
+        return False
     if re.search(r"(?<![.!?]\s)(?<!^)(?<=\s)" + re.escape(word) + r"\b", text):
         return False  # also capitalized mid-sentence: a name
     try:
@@ -531,13 +540,14 @@ def extract_entities(text):
 
     A span that opens a sentence loses its first word when that word is
     capitalized only by position (see _initial_word_is_common), so "However"
-    and "Patients" are not entities, while "In Washington" keeps "Washington"
-    and a rare initial word such as "Desmopressin" stays an entity.
+    and "Patients" are not entities, "In Washington" keeps "Washington",
+    multi-word names such as "United States" stay whole and a rare initial
+    word such as "Desmopressin" stays an entity.
     """
     starts, items = _sentence_starts(text), []
     for m in _ENTITY_RE.finditer(text):
         words = m.group().split()
-        if m.start() in starts and _initial_word_is_common(words[0], text):
+        if m.start() in starts and _initial_word_is_common(words[0], text, len(words) == 1):
             words = words[1:]
         if words:
             items.append(" ".join(words))

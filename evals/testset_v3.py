@@ -16,6 +16,7 @@ locked-test judgement before any score was read.
 
 import argparse
 import difflib
+import hashlib
 import json
 import re
 from datetime import datetime, timezone
@@ -40,6 +41,9 @@ SYSTEMS = {
     "v2_winner": config_id({"words": "off", "phrases": "authored", "structure": "t5+compound_tagger"}),
 }
 WINNER = "v2_winner"
+REPORT_SOURCES = [ROOT / "evals" / n for n in ("testset_v3.py", "human_score.py", "evaluate_base.py",
+                                                "trained_weights.json", "preservation.py", "readability.py",
+                                                "sari.py")]
 # (key, higher is better) for paired deltas.
 METRICS = (("fk_grade", False), ("kea_S", True), ("nli_mean", True), ("sent_nli_mean", True),
            ("entities", True), ("changed_token_rate", False))
@@ -143,15 +147,15 @@ def paired(rows_a, rows_b, key):
     return out
 
 
-def panel_rows(states, plan, panel, kinds):
+def panel_rows(states, plan, panel, kinds, systems=SYSTEMS):
     """{system: [row per passage]} for every complete system; pending names listed."""
-    passages, complete, pending = collect(states, plan, panel, list(SYSTEMS.values()))
+    passages, complete, pending = collect(states, plan, panel, list(systems.values()))
     for p in passages:
         p["kind"] = kinds[p["id"]]
     rows = {short: [passage_row(p, complete[name][0][p["id"]]["output"], complete[name][1][p["id"]])
                     for p in passages]
-            for short, name in SYSTEMS.items() if name in complete}
-    return passages, rows, [short for short, name in SYSTEMS.items() if name in pending]
+            for short, name in systems.items() if name in complete}
+    return passages, rows, [short for short, name in systems.items() if name in pending]
 
 
 def subset(rows, keep):
@@ -172,18 +176,21 @@ def section(rows):
     return out
 
 
-def onestop_scores(states, plan, panel):
+def onestop_scores(states, plan, panel, split, systems=SYSTEMS):
     """SARI on the OneStopEnglish sentences (two references each)."""
     from .readability import flesch_kincaid_grade
     from .sari import corpus_sari
-    sentences, complete, _ = collect(states, plan, panel, list(SYSTEMS.values()), need_metrics=False)
+    sentences, complete, pending = collect(states, plan, panel, list(systems.values()), need_metrics=False)
+    expected = set((MANIFEST.parent / f"onestop_{split}_ids.txt").read_text().split())
+    if {p["id"] for p in sentences} != expected:
+        raise SystemExit(f"Panel {panel} is not the OneStopEnglish {split} split")
+    if pending:
+        raise SystemExit(f"Incomplete OneStopEnglish systems: {pending}")
     sources, refs = [p["original"] for p in sentences], [p["references"] for p in sentences]
     out = {"n": len(sentences)}
     rng = np.random.default_rng(SEED)
     draws = rng.integers(0, len(sentences), (1000, len(sentences)))
-    for short, name in SYSTEMS.items():
-        if name not in complete:
-            continue
+    for short, name in systems.items():
         preds = [complete[name][0][p["id"]]["output"] for p in sentences]
         boot = [corpus_sari([sources[i] for i in d], [preds[i] for i in d], [refs[i] for i in d], zero_division=0)
                 for d in draws]
@@ -204,12 +211,17 @@ def report(args):
     plan = json.loads((args.state[0] / "plan.json").read_text())
     if plan.get("unlock_test") and not args.final:
         raise SystemExit("This plan is unlocked for the final test run; pass --final to report it")
+    systems = {k: v for k, v in SYSTEMS.items() if k not in args.omit}
     manifest = {p["id"]: p for p in json.loads(MANIFEST.read_text())["passages"]}
     kinds = {i: p["kind"] for i, p in manifest.items()}
-    passages, rows, pending = panel_rows(args.state, plan, args.panel, kinds)
+    passages, rows, pending = panel_rows(args.state, plan, args.panel, kinds, systems)
     expected = {i for i, p in manifest.items() if p["split"] == args.manifest_split}
     if {p["id"] for p in passages} != expected:
         raise SystemExit(f"Panel {args.panel} is not the manifest's {args.manifest_split} split")
+    changed = [p["id"] for p in passages
+               if hashlib.sha256(p["original"].encode()).hexdigest() != manifest[p["id"]]["text_sha256"]]
+    if changed:
+        raise SystemExit(f"Passage text differs from the manifest: {changed[:5]}")
     if pending:
         raise SystemExit(f"Incomplete systems: {pending}; scores stay pending until the matrix is complete")
     rb = summarize(rows["rule_based"])["entities"]
@@ -217,7 +229,11 @@ def report(args):
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "panel": {"name": args.panel, "split": args.manifest_split, "n": len(passages),
                   "sha256": plan["panel_sha256"][args.panel], "locked_ids_present": len(locked_ids(passages))},
-        "systems": SYSTEMS, "winner": WINNER, "bootstrap": {"resamples": RESAMPLES, "seed": SEED,
+        "systems": systems, "omitted": {k: SYSTEMS[k] for k in args.omit}, "winner": WINNER,
+        # Report-time metrics (Kea S, entity check, over-edit, SARI) read these
+        # files, which the frozen plan does not hash.
+        "report_sources_sha256": {str(f.relative_to(ROOT)): hashlib.sha256(f.read_bytes()).hexdigest()
+                                  for f in REPORT_SOURCES}, "bootstrap": {"resamples": RESAMPLES, "seed": SEED,
                                                             "strata": "domain", "ci": "percentile 95%"},
         "all": section(rows),
         "standard": section(subset(rows, lambda r: r["kind"] == "standard")),
@@ -233,16 +249,26 @@ def report(args):
                         for k, v in rows.items()},
         "signatures": {str(s): dict(zip(("generation", "scoring"), state_signatures(s))) for s in args.state},
     }
-    if args.onestop_panel in plan["panels"]:
-        result["onestop"] = {"panel": args.onestop_panel, **onestop_scores(args.state, plan, args.onestop_panel)}
+    onestop = args.onestop_panel or ("onestop_test" if args.final else "onestop_dev")
+    if onestop in plan["panels"]:
+        result["onestop"] = {"panel": onestop, **onestop_scores(args.state, plan, onestop, args.manifest_split,
+                                                                systems)}
+    elif args.onestop_panel:
+        raise SystemExit(f"Plan has no panel {onestop}")
     args.out.mkdir(parents=True, exist_ok=True)
     write_json(args.out / "aggregate-results.json", result)
     (args.out / "results-table.md").write_text(markdown(result))
     print(f"{len(passages)} passages, {len(rows)} systems -> {args.out}")
 
 
+def num(value, digits=4):
+    return "–" if value is None else f"{value:.{digits}f}"
+
+
 def markdown(result):
     def fmt(ci, digits=3):
+        if ci["mean"] is None:
+            return "–"
         return f"{ci['mean']:.{digits}f} [{ci['ci95'][0]:.{digits}f}, {ci['ci95'][1]:.{digits}f}]"
 
     lines = []
@@ -255,7 +281,7 @@ def markdown(result):
         for short, s in sec["systems"].items():
             ci = sec["ci"][short]
             lines.append(f"| {short} | {s['n']} | {s['changed']} | {fmt(ci['fk_grade'])} | {fmt(ci['kea_S'])} | "
-                         f"{s['nli_mean']:.4f} | {s['nli_below_080']} | {s['sent_nli_mean']:.4f} | "
+                         f"{num(s['nli_mean'])} | {s['nli_below_080']} | {num(s['sent_nli_mean'])} | "
                          f"{s['entities']:.4f} | {s['numbers_failed']}/{s['negations_failed']} | "
                          f"{s['changed_token_rate']:.4f} | {s['fk_delta']:+.3f} |")
         lines.append("")
@@ -285,7 +311,9 @@ def main():
     r.add_argument("--panel", default="dev")
     r.add_argument("--manifest-split", default="dev", choices=("dev", "test"))
     r.add_argument("--out", type=Path, required=True)
-    r.add_argument("--onestop-panel", default="onestop_dev")
+    r.add_argument("--onestop-panel", help="default onestop_dev, or onestop_test with --final")
+    r.add_argument("--omit", action="append", default=[], choices=("v7_words", "nov9_t5"),
+                   help="report without this system (named as omitted in the output)")
     r.add_argument("--final", action="store_true", help="report the pre-registered final test run")
     args = ap.parse_args()
     {"report": report}[args.command](args)
