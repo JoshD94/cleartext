@@ -1,0 +1,54 @@
+{
+ "note": "Run order 3: word configs that passed the pre-registered screen (gates 1-3 on dev shard 0/3), full dev panel.",
+ "configs": [
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.7
+   },
+   "group": "w.threshold.v7",
+   "value": 0.7
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.8
+   },
+   "group": "w.threshold.v7",
+   "value": 0.8
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.threshold": 0.9
+   },
+   "group": "w.threshold.v7",
+   "value": 0.9
+  },
+  {
+   "base": {
+    "words": "contextual_veto",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "w.veto": 0.97,
+    "w.veto_refill": false
+   },
+   "group": "w.veto.no_refill",
+   "value": 0.97
+  }
+ ]
+}
