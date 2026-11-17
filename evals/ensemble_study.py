@@ -180,6 +180,11 @@ def freeze(args):
         if name in panels:
             raise SystemExit(f"Panel {name} already defined")
         panels[name] = Path(path).resolve()
+    for name, path in panels.items():
+        locked = locked_ids(json.loads(Path(path).read_text()))
+        if locked and not args.unlock_test:
+            raise SystemExit(f"Panel {name} contains {len(locked)} locked test-set v3 IDs; "
+                             "the test split runs only in the pre-registered final run (--unlock-test)")
     generation = {
         "runs": {"v7": str(ROOT / "models/runs/ensemble-v7-20260928"),
                  "contextual": str(ROOT / "models/runs/ensemble-context-similarity-20261002")},
@@ -217,6 +222,8 @@ def freeze(args):
         "scoring_sources_sha256": {str(p): sha(p) for p in scoring_sources()},
         "runtime": runtime(),
     }
+    if args.unlock_test:
+        plan["unlock_test"] = True
     if args.reuse_state:
         plan["reuse"] = reuse_compatibility(args.reuse_state.resolve(), plan)
     state.mkdir(parents=True, exist_ok=True)
@@ -226,6 +233,23 @@ def freeze(args):
     write_json(path, plan)
     print(f"Froze {path}: {len(plan['generation_artifacts_sha256'])} generation and "
           f"{len(plan['evaluation_artifacts_sha256'])} evaluation artifacts")
+
+
+def locked_ids(rows):
+    """IDs of rows that belong to the locked test split of test set v3, matched
+    by ID or by text (manifest SHA-256; a OneStopEnglish ID is its text hash),
+    so a renamed copy of a test passage is still locked. Fails closed if the
+    committed lists are missing."""
+    data = ROOT / "evals/data/testset_v3"
+    test = set((data / "test_ids.txt").read_text().split()) | set((data / "onestop_test_ids.txt").read_text().split())
+    hashes = {p["text_sha256"] for p in json.loads((data / "manifest.json").read_text())["passages"]
+              if p["split"] == "test"}
+    found = set()
+    for r in rows:
+        text = hashlib.sha256(r.get("original", "").encode()).hexdigest()
+        if r.get("id") in test or text in hashes or "ose-" + text[:12] in test:
+            found.add(r.get("id"))
+    return sorted(found, key=str)
 
 
 def _source_at(head, path):
@@ -696,6 +720,8 @@ class StudyScorer:
 
 def load_panel(plan, panel):
     rows = json.loads(Path(plan["panels"][panel]).read_text())
+    if locked_ids(rows) and not plan.get("unlock_test"):
+        raise ValueError(f"Panel {panel} contains locked test-set v3 IDs and the plan was not unlocked")
     if len({r["id"] for r in rows}) != len(rows):
         raise ValueError("Panel IDs must be unique")
     return rows
@@ -1133,6 +1159,8 @@ def main():
     f.add_argument("--asset", type=Path)
     f.add_argument("--panel", action="append", metavar="NAME=PATH",
                    help="extra input panel (JSON rows with unique id and original), e.g. paper=paragraphs.json")
+    f.add_argument("--unlock-test", action="store_true",
+                   help="allow test-set v3 test IDs (only for the pre-registered final run)")
     f.add_argument("--languagetool-port", type=int, default=8797)
     f.add_argument("--teammate-nli", type=Path, help="local cross-encoder/nli-deberta-v3-small for "
                    "Chhoeng's phrase replacer and the word veto")

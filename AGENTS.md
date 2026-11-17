@@ -88,6 +88,15 @@ versions, input/model/source hashes and completion/failure receipts.
   source, input, model and runtime signatures. Automatic scores remain pending
   until the complete expected matrix is present. Raw checkpoints stay local.
 
+- Test set v3 (`evals/data/testset_v3/`, protocol in
+  `evals/reports/20261116-testset-v3/PROTOCOL.md`): 300 passages + 544
+  OneStopEnglish sentences, text local only. The **test split is locked**
+  for one pre-registered final run; `ensemble_study freeze`/`run` refuse test
+  IDs unless the plan was frozen with `--unlock-test`. Never pass it otherwise.
+- A Git worktree lacks the ignored `models/runs/` and `models/data/` (the v7
+  bigram cache); symlink both from the primary checkout before running the
+  pipeline there.
+
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
 handback, close only resources created for the task and leave a short handoff.

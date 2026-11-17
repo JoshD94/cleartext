@@ -474,9 +474,84 @@ def extract_dates(text):
     return _DATE_RE.findall(text)
 
 
-def extract_entities(text):
-    """Capitalized-span heuristic for named entities."""
+def extract_entities_capitalized(text):
+    """Every capitalized span (the pre-November 16 entity check). Counts
+    sentence-initial words such as "However" or "Patients" as entities."""
     return _ENTITY_RE.findall(text)
+
+
+# Words that are capitalized only because they open a sentence: function and
+# discourse words (including common sentence adverbs), and, in single-word
+# spans, common English words that the text never capitalizes mid-sentence.
+_DISCOURSE = frozenset("""
+    also although because besides but consequently finally first firstly further furthermore hence however
+    indeed instead likewise meanwhile moreover nevertheless nonetheless notably otherwise overall rather
+    second secondly similarly specifically still subsequently then thereafter therefore third thus today
+    together typically yes yet additionally accordingly alternatively here now once since unless until when
+    whereas whether while within without where what which who why how this that these those there each every
+    such some many most several both either neither other another any all no not only our we they their it its
+    his her he she you your i my us them one if as at by for from in into of on or and to with after before
+    during under over between among about against upon through the a an
+    currently generally importantly initially ultimately unfortunately fortunately recently previously
+    historically traditionally increasingly primarily essentially conversely interestingly clearly
+    collectively respectively simply mostly usually often only just even really
+""".split())
+_COMMON_ZIPF = 4.5
+
+
+_ABBREVIATIONS = frozenset("dr mr mrs ms st jr sr no vs inc co corp ltd gen sen rep gov prof fig u.s e.g i.e".split())
+
+
+def _sentence_starts(text):
+    """Offsets of each sentence's first character (after opening quotes/brackets),
+    ignoring breaks after a title, abbreviation or initial ("Dr. Smith")."""
+    starts = set()
+    for a, b in split_sentences(text):
+        before = text[:a].rstrip().split()
+        last = before[-1].rstrip(".").lower() if before else ""
+        if before and before[-1].endswith(".") and (last in _ABBREVIATIONS or len(last) == 1):
+            continue
+        chunk = text[a:b]
+        starts.add(a + len(chunk) - len(chunk.lstrip("\"'([“‘ \n\t")))
+    return starts
+
+
+def _initial_word_is_common(word, text, single):
+    """Is a sentence-initial word capitalized only by position? Function and
+    discourse words always are; another word only in a single-word span, when
+    it is common English and never capitalized mid-sentence in the text (so
+    "United States", "New York" and "Italy" written mid-sentence stay names)."""
+    low = word.lower()
+    if low in _DISCOURSE:
+        return True
+    if not single:
+        return False
+    if re.search(r"(?<![.!?]\s)(?<!^)(?<=\s)" + re.escape(word) + r"\b", text):
+        return False  # also capitalized mid-sentence: a name
+    try:
+        from wordfreq import zipf_frequency
+    except ImportError:
+        return False
+    return zipf_frequency(low, "en") >= _COMMON_ZIPF
+
+
+def extract_entities(text):
+    """Capitalized-span heuristic for named entities.
+
+    A span that opens a sentence loses its first word when that word is
+    capitalized only by position (see _initial_word_is_common), so "However"
+    and "Patients" are not entities, "In Washington" keeps "Washington",
+    multi-word names such as "United States" stay whole and a rare initial
+    word such as "Desmopressin" stays an entity.
+    """
+    starts, items = _sentence_starts(text), []
+    for m in _ENTITY_RE.finditer(text):
+        words = m.group().split()
+        if m.start() in starts and _initial_word_is_common(words[0], text, len(words) == 1):
+            words = words[1:]
+        if words:
+            items.append(" ".join(words))
+    return items
 
 
 def extract_negations(text):
@@ -490,6 +565,7 @@ def explicit_checks(original, simplified):
         "numbers_preserved": _item_fraction(extract_numbers(original), extract_numbers(simplified)),
         "dates_preserved": _preservation_fraction(extract_dates(original), simplified),
         "entities_preserved": _preservation_fraction(extract_entities(original), simplified),
+        "entities_preserved_capitalized": _preservation_fraction(extract_entities_capitalized(original), simplified),
         "negations_preserved": _preservation_fraction(extract_negations(original), simplified),
         "tenses_preserved": tense_preserved(original, simplified),
     }
