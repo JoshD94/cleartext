@@ -260,6 +260,38 @@ def signatures(plan):
     return gen, score
 
 
+class Store(S.StudyStore):
+    """StudyStore whose metric lookup falls back through several older states."""
+
+    def __init__(self, root, generation_signature, scoring_signature, fallbacks=()):
+        super().__init__(root, generation_signature, scoring_signature)
+        self.fallbacks = [Path(f) for f in fallbacks]
+
+    def metrics(self, source, output):
+        for root in [None, *self.fallbacks]:
+            path = self._metric_path(source, output, root)
+            if path.exists():
+                value = json.loads(path.read_text())
+                if value.get("pair") != {"source": source, "output": output} or value.get("signature") != self.score:
+                    raise ValueError("Metric cache identity changed")
+                return value
+        return None
+
+
+def metric_fallbacks(plan):
+    """plan["reuse_metrics"]'s state, then the states it reused from (their
+    plan["reuse"]), while the scoring signature stays identical."""
+    reuse = plan.get("reuse_metrics")
+    if not reuse:
+        return []
+    found, state = [], Path(reuse["state"])
+    while state and S.state_signatures(state)[1] == reuse["scoring_signature"]:
+        found.append(state)
+        older = json.loads((state / "plan.json").read_text()).get("reuse") or {}
+        state = Path(older["state"]) if older.get("metrics") else None
+    return found
+
+
 def preflight(plan, check_artifacts=False):
     for name, path in plan["panels"].items():
         guard_panel(path)
@@ -511,8 +543,7 @@ def run(args):
     shard, shards = map(int, args.shard.split("/"))
     selected = [p for k, p in enumerate(passages) if k % shards == shard]
     state = args.state
-    reuse = plan.get("reuse_metrics") or {}
-    store = S.StudyStore(state, gen_sig, score_sig, reuse.get("state"))
+    store = Store(state, gen_sig, score_sig, metric_fallbacks(plan))
     import torch
     torch.set_num_threads(args.threads)
     try:
@@ -583,9 +614,9 @@ def run(args):
 
 def collect(states, plan, panel, names, need_metrics=True):
     """ensemble_study.collect, also reading metrics from plan["reuse_metrics"]."""
-    fallback = (plan.get("reuse_metrics") or {}).get("state")
+    fallbacks = metric_fallbacks(plan)
     passages = S.load_panel(plan, panel)
-    stores = [S.StudyStore(state, *S.state_signatures(state), fallback) for state in states]
+    stores = [Store(state, *S.state_signatures(state), fallbacks) for state in states]
     complete, pending = {}, []
     for name in names:
         outputs, metrics = {}, {}
@@ -697,6 +728,21 @@ def report(args):
     print(f"{len(summaries)} complete configs, {len(pending)} pending -> {args.out}")
 
 
+def short(name, group=None):
+    """Readable label: factor levels that differ from the incumbent, then parameters."""
+    if name in S.REFERENCES:
+        return name
+    if group and group[0] not in ("levels", "combined"):
+        value = "none" if group[1] is None else group[1]
+        return f"{group[0]} = {value}"
+    config, params = parse(name)
+    incumbent = S.normalize({"words": "off", "phrases": "authored", "structure": "t5+compound_tagger"})
+    parts = [f"{k}={v}" for k, v in config.items() if v != incumbent[k]]
+    for k, v in sorted(params.items()):
+        parts.append(f"{k}={'all soft' if k == 't5.waive' and len(v) > 8 else v}")
+    return ", ".join(parts) or "incumbent"
+
+
 def markdown(result):
     head = ("| Config | Changed | FK ↓ | ΔFK vs incumbent [95% CI] | NLI passage | ΔNLI [95% CI] | NLI<0.8 | "
             "Entities | Num/neg fails | Human S ↑ | Gates |\n"
@@ -710,7 +756,7 @@ def markdown(result):
         v = versus.get(name)
         dfk = f"{v['fk_grade']['mean']:+.3f} [{v['fk_grade']['ci95'][0]:+.3f}, {v['fk_grade']['ci95'][1]:+.3f}]" if v else ""
         dnli = f"{v['nli_mean']['mean']:+.4f} [{v['nli_mean']['ci95'][0]:+.4f}, {v['nli_mean']['ci95'][1]:+.4f}]" if v else ""
-        label = name.replace("|", " ") + (" ◆" if name in front else "")
+        label = short(name, result["groups"].get(name)) + (" ◆" if name in front else "")
         lines.append(f"| `{label}` | {s['changed']}/{s['n']} | {s['fk_grade']:.3f} | {dfk} | {s['nli_mean']:.4f} | "
                      f"{dnli} | {s['nli_below_080']} | {s['entities']:.4f} | "
                      f"{s['numbers_failed']}/{s['negations_failed']} | {s['human_simplicity']:.4f} | {gate} |")
