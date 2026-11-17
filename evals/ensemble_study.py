@@ -171,16 +171,20 @@ def freeze(args):
     if state == ROOT or ROOT in state.parents:
         raise SystemExit("State must be outside the checkout; raw text stays local.")
     panels = {"sourced": ROOT / "evals/data/week7_sourced_passages.json"}
-    if args.panel:
-        panels = dict(item.split("=", 1) for item in args.panel)
-        panels = {name: Path(path).resolve() for name, path in panels.items()}
+    if args.asset:
+        panels["asset_test"] = args.asset.resolve()
+    for spec in args.panel or []:
+        if "=" not in spec:
+            raise SystemExit(f"--panel expects NAME=PATH, got {spec!r}")
+        name, path = spec.split("=", 1)
+        if name in panels:
+            raise SystemExit(f"Panel {name} already defined")
+        panels[name] = Path(path).resolve()
     for name, path in panels.items():
         locked = locked_ids(json.loads(Path(path).read_text()))
         if locked and not args.unlock_test:
             raise SystemExit(f"Panel {name} contains {len(locked)} locked test-set v3 IDs; "
                              "the test split runs only in the pre-registered final run (--unlock-test)")
-    if args.asset:
-        panels["asset_test"] = args.asset.resolve()
     generation = {
         "runs": {"v7": str(ROOT / "models/runs/ensemble-v7-20260928"),
                  "contextual": str(ROOT / "models/runs/ensemble-context-similarity-20261002")},
@@ -1153,7 +1157,8 @@ def main():
     for name in ("t5", "tagger", "encoder", "nltk-data", "languagetool", "java", "embedding", "nli"):
         f.add_argument("--" + name, type=Path, required=True)
     f.add_argument("--asset", type=Path)
-    f.add_argument("--panel", action="append", help="NAME=PATH panel(s) instead of the week 7 sourced panel")
+    f.add_argument("--panel", action="append", metavar="NAME=PATH",
+                   help="extra input panel (JSON rows with unique id and original), e.g. paper=paragraphs.json")
     f.add_argument("--unlock-test", action="store_true",
                    help="allow test-set v3 test IDs (only for the pre-registered final run)")
     f.add_argument("--languagetool-port", type=int, default=8797)

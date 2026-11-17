@@ -161,7 +161,7 @@ def test_freeze_and_run_refuse_locked_test_ids(tmp_path, monkeypatch):
     panel = tmp_path / "panel.json"
     panel.write_text(json.dumps([{"id": test_id, "original": "Text."}]))
     assert E.locked_ids([{"id": test_id}, {"id": "cs-s01"}]) == [test_id]
-    args = SimpleNamespace(state=tmp_path / "state", panel=[f"x={panel}"], unlock_test=False)
+    args = SimpleNamespace(state=tmp_path / "state", panel=[f"x={panel}"], asset=None, unlock_test=False)
     with pytest.raises(SystemExit, match="locked"):
         E.freeze(args)
     with pytest.raises(ValueError, match="locked"):
