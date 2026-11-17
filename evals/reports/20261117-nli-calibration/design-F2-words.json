@@ -1,0 +1,96 @@
+{
+ "note": "NLI calibration study (2026-11-17): F2 and F2 with v7 word swaps on test set v3 DEV only. Word gates A1 (primary) and A2 (sensitivity) are applied per swap after generation; see PROTOCOL.md. Committed before any F2+words output exists.",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2+v7"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5,
+    "w.threshold": 0.7
+   },
+   "label": "F2+v7 (threshold 0.7)"
+  }
+ ]
+}
