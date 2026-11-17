@@ -1,0 +1,5181 @@
+{
+ "name": "testset-v3",
+ "seed": 20261116,
+ "words": [
+  60,
+  120
+ ],
+ "dev_fraction": 0.3333333333333333,
+ "builder": "evals/build_testset_v3.py",
+ "plan": {
+  "computer_science": {
+   "source": "rfc",
+   "documents": 21,
+   "per_document": 2,
+   "kind": "standard",
+   "prefix": "cs"
+  },
+  "corporate_communication": {
+   "source": "sec10k",
+   "documents": 21,
+   "per_document": 2,
+   "kind": "standard",
+   "prefix": "corp"
+  },
+  "political_science": {
+   "source": "speech",
+   "documents": 21,
+   "per_document": 2,
+   "kind": "standard",
+   "prefix": "pol"
+  },
+  "health_medical": {
+   "source": "openfda",
+   "documents": 21,
+   "per_document": 2,
+   "kind": "standard",
+   "prefix": "health"
+  },
+  "legal_government": {
+   "source": "fedreg",
+   "documents": 21,
+   "per_document": 2,
+   "kind": "standard",
+   "prefix": "legal"
+  },
+  "science": {
+   "source": "arxiv",
+   "documents": 42,
+   "per_document": 1,
+   "kind": "standard",
+   "prefix": "sci"
+  },
+  "simple_english": {
+   "source": "simplewiki",
+   "documents": 48,
+   "per_document": 1,
+   "kind": "simple_control",
+   "prefix": "simple"
+  }
+ },
+ "pool_sizes": {
+  "computer_science": 627,
+  "corporate_communication": 50,
+  "political_science": 47,
+  "health_medical": 677,
+  "legal_government": 432,
+  "science": 298,
+  "simple_english": 141
+ },
+ "licenses": {
+  "rfc": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+  "sec10k": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+  "speech": "US Government work (public domain); transcript via The American Presidency Project",
+  "openfda": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+  "fedreg": "US Government work (public domain), Federal Register",
+  "arxiv": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+  "simplewiki": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)"
+ },
+ "passages": [
+  {
+   "id": "cs-v3-001",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9360",
+   "source_title": "RFC 9360, CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates, February 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9360.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    44,
+    0,
+    3
+   ],
+   "word_count": 79,
+   "text_sha256": "01df1255e9c8facb252bd253118d895ab9ceeebedcedb60df3d79d86f52d31d8"
+  },
+  {
+   "id": "cs-v3-002",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9360",
+   "source_title": "RFC 9360, CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates, February 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9360.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    45,
+    1,
+    3
+   ],
+   "word_count": 66,
+   "text_sha256": "5005355780f1ce94f92c7369db561e150050e3506f5a316ac5aeee256e11f69d"
+  },
+  {
+   "id": "cs-v3-003",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9356",
+   "source_title": "RFC 9356, Advertising Layer 2 Bundle Member Link Attributes in OSPF, January 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9356.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    7,
+    0,
+    2
+   ],
+   "word_count": 87,
+   "text_sha256": "fe7516d61a36b23f317fc3a2d47b1088a995ece9834996411cdfec5a07b2cbf5"
+  },
+  {
+   "id": "cs-v3-004",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9356",
+   "source_title": "RFC 9356, Advertising Layer 2 Bundle Member Link Attributes in OSPF, January 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9356.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    21,
+    0,
+    4
+   ],
+   "word_count": 116,
+   "text_sha256": "c50485ecc3acab6cc815f28ed515834cebb6602fcf208752c10af235b35cad64"
+  },
+  {
+   "id": "cs-v3-005",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9303",
+   "source_title": "RFC 9303, Locator/ID Separation Protocol Security (LISP-SEC), October 2022",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9303.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    114,
+    1,
+    3
+   ],
+   "word_count": 67,
+   "text_sha256": "a02b7bf4e943779080670800a806b2d85b06ec2fbd40c5235dc6437b86976b69"
+  },
+  {
+   "id": "cs-v3-006",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9303",
+   "source_title": "RFC 9303, Locator/ID Separation Protocol Security (LISP-SEC), October 2022",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9303.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    115,
+    3,
+    4
+   ],
+   "word_count": 74,
+   "text_sha256": "3d3d43e7507f90eead9259ec0c3cc12507296d491b6b7279cfc261b345cf4c52"
+  },
+  {
+   "id": "cs-v3-007",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9352",
+   "source_title": "RFC 9352, IS-IS Extensions to Support Segment Routing over the IPv6 Data Plane, February 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9352.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    65,
+    0,
+    2
+   ],
+   "word_count": 68,
+   "text_sha256": "c63393b7a44792cfb53a558ae26aed9bed1163636af94176b30658efaba21cff"
+  },
+  {
+   "id": "cs-v3-008",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9352",
+   "source_title": "RFC 9352, IS-IS Extensions to Support Segment Routing over the IPv6 Data Plane, February 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9352.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    99,
+    0,
+    2
+   ],
+   "word_count": 75,
+   "text_sha256": "79b6be4b0d399fef641250d5bbf84160062ac656e6a23cc7c558676c3d1b6145"
+  },
+  {
+   "id": "cs-v3-009",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9418",
+   "source_title": "RFC 9418, A YANG Data Model for Service Assurance, July 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9418.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    25,
+    0,
+    4
+   ],
+   "word_count": 90,
+   "text_sha256": "fbd790f57e2d8e51ede90746bb5cd0c54dd2be77900b91e7d31f4241eeaf9cb1"
+  },
+  {
+   "id": "cs-v3-010",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9418",
+   "source_title": "RFC 9418, A YANG Data Model for Service Assurance, July 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9418.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    35,
+    1,
+    3
+   ],
+   "word_count": 82,
+   "text_sha256": "d91ca8428045b3a9f256fd82ecc98437b664452328fe86a7b6b2c90cbd9422ba"
+  },
+  {
+   "id": "cs-v3-011",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9011",
+   "source_title": "RFC 9011, Static Context Header Compression and Fragmentation (SCHC) over LoRaWAN, April 2021",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9011.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    31,
+    2,
+    5
+   ],
+   "word_count": 75,
+   "text_sha256": "d788e9986cba85a33693a53860fcaf955a568bd6076c4437bff4f3162bca86c2"
+  },
+  {
+   "id": "cs-v3-012",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9011",
+   "source_title": "RFC 9011, Static Context Header Compression and Fragmentation (SCHC) over LoRaWAN, April 2021",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9011.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    35,
+    0,
+    2
+   ],
+   "word_count": 71,
+   "text_sha256": "b292673a5f4f881616bf96b47dcd0aa003c5f7d0071ea591318e7a10aa83a983"
+  },
+  {
+   "id": "cs-v3-013",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9606",
+   "source_title": "RFC 9606, DNS Resolver Information, June 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9606.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    1,
+    4,
+    6
+   ],
+   "word_count": 61,
+   "text_sha256": "7ee39c9af06abf324947420b2a893ccc2d9b297cfdcc6b7835c16e1a226c9171"
+  },
+  {
+   "id": "cs-v3-014",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc9606",
+   "source_title": "RFC 9606, DNS Resolver Information, June 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9606.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    2,
+    0,
+    4
+   ],
+   "word_count": 74,
+   "text_sha256": "70befd87bba20487d43f6dd875e05660a5aa88716c4e064aa4cf942c385597e8"
+  },
+  {
+   "id": "cs-v3-015",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc8737",
+   "source_title": "RFC 8737, Automated Certificate Management Environment (ACME) TLS Application-Layer Protocol Negotiation (ALPN) Challenge Extension, February 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8737.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    3,
+    0,
+    1
+   ],
+   "word_count": 74,
+   "text_sha256": "25dcf2432b151a09b46c99c2f5227d4b60840892262f5f2937c01ccbe8f2a930"
+  },
+  {
+   "id": "cs-v3-016",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc8737",
+   "source_title": "RFC 8737, Automated Certificate Management Environment (ACME) TLS Application-Layer Protocol Negotiation (ALPN) Challenge Extension, February 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8737.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    31,
+    0,
+    1
+   ],
+   "word_count": 64,
+   "text_sha256": "184376bbe6d4b1e8d3af8f1fdc1305b10515f9bb7d7f6c3d2aca13baa216ca3a"
+  },
+  {
+   "id": "cs-v3-017",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9617",
+   "source_title": "RFC 9617, A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM), August 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9617.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    12,
+    0,
+    4
+   ],
+   "word_count": 81,
+   "text_sha256": "c75848af7fe21bc22749a137cd4f248c7d8c8153993fe957b50aed9922b34889"
+  },
+  {
+   "id": "cs-v3-018",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9617",
+   "source_title": "RFC 9617, A YANG Data Model for In Situ Operations, Administration, and Maintenance (IOAM), August 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9617.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    27,
+    0,
+    4
+   ],
+   "word_count": 73,
+   "text_sha256": "242ef5273caf9623c0e6295f9f31b80f2cd75582abd3c29bc1b54fb1e61a7052"
+  },
+  {
+   "id": "cs-v3-019",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9651",
+   "source_title": "RFC 9651, Structured Field Values for HTTP, September 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9651.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    30,
+    0,
+    1
+   ],
+   "word_count": 62,
+   "text_sha256": "a4e08dbc3e421f69f6c190382137760777a2ce8cf399ab644535ba0f8887c370"
+  },
+  {
+   "id": "cs-v3-020",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9651",
+   "source_title": "RFC 9651, Structured Field Values for HTTP, September 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9651.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    37,
+    1,
+    3
+   ],
+   "word_count": 71,
+   "text_sha256": "e26e2064a8f70483669a30ed3770fc35b1c04c19ce2e0f0d0139f10d001f042d"
+  },
+  {
+   "id": "cs-v3-021",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc8779",
+   "source_title": "RFC 8779, Path Computation Element Communication Protocol (PCEP) Extensions for GMPLS, July 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8779.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    59,
+    1,
+    5
+   ],
+   "word_count": 102,
+   "text_sha256": "8a8ebd9f4aa2141c0d8c67e8c85cc8ff55fdcce62399b2cd72a008ac44a6c3d1"
+  },
+  {
+   "id": "cs-v3-022",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc8779",
+   "source_title": "RFC 8779, Path Computation Element Communication Protocol (PCEP) Extensions for GMPLS, July 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8779.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    178,
+    0,
+    2
+   ],
+   "word_count": 91,
+   "text_sha256": "0bac5162a711750854a3b32bee40f5d84c7397ae53142353837fabda041d8572"
+  },
+  {
+   "id": "cs-v3-023",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9384",
+   "source_title": "RFC 9384, A BGP Cease NOTIFICATION Subcode for Bidirectional Forwarding Detection (BFD), March 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9384.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    2,
+    0,
+    1
+   ],
+   "word_count": 76,
+   "text_sha256": "3174d4d6653ae442f9e2d50735de22a9f718c89f11dc1437bc4bb93fc939454e"
+  },
+  {
+   "id": "cs-v3-024",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9384",
+   "source_title": "RFC 9384, A BGP Cease NOTIFICATION Subcode for Bidirectional Forwarding Detection (BFD), March 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9384.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    8,
+    0,
+    1
+   ],
+   "word_count": 71,
+   "text_sha256": "a095f574c6492af99827f6345c53ce27a06b5d303c0620b563d648916361144b"
+  },
+  {
+   "id": "cs-v3-025",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9022",
+   "source_title": "RFC 9022, Domain Name Registration Data (DNRD) Objects Mapping, May 2021",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9022.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    18,
+    1,
+    3
+   ],
+   "word_count": 63,
+   "text_sha256": "f1814fe5f3c45db0896ff90cbdfe89d032f828defef6138832afc6c9e144a45d"
+  },
+  {
+   "id": "cs-v3-026",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9022",
+   "source_title": "RFC 9022, Domain Name Registration Data (DNRD) Objects Mapping, May 2021",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9022.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    88,
+    0,
+    5
+   ],
+   "word_count": 118,
+   "text_sha256": "10775e89cc11c83aa2b84c246ddf8c358713b7f222013c90db0d65551e852724"
+  },
+  {
+   "id": "cs-v3-027",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9685",
+   "source_title": "RFC 9685, Listener Subscription for IPv6 Neighbor Discovery Multicast and Anycast Addresses, November 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9685.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    105,
+    0,
+    2
+   ],
+   "word_count": 84,
+   "text_sha256": "f1f20d5a9986a2ad747be5d093463037e055dffc52f26ef153d719a75d457896"
+  },
+  {
+   "id": "cs-v3-028",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9685",
+   "source_title": "RFC 9685, Listener Subscription for IPv6 Neighbor Discovery Multicast and Anycast Addresses, November 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9685.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    106,
+    0,
+    2
+   ],
+   "word_count": 77,
+   "text_sha256": "d6334223ca68dc4dfac96940f8b6357c0caa9d27fbb2a364843c49efa5698a49"
+  },
+  {
+   "id": "cs-v3-029",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9571",
+   "source_title": "RFC 9571, Extension of RFC 6374-Based Performance Measurement Using Synonymous Flow Labels, May 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9571.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    12,
+    1,
+    3
+   ],
+   "word_count": 68,
+   "text_sha256": "3d4f33b85290e3bdf3b156fa92ee07cc4e8520a2c6f442bb316d2232d9cdad4c"
+  },
+  {
+   "id": "cs-v3-030",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9571",
+   "source_title": "RFC 9571, Extension of RFC 6374-Based Performance Measurement Using Synonymous Flow Labels, May 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9571.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    16,
+    1,
+    2
+   ],
+   "word_count": 71,
+   "text_sha256": "b8b65c51e8d16ff79176524846fb5cc0211217af8d4f9b686084bfe080294885"
+  },
+  {
+   "id": "cs-v3-031",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9530",
+   "source_title": "RFC 9530, Digest Fields, February 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9530.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    0,
+    3,
+    6
+   ],
+   "word_count": 62,
+   "text_sha256": "65d7f28a1ac1c2dd50c87182703835c42d1d1253b992877d7182d22e595bab9f"
+  },
+  {
+   "id": "cs-v3-032",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9530",
+   "source_title": "RFC 9530, Digest Fields, February 2024",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9530.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    90,
+    0,
+    2
+   ],
+   "word_count": 72,
+   "text_sha256": "8aecb3499827bb98e3fd239ec5594f8cd24b2bcec6d2f1aeae127f29bf6f611b"
+  },
+  {
+   "id": "cs-v3-033",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc8787",
+   "source_title": "RFC 8787, Location Source Parameter for the SIP Geolocation Header Field, May 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8787.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    1,
+    1,
+    2
+   ],
+   "word_count": 69,
+   "text_sha256": "9bc557b74043f7845884970eea2ca01217b898f012c503321a0104bd518c30f1"
+  },
+  {
+   "id": "cs-v3-034",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc8787",
+   "source_title": "RFC 8787, Location Source Parameter for the SIP Geolocation Header Field, May 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8787.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    12,
+    0,
+    2
+   ],
+   "word_count": 78,
+   "text_sha256": "d7765b12a8fa2bb37979517d06b392342d9b38933dec1d956817312e413b8b1c"
+  },
+  {
+   "id": "cs-v3-035",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9354",
+   "source_title": "RFC 9354, Transmission of IPv6 Packets over Power Line Communication (PLC) Networks, January 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9354.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    30,
+    1,
+    4
+   ],
+   "word_count": 70,
+   "text_sha256": "2e19d141294fd22f45ff0f66945727e2f2e41f467e901ec7a878f3d23310670e"
+  },
+  {
+   "id": "cs-v3-036",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9354",
+   "source_title": "RFC 9354, Transmission of IPv6 Packets over Power Line Communication (PLC) Networks, January 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9354.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    90,
+    8,
+    11
+   ],
+   "word_count": 89,
+   "text_sha256": "f1a482e25203d7ba3d64b257f1fff7cd75f51d458cc12f87003a5d14a8a340c7"
+  },
+  {
+   "id": "cs-v3-037",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9406",
+   "source_title": "RFC 9406, HyStart++: Modified Slow Start for TCP, May 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9406.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    10,
+    2,
+    4
+   ],
+   "word_count": 76,
+   "text_sha256": "e7c5395ca1d8fb561c14976e8f1e0da575766610ef066d7bf5f32e9f4afa426c"
+  },
+  {
+   "id": "cs-v3-038",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc9406",
+   "source_title": "RFC 9406, HyStart++: Modified Slow Start for TCP, May 2023",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc9406.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    48,
+    0,
+    1
+   ],
+   "word_count": 78,
+   "text_sha256": "75cc80e739348e97a9f9a8867241ab3eaf233569bbdd188272bc909d01709732"
+  },
+  {
+   "id": "cs-v3-039",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc8812",
+   "source_title": "RFC 8812, CBOR Object Signing and Encryption (COSE) and JSON Object Signing and Encryption (JOSE) Registrations for Web Authentication (WebAuthn) Algorithms, August 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8812.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    21,
+    0,
+    2
+   ],
+   "word_count": 67,
+   "text_sha256": "54589d49caa2c370bf6ab7cd93e2d529471d42ad2e2912d853e858b46cdcb077"
+  },
+  {
+   "id": "cs-v3-040",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "rfc8812",
+   "source_title": "RFC 8812, CBOR Object Signing and Encryption (COSE) and JSON Object Signing and Encryption (JOSE) Registrations for Web Authentication (WebAuthn) Algorithms, August 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8812.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    22,
+    1,
+    2
+   ],
+   "word_count": 61,
+   "text_sha256": "a80f30c427f999beea833bfe06bc522c103fdfc6ee0e0a49c653ada19a72f3be"
+  },
+  {
+   "id": "cs-v3-041",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc8723",
+   "source_title": "RFC 8723, Double Encryption Procedures for the Secure Real-Time Transport Protocol (SRTP), April 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8723.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    69,
+    0,
+    1
+   ],
+   "word_count": 65,
+   "text_sha256": "27e5e4f11cf37a21d594c75070e7b3a1148100cab115fb4a3f294b0e4745e2bc"
+  },
+  {
+   "id": "cs-v3-042",
+   "domain": "computer_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "rfc8723",
+   "source_title": "RFC 8723, Double Encryption Procedures for the Secure Real-Time Transport Protocol (SRTP), April 2020",
+   "source_url": "https://www.rfc-editor.org/rfc/rfc8723.txt",
+   "license": "IETF Trust Legal Provisions (RFC text may be reproduced with attribution); text kept local",
+   "sentence_span": [
+    75,
+    0,
+    1
+   ],
+   "word_count": 60,
+   "text_sha256": "f100d36b10d073db1cf6b4580734fd319f31cdd05a1d4acdfe978d5a65731610"
+  },
+  {
+   "id": "corp-v3-001",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik59478-10k-2026",
+   "source_title": "ELI LILLY & Co, Form 10-K filed 2026-02-12 (accession 0000059478-26-000013)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    152,
+    1,
+    2
+   ],
+   "word_count": 83,
+   "text_sha256": "1d9e9b2fa31db62d55c928a8ad0aa4d499cf4ab0c89ed8c4c5d67d89e767c315"
+  },
+  {
+   "id": "corp-v3-002",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik59478-10k-2026",
+   "source_title": "ELI LILLY & Co, Form 10-K filed 2026-02-12 (accession 0000059478-26-000013)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/59478/000005947826000013/lly-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    241,
+    0,
+    3
+   ],
+   "word_count": 113,
+   "text_sha256": "54d29ecb0b9fec57a769c49f55b1c5343076449ecfd0d17aa39c47fc8adb41c3"
+  },
+  {
+   "id": "corp-v3-003",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1141391-10k-2026",
+   "source_title": "Mastercard Inc, Form 10-K filed 2026-02-11 (accession 0001141391-26-000013)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000013/ma-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    895,
+    1,
+    3
+   ],
+   "word_count": 86,
+   "text_sha256": "59d625b78e1729c89546635be0d2ae7d0ed4de5faf4e76728defd4a4155660e4"
+  },
+  {
+   "id": "corp-v3-004",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1141391-10k-2026",
+   "source_title": "Mastercard Inc, Form 10-K filed 2026-02-11 (accession 0001141391-26-000013)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1141391/000114139126000013/ma-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    1172,
+    1,
+    4
+   ],
+   "word_count": 111,
+   "text_sha256": "6537e41e8fd7c2a5d43860454c77737ee420c810be675dab6bd6cf414d3cdacd"
+  },
+  {
+   "id": "corp-v3-005",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik882095-10k-2026",
+   "source_title": "GILEAD SCIENCES, INC., Form 10-K filed 2026-02-24 (accession 0000882095-26-000006)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/882095/000088209526000006/gild-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    147,
+    1,
+    4
+   ],
+   "word_count": 113,
+   "text_sha256": "4622de43559ddf986b639365c754cbb9473d65aad73239ebee3c12d60391403f"
+  },
+  {
+   "id": "corp-v3-006",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik882095-10k-2026",
+   "source_title": "GILEAD SCIENCES, INC., Form 10-K filed 2026-02-24 (accession 0000882095-26-000006)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/882095/000088209526000006/gild-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    251,
+    0,
+    1
+   ],
+   "word_count": 69,
+   "text_sha256": "b25118dc733ac2823904058d6ef09df8c8ba1b5d0b8eb21ec95e057f86605e2e"
+  },
+  {
+   "id": "corp-v3-007",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1571996-10k-2026",
+   "source_title": "Dell Technologies Inc., Form 10-K filed 2026-03-16 (accession 0001571996-26-000008)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1571996/000157199626000008/dell-20260130.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    725,
+    0,
+    4
+   ],
+   "word_count": 95,
+   "text_sha256": "737686927be5660fb6d906e2fe7c715f53cc0c7fcf7a821e54451a1e1fc59a2e"
+  },
+  {
+   "id": "corp-v3-008",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1571996-10k-2026",
+   "source_title": "Dell Technologies Inc., Form 10-K filed 2026-03-16 (accession 0001571996-26-000008)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1571996/000157199626000008/dell-20260130.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    739,
+    1,
+    3
+   ],
+   "word_count": 73,
+   "text_sha256": "5941c9cfa9e2f0cd9de32ffd1905acaa26397abbdafab4a180ce56c0dd7a7681"
+  },
+  {
+   "id": "corp-v3-009",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1065280-10k-2026",
+   "source_title": "NETFLIX INC, Form 10-K filed 2026-01-23 (accession 0001065280-26-000034)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/nflx-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    122,
+    5,
+    8
+   ],
+   "word_count": 119,
+   "text_sha256": "7cdfa8f1eba479e93ed78fb51a14334b981f219b870685f9d64a79ac0eda2f11"
+  },
+  {
+   "id": "corp-v3-010",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1065280-10k-2026",
+   "source_title": "NETFLIX INC, Form 10-K filed 2026-01-23 (accession 0001065280-26-000034)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1065280/000106528026000034/nflx-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    487,
+    2,
+    5
+   ],
+   "word_count": 94,
+   "text_sha256": "4743ca0554ea6f3c6a22a59441e1b4e9c1331454baf17705fb9a4d98017d24e7"
+  },
+  {
+   "id": "corp-v3-011",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1067983-10k-2026",
+   "source_title": "BERKSHIRE HATHAWAY INC, Form 10-K filed 2026-03-02 (accession 0001193125-26-083899)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    521,
+    1,
+    3
+   ],
+   "word_count": 87,
+   "text_sha256": "58e706ab364bcacb44d267e2e7be53bb23f15e37b70cc3a471fcf339c2413d1b"
+  },
+  {
+   "id": "corp-v3-012",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1067983-10k-2026",
+   "source_title": "BERKSHIRE HATHAWAY INC, Form 10-K filed 2026-03-02 (accession 0001193125-26-083899)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1067983/000119312526083899/brka-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    625,
+    2,
+    4
+   ],
+   "word_count": 71,
+   "text_sha256": "8a305078cc9d67ac3293cb7fe692f25459732403f033a5b4b5f369ab43bd2852"
+  },
+  {
+   "id": "corp-v3-013",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik2488-10k-2026",
+   "source_title": "ADVANCED MICRO DEVICES INC, Form 10-K filed 2026-02-04 (accession 0000002488-26-000018)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    660,
+    0,
+    1
+   ],
+   "word_count": 88,
+   "text_sha256": "98291df279048a5d35e9ad8dd70f1844df8cdedaa99813632f10953d28db859c"
+  },
+  {
+   "id": "corp-v3-014",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik2488-10k-2026",
+   "source_title": "ADVANCED MICRO DEVICES INC, Form 10-K filed 2026-02-04 (accession 0000002488-26-000018)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    667,
+    2,
+    5
+   ],
+   "word_count": 109,
+   "text_sha256": "b31f85c7b1d9083a1bc3025245f6f51cb16ca917cff69882f9fef30665e20121"
+  },
+  {
+   "id": "corp-v3-015",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik1707925-10k-2026",
+   "source_title": "LINDE PLC, Form 10-K filed 2026-02-25 (accession 0001628280-26-011430)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1707925/000162828026011430/lin-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    11,
+    0,
+    2
+   ],
+   "word_count": 87,
+   "text_sha256": "c4a2027d3784cc27b6c280842803be3106a2b95febcea5e69949a38460bf5b24"
+  },
+  {
+   "id": "corp-v3-016",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik1707925-10k-2026",
+   "source_title": "LINDE PLC, Form 10-K filed 2026-02-25 (accession 0001628280-26-011430)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1707925/000162828026011430/lin-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    401,
+    0,
+    2
+   ],
+   "word_count": 91,
+   "text_sha256": "dfccafd7052223c717a79f1d44ca4573398066fe58aa3e554d95d5ce90c201dd"
+  },
+  {
+   "id": "corp-v3-017",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik1045810-10k-2026",
+   "source_title": "NVIDIA CORP, Form 10-K filed 2026-02-25 (accession 0001045810-26-000021)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    366,
+    0,
+    1
+   ],
+   "word_count": 79,
+   "text_sha256": "6253c60d181d99e39b85d0016a24b2b634705698facab2be10cb2069aeafe9f1"
+  },
+  {
+   "id": "corp-v3-018",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik1045810-10k-2026",
+   "source_title": "NVIDIA CORP, Form 10-K filed 2026-02-25 (accession 0001045810-26-000021)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    528,
+    1,
+    2
+   ],
+   "word_count": 76,
+   "text_sha256": "ab989b6d31e5ac41c7f720d129e662980c70a9bdc1313e3b0fe20d84c665cb58"
+  },
+  {
+   "id": "corp-v3-019",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik310158-10k-2026",
+   "source_title": "Merck & Co., Inc., Form 10-K filed 2026-02-24 (accession 0000310158-26-000063)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/310158/000031015826000063/mrk-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    446,
+    2,
+    4
+   ],
+   "word_count": 63,
+   "text_sha256": "0eb35c947e2ece61c7fe564435e0b18147b06771f0c4d3fc4dbd4a71ee5c5c6c"
+  },
+  {
+   "id": "corp-v3-020",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik310158-10k-2026",
+   "source_title": "Merck & Co., Inc., Form 10-K filed 2026-02-24 (accession 0000310158-26-000063)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/310158/000031015826000063/mrk-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    955,
+    2,
+    4
+   ],
+   "word_count": 97,
+   "text_sha256": "1b53d4dd53fb868d8fb221a0b6153cb1e298f89a8a4dea8f5debd06454538c9f"
+  },
+  {
+   "id": "corp-v3-021",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1652044-10k-2026",
+   "source_title": "Alphabet Inc., Form 10-K filed 2026-02-05 (accession 0001652044-26-000018)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    189,
+    0,
+    3
+   ],
+   "word_count": 104,
+   "text_sha256": "cfb2238b54c1c4157bfaef4586f4997de45b308c3e918e68ab54ef7fb1287844"
+  },
+  {
+   "id": "corp-v3-022",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1652044-10k-2026",
+   "source_title": "Alphabet Inc., Form 10-K filed 2026-02-05 (accession 0001652044-26-000018)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    920,
+    1,
+    2
+   ],
+   "word_count": 64,
+   "text_sha256": "6d327204926fae27fa843640bbd5fc3dfa99393b9a9e27fc673628acebf7d740"
+  },
+  {
+   "id": "corp-v3-023",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik886982-10k-2026",
+   "source_title": "GOLDMAN SACHS GROUP INC, Form 10-K filed 2026-02-25 (accession 0000886982-26-000091)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000091/gs-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    264,
+    3,
+    4
+   ],
+   "word_count": 76,
+   "text_sha256": "c76efa4399367e116920160614285d354835c5e5fd9c44e102ed1baf75681320"
+  },
+  {
+   "id": "corp-v3-024",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik886982-10k-2026",
+   "source_title": "GOLDMAN SACHS GROUP INC, Form 10-K filed 2026-02-25 (accession 0000886982-26-000091)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000091/gs-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    558,
+    0,
+    1
+   ],
+   "word_count": 82,
+   "text_sha256": "77311f277b56128c1d7960b73cd5d1580a876acd936bc27587db86ff84dd240d"
+  },
+  {
+   "id": "corp-v3-025",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik1318605-10k-2026",
+   "source_title": "Tesla, Inc., Form 10-K filed 2026-01-29 (accession 0001628280-26-003952)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    194,
+    0,
+    2
+   ],
+   "word_count": 94,
+   "text_sha256": "91e2c522def7b9823eab797822067a9d9a1c6006ab156d6c407b5a2482a9a2b8"
+  },
+  {
+   "id": "corp-v3-026",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik1318605-10k-2026",
+   "source_title": "Tesla, Inc., Form 10-K filed 2026-01-29 (accession 0001628280-26-003952)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828026003952/tsla-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    522,
+    2,
+    3
+   ],
+   "word_count": 99,
+   "text_sha256": "323146b9851c2484be7aed5711146f51809f0a991f56823392089b55bfdeb1c5"
+  },
+  {
+   "id": "corp-v3-027",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik19617-10k-2026",
+   "source_title": "JPMORGAN CHASE & CO, Form 10-K filed 2026-02-13 (accession 0001628280-26-008131)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    3454,
+    0,
+    1
+   ],
+   "word_count": 75,
+   "text_sha256": "d01f5b13e3011e045858c631eedbfaf3db63b7ae155a6ae2750a225aeffdba92"
+  },
+  {
+   "id": "corp-v3-028",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik19617-10k-2026",
+   "source_title": "JPMORGAN CHASE & CO, Form 10-K filed 2026-02-13 (accession 0001628280-26-008131)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/jpm-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    3557,
+    0,
+    1
+   ],
+   "word_count": 76,
+   "text_sha256": "f663f2fba0a32acc9db3861a199f9b19378499430d82acaab6c7a96dba2e0e1d"
+  },
+  {
+   "id": "corp-v3-029",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik80424-10k-2026",
+   "source_title": "PROCTER & GAMBLE Co, Form 10-K filed 2026-08-04 (accession 0000080424-26-000103)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    68,
+    4,
+    6
+   ],
+   "word_count": 80,
+   "text_sha256": "f82455f226d6619d0806fe482f7d38a10f311215f11d853d5bed626122f2f614"
+  },
+  {
+   "id": "corp-v3-030",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik80424-10k-2026",
+   "source_title": "PROCTER & GAMBLE Co, Form 10-K filed 2026-08-04 (accession 0000080424-26-000103)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    87,
+    4,
+    6
+   ],
+   "word_count": 86,
+   "text_sha256": "592d4745703fab779ec96683d99af687e6ae435f7296e6032ec0d43325c46a6f"
+  },
+  {
+   "id": "corp-v3-031",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1341439-10k-2026",
+   "source_title": "ORACLE CORP, Form 10-K filed 2026-06-22 (accession 0001193125-26-277521)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    948,
+    0,
+    2
+   ],
+   "word_count": 60,
+   "text_sha256": "a28856c734676e07a250a12b2ed80c0f07483122943d33464d6e1f3762038857"
+  },
+  {
+   "id": "corp-v3-032",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik1341439-10k-2026",
+   "source_title": "ORACLE CORP, Form 10-K filed 2026-06-22 (accession 0001193125-26-277521)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    1319,
+    1,
+    3
+   ],
+   "word_count": 71,
+   "text_sha256": "61e486537c07d59706fc103d8f91542ae3ac15921c398ef8b45ea345d257c776"
+  },
+  {
+   "id": "corp-v3-033",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik4962-10k-2026",
+   "source_title": "AMERICAN EXPRESS CO, Form 10-K filed 2026-02-06 (accession 0000004962-26-000080)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/4962/000000496226000080/axp-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    157,
+    0,
+    3
+   ],
+   "word_count": 108,
+   "text_sha256": "89b4d66446bb6bd80b73dc23d5875d23205dcc2f7f1637e439489d7214c8e5a5"
+  },
+  {
+   "id": "corp-v3-034",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik4962-10k-2026",
+   "source_title": "AMERICAN EXPRESS CO, Form 10-K filed 2026-02-06 (accession 0000004962-26-000080)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/4962/000000496226000080/axp-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    1398,
+    0,
+    2
+   ],
+   "word_count": 109,
+   "text_sha256": "2a52c02130bd5df87ef6816bc41d621a9971569d9c41a5ad3f97c1f745316d79"
+  },
+  {
+   "id": "corp-v3-035",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik731766-10k-2026",
+   "source_title": "UNITEDHEALTH GROUP INC, Form 10-K filed 2026-03-02 (accession 0000731766-26-000062)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    425,
+    0,
+    1
+   ],
+   "word_count": 60,
+   "text_sha256": "66d4fba4d7dfb035501993cdb667005f979f88c11397a634819f241994fb887d"
+  },
+  {
+   "id": "corp-v3-036",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik731766-10k-2026",
+   "source_title": "UNITEDHEALTH GROUP INC, Form 10-K filed 2026-03-02 (accession 0000731766-26-000062)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    815,
+    0,
+    1
+   ],
+   "word_count": 76,
+   "text_sha256": "0c28229af2836ed104a1188a1756ad431e9d3e9fb06b8eca966bbd184b5ce3e7"
+  },
+  {
+   "id": "corp-v3-037",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik6951-10k-2025",
+   "source_title": "APPLIED MATERIALS INC /DE, Form 10-K filed 2025-12-12 (accession 0001628280-25-056742)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/6951/000162828025056742/amat-20251026.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    247,
+    3,
+    5
+   ],
+   "word_count": 95,
+   "text_sha256": "5e84da3e6086b3a80c5db50b56ebde5a84d0c233694c7ef9b3a5a0abd46eee84"
+  },
+  {
+   "id": "corp-v3-038",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik6951-10k-2025",
+   "source_title": "APPLIED MATERIALS INC /DE, Form 10-K filed 2025-12-12 (accession 0001628280-25-056742)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/6951/000162828025056742/amat-20251026.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    273,
+    1,
+    1
+   ],
+   "word_count": 63,
+   "text_sha256": "8d7ae56e5100a59b86221d0d9a7eab2becdb3969fe3461ae97f5960eadce26bd"
+  },
+  {
+   "id": "corp-v3-039",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik723125-10k-2026",
+   "source_title": "MICRON TECHNOLOGY INC, Form 10-K filed 2026-10-09 (accession 0000723125-26-000023)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    254,
+    1,
+    2
+   ],
+   "word_count": 75,
+   "text_sha256": "3a8187e1fe4b65f44d69440ec5e70f162c9e544b2662179821653ea8ea5abc37"
+  },
+  {
+   "id": "corp-v3-040",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "cik723125-10k-2026",
+   "source_title": "MICRON TECHNOLOGY INC, Form 10-K filed 2026-10-09 (accession 0000723125-26-000023)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    508,
+    0,
+    4
+   ],
+   "word_count": 107,
+   "text_sha256": "6079aaf98b92bf6105eef7a99b608cbacfa64117f66e5b22adad7372516fcdf5"
+  },
+  {
+   "id": "corp-v3-041",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik97745-10k-2026",
+   "source_title": "THERMO FISHER SCIENTIFIC INC., Form 10-K filed 2026-02-26 (accession 0000097745-26-000018)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/97745/000009774526000018/tmo-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    352,
+    0,
+    0
+   ],
+   "word_count": 70,
+   "text_sha256": "49749b8ff98cb1a6c6ee458edb3c35834ba23ac94c782ecc4a2c9cd8d9a16d60"
+  },
+  {
+   "id": "corp-v3-042",
+   "domain": "corporate_communication",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "cik97745-10k-2026",
+   "source_title": "THERMO FISHER SCIENTIFIC INC., Form 10-K filed 2026-02-26 (accession 0000097745-26-000018)",
+   "source_url": "https://www.sec.gov/Archives/edgar/data/97745/000009774526000018/tmo-20251231.htm",
+   "license": "Public SEC EDGAR filing (17 CFR 232); text kept local, not redistributed",
+   "sentence_span": [
+    589,
+    0,
+    2
+   ],
+   "word_count": 69,
+   "text_sha256": "5ea21d26fdf683eafe5f6aacd06a4d7fb25f5159cf761e0e384564931540e767"
+  },
+  {
+   "id": "pol-v3-001",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-23",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2003-01-28",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-23",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    4,
+    1,
+    3
+   ],
+   "word_count": 81,
+   "text_sha256": "05920a2b276c8f845879d3f54067cfd28e1972bd724271886f404b80a517f1a8"
+  },
+  {
+   "id": "pol-v3-002",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-23",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2003-01-28",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-23",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    63,
+    2,
+    6
+   ],
+   "word_count": 78,
+   "text_sha256": "b7fd20b0c587496bc42db8140149f6993ede53cbd1c8f64e463aa8d049e5fc58"
+  },
+  {
+   "id": "pol-v3-003",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-13",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2006-01-31",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-13",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    4,
+    2,
+    5
+   ],
+   "word_count": 71,
+   "text_sha256": "8db88c164e50891aa2b31d8168dd8980cc3e74ae5e429f3d187a2db4651b4aec"
+  },
+  {
+   "id": "pol-v3-004",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-13",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2006-01-31",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-13",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    11,
+    0,
+    2
+   ],
+   "word_count": 67,
+   "text_sha256": "2118b6d16575082c7b6fef4c6f69129f1d3595f4839f48b1e03bf766e2651a09"
+  },
+  {
+   "id": "pol-v3-005",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-6",
+   "source_title": "William J. Clinton, Address Before a Joint Session of the Congress on the State of the Union, 1999-01-19",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-6",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    20,
+    0,
+    2
+   ],
+   "word_count": 77,
+   "text_sha256": "8abd5258996dbd91d3a9c335c5e3b900af5b7f3d9cdf554a8ae25406c9269299"
+  },
+  {
+   "id": "pol-v3-006",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-6",
+   "source_title": "William J. Clinton, Address Before a Joint Session of the Congress on the State of the Union, 1999-01-19",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-6",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    42,
+    1,
+    3
+   ],
+   "word_count": 76,
+   "text_sha256": "1cbdaeb5ed029c17d42f3091936912993f9c012c815c6cedca27e71ff7798b07"
+  },
+  {
+   "id": "pol-v3-007",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union-2",
+   "source_title": "Barack Obama, Address Before a Joint Session of Congress on the State of the Union, 2013-02-12",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union-2",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    18,
+    1,
+    3
+   ],
+   "word_count": 87,
+   "text_sha256": "69d142e96c4353e289e7aab0162058f1fd9a781fa4e2348c51eb41821aac762f"
+  },
+  {
+   "id": "pol-v3-008",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union-2",
+   "source_title": "Barack Obama, Address Before a Joint Session of Congress on the State of the Union, 2013-02-12",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union-2",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    19,
+    0,
+    6
+   ],
+   "word_count": 107,
+   "text_sha256": "4cbcae771c7c29c2a731bc1136a8a94f981d618dc2c9f7500f32ed69ceca1fa9"
+  },
+  {
+   "id": "pol-v3-009",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "inaugural-address-10",
+   "source_title": "Ronald Reagan, Inaugural Address, 1985-01-21",
+   "source_url": "https://www.presidency.ucsb.edu/documents/inaugural-address-10",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    5,
+    1,
+    5
+   ],
+   "word_count": 95,
+   "text_sha256": "ebef551075c071c25840964961008a9e0075cceccf78df91e28e98c10b5635cf"
+  },
+  {
+   "id": "pol-v3-010",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "inaugural-address-10",
+   "source_title": "Ronald Reagan, Inaugural Address, 1985-01-21",
+   "source_url": "https://www.presidency.ucsb.edu/documents/inaugural-address-10",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    19,
+    0,
+    1
+   ],
+   "word_count": 61,
+   "text_sha256": "adb10bd6e71b0ab45bfb9e0487a760eb2eb314baf6d88335545a901e5bd37b56"
+  },
+  {
+   "id": "pol-v3-011",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-2",
+   "source_title": "George Bush, Address Before a Joint Session of the Congress on the State of the Union, 1990-01-31",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-2",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    12,
+    0,
+    2
+   ],
+   "word_count": 85,
+   "text_sha256": "5f6f34084b1f19fce20877d6dda2d42602d8b51dd636f66c76820f0aa69a64b5"
+  },
+  {
+   "id": "pol-v3-012",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-2",
+   "source_title": "George Bush, Address Before a Joint Session of the Congress on the State of the Union, 1990-01-31",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-2",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    43,
+    0,
+    4
+   ],
+   "word_count": 84,
+   "text_sha256": "c49490f9ea69fed2345dd783df6e41f55307ad598605070f85489a36efeddebe"
+  },
+  {
+   "id": "pol-v3-013",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-9",
+   "source_title": "William J. Clinton, Address Before a Joint Session of the Congress on the State of the Union, 1997-02-04",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-9",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    54,
+    0,
+    3
+   ],
+   "word_count": 73,
+   "text_sha256": "2a1bf9ee275bc76cf10cb983ce758b1fd3f644bce2191390e28d64e0c331b0f4"
+  },
+  {
+   "id": "pol-v3-014",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-9",
+   "source_title": "William J. Clinton, Address Before a Joint Session of the Congress on the State of the Union, 1997-02-04",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-9",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    60,
+    0,
+    2
+   ],
+   "word_count": 67,
+   "text_sha256": "a819c6f79feef27947e2c3bb45807917bfc367831e3a29da2d1d7b056359bce2"
+  },
+  {
+   "id": "pol-v3-015",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union-1",
+   "source_title": "Ronald Reagan, Address Before a Joint Session of Congress on the State of the Union, 1987-01-27",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union-1",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    15,
+    2,
+    5
+   ],
+   "word_count": 63,
+   "text_sha256": "e27090f6ccf033bca18aa935d9c3dd27d0858455a052146033b845d29029bd24"
+  },
+  {
+   "id": "pol-v3-016",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union-1",
+   "source_title": "Ronald Reagan, Address Before a Joint Session of Congress on the State of the Union, 1987-01-27",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union-1",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    19,
+    5,
+    7
+   ],
+   "word_count": 64,
+   "text_sha256": "caec9b1fada97fae8d1c1ab449a7bd392401dade62e340abe1467dd36f5406fb"
+  },
+  {
+   "id": "pol-v3-017",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "inaugural-address-51",
+   "source_title": "William J. Clinton, Inaugural Address, 1993-01-20",
+   "source_url": "https://www.presidency.ucsb.edu/documents/inaugural-address-51",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    7,
+    0,
+    4
+   ],
+   "word_count": 63,
+   "text_sha256": "9a6bcdc3ff493ed28347598b97cfbf9df53dc66da6049f280ebfa5ab16fb57d5"
+  },
+  {
+   "id": "pol-v3-018",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "inaugural-address-51",
+   "source_title": "William J. Clinton, Inaugural Address, 1993-01-20",
+   "source_url": "https://www.presidency.ucsb.edu/documents/inaugural-address-51",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    8,
+    0,
+    4
+   ],
+   "word_count": 75,
+   "text_sha256": "52ced75a44839bf2103914581d7c9a60a6cf07ac5a83a0051f450379b15aa0c6"
+  },
+  {
+   "id": "pol-v3-019",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-18",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2008-01-28",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-18",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    57,
+    3,
+    5
+   ],
+   "word_count": 76,
+   "text_sha256": "11af6876fb99c8fe6f0dbbcc99f2217bd756490ae020e2d563bfab8ef55989e0"
+  },
+  {
+   "id": "pol-v3-020",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-18",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2008-01-28",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-18",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    58,
+    2,
+    6
+   ],
+   "word_count": 103,
+   "text_sha256": "f917f5e37563d1ca0734934f3132c23ae844a889a328864c63dddcf8b41462cf"
+  },
+  {
+   "id": "pol-v3-021",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-20",
+   "source_title": "Barack Obama, Address Before a Joint Session of the Congress on the State of the Union, 2015-01-20",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-20",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    9,
+    7,
+    10
+   ],
+   "word_count": 72,
+   "text_sha256": "8f05e5fbee081335dd2296eb8675de5ddefb6b907694928779dc40620413d093"
+  },
+  {
+   "id": "pol-v3-022",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-20",
+   "source_title": "Barack Obama, Address Before a Joint Session of the Congress on the State of the Union, 2015-01-20",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-20",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    48,
+    0,
+    3
+   ],
+   "word_count": 60,
+   "text_sha256": "2e6793bb1ee223cb2ab96fc5d0056d6fa97eaf4f603fed3e49dbde181acfe1ba"
+  },
+  {
+   "id": "pol-v3-023",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-25",
+   "source_title": "Donald J. Trump (1st Term), Address Before a Joint Session of the Congress on the State of the Union, 2018-01-30",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-25",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    16,
+    1,
+    5
+   ],
+   "word_count": 66,
+   "text_sha256": "1603106e550ac10ef54eaa0abd320fd0ecd571f42f056554f5ffbd35ffbd1bcd"
+  },
+  {
+   "id": "pol-v3-024",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-25",
+   "source_title": "Donald J. Trump (1st Term), Address Before a Joint Session of the Congress on the State of the Union, 2018-01-30",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-25",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    29,
+    0,
+    3
+   ],
+   "word_count": 60,
+   "text_sha256": "39e2c3adc0122173c68b34f628df01e7230023c1955aca72c638fb3fa251fdb5"
+  },
+  {
+   "id": "pol-v3-025",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-15",
+   "source_title": "Barack Obama, Address Before a Joint Session of the Congress on the State of the Union, 2012-01-24",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-15",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    16,
+    1,
+    6
+   ],
+   "word_count": 81,
+   "text_sha256": "c9a7a84a34763b849e4228628a9c754eef5b3ac9eae326466938454cc5a81180"
+  },
+  {
+   "id": "pol-v3-026",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-15",
+   "source_title": "Barack Obama, Address Before a Joint Session of the Congress on the State of the Union, 2012-01-24",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-15",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    24,
+    0,
+    6
+   ],
+   "word_count": 100,
+   "text_sha256": "933f23002e5f8ca2e43e28113f742445e2816d678acc272affcfbd88f4b9d050"
+  },
+  {
+   "id": "pol-v3-027",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-19",
+   "source_title": "Barack Obama, Address Before a Joint Session of the Congress on the State of the Union, 2016-01-12",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-19",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    36,
+    5,
+    6
+   ],
+   "word_count": 63,
+   "text_sha256": "0e5de44accc2bfec238bcd54b071a5a2c179f12a7879d4655a259d6afbb972e2"
+  },
+  {
+   "id": "pol-v3-028",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-19",
+   "source_title": "Barack Obama, Address Before a Joint Session of the Congress on the State of the Union, 2016-01-12",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-19",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    38,
+    4,
+    7
+   ],
+   "word_count": 68,
+   "text_sha256": "33a8606d900d7b3f693fa5496d6394fef07955b7eeb340b4fe2cb96af513c1c4"
+  },
+  {
+   "id": "pol-v3-029",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2007-01-23",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    10,
+    0,
+    4
+   ],
+   "word_count": 87,
+   "text_sha256": "f0e4000bf47cc43db9740dcb7698954a3e125232b6df92d5dba1774d2cefc9db"
+  },
+  {
+   "id": "pol-v3-030",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2007-01-23",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    37,
+    2,
+    4
+   ],
+   "word_count": 78,
+   "text_sha256": "2a5c56d629ba32aa25808e9fafa66a7bbeb0c54fcfa6cb5ef0e2126395e289ef"
+  },
+  {
+   "id": "pol-v3-031",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-22",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2002-01-29",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-22",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    6,
+    1,
+    3
+   ],
+   "word_count": 60,
+   "text_sha256": "91fe64e946480a0f04e7de1a4e85a9e109447d64a39f45a22f13c1e842ed0732"
+  },
+  {
+   "id": "pol-v3-032",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-22",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2002-01-29",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-22",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    49,
+    1,
+    4
+   ],
+   "word_count": 69,
+   "text_sha256": "0193c5774871a416d1831688a862aa2c6bedabd172973419b49289efa5900df0"
+  },
+  {
+   "id": "pol-v3-033",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-8",
+   "source_title": "William J. Clinton, Address Before a Joint Session of the Congress on the State of the Union, 1998-01-27",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-8",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    50,
+    1,
+    5
+   ],
+   "word_count": 91,
+   "text_sha256": "3a929476e97fe4f34f7ef8cfe3294dd6e5f3792e57ebffffbeb4931a454db69f"
+  },
+  {
+   "id": "pol-v3-034",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-8",
+   "source_title": "William J. Clinton, Address Before a Joint Session of the Congress on the State of the Union, 1998-01-27",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-8",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    51,
+    1,
+    6
+   ],
+   "word_count": 91,
+   "text_sha256": "6951ecbae497b6eeb4fbefd8687c778fe70cce7794d9f2936da6ad2dacad0924"
+  },
+  {
+   "id": "pol-v3-035",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-14",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2005-02-02",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-14",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    19,
+    2,
+    6
+   ],
+   "word_count": 83,
+   "text_sha256": "d7745a0574134bec3c6afea4e09d8962e77b7da39c2887ad05640653b614d11d"
+  },
+  {
+   "id": "pol-v3-036",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-14",
+   "source_title": "George W. Bush, Address Before a Joint Session of the Congress on the State of the Union, 2005-02-02",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-14",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    22,
+    2,
+    4
+   ],
+   "word_count": 66,
+   "text_sha256": "a86c2ff99834f6f99d48bfe155b96a7b647b99810cb58517aeb30de7befae977"
+  },
+  {
+   "id": "pol-v3-037",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union",
+   "source_title": "Ronald Reagan, Address Before a Joint Session of Congress on the State of the Union, 1986-02-04",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    3,
+    3,
+    6
+   ],
+   "word_count": 70,
+   "text_sha256": "1960b0a2cab2eed23d1124932a4bcc469d1666c03ab5eb75885911ad1195fa3a"
+  },
+  {
+   "id": "pol-v3-038",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union",
+   "source_title": "Ronald Reagan, Address Before a Joint Session of Congress on the State of the Union, 1986-02-04",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    18,
+    0,
+    3
+   ],
+   "word_count": 84,
+   "text_sha256": "0dd4607268dde39116211f8ea911b838f8680f5787889c73eb2af1d1617139e8"
+  },
+  {
+   "id": "pol-v3-039",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-31",
+   "source_title": "Donald J. Trump (2nd Term), Address Before a Joint Session of the Congress on the State of the Union, 2026-02-24",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-31",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    159,
+    0,
+    7
+   ],
+   "word_count": 82,
+   "text_sha256": "8b12e2dd5e9a8660ab9e6d179993eaf9ef693763c9cd583233941282a293e05c"
+  },
+  {
+   "id": "pol-v3-040",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "address-before-joint-session-the-congress-the-state-the-union-31",
+   "source_title": "Donald J. Trump (2nd Term), Address Before a Joint Session of the Congress on the State of the Union, 2026-02-24",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-the-congress-the-state-the-union-31",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    194,
+    0,
+    6
+   ],
+   "word_count": 96,
+   "text_sha256": "723b704582353acbd74d62e5258c25a18672b3abc923378c476bd24440c7df91"
+  },
+  {
+   "id": "pol-v3-041",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union-0",
+   "source_title": "Ronald Reagan, Address Before a Joint Session of Congress on the State of the Union, 1988-01-25",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union-0",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    3,
+    1,
+    5
+   ],
+   "word_count": 110,
+   "text_sha256": "266d8ab1f77799f1805e199c7ec4a1f017ddb1d41294b476c980d6d49aeec39d"
+  },
+  {
+   "id": "pol-v3-042",
+   "domain": "political_science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "address-before-joint-session-congress-the-state-the-union-0",
+   "source_title": "Ronald Reagan, Address Before a Joint Session of Congress on the State of the Union, 1988-01-25",
+   "source_url": "https://www.presidency.ucsb.edu/documents/address-before-joint-session-congress-the-state-the-union-0",
+   "license": "US Government work (public domain); transcript via The American Presidency Project",
+   "sentence_span": [
+    15,
+    2,
+    6
+   ],
+   "word_count": 82,
+   "text_sha256": "f64b073a662f254258ac3ef9192d7c8d37a2542b3ec36f42af1901bf444c5d0d"
+  },
+  {
+   "id": "health-v3-001",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-2311836b-de63-4e8c-a021-600c40110024-v1",
+   "source_title": "Clonidine (clonidine) prescribing information, set 2311836b-de63-4e8c-a021-600c40110024, version 1, effective 20240111",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:2311836b-de63-4e8c-a021-600c40110024",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    1,
+    0,
+    3
+   ],
+   "word_count": 60,
+   "text_sha256": "b5e939b24ef34ab9dcb6e429f08d636a9b834dd41fb25e4456cb4a685027d0df"
+  },
+  {
+   "id": "health-v3-002",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-2311836b-de63-4e8c-a021-600c40110024-v1",
+   "source_title": "Clonidine (clonidine) prescribing information, set 2311836b-de63-4e8c-a021-600c40110024, version 1, effective 20240111",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:2311836b-de63-4e8c-a021-600c40110024",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    3,
+    2,
+    4
+   ],
+   "word_count": 79,
+   "text_sha256": "4879713f2ab260ba36d3175e4eaf896bcde47682ffe7d0bc9108ec0bf6b49189"
+  },
+  {
+   "id": "health-v3-003",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-9d289052-1eb6-4ba2-a3ca-d2e542a052ae-v4",
+   "source_title": "REMIFENTANIL HYDROCHLORIDE (remifentanil hydrochloride) prescribing information, set 9d289052-1eb6-4ba2-a3ca-d2e542a052ae, version 4, effective 20240101",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:9d289052-1eb6-4ba2-a3ca-d2e542a052ae",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    8,
+    11
+   ],
+   "word_count": 71,
+   "text_sha256": "4801281b38722788c0ea14527580bb692e7661c9d0dde2c43a630bf75a718c57"
+  },
+  {
+   "id": "health-v3-004",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-9d289052-1eb6-4ba2-a3ca-d2e542a052ae-v4",
+   "source_title": "REMIFENTANIL HYDROCHLORIDE (remifentanil hydrochloride) prescribing information, set 9d289052-1eb6-4ba2-a3ca-d2e542a052ae, version 4, effective 20240101",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:9d289052-1eb6-4ba2-a3ca-d2e542a052ae",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    19,
+    1,
+    5
+   ],
+   "word_count": 99,
+   "text_sha256": "e9643221b5280d7922ba49be1d8b32cd29f351fce8a8d2145a86d01ecceb0560"
+  },
+  {
+   "id": "health-v3-005",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-3a541efa-9eed-4a27-b602-7999fc6f59aa-v100",
+   "source_title": "Alfuzosin Hydrochloride (alfuzosin hydrochloride) prescribing information, set 3a541efa-9eed-4a27-b602-7999fc6f59aa, version 100, effective 20240716",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:3a541efa-9eed-4a27-b602-7999fc6f59aa",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    3,
+    8,
+    12
+   ],
+   "word_count": 111,
+   "text_sha256": "9b74b18b48dba455c086abe9a246f45691a327e33b95a42f4633088433b72322"
+  },
+  {
+   "id": "health-v3-006",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-3a541efa-9eed-4a27-b602-7999fc6f59aa-v100",
+   "source_title": "Alfuzosin Hydrochloride (alfuzosin hydrochloride) prescribing information, set 3a541efa-9eed-4a27-b602-7999fc6f59aa, version 100, effective 20240716",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:3a541efa-9eed-4a27-b602-7999fc6f59aa",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    4,
+    1,
+    4
+   ],
+   "word_count": 63,
+   "text_sha256": "91c02a67365681d0b109361a16e773cdf9547806511584d1b0a78e0e809aabb7"
+  },
+  {
+   "id": "health-v3-007",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-04c8a345-0a0d-5a01-e063-6294a90a40d2-v2",
+   "source_title": "Albuterol Sulfate HFA (albuterol sulfate) prescribing information, set 04c8a345-0a0d-5a01-e063-6294a90a40d2, version 2, effective 20241231",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:04c8a345-0a0d-5a01-e063-6294a90a40d2",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    1,
+    3,
+    7
+   ],
+   "word_count": 119,
+   "text_sha256": "f19212abab1b9ba17234f24cfb09b930058332e3b8ef5410f244194adee34673"
+  },
+  {
+   "id": "health-v3-008",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-04c8a345-0a0d-5a01-e063-6294a90a40d2-v2",
+   "source_title": "Albuterol Sulfate HFA (albuterol sulfate) prescribing information, set 04c8a345-0a0d-5a01-e063-6294a90a40d2, version 2, effective 20241231",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:04c8a345-0a0d-5a01-e063-6294a90a40d2",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    0,
+    3
+   ],
+   "word_count": 98,
+   "text_sha256": "fb7b1dedd99fb5968267ccee3c89909f6aedfe4abc08020285ae90588638493c"
+  },
+  {
+   "id": "health-v3-009",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-18fb1c2b-0c1e-436c-a5b6-d4840b5da228-v13",
+   "source_title": "Nicardipine Hydrochloride (nicardipine hydrochloride) prescribing information, set 18fb1c2b-0c1e-436c-a5b6-d4840b5da228, version 13, effective 20240824",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:18fb1c2b-0c1e-436c-a5b6-d4840b5da228",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    7,
+    10
+   ],
+   "word_count": 69,
+   "text_sha256": "2c457e401377bea8354f1d9b8c1c3d4653300eb4dd5eb64aebe07f88e8612de8"
+  },
+  {
+   "id": "health-v3-010",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-18fb1c2b-0c1e-436c-a5b6-d4840b5da228-v13",
+   "source_title": "Nicardipine Hydrochloride (nicardipine hydrochloride) prescribing information, set 18fb1c2b-0c1e-436c-a5b6-d4840b5da228, version 13, effective 20240824",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:18fb1c2b-0c1e-436c-a5b6-d4840b5da228",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    12,
+    16
+   ],
+   "word_count": 93,
+   "text_sha256": "ab9302b36dadfe180ce01a94deeae8ef835f6ed3d2106cb2dc31098a8e96b2df"
+  },
+  {
+   "id": "health-v3-011",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-26756ac7-a80c-49db-97bb-351f76ad8a71-v4",
+   "source_title": "calcipotriene (calcipotriene) prescribing information, set 26756ac7-a80c-49db-97bb-351f76ad8a71, version 4, effective 20240509",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:26756ac7-a80c-49db-97bb-351f76ad8a71",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    3,
+    0,
+    3
+   ],
+   "word_count": 115,
+   "text_sha256": "ecae0fb6c2422eaa2b61f64798aa6c23024727d06cfd94bc2bffdc3def9b8bca"
+  },
+  {
+   "id": "health-v3-012",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-26756ac7-a80c-49db-97bb-351f76ad8a71-v4",
+   "source_title": "calcipotriene (calcipotriene) prescribing information, set 26756ac7-a80c-49db-97bb-351f76ad8a71, version 4, effective 20240509",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:26756ac7-a80c-49db-97bb-351f76ad8a71",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    3,
+    4,
+    6
+   ],
+   "word_count": 93,
+   "text_sha256": "fc854a6b91a3dfef54c00a7ee944b327f9305211307981fc839e6959786d67a4"
+  },
+  {
+   "id": "health-v3-013",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-203386e3-718f-7c84-e063-6394a90aed34-v1",
+   "source_title": "Lithium Carbonate (lithium carbonate) prescribing information, set 203386e3-718f-7c84-e063-6394a90aed34, version 1, effective 20240821",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:203386e3-718f-7c84-e063-6394a90aed34",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    5,
+    3,
+    7
+   ],
+   "word_count": 63,
+   "text_sha256": "b62969616b9a380705d2a9d7456475a2544963c3ddef2ee48c9ac5d1f73bbdad"
+  },
+  {
+   "id": "health-v3-014",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-203386e3-718f-7c84-e063-6394a90aed34-v1",
+   "source_title": "Lithium Carbonate (lithium carbonate) prescribing information, set 203386e3-718f-7c84-e063-6394a90aed34, version 1, effective 20240821",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:203386e3-718f-7c84-e063-6394a90aed34",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    7,
+    10,
+    14
+   ],
+   "word_count": 63,
+   "text_sha256": "d3831060af3dc8eaedb2ace5c9fdaf36b18e64746052f5c36c04925662949e12"
+  },
+  {
+   "id": "health-v3-015",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-d68c9247-91c7-4e0f-adc4-2cfa7446580f-v1",
+   "source_title": "esomeprazole (esomeprazole) prescribing information, set d68c9247-91c7-4e0f-adc4-2cfa7446580f, version 1, effective 20241130",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:d68c9247-91c7-4e0f-adc4-2cfa7446580f",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    11,
+    0,
+    3
+   ],
+   "word_count": 104,
+   "text_sha256": "9063eb95c0e2cd94768039fec158baee8b8bc8a735577d71f2d87cb706d87d13"
+  },
+  {
+   "id": "health-v3-016",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-d68c9247-91c7-4e0f-adc4-2cfa7446580f-v1",
+   "source_title": "esomeprazole (esomeprazole) prescribing information, set d68c9247-91c7-4e0f-adc4-2cfa7446580f, version 1, effective 20241130",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:d68c9247-91c7-4e0f-adc4-2cfa7446580f",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    17,
+    5,
+    9
+   ],
+   "word_count": 115,
+   "text_sha256": "efea9e88fcd6b36db1f71bfce086b22dd2c6c7a8e05e9f85910cbadb313b82c7"
+  },
+  {
+   "id": "health-v3-017",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-1d3fdfcf-7406-4be0-90e9-b10c9257bf69-v12",
+   "source_title": "Fesoterodine Fumarate (fesoterodine fumarate) prescribing information, set 1d3fdfcf-7406-4be0-90e9-b10c9257bf69, version 12, effective 20240412",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:1d3fdfcf-7406-4be0-90e9-b10c9257bf69",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    6,
+    0,
+    5
+   ],
+   "word_count": 103,
+   "text_sha256": "01aa905a981d7ef8752618967a250a75c8d102b71220ac327e5bdcc65abd9cd6"
+  },
+  {
+   "id": "health-v3-018",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-1d3fdfcf-7406-4be0-90e9-b10c9257bf69-v12",
+   "source_title": "Fesoterodine Fumarate (fesoterodine fumarate) prescribing information, set 1d3fdfcf-7406-4be0-90e9-b10c9257bf69, version 12, effective 20240412",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:1d3fdfcf-7406-4be0-90e9-b10c9257bf69",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    13,
+    3,
+    4
+   ],
+   "word_count": 63,
+   "text_sha256": "62481a5c6554fc5a886bdafc7e18bd44de2cc3275d65b29abaeb54aa1e55a472"
+  },
+  {
+   "id": "health-v3-019",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-339a961e-4eb0-4406-913e-ccc9e9bde084-v1",
+   "source_title": "Ropinirole (ropinirole) prescribing information, set 339a961e-4eb0-4406-913e-ccc9e9bde084, version 1, effective 20241108",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:339a961e-4eb0-4406-913e-ccc9e9bde084",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    15,
+    3,
+    5
+   ],
+   "word_count": 78,
+   "text_sha256": "9279bdcefa9fbbbc692449bce89236f0c097f9a67bf67ef1244bf67dffec47d0"
+  },
+  {
+   "id": "health-v3-020",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-339a961e-4eb0-4406-913e-ccc9e9bde084-v1",
+   "source_title": "Ropinirole (ropinirole) prescribing information, set 339a961e-4eb0-4406-913e-ccc9e9bde084, version 1, effective 20241108",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:339a961e-4eb0-4406-913e-ccc9e9bde084",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    21,
+    0,
+    3
+   ],
+   "word_count": 97,
+   "text_sha256": "22d550c436ea7491854475cc5598d078d9e98550464b19d125b60d09d7dc8c23"
+  },
+  {
+   "id": "health-v3-021",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-1052a869-b64d-655d-e063-6294a90ad0e2-v1",
+   "source_title": "Desmopressin Acetate (desmopressin acetate) prescribing information, set 1052a869-b64d-655d-e063-6294a90ad0e2, version 1, effective 20240322",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:1052a869-b64d-655d-e063-6294a90ad0e2",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    0,
+    1
+   ],
+   "word_count": 69,
+   "text_sha256": "dafb3ecc535098820805f50abf7d2fa91e9fac155c01b5a53cd04b1c8f154172"
+  },
+  {
+   "id": "health-v3-022",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-1052a869-b64d-655d-e063-6294a90ad0e2-v1",
+   "source_title": "Desmopressin Acetate (desmopressin acetate) prescribing information, set 1052a869-b64d-655d-e063-6294a90ad0e2, version 1, effective 20240322",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:1052a869-b64d-655d-e063-6294a90ad0e2",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    3,
+    0,
+    2
+   ],
+   "word_count": 84,
+   "text_sha256": "d5805f036c1eacb823db2ccfb954545bc580406af0ee63a25d6945def3945572"
+  },
+  {
+   "id": "health-v3-023",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-074abb29-72d9-b09f-e063-6294a90af0a9-v2",
+   "source_title": "ROCURONIUM BROMIDE (rocuronium bromide) prescribing information, set 074abb29-72d9-b09f-e063-6294a90af0a9, version 2, effective 20240127",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:074abb29-72d9-b09f-e063-6294a90af0a9",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    4,
+    8,
+    11
+   ],
+   "word_count": 96,
+   "text_sha256": "85150780ed7472dc4e091801a03f2f620265368c8fa46f33b4c42500f22b1ec1"
+  },
+  {
+   "id": "health-v3-024",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-074abb29-72d9-b09f-e063-6294a90af0a9-v2",
+   "source_title": "ROCURONIUM BROMIDE (rocuronium bromide) prescribing information, set 074abb29-72d9-b09f-e063-6294a90af0a9, version 2, effective 20240127",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:074abb29-72d9-b09f-e063-6294a90af0a9",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    14,
+    1,
+    4
+   ],
+   "word_count": 79,
+   "text_sha256": "f826b1458158ccd2abb804c4e3ad5bf32bca175f290bc041a8e209ea9cbe8a6c"
+  },
+  {
+   "id": "health-v3-025",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-0f2cdbf6-bc74-4b22-b795-23ace89894b3-v13",
+   "source_title": "Moxifloxacin ophthalmic solution (moxifloxacin ophthalmic solution) prescribing information, set 0f2cdbf6-bc74-4b22-b795-23ace89894b3, version 13, effective 20240419",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:0f2cdbf6-bc74-4b22-b795-23ace89894b3",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    0,
+    6
+   ],
+   "word_count": 116,
+   "text_sha256": "629d9bfc03bf6ab7c7e31c40959c98d487882fa81fae7864d7e951b409c02602"
+  },
+  {
+   "id": "health-v3-026",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-0f2cdbf6-bc74-4b22-b795-23ace89894b3-v13",
+   "source_title": "Moxifloxacin ophthalmic solution (moxifloxacin ophthalmic solution) prescribing information, set 0f2cdbf6-bc74-4b22-b795-23ace89894b3, version 13, effective 20240419",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:0f2cdbf6-bc74-4b22-b795-23ace89894b3",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    10,
+    13
+   ],
+   "word_count": 69,
+   "text_sha256": "210d60f347f9ee784427759b6f48cf025e2e9a09632eca8ba5719ac269c0abd8"
+  },
+  {
+   "id": "health-v3-027",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-a1b17507-4560-490d-a388-74e7fd7eaa5e-v26",
+   "source_title": "Ztlido (lidocaine) prescribing information, set a1b17507-4560-490d-a388-74e7fd7eaa5e, version 26, effective 20241101",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:a1b17507-4560-490d-a388-74e7fd7eaa5e",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    5,
+    1,
+    3
+   ],
+   "word_count": 68,
+   "text_sha256": "9f610e6ac225502311f15d6838325da06504ec7fe5c468cbd0a31ad541d8337d"
+  },
+  {
+   "id": "health-v3-028",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-a1b17507-4560-490d-a388-74e7fd7eaa5e-v26",
+   "source_title": "Ztlido (lidocaine) prescribing information, set a1b17507-4560-490d-a388-74e7fd7eaa5e, version 26, effective 20241101",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:a1b17507-4560-490d-a388-74e7fd7eaa5e",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    13,
+    0,
+    2
+   ],
+   "word_count": 93,
+   "text_sha256": "35b58e9d65dd86e7921691b776d0f91ee7c7ac8a94612e036fadf62994a28bb7"
+  },
+  {
+   "id": "health-v3-029",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-0bc8468f-832c-4e71-95a2-db464d4d54bc-v10",
+   "source_title": "Levetiracetam (levetiracetam oral) prescribing information, set 0bc8468f-832c-4e71-95a2-db464d4d54bc, version 10, effective 20240803",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:0bc8468f-832c-4e71-95a2-db464d4d54bc",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    12,
+    18,
+    22
+   ],
+   "word_count": 99,
+   "text_sha256": "285240c264c99ae52864e71e2b26fbba169f45a8e8d5e14b22aade9fb685f11a"
+  },
+  {
+   "id": "health-v3-030",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-0bc8468f-832c-4e71-95a2-db464d4d54bc-v10",
+   "source_title": "Levetiracetam (levetiracetam oral) prescribing information, set 0bc8468f-832c-4e71-95a2-db464d4d54bc, version 10, effective 20240803",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:0bc8468f-832c-4e71-95a2-db464d4d54bc",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    16,
+    0,
+    2
+   ],
+   "word_count": 80,
+   "text_sha256": "9c5ddfe8ba87b2e65982a4b957bd0bbc5ff381a778bd6fcc6cdc58aee8005c22"
+  },
+  {
+   "id": "health-v3-031",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-682e8a86-9f49-45db-a2ea-403ee1dc62d2-v6",
+   "source_title": "lenalidomide (lenalidomide) prescribing information, set 682e8a86-9f49-45db-a2ea-403ee1dc62d2, version 6, effective 20240621",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:682e8a86-9f49-45db-a2ea-403ee1dc62d2",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    16,
+    0,
+    1
+   ],
+   "word_count": 89,
+   "text_sha256": "306066e488df82d6dcb34ab42c57c95b6f063573e25f73e77d9e3f107556f927"
+  },
+  {
+   "id": "health-v3-032",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-682e8a86-9f49-45db-a2ea-403ee1dc62d2-v6",
+   "source_title": "lenalidomide (lenalidomide) prescribing information, set 682e8a86-9f49-45db-a2ea-403ee1dc62d2, version 6, effective 20240621",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:682e8a86-9f49-45db-a2ea-403ee1dc62d2",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    18,
+    7,
+    10
+   ],
+   "word_count": 80,
+   "text_sha256": "783a049d9b09b8fb621745e260783bb1b373858a6b7f13b7a9d9535d31ef8672"
+  },
+  {
+   "id": "health-v3-033",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-1e0006b6-9405-95a7-e063-6294a90aa277-v1",
+   "source_title": "Mirtazapine (mirtazapine) prescribing information, set 1e0006b6-9405-95a7-e063-6294a90aa277, version 1, effective 20240724",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:1e0006b6-9405-95a7-e063-6294a90aa277",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    10,
+    0,
+    2
+   ],
+   "word_count": 72,
+   "text_sha256": "077e197f0629b380398d282ce803409edac020eba5fac9511bb320d0763c4eff"
+  },
+  {
+   "id": "health-v3-034",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-1e0006b6-9405-95a7-e063-6294a90aa277-v1",
+   "source_title": "Mirtazapine (mirtazapine) prescribing information, set 1e0006b6-9405-95a7-e063-6294a90aa277, version 1, effective 20240724",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:1e0006b6-9405-95a7-e063-6294a90aa277",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    12,
+    1,
+    4
+   ],
+   "word_count": 85,
+   "text_sha256": "a11542797b3e275bc9c8015f08cc6b69651f683fe4c274a4ed9a8835881fa091"
+  },
+  {
+   "id": "health-v3-035",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-c3cca66e-348a-43e8-8f96-e995104dae3d-v6",
+   "source_title": "Conjupri (levamlodipine) prescribing information, set c3cca66e-348a-43e8-8f96-e995104dae3d, version 6, effective 20241211",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:c3cca66e-348a-43e8-8f96-e995104dae3d",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    1,
+    8,
+    9
+   ],
+   "word_count": 88,
+   "text_sha256": "b116ee77decc16a423b66c54a5eb86fd33f27a168721105aea2a180452ea8679"
+  },
+  {
+   "id": "health-v3-036",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-c3cca66e-348a-43e8-8f96-e995104dae3d-v6",
+   "source_title": "Conjupri (levamlodipine) prescribing information, set c3cca66e-348a-43e8-8f96-e995104dae3d, version 6, effective 20241211",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:c3cca66e-348a-43e8-8f96-e995104dae3d",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    4,
+    6
+   ],
+   "word_count": 76,
+   "text_sha256": "7c0a3af4a89cb60cacfe0e62baa6c6adfe62d83d058deb73f9366114bd291e95"
+  },
+  {
+   "id": "health-v3-037",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-272e8f56-ee4e-456f-ab98-3e40f657c630-v108",
+   "source_title": "olopatadine hydrochloride (olopatadine hydrochloride) prescribing information, set 272e8f56-ee4e-456f-ab98-3e40f657c630, version 108, effective 20240510",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:272e8f56-ee4e-456f-ab98-3e40f657c630",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    11,
+    1,
+    4
+   ],
+   "word_count": 104,
+   "text_sha256": "5c5f61933a2cab8498f8c15fac7be3b9dbc1b33c11ec477501d97baf4c74bfa4"
+  },
+  {
+   "id": "health-v3-038",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-272e8f56-ee4e-456f-ab98-3e40f657c630-v108",
+   "source_title": "olopatadine hydrochloride (olopatadine hydrochloride) prescribing information, set 272e8f56-ee4e-456f-ab98-3e40f657c630, version 108, effective 20240510",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:272e8f56-ee4e-456f-ab98-3e40f657c630",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    15,
+    1,
+    2
+   ],
+   "word_count": 62,
+   "text_sha256": "0e1c1412c27a2a87d8a2df211ac34b10f264e57e018aa5ebac74a99cc6d0c6c7"
+  },
+  {
+   "id": "health-v3-039",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-e031dfb3-56e1-4fea-95f2-c2936e2057a0-v1",
+   "source_title": "Anagrelide (anagrelide) prescribing information, set e031dfb3-56e1-4fea-95f2-c2936e2057a0, version 1, effective 20240307",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:e031dfb3-56e1-4fea-95f2-c2936e2057a0",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    2,
+    1,
+    4
+   ],
+   "word_count": 80,
+   "text_sha256": "82a841784145a642da291a7720fc9cd6dcc29d029b0a135823e69b0a5bd571b9"
+  },
+  {
+   "id": "health-v3-040",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fda-e031dfb3-56e1-4fea-95f2-c2936e2057a0-v1",
+   "source_title": "Anagrelide (anagrelide) prescribing information, set e031dfb3-56e1-4fea-95f2-c2936e2057a0, version 1, effective 20240307",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:e031dfb3-56e1-4fea-95f2-c2936e2057a0",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    3,
+    0,
+    2
+   ],
+   "word_count": 60,
+   "text_sha256": "45feada123a93a3ac103e13930b01ac5cdef4d0927e2c8b17cb1cf566bde98fd"
+  },
+  {
+   "id": "health-v3-041",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-11f4ec97-ed86-48b5-af3a-446b882294cb-v101",
+   "source_title": "METHYLPHENIDATE HYDROCHLORIDE (methylphenidate hydrochloride) prescribing information, set 11f4ec97-ed86-48b5-af3a-446b882294cb, version 101, effective 20240403",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:11f4ec97-ed86-48b5-af3a-446b882294cb",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    11,
+    2,
+    3
+   ],
+   "word_count": 64,
+   "text_sha256": "8e72beb0e410ad90872335f4be64c0abcc65eacd24142d24529ed0a7ddebfec0"
+  },
+  {
+   "id": "health-v3-042",
+   "domain": "health_medical",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fda-11f4ec97-ed86-48b5-af3a-446b882294cb-v101",
+   "source_title": "METHYLPHENIDATE HYDROCHLORIDE (methylphenidate hydrochloride) prescribing information, set 11f4ec97-ed86-48b5-af3a-446b882294cb, version 101, effective 20240403",
+   "source_url": "https://api.fda.gov/drug/label.json?search=set_id:11f4ec97-ed86-48b5-af3a-446b882294cb",
+   "license": "openFDA drug label data, CC0 1.0 (https://open.fda.gov/license/)",
+   "sentence_span": [
+    13,
+    1,
+    4
+   ],
+   "word_count": 75,
+   "text_sha256": "b264b4e65cf7bfc52ddbc133223c035fc53052bccaa7c14fc56f616e28820fdc"
+  },
+  {
+   "id": "legal-v3-001",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-19481",
+   "source_title": "Prohibition of Sale of Tobacco Products to Persons Younger Than 21 Years of Age, Federal Register doc. 2024-19481, 2024-08-30",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/08/30/2024-19481.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    21,
+    0,
+    0
+   ],
+   "word_count": 75,
+   "text_sha256": "a24adde6c40581d18b46b8aed0ec452e63fb5b1939374ae72bc422c0f821df87"
+  },
+  {
+   "id": "legal-v3-002",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-19481",
+   "source_title": "Prohibition of Sale of Tobacco Products to Persons Younger Than 21 Years of Age, Federal Register doc. 2024-19481, 2024-08-30",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/08/30/2024-19481.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    35,
+    0,
+    1
+   ],
+   "word_count": 93,
+   "text_sha256": "63acf477bb58bc1c62ce0cc92533a1a7f9efa2bd36a5013fb1e284a217702268"
+  },
+  {
+   "id": "legal-v3-003",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-19198",
+   "source_title": "Anti-Money Laundering Regulations for Residential Real Estate Transfers, Federal Register doc. 2024-19198, 2024-08-29",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/08/29/2024-19198.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    56,
+    0,
+    1
+   ],
+   "word_count": 61,
+   "text_sha256": "f8e0c4b312003def6cd7739bd632b3fad696f99276d3faf2f165697057725313"
+  },
+  {
+   "id": "legal-v3-004",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-19198",
+   "source_title": "Anti-Money Laundering Regulations for Residential Real Estate Transfers, Federal Register doc. 2024-19198, 2024-08-29",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/08/29/2024-19198.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    158,
+    0,
+    1
+   ],
+   "word_count": 82,
+   "text_sha256": "1890153290018f487275a34af1cbdd14061859e0ffb607eb9530747b1942fa25"
+  },
+  {
+   "id": "legal-v3-005",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2025-01031",
+   "source_title": "Eligibility of Arriving Aliens in Removal Proceedings To Apply for Adjustment of Status and Jurisdiction To Adjudicate Applications for Adjustment of Status; Correction, Federal Register doc. 2025-01031, 2025-01-16",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/16/2025-01031.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    15,
+    1,
+    1
+   ],
+   "word_count": 80,
+   "text_sha256": "ab287dccd0f6b865b3ae4861094d9d45de7010c2940dff0cddcfcc0ee483659e"
+  },
+  {
+   "id": "legal-v3-006",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2025-01031",
+   "source_title": "Eligibility of Arriving Aliens in Removal Proceedings To Apply for Adjustment of Status and Jurisdiction To Adjudicate Applications for Adjustment of Status; Correction, Federal Register doc. 2025-01031, 2025-01-16",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/16/2025-01031.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    15,
+    2,
+    3
+   ],
+   "word_count": 63,
+   "text_sha256": "43ad71c477fb794bcd5f0a2111b1f33cf629cd2128ebadc3895e33142e1642ca"
+  },
+  {
+   "id": "legal-v3-007",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-28848",
+   "source_title": "Black Lung Benefits Act: Authorization of Self-Insurers, Federal Register doc. 2024-28848, 2024-12-12",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/12/2024-28848.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    90,
+    1,
+    5
+   ],
+   "word_count": 82,
+   "text_sha256": "0b15032c72f02605b1475c5880386adf86eb9546e30851bb3e8e0783f953d8ee"
+  },
+  {
+   "id": "legal-v3-008",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-28848",
+   "source_title": "Black Lung Benefits Act: Authorization of Self-Insurers, Federal Register doc. 2024-28848, 2024-12-12",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/12/2024-28848.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    208,
+    0,
+    4
+   ],
+   "word_count": 106,
+   "text_sha256": "99e7ee1c64111fec65ebfe47f00fb346e2ff9dcfb19483e37b5ee7cb98188368"
+  },
+  {
+   "id": "legal-v3-009",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-05479",
+   "source_title": "Voluntary Labeling of FSIS-Regulated Products With U.S.-Origin Claims, Federal Register doc. 2024-05479, 2024-03-18",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/18/2024-05479.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    74,
+    2,
+    2
+   ],
+   "word_count": 61,
+   "text_sha256": "076ea077d630f6c0db1346fa5b014b3b822c90a1631614b9976ddedde343a9d7"
+  },
+  {
+   "id": "legal-v3-010",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-05479",
+   "source_title": "Voluntary Labeling of FSIS-Regulated Products With U.S.-Origin Claims, Federal Register doc. 2024-05479, 2024-03-18",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/18/2024-05479.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    179,
+    1,
+    2
+   ],
+   "word_count": 71,
+   "text_sha256": "30f5a4055dba4a642645c06c0d0c924854385cc1cdf93d18206dbe73d33ae492"
+  },
+  {
+   "id": "legal-v3-011",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-05194",
+   "source_title": "Exception to Restrictions on Private Transfer Fee Covenants for Loans Meeting Certain Duty To Serve Shared Equity Loan Program Requirements, Federal Register doc. 2024-05194, 2024-03-12",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/12/2024-05194.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    53,
+    1,
+    1
+   ],
+   "word_count": 72,
+   "text_sha256": "e4135f59926dfdab9d7547fba530f76a4ee8fd6cb27ec1878cc3a5a00d241a11"
+  },
+  {
+   "id": "legal-v3-012",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-05194",
+   "source_title": "Exception to Restrictions on Private Transfer Fee Covenants for Loans Meeting Certain Duty To Serve Shared Equity Loan Program Requirements, Federal Register doc. 2024-05194, 2024-03-12",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/12/2024-05194.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    83,
+    0,
+    3
+   ],
+   "word_count": 117,
+   "text_sha256": "a1da90a94792324f7701265de544ecaeae1d945142593bb753b7e8d84359f7b3"
+  },
+  {
+   "id": "legal-v3-013",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-27841",
+   "source_title": "Medicare Program; Alternative Payment Model Updates and the Increasing Organ Transplant Access (IOTA) Model, Federal Register doc. 2024-27841, 2024-12-04",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/04/2024-27841.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    877,
+    0,
+    1
+   ],
+   "word_count": 81,
+   "text_sha256": "fecbd5ed10f94d9bccaeacc4a54866c5141fdfcdb9c812f324f330639ffc547a"
+  },
+  {
+   "id": "legal-v3-014",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-27841",
+   "source_title": "Medicare Program; Alternative Payment Model Updates and the Increasing Organ Transplant Access (IOTA) Model, Federal Register doc. 2024-27841, 2024-12-04",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/04/2024-27841.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    1421,
+    6,
+    7
+   ],
+   "word_count": 65,
+   "text_sha256": "ad07ccca5532341fb4869658c691f834c68454c49e91c78ea15f02e187e7f1bd"
+  },
+  {
+   "id": "legal-v3-015",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-00592",
+   "source_title": "Securing the Information and Communications Technology and Services Supply Chain: Connected Vehicles, Federal Register doc. 2025-00592, 2025-01-16",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/16/2025-00592.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    63,
+    1,
+    2
+   ],
+   "word_count": 68,
+   "text_sha256": "353588e70b7e57efcbbca3e79d28bc122aa4a6febeae1ff8b84f5eeb129e23da"
+  },
+  {
+   "id": "legal-v3-016",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-00592",
+   "source_title": "Securing the Information and Communications Technology and Services Supply Chain: Connected Vehicles, Federal Register doc. 2025-00592, 2025-01-16",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/16/2025-00592.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    146,
+    0,
+    4
+   ],
+   "word_count": 111,
+   "text_sha256": "fc317e9aa6190d35fd52c2464f8a53a25c2a86d742ed93f9f6daea4fd4c81bb7"
+  },
+  {
+   "id": "legal-v3-017",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2025-00484",
+   "source_title": "Minimum Standards for Driver's Licenses and Identification Cards Acceptable by Federal Agencies for Official Purposes; Phased Approach for Card-Based Enforcement, Federal Register doc. 2025-00484, 2025-01-14",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/14/2025-00484.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    106,
+    5,
+    6
+   ],
+   "word_count": 95,
+   "text_sha256": "b3151373dac0b39b0a68acc5576ce3e962d3516e7e9ed03ee0773ebcfd6b3602"
+  },
+  {
+   "id": "legal-v3-018",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2025-00484",
+   "source_title": "Minimum Standards for Driver's Licenses and Identification Cards Acceptable by Federal Agencies for Official Purposes; Phased Approach for Card-Based Enforcement, Federal Register doc. 2025-00484, 2025-01-14",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/14/2025-00484.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    458,
+    3,
+    4
+   ],
+   "word_count": 63,
+   "text_sha256": "47596832f73eaf5db4fd386fadf53f7d912a795b9e07372031d241798319b76a"
+  },
+  {
+   "id": "legal-v3-019",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-08215",
+   "source_title": "Federal Management Regulation; Federal Advisory Committee Management, Federal Register doc. 2024-08215, 2024-04-18",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/04/18/2024-08215.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    29,
+    2,
+    4
+   ],
+   "word_count": 60,
+   "text_sha256": "97b133492d0ea4bf698c21f7a93851825510cc4cde7d5c760cfe41ea85a32794"
+  },
+  {
+   "id": "legal-v3-020",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-08215",
+   "source_title": "Federal Management Regulation; Federal Advisory Committee Management, Federal Register doc. 2024-08215, 2024-04-18",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/04/18/2024-08215.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    55,
+    6,
+    9
+   ],
+   "word_count": 85,
+   "text_sha256": "55204d00835f1e8ffe59d1db4245e2d60c9bf28dc64b60aa241b89621a990f65"
+  },
+  {
+   "id": "legal-v3-021",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-01840",
+   "source_title": "Nonprescription Drug Product With an Additional Condition for Nonprescription Use, Federal Register doc. 2025-01840, 2025-01-27",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/27/2025-01840.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    3,
+    1,
+    3
+   ],
+   "word_count": 83,
+   "text_sha256": "a77b6f06ffc036670375bc9511b7fc9210c6e6e32cc5d144075a35f09ee15b34"
+  },
+  {
+   "id": "legal-v3-022",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-01840",
+   "source_title": "Nonprescription Drug Product With an Additional Condition for Nonprescription Use, Federal Register doc. 2025-01840, 2025-01-27",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/27/2025-01840.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    4,
+    7,
+    8
+   ],
+   "word_count": 69,
+   "text_sha256": "e4aa66e6bb83b403902ab0c338f6d286f6f778d147ef8eca5e4338ebf20896f5"
+  },
+  {
+   "id": "legal-v3-023",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-03869",
+   "source_title": "Partnerships With Faith-Based and Neighborhood Organizations, Federal Register doc. 2024-03869, 2024-03-04",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/04/2024-03869.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    105,
+    1,
+    2
+   ],
+   "word_count": 83,
+   "text_sha256": "b676378f07f77c8010d5832e8394b260a1b88365e0bc43ccfa34f4fa2a525300"
+  },
+  {
+   "id": "legal-v3-024",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-03869",
+   "source_title": "Partnerships With Faith-Based and Neighborhood Organizations, Federal Register doc. 2024-03869, 2024-03-04",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/04/2024-03869.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    173,
+    3,
+    5
+   ],
+   "word_count": 95,
+   "text_sha256": "5353ae01f7001aa2eb2ba30de93da4b7e4957993545636afc336944993ff2baa"
+  },
+  {
+   "id": "legal-v3-025",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-31188",
+   "source_title": "Extension of the Prohibition Against Certain Flights in Specified Areas of the Sanaa Flight Information Region (FIR) (OYSC), Federal Register doc. 2024-31188, 2024-12-30",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/30/2024-31188.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    39,
+    0,
+    1
+   ],
+   "word_count": 115,
+   "text_sha256": "11fa0d8c70b797813cc4f45528359445782923f105b09439c32970670395d20e"
+  },
+  {
+   "id": "legal-v3-026",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-31188",
+   "source_title": "Extension of the Prohibition Against Certain Flights in Specified Areas of the Sanaa Flight Information Region (FIR) (OYSC), Federal Register doc. 2024-31188, 2024-12-30",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/30/2024-31188.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    78,
+    0,
+    3
+   ],
+   "word_count": 82,
+   "text_sha256": "46af961a4069b34315a706f0b24af514bc67a8b527a5087c2af66ccc771f5a2c"
+  },
+  {
+   "id": "legal-v3-027",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-29354",
+   "source_title": "Modernizing H-1B Requirements, Providing Flexibility in the F-1 Program, and Program Improvements Affecting Other Nonimmigrant Workers, Federal Register doc. 2024-29354, 2024-12-18",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/18/2024-29354.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    110,
+    3,
+    8
+   ],
+   "word_count": 80,
+   "text_sha256": "05c8f2088e48bd0d66f9cd4418d4054400be73bfbb7ccbeb2f40245e8649e642"
+  },
+  {
+   "id": "legal-v3-028",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-29354",
+   "source_title": "Modernizing H-1B Requirements, Providing Flexibility in the F-1 Program, and Program Improvements Affecting Other Nonimmigrant Workers, Federal Register doc. 2024-29354, 2024-12-18",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/18/2024-29354.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    1562,
+    1,
+    2
+   ],
+   "word_count": 66,
+   "text_sha256": "f3bb1ae3728e9d96ba9d76946233bb36c86269bc690e7d435cc74f3196def78e"
+  },
+  {
+   "id": "legal-v3-029",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-08022",
+   "source_title": "Federal Acquisition Regulation: List of Domestically Nonavailable Articles, Federal Register doc. 2025-08022, 2025-05-12",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/05/12/2025-08022.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    16,
+    1,
+    2
+   ],
+   "word_count": 81,
+   "text_sha256": "d0229cbc645c8e11468eea0ea8352ff4fd509ececff65d3a15bdb4c78361555b"
+  },
+  {
+   "id": "legal-v3-030",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-08022",
+   "source_title": "Federal Acquisition Regulation: List of Domestically Nonavailable Articles, Federal Register doc. 2025-08022, 2025-05-12",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/05/12/2025-08022.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    25,
+    3,
+    4
+   ],
+   "word_count": 64,
+   "text_sha256": "f509e418d21e7d091dfbe97760af8c33cf0ff319bf655342a2a024874b5ba9ab"
+  },
+  {
+   "id": "legal-v3-031",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-08554",
+   "source_title": "Amending the Administrative Procedures With Respect to the Import and Export of Natural Gas, Federal Register doc. 2025-08554, 2025-05-16",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/05/16/2025-08554.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    23,
+    2,
+    3
+   ],
+   "word_count": 62,
+   "text_sha256": "d325231ae67b8605492dfb33e3291b83be30fe49cacc1ac9707811dd14369ff8"
+  },
+  {
+   "id": "legal-v3-032",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2025-08554",
+   "source_title": "Amending the Administrative Procedures With Respect to the Import and Export of Natural Gas, Federal Register doc. 2025-08554, 2025-05-16",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/05/16/2025-08554.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    45,
+    2,
+    2
+   ],
+   "word_count": 72,
+   "text_sha256": "45b913bebd44ca3cd4e980aaa533b5cef866acc231debf645200772ca18f3cb6"
+  },
+  {
+   "id": "legal-v3-033",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-30824",
+   "source_title": "Prohibition on Creditors and Consumer Reporting Agencies Concerning Medical Information (Regulation V), Federal Register doc. 2024-30824, 2025-01-14",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/14/2024-30824.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    882,
+    3,
+    5
+   ],
+   "word_count": 92,
+   "text_sha256": "347b04dcfbb50ff9ee328b184b2f4aabe4ccbc84ace2ff2f9009acd3f65f7559"
+  },
+  {
+   "id": "legal-v3-034",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-30824",
+   "source_title": "Prohibition on Creditors and Consumer Reporting Agencies Concerning Medical Information (Regulation V), Federal Register doc. 2024-30824, 2025-01-14",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2025/01/14/2024-30824.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    1285,
+    0,
+    1
+   ],
+   "word_count": 65,
+   "text_sha256": "30941034eab3f40d2bd443efd9554d537728a3838761f13a75ee5b691a3a0862"
+  },
+  {
+   "id": "legal-v3-035",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-09862",
+   "source_title": "Veteran and Spouse Transitional Assistance Grant Program, Federal Register doc. 2024-09862, 2024-05-13",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/05/13/2024-09862.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    3,
+    2,
+    3
+   ],
+   "word_count": 83,
+   "text_sha256": "13a2dd1e4d923180362c2793926be695f983fceff0a9fab7cd8ca90505565894"
+  },
+  {
+   "id": "legal-v3-036",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-09862",
+   "source_title": "Veteran and Spouse Transitional Assistance Grant Program, Federal Register doc. 2024-09862, 2024-05-13",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/05/13/2024-09862.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    38,
+    0,
+    2
+   ],
+   "word_count": 81,
+   "text_sha256": "0520c1f095f686d2eebb0aeb5ea2862e4ecf7f4de3dce5998aba30d10490a912"
+  },
+  {
+   "id": "legal-v3-037",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-05695",
+   "source_title": "International Traffic in Arms Regulations: Addition to List of Proscribed Countries, Federal Register doc. 2024-05695, 2024-03-15",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/15/2024-05695.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    0,
+    4,
+    5
+   ],
+   "word_count": 64,
+   "text_sha256": "977b81c73d8a3cc1797f2e0a381782bc609bbcffcc364c79ac103b7d18ece81b"
+  },
+  {
+   "id": "legal-v3-038",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-05695",
+   "source_title": "International Traffic in Arms Regulations: Addition to List of Proscribed Countries, Federal Register doc. 2024-05695, 2024-03-15",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/03/15/2024-05695.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    13,
+    2,
+    4
+   ],
+   "word_count": 74,
+   "text_sha256": "75d766bcd514696d96c32a0c3857d74eba70b192ba0c9a6be15e4a831099d56f"
+  },
+  {
+   "id": "legal-v3-039",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-29072",
+   "source_title": "Supplemental Nutrition Assistance Program: Program Purpose and Work Requirement Provisions of the Fiscal Responsibility Act of 2023, Federal Register doc. 2024-29072, 2024-12-17",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/17/2024-29072.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    45,
+    0,
+    4
+   ],
+   "word_count": 106,
+   "text_sha256": "639a68724daebdeacb21406ad077d9ab6ac272d6ada6e5c265f54c415f839166"
+  },
+  {
+   "id": "legal-v3-040",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "fr-2024-29072",
+   "source_title": "Supplemental Nutrition Assistance Program: Program Purpose and Work Requirement Provisions of the Fiscal Responsibility Act of 2023, Federal Register doc. 2024-29072, 2024-12-17",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/12/17/2024-29072.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    155,
+    3,
+    5
+   ],
+   "word_count": 88,
+   "text_sha256": "4481e99d1ed694fadb841f773669e2b32fe323905a2b2446593984c06369647a"
+  },
+  {
+   "id": "legal-v3-041",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-01942",
+   "source_title": "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Fees; Histocompatibility, Personnel, and Alternative Sanctions for Certificate of Waiver Laboratories; Correction, Federal Register doc. 2024-01942, 2024-02-01",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/02/01/2024-01942.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    8,
+    0,
+    1
+   ],
+   "word_count": 60,
+   "text_sha256": "1340f7f3bc85c41e6318dc0a334918f29c6acd90644544a2f4bd70157048430c"
+  },
+  {
+   "id": "legal-v3-042",
+   "domain": "legal_government",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "fr-2024-01942",
+   "source_title": "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Fees; Histocompatibility, Personnel, and Alternative Sanctions for Certificate of Waiver Laboratories; Correction, Federal Register doc. 2024-01942, 2024-02-01",
+   "source_url": "https://www.federalregister.gov/documents/full_text/text/2024/02/01/2024-01942.txt",
+   "license": "US Government work (public domain), Federal Register",
+   "sentence_span": [
+    11,
+    0,
+    2
+   ],
+   "word_count": 111,
+   "text_sha256": "222bd1d51b39bcda4c0680a52baca98ebbda60c48d0e6b1f58812f2957b25ec8"
+  },
+  {
+   "id": "sci-v3-001",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.02345v1",
+   "source_title": "arXiv:2503.02345v1, CQ CNN: A Hybrid Classical Quantum Convolutional Neural Network for Alzheimer's Disease Detection Using Diffusion Generated and U Net Segmented 3D MRI (abstract; quant-ph cs.AI cs.CV cs.LG)",
+   "source_url": "https://arxiv.org/abs/2503.02345v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    6,
+    8
+   ],
+   "word_count": 75,
+   "text_sha256": "a929e08627f9c7fae2cd10bec22271ab211a777dcd10e1be83a9e772277f10e2"
+  },
+  {
+   "id": "sci-v3-002",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.02405v2",
+   "source_title": "arXiv:2502.02405v2, Unlocking the power of global quantum gates with machine learning (abstract; quant-ph)",
+   "source_url": "https://arxiv.org/abs/2502.02405v2",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    1,
+    3
+   ],
+   "word_count": 82,
+   "text_sha256": "c6ca5e1a7f8397ee1c5a4021967602fb52692d3e5f2929bbdcb55affe59bb785"
+  },
+  {
+   "id": "sci-v3-003",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.10083v1",
+   "source_title": "arXiv:2502.10083v1, Entangling power of Anti-Jaynes-Cummings model and its efficiency to encode information in atomic system (abstract; quant-ph)",
+   "source_url": "https://arxiv.org/abs/2502.10083v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    1,
+    3
+   ],
+   "word_count": 62,
+   "text_sha256": "a6331ac3a02dcc1e4d9f38b4fa60e18a67e0f61a94771970b13bfea234c38a48"
+  },
+  {
+   "id": "sci-v3-004",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.00586v1",
+   "source_title": "arXiv:2503.00586v1, Cross-Attention Fusion of MRI and Jacobian Maps for Alzheimer's Disease Diagnosis (abstract; eess.IV cs.CV q-bio.QM)",
+   "source_url": "https://arxiv.org/abs/2503.00586v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    4
+   ],
+   "word_count": 109,
+   "text_sha256": "5969b931117b5ee6c902cddfc0d4bca5663e32fb75db3332923f3ee71379540c"
+  },
+  {
+   "id": "sci-v3-005",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.02461v1",
+   "source_title": "arXiv:2503.02461v1, Timelike Compton scattering on a spin-0 target with kinematic twist-4 precision (abstract; hep-ph hep-ex hep-th nucl-ex)",
+   "source_url": "https://arxiv.org/abs/2503.02461v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 73,
+   "text_sha256": "fdb2ef00a55719e0b63e67da9e446f9f65f485aa51a333d358e00d54bca4f100"
+  },
+  {
+   "id": "sci-v3-006",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.21045v1",
+   "source_title": "arXiv:2502.21045v1, Incorporating Long-Range Interactions via the Multipole Expansion into Ground and Excited-State Molecular Simulations (abstract; physics.comp-ph math-ph math.MP)",
+   "source_url": "https://arxiv.org/abs/2502.21045v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    4
+   ],
+   "word_count": 116,
+   "text_sha256": "d10bf3d7a376fd290043bfb2c120374850459f8d911a502a7026b5f8226cf237"
+  },
+  {
+   "id": "sci-v3-007",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.19244v1",
+   "source_title": "arXiv:2502.19244v1, Deciphering the Electron Spectral Hardening in AMS-02 (abstract; astro-ph.HE)",
+   "source_url": "https://arxiv.org/abs/2502.19244v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    5
+   ],
+   "word_count": 63,
+   "text_sha256": "4aa3f3d5c137daf43a1dfa386f99739f331397658dfa5c5b4ddb6892f3d1e58a"
+  },
+  {
+   "id": "sci-v3-008",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.01963v1",
+   "source_title": "arXiv:2503.01963v1, Projection-angle effects when \"observing\" a turbulent magnetized collapsing molecular cloud. I. Chemistry and line transfer (abstract; astro-ph.GA)",
+   "source_url": "https://arxiv.org/abs/2503.01963v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    5,
+    7
+   ],
+   "word_count": 92,
+   "text_sha256": "fd64065e553ce78048d9604da910f0202870404e7c15c622dca602cabf9084c0"
+  },
+  {
+   "id": "sci-v3-009",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.01910v1",
+   "source_title": "arXiv:2503.01910v1, dyAb: Flow Matching for Flexible Antibody Design with AlphaFold-driven Pre-binding Antigen (abstract; q-bio.QM cs.AI)",
+   "source_url": "https://arxiv.org/abs/2503.01910v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    2,
+    3
+   ],
+   "word_count": 65,
+   "text_sha256": "5e5d33f32fc2a5477f2496ec93065488ee66baf015cb563b1df8aa4bf420dae6"
+  },
+  {
+   "id": "sci-v3-010",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.01379v1",
+   "source_title": "arXiv:2503.01379v1, A neural-network-based Python package for performing large-scale atomic CI using pCI and other high-performance atomic codes (abstract; physics.atom-ph)",
+   "source_url": "https://arxiv.org/abs/2503.01379v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 73,
+   "text_sha256": "d9688f377d3f34c3771b31f49e1760fe1ccd443a7539614f7ac07a77fae9e727"
+  },
+  {
+   "id": "sci-v3-011",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.02444v1",
+   "source_title": "arXiv:2503.02444v1, Resonance for life: Metabolism and Social Interactions in Bacterial Communities (abstract; physics.bio-ph)",
+   "source_url": "https://arxiv.org/abs/2503.02444v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    4
+   ],
+   "word_count": 87,
+   "text_sha256": "0d38eab4414483923dccb61a4a87ac2b326bcd438963c17bd385f24139c05d88"
+  },
+  {
+   "id": "sci-v3-012",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.21232v1",
+   "source_title": "arXiv:2502.21232v1, A quantum walk inspired model for distributed computing on arbitrary graphs (abstract; quant-ph cs.DC)",
+   "source_url": "https://arxiv.org/abs/2502.21232v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    3
+   ],
+   "word_count": 71,
+   "text_sha256": "f8ae7897e03f12af9ef37c196dd2b7b5175fd06ca92b1baa60488d8f58c99980"
+  },
+  {
+   "id": "sci-v3-013",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2502.13911v2",
+   "source_title": "arXiv:2502.13911v2, Application of autoresonance in rapid beam extraction of synchrotrons (abstract; physics.acc-ph physics.med-ph)",
+   "source_url": "https://arxiv.org/abs/2502.13911v2",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    4,
+    7
+   ],
+   "word_count": 108,
+   "text_sha256": "e4309a9050e3b35b42602ba2a2a126c7945a96b0d5ad284d61685d4e473093c0"
+  },
+  {
+   "id": "sci-v3-014",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2502.20683v1",
+   "source_title": "arXiv:2502.20683v1, Finite-momentum dielectric function and excitonic effects from time-dependent density-functional theory with dielectrically screened hybrid functionals (abstract; cond-mat.mtrl-sci)",
+   "source_url": "https://arxiv.org/abs/2502.20683v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 96,
+   "text_sha256": "b62ff04c40f0c7640bc51559e63f4393c02123f13a6fadc862c492c90981f4a9"
+  },
+  {
+   "id": "sci-v3-015",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.20899v1",
+   "source_title": "arXiv:2502.20899v1, GHz helical acoustic drum modes on a chip (abstract; physics.optics cond-mat.other)",
+   "source_url": "https://arxiv.org/abs/2502.20899v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    3
+   ],
+   "word_count": 89,
+   "text_sha256": "e9571fe04c05bd1f0f0e1f947a8a40c38d6a24999ffe69d6717d1013c76cd130"
+  },
+  {
+   "id": "sci-v3-016",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.01810v1",
+   "source_title": "arXiv:2503.01810v1, Understanding Urban-Rural Disparities in Mobility Inefficiency for Colombia, Mexico, and India (abstract; physics.soc-ph)",
+   "source_url": "https://arxiv.org/abs/2503.01810v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    6
+   ],
+   "word_count": 77,
+   "text_sha256": "dc80aadf49df6ac41025c95b2501da93a23e250d9ec0d1c2ef8c15a288889099"
+  },
+  {
+   "id": "sci-v3-017",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.11334v2",
+   "source_title": "arXiv:2502.11334v2, Three-dimensional imaging of biological cells using surface plasmon coupled emission (abstract; physics.optics)",
+   "source_url": "https://arxiv.org/abs/2502.11334v2",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    2,
+    6
+   ],
+   "word_count": 86,
+   "text_sha256": "81c6f35f0cdfde4f4c7ca8e289792de28d5d0233e47d04d7d7bb1c8864f2d9f0"
+  },
+  {
+   "id": "sci-v3-018",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.02632v1",
+   "source_title": "arXiv:2503.02632v1, Mode stability of blow-up for wave maps in the absence of symmetry (abstract; math.AP math-ph math.CA math.MP)",
+   "source_url": "https://arxiv.org/abs/2503.02632v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 65,
+   "text_sha256": "32233aa8f856c5e11284e27f24be995cb245d17340dc894d69613a4bb1e82529"
+  },
+  {
+   "id": "sci-v3-019",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2502.20815v1",
+   "source_title": "arXiv:2502.20815v1, Is chiral supersymmetry emanant or emergent? (abstract; hep-th cond-mat.str-el)",
+   "source_url": "https://arxiv.org/abs/2502.20815v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    1,
+    3
+   ],
+   "word_count": 73,
+   "text_sha256": "12796beabd0d0b114feec54a803ab2c9734a6c9173cdb7fee99240667d521908"
+  },
+  {
+   "id": "sci-v3-020",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.00903v1",
+   "source_title": "arXiv:2503.00903v1, Hybrid Fiber-Based Radio Frequency Distribution and Vibration Detection System Tailored for Large Radio Arrays (abstract; astro-ph.IM physics.ins-det)",
+   "source_url": "https://arxiv.org/abs/2503.00903v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    2,
+    5
+   ],
+   "word_count": 65,
+   "text_sha256": "b02154a738a9f8a05f6f5512dc8d9f6fe577a55655f6a1c71511d5b71428fec6"
+  },
+  {
+   "id": "sci-v3-021",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.01800v1",
+   "source_title": "arXiv:2503.01800v1, Hilbert's sixth problem: derivation of fluid equations via Boltzmann's kinetic theory (abstract; math.AP math-ph math.MP)",
+   "source_url": "https://arxiv.org/abs/2503.01800v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 79,
+   "text_sha256": "b448289891e0375808b19044b571c4e1fa47b8b854c4de21cde5dc1717295b87"
+  },
+  {
+   "id": "sci-v3-022",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.00792v1",
+   "source_title": "arXiv:2503.00792v1, On the breathing modes at the interfaces of two medium leading to radiation and guiding of spin waves (abstract; physics.optics)",
+   "source_url": "https://arxiv.org/abs/2503.00792v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    5
+   ],
+   "word_count": 87,
+   "text_sha256": "cd37950af841dc82061a55bb8ce9fadd1f333ee7ba640e2e6748b7bf8d2680b6"
+  },
+  {
+   "id": "sci-v3-023",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.01022v1",
+   "source_title": "arXiv:2503.01022v1, LLM-Fusion: A Novel Multimodal Fusion Model for Accelerated Material Discovery (abstract; cond-mat.mtrl-sci cs.AI cs.LG)",
+   "source_url": "https://arxiv.org/abs/2503.01022v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    3
+   ],
+   "word_count": 70,
+   "text_sha256": "4398ff730e90d305eb3fd157043892e5e4f64f87d01cbc9c4c25b6ea41622f99"
+  },
+  {
+   "id": "sci-v3-024",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.20471v1",
+   "source_title": "arXiv:2502.20471v1, Scalar Field Fluctuations and the Production of Dark Matter (abstract; hep-ph astro-ph.CO hep-th)",
+   "source_url": "https://arxiv.org/abs/2502.20471v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 67,
+   "text_sha256": "aee4f8ad1408e1c5db353811b855dd3a4f0a3c547b266c5621f67a79e7c67ffc"
+  },
+  {
+   "id": "sci-v3-025",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.00889v1",
+   "source_title": "arXiv:2503.00889v1, Algebro-geometric integration to the discrete Chen-Lee-Liu system (abstract; nlin.SI)",
+   "source_url": "https://arxiv.org/abs/2503.00889v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    2,
+    6
+   ],
+   "word_count": 79,
+   "text_sha256": "4aa485ab21aa310562e45e0b9d05af0e6d1584c50a3734cf4cc2b2392ee19fe2"
+  },
+  {
+   "id": "sci-v3-026",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.02843v1",
+   "source_title": "arXiv:2503.02843v1, Atomistic tight-binding Hartree-Fock calculations of multielectron configurations in P-doped silicon devices: wavefunction reshaping (abstract; quant-ph cond-mat.mes-hall cond-mat.str-el)",
+   "source_url": "https://arxiv.org/abs/2503.02843v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    1,
+    3
+   ],
+   "word_count": 73,
+   "text_sha256": "86269ac3e39bd9e48e53e585074857fca1ee939896705c90626ab13d62a6ae34"
+  },
+  {
+   "id": "sci-v3-027",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.02685v1",
+   "source_title": "arXiv:2503.02685v1, TReND: Transformer derived features and Regularized NMF for neonatal functional network Delineation (abstract; q-bio.NC cs.CV eess.SP q-bio.QM)",
+   "source_url": "https://arxiv.org/abs/2503.02685v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    6
+   ],
+   "word_count": 71,
+   "text_sha256": "58dd93610024af4f76aa209a87ca91fd739ed4b88c07808119a5870a155960c0"
+  },
+  {
+   "id": "sci-v3-028",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.00015v1",
+   "source_title": "arXiv:2503.00015v1, The Quantum Ratio (abstract; quant-ph hep-ph hep-th)",
+   "source_url": "https://arxiv.org/abs/2503.00015v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    7
+   ],
+   "word_count": 76,
+   "text_sha256": "f6d03de688322bad3e1aba03fd9d17bf386bc49cf1e6f6e6c17662bccfb68f38"
+  },
+  {
+   "id": "sci-v3-029",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.01972v1",
+   "source_title": "arXiv:2503.01972v1, Enceladus's Tidal Heating (abstract; astro-ph.EP)",
+   "source_url": "https://arxiv.org/abs/2503.01972v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    7
+   ],
+   "word_count": 87,
+   "text_sha256": "ceb1f88c30c83428d7029f1c78bbac56bd2561f996461ddc43d59bf7648318e6"
+  },
+  {
+   "id": "sci-v3-030",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.00806v1",
+   "source_title": "arXiv:2503.00806v1, Solar Cycle Prediction Using TCN Deep Learning Model with One-Step Pattern (abstract; astro-ph.SR)",
+   "source_url": "https://arxiv.org/abs/2503.00806v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    5,
+    11
+   ],
+   "word_count": 95,
+   "text_sha256": "1291179fab3896388a396d69793526ccc8a1e1bf5d0d3dde16ed8b338d83106b"
+  },
+  {
+   "id": "sci-v3-031",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.20563v1",
+   "source_title": "arXiv:2502.20563v1, Mean-field approximation and phase transitions in an Ising-voter model on directed regular random graphs (abstract; cond-mat.stat-mech)",
+   "source_url": "https://arxiv.org/abs/2502.20563v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    4
+   ],
+   "word_count": 116,
+   "text_sha256": "28be135b0cb8963b5b7c4ee5df6030f56b48b4105e6a86ae0da358013e0f59f0"
+  },
+  {
+   "id": "sci-v3-032",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2502.20722v1",
+   "source_title": "arXiv:2502.20722v1, Internal Heat and Energy Imbalance of Uranus (abstract; astro-ph.EP)",
+   "source_url": "https://arxiv.org/abs/2502.20722v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    1,
+    6
+   ],
+   "word_count": 116,
+   "text_sha256": "088d387f8ff690f1835522d72b24333120f58f8ddc11fd4dcb4a54b45d8c3269"
+  },
+  {
+   "id": "sci-v3-033",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.01853v1",
+   "source_title": "arXiv:2503.01853v1, Direct detonation initiation and propagation in methane/air mixtures containing coal particles (abstract; physics.chem-ph physics.flu-dyn)",
+   "source_url": "https://arxiv.org/abs/2503.01853v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    4,
+    10
+   ],
+   "word_count": 109,
+   "text_sha256": "724bdf8e1942aa0a7c2154f35e831f1cdaa2a22dfcdcad39e656c87dfe28b02d"
+  },
+  {
+   "id": "sci-v3-034",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.02070v1",
+   "source_title": "arXiv:2503.02070v1, Tunable Non-Equilibrium Magic and Minimum Twist Angles in AA-Stacked Twisted Multilayer Graphene (abstract; cond-mat.str-el cond-mat.mes-hall)",
+   "source_url": "https://arxiv.org/abs/2503.02070v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    2,
+    4
+   ],
+   "word_count": 69,
+   "text_sha256": "99d2268ccfc2ec46f75ee5a895b5d0d6816bc3dec359db572fe6b655f2b1b995"
+  },
+  {
+   "id": "sci-v3-035",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2502.20660v1",
+   "source_title": "arXiv:2502.20660v1, Probing double hadron resonance by complex momentum representation method (abstract; hep-ph nucl-th)",
+   "source_url": "https://arxiv.org/abs/2502.20660v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 60,
+   "text_sha256": "a9a10da02a99ae9bc2e915c83333de6dd1baa8021b823e8c50a4561c74e5299b"
+  },
+  {
+   "id": "sci-v3-036",
+   "domain": "science",
+   "kind": "standard",
+   "split": "dev",
+   "source_doc": "arxiv-2503.01226v1",
+   "source_title": "arXiv:2503.01226v1, Dementia Insights: A Context-Based MultiModal Approach (abstract; q-bio.NC cs.LG)",
+   "source_url": "https://arxiv.org/abs/2503.01226v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    4
+   ],
+   "word_count": 98,
+   "text_sha256": "a3cbc821bcc052b55ab97fc96cbe8185e6f241f1296ade938f937606803dbefd"
+  },
+  {
+   "id": "sci-v3-037",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.01371v1",
+   "source_title": "arXiv:2503.01371v1, Efficient Tunable THz wave generation using spectral shaping in electro-optic combs (abstract; physics.optics physics.app-ph)",
+   "source_url": "https://arxiv.org/abs/2503.01371v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    3
+   ],
+   "word_count": 106,
+   "text_sha256": "8087c2c4d4430dc96f7017120cbb5bfe71a1b9715c4b4f97d03cf43b61f29b65"
+  },
+  {
+   "id": "sci-v3-038",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2501.12567v1",
+   "source_title": "arXiv:2501.12567v1, Exploring quasar evolution with proximate molecular absorbers: Insights from the kinematics of highly ionized nitrogen (abstract; astro-ph.GA)",
+   "source_url": "https://arxiv.org/abs/2501.12567v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    2,
+    4
+   ],
+   "word_count": 89,
+   "text_sha256": "9e37233a9ca25d70390de81d510dde81594ed6d9a994fcee3977dbce17e910e0"
+  },
+  {
+   "id": "sci-v3-039",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.00336v1",
+   "source_title": "arXiv:2503.00336v1, Astrof\\'isica Observacional e Ensino de F\\'isica Moderna: Uma Abordagem Conceitual da Espectroscopia Astron\\^omica (abstract; physics.ed-ph)",
+   "source_url": "https://arxiv.org/abs/2503.00336v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    3,
+    5
+   ],
+   "word_count": 103,
+   "text_sha256": "b7dad6ac410b45d9ca360ce5bc2594301b73c13e1753093f89392165a0d684a4"
+  },
+  {
+   "id": "sci-v3-040",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.02516v1",
+   "source_title": "arXiv:2503.02516v1, Tidal fluctuations and spatial heterogeneity lead to trapping and chaotic mixing in coastal aquifers (abstract; physics.flu-dyn)",
+   "source_url": "https://arxiv.org/abs/2503.02516v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    0,
+    2
+   ],
+   "word_count": 77,
+   "text_sha256": "9aea3fa1bbd7cb503c1184e7083f572744a1e1274cfd02cdd89a5ed6776ce6d4"
+  },
+  {
+   "id": "sci-v3-041",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2502.20501v1",
+   "source_title": "arXiv:2502.20501v1, JWST COMPASS: NIRSpec/G395H Transmission Observations of TOI-776 c, a 2 Rearth M Dwarf Planet (abstract; astro-ph.EP)",
+   "source_url": "https://arxiv.org/abs/2502.20501v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    8,
+    9
+   ],
+   "word_count": 63,
+   "text_sha256": "e0e2cc118dab84f11d337ee089045b2647667039185e456e42eb406bdac98a52"
+  },
+  {
+   "id": "sci-v3-042",
+   "domain": "science",
+   "kind": "standard",
+   "split": "test",
+   "source_doc": "arxiv-2503.01943v1",
+   "source_title": "arXiv:2503.01943v1, Spectroscopic classification of non-ergodic populations (abstract; cond-mat.stat-mech)",
+   "source_url": "https://arxiv.org/abs/2503.01943v1",
+   "license": "CC BY 4.0 (per-record arXiv licence field; only CC BY 4.0 records are eligible)",
+   "sentence_span": [
+    0,
+    1,
+    4
+   ],
+   "word_count": 75,
+   "text_sha256": "fe93dfa209043607fd4ca32834b52e0f70b37d2d9a9f9463542f681ecaa6d02e"
+  },
+  {
+   "id": "simple-v3-001",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11071838",
+   "source_title": "Made You Look (Simple English Wikipedia, revision 11071838)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11071838",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    2,
+    0,
+    4
+   ],
+   "word_count": 68,
+   "text_sha256": "c43a8db29211fae899255d45798873da1b7956f77ea34e2d5385f1ab949d4188"
+  },
+  {
+   "id": "simple-v3-002",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11024644",
+   "source_title": "White wine (Simple English Wikipedia, revision 11024644)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11024644",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    37,
+    1,
+    4
+   ],
+   "word_count": 70,
+   "text_sha256": "1ce0b8c014d72ea826e2c61b804ec5cc7709e47272638f6bf2617bc30b4cca20"
+  },
+  {
+   "id": "simple-v3-003",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11059570",
+   "source_title": "Valkyrae (Simple English Wikipedia, revision 11059570)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11059570",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    9,
+    0,
+    5
+   ],
+   "word_count": 88,
+   "text_sha256": "790dc00ab8a41292ebeff424bd91bfd43ae5d4873ee4c4ca72db05c84eec2552"
+  },
+  {
+   "id": "simple-v3-004",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10943207",
+   "source_title": "Color of the day (police) (Simple English Wikipedia, revision 10943207)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10943207",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    0,
+    4,
+    5
+   ],
+   "word_count": 65,
+   "text_sha256": "f2ff659b0f739e19bcddb59618692881345191765fb6571e293735d594c76417"
+  },
+  {
+   "id": "simple-v3-005",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11065248",
+   "source_title": "Crater Lake (Simple English Wikipedia, revision 11065248)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11065248",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    8,
+    0,
+    6
+   ],
+   "word_count": 74,
+   "text_sha256": "de065b9b9e18de0dc841d85850f3e04d56ffc4934a5bec2d6a59bc78aac123f9"
+  },
+  {
+   "id": "simple-v3-006",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-9738908",
+   "source_title": "Common scold (Simple English Wikipedia, revision 9738908)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=9738908",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    14,
+    2,
+    7
+   ],
+   "word_count": 119,
+   "text_sha256": "e47e3bc631a9db7222c44b3c918db1b1c06d506bfef5f0d4d8dcbb36dc562363"
+  },
+  {
+   "id": "simple-v3-007",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10986665",
+   "source_title": "Ed Gein (Simple English Wikipedia, revision 10986665)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10986665",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    31,
+    1,
+    3
+   ],
+   "word_count": 60,
+   "text_sha256": "22f21a0b0640badb2e8f944cc233e0f205365de83b1697ceccbd57ed3e549507"
+  },
+  {
+   "id": "simple-v3-008",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11053891",
+   "source_title": "Mourning dove (Simple English Wikipedia, revision 11053891)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11053891",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    10,
+    0,
+    4
+   ],
+   "word_count": 71,
+   "text_sha256": "9168f4d6c3aa265ab4d5285a5381cdc34419f66f6e370cafc059578ae517a127"
+  },
+  {
+   "id": "simple-v3-009",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11061826",
+   "source_title": "Alice in Borderland (TV show) (Simple English Wikipedia, revision 11061826)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11061826",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    8,
+    1,
+    5
+   ],
+   "word_count": 82,
+   "text_sha256": "2ae09bf8f205deadee47c5d70bf58f5a66fa1edc4448ea398500cc21b89b5e1c"
+  },
+  {
+   "id": "simple-v3-010",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11006618",
+   "source_title": "Powderfinger (Simple English Wikipedia, revision 11006618)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11006618",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    4,
+    1,
+    4
+   ],
+   "word_count": 63,
+   "text_sha256": "abc40052120954e6f8c874e490f305b93c5669fc2dfc1e6bd348297028842017"
+  },
+  {
+   "id": "simple-v3-011",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11073590",
+   "source_title": "Flag of Italy (Simple English Wikipedia, revision 11073590)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11073590",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    5,
+    0,
+    1
+   ],
+   "word_count": 85,
+   "text_sha256": "1f324e0d872751506322af3a3c319c8cc8c444d5ef39490fc2fda1ac21979fb9"
+  },
+  {
+   "id": "simple-v3-012",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-10949773",
+   "source_title": "Shipping Forecast (Simple English Wikipedia, revision 10949773)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10949773",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    3,
+    1,
+    4
+   ],
+   "word_count": 73,
+   "text_sha256": "ad823b635bcbb65a6a1ebc30e25a0b111af3101a94f5d89dbce7713c34cc3d37"
+  },
+  {
+   "id": "simple-v3-013",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10940070",
+   "source_title": "Grand Duchess Anastasia Nikolaevna of Russia (Simple English Wikipedia, revision 10940070)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10940070",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    27,
+    5,
+    9
+   ],
+   "word_count": 67,
+   "text_sha256": "06a91ba9fb646536830ab6c5a7dc54b650d9e183fb77a562461e640785d4da45"
+  },
+  {
+   "id": "simple-v3-014",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10697029",
+   "source_title": "Oyster Burns (Simple English Wikipedia, revision 10697029)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10697029",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    7,
+    8,
+    15
+   ],
+   "word_count": 101,
+   "text_sha256": "f151382d0aaf2b2483bc01f3ed8ddd058855ff580410dbe740d84d144e935834"
+  },
+  {
+   "id": "simple-v3-015",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10922291",
+   "source_title": "Color blindness (Simple English Wikipedia, revision 10922291)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10922291",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    28,
+    0,
+    3
+   ],
+   "word_count": 79,
+   "text_sha256": "baa2d3a34e880893ad49ec4cd7373bf6a767e531ef0dd8e7bc006da7db887316"
+  },
+  {
+   "id": "simple-v3-016",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11018964",
+   "source_title": "Knut (polar bear) (Simple English Wikipedia, revision 11018964)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11018964",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    9,
+    1,
+    3
+   ],
+   "word_count": 69,
+   "text_sha256": "d42e8477ea22773bea8197aadac30c866676c075dab8f1af3ba62663cf7f3065"
+  },
+  {
+   "id": "simple-v3-017",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11072565",
+   "source_title": "Megadeth (Simple English Wikipedia, revision 11072565)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11072565",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    43,
+    0,
+    8
+   ],
+   "word_count": 120,
+   "text_sha256": "a44c2cc63d77e014643a72e530b6314dd5deae3f3c69fe0fdceb91e07f19824a"
+  },
+  {
+   "id": "simple-v3-018",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11021256",
+   "source_title": "Ludwig van Beethoven (Simple English Wikipedia, revision 11021256)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11021256",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    1,
+    3,
+    8
+   ],
+   "word_count": 70,
+   "text_sha256": "a91f2d341b1f460b45a1967fd942abad4700e6265fbade115da6131b0b4a0b6b"
+  },
+  {
+   "id": "simple-v3-019",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10748263",
+   "source_title": "Crich Tramway Village (Simple English Wikipedia, revision 10748263)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10748263",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    0,
+    0,
+    3
+   ],
+   "word_count": 73,
+   "text_sha256": "12591e145856168082e26c9a13e70eaf9a33cb9c6089a80309142059ffedabdf"
+  },
+  {
+   "id": "simple-v3-020",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11040653",
+   "source_title": "Yellowstone National Park (Simple English Wikipedia, revision 11040653)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11040653",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    28,
+    0,
+    3
+   ],
+   "word_count": 78,
+   "text_sha256": "3833a3e6477392d17c770fd3b37b4b6b12afdb490bbf8b92092ac44433109034"
+  },
+  {
+   "id": "simple-v3-021",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-10967151",
+   "source_title": "Hurricane Grace (1991) (Simple English Wikipedia, revision 10967151)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10967151",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    3,
+    4,
+    11
+   ],
+   "word_count": 84,
+   "text_sha256": "53a3b142af8415a08c1cc6769a70f7a0b32660100fb2601a890a4eb579229ad8"
+  },
+  {
+   "id": "simple-v3-022",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11045275",
+   "source_title": "Bowls (Simple English Wikipedia, revision 11045275)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11045275",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    6,
+    2,
+    8
+   ],
+   "word_count": 70,
+   "text_sha256": "5ec8d32f6525ecdeaa15c07b34395de1e293361b643ffeb56a06af8eb622d099"
+  },
+  {
+   "id": "simple-v3-023",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10802103",
+   "source_title": "Nestor Makhno (Simple English Wikipedia, revision 10802103)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10802103",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    11,
+    0,
+    5
+   ],
+   "word_count": 62,
+   "text_sha256": "c563a72aea12cb94fec12704aa80bae4b8811164dbb6d0aabc4cde05dc3ecef6"
+  },
+  {
+   "id": "simple-v3-024",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11058700",
+   "source_title": "Presidents' Trophy (Simple English Wikipedia, revision 11058700)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11058700",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    1,
+    1,
+    3
+   ],
+   "word_count": 78,
+   "text_sha256": "aa2e3ed5e9ea6fa6c1219f8443b0c518ac1526fde02f787d45cea6249562dd1f"
+  },
+  {
+   "id": "simple-v3-025",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10647860",
+   "source_title": "Least weasel (Simple English Wikipedia, revision 10647860)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10647860",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    13,
+    1,
+    6
+   ],
+   "word_count": 80,
+   "text_sha256": "1fa5eb77c8ab659ae5de15356ef36165373f20eebf4d38c3bf4a4c6c4f82bed3"
+  },
+  {
+   "id": "simple-v3-026",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11013097",
+   "source_title": "Bernie Sanders (Simple English Wikipedia, revision 11013097)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11013097",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    2,
+    1,
+    6
+   ],
+   "word_count": 104,
+   "text_sha256": "f95ac5ec7f19c476407af7fabe8ff080977df7ec25b33ceee181c95a528ac279"
+  },
+  {
+   "id": "simple-v3-027",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11056807",
+   "source_title": "Singapore (Simple English Wikipedia, revision 11056807)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11056807",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    9,
+    1,
+    2
+   ],
+   "word_count": 64,
+   "text_sha256": "3a87687dea221a2ce16c518b654603b2b0156342a90d8a596c3ffcdbeefac43d"
+  },
+  {
+   "id": "simple-v3-028",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11071693",
+   "source_title": "Luis Suárez Miramontes (Simple English Wikipedia, revision 11071693)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11071693",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    5,
+    0,
+    5
+   ],
+   "word_count": 94,
+   "text_sha256": "05ee6b85cd639d5254d5b76aa9c533990d57dff43fa44b080015f9e803f80900"
+  },
+  {
+   "id": "simple-v3-029",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-8773999",
+   "source_title": "Kingsway tramway subway (Simple English Wikipedia, revision 8773999)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=8773999",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    2,
+    3,
+    5
+   ],
+   "word_count": 64,
+   "text_sha256": "b16609ad5ca2081c1a4cdbea803ec1a83f827c791d8ce3761951a8557c758a16"
+  },
+  {
+   "id": "simple-v3-030",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11003226",
+   "source_title": "Commodore Nutt (Simple English Wikipedia, revision 11003226)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11003226",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    6,
+    0,
+    4
+   ],
+   "word_count": 60,
+   "text_sha256": "7b93b3f97729c71e50c57de7d94586cb35944c976e1e83de0627f7f1a17bf008"
+  },
+  {
+   "id": "simple-v3-031",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11040547",
+   "source_title": "Hurricane Floyd (1987) (Simple English Wikipedia, revision 11040547)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11040547",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    0,
+    5,
+    12
+   ],
+   "word_count": 70,
+   "text_sha256": "61321e4afbac56b7e9b1b781754cc5d50f21036ee0a010908165a05ceca39136"
+  },
+  {
+   "id": "simple-v3-032",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10996049",
+   "source_title": "Cassowary (Simple English Wikipedia, revision 10996049)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10996049",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    4,
+    1,
+    8
+   ],
+   "word_count": 88,
+   "text_sha256": "f9a024701c67c6898c367b088046e23435b637282789c801743f08882a4de07e"
+  },
+  {
+   "id": "simple-v3-033",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11059682",
+   "source_title": "Victoria line (Simple English Wikipedia, revision 11059682)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11059682",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    23,
+    1,
+    4
+   ],
+   "word_count": 65,
+   "text_sha256": "fd1a1e0674559ec3b8645137c04a0e498000ed21368e7a340254e92256f143b8"
+  },
+  {
+   "id": "simple-v3-034",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11070670",
+   "source_title": "Lawrence, Kansas (Simple English Wikipedia, revision 11070670)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11070670",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    12,
+    0,
+    7
+   ],
+   "word_count": 94,
+   "text_sha256": "d2904065c2c7d5ef41ed7761a0eedc55ab90968acdbc426b78fb586b934292dd"
+  },
+  {
+   "id": "simple-v3-035",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10903197",
+   "source_title": "St. Peter's Basilica (Simple English Wikipedia, revision 10903197)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10903197",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    22,
+    1,
+    4
+   ],
+   "word_count": 79,
+   "text_sha256": "742bcaf4960079e416e2fb8246d040301c7cbb06c9d14d6b3118e904ac15bb24"
+  },
+  {
+   "id": "simple-v3-036",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11005575",
+   "source_title": "Ned Kelly (Simple English Wikipedia, revision 11005575)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11005575",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    22,
+    1,
+    5
+   ],
+   "word_count": 99,
+   "text_sha256": "5e18298a3396652e5747f1cf3347df6171530d4cc8ada45f7af8f004d728a007"
+  },
+  {
+   "id": "simple-v3-037",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11031013",
+   "source_title": "Monarch butterfly (Simple English Wikipedia, revision 11031013)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11031013",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    25,
+    0,
+    7
+   ],
+   "word_count": 92,
+   "text_sha256": "f8125242162f378a00b7becc39bb8a69478d700884a56ba0cdc916f57c6463e4"
+  },
+  {
+   "id": "simple-v3-038",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11060148",
+   "source_title": "Wheeling Tunnel (Simple English Wikipedia, revision 11060148)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11060148",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    2,
+    0,
+    3
+   ],
+   "word_count": 69,
+   "text_sha256": "4ac68c6772af8c40ddffebaebbd1e3b31244da6c31a064dc2ddf1be957794925"
+  },
+  {
+   "id": "simple-v3-039",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11070681",
+   "source_title": "Lawrence massacre (Simple English Wikipedia, revision 11070681)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11070681",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    12,
+    6,
+    12
+   ],
+   "word_count": 61,
+   "text_sha256": "fbec5f92e90442fd0073343dec7e6064d738cc1747e5a2d625f05623f385ff44"
+  },
+  {
+   "id": "simple-v3-040",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11046012",
+   "source_title": "Saturn (Simple English Wikipedia, revision 11046012)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11046012",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    26,
+    1,
+    4
+   ],
+   "word_count": 73,
+   "text_sha256": "e13308de081a82c5806b799e76c385fdb498122ac028fa545fe78df9f90849b0"
+  },
+  {
+   "id": "simple-v3-041",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-10426181",
+   "source_title": "Jean Balukas (Simple English Wikipedia, revision 10426181)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10426181",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    15,
+    2,
+    7
+   ],
+   "word_count": 90,
+   "text_sha256": "6602cf2818ed8ddf8fd84150962d9d3145516ebb4b9e15e22410707b3f501f08"
+  },
+  {
+   "id": "simple-v3-042",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11013144",
+   "source_title": "The Nutcracker (Simple English Wikipedia, revision 11013144)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11013144",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    32,
+    3,
+    10
+   ],
+   "word_count": 111,
+   "text_sha256": "320982718b10ceca2fee05dc48924945cdd712380d56e55a8c6a71fde63dd834"
+  },
+  {
+   "id": "simple-v3-043",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-10918511",
+   "source_title": "Royal Rumble (2009) (Simple English Wikipedia, revision 10918511)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10918511",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    8,
+    0,
+    5
+   ],
+   "word_count": 78,
+   "text_sha256": "83f1e27ee8dfde2e23aca4f3d01d507795862ba31da40e806bafab760e5e2f07"
+  },
+  {
+   "id": "simple-v3-044",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11026024",
+   "source_title": "Bloc Party (Simple English Wikipedia, revision 11026024)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11026024",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    4,
+    1,
+    4
+   ],
+   "word_count": 89,
+   "text_sha256": "80906631448675bc3b4600717f47af895e72acf3709b66daf12b3dcfb543bbfe"
+  },
+  {
+   "id": "simple-v3-045",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-11013306",
+   "source_title": "Bobby Robson (Simple English Wikipedia, revision 11013306)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11013306",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    17,
+    0,
+    8
+   ],
+   "word_count": 94,
+   "text_sha256": "92835f0b2bacdca057f43f66322791e70eebc09aac9af8e6b4e169de7935b1c7"
+  },
+  {
+   "id": "simple-v3-046",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "test",
+   "source_doc": "simplewiki-10949752",
+   "source_title": "Fra Angelico (Simple English Wikipedia, revision 10949752)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=10949752",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    9,
+    0,
+    4
+   ],
+   "word_count": 86,
+   "text_sha256": "818ca3ba6ff9b232d10675d1b500a4072c31f8559b3363b7abf6e965f6b229c0"
+  },
+  {
+   "id": "simple-v3-047",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11068417",
+   "source_title": "Hot chocolate (Simple English Wikipedia, revision 11068417)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11068417",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    16,
+    2,
+    6
+   ],
+   "word_count": 77,
+   "text_sha256": "670f43c8d9b414c1441177219549cac3fb00f794e259540fff0cd9d914c70a75"
+  },
+  {
+   "id": "simple-v3-048",
+   "domain": "simple_english",
+   "kind": "simple_control",
+   "split": "dev",
+   "source_doc": "simplewiki-11061232",
+   "source_title": "Gothic cathedrals (Simple English Wikipedia, revision 11061232)",
+   "source_url": "https://simple.wikipedia.org/w/index.php?oldid=11061232",
+   "license": "CC BY-SA 4.0, Simple English Wikipedia (revision pinned)",
+   "sentence_span": [
+    19,
+    0,
+    7
+   ],
+   "word_count": 120,
+   "text_sha256": "df51c02812d0d10e102c3d877f516561c7345448a4372b62e154a64ecf9471a8"
+  }
+ ]
+}
