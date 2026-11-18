@@ -246,6 +246,7 @@
     "e_dfk_le_0": true
    },
    "beats_F2": false,
+   "judged": true,
    "passages": 100,
    "complete": true,
    "swaps_applied": 94,
@@ -355,6 +356,7 @@
     "e_dfk_le_0": true
    },
    "beats_F2": false,
+   "judged": true,
    "passages": 100,
    "complete": true,
    "swaps_applied": 99,
@@ -464,6 +466,7 @@
     "e_dfk_le_0": true
    },
    "beats_F2": false,
+   "judged": false,
    "passages": 100,
    "complete": true,
    "swaps_applied": 100,
@@ -564,6 +567,7 @@
     "e_dfk_le_0": true
    },
    "beats_F2": false,
+   "judged": false,
    "passages": 100,
    "complete": true,
    "swaps_applied": 99,

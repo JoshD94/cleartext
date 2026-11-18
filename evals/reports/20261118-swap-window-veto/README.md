@@ -33,11 +33,14 @@ only.
     metric falls with a CI below 0;
   - fail the meaning rule: 7 of 100 passages fall below 0.80 NLI (F2 has
     2), and the Δ passage-NLI CI reaches −0.039 and −0.057 (limit −0.005).
-- **Why.** The evaluator scores meaning on whole passages. The swaps the
-  window rescues (20 of 193 applied) are the ones it penalises, so 8 of the 12 new
-  failures come from them.
-  - The veto and the gate disagree by construction.
-  - A swap the window accepts can still fail the passage test.
+- **Why (post hoc diagnostics).**
+  - The swaps the window rescues (20 of 193 applied, whole-sentence NLI
+    < 0.95) account for 8 of the 12 new below-0.80 cases (10 distinct
+    passages; 5 net new per arm against F2's 2).
+  - Passage NLI also swings on single swaps that both the sentence and
+    the window accept: one swap scoring 0.994 on its sentence costs its
+    passage −0.63.
+  - A swap the veto accepts can still fail the passage test.
 - **Recommendation.**
   - Keep F2 without words as the strongest candidate.
   - Keep the veto as an opt-in tool; no default changes.
@@ -59,8 +62,9 @@ that swap (`analyze(word_veto=...)`). The veto works in four steps:
    number, negation and entity checks hold on the whole sentence.
 
 A vetoed swap is skipped on its own, and the next-ranked word may take the
-slot (the existing refill). Example window at W = 2: *"often **integrated**,
-with products"* against *"often **combined**, with products"*.
+slot (the existing refill). An illustrative window at W = 2: *"are often
+**integrated**, with products"* against *"are often **combined**, with
+products"*.
 
 The binding to the evaluation model and checks lives in `evals/swap_veto.py`;
 the core module loads no model. Tests:
@@ -122,8 +126,10 @@ T = 0.945:
 | Precision | 0.706 | 0.748 |
 | Recall | 0.762 | 0.775 |
 
-Smaller windows are better on both counts. The window still cannot tell a
-plausible wrong-sense synonym well: SWORDS precision is 0.64.
+At this threshold the ±2 window beats the whole sentence on both counts.
+Wider windows (3–8 words) recall more (0.79–0.80) but are less precise. The
+window still cannot tell a plausible wrong-sense synonym well: SWORDS
+precision is 0.64.
 
 The full grid is in [calibration.json](calibration.json).
 
@@ -189,8 +195,8 @@ rest:
 | Of those, still swapped through refill | 21 | 19 |
 
 The veto removes the entity failures (entities 0.99 → 1.00). It also cuts
-the NLI cost by half or more (−0.057 → −0.020 for v7) and makes the
-over-edit gate pass.
+the passage-NLI cost: −0.057 → −0.020 for v7 (65% less) and −0.050 →
+−0.028 for contextual (44% less). The over-edit gate then passes.
 
 **Zipf per applied swap:**
 
@@ -220,14 +226,19 @@ aggregate). "Newly < 0.80" counts passages that F2 kept at or above 0.80.
 
 - **Rescued swaps.** 20 of the 193 applied swaps score below 0.95 on the
   whole sentence but pass on the window.
-  - They are about 10% of the swaps, but cause 8 of the 12 new
-    below-0.80 passages.
-  - The passage metric scores meaning the way the whole-sentence veto does,
-    so it cannot credit a window rescue. Only a human judgment can say
-    whether these swaps are good.
-- **Accepted swaps that still fail.** Even swaps above 0.95 on the
-  sentence push 4 passages below 0.80. Each passage sits close to the line
-  after F2's splits.
+  - They are about 10% of the swaps, but account for 8 of the 12 new
+    below-0.80 cases. Counted per arm: 10 distinct passages, of which
+    `sci-v3-013` falls in both arms.
+  - Passage NLI agrees more with whole-sentence NLI than with the window
+    on these swaps. Only a human judgment can say whether they are good.
+- **Accepted swaps that still fail.** Swaps above 0.95 on the sentence
+  push 4 cases (3 distinct passages) below 0.80.
+  - These are not borderline passages. F2 had them at 0.82–0.99, and they
+    fall to 0.33–0.71.
+  - Example: one swap scores 0.994 on its sentence and 0.985 on its window,
+    yet costs the passage −0.63.
+  - Passage NLI is unstable on some single-word changes. Neither the
+    sentence nor the window veto can predict that.
 
 ## 5. Applied-swaps page (local)
 
@@ -273,7 +284,11 @@ It is phone-readable and works offline.
     chunks: `3f0b062b0be9`, `7a05f797e87c`, `5d3f832ce177`,
     `1ef57e3568f4`, `899370e4a22a`, `e910591c2aa6`.
   - Judge and page: `b75af43d2563`, then `1674334e4c92` after fixing how
-    applied swaps are counted (the verdict did not change).
+    applied swaps are counted, then `a030208c100f` after the independent
+    review's fixes. No verdict or delta changed.
+  - The swap-matching fix, the diagnostics and the `judged` flag were
+    written after the dev results were read. None of them feeds the rule.
+- **Verify:** `scripts/verify` passes (600 tests, jobs `4e51546af255` and `8c42bb2dfbed` after the review fixes).
 - **Dev state signatures:**
   - Reused sweep state: generation `223acb6f0e3f…`, scoring
     `b818b07ac341…`.

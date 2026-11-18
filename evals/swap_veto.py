@@ -342,6 +342,17 @@ def run_freeze(args):
     if problems:
         raise SystemExit("Cannot reuse " + str(base) + ": " + "; ".join(problems))
     old_gen, old_score = S.state_signatures(base)
+    # The memo keys and values also depend on the harness that wrote them
+    # (StudyGenerator, SweepGenerator, PARAMS, GENERATION_VERSION), which is not
+    # among the frozen sources: the old plan must still reproduce its signature.
+    root = S.ROOT
+    try:
+        S.ROOT = old_root
+        harness_ok = P.signatures(old)[0] == old_gen
+    finally:
+        S.ROOT = root
+    if not harness_ok:
+        raise SystemExit("The sweep harness changed since the base state ran; its memos cannot be reused")
     plan = {
         "created": datetime.now(timezone.utc).isoformat(),
         "head": subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
@@ -374,7 +385,9 @@ def run_freeze(args):
 
 def signatures(plan):
     gen, score = P.signatures(plan)
-    # Everything outside the frozen sources that can change an output.
+    # Everything outside the frozen sources that can change an output. The
+    # veto's checks (preservation.explicit_checks) are scoring sources, pinned
+    # by the plan and rechecked by preflight before and after every batch.
     code = [VetoGenerator, MemoScorer, C.Scorer, C.checks_pass, evaluation_veto, sentence_checks]
     harness = hashlib.sha256("".join(inspect.getsource(o) for o in code).encode()).hexdigest()
     return digest({"sweep": gen, "harness": harness, "veto": plan["veto"], "version": VERSION}), score
@@ -670,7 +683,9 @@ def run_judge(args):
             if not any(e.get("stage") == "word" for e in outputs[name][p].get("edits", [])) and \
                     outputs[name][p]["output"] != outputs[base][p]["output"]:
                 raise SystemExit(f"{p}: no word edit, but {name} differs from {base}")
-        res = judged(arm, base_rows, rb_ent)
+        # Gate 4's reference: rule_based entities on the same passages.
+        res = judged(arm, base_rows, summarize([rows["rule_based"][p] for p in done])["entities"])
+        res["judged"] = name.endswith("@window")
         res["passages"] = len(done)
         res["complete"] = len(done) == len(ids)
         words = [(p, e) for p in done for e in outputs[name][p].get("edits", []) if e.get("stage") == "word"]
@@ -686,6 +701,7 @@ def run_judge(args):
                            "vetoed_checks": sum(not r["checks"] for _, r in recs),
                            "applied": sum(r["applied"] for _, r in recs),
                            "passages_with_a_veto": len({p for p, r in recs if not r["passes"]}),
+                           # Valid as a refill count because one word edit per passage is allowed.
                            "refilled": sum(any(not r["passes"] for r in swap_records(passages[p], outputs[name][p]))
                                            and any(e.get("stage") == "word" for e in outputs[name][p]["edits"])
                                            for p in done)}
