@@ -111,3 +111,13 @@ At most 12 queue chunks of ≤ 30 minutes, at `later` priority, one job at a
 time, on Yoga with 1 torch thread for generation and scoring. Outputs are
 checkpointed per (passage, config). If an arm is not complete within the
 budget, it is judged on the passages done and reported as **incomplete**.
+
+## Choice (added after the gold scores, before any dev output)
+
+`swap_veto calibrate` on the 7,327 gold pairs gave **W = 2 words, T =
+0.945** ([veto-choice.json](veto-choice.json), [calibration.json](calibration.json)).
+No setting in the grid reaches pooled precision 0.90 (the highest is
+0.889), so the rule's fallback applied: the highest pooled balanced
+accuracy overall. At that setting, pooled precision is 0.748, recall 0.775
+and balanced accuracy 0.755. Whole-sentence scoring reaches 0.721 at best.
+Nothing else in this file changed.

@@ -374,7 +374,9 @@ def run_freeze(args):
 
 def signatures(plan):
     gen, score = P.signatures(plan)
-    harness = hashlib.sha256(inspect.getsource(VetoGenerator).encode()).hexdigest()
+    # Everything outside the frozen sources that can change an output.
+    code = [VetoGenerator, MemoScorer, C.Scorer, C.checks_pass, evaluation_veto, sentence_checks]
+    harness = hashlib.sha256("".join(inspect.getsource(o) for o in code).encode()).hexdigest()
     return digest({"sweep": gen, "harness": harness, "veto": plan["veto"], "version": VERSION}), score
 
 
@@ -798,7 +800,7 @@ def main(argv=None):
     pg = sub.add_parser("page")
     pg.add_argument("--state", type=Path, required=True)
     pg.add_argument("--out", type=Path, required=True)
-    pg.add_argument("--window", type=int, required=True)
+    pg.add_argument("--window", required=True)
     pg.add_argument("--threshold", type=float, required=True)
     args = ap.parse_args(argv)
     {"gold": run_gold, "calibrate": run_calibrate, "freeze": run_freeze, "run": run, "judge": run_judge,
