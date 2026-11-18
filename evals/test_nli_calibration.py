@@ -49,3 +49,19 @@ def test_rates_auc_wilson():
     assert N.auc([0.9, 0.8], [0.1, 0.2]) == 1.0 and N.auc([0.5], [0.5]) == 0.5
     lo, hi = N.wilson(5, 10)
     assert lo < 0.5 < hi
+
+
+def test_rates_clustered_ci_and_marks_key(tmp_path):
+    r = N.rates([0.5, 0.6, 0.99, 0.99], thresholds=(0.9,), groups=["a", "a", "b", "b"], resamples=200)
+    assert r["0.9"]["rate"] == 0.5 and r["0.9"]["ci"][0] <= 0.5 <= r["0.9"]["ci"][1]
+    N.write_jsonl(tmp_path / "review-key.jsonl", [
+        {"n": 1, "swap_key": "a" * 64, "band": "≥0.95", "base_mean": 0.99, "base_min": 0.99, "small_min": 0.99},
+        {"n": 2, "swap_key": "b" * 64, "band": "<0.80", "base_mean": 0.5, "base_min": 0.5, "small_min": 0.5}])
+    (tmp_path / "review-bands.json").write_text('{"≥0.95": 0.8, "<0.80": 0.2}')
+    marks = tmp_path / "marks.csv"
+    marks.write_text(f"n,swap_key,mark\n1,{'a' * 16},good\n2,{'c' * 16},bad\n")
+    import pytest
+    with pytest.raises(SystemExit):
+        N.run_marks(type("A", (), {"state": tmp_path, "marks": marks}))
+    marks.write_text(f"n,swap_key,mark\n1,{'a' * 16},good\n2,{'b' * 16},bad\n")
+    N.run_marks(type("A", (), {"state": tmp_path, "marks": marks}))

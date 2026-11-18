@@ -77,9 +77,15 @@ def _nlp():
 
 
 def _inflect(lemma, tag, original):
-    """cleartext.generation.inflect for one-word substitutes; None if no form."""
+    """cleartext.generation.inflect for one-word substitutes; None if no form
+    or if the form is not a word (zipf 0, e.g. an already inflected
+    substitute inflected again: "consentinged")."""
+    from wordfreq import zipf_frequency
     from cleartext.generation import inflect
-    return inflect(lemma, tag, original)
+    form = inflect(lemma, tag, original)
+    if form and zipf_frequency(form, "en") == 0 and zipf_frequency(lemma, "en") > 0:
+        return None
+    return form
 
 
 def _sentence_at(text, offset):
@@ -481,13 +487,26 @@ def clustered_auc_ci(rows, score, pos_kind, neg_kind, resamples=2000):
     return [float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5))]
 
 
-def rates(values, thresholds=THRESHOLDS):
-    """Share of values below each threshold (k, n, rate, Wilson CI)."""
+def rates(values, thresholds=THRESHOLDS, groups=None, resamples=2000):
+    """Share of values below each threshold (k, n, rate, 95% CI). With groups
+    (several substitutes per target), the CI is a bootstrap over groups;
+    otherwise Wilson."""
     out = {}
+    vals = np.asarray(values, dtype=float)
+    if groups is not None and len(vals):
+        keys = sorted(set(groups))
+        index = {g: np.flatnonzero(np.asarray(groups) == g) for g in keys}
+        rng = np.random.default_rng(SEED)
+        draws = [np.concatenate([index[keys[i]] for i in rng.choice(len(keys), len(keys))])
+                 for _ in range(resamples)]
     for t in thresholds:
-        k = sum(v < t for v in values)
-        out[str(t)] = {"k": k, "n": len(values), "rate": k / len(values) if values else None,
-                       "ci": wilson(k, len(values))}
+        k = int((vals < t).sum())
+        if groups is not None and len(vals):
+            boot = [float((vals[d] < t).mean()) for d in draws]
+            ci = [float(np.percentile(boot, 2.5)), float(np.percentile(boot, 97.5))]
+        else:
+            ci = wilson(k, len(vals))
+        out[str(t)] = {"k": k, "n": len(vals), "rate": k / len(vals) if len(vals) else None, "ci": ci}
     return out
 
 
@@ -510,13 +529,15 @@ def calibration(gold):
         for ds in ("swords_test", "tsar2022_test", "multils_trial", "all_gold_positives"):
             sel = rows if ds == "all_gold_positives" else [r for r in rows if r["dataset"] == ds]
             pos = [r[score] for r in sel if r["kind"] == "pos"]
-            res[ds] = {"positives_rejected": rates(pos)}
+            res[ds] = {"positives_rejected": rates(pos, groups=[r["group"] for r in sel if r["kind"] == "pos"])}
             if ds != "all_gold_positives":
                 for kind in ("pos1", "border", "neg", "easy_neg"):
                     vals = [r[score] for r in sel if r["kind"] == kind]
                     if vals:
+                        groups = [r["group"] for r in sel if r["kind"] == kind]
                         accepted = {t: {"rate": 1 - v["rate"], "k": v["n"] - v["k"], "n": v["n"],
-                                        "ci": [1 - v["ci"][1], 1 - v["ci"][0]]} for t, v in rates(vals).items()}
+                                        "ci": [1 - v["ci"][1], 1 - v["ci"][0]]}
+                                    for t, v in rates(vals, groups=groups).items()}
                         res[ds][f"{kind}_accepted"] = accepted
                 for kind in ("neg", "easy_neg"):
                     neg = [r[score] for r in sel if r["kind"] == kind]
@@ -786,6 +807,8 @@ def run_review(args):
             "word": s["word"], "replacement": s["replacement"], "source": s["source"]}
            for k, (b, s) in enumerate(sample)]
     write_jsonl(state / "review-key.jsonl", key)
+    shares = Counter(band(s["base_mean"]) for s in unique)
+    (state / "review-bands.json").write_text(json.dumps({b: n / len(unique) for b, n in shares.items()}))
     Path(args.out).write_text(review_html(sample))
     print("wrote", args.out, Counter(b for b, _ in sample))
 
@@ -796,7 +819,7 @@ def review_html(sample):
         if b != current:
             current = b
             cards.append(f'<h2>NLI {html.escape(b)}</h2>')
-        cards.append(f"""<section class="card" data-n="{k}">
+        cards.append(f"""<section class="card" data-n="{k}" data-key="{s['swap_key'][:16]}">
 <div class="num">{k}</div>
 <p class="swap"><b>{html.escape(s['word'])}</b> → <b>{html.escape(s['replacement'])}</b></p>
 <p class="lab">Before</p><p class="txt">{highlight(s['before'], s['after'])}</p>
@@ -827,7 +850,7 @@ button{{flex:1;min-height:44px;border-radius:8px;border:1px solid var(--line);ba
 <div class="bar"><span id="count"></span><button id="export">Export CSV</button></div>
 {''.join(cards)}
 </main><script>
-const KEY='cleartext-nli-review-20261117';
+const KEY='cleartext-nli-review-'+[...document.querySelectorAll('.card')].map(c=>c.dataset.key).join('').slice(0,64);
 let marks={{}};try{{marks=JSON.parse(localStorage.getItem(KEY)||'{{}}')}}catch(e){{}}
 const cards=[...document.querySelectorAll('.card')];
 function paint(){{cards.forEach(c=>{{const m=marks[c.dataset.n];if(m)c.dataset.mark=m;else delete c.dataset.mark}});
@@ -837,7 +860,7 @@ cards.forEach(c=>c.querySelectorAll('button').forEach(b=>b.onclick=()=>{{
 marks[c.dataset.n]=marks[c.dataset.n]===b.dataset.v?undefined:b.dataset.v;
 if(!marks[c.dataset.n])delete marks[c.dataset.n];paint()}}));
 document.getElementById('export').onclick=()=>{{
-const rows=['n,mark',...cards.map(c=>c.dataset.n+','+(marks[c.dataset.n]||''))].join('\\n');
+const rows=['n,swap_key,mark',...cards.map(c=>c.dataset.n+','+c.dataset.key+','+(marks[c.dataset.n]||''))].join('\\n');
 const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows],{{type:'text/csv'}}));
 a.download='word-swap-marks.csv';a.click()}};
 paint();
@@ -846,21 +869,36 @@ paint();
 
 
 def run_marks(args):
-    key = {r["n"]: r for r in read_jsonl(Path(args.state) / "review-key.jsonl")}
+    """Precision/recall of each NLI score per threshold, Joshua's "good" as the
+    positive class. The sample has 15 swaps per band, so each mark is weighted
+    by its band's share of all swaps (review-bands.json); per-band good rates
+    are reported too. Marks must match the review key's swap IDs."""
+    state = Path(args.state)
+    key = {r["n"]: r for r in read_jsonl(state / "review-key.jsonl")}
+    share = json.loads((state / "review-bands.json").read_text())
+    per_band = Counter(r["band"] for r in key.values())
     with open(args.marks, newline="") as fh:
-        marks = {int(r["n"]): r["mark"].strip().lower() for r in csv.DictReader(fh) if r["mark"].strip()}
-    rows = [(key[n], m == "good") for n, m in marks.items() if m in ("good", "bad")]
-    out = {"marked": len(rows), "good": sum(g for _, g in rows), "by_score": {}}
+        found = [r for r in csv.DictReader(fh) if r["mark"].strip()]
+    for r in found:
+        if key[int(r["n"])]["swap_key"][:16] != r["swap_key"]:
+            raise SystemExit(f"mark {r['n']} is for another sample; rebuild nothing, use the matching page")
+    rows = [(key[int(r["n"])], r["mark"].strip().lower() == "good") for r in found
+            if r["mark"].strip().lower() in ("good", "bad")]
+    weight = {b: share.get(b, 0) / per_band[b] for b in per_band}
+    out = {"marked": len(rows), "good": sum(g for _, g in rows), "by_score": {},
+           "good_rate_by_band": {b: (sum(g for r, g in rows if r["band"] == b)
+                                     / max(1, sum(r["band"] == b for r, _ in rows))) for b in per_band}}
     for sc in SCORES:
         res = {}
         for t in THRESHOLDS:
-            acc = [(r[sc] >= t, g) for r, g in rows]
-            tp = sum(a and g for a, g in acc)
-            fp = sum(a and not g for a, g in acc)
-            fn = sum(g and not a for a, g in acc)
-            res[str(t)] = {"accepted": tp + fp, "precision": tp / (tp + fp) if tp + fp else None,
+            acc = [(r[sc] >= t, g, weight[r["band"]]) for r, g in rows]
+            tp = sum(w for a, g, w in acc if a and g)
+            fp = sum(w for a, g, w in acc if a and not g)
+            fn = sum(w for a, g, w in acc if g and not a)
+            res[str(t)] = {"accepted_unweighted": sum(a for a, _, _ in acc),
+                           "precision": tp / (tp + fp) if tp + fp else None,
                            "recall": tp / (tp + fn) if tp + fn else None,
-                           "good_rejected": fn}
+                           "good_rejected_unweighted": sum(g and not a for a, g, _ in acc)}
         out["by_score"][sc] = res
         out["by_score"][sc]["auc"] = auc([r[sc] for r, g in rows if g], [r[sc] for r, g in rows if not g])
     print(json.dumps(out, indent=1))
@@ -916,6 +954,8 @@ def run_judge(args):
         for rule, (sc, t, guard) in JUDGED_RULES.items():
             chosen, kept = [], 0
             for pid in ids:
+                if pid not in swaps and outputs[name][pid]["output"] != outputs[base][pid]["output"]:
+                    raise SystemExit(f"{pid}: no word edit, but the output differs from {base}")
                 keep = pid in swaps and (sc is None or swap_passes(swaps[pid], scored[pid], sc, t, guard))
                 chosen.append(rows[name][pid] if keep else rows[base][pid])
                 kept += keep
@@ -934,7 +974,9 @@ def run_judge(args):
                 "numbers_failed": summ["numbers_failed"], "negations_failed": summ["negations_failed"],
                 "gates": g, "over_edit": over,
                 "vs_F2": {m: {k: v[k] for k in ("mean", "ci95")} for m, v in d.items()},
-                "adoption": adopt, "beats_F2": all(adopt.values())}
+                "adoption": adopt, "eligible": rule == "A1",
+                "beats_F2": all(adopt.values()) and rule == "A1",
+                "passes_rule_ignoring_eligibility": all(adopt.values())}
     out["F2"] = {k: summarize(base_rows)[k] for k in ("fk_grade", "kea_S", "nli_mean", "nli_below_080")}
     Path(args.out).write_text(json.dumps(out, indent=1, default=float))
     for k, v in out["results"].items():

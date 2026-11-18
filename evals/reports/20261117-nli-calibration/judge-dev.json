@@ -63,7 +63,9 @@
     "d_dnli_ge_-0.010": false,
     "e_over_edit": true
    },
-   "beats_F2": false
+   "eligible": true,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
   },
   "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]} | A2": {
    "swaps_proposed": 100,
@@ -115,7 +117,9 @@
     "d_dnli_ge_-0.010": true,
     "e_over_edit": true
    },
-   "beats_F2": true
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": true
   },
   "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]} | none": {
    "swaps_proposed": 100,
@@ -167,7 +171,9 @@
     "d_dnli_ge_-0.010": false,
     "e_over_edit": false
    },
-   "beats_F2": false
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
   },
   "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7} | A1": {
    "swaps_proposed": 77,
@@ -219,7 +225,9 @@
     "d_dnli_ge_-0.010": true,
     "e_over_edit": true
    },
-   "beats_F2": false
+   "eligible": true,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
   },
   "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7} | A2": {
    "swaps_proposed": 77,
@@ -271,7 +279,9 @@
     "d_dnli_ge_-0.010": true,
     "e_over_edit": true
    },
-   "beats_F2": true
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": true
   },
   "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7} | none": {
    "swaps_proposed": 77,
@@ -323,7 +333,9 @@
     "d_dnli_ge_-0.010": false,
     "e_over_edit": false
    },
-   "beats_F2": false
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
   }
  },
  "complete": true,
