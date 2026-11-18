@@ -100,6 +100,11 @@ versions, input/model/source hashes and completion/failure receipts.
 - A Git worktree lacks the ignored `models/runs/` and `models/data/` (the v7
   bigram cache); symlink both from the primary checkout before running the
   pipeline there.
+- The Nov 16 sweep's dev plan pins its sources by absolute path in
+  `cleartext-wt-sweeps`. To add cells to it, check out a detached worktree of
+  `main` at that path (sources still match). NLI rejects about 25% of
+  human-gold word swaps at 0.95; do not lower the bound for that
+  (`evals/reports/20261117-nli-calibration/`).
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before

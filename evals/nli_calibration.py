@@ -679,6 +679,35 @@ def regate(swaps, scores):
     return results
 
 
+def amplification(swaps, scores):
+    """Per swap: sentence-level NLI vs the passage NLI change it causes (word
+    output minus its twin), one row per unique (source, passage, sentence pair)."""
+    from scipy.stats import spearmanr
+    rows, seen = [], set()
+    for label in SOURCES:
+        plan, passages = load_source_panel(label)
+        outputs = state_outputs(STATE_ROOT / SOURCES[label][0])
+        roots = metric_roots(label)
+        for s in swaps:
+            key = (label, s["passage"], s["swap_key"])
+            if s["source"] != label or key in seen:
+                continue
+            seen.add(key)
+            w = passage_rows(label, plan, passages, outputs, s["config"], [s["passage"]], roots)
+            t = passage_rows(label, plan, passages, outputs, s["twin"], [s["passage"]], roots)
+            if s["passage"] in w and s["passage"] in t:
+                rows.append((scores[s["swap_key"]]["base_mean"], scores[s["swap_key"]]["small_min"],
+                             w[s["passage"]]["nli_mean"] - t[s["passage"]]["nli_mean"]))
+    sent, small, drop = (np.asarray(x, dtype=float) for x in zip(*rows))
+    out = {"n": len(rows), "spearman_sentence_vs_passage_delta": float(spearmanr(sent, drop).statistic),
+           "mean_passage_delta": float(drop.mean())}
+    for lo, hi, name in BANDS:
+        sel = (sent >= lo) & (sent < hi)
+        out[f"sentence {name}"] = {"n": int(sel.sum()), "mean_passage_delta": float(drop[sel].mean()) if sel.any() else None,
+                                   "share_passage_drop_gt_0.05": float((drop[sel] < -0.05).mean()) if sel.any() else None}
+    return out
+
+
 def run_analyze(args):
     state = Path(args.state)
     scorer = Scorer(state / "nli-memo.jsonl")
@@ -696,7 +725,7 @@ def run_analyze(args):
                                                            for t in THRESHOLDS}}
     out = {"calibration": calibration(gold), "pipeline_swaps": swap_bands,
            "swap_sources": Counter(s["source"] for s in unique),
-           "regate": regate(swaps, scores)}
+           "regate": regate(swaps, scores), "amplification": amplification(swaps, scores)}
     fid = state / "fidelity.json"
     out["fidelity"] = json.loads(fid.read_text()) if fid.exists() else None
     Path(args.out).write_text(json.dumps(out, indent=1, default=float))
