@@ -1,0 +1,348 @@
+{
+ "design": "evals/reports/20261117-nli-calibration/design-F2-words.json",
+ "n": 100,
+ "pending_outputs": {
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]}": 0,
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]}": 0,
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7}": 0
+ },
+ "unscored": {
+  "words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]}": 0,
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]}": 0,
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7}": 0,
+  "rule_based": 0
+ },
+ "results": {
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]} | A1": {
+   "swaps_proposed": 100,
+   "swaps_kept": 78,
+   "fk": 12.75000362640296,
+   "kea_S": 0.272602698901875,
+   "nli_mean": 0.9631248506158591,
+   "nli_below_080": 6,
+   "entities": 1.0,
+   "numbers_failed": 0,
+   "negations_failed": 0,
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": false,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.10062655776669292,
+     "ci95": [
+      -0.13297887590196697,
+      -0.0702010263669117
+     ]
+    },
+    "kea_S": {
+     "mean": 0.0025614546992937036,
+     "ci95": [
+      0.0013684251353428213,
+      0.004065038637661609
+     ]
+    },
+    "nli_mean": {
+     "mean": -0.011474634483456612,
+     "ci95": [
+      -0.02572759250178933,
+      -0.0001305888369679488
+     ]
+    }
+   },
+   "adoption": {
+    "a_gates": false,
+    "b_dfk_le_-0.10": true,
+    "c_dfk_ci_below_0": true,
+    "d_dnli_ge_-0.010": false,
+    "e_over_edit": true
+   },
+   "eligible": true,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
+  },
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]} | A2": {
+   "swaps_proposed": 100,
+   "swaps_kept": 81,
+   "fk": 12.735603622829055,
+   "kea_S": 0.27242546197803214,
+   "nli_mean": 0.9678579911589622,
+   "nli_below_080": 4,
+   "entities": 1.0,
+   "numbers_failed": 0,
+   "negations_failed": 0,
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.11502656134059652,
+     "ci95": [
+      -0.14860101443157983,
+      -0.08381701051281804
+     ]
+    },
+    "kea_S": {
+     "mean": 0.002384217775450836,
+     "ci95": [
+      0.0014883683273029958,
+      0.0034868011198274152
+     ]
+    },
+    "nli_mean": {
+     "mean": -0.0067414939403533936,
+     "ci95": [
+      -0.018281122110784052,
+      0.002820795316249132
+     ]
+    }
+   },
+   "adoption": {
+    "a_gates": true,
+    "b_dfk_le_-0.10": true,
+    "c_dfk_ci_below_0": true,
+    "d_dnli_ge_-0.010": true,
+    "e_over_edit": true
+   },
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": true
+  },
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"]} | none": {
+   "swaps_proposed": 100,
+   "swaps_kept": 100,
+   "fk": 12.716522543999329,
+   "kea_S": 0.27366561467719863,
+   "nli_mean": 0.9172121781925671,
+   "nli_below_080": 12,
+   "entities": 0.99,
+   "numbers_failed": 0,
+   "negations_failed": 0,
+   "gates": {
+    "nli_mean_ge_095": false,
+    "nli_below_080_le_5pct": false,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": false
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": false
+   },
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.13410764017032203,
+     "ci95": [
+      -0.1683546215400757,
+      -0.10150272657638933
+     ]
+    },
+    "kea_S": {
+     "mean": 0.003624370474617337,
+     "ci95": [
+      0.0023630167004941136,
+      0.005209324762764682
+     ]
+    },
+    "nli_mean": {
+     "mean": -0.057387306906748564,
+     "ci95": [
+      -0.09427292553323788,
+      -0.025953878399101092
+     ]
+    }
+   },
+   "adoption": {
+    "a_gates": false,
+    "b_dfk_le_-0.10": true,
+    "c_dfk_ci_below_0": true,
+    "d_dnli_ge_-0.010": false,
+    "e_over_edit": false
+   },
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
+  },
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7} | A1": {
+   "swaps_proposed": 77,
+   "swaps_kept": 64,
+   "fk": 12.75539688838217,
+   "kea_S": 0.2719885599328991,
+   "nli_mean": 0.9738085506856442,
+   "nli_below_080": 3,
+   "entities": 1.0,
+   "numbers_failed": 0,
+   "negations_failed": 0,
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.09523329578748044,
+     "ci95": [
+      -0.12630991687284868,
+      -0.06628683199637363
+     ]
+    },
+    "kea_S": {
+     "mean": 0.0019473157303177956,
+     "ci95": [
+      0.0011363060617816723,
+      0.0029881580536464704
+     ]
+    },
+    "nli_mean": {
+     "mean": -0.0007909344136714935,
+     "ci95": [
+      -0.006738978460431098,
+      0.00343665837496519
+     ]
+    }
+   },
+   "adoption": {
+    "a_gates": true,
+    "b_dfk_le_-0.10": false,
+    "c_dfk_ci_below_0": true,
+    "d_dnli_ge_-0.010": true,
+    "e_over_edit": true
+   },
+   "eligible": true,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
+  },
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7} | A2": {
+   "swaps_proposed": 77,
+   "swaps_kept": 70,
+   "fk": 12.742411033991955,
+   "kea_S": 0.2723392759085607,
+   "nli_mean": 0.9713611787557602,
+   "nli_below_080": 3,
+   "entities": 1.0,
+   "numbers_failed": 0,
+   "negations_failed": 0,
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.10821915017769626,
+     "ci95": [
+      -0.14156667245812524,
+      -0.07736988499802865
+     ]
+    },
+    "kea_S": {
+     "mean": 0.0022980317059794054,
+     "ci95": [
+      0.001389635527231222,
+      0.003439990084585652
+     ]
+    },
+    "nli_mean": {
+     "mean": -0.0032383063435554504,
+     "ci95": [
+      -0.012812589388340711,
+      0.004281813032925126
+     ]
+    }
+   },
+   "adoption": {
+    "a_gates": true,
+    "b_dfk_le_-0.10": true,
+    "c_dfk_ci_below_0": true,
+    "d_dnli_ge_-0.010": true,
+    "e_over_edit": true
+   },
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": true
+  },
+  "words=v7|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#{\"t5.min_entailment\":0.5,\"t5.passage\":\"passage\",\"t5.waive\":[\"argument_roles\",\"complement_scope\",\"complete_clauses\",\"content_retained\",\"discourse_markers\",\"finite_predicates\",\"generation_terminated\",\"logical_connectives\",\"modality\",\"no_new_content\",\"operator_scope\",\"predicate_tense\",\"relative_attachments\",\"sentence_count\",\"subject_groups\",\"uncertainty_scope\"],\"w.threshold\":0.7} | none": {
+   "swaps_proposed": 77,
+   "swaps_kept": 77,
+   "fk": 12.7310830075416,
+   "kea_S": 0.2727330813943377,
+   "nli_mean": 0.957484139688313,
+   "nli_below_080": 5,
+   "entities": 0.99,
+   "numbers_failed": 0,
+   "negations_failed": 0,
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": false
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": false
+   },
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.11954717662805275,
+     "ci95": [
+      -0.15197553890352047,
+      -0.08819992700883623
+     ]
+    },
+    "kea_S": {
+     "mean": 0.002691837191756424,
+     "ci95": [
+      0.0017366879242194909,
+      0.0038632668764555975
+     ]
+    },
+    "nli_mean": {
+     "mean": -0.017115345411002635,
+     "ci95": [
+      -0.037297610596753655,
+      -0.001945173516869549
+     ]
+    }
+   },
+   "adoption": {
+    "a_gates": false,
+    "b_dfk_le_-0.10": true,
+    "c_dfk_ci_below_0": true,
+    "d_dnli_ge_-0.010": false,
+    "e_over_edit": false
+   },
+   "eligible": false,
+   "beats_F2": false,
+   "passes_rule_ignoring_eligibility": false
+  }
+ },
+ "complete": true,
+ "F2": {
+  "fk_grade": 12.850630184169653,
+  "kea_S": 0.2700412442025813,
+  "nli_mean": 0.9745994850993156,
+  "nli_below_080": 2
+ }
+}
