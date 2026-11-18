@@ -1,0 +1,1 @@
+{"window": 2, "threshold": 0.945, "precision_constraint_met": false, "source": "calibrate on gold.jsonl (SWORDS, TSAR-2022, MultiLS)", "gold_sha256": "9440d3f8194b842028d2ed15ea1911764ada6522bd5d418a8461709afc137c38"}

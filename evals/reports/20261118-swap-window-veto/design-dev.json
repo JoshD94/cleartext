@@ -1,0 +1,162 @@
+{
+ "note": "Window swap-veto study (2026-11-18): F2 and F2 + word swaps on test set v3 DEV only. The first config is the reference; @window arms are judged by PROTOCOL.md; the arms without a veto are reported for reference only. Committed before any output of this design exists.",
+ "configs": [
+  {
+   "base": {
+    "words": "off",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2",
+   "role": "reference"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2+v7 (window veto)",
+   "role": "judged",
+   "veto": "window"
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2+contextual (window veto)",
+   "role": "judged",
+   "veto": "window"
+  },
+  {
+   "base": {
+    "words": "v7",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2+v7 (no veto)",
+   "role": "reference"
+  },
+  {
+   "base": {
+    "words": "contextual",
+    "phrases": "authored",
+    "structure": "t5+compound_tagger"
+   },
+   "params": {
+    "t5.waive": [
+     "modality",
+     "content_retained",
+     "no_new_content",
+     "argument_roles",
+     "operator_scope",
+     "finite_predicates",
+     "logical_connectives",
+     "sentence_count",
+     "complete_clauses",
+     "discourse_markers",
+     "uncertainty_scope",
+     "predicate_tense",
+     "complement_scope",
+     "generation_terminated",
+     "subject_groups",
+     "relative_attachments"
+    ],
+    "t5.passage": "passage",
+    "t5.min_entailment": 0.5
+   },
+   "label": "F2+contextual (no veto)",
+   "role": "reference"
+  }
+ ]
+}
