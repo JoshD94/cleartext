@@ -1,0 +1,422 @@
+[
+ {
+  "word": "grateful",
+  "replacement": "thankful",
+  "band": "\u22650.95",
+  "nli": 0.996,
+  "mark": "good"
+ },
+ {
+  "word": "terminate",
+  "replacement": "end",
+  "band": "\u22650.95",
+  "nli": 0.994,
+  "mark": "good"
+ },
+ {
+  "word": "superfluous",
+  "replacement": "redundant",
+  "band": "\u22650.95",
+  "nli": 0.993,
+  "mark": "good"
+ },
+ {
+  "word": "switch",
+  "replacement": "change",
+  "band": "\u22650.95",
+  "nli": 0.993,
+  "mark": "good"
+ },
+ {
+  "word": "exploited",
+  "replacement": "used",
+  "band": "\u22650.95",
+  "nli": 0.99,
+  "mark": "good"
+ },
+ {
+  "word": "competitors",
+  "replacement": "rivals",
+  "band": "\u22650.95",
+  "nli": 0.99,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "targeted",
+  "replacement": "took",
+  "band": "\u22650.95",
+  "nli": 0.989,
+  "mark": "meaning"
+ },
+ {
+  "word": "erroneously",
+  "replacement": "mistakenly",
+  "band": "\u22650.95",
+  "nli": 0.987,
+  "mark": "good"
+ },
+ {
+  "word": "evaluation",
+  "replacement": "assessment",
+  "band": "\u22650.95",
+  "nli": 0.986,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "consists",
+  "replacement": "is",
+  "band": "\u22650.95",
+  "nli": 0.984,
+  "mark": "meaning"
+ },
+ {
+  "word": "calculate",
+  "replacement": "figure",
+  "band": "\u22650.95",
+  "nli": 0.981,
+  "mark": "meaning"
+ },
+ {
+  "word": "segments",
+  "replacement": "sections",
+  "band": "\u22650.95",
+  "nli": 0.98,
+  "mark": "good"
+ },
+ {
+  "word": "associated",
+  "replacement": "connected",
+  "band": "\u22650.95",
+  "nli": 0.977,
+  "mark": "meaning"
+ },
+ {
+  "word": "concluded",
+  "replacement": "thought",
+  "band": "\u22650.95",
+  "nli": 0.966,
+  "mark": "meaning"
+ },
+ {
+  "word": "optimistic",
+  "replacement": "hopeful",
+  "band": "\u22650.95",
+  "nli": 0.958,
+  "mark": "good"
+ },
+ {
+  "word": "oversight",
+  "replacement": "management",
+  "band": "0.90\u20130.95",
+  "nli": 0.95,
+  "mark": "meaning"
+ },
+ {
+  "word": "fragmented",
+  "replacement": "separated",
+  "band": "0.90\u20130.95",
+  "nli": 0.949,
+  "mark": "good"
+ },
+ {
+  "word": "recoverable",
+  "replacement": "redeemable",
+  "band": "0.90\u20130.95",
+  "nli": 0.948,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "deploy",
+  "replacement": "position",
+  "band": "0.90\u20130.95",
+  "nli": 0.944,
+  "mark": "meaning"
+ },
+ {
+  "word": "infer",
+  "replacement": "reason",
+  "band": "0.90\u20130.95",
+  "nli": 0.939,
+  "mark": "meaning"
+ },
+ {
+  "word": "packets",
+  "replacement": "messages",
+  "band": "0.90\u20130.95",
+  "nli": 0.935,
+  "mark": "meaning"
+ },
+ {
+  "word": "financing",
+  "replacement": "funding",
+  "band": "0.90\u20130.95",
+  "nli": 0.935,
+  "mark": "meaning"
+ },
+ {
+  "word": "requiring",
+  "replacement": "involving",
+  "band": "0.90\u20130.95",
+  "nli": 0.934,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "spectators",
+  "replacement": "witnesses",
+  "band": "0.90\u20130.95",
+  "nli": 0.933,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "decreased",
+  "replacement": "diminished",
+  "band": "0.90\u20130.95",
+  "nli": 0.927,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "spectators",
+  "replacement": "witnesses",
+  "band": "0.90\u20130.95",
+  "nli": 0.925,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "endpoint",
+  "replacement": "end",
+  "band": "0.90\u20130.95",
+  "nli": 0.915,
+  "mark": "meaning"
+ },
+ {
+  "word": "determine",
+  "replacement": "see",
+  "band": "0.90\u20130.95",
+  "nli": 0.905,
+  "mark": "good"
+ },
+ {
+  "word": "forwarding",
+  "replacement": "sending",
+  "band": "0.90\u20130.95",
+  "nli": 0.904,
+  "mark": "meaning"
+ },
+ {
+  "word": "issuers",
+  "replacement": "institutions",
+  "band": "0.90\u20130.95",
+  "nli": 0.904,
+  "mark": "meaning"
+ },
+ {
+  "word": "forwarding",
+  "replacement": "sending",
+  "band": "0.80\u20130.90",
+  "nli": 0.895,
+  "mark": "meaning"
+ },
+ {
+  "word": "drifting",
+  "replacement": "going",
+  "band": "0.80\u20130.90",
+  "nli": 0.89,
+  "mark": "good"
+ },
+ {
+  "word": "conform",
+  "replacement": "change",
+  "band": "0.80\u20130.90",
+  "nli": 0.89,
+  "mark": "meaning"
+ },
+ {
+  "word": "topically",
+  "replacement": "locally",
+  "band": "0.80\u20130.90",
+  "nli": 0.88,
+  "mark": "meaning"
+ },
+ {
+  "word": "metabolite",
+  "replacement": "substance",
+  "band": "0.80\u20130.90",
+  "nli": 0.88,
+  "mark": "meaning"
+ },
+ {
+  "word": "elected",
+  "replacement": "taken",
+  "band": "0.80\u20130.90",
+  "nli": 0.878,
+  "mark": "meaning"
+ },
+ {
+  "word": "decreased",
+  "replacement": "diminished",
+  "band": "0.80\u20130.90",
+  "nli": 0.877,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "petitioners",
+  "replacement": "applicants",
+  "band": "0.80\u20130.90",
+  "nli": 0.876,
+  "mark": "meaning"
+ },
+ {
+  "word": "recoverable",
+  "replacement": "redeemable",
+  "band": "0.80\u20130.90",
+  "nli": 0.873,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "delimit",
+  "replacement": "define",
+  "band": "0.80\u20130.90",
+  "nli": 0.871,
+  "mark": "meaning"
+ },
+ {
+  "word": "algorithms",
+  "replacement": "rules",
+  "band": "0.80\u20130.90",
+  "nli": 0.859,
+  "mark": "meaning"
+ },
+ {
+  "word": "nonce",
+  "replacement": "present",
+  "band": "0.80\u20130.90",
+  "nli": 0.856,
+  "mark": "meaning"
+ },
+ {
+  "word": "dynamic",
+  "replacement": "changing",
+  "band": "0.80\u20130.90",
+  "nli": 0.826,
+  "mark": "good"
+ },
+ {
+  "word": "interim",
+  "replacement": "temporary",
+  "band": "0.80\u20130.90",
+  "nli": 0.819,
+  "mark": "meaning"
+ },
+ {
+  "word": "ordinary",
+  "replacement": "average",
+  "band": "0.80\u20130.90",
+  "nli": 0.808,
+  "mark": "meaning"
+ },
+ {
+  "word": "confirmation",
+  "replacement": "verification",
+  "band": "<0.80",
+  "nli": 0.649,
+  "mark": "meaning"
+ },
+ {
+  "word": "verification",
+  "replacement": "confirmation",
+  "band": "<0.80",
+  "nli": 0.646,
+  "mark": "meaning"
+ },
+ {
+  "word": "retrained",
+  "replacement": "prepared",
+  "band": "<0.80",
+  "nli": 0.615,
+  "mark": "good"
+ },
+ {
+  "word": "bidirectional",
+  "replacement": "duplex",
+  "band": "<0.80",
+  "nli": 0.611,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "implicit",
+  "replacement": "absolute",
+  "band": "<0.80",
+  "nli": 0.585,
+  "mark": "notsimpler"
+ },
+ {
+  "word": "interoperability",
+  "replacement": "ability",
+  "band": "<0.80",
+  "nli": 0.573,
+  "mark": "meaning"
+ },
+ {
+  "word": "interoperability",
+  "replacement": "ability",
+  "band": "<0.80",
+  "nli": 0.571,
+  "mark": "meaning"
+ },
+ {
+  "word": "rewriting",
+  "replacement": "writing",
+  "band": "<0.80",
+  "nli": 0.564,
+  "mark": "meaning"
+ },
+ {
+  "word": "spontaneous",
+  "replacement": "natural",
+  "band": "<0.80",
+  "nli": 0.554,
+  "mark": "meaning"
+ },
+ {
+  "word": "procure",
+  "replacement": "secure",
+  "band": "<0.80",
+  "nli": 0.494,
+  "mark": "meaning"
+ },
+ {
+  "word": "latency",
+  "replacement": "potential",
+  "band": "<0.80",
+  "nli": 0.447,
+  "mark": "meaning"
+ },
+ {
+  "word": "marshmallows",
+  "replacement": "candies",
+  "band": "<0.80",
+  "nli": 0.388,
+  "mark": "meaning"
+ },
+ {
+  "word": "procure",
+  "replacement": "secure",
+  "band": "<0.80",
+  "nli": 0.267,
+  "mark": "meaning"
+ },
+ {
+  "word": "reverse",
+  "replacement": "change",
+  "band": "<0.80",
+  "nli": 0.113,
+  "mark": "meaning"
+ },
+ {
+  "word": "partitioning",
+  "replacement": "analysis",
+  "band": "<0.80",
+  "nli": 0.017,
+  "mark": "meaning"
+ }
+]
