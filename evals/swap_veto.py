@@ -574,11 +574,14 @@ def load_state(state, plan, panel):
 
 def swap_records(passage, rec):
     """Every veto decision of one @window output, with whether it was applied."""
+    import re
+    bare = lambda text: re.sub(r"[^\w\s]", "", text).strip().lower()
     words = [e for e in rec.get("edits", []) if e.get("stage") == "word"]
     rows = []
     for d in rec.get("veto_log", []):
-        applied = d["passes"] and any(e["source"] == d["word"] or e["replacement"] == d["replacement"]
-                                      for e in words)
+        # The logged run is whole whitespace words, so it may carry punctuation or an article.
+        applied = d["passes"] and any(bare(e["source"]) in bare(d["word"]).split()
+                                      and bare(e["replacement"]) in bare(d["replacement"]).split() for e in words)
         rows.append({**d, "applied": bool(applied)})
     return rows
 
@@ -687,7 +690,8 @@ def run_judge(args):
                                            and any(e.get("stage") == "word" for e in outputs[name][p]["edits"])
                                            for p in done)}
             swaps_local += [{"config": labels.get(name, name), "passage": p, "domain": passages[p]["domain"],
-                             "kind": passages[p]["kind"], **r} for p, r in recs]
+                             "kind": passages[p]["kind"], "passage_nli": rows[name][p]["nli_mean"],
+                             "f2_passage_nli": rows[base][p]["nli_mean"], **r} for p, r in recs]
         out["arms"][labels.get(name, name)] = res
     if swaps_local:
         sentence_scores(swaps_local, args.state)
@@ -698,9 +702,28 @@ def run_judge(args):
             "sentence_mean_below_0.95": sum((r["sentence_mean"] or 0) < 0.95 for r in applied),
             "window_mean": bootstrap_mean([r["mean"] for r in applied]),
             "sentence_mean": bootstrap_mean([r["sentence_mean"] for r in applied])}
+        out["applied_swaps_by_sentence_nli"] = diagnostics(applied)
     Path(args.out).write_text(json.dumps(out, indent=1, default=float))
     for k, v in out["arms"].items():
         print(f"{k}: {v['passages']} passages, beats F2: {v['beats_F2']} {v['rule']}")
+
+
+def diagnostics(applied):
+    """Passage-NLI cost of the applied swaps by their whole-sentence NLI (post
+    hoc, aggregate): where do the passages that fall below 0.80 come from?"""
+    out = {}
+    for config in sorted({r["config"] for r in applied}):
+        rows = [r for r in applied if r["config"] == config]
+        bands = {}
+        for lo, hi, label in C.BANDS:
+            sel = [r for r in rows if r["sentence_mean"] is not None and lo <= r["sentence_mean"] < hi]
+            d = [r["passage_nli"] - r["f2_passage_nli"] for r in sel
+                 if r["passage_nli"] is not None and r["f2_passage_nli"] is not None]
+            bands[label] = {"swaps": len(sel), "mean_d_passage_nli": float(np.mean(d)) if d else None,
+                            "newly_below_080": sum(r["passage_nli"] < 0.80 <= r["f2_passage_nli"] for r in sel
+                                                   if r["passage_nli"] is not None and r["f2_passage_nli"] is not None)}
+        out[config] = bands
+    return out
 
 
 def C_zipf(word):

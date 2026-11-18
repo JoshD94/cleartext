@@ -55,3 +55,11 @@ def test_lexical_row_credits_a_simpler_word():
     assert lex["word_complexity"] < same["word_complexity"]
     assert lex["rare_share"] < same["rare_share"]
     assert lex["changed_zipf_gain"] > 0
+
+
+def test_applied_swap_matches_its_edit_despite_punctuation():
+    rec = {"edits": [{"stage": "word", "source": "integrated", "replacement": "combined"}],
+           "veto_log": [{"passes": False, "word": "a large", "replacement": "an big"},
+                        {"passes": True, "word": "integrated.", "replacement": "combined."}]}
+    assert [r["applied"] for r in V.swap_records(None, rec)] == [False, True]
+    assert [r["applied"] for r in V.swap_records(None, {**rec, "edits": []})] == [False, False]

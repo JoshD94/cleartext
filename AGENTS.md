@@ -105,6 +105,10 @@ versions, input/model/source hashes and completion/failure receipts.
   `main` at that path (sources still match). NLI rejects about 25% of
   human-gold word swaps at 0.95; do not lower the bound for that
   (`evals/reports/20261117-nli-calibration/`).
+- `cleartext.swap_veto.WindowSwapVeto` is an opt-in per-swap veto (window NLI
+  + checks, `word_veto=`). `evals/swap_veto.py freeze` reuses the Nov 16 sweep
+  dev state's memos only while every source stays byte-identical; on dev it
+  did not make words beat F2 (`evals/reports/20261118-swap-window-veto/`).
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
