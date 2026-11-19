@@ -27,11 +27,95 @@ LS_TRAIN = {"benchls", "tsar_trial"}
 MODEL = STATE / "model.pkl"
 
 
+NLI_STORE = STATE / "nli.jsonl"
+
+
 def _rows(state=None):
-    rows = read_jsonl(Path(state or STATE / "features") / "rows.jsonl")
+    rows = read_jsonl(Path(state or STATE / "features-v2") / "rows.jsonl")
+    nli = {(n["id"], n["word"]): n for n in read_jsonl(NLI_STORE)}
     for r in rows:
         r["key"] = (r["id"], r["word"].lower())
+        n = nli.get(r["key"])
+        if n:
+            r["f"].update({"nli_fw": n["fw"], "nli_bw": n["bw"], "nli_min": min(n["fw"], n["bw"])})
     return rows
+
+
+def has_nli(r):
+    return not np.isnan(r["f"]["nli_min"])
+
+
+def nli_targets_train(rows, seed=4701):
+    """Rows the checker trains or is tested on: rated SWORDS substitutes
+    (dev: all; test: up to 4 accepted + 4 rejected per target), LS-train gold
+    rows and up to 4 random generated non-gold rows per LS-train target."""
+    import random
+
+    rng = random.Random(seed)
+    by = defaultdict(list)
+    for r in rows:
+        by[r["id"]].append(r)
+    out = []
+    for iid, rs in by.items():
+        ds = rs[0]["dataset"]
+        rated = [r for r in rs if r["rated"] is not None and r["rated_n"] >= 3 and (r["rated"] >= 0.5 or r["rated"] == 0)]
+        if ds == "swords_dev":
+            out += rated
+        elif ds == "swords_test":
+            out += [r for r in rated if r["rated"] >= 0.5][:4] + [r for r in rated if r["rated"] == 0][:4]
+        elif ds in LS_TRAIN:
+            neg = [r for r in rs if r["gold"] == 0 and set(r["sources"]) - {"given"}]
+            out += [r for r in rs if r["gold"] > 0] + rng.sample(neg, min(4, len(neg)))
+    return out
+
+
+def nli_targets_test(rows):
+    """The top candidate of every held-out target under each ablation."""
+    model = pickle.load(open(MODEL, "rb"))
+    by_ds = defaultdict(list)
+    for r in rows:
+        if r["dataset"] in ("tsar_test", "nnseval", "joshua60"):
+            by_ds[r["dataset"]].append(r)
+    keys = set()
+    for cfg in ABLATIONS.values():
+        cfg = dict(cfg, checker="off")
+        for ds, rs in by_ds.items():
+            for iid, d in decide(model, [dict(r, f=dict(r["f"])) for r in rs], cfg).items():
+                keys.add((iid, d["word"].lower()))
+    return [r for rs in by_ds.values() for r in rs if r["key"] in keys]
+
+
+def nli(argv):
+    """learned-words nli train|test [--max-seconds N]: fill window NLI, checkpointed."""
+    import torch
+
+    from cleartext.learned_words import features as F
+
+    torch.set_num_threads(2)
+    phase = argv[0]
+    max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1500
+    rows = _rows()
+    want = nli_targets_train(rows) if phase == "train" else nli_targets_test(rows)
+    todo = [r for r in want if not has_nli(r)]
+    inst = {i["id"]: i for i in all_instances()}
+    print(f"{len(want)} rows need NLI, {len(todo)} to do", flush=True)
+    by = defaultdict(list)
+    for r in todo:
+        by[r["id"]].append(r)
+    deadline = time.monotonic() + max_seconds
+    n = 0
+    with open(NLI_STORE, "a") as f:
+        for iid, rs in by.items():
+            if time.monotonic() > deadline:
+                break
+            F.add_nli(rs, inst)
+            for r in rs:
+                f.write(json.dumps({"id": r["id"], "word": r["word"].lower(),
+                                    "fw": round(r["f"]["nli_fw"], 5), "bw": round(r["f"]["nli_bw"], 5)}) + "\n")
+            f.flush()
+            n += len(rs)
+    print(f"scored {n}; {len(todo) - n} left", flush=True)
+    print("COMPLETE" if n == len(todo) else "PARTIAL", flush=True)
 
 
 # --- stage 1 ---------------------------------------------------------------------
@@ -131,10 +215,10 @@ def check_training(rows):
     """Checker rows, labels, weights from the train split."""
     out, y, w = [], [], []
     for r in rows:
-        if r["dataset"] == "swords_dev" and r["rated"] is not None and r["rated_n"] >= 3:
+        if r["dataset"] == "swords_dev" and r["rated"] is not None and r["rated_n"] >= 3 and has_nli(r):
             if r["rated"] >= 0.5 or r["rated"] == 0:
                 out.append(r), y.append(float(r["rated"] >= 0.5)), w.append(1.0)
-        elif r["dataset"] in LS_TRAIN:
+        elif r["dataset"] in LS_TRAIN and has_nli(r):
             if r["gold"] > 0:
                 out.append(r), y.append(1.0), w.append(0.5)
             elif set(r["sources"]) - {"given"}:
@@ -391,7 +475,8 @@ def potential(rows, instances):
 def checker_on_swords(model, rows):
     from sklearn.metrics import roc_auc_score
 
-    rated = [r for r in rows if r["rated"] is not None and r["rated_n"] >= 3 and (r["rated"] >= 0.5 or r["rated"] == 0)]
+    rated = [r for r in rows if r["rated"] is not None and r["rated_n"] >= 3 and (r["rated"] >= 0.5 or r["rated"] == 0)
+             and has_nli(r)]
     for r in rated:
         r["f"].update(model["extra"].get(r["id"], {"p_complex": 0.5, "p_term": 0.5}))
     y = np.array([r["rated"] >= 0.5 for r in rated])

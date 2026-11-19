@@ -135,8 +135,10 @@ def masked_distribution(text, start, end):
     return mlm.cls(hidden[0, pos]).log_softmax(-1).numpy()
 
 
-def generate(instance, doc, token, logp, given=True):
-    """{lower word: candidate dict} from every source, plus the resolved target."""
+def generate(instance, doc, token, logp, given=True, generated=True):
+    """{lower word: candidate dict} from every source, plus the resolved target.
+    generated=False keeps only the data set's own substitutes (SWORDS rows,
+    used for the checker)."""
     target = resolve_target(token) if token is not None and not hyphen_fragment(token) else None
     if target is None:
         return None, {}
@@ -153,13 +155,13 @@ def generate(instance, doc, token, logp, given=True):
         c["sources"].add(source)
         c.update({k: v for k, v in extra.items() if c.get(k) is None})
 
-    for name, (relation, senses) in relation_map(lemma, pos).items():
+    for name, (relation, senses) in (relation_map(lemma, pos).items() if generated else ()):
         if not name.replace("_", "").replace("-", "").isalpha():
             continue
         word = inflect(name, tag, token.text)
         add(word, "wordnet", relation=relation)
     tokz, _ = bert()
-    for rank, idx in enumerate(np.argsort(-logp)[:BERT_TOP * 3]):
+    for idx in (np.argsort(-logp)[:BERT_TOP * 3] if generated else ()):
         surface = tokz.convert_ids_to_tokens(int(idx))
         if not surface.isalpha() or len([w for w in out.values() if "bert" in w["sources"]]) >= BERT_TOP:
             continue
@@ -168,7 +170,7 @@ def generate(instance, doc, token, logp, given=True):
             if forms:
                 add(forms[0], "bert")
                 break
-    for say in D.plain_pairs().get(lemma, []):
+    for say in (D.plain_pairs().get(lemma, []) if generated else ()):
         add(inflect(say.replace(" ", "_"), tag, token.text), "plain")
     out = _cap(out, logp, tokz)
     if given:
@@ -194,6 +196,29 @@ def _cap(cands, logp, tok, limit=MAX_GENERATED):
     rest = sorted((k for k in cands if k not in must), key=lambda k: -_first_logp(k, logp, tok))
     keep = (must + rest)[:max(limit, len(must))]
     return {k: cands[k] for k in keep}
+
+
+def nli_scores(text, start, end, words):
+    """[fw, bw] * len(words): small-NLI entailment of the window before -> after and back."""
+    pairs = []
+    for w in words:
+        a, b = window(text, start, end, w)
+        pairs += [(a, b), (b, a)]
+    return entail(pairs)
+
+
+def add_nli(rows, instances):
+    """Fill nli_fw / nli_bw / nli_min in place for rows of the given instances."""
+    by = {}
+    for r in rows:
+        by.setdefault(r["id"], []).append(r)
+    for iid, rs in by.items():
+        inst = instances[iid]
+        ent = nli_scores(inst["text"], inst["start"], inst["end"], [r["word"] for r in rs])
+        for k, r in enumerate(rs):
+            fw, bw = ent[2 * k], ent[2 * k + 1]
+            r["f"].update({"nli_fw": fw, "nli_bw": bw, "nli_min": min(fw, bw)})
+    return rows
 
 
 # --- features --------------------------------------------------------------------
@@ -287,14 +312,16 @@ def target_features(doc, token, target, logp):
     return f
 
 
-def featurize(instance, given=True):
-    """All candidate rows for one instance (empty when the target does not resolve)."""
+def featurize(instance, given=True, generated=True, with_nli=False):
+    """All candidate rows for one instance (empty when the target does not resolve).
+    Window NLI is costly and only the checker reads it: unless with_nli, the
+    NLI features are NaN here and add_nli() fills them for the rows needed."""
     doc = nlp()(instance["text"])
     token = next((t for t in doc if t.idx == instance["start"]), None)
     if token is None or token.idx + len(token) != instance["end"] or not token.is_alpha:
         return []
     logp = masked_distribution(instance["text"], instance["start"], instance["end"])
-    target, cands = generate(instance, doc, token, logp, given=given)
+    target, cands = generate(instance, doc, token, logp, given=given, generated=generated)
     if not cands:
         return []
     lemma, pos, tag, _ = target
@@ -306,11 +333,7 @@ def featurize(instance, given=True):
     subs = [(text[:s] + w + text[e:], s, s + len(w), w) for w in words]
     enc = encode([(text, s, e, token.text)] + subs)
     t_vec, t_sent, t_pll, _ = enc[0]
-    pairs = []
-    for w in words:
-        a, b = window(text, s, e, w)
-        pairs += [(a, b), (b, a)]
-    ent = entail(pairs)
+    ent = nli_scores(text, s, e, words) if with_nli else [float("nan")] * (2 * len(words))
     order = {w: r for r, w in enumerate(sorted(words, key=lambda w: -float(logp[(tok(w.lower(), add_special_tokens=False).input_ids or [0])[0]])))}
     rows = []
     for k, (w, c) in enumerate(zip(words, cands.values())):

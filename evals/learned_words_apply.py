@@ -12,7 +12,7 @@
 
 The candidate ranker excludes NLI, so window NLI is computed only for each
 target's top candidate here (the checker's input); featurize() is called with
-NLI stubbed out for the rest. Swaps identical to one of Joshua's 60 marked
+NaN NLI for the rest. Swaps identical to one of Joshua's 60 marked
 swaps (same sentence, word and replacement) keep their known mark and are left
 off the page.
 """
@@ -103,11 +103,7 @@ def word_swaps(text, model, pid):
             iid = f"{pid}:{si}:{t.idx}"
             inst = {"id": iid, "dataset": "apply", "group": t.lemma_.lower(), "text": s, "start": t.idx,
                     "end": t.idx + len(t), "target": t.text, "gold": {}, "rated": []}
-            F.entail = lambda pairs, batch=32: [0.0] * len(pairs)
-            try:
-                rows = F.featurize(inst, given=False)
-            finally:
-                F.entail = real_entail
+            rows = F.featurize(inst, given=False)  # NLI left NaN; filled for the top candidate below
             if not rows:
                 continue
             model["extra"][iid] = {"p_complex": pc, "p_term": pt}

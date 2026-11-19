@@ -106,7 +106,13 @@ def featurize(args):
             if time.monotonic() > deadline:
                 break
             given = inst["dataset"] != "joshua60"
-            rows = F.featurize(inst, given=given)
+            if inst["dataset"] == "swords_test":
+                # The checker is tested on up to 4 accepted + 4 rejected substitutes per target.
+                rated = sorted(inst["rated"], key=lambda r: -r[1])
+                inst = dict(inst, rated=[r for r in rated if r[1] >= 0.5 and r[2] >= 3][:4]
+                            + [r for r in rated if r[1] == 0 and r[2] >= 3][:4])
+            # SWORDS rows train and test the checker only: its rated substitutes.
+            rows = F.featurize(inst, given=given, generated=not inst["dataset"].startswith("swords"))
             for r in rows:
                 out.write(json.dumps(_round(r)) + "\n")
             out.flush()
@@ -124,11 +130,11 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     f = sub.add_parser("featurize")
-    f.add_argument("--state", default=str(STATE / "features"))
+    f.add_argument("--state", default=str(STATE / "features-v2"))
     f.add_argument("--datasets", default="")
     f.add_argument("--max-seconds", type=float, default=1500)
     f.add_argument("--threads", type=int, default=2)
-    for name in ("train", "evaluate", "splits", "apply", "page"):
+    for name in ("nli", "train", "evaluate", "splits", "apply", "page"):
         p = sub.add_parser(name)
         p.add_argument("rest", nargs="*")
     args, extra = ap.parse_known_args(argv)
