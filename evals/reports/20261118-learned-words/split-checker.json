@@ -1,0 +1,40 @@
+{
+ "threshold_rule": "max validation recall with specificity >= 0.9",
+ "threshold": 0.54,
+ "validation_recall": 0.715,
+ "validation_specificity": 0.904881101376721,
+ "train_pairs": 2999,
+ "test": {
+  "auc": 0.8968538798498124,
+  "human_split_acceptance": 0.705,
+  "rejection_by_kind": {
+   "bad_boundary": 0.9291666666666667,
+   "dropped_span": 0.919831223628692,
+   "lost_subject": 0.960352422907489,
+   "wrong_referent": 0.5157894736842106
+  },
+  "n": {
+   "human": 400,
+   "bad_boundary": 240,
+   "dropped_span": 237,
+   "wrong_referent": 95,
+   "lost_subject": 227
+  },
+  "nli_min_auc": 0.5754411764705882,
+  "nli_floor_05_rejection_by_kind": {
+   "bad_boundary": 0.0,
+   "dropped_span": 0.8607594936708861,
+   "lost_subject": 0.5022026431718062,
+   "wrong_referent": 0.5157894736842106
+  }
+ },
+ "f2_dev": {
+  "splits": 73,
+  "rejected": 38
+ },
+ "precommit_60": {
+  "n": 60,
+  "rejected": 30,
+  "sha256": "beb0559094536911c96c269c893bfa85ec2f304bb32cbff1271983b70ace6773"
+ }
+}

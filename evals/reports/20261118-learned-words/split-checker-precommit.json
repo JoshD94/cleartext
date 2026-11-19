@@ -1,0 +1,309 @@
+{
+ "note": "Split-checker decisions on the 60 F2 splits of rate-edits.html part 2, written before Joshua's marks on them exist. Score with evals/learned_splits.py score-marks.",
+ "threshold": 0.54,
+ "n": 60,
+ "rejected": 30,
+ "sha256": "beb0559094536911c96c269c893bfa85ec2f304bb32cbff1271983b70ace6773",
+ "decisions": [
+  {
+   "key": "2c04503896f36c5a",
+   "score": 0.031,
+   "accept": false
+  },
+  {
+   "key": "c3c539ed674d5a47",
+   "score": 0.2894,
+   "accept": false
+  },
+  {
+   "key": "fe37551f91a060e9",
+   "score": 0.003,
+   "accept": false
+  },
+  {
+   "key": "921df39fd086b095",
+   "score": 0.8601,
+   "accept": true
+  },
+  {
+   "key": "5162e7e1e35aca5d",
+   "score": 0.002,
+   "accept": false
+  },
+  {
+   "key": "b46cd6fcc5daa929",
+   "score": 0.7201,
+   "accept": true
+  },
+  {
+   "key": "260a84730517621e",
+   "score": 0.5481,
+   "accept": true
+  },
+  {
+   "key": "e184ac5006591d70",
+   "score": 0.4926,
+   "accept": false
+  },
+  {
+   "key": "fa2ed214dcd890e1",
+   "score": 0.5262,
+   "accept": false
+  },
+  {
+   "key": "1b01fab58459883d",
+   "score": 0.8441,
+   "accept": true
+  },
+  {
+   "key": "bb09c08d59d09415",
+   "score": 0.0378,
+   "accept": false
+  },
+  {
+   "key": "e9524d090ac94e88",
+   "score": 0.8895,
+   "accept": true
+  },
+  {
+   "key": "3f41f9f5efe7c892",
+   "score": 0.0014,
+   "accept": false
+  },
+  {
+   "key": "a691236781f8dcd6",
+   "score": 0.7966,
+   "accept": true
+  },
+  {
+   "key": "839dd6ac0d66ca33",
+   "score": 0.9056,
+   "accept": true
+  },
+  {
+   "key": "7905e064c45ce97c",
+   "score": 0.3454,
+   "accept": false
+  },
+  {
+   "key": "3761fc013b1a36b4",
+   "score": 0.9105,
+   "accept": true
+  },
+  {
+   "key": "9f1a196da303a0dd",
+   "score": 0.7116,
+   "accept": true
+  },
+  {
+   "key": "7b899ccf7b3de768",
+   "score": 0.7619,
+   "accept": true
+  },
+  {
+   "key": "b88e2e543839411d",
+   "score": 0.4751,
+   "accept": false
+  },
+  {
+   "key": "fb4e8045714be625",
+   "score": 0.6148,
+   "accept": true
+  },
+  {
+   "key": "936c376c676a9e84",
+   "score": 0.6837,
+   "accept": true
+  },
+  {
+   "key": "a2c79363a025f315",
+   "score": 0.813,
+   "accept": true
+  },
+  {
+   "key": "0796754ccdcfdbc2",
+   "score": 0.7208,
+   "accept": true
+  },
+  {
+   "key": "c0119abf0ab4178d",
+   "score": 0.2319,
+   "accept": false
+  },
+  {
+   "key": "f959afe444ad1d08",
+   "score": 0.0232,
+   "accept": false
+  },
+  {
+   "key": "e641e22d794a31c6",
+   "score": 0.5403,
+   "accept": true
+  },
+  {
+   "key": "cd0a80b7b866b5ed",
+   "score": 0.139,
+   "accept": false
+  },
+  {
+   "key": "8a15717439bb82f6",
+   "score": 0.0004,
+   "accept": false
+  },
+  {
+   "key": "2a03c98c3afbb378",
+   "score": 0.012,
+   "accept": false
+  },
+  {
+   "key": "b960b2291d29cdf0",
+   "score": 0.6257,
+   "accept": true
+  },
+  {
+   "key": "e149ca31b1bbc800",
+   "score": 0.0023,
+   "accept": false
+  },
+  {
+   "key": "15c83b362a1f87f1",
+   "score": 0.8186,
+   "accept": true
+  },
+  {
+   "key": "a68dbc5194483a50",
+   "score": 0.3351,
+   "accept": false
+  },
+  {
+   "key": "3e95db5dba8d0bfd",
+   "score": 0.2227,
+   "accept": false
+  },
+  {
+   "key": "9e739303647a30ef",
+   "score": 0.1817,
+   "accept": false
+  },
+  {
+   "key": "0bf1e0ab007cf4d6",
+   "score": 0.8829,
+   "accept": true
+  },
+  {
+   "key": "af932810d921530c",
+   "score": 0.9012,
+   "accept": true
+  },
+  {
+   "key": "8d924ea263e5f2e4",
+   "score": 0.1874,
+   "accept": false
+  },
+  {
+   "key": "dfb992ede2b83c44",
+   "score": 0.6443,
+   "accept": true
+  },
+  {
+   "key": "fc30f68bbd74590c",
+   "score": 0.9106,
+   "accept": true
+  },
+  {
+   "key": "31804ebc6f2fb451",
+   "score": 0.915,
+   "accept": true
+  },
+  {
+   "key": "e57f27d7e8a9cfcd",
+   "score": 0.5896,
+   "accept": true
+  },
+  {
+   "key": "4d846f2f7a4584cf",
+   "score": 0.1371,
+   "accept": false
+  },
+  {
+   "key": "f22fe6665ca2d7d6",
+   "score": 0.1632,
+   "accept": false
+  },
+  {
+   "key": "d898c9f927ca0126",
+   "score": 0.8781,
+   "accept": true
+  },
+  {
+   "key": "db1f7d05cea0fe9f",
+   "score": 0.2763,
+   "accept": false
+  },
+  {
+   "key": "f29aa3a28b392257",
+   "score": 0.6015,
+   "accept": true
+  },
+  {
+   "key": "d9828bd43f46bca1",
+   "score": 0.206,
+   "accept": false
+  },
+  {
+   "key": "16646d6c778a5b29",
+   "score": 0.5868,
+   "accept": true
+  },
+  {
+   "key": "0299d692100b83d6",
+   "score": 0.1099,
+   "accept": false
+  },
+  {
+   "key": "8d03c607cdaa191b",
+   "score": 0.6185,
+   "accept": true
+  },
+  {
+   "key": "d1309f47ed30c8f4",
+   "score": 0.0053,
+   "accept": false
+  },
+  {
+   "key": "31f5b7d79e9f5a1f",
+   "score": 0.749,
+   "accept": true
+  },
+  {
+   "key": "2c39e26a66d5f14a",
+   "score": 0.0013,
+   "accept": false
+  },
+  {
+   "key": "1932aa5c4a069ac7",
+   "score": 0.875,
+   "accept": true
+  },
+  {
+   "key": "c22c66110a873104",
+   "score": 0.0475,
+   "accept": false
+  },
+  {
+   "key": "451228a7da348945",
+   "score": 0.663,
+   "accept": true
+  },
+  {
+   "key": "e531645a8b95da52",
+   "score": 0.3683,
+   "accept": false
+  },
+  {
+   "key": "2559298763f89d2e",
+   "score": 0.0039,
+   "accept": false
+  }
+ ]
+}

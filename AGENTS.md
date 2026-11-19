@@ -110,6 +110,13 @@ versions, input/model/source hashes and completion/failure receipts.
   dev state's memos only while every source stays byte-identical; on dev it
   did not make words beat F2 (`evals/reports/20261118-swap-window-veto/`).
 
+- `cleartext.learned_words` (opt-in; `scripts/learned-words`, runs `python -I`)
+  is the trained word stage; downloads live in CLEARTEXT_LEXSIMP_RAW, rows and
+  models in `~/.local/state/cleartext/learned-words-20261118/`. Editing its
+  `features.py`/`data.py` invalidates the feature state (new dir). Joshua's 60
+  marked swaps are held out: never train or tune on them or the round-2 page.
+  Its split checker is too strict on F2 (rejects 38/73): keep it opt-in.
+
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
 handback, close only resources created for the task and leave a short handoff.

@@ -1,0 +1,25 @@
+{
+ "passages": 100,
+ "passages_with_swaps": 70,
+ "swaps": 98,
+ "by_pos": {
+  "v": 54,
+  "a": 25,
+  "r": 11,
+  "n": 8
+ },
+ "by_domain": {
+  "corporate_communication": 18,
+  "computer_science": 13,
+  "health_medical": 15,
+  "legal_government": 15,
+  "political_science": 13,
+  "science": 15,
+  "simple_english": 9
+ },
+ "simple_control_swaps": 9,
+ "splits_rejected": 0,
+ "content_words_seen": 3446,
+ "page_items": 98,
+ "identical_to_marked_60": []
+}
