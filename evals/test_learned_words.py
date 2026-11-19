@@ -100,3 +100,33 @@ def test_oof_scores_extra_rows_with_the_fold_that_held_out_their_group():
     ge = np.array([0, 3, 7, 11, 19, 99])  # 99 never occurs: scored by a model on all rows
     pred, pe = oof(lambda: LogisticRegression(), X, y, g, extra=(Xe, ge))
     assert pred.shape == (200,) and pe.shape == (6,) and not np.isnan(pe).any()
+
+
+def test_simpler_margin_rule_takes_smallest_margin_at_target_precision():
+    from cleartext.learned_words import simpler as SM
+
+    margins = np.repeat([0.0, 0.5, 1.0], 200)
+    labels = np.concatenate([np.zeros(200), np.r_[np.ones(120), np.zeros(80)], np.ones(200)]).astype(bool)
+    # >= 0.5: 320/400 = 0.80 reaches the target; >= 0.0 does not.
+    m, table = SM.choose_margin(margins, labels, grid=np.array([0.0, 0.5, 1.0]))
+    assert m == 0.5 and table[0]["precision"] < 0.8
+
+
+def test_simpler_pairs_label_needs_clear_gap():
+    from cleartext.learned_words import simpler as SM
+
+    scores = {"a": 0.9, "b": 0.85, "c": 0.1}
+    pred = {"a": 2.0, "b": 1.0, "c": 0.0}
+    m, lab, gap = SM.pairs(scores, pred, 0.10, max_pairs=2000)
+    clear = dict(zip(np.round(gap, 2), lab))
+    assert clear[0.8] and not clear[0.05] and not clear[-0.8]
+
+
+def test_r3_choose_keeps_one_swap_per_sentence_and_respects_filter():
+    from evals.learned_words_apply import choose
+
+    sw = [{"sentence": 0, "gate": 0.9, "check": 0.9, "margin": 0.1},
+          {"sentence": 0, "gate": 0.8, "check": 0.9, "margin": 1.0},
+          {"sentence": 1, "gate": 0.5, "check": 0.9, "margin": 1.0}]
+    assert choose(sw) == [sw[0], sw[2]]
+    assert choose(sw, lambda s: s["margin"] >= 0.5) == [sw[1], sw[2]]

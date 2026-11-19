@@ -10,6 +10,7 @@ Subcommands (state under ~/.local/state/cleartext/learned-words-20261118):
   splits      sentence-split checker (featurize/train/evaluate)
   apply       the learned word stage on F2's dev outputs (new swaps)
   page        the blind rating page of those swaps
+  simpler     round 3: the "is the replacement simpler" check
 
 Run through scripts/learned-words (python -I; downloaded files are only read
 as data). Raw text and predictions stay in the state directory; aggregates go
@@ -139,7 +140,7 @@ def main(argv=None):
     f.add_argument("--datasets", default="")
     f.add_argument("--max-seconds", type=float, default=1500)
     f.add_argument("--threads", type=int, default=2)
-    for name in ("nli", "train", "evaluate", "splits", "apply", "page"):
+    for name in ("nli", "train", "evaluate", "splits", "apply", "page", "simpler"):
         p = sub.add_parser(name)
         p.add_argument("rest", nargs="*")
     raw = list(sys.argv[1:] if argv is None else argv)

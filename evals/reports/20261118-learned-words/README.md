@@ -109,6 +109,55 @@ Changes meaning, 11 Not simpler.
   (evaluates→assesses, intentionally→deliberately) may be marked Not simpler.
   The model was not changed after these swaps were seen.
 
+## Round 3: is the replacement simpler? (November 19)
+
+**Hypothesis:** many round-2 failures are same-difficulty synonyms, because the
+ranker learned substitutability, not simplicity. A learned word-difficulty
+margin should remove them.
+
+- **Model** (`learned_words/simpler.py`): two gradient-boosting regressors
+  on word-type features (frequency, length, WordNet, BERT static embedding).
+  One is trained on CompLex 2.0 ratings, the other on CWI 2018 annotator
+  shares. Margin = difficulty(target) − difficulty(replacement), in z units.
+- **Held-out words** ([simpler-check.json](simpler-check.json)), pair AUC:
+  CompLex 0.90 and CWI 0.79 on test words. Median margin: TSAR human
+  simplifications +0.81, SWORDS plain synonyms −0.31.
+- **The pre-registered margin rule failed.** Its precision target on random
+  word pairs gave a margin of 1.6, which passes only 14% of TSAR-test human
+  simplifications and removes 28 of the stage's 34 correct TSAR swaps.
+- **Revised rule R2** ([simpler-precommit-r2.json](simpler-precommit-r2.json)),
+  committed before any round-2 comparison or round-3 swap. Margin = **0.1**,
+  chosen for best balanced accuracy between train-side human simplifications
+  and SWORDS-dev synonyms. The revision was prompted by TSAR-test numbers, so
+  TSAR test under R2 is not clean: it passes 73% of gold simplifications and
+  17% of SWORDS-test synonyms, and the stage's TSAR precision stays at 94%
+  (33 swaps, down from 36).
+- **Fresh swaps:** F2's output on the 181 OneStopEnglish dev sentences, which
+  the word stage had never seen. Arm A is the round-2 stage; arm B adds the
+  margin.
+- **Rater:** a fresh blind subagent (Claude, not human). It saw only the
+  sentences and the two words, with round-2 and round-3 swaps shuffled
+  together. It is stricter than the earlier Claude marks (79% agreement).
+
+| Swaps (blind rater) | n | Good | Not simpler | Changes meaning | Good rate |
+|---|---:|---:|---:|---:|---:|
+| Round 2, no margin | 98 | 53 | 34 | 11 | 54% |
+| Round 2, margin (held-out comparison) | 79 | 49 | 14 | 16 | 62% |
+| Round 3 arm A, no margin | 45 | 23 | 16 | 6 | 51% |
+| **Round 3 arm B, margin** | **33** | **21** | **6** | **6** | **64%** |
+
+- **Effect:** on fresh text the margin blocks 10 Not-simpler swaps, 2 Good
+  and 2 Changes meaning. The hypothesis holds, but the Good rate is far
+  from 90%.
+- **What still fails in arm B:**
+  - spelling variants: neighbouring→neighboring, sceptical→skeptical
+  - near-equal synonyms: particularly→especially, international→global
+  - broken grammar: artwork→art in "an art", adored→loved in "his loved music"
+  - shifted claims: suggests→says, proposed→planned
+- Details are in [round3.json](round3.json). Per-swap sentences and marks
+  stay in the state directory (`rating-r3/`). Joshua's page is
+  `~/Documents/cleartext-rating/rate-learned-swaps-r3.html`.
+
 ## Split checker (stage 4b)
 
 [split-checker.json](split-checker.json) has the full results; all figures

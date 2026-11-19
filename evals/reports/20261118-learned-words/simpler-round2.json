@@ -1,0 +1,16 @@
+{
+ "rater": "claude-opus-5-5 (not human), round-2 marks",
+ "swaps": 98,
+ "margin": 0.1,
+ "rule": "r2",
+ "counts": {
+  "good/block": 8,
+  "good/pass": 62,
+  "meaning/pass": 8,
+  "notsimpler/block": 11,
+  "notsimpler/pass": 9
+ },
+ "good_rate_before": 0.7142857142857143,
+ "kept": 79,
+ "good_rate_after": 0.7848101265822784
+}

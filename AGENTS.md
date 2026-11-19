@@ -116,6 +116,8 @@ versions, input/model/source hashes and completion/failure receipts.
   `features.py`/`data.py` invalidates the feature state (new dir). Joshua's 60
   marked swaps are held out: never train or tune on them or the round-2 page.
   Its split checker is too strict on F2 (rejects 38/73): keep it opt-in.
+  Round 3 adds `simpler.py` (word-difficulty margin, rule R2 = 0.1, opt-in
+  via `apply --panel onestop-dev`); OneStopEnglish dev is now used for rated swaps.
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before

@@ -1,0 +1,10 @@
+{
+ "written": "2026-11-19 17:28:43 EST",
+ "margin": 1.6,
+ "model_sha256": "b56d4de4f2c33d1fa02114f8c421b4c838fdc303c4403a914c1ccf3f5358ccf7",
+ "source_sha256": {
+  "models/src/cleartext/learned_words/simpler.py": "e02343d811115bc716e8b2235d503695acb881566e4a4b18c94cd7f97d57bda8",
+  "evals/learned_words_simpler.py": "1363429536cc11965cc0cd1cdfdf594c0cfe05074afd6987bdd56890c41d7edf"
+ },
+ "note": "written before the round-2 comparison and before any round-3 swap exists"
+}

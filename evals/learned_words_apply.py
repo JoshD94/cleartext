@@ -9,6 +9,13 @@
       ~/Documents/cleartext-rating/rate-learned-swaps.html and key.json
       (same card and CSV design as the November 18 page; marks download as
       cleartext-marks-learned-swaps.csv)
+  learned-words apply --panel onestop-dev [--targets N] [--max-seconds N]
+      Round 3: the same stage on F2's output for the 181 OneStopEnglish dev
+      sentences (never seen by the word stage), into apply-r3-onestop/. Every
+      proposed swap records the simplicity margin (simpler.pkl, fixed in
+      simpler-precommit.json); arm A picks swaps as in round 2, arm B only
+      among swaps whose margin passes. The locked OneStopEnglish test split
+      is never read.
 
 The candidate ranker excludes NLI, so window NLI is computed only for each
 target's top candidate here (the checker's input); featurize() is called with
@@ -39,16 +46,41 @@ PAGE = PAGE_DIR / "rate-learned-swaps.html"
 KEY = STATE / "rating/key.json"
 
 
-def f2_outputs():
+SWEEP_DEV = Path.home() / ".local/state/cleartext/param-sweeps-20261116/dev/outputs"
+ONESTOP_DEV = Path.home() / ".local/state/cleartext/testset-v3-20261116/panel/onestop-dev.json"
+APPLY_R3 = STATE / "apply-r3-onestop"
+
+
+def f2_outputs(root=F2_OUTPUTS, ids=None):
     import glob
 
     out = {}
-    for f in sorted(glob.glob(str(F2_OUTPUTS / "*/*.json"))):
+    for f in sorted(glob.glob(str(root / "*/*.json"))):
         d = json.load(open(f))
         c = d["identity"]["config"]
-        if c.startswith("words=off") and '"t5.min_entailment":0.5' in c:
-            out[d["identity"]["id"]] = d["output"]
+        if c.startswith("words=off") and '"t5.min_entailment":0.5' in c and "compound_tagger" in c:
+            if ids is None or d["identity"]["id"] in ids:
+                out[d["identity"]["id"]] = d["output"]
     return out
+
+
+def onestop_panel():
+    """(panel, F2 outputs) for OneStopEnglish dev; refuses if any is missing."""
+    rows = json.load(open(ONESTOP_DEV))
+    panel = {r["id"]: {"original": r["original"], "domain": "onestop_news", "kind": "standard"} for r in rows}
+    outputs = f2_outputs(SWEEP_DEV, set(panel))
+    if set(outputs) != set(panel):
+        raise SystemExit(f"REFUSED: F2 outputs for {len(set(panel) - set(outputs))} OneStopEnglish dev ids missing")
+    return panel, outputs
+
+
+def choose(swaps, ok=lambda s: True):
+    chosen, used = [], set()
+    for s in sorted(swaps, key=lambda s: -(s["gate"] * s["check"])):
+        if ok(s) and s["sentence"] not in used and len(chosen) < MAX_SWAPS:
+            chosen.append(s)
+            used.add(s["sentence"])
+    return chosen
 
 
 def filtered(original, output, scores, threshold):
@@ -133,6 +165,11 @@ def apply(argv):
 
     torch.set_num_threads(2)
     max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1500
+    limit = int(argv[argv.index("--targets") + 1]) if "--targets" in argv else MAX_TARGETS
+    if "--panel" in argv:
+        if argv[argv.index("--panel") + 1] != "onestop-dev":
+            raise SystemExit("only --panel onestop-dev is supported")
+        return apply_r3(max_seconds, limit)
     # The split checker rejects 38 of F2's 73 dev splits at its pre-registered
     # threshold, far more than the ~15% a review found broken, so by default
     # the word stage runs on F2's output unchanged (opt in with --split-filter).
@@ -158,11 +195,7 @@ def apply(argv):
             else:
                 text, rejected = outputs[pid], 0
             swaps, seen = word_swaps(text, model, pid)
-            chosen, used = [], set()
-            for s in sorted(swaps, key=lambda s: -(s["gate"] * s["check"])):
-                if s["sentence"] not in used and len(chosen) < MAX_SWAPS:
-                    chosen.append(s)
-                    used.add(s["sentence"])
+            chosen = choose(swaps)
             final = sent(text)
             for s in chosen:
                 final[s["sentence"]] = s["after"]
@@ -173,6 +206,49 @@ def apply(argv):
             print(f"{time.strftime('%H:%M:%S')} {pid} swaps={len(chosen)} rejected_splits={rejected}", flush=True)
     left = len(set(outputs) - {r["pid"] for r in read_jsonl(path)})
     print("COMPLETE" if not left else f"PARTIAL {left} left", flush=True)
+
+
+def apply_r3(max_seconds, limit):
+    import torch
+
+    from .learned_words_simpler import SIMPLER, active_margin
+
+    torch.set_num_threads(2)
+    margin, rule = active_margin()
+    pre = {"margin": margin}
+    print(f"simplicity margin {margin} (rule {rule})", flush=True)
+    simpler = pickle.load(open(SIMPLER, "rb"))
+    model = pickle.load(open(STATE / "model.pkl", "rb"))
+    panel, outputs = onestop_panel()
+    APPLY_R3.mkdir(parents=True, exist_ok=True)
+    path = APPLY_R3 / "passages.jsonl"
+    done = {r["pid"] for r in read_jsonl(path)}
+    deadline = time.monotonic() + max_seconds
+    todo = [p for p in sorted(outputs) if p not in done]
+    print(f"{len(done)} done, {len(todo)} to do, targets/item {limit}, margin {pre['margin']}", flush=True)
+    with open(path, "a") as f:
+        for pid in todo:
+            if time.monotonic() > deadline:
+                break
+            swaps, seen = word_swaps(outputs[pid], model, pid, limit=limit)
+            if swaps:
+                ms = simpler.margin([s["word"] for s in swaps], [s["rep"] for s in swaps])
+                for s, m in zip(swaps, ms):
+                    s["margin"] = float(m)
+            a = choose(swaps)
+            b = choose(swaps, lambda s: s["margin"] >= pre["margin"])
+            f.write(json.dumps({"pid": pid, "domain": "onestop_news", "kind": "standard",
+                                "content_words": seen, "proposed": swaps,
+                                "arm_a": [_skey(s) for s in a],
+                                "arm_b": [_skey(s) for s in b], "input": outputs[pid]}) + "\n")
+            f.flush()
+            print(f"{time.strftime('%H:%M:%S')} {pid} proposed={len(swaps)} a={len(a)} b={len(b)}", flush=True)
+    left = len(set(outputs) - {r["pid"] for r in read_jsonl(path)})
+    print("COMPLETE" if not left else f"PARTIAL {left} left", flush=True)
+
+
+def _skey(s):
+    return hashlib.sha256(f"{s['pid']}\n{s['before']}\n{s['word']}\n{s['rep']}".encode()).hexdigest()[:16]
 
 
 def summary():
@@ -217,7 +293,61 @@ def page(argv):
     print(f"page {PAGE} ({len(items)} swaps), key {KEY}")
 
 
-def render(items):
+R3 = STATE / "rating-r3"
+PAGE_R3 = PAGE_DIR / "rate-learned-swaps-r3.html"
+
+
+def page_r3(argv):
+    """Blind items (union of arms A and B, shuffled, no scores) for the
+    round-3 rater, a page for Joshua, and the key that maps items to arms."""
+    import random
+
+    rows = read_jsonl(APPLY_R3 / "passages.jsonl")
+    items = {}
+    for r in rows:
+        for s in r["proposed"]:
+            k = _skey(s)
+            arms = [a for a in ("a", "b") if k in r["arm_" + a]]
+            if arms:
+                items[k] = dict(s, key=k, arms=arms)
+    items = sorted(items.values(), key=lambda x: x["key"])
+    random.Random(1119).shuffle(items)
+    R3.mkdir(parents=True, exist_ok=True)
+    json.dump({"swaps": items}, open(R3 / "key.json", "w"), indent=1)
+    blind = [{"id": f"w{n}", "before": x["before"], "after": x["after"], "word": x["word"], "rep": x["rep"]}
+             for n, x in enumerate(items, 1)]
+    json.dump(blind, open(R3 / "blind-items.json", "w"), indent=1)
+    PAGE_DIR.mkdir(parents=True, exist_ok=True)
+    PAGE_R3.write_text(render(items, "Rate the word swaps (round 3)", "cleartext-rate-learned-r3-20261119",
+                              "cleartext-marks-learned-swaps-r3.csv"))
+    print(f"{len(items)} items (arm A {sum('a' in x['arms'] for x in items)}, arm B "
+          f"{sum('b' in x['arms'] for x in items)}) -> {R3 / 'blind-items.json'}, page {PAGE_R3}")
+
+
+def score_r3(argv):
+    """Good-rate per arm from a marks CSV (id,mark[,...]) over the blind items."""
+    import csv
+
+    path = argv[0]
+    key = json.load(open(R3 / "key.json"))["swaps"]
+    ids = {f"w{n}": x for n, x in enumerate(key, 1)}
+    marks = {r["id"]: r["mark"] for r in csv.DictReader(open(path)) if r.get("mark")}
+    from .learned_words_study import wilson
+
+    out = {"marks_file": Path(path).name, "rated": len(marks), "items": len(ids)}
+    for arm in ("a", "b"):
+        ms = [marks[i] for i, x in ids.items() if arm in x["arms"] and i in marks]
+        c = Counter(ms)
+        out["arm_" + arm] = {"swaps": len(ms), **c, "good_rate": c["good"] / len(ms) if ms else None,
+                             "good_ci95": wilson(c["good"], len(ms))}
+    blocked = [marks[i] for i, x in ids.items() if x["arms"] == ["a"] and i in marks]
+    out["blocked_by_margin"] = dict(Counter(blocked))
+    print(json.dumps(out, indent=1))
+    return out
+
+
+def render(items, title="Rate the word swaps (round 2)", store="cleartext-rate-learned-20261118",
+           download="cleartext-marks-learned-swaps.csv"):
     import re
 
     def mark(s, w):
@@ -250,12 +380,12 @@ mark{{background:#fde68a;color:#111;border-radius:3px;padding:0 2px}}
 .bar{{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 0;display:flex;justify-content:space-between;align-items:center;gap:8px}}
 .bar button{{background:var(--acc);color:#fff;border-color:var(--acc)}}
 </style></head><body><main>
-<h1>Rate the word swaps (round 2)</h1>
-<p class="intro">These are new swaps from a retrained word stage, on the same kind of passages as last time. Each card shows a sentence before and after one word was replaced. Tap the one answer that fits: is the highlighted replacement correct here, and simpler? Your marks save in this browser as you go. When you're done, tap <b>Download marks</b> at the top (it saves <code>cleartext-marks-learned-swaps.csv</code>, separate from the first page's file). Scores are hidden.</p>
+<h1>{html.escape(title)}</h1>
+<p class="intro">These are new swaps from a retrained word stage. Each card shows a sentence before and after one word was replaced. Tap the one answer that fits: is the highlighted replacement correct here, and simpler? Your marks save in this browser as you go. When you're done, tap <b>Download marks</b> at the top (it saves <code>{download}</code>, separate from earlier pages' files). Scores are hidden.</p>
 <div class="bar"><span id="count"></span><button id="dl">Download marks</button></div>
 {chr(10).join(cards)}
 </main><script>
-const KEY='cleartext-rate-learned-20261118';const cs=[...document.querySelectorAll('.card')];
+const KEY='{store}';const cs=[...document.querySelectorAll('.card')];
 let m={{}};try{{m=JSON.parse(localStorage.getItem(KEY)||'{{}}')}}catch(e){{}}
 function paint(){{cs.forEach(c=>{{const v=m[c.dataset.id];if(v)c.dataset.mark=v;else delete c.dataset.mark}});
 document.getElementById('count').textContent=Object.keys(m).length+' of '+cs.length+' rated';
@@ -263,6 +393,6 @@ try{{localStorage.setItem(KEY,JSON.stringify(m))}}catch(e){{}}}}
 cs.forEach(c=>c.querySelectorAll('button').forEach(b=>b.onclick=()=>{{const id=c.dataset.id;
 if(m[id]===b.dataset.v)delete m[id];else m[id]=b.dataset.v;paint()}}));
 document.getElementById('dl').onclick=()=>{{const rows=['id,key,mark',...cs.map(c=>c.dataset.id+','+c.dataset.key+','+(m[c.dataset.id]||''))].join('\\n');
-const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows],{{type:'text/csv'}}));a.download='cleartext-marks-learned-swaps.csv';a.click()}};
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows],{{type:'text/csv'}}));a.download='{download}';a.click()}};
 paint();
 </script></body></html>"""

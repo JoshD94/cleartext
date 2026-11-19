@@ -1,0 +1,73 @@
+{
+ "rater": "fresh blind subagent (claude-opus-5-5, not human); saw only before/after sentences and the two words; round-2 and round-3 swaps shuffled together (145)",
+ "rater_agreement_with_earlier_claude_marks_on_round2": {
+  "agree": 0.786,
+  "n": 98
+ },
+ "round2_blind": {
+  "swaps": 98,
+  "good": 53,
+  "good_rate": 0.541,
+  "with_margin": {
+   "kept": 79,
+   "good": 49,
+   "notsimpler": 14,
+   "meaning": 16,
+   "good_rate": 0.62
+  },
+  "blocked": {
+   "notsimpler": 14,
+   "good": 4,
+   "meaning": 1
+  }
+ },
+ "round3_onestop_dev": {
+  "passages": 181,
+  "targets_per_item": 3,
+  "margin": 0.1,
+  "rule": "r2",
+  "arm_a_no_margin": {
+   "swaps": 45,
+   "good": 23,
+   "notsimpler": 16,
+   "meaning": 6,
+   "good_rate": 0.511
+  },
+  "arm_b_margin": {
+   "swaps": 33,
+   "good": 21,
+   "notsimpler": 6,
+   "meaning": 6,
+   "good_rate": 0.636
+  },
+  "blocked_by_margin": {
+   "notsimpler": 10,
+   "good": 2,
+   "meaning": 2
+  },
+  "arm_b_failures": {
+   "spelling_variant": [
+    "neighbouring->neighboring",
+    "sceptical->skeptical"
+   ],
+   "same_difficulty": [
+    "particularly->especially (x2)",
+    "international->global",
+    "hugely->highly"
+   ],
+   "grammar_or_meaning": [
+    "artwork->art (an art)",
+    "adored->loved (his loved music)",
+    "involved->been",
+    "suggests->says",
+    "proposed->planned",
+    "cherish->love"
+   ]
+  }
+ },
+ "job_ids": {
+  "fit": "65a5024ffa0f",
+  "margin_r2_and_round2": "ffe9fc1c396c",
+  "apply_r3": "ccfe12139937"
+ }
+}
