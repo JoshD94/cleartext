@@ -142,12 +142,15 @@ def main(argv=None):
     for name in ("nli", "train", "evaluate", "splits", "apply", "page"):
         p = sub.add_parser(name)
         p.add_argument("rest", nargs="*")
-    args, extra = ap.parse_known_args(argv)
+    raw = list(sys.argv[1:] if argv is None else argv)
+    args, _ = ap.parse_known_args(raw)
     if args.cmd == "featurize":
         return featurize(args)
     from . import learned_words_study as study
 
-    return getattr(study, args.cmd)(args.rest + extra)
+    # Subcommands read their own arguments in order (argparse would move
+    # "--max-seconds N" apart from its value).
+    return getattr(study, args.cmd)(raw[raw.index(args.cmd) + 1:])
 
 
 if __name__ == "__main__":
