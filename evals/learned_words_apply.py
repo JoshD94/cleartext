@@ -1,8 +1,8 @@
 """Apply the learned word stage to F2's dev outputs and build a blind rating page.
 
   learned-words apply [--max-seconds N]
-      For each test-set-v3 dev passage: F2's output, with any split the split
-      checker rejects reverted to its source sentence, then the learned word
+      For each test-set-v3 dev passage: F2's output (with --split-filter, any
+      split the split checker rejects reverted to its source sentence), then the learned word
       stage on every sentence (at most MAX_SWAPS swaps per passage, one per
       sentence). Checkpointed per passage. The locked test split is never read.
   learned-words page
@@ -133,6 +133,10 @@ def apply(argv):
 
     torch.set_num_threads(2)
     max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1500
+    # The split checker rejects 38 of F2's 73 dev splits at its pre-registered
+    # threshold, far more than the ~15% a review found broken, so by default
+    # the word stage runs on F2's output unchanged (opt in with --split-filter).
+    split_filter = "--split-filter" in argv
     model = pickle.load(open(STATE / "model.pkl", "rb"))
     checker = pickle.load(open(STATE / "split-checker.pkl", "rb"))
     scores = json.load(open(SPLIT_STATE / "f2-dev-scores.json"))
@@ -149,7 +153,10 @@ def apply(argv):
             if time.monotonic() > deadline:
                 break
             filtered.pid = pid
-            text, rejected = filtered(panel[pid]["original"], outputs[pid], scores, checker.threshold)
+            if split_filter:
+                text, rejected = filtered(panel[pid]["original"], outputs[pid], scores, checker.threshold)
+            else:
+                text, rejected = outputs[pid], 0
             swaps, seen = word_swaps(text, model, pid)
             chosen, used = [], set()
             for s in sorted(swaps, key=lambda s: -(s["gate"] * s["check"])):
