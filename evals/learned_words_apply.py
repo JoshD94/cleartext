@@ -32,7 +32,7 @@ from .learned_splits import F2_OUTPUTS, PANEL, SPLIT_STATE, sent
 from .learned_words import REPORT, STATE, read_jsonl
 
 MAX_SWAPS = 3
-MAX_TARGETS = 8
+MAX_TARGETS = 10
 APPLY = STATE / "apply"
 PAGE_DIR = Path.home() / "Documents/cleartext-rating"
 PAGE = PAGE_DIR / "rate-learned-swaps.html"
@@ -85,44 +85,46 @@ def targets(doc, model, limit=MAX_TARGETS):
     return sorted(elig, key=lambda x: -x[1])[:limit], out
 
 
-def word_swaps(text, model, pid):
+def word_swaps(text, model, pid, limit=MAX_TARGETS):
+    """Swaps the stage accepts in one passage. Eligible words across all its
+    sentences are ranked by p_complex * (1 - p_term); the top `limit` are
+    featurized and decided (featurization is the costly step)."""
     from cleartext.features import nlp
     from cleartext.learned_words import features as F
     from .learned_words_study import decide
 
-    swaps, seen = [], 0
-    real_entail = F.entail
-    for si, s in enumerate(sent(text)):
-        doc = nlp()(s)
-        found = targets(doc, model)
-        if not found:
+    pool, seen = [], 0
+    sentences = sent(text)
+    for si, s in enumerate(sentences):
+        found = targets(nlp()(s), model, limit=1000)
+        if found:
+            elig, allc = found
+            seen += len(allc)
+            pool += [(pc * (1 - pt), si, s, t, pc, pt) for t, pc, pt in elig]
+    swaps = []
+    for _, si, s, t, pc, pt in sorted(pool, key=lambda x: -x[0])[:limit]:
+        iid = f"{pid}:{si}:{t.idx}"
+        inst = {"id": iid, "dataset": "apply", "group": t.lemma_.lower(), "text": s, "start": t.idx,
+                "end": t.idx + len(t), "target": t.text, "gold": {}, "rated": []}
+        rows = F.featurize(inst, given=False)  # NLI left NaN; filled for the top candidate below
+        if not rows:
             continue
-        elig, allc = found
-        seen += len(allc)
-        for t, pc, pt in elig:
-            iid = f"{pid}:{si}:{t.idx}"
-            inst = {"id": iid, "dataset": "apply", "group": t.lemma_.lower(), "text": s, "start": t.idx,
-                    "end": t.idx + len(t), "target": t.text, "gold": {}, "rated": []}
-            rows = F.featurize(inst, given=False)  # NLI left NaN; filled for the top candidate below
-            if not rows:
-                continue
-            model["extra"][iid] = {"p_complex": pc, "p_term": pt}
-            for r in rows:
-                r["f"].update(model["extra"][iid])
-            scores = model["stage"].rank([r for r in rows if set(r["sources"]) - {"given"}])
-            top = max(zip(scores, rows), key=lambda x: x[0])[1]
-            a, b = F.window(s, inst["start"], inst["end"], top["word"])
-            fw, bw = real_entail([(a, b), (b, a)])
-            top["f"].update({"nli_fw": fw, "nli_bw": bw, "nli_min": min(fw, bw)})
-            d = decide(model, rows)[iid]
-            # decide() re-ranks; its top is the same candidate (ranker scores are unchanged).
-            if d["word"] != top["word"]:
-                continue
-            if d["swap"]:
-                after = s[:inst["start"]] + d["word"] + s[inst["end"]:]
-                swaps.append({"pid": pid, "sentence": si, "before": s, "after": after, "word": t.text,
-                              "rep": d["word"], "pos": d["pos"], "gate": d["gate"], "check": d["check"],
-                              "p_complex": pc, "p_term": pt, "sources": top["sources"]})
+        model["extra"][iid] = {"p_complex": pc, "p_term": pt}
+        for r in rows:
+            r["f"].update(model["extra"][iid])
+        scores = model["stage"].rank(rows)
+        top = max(zip(scores, rows), key=lambda x: x[0])[1]
+        a, b = F.window(s, inst["start"], inst["end"], top["word"])
+        fw, bw = F.entail([(a, b), (b, a)])
+        top["f"].update({"nli_fw": fw, "nli_bw": bw, "nli_min": min(fw, bw)})
+        d = decide(model, rows)[iid]
+        if d["word"] != top["word"]:
+            continue  # decide() re-ranks with the same ranker; this guards the NLI fill
+        if d["swap"]:
+            after = s[:inst["start"]] + d["word"] + s[inst["end"]:]
+            swaps.append({"pid": pid, "sentence": si, "before": s, "after": after, "word": t.text,
+                          "rep": d["word"], "pos": d["pos"], "gate": d["gate"], "check": d["check"],
+                          "p_complex": pc, "p_term": pt, "sources": top["sources"]})
     return swaps, seen
 
 
