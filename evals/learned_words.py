@@ -55,7 +55,12 @@ def read_jsonl(path):
     with open(path) as f:
         for line in f:
             if line.strip():
-                out.append(json.loads(line))
+                try:
+                    out.append(json.loads(line))
+                except json.JSONDecodeError:
+                    if line.endswith("\n"):
+                        raise
+                    # a run stopped mid-write leaves one cut-off last line
     return out
 
 

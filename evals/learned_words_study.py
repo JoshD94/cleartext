@@ -32,6 +32,9 @@ NLI_STORE = STATE / "nli.jsonl"
 
 def _rows(state=None):
     rows = read_jsonl(Path(state or STATE / "features-v2") / "rows.jsonl")
+    # A run stopped between writing an instance's rows and marking it done
+    # repeats that instance; keep one copy of each (instance, word).
+    rows = list({(r["id"], r["word"].lower()): r for r in rows}.values())
     nli = {(n["id"], n["word"]): n for n in read_jsonl(NLI_STORE)}
     for r in rows:
         r["key"] = (r["id"], r["word"].lower())
