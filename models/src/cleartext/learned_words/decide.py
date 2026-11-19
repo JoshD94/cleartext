@@ -45,16 +45,45 @@ def gbm(seed=4701, iters=300, leaves=31):
                                           l2_regularization=1.0, min_samples_leaf=20, random_state=seed)
 
 
-def oof(make, X, y, groups, w=None, folds=5, seed=4701):
-    """Out-of-fold probabilities, folds grouped by target word."""
+def oof(make, X, y, groups, w=None, folds=5, seed=4701, extra=None):
+    """Out-of-fold probabilities, folds grouped by target word. `extra` =
+    (X_extra, groups_extra): rows scored by the fold model that held out their
+    group (or by a model fitted on all rows when their group never occurs)."""
     from sklearn.model_selection import GroupKFold
 
     pred = np.zeros(len(y))
+    pe = None if extra is None else np.full(len(extra[1]), np.nan)
     for tr, te in GroupKFold(folds, shuffle=True, random_state=seed).split(X, y, groups):
         m = make()
         m.fit(X[tr], y[tr], sample_weight=None if w is None else w[tr])
         pred[te] = m.predict_proba(X[te])[:, 1]
-    return pred
+        if extra is not None:
+            held = np.isin(extra[1], groups[te])
+            if held.any():
+                pe[held] = m.predict_proba(extra[0][held])[:, 1]
+    if extra is None:
+        return pred
+    unseen = np.isnan(pe)
+    if unseen.any():
+        m = make()
+        m.fit(X, y, sample_weight=w)
+        pe[unseen] = m.predict_proba(extra[0][unseen])[:, 1]
+    return pred, pe
+
+
+def ranker_oof(rank_rows):
+    """(generated rows, out-of-fold ranker scores) on the LS train rows."""
+    rows = generated(rank_rows)
+    keys = rank_keys(rows)
+    y = np.array([float(r["gold"] > 0) for r in rows])
+    return rows, keys, oof(gbm, matrix(rows, keys), y, np.array([r["group"] for r in rows]))
+
+
+def top_keys(rows, scores, k=2):
+    by = {}
+    for r, s in zip(rows, scores):
+        by.setdefault(r["id"], []).append((s, r["key"]))
+    return {key for items in by.values() for _, key in sorted(items, key=lambda x: -x[0])[:k]}
 
 
 def generated(rows):
@@ -92,12 +121,9 @@ class Stage:
     """Fitted ranker, gate and checker, with thresholds."""
 
     def fit(self, rank_rows, check_rows, check_labels, check_weights, extra):
-        rank_rows = generated(rank_rows)
-        self.rk = rank_keys(rank_rows)
+        rank_rows, self.rk, self.rank_oof = ranker_oof(rank_rows)
         X = matrix(rank_rows, self.rk)
         y = np.array([float(r["gold"] > 0) for r in rank_rows])
-        g = np.array([r["group"] for r in rank_rows])
-        self.rank_oof = oof(gbm, X, y, g)
         self.ranker = gbm().fit(X, y)
         grows = gate_rows(rank_rows, self.rank_oof, extra)
         GX = gate_matrix(grows)
@@ -111,7 +137,12 @@ class Stage:
         Cy = np.asarray(check_labels, float)
         Cg = np.array([r["group"] for r in check_rows])
         Cw = np.asarray(check_weights, float)
-        self.check_oof = oof(gbm, CX, Cy, Cg, Cw)
+        # Every gate row's top candidate gets an out-of-fold checker score too
+        # (its NLI is filled by `nli train-top`), so thresholds are chosen on
+        # the same rows the gate sees, not only on checker training rows.
+        tops = [gr["top"] for gr in grows]
+        self.check_oof, self.top_check_oof = oof(
+            gbm, CX, Cy, Cg, Cw, extra=(matrix(tops, self.ck), np.array([t["group"] for t in tops])))
         self.checker = gbm().fit(CX, Cy, sample_weight=Cw)
         return self
 

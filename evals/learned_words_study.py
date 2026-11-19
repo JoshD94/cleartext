@@ -44,6 +44,14 @@ def _rows(state=None):
     return rows
 
 
+def stage1_extra():
+    """p_complex / p_term per instance, written by `train` (stage 1 does not read NLI)."""
+    path = STATE / "stage1-extra.json"
+    if path.exists():
+        return json.load(open(path))
+    return pickle.load(open(MODEL, "rb"))["extra"]
+
+
 def has_nli(r):
     return not np.isnan(r["f"]["nli_min"])
 
@@ -98,7 +106,20 @@ def nli(argv):
     phase = argv[0]
     max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1500
     rows = _rows()
-    want = nli_targets_train(rows) if phase == "train" else nli_targets_test(rows)
+    if phase == "train":
+        want = nli_targets_train(rows)
+    elif phase == "train-top":
+        from cleartext.learned_words.decide import ranker_oof, top_keys
+
+        ls = [r for r in rows if r["dataset"] in LS_TRAIN]
+        extra = stage1_extra()
+        for r in ls:
+            r["f"].update(extra.get(r["id"], {"p_complex": 0.5, "p_term": 0.5}))
+        gen, _, scores = ranker_oof(ls)
+        keys = top_keys(gen, scores, k=2)
+        want = [r for r in ls if r["key"] in keys]
+    else:
+        want = nli_targets_test(rows)
     todo = [r for r in want if not has_nli(r)]
     inst = {i["id"]: i for i in all_instances()}
     print(f"{len(want)} rows need NLI, {len(todo)} to do", flush=True)
@@ -258,14 +279,17 @@ def train(argv):
     done = {r["id"] for r in rows}
     print(f"{len(rows)} rows over {len(done)} instances", flush=True)
     cw, tw, extra, stage1 = fit_eligibility(instances)
+    json.dump(extra, open(STATE / "stage1-extra.json", "w"))
     train_rows = [r for r in rows if r["dataset"] in LS_TRAIN | {"swords_dev"}]
     for r in rows:
         r["f"].update(extra.get(r["id"], {"p_complex": 0.5, "p_term": 0.5}))
     rank_rows = [r for r in train_rows if r["dataset"] in LS_TRAIN]
     crow, cy, cw_ = check_training(train_rows)
     stage = Stage().fit(rank_rows, crow, cy, cw_, extra)
-    check_oof = {r["key"]: p for r, p in zip(crow, stage.check_oof)}
-    top_check = np.array([check_oof.get(g["top"]["key"], 0.0) for g in stage.gate_train])
+    missing = sum(not has_nli(g["top"]) for g in stage.gate_train)
+    if missing:
+        raise SystemExit(f"REFUSED: {missing} gate-row top candidates lack NLI; run `nli train-top` first")
+    top_check = stage.top_check_oof
     best, grid = choose_thresholds(stage.gate_train, stage.gate_oof, top_check)
     stage.tg, stage.tc = best["tg"], best["tc"]
     print("THRESHOLDS", best, flush=True)

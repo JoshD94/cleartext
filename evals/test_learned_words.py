@@ -86,3 +86,17 @@ def test_wikisplit_detok_and_corruptions_are_labelled():
     assert lost and not lost[1].lower().startswith("it ")
     pairs = SP.build_pairs([row], per_source=2)
     assert [p["label"] for p in pairs].count(1) == 1 and all(p["kind"] in SP.KINDS for p in pairs if p["label"] == 0)
+
+
+def test_oof_scores_extra_rows_with_the_fold_that_held_out_their_group():
+    from cleartext.learned_words.decide import oof
+    from sklearn.linear_model import LogisticRegression
+
+    rng = np.random.RandomState(0)
+    X = rng.rand(200, 2)
+    y = (X[:, 0] > 0.5).astype(float)
+    g = np.repeat(np.arange(20), 10)
+    Xe = rng.rand(6, 2)
+    ge = np.array([0, 3, 7, 11, 19, 99])  # 99 never occurs: scored by a model on all rows
+    pred, pe = oof(lambda: LogisticRegression(), X, y, g, extra=(Xe, ge))
+    assert pred.shape == (200,) and pe.shape == (6,) and not np.isnan(pe).any()
