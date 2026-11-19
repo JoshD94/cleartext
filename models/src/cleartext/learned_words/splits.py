@@ -1,8 +1,7 @@
 """Stage 4b: a learned per-edit checker for sentence splits.
 
 One split edit = one source sentence and the sentences that replace it.
-Features: small-NLI entailment source -> output, output -> source and source
--> each new sentence (minimum); parse features of every new sentence
+Features: small-NLI entailment source -> output and output -> source; parse features of every new sentence
 (finite verb, subject, first-word category, closing punctuation, length);
 content-word coverage of the source and content words the split adds.
 
@@ -146,20 +145,19 @@ def features(pairs, batch=32):
     nli_in = []
     for p in pairs:
         out = " ".join(p["parts"])
-        nli_in += [(p["source"], out), (out, p["source"])] + [(p["source"], s) for s in p["parts"]]
+        nli_in += [(p["source"], out), (out, p["source"])]
     ent = entail(nli_in, batch=batch)
     rows, k, d = [], 0, 0
     for p in pairs:
         m = len(p["parts"])
         src, parts = docs[d], docs[d + 1:d + 1 + m]
         d += 1 + m
-        e = ent[k:k + 2 + m]
-        k += 2 + m
+        e = ent[k:k + 2]
+        k += 2
         sf = [sentence_features(x) for x in parts]
         src_c = {t.lemma_.lower() for t in src if t.pos_ in CONTENT}
         out_c = {t.lemma_.lower() for x in parts for t in x if t.pos_ in CONTENT}
-        f = {"nli_fw": e[0], "nli_bw": e[1], "nli_part_min": min(e[2:]), "nli_part_mean": float(np.mean(e[2:])),
-             "parts": m, "coverage": len(src_c & out_c) / max(1, len(src_c)), "added": len(out_c - src_c),
+        f = {"nli_fw": e[0], "nli_bw": e[1], "nli_min": min(e), "parts": m, "coverage": len(src_c & out_c) / max(1, len(src_c)), "added": len(out_c - src_c),
              "len_ratio": sum(len(x) for x in parts) / max(1, len(src)), "src_len": len(src),
              "min_part_len": min(len(x) for x in parts)}
         for key in sf[0]:

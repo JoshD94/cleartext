@@ -31,7 +31,7 @@ F2_OUTPUTS = Path.home() / ".local/state/cleartext/swap-veto-20261118/dev/output
 PANEL = Path.home() / ".local/state/cleartext/testset-v3-20261116/panel/dev.json"
 HUMAN_KEY = Path.home() / ".local/state/cleartext/human-rating-20261118/key.json"
 SPLIT_STATE = STATE / "splits"
-SIZES = {"train": ("tune.tsv", 2500), "validation": ("validation.tsv", 800), "test": ("test.tsv", 800)}
+SIZES = {"train": ("tune.tsv", 1000), "validation": ("validation.tsv", 400), "test": ("test.tsv", 400)}
 MIN_SPECIFICITY = 0.90
 
 
@@ -127,8 +127,8 @@ def fit(argv):
             "rejection_by_kind": {k: float((pt[kinds == k] < m.threshold).mean()) for k in sorted(set(kinds) - {"human"})},
             "n": dict(Counter(kinds.tolist()))}
     # NLI-only reference (the small-NLI floor F2 uses per split is 0.5).
-    nli = np.array([r["x"]["nli_part_min"] for r in by["test"]])
-    test["nli_part_min_auc"] = float(roc_auc_score(yt, nli))
+    nli = np.array([r["x"]["nli_min"] for r in by["test"]])
+    test["nli_min_auc"] = float(roc_auc_score(yt, nli))
     test["nli_floor_05_rejection_by_kind"] = {k: float((nli[kinds == k] < 0.5).mean()) for k in sorted(set(kinds) - {"human"})}
     pf = m.predict([r["x"] for r in by["f2_dev"]])
     f2 = {"splits": len(pf), "rejected": int((pf < m.threshold).sum())}
