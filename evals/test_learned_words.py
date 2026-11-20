@@ -130,3 +130,31 @@ def test_r3_choose_keeps_one_swap_per_sentence_and_respects_filter():
           {"sentence": 1, "gate": 0.5, "check": 0.9, "margin": 1.0}]
     assert choose(sw) == [sw[0], sw[2]]
     assert choose(sw, lambda s: s["margin"] >= 0.5) == [sw[1], sw[2]]
+
+
+def test_judge_pair_marks_target_and_replacement_in_same_window():
+    from cleartext.learned_words.judge import pair
+
+    text = "We are required to submit the form before noon."
+    s = text.index("required")
+    a, b = pair(text, s, s + len("required"), "needed", size=2)
+    assert a == "We are [required] to submit"
+    assert b == "We are [needed] to submit"
+
+
+def test_r5_arms_stage_and_judge_picks():
+    from evals.learned_words_r5 import arms, swaps_for
+
+    pre = {"margin": 0.1, "judge_t": 0.6, "strict_t": None}
+    t = {"pid": "p", "sentence": 0, "before": "We are required to go.", "word": "required", "start": 7, "end": 15,
+         "pos": "v", "eligible": True, "stage": {"rep": "needed", "swap": True, "gate": 0.9, "check": 0.95},
+         "cands": [{"rep": "needed", "judge": 0.3, "margin": 0.5},
+                   {"rep": "asked", "judge": 0.8, "margin": 0.05},
+                   {"rep": "told", "judge": 0.7, "margin": 0.4}]}
+    rec = {"targets": [t]}
+    a = arms(pre)
+    assert set(a) == {"b", "e", "f"}
+    assert [s["rep"] for s in swaps_for(rec, *a["b"], 0.1)] == ["needed"]
+    assert swaps_for(rec, *a["e"], 0.1) == []  # judge rejects the stage's word
+    f = swaps_for(rec, *a["f"], 0.1)  # "asked" fails the margin; "told" is the judge's pick
+    assert [s["rep"] for s in f] == ["told"] and f[0]["after"] == "We are told to go."

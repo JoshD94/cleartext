@@ -1,6 +1,8 @@
 """Fresh passages for later word-stage rounds: unused windows of test-set v3 DEV documents.
 
   learned-words panel build-r4
+  learned-words panel build-r5
+
 
 Re-runs `evals/build_testset_v3.select` offline (download cache only), so it
 opens exactly the documents of the v3 panel, and keeps every candidate window
@@ -9,6 +11,9 @@ read beyond what `select` itself opens, and none of their text is kept.
 From those windows: per standard domain 14 passages, per simple-control
 domain 6, picked round-robin over documents from a seeded shuffle (seed
 20261119), pairwise non-overlapping. Text stays in the state directory.
+
+build-r5 (round 5) does the same with seed 20261120 and also skips every
+window that overlaps a round-4 passage.
 """
 
 import hashlib
@@ -21,7 +26,9 @@ from .learned_words import STATE
 
 V3_STATE = Path.home() / ".local/state/cleartext/testset-v3-20261116"
 PANEL_R4 = STATE / "panel-r4/passages.json"
+PANEL_R5 = STATE / "panel-r5/passages.json"
 SEED = 20261119
+SEED_R5 = 20261120
 PER_DOMAIN = {"standard": 14, "simple_control": 6}
 
 
@@ -30,16 +37,24 @@ def _overlap(a, b):
 
 
 def build_r4(argv):
+    return build(PANEL_R4, SEED, "r4", [])
+
+
+def build_r5(argv):
+    return build(PANEL_R5, SEED_R5, "r5", json.load(open(PANEL_R4)))
+
+
+def build(path, seed, prefix, previous):
     from . import build_testset_v3 as B
 
-    if PANEL_R4.exists():
-        raise SystemExit(f"REFUSED: {PANEL_R4} exists")
+    if path.exists():
+        raise SystemExit(f"REFUSED: {path} exists")
     panel = json.load(open(V3_STATE / "panel/all.json"))
     dev_docs = {p["source_doc"] for p in panel if p["split"] == "dev"}
     used = defaultdict(list)
-    for p in panel:
+    for p in panel + previous:
         used[p["source_doc"]].append(tuple(p["sentence_span"]))
-    texts = [p["original"] for p in panel]
+    texts = [p["original"] for p in panel + previous]
     info = {p["source_doc"]: (p["domain"], p["kind"]) for p in panel}
 
     seen, metas = [], []
@@ -73,7 +88,7 @@ def build_r4(argv):
             by_domain[info[doc]][doc].append((span, text, meta))
     out = []
     for (domain, kind), docs in sorted(by_domain.items()):
-        rng = random.Random(f"{SEED}:{domain}")
+        rng = random.Random(f"{seed}:{domain}")
         order = sorted(docs)
         rng.shuffle(order)
         for d in order:
@@ -87,12 +102,12 @@ def build_r4(argv):
                     if all(not _overlap(span, s) for s, _ in chosen[d]):
                         chosen[d].append((span, text))
                         n += 1
-                        out.append({"id": f"r4-{domain[:4]}-{n:02d}", "domain": domain, "kind": kind,
+                        out.append({"id": f"{prefix}-{domain[:4]}-{n:02d}", "domain": domain, "kind": kind,
                                     "source_doc": d, "sentence_span": list(span), "original": text,
                                     "sha256": hashlib.sha256(text.encode()).hexdigest()})
                         break
-    PANEL_R4.parent.mkdir(parents=True, exist_ok=True)
-    json.dump(out, open(PANEL_R4, "w"), indent=1)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    json.dump(out, open(path, "w"), indent=1)
     from collections import Counter
 
     print(json.dumps({"passages": len(out), "by_domain": Counter(p["domain"] for p in out),
@@ -103,4 +118,6 @@ def build_r4(argv):
 def main(argv):
     if argv[:1] == ["build-r4"]:
         return build_r4(argv[1:])
-    raise SystemExit("usage: learned-words panel build-r4")
+    if argv[:1] == ["build-r5"]:
+        return build_r5(argv[1:])
+    raise SystemExit("usage: learned-words panel build-r4|build-r5")

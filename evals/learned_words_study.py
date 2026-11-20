@@ -559,3 +559,21 @@ def strict(argv):
     from . import learned_words_strict
 
     return learned_words_strict.main(argv)
+
+
+def frame(argv):
+    from . import learned_words_frame
+
+    return learned_words_frame.main(argv)
+
+
+def judge(argv):
+    from . import learned_words_judge
+
+    return learned_words_judge.main(argv)
+
+
+def r5(argv):
+    from . import learned_words_r5
+
+    return learned_words_r5.main(argv)

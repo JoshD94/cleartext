@@ -74,9 +74,9 @@ def onestop_panel():
     return panel, outputs
 
 
-def choose(swaps, ok=lambda s: True):
+def choose(swaps, ok=lambda s: True, key=lambda s: s["gate"] * s["check"]):
     chosen, used = [], set()
-    for s in sorted(swaps, key=lambda s: -(s["gate"] * s["check"])):
+    for s in sorted(swaps, key=lambda s: -key(s)):
         if ok(s) and s["sentence"] not in used and len(chosen) < MAX_SWAPS:
             chosen.append(s)
             used.add(s["sentence"])
