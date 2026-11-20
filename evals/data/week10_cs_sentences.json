@@ -1,0 +1,1002 @@
+[
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-01",
+  "original": "We study two-layer neural networks trained by stochastic gradient descent (SGD) on a multi-index teacher model, focusing on how first-layer parameters orthogonal to the teacher subspace affect generalization.",
+  "source_doc": "arXiv:2611.24908",
+  "source_title": "Decomposing SGD Dynamics in Neural Networks: Teacher-Induced Spikes and Variance Inflation",
+  "source_url": "https://arxiv.org/abs/2611.24908",
+  "subfield": "machine_learning",
+  "word_count": 28
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-02",
+  "original": "We show that although SGD updates to the complement are initially isotropic, the training dynamics induce teacher-dependent spectral spikes in the complement Gram matrix.",
+  "source_doc": "arXiv:2611.24908",
+  "source_title": "Decomposing SGD Dynamics in Neural Networks: Teacher-Induced Spikes and Variance Inflation",
+  "source_url": "https://arxiv.org/abs/2611.24908",
+  "subfield": "machine_learning",
+  "word_count": 24
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-03",
+  "original": "We present a general framework for modeling and learning equivariant functions between finite dimensional semisimple real group representations, unifying constructions developed across many application areas.",
+  "source_doc": "arXiv:2611.24896",
+  "source_title": "Equivariant Modeling with Polynomial Features via Minimal Homogeneous Generators",
+  "source_url": "https://arxiv.org/abs/2611.24896",
+  "subfield": "machine_learning",
+  "word_count": 25
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-04",
+  "original": "Numerical experiments in scientific modeling demonstrate the full learning pipeline and yield accurate predictors with few trainable parameters, using the model both for end-to-end prediction and within layers of larger architectures.",
+  "source_doc": "arXiv:2611.24896",
+  "source_title": "Equivariant Modeling with Polynomial Features via Minimal Homogeneous Generators",
+  "source_url": "https://arxiv.org/abs/2611.24896",
+  "subfield": "machine_learning",
+  "word_count": 31
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-05",
+  "original": "We prove that world models trained on factual transitions cannot answer it on their own, whatever their data or capacity.",
+  "source_doc": "arXiv:2611.24778",
+  "source_title": "Counterfactual World Models: JEPAs That Reason About \"What If\"",
+  "source_url": "https://arxiv.org/abs/2611.24778",
+  "subfield": "machine_learning",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-06",
+  "original": "When actions and disturbances act as separate forces, their interaction is second-order in time, so the counterfactual outcome is, to first order, the observed outcome plus the difference between the world model's predictions under the alternative and factual actions.",
+  "source_doc": "arXiv:2611.24778",
+  "source_title": "Counterfactual World Models: JEPAs That Reason About \"What If\"",
+  "source_url": "https://arxiv.org/abs/2611.24778",
+  "subfield": "machine_learning",
+  "word_count": 39
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-07",
+  "original": "We show that, given an accurate diffusion model capturing a sparsity-promoting Bernoulli-Gaussian prior, a likelihood-guided annealed Langevin sampler provably recovers the sparse signal in polynomial time with near-optimal sample complexity for a broad family of random and deterministic sensing matrices.",
+  "source_doc": "arXiv:2611.24602",
+  "source_title": "Diffusion Models are Provably Efficient Priors for Sparse Recovery",
+  "source_url": "https://arxiv.org/abs/2611.24602",
+  "subfield": "machine_learning",
+  "word_count": 40
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-08",
+  "original": "This work introduces a method for visualizing and measuring ANN decision boundary geometry directly in the high-dimensional input space, avoiding distortions found with traditional projection-based techniques.",
+  "source_doc": "arXiv:2611.24557",
+  "source_title": "The geometry of neural network decision boundaries",
+  "source_url": "https://arxiv.org/abs/2611.24557",
+  "subfield": "machine_learning",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-09",
+  "original": "Building on these insights, we propose LAPIS for goal-conditioned latent policy improvement, grounding value-based policy improvement in observed state-latent transitions and using a conditional flow policy to capture their multimodal structure.",
+  "source_doc": "arXiv:2611.24482",
+  "source_title": "Latent Action Policies from Suboptimal Data",
+  "source_url": "https://arxiv.org/abs/2611.24482",
+  "subfield": "machine_learning",
+  "word_count": 31
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-10",
+  "original": "We present TangentPDE, which uses finite differences to approximate directional derivatives and constructs task-relevant finite-step responses from the state outputs of a reference solver at sparse paired inputs.",
+  "source_doc": "arXiv:2611.24873",
+  "source_title": "TangentPDE: Learning Local Operator Responses with Sparse Finite-Difference Supervision",
+  "source_url": "https://arxiv.org/abs/2611.24873",
+  "subfield": "machine_learning",
+  "word_count": 28
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-11",
+  "original": "We propose Jailbreak Detection with Prototype Inference (JDPI), which uses binary safety labels to construct harmful and benign prototypes and makes predictions from relative prototype distances.",
+  "source_doc": "arXiv:2611.24936",
+  "source_title": "Jailbreak Detection on Large Language Models via Contrastive Prototype Structures",
+  "source_url": "https://arxiv.org/abs/2611.24936",
+  "subfield": "natural_language_processing",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-12",
+  "original": "Across four benchmarks covering different input formats, contrastive fine-tuning improves JDPI's detection accuracy by 9.1-18.0 percentage points.",
+  "source_doc": "arXiv:2611.24936",
+  "source_title": "Jailbreak Detection on Large Language Models via Contrastive Prototype Structures",
+  "source_url": "https://arxiv.org/abs/2611.24936",
+  "subfield": "natural_language_processing",
+  "word_count": 17
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-13",
+  "original": "Large Language Models (LLMs) now perform strongly on Alan Turing's 1950 Imitation Game, so we propose a harder challenge, the Personal Imitation Game, which asks whether a machine can replicate a specific individual in conversation rather than a generic human.",
+  "source_doc": "arXiv:2611.24888",
+  "source_title": "Who are you? The Personal Imitation Game",
+  "source_url": "https://arxiv.org/abs/2611.24888",
+  "subfield": "natural_language_processing",
+  "word_count": 40
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-14",
+  "original": "CAR constructs a semantic knowledge graph from retrieved literature and equips an ideation agent with graph-retrieval tools and four operators: bisociation, analogy, exploration and elaboration.",
+  "source_doc": "arXiv:2611.24887",
+  "source_title": "Ground, Iterate, Trace: Decomposing AI Research Ideation",
+  "source_url": "https://arxiv.org/abs/2611.24887",
+  "subfield": "natural_language_processing",
+  "word_count": 25
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-15",
+  "original": "Specifically, ExecJudges uses a frontier LLM to turn assessment guidelines into executable programs, which rely only on lexical matching, standard NLP libraries like parsers, and pool statistics.",
+  "source_doc": "arXiv:2611.24849",
+  "source_title": "Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling",
+  "source_url": "https://arxiv.org/abs/2611.24849",
+  "subfield": "natural_language_processing",
+  "word_count": 27
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-16",
+  "original": "Our results show that ExecJudges agrees with NIST assessors at the level of the Claude Sonnet 5.5 LLM judges on TREC DL 2019-2021.",
+  "source_doc": "arXiv:2611.24849",
+  "source_title": "Can Programs Replace LLM Judges? Executable Program Judges for Scalable and Efficient Relevance Labeling",
+  "source_url": "https://arxiv.org/abs/2611.24849",
+  "subfield": "natural_language_processing",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-17",
+  "original": "A chess model never explicitly trained to respond to check ranked the legal responses almost as well as a model that was.",
+  "source_doc": "arXiv:2611.24844",
+  "source_title": "General progress substitutes for specific training data in language models",
+  "source_url": "https://arxiv.org/abs/2611.24844",
+  "subfield": "natural_language_processing",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-18",
+  "original": "We jointly fine-tune an LLM to represent psychological constructs, predict individual behaviour, and align population response distributions with human statistics.",
+  "source_doc": "arXiv:2611.24830",
+  "source_title": "A Foundation Model to Measure and Predict Human Behaviour",
+  "source_url": "https://arxiv.org/abs/2611.24830",
+  "subfield": "natural_language_processing",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-19",
+  "original": "We identify two off-policy mismatches in FlashMorph's layer selection: (i) continuous branch interpolation and teacher-forced hidden states differ from discrete hybrid computation; and (ii) frozen model weights fail to account for parameter adaptation during subsequent recovery.",
+  "source_doc": "arXiv:2611.24809",
+  "source_title": "On-Policy Morphing into Hybrid Attention Models",
+  "source_url": "https://arxiv.org/abs/2611.24809",
+  "subfield": "natural_language_processing",
+  "word_count": 36
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-20",
+  "original": "This work shows that SLAM-ASR models rely on induction heads of the frozen language model: the same heads that copy repeated token sequences in text are also important for mapping speech embeddings to transcript tokens.",
+  "source_doc": "arXiv:2611.24721",
+  "source_title": "Induction Head Origins of SLAM-ASR Speech Recognition Models",
+  "source_url": "https://arxiv.org/abs/2611.24721",
+  "subfield": "natural_language_processing",
+  "word_count": 35
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-21",
+  "original": "UltraTex first jointly predicts albedo and world-space shading normals to generate more detailed albedo maps, and then predicts metallic-roughness (MR) maps conditioned on the generated albedo, reference image, and material semantic priors.",
+  "source_doc": "arXiv:2611.24941",
+  "source_title": "UltraTex: Aligning Physical Knowledge for High-Fidelity PBR Texture Generation",
+  "source_url": "https://arxiv.org/abs/2611.24941",
+  "subfield": "computer_vision",
+  "word_count": 32
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-22",
+  "original": "To inject material semantics, a lightweight adapter transforms hidden-layer features of a vision-language model (VLM) into intrinsic material representation tokens, providing part-level knowledge anchors for MR estimation.",
+  "source_doc": "arXiv:2611.24941",
+  "source_title": "UltraTex: Aligning Physical Knowledge for High-Fidelity PBR Texture Generation",
+  "source_url": "https://arxiv.org/abs/2611.24941",
+  "subfield": "computer_vision",
+  "word_count": 27
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-23",
+  "original": "Video-based world action models (WAMs) show the value of joint future-and-action generation for control, yet inherit the heavy cost of video generators.",
+  "source_doc": "arXiv:2611.24940",
+  "source_title": "$Z$-sight: Unifying Vision-Language-Action and Latent World Modeling",
+  "source_url": "https://arxiv.org/abs/2611.24940",
+  "subfield": "computer_vision",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-24",
+  "original": "Furthermore, if all visual and visualization tasks can be reformulated as generation tasks, then a unified method, World Snapshot Models (WSMs), can perform the vast majority of visual tasks, much as large language models have largely unified natural language processing.",
+  "source_doc": "arXiv:2611.24917",
+  "source_title": "Unified Law for Visual Tasks (The Four Laws of Computer Vision)",
+  "source_url": "https://arxiv.org/abs/2611.24917",
+  "subfield": "computer_vision",
+  "word_count": 40
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-25",
+  "original": "An offline task-prior search uses activation and gradient statistics to group channels with similar response profiles, then searches task-specific modulation coefficients over non-representative channels while leaving representative channels unmodulated.",
+  "source_doc": "arXiv:2611.24915",
+  "source_title": "PrismRestore: A Compact Restoration Toolbox for Agentic Image Restoration",
+  "source_url": "https://arxiv.org/abs/2611.24915",
+  "subfield": "computer_vision",
+  "word_count": 29
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-26",
+  "original": "Under vanilla training, holding out the test city costs 3.5 to 7.8 mIoU across four architectures, the gap remains significant when the training set grows from 225 to 900 images, and six of eight adaptation methods degrade more than vanilla training on average.",
+  "source_doc": "arXiv:2611.24904",
+  "source_title": "ShadowTransfer: A Geographic Transfer Benchmark for Overhead Shadow Detection",
+  "source_url": "https://arxiv.org/abs/2611.24904",
+  "subfield": "computer_vision",
+  "word_count": 43
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-27",
+  "original": "We first train Sea2Know on approximately two million marine examples to learn target grounding, spatial relations, and scene structure without paired robot-motion supervision.",
+  "source_doc": "arXiv:2611.24864",
+  "source_title": "NereidVLA: Learning to Understand and Navigate the Underwater World",
+  "source_url": "https://arxiv.org/abs/2611.24864",
+  "subfield": "computer_vision",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-28",
+  "original": "Experiments show that the executed action improves mid-term mIoU by at most 2.5 points on Cityscapes and 0.6 points on BDD100K, whereas a wrong action reduces it by up to 23.2 and 7.0 points, below the model without action input.",
+  "source_doc": "arXiv:2611.24840",
+  "source_title": "Does the Action Matter? Probing Action-Conditioned Semantic Forecasting as a World Model for Autonomous Driving",
+  "source_url": "https://arxiv.org/abs/2611.24840",
+  "subfield": "computer_vision",
+  "word_count": 40
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-29",
+  "original": "Extensive experiments demonstrate substantial improvements in frozen-feature segmentation, clustering, and regional retrieval while maintaining competitive image-level recognition, alleviating the trade-off between dense and global representation quality.",
+  "source_doc": "arXiv:2611.24806",
+  "source_title": "ReCoCo: From Patches to Compositions for Visual Representation Learning",
+  "source_url": "https://arxiv.org/abs/2611.24806",
+  "subfield": "computer_vision",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-30",
+  "original": "A lightweight on-device encoder compresses noisy RAW measurements into a bitstream, while a higher-capacity backend decoder jointly denoises and demosaics the encoded representation.",
+  "source_doc": "arXiv:2611.24805",
+  "source_title": "Edge-Efficient Joint RAW Image Compression and Restoration for Smart Wearable Devices",
+  "source_url": "https://arxiv.org/abs/2611.24805",
+  "subfield": "computer_vision",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-31",
+  "original": "Applying these rules in distributed monitoring systems is more difficult because observations come from different nodes, whose clocks may not be synchronized, and events may be lost or reordered during transmission.",
+  "source_doc": "arXiv:2611.24902",
+  "source_title": "Mine Locally, Verify Globally: Exact Recovery, Compilation, and Distortion of Mined Temporal Rules",
+  "source_url": "https://arxiv.org/abs/2611.24902",
+  "subfield": "systems_and_distributed",
+  "word_count": 31
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-32",
+  "original": "We practically analyze the performance of DispersedBFT and show it greatly outperforms PBFT and HotStuff: DispersedBFT supports a throughput of 3.4Mtxn/sec with 43 replicas and is up-to 6.2x faster than PBFT and 2.6x faster than HotStuff.",
+  "source_doc": "arXiv:2611.24833",
+  "source_title": "DispersedBFT: Bottleneck-Free Primary-Backup Consensus using Dispersed Replication",
+  "source_url": "https://arxiv.org/abs/2611.24833",
+  "subfield": "systems_and_distributed",
+  "word_count": 36
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-33",
+  "original": "We introduce a novel attack pipeline that unwinds this entanglement progressively through an iterative loop, in which the gradient contributions of sentences recovered exactly in one round are subtracted from the aggregate, exposing the remaining sentences for recovery in the next iteration.",
+  "source_doc": "arXiv:2611.24689",
+  "source_title": "Stealing Exact Training Data from Other Clients during Federated Learning",
+  "source_url": "https://arxiv.org/abs/2611.24689",
+  "subfield": "systems_and_distributed",
+  "word_count": 42
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-34",
+  "original": "Unlike existing colocation systems, which make one scheduling decision for all GPUs per forward pass, BubbleTea predicts each GPU's bubble at every layer from the router's token assignment, and fills it with short chunks of fine-tuning work that reuse the weights already loaded for serving.",
+  "source_doc": "arXiv:2611.24496",
+  "source_title": "Harvesting Expert-Parallel Bubbles for Fine-Tuning",
+  "source_url": "https://arxiv.org/abs/2611.24496",
+  "subfield": "systems_and_distributed",
+  "word_count": 45
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-35",
+  "original": "Based on these observations, we present GPCPlace, a runtime system that dynamically selects between spreading and packing by profiling workloads on the target GPU to estimate both slowdowns, and hooks kernel launches in the CUDA driver to set SM masks without application modifications.",
+  "source_doc": "arXiv:2611.24458",
+  "source_title": "A Runtime System for Mitigating Crossbar Port Contention on SM-Partitioned GPUs",
+  "source_url": "https://arxiv.org/abs/2611.24458",
+  "subfield": "systems_and_distributed",
+  "word_count": 43
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-36",
+  "original": "Using instruction-level microbenchmarks, we show that the field controls two independent hardware mechanisms: barrier exemption (EXEMPT), which allows instructions blocked by a pending barrier to issue early during the barrier wait, and programmable warp priority (START, TILE, and END), which moves warps across three priority levels in the hardware scheduler.",
+  "source_doc": "arXiv:2611.24437",
+  "source_title": "Dissecting an Unexplored SASS Control-Code Field: Barrier Exemption and Programmable Warp Priority",
+  "source_url": "https://arxiv.org/abs/2611.24437",
+  "subfield": "systems_and_distributed",
+  "word_count": 50
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-37",
+  "original": "Unlike existing approaches, ScaleBench integrates autoscalers as native Kubernetes components, allowing researchers to assess not only scaling performance but also deployment characteristics and integration requirements within realistic cloud-native environments.",
+  "source_doc": "arXiv:2611.24398",
+  "source_title": "ScaleBench: An Extensible and Reproducible Experimental Platform for Kubernetes Autoscaling Research",
+  "source_url": "https://arxiv.org/abs/2611.24398",
+  "subfield": "systems_and_distributed",
+  "word_count": 29
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-38",
+  "original": "Our experiments show excellent weak scaling up to 256 GPUs, enabling partitioning of instances significantly larger than a single-GPU partitioner can handle.",
+  "source_doc": "arXiv:2611.24264",
+  "source_title": "Multilevel Graph Partitioning on GPU Supercomputers",
+  "source_url": "https://arxiv.org/abs/2611.24264",
+  "subfield": "systems_and_distributed",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-39",
+  "original": "Evaluated on five open-source RISC-V CPUs against three existing assertion generation approaches, MicroAssert achieves 100% syntax correctness and complete branch, statement, and toggle coverage, with an average proven rate of 74.82% and Proof Core coverage of 90.96%.",
+  "source_doc": "arXiv:2611.24872",
+  "source_title": "MicroAssert: Microarchitecture-Aware Structured Assertion Generation for CPU Verification",
+  "source_url": "https://arxiv.org/abs/2611.24872",
+  "subfield": "systems_and_distributed",
+  "word_count": 37
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-40",
+  "original": "Inspired by the brain's wake and sleep cycles, the former for rapid adaptation with minimal resources and the latter for long-term consolidation, we introduce Hypnos, an open-source dual-phase platform for efficient CL at the edge.",
+  "source_doc": "arXiv:2611.24637",
+  "source_title": "Hypnos: A Dual-Phase End-to-End Platform for Scalable Continual Learning at the Edge",
+  "source_url": "https://arxiv.org/abs/2611.24637",
+  "subfield": "systems_and_distributed",
+  "word_count": 35
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-41",
+  "original": "In this paper, we propose sparse signal-multiplexing network ranging (S-SM-NR), a task-oriented framework that adapts the transmit-listen schedule to the ranging task required by network localization.",
+  "source_doc": "arXiv:2611.24702",
+  "source_title": "Task-Oriented Network Ranging via Joint Graph and Schedule Design",
+  "source_url": "https://arxiv.org/abs/2611.24702",
+  "subfield": "networks",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-42",
+  "original": "SALSA learns a per-node transmission policy close to optimal, with throughput near the theoretical maximum for fair random access.",
+  "source_doc": "arXiv:2611.24676",
+  "source_title": "Can Bandits Learn to Share a Channel? Distributed Multi-Armed Bandits for Slotted ALOHA",
+  "source_url": "https://arxiv.org/abs/2611.24676",
+  "subfield": "networks",
+  "word_count": 19
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-43",
+  "original": "Specifically, we formulate the optimization problem of joint task offloading and UAV trajectory to minimize the total execution time, which is in the form of mixed integer nonlinear programming and NP-hard to tackle.",
+  "source_doc": "arXiv:2611.24466",
+  "source_title": "Cooperative UAV and Ground Station for Robust MEC of Dynamic Aquatic IoT: A Generative AI-Enhanced Approach",
+  "source_url": "https://arxiv.org/abs/2611.24466",
+  "subfield": "networks",
+  "word_count": 33
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-44",
+  "original": "Conditional generative models support what-if analysis by generating plausible power-consumption trajectories for radio configurations and operating scenarios, helping operators evaluate energy-saving policies before deployment.",
+  "source_doc": "arXiv:2611.24208",
+  "source_title": "Conditional What-If Generation for Radio Access Network Energy under Rare and Unseen Contexts",
+  "source_url": "https://arxiv.org/abs/2611.24208",
+  "subfield": "networks",
+  "word_count": 24
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-45",
+  "original": "However, conventional snapshot-based schedulers discard the forwarding progress of unfinished time-triggered traffic across topology transitions, degrading schedulability and timing consistency.",
+  "source_doc": "arXiv:2611.24021",
+  "source_title": "Continuum: Boundary-State-Aware Deterministic Scheduling in Dynamic LEO Networks",
+  "source_url": "https://arxiv.org/abs/2611.24021",
+  "subfield": "networks",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-46",
+  "original": "To address this limitation, we propose OMNIS+, a semantic RAN slicing framework for multi-cell edge computing built upon a new generation of dynamic split neural models.",
+  "source_doc": "arXiv:2611.23977",
+  "source_title": "OMNIS+: Semantic RAN Slicing and Quantization for Dynamic Split Neural Networks",
+  "source_url": "https://arxiv.org/abs/2611.23977",
+  "subfield": "networks",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-47",
+  "original": "CoSlice uses preference-conditioned slice agents for fast resource allocation and an LLM-based coordinator to adapt their objectives using global network observations at a slower timescale.",
+  "source_doc": "arXiv:2611.23909",
+  "source_title": "CoSlice: Coordinated Multi-Agent Reinforcement Learning for 5G Network Slicing Allocation",
+  "source_url": "https://arxiv.org/abs/2611.23909",
+  "subfield": "networks",
+  "word_count": 25
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-48",
+  "original": "Drawing on sparse antenna-array theory, we show that interference avoidance alone is insufficient: the spacing of selected tones can introduce repeated peaks in the ranging response, leading to estimation errors.",
+  "source_doc": "arXiv:2611.23471",
+  "source_title": "Interference-Aware Tone Selection for Bluetooth Channel Sounding",
+  "source_url": "https://arxiv.org/abs/2611.23471",
+  "subfield": "networks",
+  "word_count": 30
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-49",
+  "original": "LASH-PAT supports multiple shortest paths and dynamically selects among them based on local congestion while preserving deadlock freedom.",
+  "source_doc": "arXiv:2611.22937",
+  "source_title": "LASH-PAT: Deadlock-Free Adaptive Shortest-Path Routing for Inter-Chiplet Interconnects",
+  "source_url": "https://arxiv.org/abs/2611.22937",
+  "subfield": "networks",
+  "word_count": 18
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-50",
+  "original": "Five functions support capability discovery, task coordination, federated compute, intelligence reuse, and governance of capability use and settlement.",
+  "source_doc": "arXiv:2611.23841",
+  "source_title": "Capability Internet: A Network Architecture for Autonomous Agents",
+  "source_url": "https://arxiv.org/abs/2611.23841",
+  "subfield": "networks",
+  "word_count": 18
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-51",
+  "original": "This paper presents a physics-grounded framework for identifying cyber-physical attack paths using large language models (LLMs), with cascading-failure-derived impact rankings used as physics-grounded references.",
+  "source_doc": "arXiv:2611.24765",
+  "source_title": "LLM-Guided Cyber-Physical Attack Path Identification in Smart Grids",
+  "source_url": "https://arxiv.org/abs/2611.24765",
+  "subfield": "security_and_cryptography",
+  "word_count": 24
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-52",
+  "original": "The same command can require opposite safety decisions in different states, so an incorrect answer may reflect missing information rather than poor reasoning.",
+  "source_doc": "arXiv:2611.24682",
+  "source_title": "The Limit Is in the Input, Not the Model: State-Dependent Command Safety in Natural-Language Interfaces to Industrial Controllers",
+  "source_url": "https://arxiv.org/abs/2611.24682",
+  "subfield": "security_and_cryptography",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-53",
+  "original": "This work applies Adversarial Machine Learning as a defense, injecting small perturbations into the measurements the attacker observes to degrade an artificial neural network (ANN)-based system identification (SI) attack.",
+  "source_doc": "arXiv:2611.24662",
+  "source_title": "Gradient-Based Defensive Poisoning Against System Identification Attacks on Cyber-Physical Systems",
+  "source_url": "https://arxiv.org/abs/2611.24662",
+  "subfield": "security_and_cryptography",
+  "word_count": 29
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-54",
+  "original": "We instead develop a three-message lightweight verification framework for robust histogram estimation that uses proofs of plaintext evaluation to restrict output manipulation to selective dropout.",
+  "source_doc": "arXiv:2611.24623",
+  "source_title": "Robust, Lightweight Locally Differentially Private Histogram Estimation and the Role of Dropout Attacks",
+  "source_url": "https://arxiv.org/abs/2611.24623",
+  "subfield": "security_and_cryptography",
+  "word_count": 25
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-55",
+  "original": "In this paper, we propose Semantic Counterfactual Residualization (SCR), which uses a small set of clean reference samples to account for benign variation through sample-specific feature reconstruction.",
+  "source_doc": "arXiv:2611.24558",
+  "source_title": "SCR: Detecting Backdoor-Poisoned Samples through Clean-Reference Residuals",
+  "source_url": "https://arxiv.org/abs/2611.24558",
+  "subfield": "security_and_cryptography",
+  "word_count": 27
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-56",
+  "original": "We introduce RECLAIM, a training-free, inference-time defense that uses a frozen VLA's own attention response to local visual interventions to guide purification during closed-loop embodied manipulation.",
+  "source_doc": "arXiv:2611.24494",
+  "source_title": "RECLAIM: Robot-Vision-Informed Adversarial Patch Defense via Embodied Attention Feedback",
+  "source_url": "https://arxiv.org/abs/2611.24494",
+  "subfield": "security_and_cryptography",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-57",
+  "original": "Function-level vulnerability detectors often exhibit fix reversal, assigning a higher vulnerability probability to a fixed version than to its vulnerable counterpart.",
+  "source_doc": "arXiv:2611.24489",
+  "source_title": "Mitigating fix reversal: Counterfactual constraints for function-level vulnerability detection",
+  "source_url": "https://arxiv.org/abs/2611.24489",
+  "subfield": "security_and_cryptography",
+  "word_count": 21
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-58",
+  "original": "We present a framework for Windows Portable Executable (PE) malware forensic triage that works only on pre-extracted static features and never executes malware.",
+  "source_doc": "arXiv:2611.24474",
+  "source_title": "Drift-Aware Explainable Prioritization for Windows PE Malware Forensic Triage with Semantic Consistency Checks",
+  "source_url": "https://arxiv.org/abs/2611.24474",
+  "subfield": "security_and_cryptography",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-59",
+  "original": "Keyword Private Information Retrieval (Keyword PIR) allows users to retrieve data associated with specific keywords from a database while protecting query privacy.",
+  "source_doc": "arXiv:2611.24248",
+  "source_title": "PMKPIR: Parallel Multi-Keyword PIR with Interleaved Batching for Private Boolean Retrieval",
+  "source_url": "https://arxiv.org/abs/2611.24248",
+  "subfield": "security_and_cryptography",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-60",
+  "original": "To address this gap, we introduce PIPETTE, a unified prompt injection purple-teaming framework that effectively converts red-teaming discoveries into defender robustness improvements.",
+  "source_doc": "arXiv:2611.24362",
+  "source_title": "PIPETTE: Prompt Injection Purple-Teaming for Robust LLM Agents",
+  "source_url": "https://arxiv.org/abs/2611.24362",
+  "subfield": "security_and_cryptography",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-61",
+  "original": "Choreographic programming (CP) describes a distributed system as a global program and compiles it into communicating network programs via endpoint projection (EPP).",
+  "source_doc": "arXiv:2611.24649",
+  "source_title": "A Principled Approach to Concurrency, Nondeterminism, and Asynchrony in Choreographies",
+  "source_url": "https://arxiv.org/abs/2611.24649",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-62",
+  "original": "Despite more than a decade of such sequencer-aided coordination (SAC) systems, from Corfu and NOPaxos to LazyLog and SwitchBFT, their correctness has been argued only with pen-and-paper proofs or bounded model checking at the protocol level.",
+  "source_doc": "arXiv:2611.23811",
+  "source_title": "Stephen: Verifying Sequencer-Aided Coordination Systems with Cross-View Prophecy",
+  "source_url": "https://arxiv.org/abs/2611.23811",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 36
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-63",
+  "original": "This paper presents a sound and complete constant-time emptiness check across the eBPF verifier's abstract domains to prune dead branches.",
+  "source_doc": "arXiv:2611.23584",
+  "source_title": "Detecting Empty Abstractions and Pruning Dead Paths in the Linux eBPF Verifier with Abstract Step Functions",
+  "source_url": "https://arxiv.org/abs/2611.23584",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-64",
+  "original": "We introduce MetaphIR, a system pairing a domain-specific language for expressing LLVM peephole optimizations with an indexed search engine over large IR corpora.",
+  "source_doc": "arXiv:2611.23555",
+  "source_title": "MetaphIR: Corpus-Scale Applicability Analysis for LLVM Peephole Optimizations",
+  "source_url": "https://arxiv.org/abs/2611.23555",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-65",
+  "original": "We prove that robustness against any prefix-closed, KAT-definable memory model is in PSPACE.",
+  "source_doc": "arXiv:2611.22663",
+  "source_title": "A Unifying Metatheorem on Weak-Memory Robustness",
+  "source_url": "https://arxiv.org/abs/2611.22663",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 13
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-66",
+  "original": "This generator enables verified algorithms to be used in Python applications, or to serve as verified references against which established Python libraries can be differentially tested, without leaving the Python ecosystem.",
+  "source_doc": "arXiv:2611.22613",
+  "source_title": "Python Code Generation for Isabelle/HOL",
+  "source_url": "https://arxiv.org/abs/2611.22613",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 31
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-67",
+  "original": "Empirically, on held-out tasks, AHE-Beta raises pass@1 from 21.9% to 33.3% while using 40.8% fewer tokens than Base Harness, and achieves higher pass@1 than Claude Code, Meta-Harness, and AHE.",
+  "source_doc": "arXiv:2611.24924",
+  "source_title": "Agentic Harness Engineering Beta: Requirement-Centered Evolution of Agent Harnesses",
+  "source_url": "https://arxiv.org/abs/2611.24924",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 29
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-68",
+  "original": "We present MicroAssert, a microarchitecture-aware framework that identifies functional regions directly from RTL and generates local and composite assertions through structured contracts and deterministic verification primitives.",
+  "source_doc": "arXiv:2611.24872",
+  "source_title": "MicroAssert: Microarchitecture-Aware Structured Assertion Generation for CPU Verification",
+  "source_url": "https://arxiv.org/abs/2611.24872",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-69",
+  "original": "Guided by this analysis, we propose DrawScore, which projects both models into three orthographic views with visible and hidden lines, as in engineering drawings, and applies a saturating penalty along the projected curves, so that the weight of a local error decays only linearly.",
+  "source_doc": "arXiv:2611.24681",
+  "source_title": "DrawScore: Evaluating Generated CAD Models against Engineering Drawings",
+  "source_url": "https://arxiv.org/abs/2611.24681",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 44
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-70",
+  "original": "We introduce Continuation Audits, a pipeline that grounds the auditor on a prefix drawn from a real coding-agent transcript and directs it to continue the trajectory toward a seeded behaviour.",
+  "source_doc": "arXiv:2611.24491",
+  "source_title": "Probing agent overeagerness in realistic settings with continuation audits",
+  "source_url": "https://arxiv.org/abs/2611.24491",
+  "subfield": "programming_languages_and_software_engineering",
+  "word_count": 30
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-71",
+  "original": "For common, nonincreasing concave polynomial inverse demands, convex quadratic costs of firms' allocation vectors, and rational total capacities, high-precision approximation is polynomial-time solvable for cubic demands, regardless of market size.",
+  "source_doc": "arXiv:2611.24931",
+  "source_title": "Sharp Complexity Thresholds for Network Cournot Competition",
+  "source_url": "https://arxiv.org/abs/2611.24931",
+  "subfield": "theory_and_algorithms",
+  "word_count": 30
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-72",
+  "original": "The colorless game, with connectability given by an arbitrary matrix, is NP-hard (by reduction from Hamiltonian Path) and lies in PSPACE.",
+  "source_doc": "arXiv:2611.24918",
+  "source_title": "Hardness of \"Infinite Energy\" Puzzles",
+  "source_url": "https://arxiv.org/abs/2611.24918",
+  "subfield": "theory_and_algorithms",
+  "word_count": 21
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-73",
+  "original": "For security strategies in arbitrary zero-sum games the exponent is four times larger, and sampling an optimal strategy attains it.",
+  "source_doc": "arXiv:2611.24913",
+  "source_title": "Sharp Bounds for Selector Advice and Oblivious Equilibrium Search",
+  "source_url": "https://arxiv.org/abs/2611.24913",
+  "subfield": "theory_and_algorithms",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-74",
+  "original": "The variant in which vertices are assigned heights with maximum value m that reduce by 1 whenever the token is moved from that vertex, denoted UIRm, is known to be polynomial time solvable when m=2 and PSPACE-complete when m=4.",
+  "source_doc": "arXiv:2611.24709",
+  "source_title": "The computational complexity of Undirected Vertex Geography with maximum height 3",
+  "source_url": "https://arxiv.org/abs/2611.24709",
+  "subfield": "theory_and_algorithms",
+  "word_count": 39
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-75",
+  "original": "Our algorithm is based on assigning each vertex a \"pressure\" and splits each edge's unit load smoothly between its endpoints according to their pressures.",
+  "source_doc": "arXiv:2611.24905",
+  "source_title": "Batch-Dynamic Coreness and Applications with Logarithmic Work via Balanced Pressures",
+  "source_url": "https://arxiv.org/abs/2611.24905",
+  "subfield": "theory_and_algorithms",
+  "word_count": 24
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-76",
+  "original": "A threshold matcher based on random-prime residue refinements and the multi-stream dictionary matching algorithm of Golan, Kopelowitz, and Porat [GKP18] gives our second space bound directly.",
+  "source_doc": "arXiv:2611.24768",
+  "source_title": "Small-Space Streaming Hamming Approximation",
+  "source_url": "https://arxiv.org/abs/2611.24768",
+  "subfield": "theory_and_algorithms",
+  "word_count": 26
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-77",
+  "original": "The second algorithm achieves the same guarantee through a different decomposition: it enumerates vertex partitions and heavy trees connecting their parts, then approximates a bounded-weight interdiction problem within the parts.",
+  "source_doc": "arXiv:2611.24526",
+  "source_title": "Two $(2+ε)$-Approximation Algorithms for Minimum Spanning Tree Interdiction",
+  "source_url": "https://arxiv.org/abs/2611.24526",
+  "subfield": "theory_and_algorithms",
+  "word_count": 30
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-78",
+  "original": "Constant-factor approximation algorithms are known when rotations are allowed, but no approximation guarantee was previously known for arbitrary convex polyhedra with fixed orientations.",
+  "source_doc": "arXiv:2611.26352",
+  "source_title": "Polylogarithmic Approximation for Packing Convex Polyhedra",
+  "source_url": "https://arxiv.org/abs/2611.26352",
+  "subfield": "theory_and_algorithms",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-79",
+  "original": "Our algorithm for component decomposition combines fundamental basis exchanges with a disjoint-set union data structure, avoiding the explicit construction of the fundamental graph.",
+  "source_doc": "arXiv:2611.23624",
+  "source_title": "Matroid Connectedness and Component Decomposition: Breaking the Quadratic Barrier",
+  "source_url": "https://arxiv.org/abs/2611.23624",
+  "subfield": "theory_and_algorithms",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-80",
+  "original": "Quantum algorithms for differential equations have the potential for substantial algorithmic speedups over classical methods.",
+  "source_doc": "arXiv:2611.26582",
+  "source_title": "End-to-End Quantum Algorithm for Differential Equations: Application to Simulating a Biomolecular System",
+  "source_url": "https://arxiv.org/abs/2611.26582",
+  "subfield": "theory_and_algorithms",
+  "word_count": 15
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-81",
+  "original": "We argue this is a question about a single cognitive trait, metacognitive calibration: the alignment between a reviewer's behavioral confidence and the actual correctness of their judgments.",
+  "source_doc": "arXiv:2611.24932",
+  "source_title": "Knowing What You Know: A Trait Theory of Reviewer Value in Human-AI Cognitive Systems",
+  "source_url": "https://arxiv.org/abs/2611.24932",
+  "subfield": "human_computer_interaction",
+  "word_count": 27
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-82",
+  "original": "To demonstrate the framework, we design an LLM-based system that plays the game for one of the paper's authors, drawing on an autoethnographic dataset spanning ten years of personal digital communication.",
+  "source_doc": "arXiv:2611.24888",
+  "source_title": "Who are you? The Personal Imitation Game",
+  "source_url": "https://arxiv.org/abs/2611.24888",
+  "subfield": "human_computer_interaction",
+  "word_count": 31
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-83",
+  "original": "While these approaches offer technical transparency, evaluating dozens of isolated features demands excessive cognitive effort from non-expert users.",
+  "source_doc": "arXiv:2611.24831",
+  "source_title": "Overlooked and Underutilized: Prototypes are the Missing Piece in Tabular XAI",
+  "source_url": "https://arxiv.org/abs/2611.24831",
+  "subfield": "human_computer_interaction",
+  "word_count": 18
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-84",
+  "original": "By grouping related features into bounded subspaces, prototypical parts technically embody human-understandable concepts, replacing isolated features with cohesive semantic units.",
+  "source_doc": "arXiv:2611.24831",
+  "source_title": "Overlooked and Underutilized: Prototypes are the Missing Piece in Tabular XAI",
+  "source_url": "https://arxiv.org/abs/2611.24831",
+  "subfield": "human_computer_interaction",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-85",
+  "original": "We analyzed 35 sessions of 19 patients with PD from a multi-center cohort performing the CopyDraw task, a drawing task designed to overcome the subjectivity and limited granularity of clinical assessments.",
+  "source_doc": "arXiv:2611.24823",
+  "source_title": "One size does not fit all: session-specific effects of deep brain stimulation on hand-motor kinematics in Parkinson's disease",
+  "source_url": "https://arxiv.org/abs/2611.24823",
+  "subfield": "human_computer_interaction",
+  "word_count": 31
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-86",
+  "original": "ATCOs found the chosen transparency techniques helpful to some extent: revealing how agents were making controlling decisions was an essential foundation for trust.",
+  "source_doc": "arXiv:2611.24791",
+  "source_title": "Towards Transparent Computational Agents for Air Traffic Control: Explainability, Interpretability and Trust",
+  "source_url": "https://arxiv.org/abs/2611.24791",
+  "subfield": "human_computer_interaction",
+  "word_count": 23
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-87",
+  "original": "We describe the iterative development and evaluation of ALIGN and discuss how this method promotes AI governance by highlighting the relevance of control-accountability alignment throughout the AI life cycle.",
+  "source_doc": "arXiv:2611.24609",
+  "source_title": "Negotiating Control and Accountability among Stakeholders in High-Risk AI Use Cases: Development and Evaluation of the Method ALIGN",
+  "source_url": "https://arxiv.org/abs/2611.24609",
+  "subfield": "human_computer_interaction",
+  "word_count": 29
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-88",
+  "original": "Building on the findings of previous studies investigating the impact of multitasking in individual non-video meeting work setups and threaded cognition theory, we present a research model that suggests that multitasking may have negative effects on meeting outcomes such as process loss and team meeting outcome satisfaction.",
+  "source_doc": "arXiv:2611.24545",
+  "source_title": "The Impact Of Multitasking In Video Meetings On Meeting Outcomes: Initial Results",
+  "source_url": "https://arxiv.org/abs/2611.24545",
+  "subfield": "human_computer_interaction",
+  "word_count": 47
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-89",
+  "original": "In a between-subjects study (N=132) against two baselines, MemoSync participants achieved significantly higher task performance and the highest mean developer-agent memory alignment.",
+  "source_doc": "arXiv:2611.24165",
+  "source_title": "MemoSync: Co-Managing Developer-Agent Metamemory Across Contexts",
+  "source_url": "https://arxiv.org/abs/2611.24165",
+  "subfield": "human_computer_interaction",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-90",
+  "original": "Using four concealed piezoelectric sensors, the system combines signal acquisition and preprocessing with neural event detection and gesture classification.",
+  "source_doc": "arXiv:2611.24218",
+  "source_title": "TableControl: Gesture Interaction Through Surface Vibrations",
+  "source_url": "https://arxiv.org/abs/2611.24218",
+  "subfield": "human_computer_interaction",
+  "word_count": 19
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-91",
+  "original": "We present ProvCards, an artifact-oriented approach that treats provenance as a first-class artifact grounded in the W3C PROV Data Model.",
+  "source_doc": "arXiv:2611.24894",
+  "source_title": "ProvCards: Artifact-Oriented Provenance for Heterogeneous Scientific Workflows",
+  "source_url": "https://arxiv.org/abs/2611.24894",
+  "subfield": "databases_and_data_management",
+  "word_count": 20
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-92",
+  "original": "Individual workflow components can generate cards that are stored, exchanged, reused, and composed independently of any workflow system or centralized execution context.",
+  "source_doc": "arXiv:2611.24894",
+  "source_title": "ProvCards: Artifact-Oriented Provenance for Heterogeneous Scientific Workflows",
+  "source_url": "https://arxiv.org/abs/2611.24894",
+  "subfield": "databases_and_data_management",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-93",
+  "original": "In this paper, we propose DispersedBFT, a high performance PBFT-like consensus protocol that utilizes dispersed replication to eliminate the primary bottleneck of PBFT-like consensus.",
+  "source_doc": "arXiv:2611.24833",
+  "source_title": "DispersedBFT: Bottleneck-Free Primary-Backup Consensus using Dispersed Replication",
+  "source_url": "https://arxiv.org/abs/2611.24833",
+  "subfield": "databases_and_data_management",
+  "word_count": 24
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-94",
+  "original": "Large language models (LLMs) enable semantic filtering over unstructured documents using natural language predicates, but invoking an oracle LLM on every document incurs prohibitive monetary cost and online latency.",
+  "source_doc": "arXiv:2611.24518",
+  "source_title": "Towards Online Adaptive LLM-based Semantic Filtering",
+  "source_url": "https://arxiv.org/abs/2611.24518",
+  "subfield": "databases_and_data_management",
+  "word_count": 29
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-95",
+  "original": "We present a unified benchmark of four representative systems, which formulate query processing as a three-stage workflow comprising proxy construction, threshold calibration, and cascade inference, using a two-threshold acceptance rule.",
+  "source_doc": "arXiv:2611.23898",
+  "source_title": "Cascadeability and the Realization Gap: An Empirical Study of LLM-Powered Semantic Filtering",
+  "source_url": "https://arxiv.org/abs/2611.23898",
+  "subfield": "databases_and_data_management",
+  "word_count": 30
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-96",
+  "original": "However, this flexibility introduces a challenge as well as an opportunity: a single conceptual schema admits many semantically equivalent relational schemas, whose performance can differ substantially across workloads.",
+  "source_doc": "arXiv:2611.23632",
+  "source_title": "Logical Design Tuning via Workload-aware E/R-to-Relational Mapping",
+  "source_url": "https://arxiv.org/abs/2611.23632",
+  "subfield": "databases_and_data_management",
+  "word_count": 28
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-97",
+  "original": "As data systems increasingly support autonomous LLM-powered agents alongside human analysts, they require richer semantic infrastructure bridging analytical concepts and analytical operations.",
+  "source_doc": "arXiv:2611.23629",
+  "source_title": "The Value Semantics Layer: Enabling Machine-Understandable Databases for Agentic AI",
+  "source_url": "https://arxiv.org/abs/2611.23629",
+  "subfield": "databases_and_data_management",
+  "word_count": 22
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-98",
+  "original": "Dataspaces are an emerging concept to enable secure and controlled data sharing between multiple stakeholders.",
+  "source_doc": "arXiv:2611.26611",
+  "source_title": "Bridging the Discovery Gap in Solid Dataspaces with a Semantic Data Catalog",
+  "source_url": "https://arxiv.org/abs/2611.26611",
+  "subfield": "databases_and_data_management",
+  "word_count": 15
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-99",
+  "original": "We evaluate 20 widely used library and database configurations and find that every tested configuration returns mathematically incorrect top-10 result sets on at least 1 applicable query.",
+  "source_doc": "arXiv:2611.22474",
+  "source_title": "Errpedia: Is Your Exact $k$-NN Vector Search Really Exact?",
+  "source_url": "https://arxiv.org/abs/2611.22474",
+  "subfield": "databases_and_data_management",
+  "word_count": 27
+ },
+ {
+  "domain": "computer_science",
+  "id": "cs-w10-100",
+  "original": "Existing multilingual benchmarks mostly translate only the question without aligning schema and value entities, so they can neither locate the source of an accuracy drop nor rule out translation errors.",
+  "source_doc": "arXiv:2611.22333",
+  "source_title": "MoL-SQL: A Controlled Benchmark for Mixture-of-Language Text-to-SQL",
+  "source_url": "https://arxiv.org/abs/2611.22333",
+  "subfield": "databases_and_data_management",
+  "word_count": 30
+ }
+]
