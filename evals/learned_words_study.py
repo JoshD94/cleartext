@@ -577,3 +577,15 @@ def r5(argv):
     from . import learned_words_r5
 
     return learned_words_r5.main(argv)
+
+
+def corpus(argv):
+    from . import learned_words_corpus
+
+    return learned_words_corpus.main(argv)
+
+
+def replay(argv):
+    from . import learned_words_replay
+
+    return learned_words_replay.main(argv)
