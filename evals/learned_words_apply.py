@@ -117,7 +117,7 @@ def targets(doc, model, limit=MAX_TARGETS):
     return sorted(elig, key=lambda x: -x[1])[:limit], out
 
 
-def word_swaps(text, model, pid, limit=MAX_TARGETS):
+def word_swaps(text, model, pid, limit=MAX_TARGETS, score_top=None):
     """Swaps the stage accepts in one passage. Eligible words across all its
     sentences are ranked by p_complex * (1 - p_term); the top `limit` are
     featurized and decided (featurization is the costly step)."""
@@ -156,7 +156,8 @@ def word_swaps(text, model, pid, limit=MAX_TARGETS):
             after = s[:inst["start"]] + d["word"] + s[inst["end"]:]
             swaps.append({"pid": pid, "sentence": si, "before": s, "after": after, "word": t.text,
                           "rep": d["word"], "pos": d["pos"], "gate": d["gate"], "check": d["check"],
-                          "p_complex": pc, "p_term": pt, "sources": top["sources"]})
+                          "p_complex": pc, "p_term": pt, "sources": top["sources"],
+                          **(score_top(top) if score_top else {})})
     return swaps, seen
 
 
@@ -167,8 +168,11 @@ def apply(argv):
     max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1500
     limit = int(argv[argv.index("--targets") + 1]) if "--targets" in argv else MAX_TARGETS
     if "--panel" in argv:
-        if argv[argv.index("--panel") + 1] != "onestop-dev":
-            raise SystemExit("only --panel onestop-dev is supported")
+        name = argv[argv.index("--panel") + 1]
+        if name == "dev-extra":
+            return apply_r4(argv)
+        if name != "onestop-dev":
+            raise SystemExit("only --panel onestop-dev|dev-extra is supported")
         return apply_r3(max_seconds, limit)
     # The split checker rejects 38 of F2's 73 dev splits at its pre-registered
     # threshold, far more than the ~15% a review found broken, so by default
@@ -245,6 +249,58 @@ def apply_r3(max_seconds, limit):
             print(f"{time.strftime('%H:%M:%S')} {pid} proposed={len(swaps)} a={len(a)} b={len(b)}", flush=True)
     left = len(set(outputs) - {r["pid"] for r in read_jsonl(path)})
     print("COMPLETE" if not left else f"PARTIAL {left} left", flush=True)
+
+
+APPLY_R4 = STATE / "apply-r4"
+
+
+def apply_r4(argv):
+    """Round 4: the stage on the 84 fresh dev-document passages (source text;
+    no F2 output exists for them). Every proposed swap records the round-3
+    margin, the strict checker score and the target's predicted CWI share;
+    arms are chosen afterwards from those fields (see page_r4)."""
+    import torch
+
+    from .learned_words_panel import PANEL_R4
+    from .learned_words_simpler import SIMPLER, active_margin
+    from . import learned_words_strict as ST
+
+    torch.set_num_threads(2)
+    max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1440
+    margin, _ = active_margin()
+    strict, floor = ST.load()
+    simpler = pickle.load(open(SIMPLER, "rb"))
+    model = pickle.load(open(STATE / "model.pkl", "rb"))
+    panel = json.load(open(PANEL_R4))
+    APPLY_R4.mkdir(parents=True, exist_ok=True)
+    path = APPLY_R4 / "passages.jsonl"
+    done = {r["pid"] for r in read_jsonl(path)}
+    deadline = time.monotonic() + max_seconds
+    todo = [p for p in panel if p["id"] not in done]
+    print(f"{len(done)} done, {len(todo)} to do; margin {margin}, strict {strict.threshold}, floor {floor}", flush=True)
+    score = lambda top: {"strict": float(strict.score([top])[0])}
+    with open(path, "a") as f:
+        for p in todo:
+            if time.monotonic() > deadline:
+                break
+            swaps, seen = word_swaps(p["original"], model, p["id"], score_top=score)
+            if swaps:
+                ms = simpler.margin([s["word"] for s in swaps], [s["rep"] for s in swaps])
+                tc = simpler.raw([s["word"] for s in swaps], "cwi")
+                for s, m, c in zip(swaps, ms, tc):
+                    s["margin"], s["target_cwi"] = float(m), float(c)
+            f.write(json.dumps({"pid": p["id"], "domain": p["domain"], "kind": p["kind"], "content_words": seen,
+                                "proposed": swaps, "input": p["original"]}) + "\n")
+            f.flush()
+            print(f"{time.strftime('%H:%M:%S')} {p['id']} proposed={len(swaps)}", flush=True)
+    left = len({p["id"] for p in panel} - {r["pid"] for r in read_jsonl(path)})
+    print("COMPLETE" if not left else f"PARTIAL {left} left", flush=True)
+
+
+def r4_arms(margin, strict_t, floor):
+    return {"b": lambda s: s["margin"] >= margin,
+            "c": lambda s: s["margin"] >= margin and s["target_cwi"] >= floor,
+            "d": lambda s: s["margin"] >= margin and s["target_cwi"] >= floor and s["strict"] >= strict_t}
 
 
 def _skey(s):
@@ -343,6 +399,60 @@ def score_r3(argv):
     blocked = [marks[i] for i, x in ids.items() if x["arms"] == ["a"] and i in marks]
     out["blocked_by_margin"] = dict(Counter(blocked))
     print(json.dumps(out, indent=1))
+    return out
+
+
+R4 = STATE / "rating-r4"
+PAGE_R4 = PAGE_DIR / "rate-learned-swaps-r4.html"
+
+
+def page_r4(argv):
+    """Union of the swaps each round-4 arm picks (b: round-3 stage, c: + target
+    floor, d: + strict checker), shuffled and blind, plus key and page."""
+    import random
+
+    from .learned_words_simpler import active_margin
+    from . import learned_words_strict as ST
+
+    margin, _ = active_margin()
+    strict, floor = ST.load()
+    arms = r4_arms(margin, strict.threshold, floor)
+    items = {}
+    for r in read_jsonl(APPLY_R4 / "passages.jsonl"):
+        for arm, ok in arms.items():
+            for s in choose(r["proposed"], ok):
+                k = _skey(s)
+                items.setdefault(k, dict(s, key=k, arms=[], domain=r["domain"], kind=r["kind"]))["arms"].append(arm)
+    items = sorted(items.values(), key=lambda x: x["key"])
+    random.Random(1120).shuffle(items)
+    R4.mkdir(parents=True, exist_ok=True)
+    json.dump({"swaps": items}, open(R4 / "key.json", "w"), indent=1)
+    blind = [{"id": f"w{n}", "before": x["before"], "after": x["after"], "word": x["word"], "rep": x["rep"]}
+             for n, x in enumerate(items, 1)]
+    json.dump(blind, open(R4 / "blind-items.json", "w"), indent=1)
+    PAGE_DIR.mkdir(parents=True, exist_ok=True)
+    PAGE_R4.write_text(render(items, "Rate the word swaps (round 4)", "cleartext-rate-learned-r4-20261119",
+                              "cleartext-marks-learned-swaps-r4.csv"))
+    print(f"{len(items)} items " + ", ".join(f"arm {a} {sum(a in x['arms'] for x in items)}" for a in arms)
+          + f" -> {R4 / 'blind-items.json'}, page {PAGE_R4}")
+
+
+def score_arms(key_path, marks_path):
+    """Good rate per arm from a marks CSV (id,mark,...) over blind items w1..wN."""
+    import csv
+
+    from .learned_words_study import wilson
+
+    key = json.load(open(key_path))["swaps"]
+    ids = {f"w{n}": x for n, x in enumerate(key, 1)}
+    marks = {r["id"]: r["mark"] for r in csv.DictReader(open(marks_path)) if r.get("mark")}
+    arms = sorted({a for x in key for a in x["arms"]})
+    out = {"rated": len(marks), "items": len(ids)}
+    for arm in arms:
+        ms = [marks[i] for i, x in ids.items() if arm in x["arms"] and i in marks]
+        c = Counter(ms)
+        out["arm_" + arm] = {"swaps": len(ms), **c, "good_rate": c["good"] / len(ms) if ms else None,
+                             "good_ci95": wilson(c["good"], len(ms))}
     return out
 
 

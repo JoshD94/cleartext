@@ -534,6 +534,8 @@ def apply(argv):
 def page(argv):
     from . import learned_words_apply
 
+    if argv[:2] == ["--round", "4"]:
+        return learned_words_apply.page_r4(argv[2:])
     if argv[:2] == ["--round", "3"]:
         return learned_words_apply.page_r3(argv[2:])
     if argv[:1] == ["score-r3"]:
@@ -545,3 +547,15 @@ def simpler(argv):
     from . import learned_words_simpler
 
     return learned_words_simpler.main(argv)
+
+
+def panel(argv):
+    from . import learned_words_panel
+
+    return learned_words_panel.main(argv)
+
+
+def strict(argv):
+    from . import learned_words_strict
+
+    return learned_words_strict.main(argv)

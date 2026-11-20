@@ -158,6 +158,39 @@ margin should remove them.
   stay in the state directory (`rating-r3/`). Joshua's page is
   `~/Documents/cleartext-rating/rate-learned-swaps-r3.html`.
 
+## Round 4: target floor and strict checker (November 19)
+
+- **Fresh text:** 84 unused windows of test-set-v3 dev documents, never test
+  documents (`learned-words panel build-r4`). The stage ran on source text,
+  because no F2 output exists for these windows.
+- **Hypotheses**, with thresholds fixed before any round-4 swap existed:
+  - (c) A target floor: the target must be predicted complex by at least 2 of
+    20 CWI annotators. Stage 1 required only 1.
+  - (d) A strict checker trained on SWORDS-dev substitutes that at least 80%
+    of annotators accept. Its pre-registered 0.90-precision rule found no
+    threshold; fallback S2 (best F0.5, fixed before the grid was seen) gave
+    0.50. On SWORDS test its AUC is 0.80, against 0.81 for the existing
+    checker on the same label.
+- **Rater:** a fresh blind subagent. It agreed with the round-3 rater on 94%
+  of the 47 re-shown swaps.
+
+| Arm (blind rater) | Swaps | Good | Not simpler | Changes meaning | Good rate |
+|---|---:|---:|---:|---:|---:|
+| b: round-3 stage | 71 | 44 | 12 | 15 | 62% |
+| c: + target floor | 55 | 35 | 9 | 11 | 64% |
+| d: + strict checker | 27 | 15 | 6 | 6 | 56% |
+
+**Both hypotheses are rejected.**
+- The floor also removes Good swaps (rapidly→quickly, believes→thinks).
+- The strict checker does not track meaning errors.
+- Across the 123 round-3 and round-4 swaps, the Good rate is 7% below margin
+  0.1, 41% at 0.1–0.3, and a flat 61–67% above 0.3.
+- About a quarter of the swaps above 0.3 change meaning. Most are broken
+  verb frames or collocations, such as "we will be needed to", "asking an
+  extension" and "it can be found that", or lost term senses, such as
+  "statistically significant → large".
+- Details are in [round4.json](round4.json).
+
 ## Split checker (stage 4b)
 
 [split-checker.json](split-checker.json) has the full results; all figures
