@@ -191,6 +191,64 @@ margin should remove them.
   "statistically significant → large".
 - Details are in [round4.json](round4.json).
 
+## Round 5: frame probe and a fine-tuned substitution judge (November 20)
+
+- **Frame probe (diagnostic only, on the 123 rated round-3/4 swaps):** how
+  much a swap lowers BERT's masked probability of the words within 3 of it
+  ([frame-probe.json](frame-probe.json)). Best AUC for meaning error vs Good
+  is 0.64 (largest neighbour drop). That is too weak to build on, so it was
+  not trained.
+- **Judge (`cleartext.learned_words.judge`):**
+  - Model: `cross-encoder/nli-deberta-v3-small` with a new one-logit head,
+    fine-tuned on CPU.
+  - Input: the 12-word window around the target, before and after the swap,
+    with the swapped word marked.
+  - Training data, public only: 11,184 pairs from SWORDS dev (soft label =
+    share of annotators who accept the substitute) and from BenchLS-train and
+    TSAR trial (human simplification vs generated candidate).
+  - Validation: 1,876 pairs, held out by target lemma.
+  - Settings and threshold rules were fixed before training (see the
+    docstring of `evals/learned_words_judge.py`).
+  - Training took 11 queue chunks (`172a5ab75661` … `4f2450b5633b`) because
+    Yoga was at load 25–46.
+  - The threshold chosen on validation is 0.78. No threshold reached 90%
+    validation precision, so the strict arm g did not run.
+  - Pre-committed in [judge-precommit.json](judge-precommit.json) before any
+    round-5 swap existed.
+- **Public tests ([judge-check.json](judge-check.json)):** the judge is weaker
+  than the existing feature models.
+
+  | Test | Judge | Existing stage |
+  |---|---|---|
+  | SWORDS test AUC | 0.85 | 0.88 (stage-4 checker) |
+  | TSAR-2022 test ACC@1 among generated candidates | 0.53 | 0.73 (GBM ranker) |
+  | TSAR test precision, stage + judge filter | 25/26 | 34/36 (stage alone) |
+
+- **Fresh text:** 70 unused windows of test-set-v3 dev documents (31
+  documents), none overlapping round 4 (`panel build-r5`).
+- **Rater:** a fresh blind subagent rated all 254 mixed items. It agreed with
+  round 4's marks on 18 of 20 re-shown swaps.
+
+| Arm (blind rater) | Swaps | Good | Not simpler | Changes meaning | Good rate (95% CI) |
+|---|---:|---:|---:|---:|---:|
+| b: round-3 stage | 49 | 34 | 5 | 10 | 69% (55–80) |
+| e: b + judge ≥ 0.78 | 42 | 30 | 4 | 8 | 71% (56–83) |
+| f: judge picks the replacement | 172 | 56 | 19 | 97 | 33% (26–40) |
+| control: TSAR-test top human substitute | 20 | 10 | 2 | 8 | 50% |
+
+**The judge is rejected.**
+- As a filter it removes 7 of 49 swaps with no clear gain.
+- As a picker it is far worse than the GBM ranker: mostly wrong senses and
+  broken frames.
+- The human-gold controls are a ceiling check. Even TSAR's most frequent
+  human substitute is rated Good only 50% of the time (10 of 18 once 2 a/an
+  errors from building the controls are excluded). Under this rater, the
+  shipped stage's 62–69% on technical text is above that level.
+- Remaining stage failures are mostly technical senses ("clinically
+  significant", "proposed rule", diplomatic "recognize") and same-difficulty
+  synonyms.
+- Details are in [round5.json](round5.json).
+
 ## Split checker (stage 4b)
 
 [split-checker.json](split-checker.json) has the full results; all figures

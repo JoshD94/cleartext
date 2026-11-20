@@ -118,6 +118,8 @@ versions, input/model/source hashes and completion/failure receipts.
   Its split checker is too strict on F2 (rejects 38/73): keep it opt-in.
   Round 3 adds `simpler.py` (word-difficulty margin, rule R2 = 0.1, opt-in
   via `apply --panel onestop-dev`); OneStopEnglish dev is now used for rated swaps.
+  Rounds 4–5 used unused dev-document windows (`panel build-r4/-r5`); the
+  fine-tuned judge (`judge.py`) was rejected: it lost to the GBM models.
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
