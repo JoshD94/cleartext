@@ -57,3 +57,35 @@ If no arm passes, round 6 spends no fresh text, and the report says so.
 - **Success:** the arm reaches at least 78% Good, keeps at least 60% of arm
   b's swaps on the same window, and has Changes meaning at or below 15% of
   its swaps. Wilson 95% intervals are reported.
+
+## Addendum k (written before arm k was trained or replayed)
+
+### Corpus
+
+- **Sources:** RFC standards from 2015–2019 (300 documents), significant
+  Federal Register rules and proposed rules from 2022 to mid-2023 (395), and
+  openFDA prescription labels effective in 2022 (585, one per generic name).
+- **Excluded:** every v3 generic name, v3 document and round-4/5 panel
+  document.
+- **Sentences:** 391k kept. 1,393 were dropped because they share a word
+  8-gram with a v3 or round-4/5 passage.
+- **SEC 10-K filings were skipped:** SEC refuses clients that send no contact
+  address, and none is sent.
+
+### Model
+
+- **Features:** corpus statistics only (`context_fit.py`). They cover
+  keyness, plus counts and association of target and replacement in five
+  frames around the swapped word.
+- **Labels:**
+  - A, human labels from SWORDS dev: accepted by at least 50% of
+    annotators means fit; accepted by at most 10% means misfit.
+  - B, distant labels from the corpus: the same word inside a multiword
+    NIST, US Courts or MeSH term is a misfit, and outside any term is a fit.
+    Rows are matched per word, at most 20 each. The swapped-in candidate is a
+    more frequent WordNet or plainlanguage.gov candidate.
+- **Threshold rule:** keep at least 90% of out-of-fold fits, with folds
+  grouped by word. Swaps scoring below the threshold are vetoed.
+- **Reported, not gating:** leave-one-glossary-out AUC on B.
+- **Replay go/no-go:** as above. Arm k must remove at least a third of the
+  Changes-meaning swaps.

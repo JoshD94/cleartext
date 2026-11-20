@@ -12,8 +12,8 @@ from other years and never a v3 document (dev or test):
   openfda  prescription labels effective in 2022 (v3: 2024), excluding
            every generic name in the v3 panel or the round-4..6 panels
   sec10k   10-Ks filed 2022-01-01..2023-06-30 by companies 300-399 of the
-           SEC ticker file (v3 drew the first 50 qualifying companies) and
-           never a v3 company
+           SEC ticker file, never a v3 company (skipped and recorded when
+           SEC refuses the request: no contact address is sent)
 
 Every corpus sentence that shares a word 8-gram with any v3 passage (dev
 or test), or with a round-4..6 panel passage, is dropped; the drop count
@@ -178,7 +178,13 @@ def fetch(argv):
                 print("PARTIAL (openfda pages cached; rerun)")
                 return
         else:
-            pool = {"rfc": rfc_pool, "fedreg": fedreg_pool}.get(source, lambda f: sec_pool(f, ciks))(f)
+            try:
+                pool = {"rfc": rfc_pool, "fedreg": fedreg_pool}.get(source, lambda f: sec_pool(f, ciks))(f)
+            except Exception as e:  # SEC refuses clients without a contact address; none is sent
+                stats[source] = {"skipped": f"{type(e).__name__}: {e}"}
+                done.write_text(json.dumps(stats[source]))
+                print(source, stats[source], flush=True)
+                continue
             rng = random.Random(f"{SEED}:{source}")
             rng.shuffle(pool)
             items = []
@@ -223,6 +229,8 @@ def count(argv):
     n = 0
     per_source = {}
     for source in ("rfc", "fedreg", "sec10k", "openfda"):
+        if not (CORPUS / f"{source}.jsonl.gz").exists():
+            continue
         src_n = 0
         with gzip.open(CORPUS / f"{source}.jsonl.gz", "rt") as r:
             for line in r:

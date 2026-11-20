@@ -589,3 +589,15 @@ def replay(argv):
     from . import learned_words_replay
 
     return learned_words_replay.main(argv)
+
+
+def pairwise(argv):
+    from . import learned_words_pairwise
+
+    return learned_words_pairwise.main(argv)
+
+
+def contextfit(argv):
+    from . import learned_words_contextfit
+
+    return learned_words_contextfit.main(argv)

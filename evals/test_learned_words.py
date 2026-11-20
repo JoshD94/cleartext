@@ -158,3 +158,17 @@ def test_r5_arms_stage_and_judge_picks():
     assert swaps_for(rec, *a["e"], 0.1) == []  # judge rejects the stage's word
     f = swaps_for(rec, *a["f"], 0.1)  # "asked" fails the margin; "told" is the judge's pick
     assert [s["rep"] for s in f] == ["told"] and f[0]["after"] == "We are told to go."
+
+
+def test_pairwise_relations_flag_families_and_edits():
+    from cleartext.learned_words.pairwise import _edit, _family
+
+    assert _edit("upward", "upwards") == 1 and _edit("intention", "intent") == 3
+    assert _family("intention", "intend") == 1.0
+    assert _family("halt", "stop") == 0.0
+
+
+def test_corpus_tokens_lowercase_and_keep_hyphens():
+    from evals.learned_words_corpus import tokens
+
+    assert tokens("The FDA’s well-known Rule, 2024.") == ["the", "fda's", "well-known", "rule"]
