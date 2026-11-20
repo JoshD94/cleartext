@@ -5,7 +5,7 @@ The protocol and thresholds were fixed before fitting ([PROTOCOL.md](PROTOCOL.md
 Raw text, candidate rows and predictions stay in `~/.local/state/cleartext/learned-words-20261118/`.
 Code is in `models/src/cleartext/learned_words/`, and it runs through `scripts/learned-words`.
 
-**Status: not adopted.** F2 stays the shipped default. Joshua's round-2 blind
+**Status: not adopted.** F2 stays the shipped default. Fresh-text blind Good rate by round: 54% (r2), 64% (r3), 62% (r4), 69% (r5); round 6's two arms failed the replay gate. Joshua's round-2 blind
 marks on 98 new swaps will decide adoption (≥ 90% Good).
 
 ## Stages
@@ -324,3 +324,55 @@ Problems along the way:
   thresholds look precise. It was fixed before any test number was read: every
   gate row now gets an out-of-fold checker score, and training refuses to run
   if any NLI is missing.
+
+## Round 6: offline replay gate, pairwise simplicity and context fit (November 20)
+
+[ROUND6.md](ROUND6.md) holds the pre-registered rules, from a planning pass
+by a separate model.
+
+### Replay set
+
+- It holds the 153 blind-rated swaps from rounds 3–5 that the current stage
+  made: 99 Good, 23 Not simpler and 31 Changes meaning, a Good rate of 65%.
+- It is validation only.
+- An arm earns a fresh window only if it meets all three conditions:
+  - its Good rate improves by at least 5 points;
+  - it keeps at least 60% of the swaps;
+  - it removes a large enough share of the error type it targets (at
+    least 40% of Not simpler for arm p, at least a third of Changes meaning
+    for arm k).
+
+### Technical reference corpus
+
+- It has 12.0M tokens. The sources are:
+  - RFCs from 2015–2019;
+  - Federal Register rules and proposed rules from 2022 to mid-2023;
+  - openFDA labels from 2022.
+- No test-set-v3 document or generic name is in it, and no round-4/5 panel
+  document. 1,393 sentences were dropped for a word 8-gram overlap with
+  those passages.
+- SEC was skipped because it refuses clients without a contact address.
+- Its manifest and hashes are in the state directory under `corpus/`.
+
+| Arm | Model check | Threshold (pre-committed) | Replay: kept | Good rate kept | Targeted error removed | Replay AUC | Decision |
+|---|---|---|---:|---:|---:|---:|---|
+| p: pairwise simplicity | OOF AUC 0.61 (43k BenchLS/plainlanguage pairs) | 0.31 (max balanced acc.) | 150/153 | 66% | 2 of 23 Not simpler | 0.76 (Good vs Not simpler) | no-go |
+| k: corpus context fit | OOF AUC 0.77 (SWORDS 0.59, distant 0.71); leave-one-glossary-out 0.54–0.64 | 0.236 (keep 90% of fits) | 148/153 | 65% | 0 of 31 Changes meaning | 0.53 (Good vs Changes meaning) | no-go |
+
+**Neither arm earns a fresh window,** so round 6 spent no new text
+([pairwise-replay.json](pairwise-replay.json),
+[contextfit-replay.json](contextfit-replay.json)).
+
+### Findings
+
+- **Corpus collocation statistics do not detect the meaning errors.** Their
+  replay AUC is 0.53. "Clinically significant", "required to" and
+  "broadcast" all have the replacement attested in the same frames.
+- **The errors look semantic, not distributional.** The replacement fits
+  the frame, but the term of art or the claim changes.
+- **BenchLS rank pairs are weak labels for simplicity.** The pairwise model
+  reaches only 0.61 out of fold. On replay, raw frequency gain separates
+  Not simpler from Good better (AUC 0.79) than either the learned margin
+  (0.67) or the pairwise model (0.76).
+- **Replay prevented two wasted windows.** Both arms would have cost
+  fresh dev text and a rating pass for no expected gain.
