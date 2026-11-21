@@ -220,3 +220,33 @@ def test_stacker_arm_s_filters_before_the_passage_limits():
     b, s = arm_picks(swaps, 0.5, choose)
     assert [x["word"] for x in b] == ["a"]
     assert [x["word"] for x in s] == ["b"]
+
+
+def test_r9_majority_takes_two_of_three_else_most_severe():
+    from evals.learned_words_r9 import majority
+
+    assert majority(["good", "good", "meaning"]) == "good"
+    assert majority(["notsimpler", "meaning", "notsimpler"]) == "notsimpler"
+    assert majority(["good", "notsimpler", "meaning"]) == "meaning"
+
+
+def test_r9_clean_sentence_filter():
+    from evals.learned_words_r9 import _ok_sentence
+
+    assert _ok_sentence("The server MUST reject a request that does not carry a valid token.")
+    assert not _ok_sentence("Table 3 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15.")
+    assert not _ok_sentence("Too short to use.")
+
+
+def test_r9_arm_w_filters_before_the_passage_limits():
+    from evals.learned_words_apply import choose
+    from evals.learned_words_r9 import picks
+
+    def sw(i, sent, margin, stack, w):
+        return {"id": i, "sentence": sent, "margin": margin, "stack": stack, "w": w, "gate": 1.0, "check": 1.0 - i / 10}
+
+    swaps = [sw(0, 0, 0.5, 0.9, 0.1), sw(1, 0, 0.5, 0.9, 0.9), sw(2, 1, 0.05, 0.9, 0.9)]
+    b, s, w = picks(swaps, 0.5, 0.5, choose)
+    assert [x["id"] for x in b] == [0]
+    assert [x["id"] for x in s] == [0]
+    assert [x["id"] for x in w] == [1]

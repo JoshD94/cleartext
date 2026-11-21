@@ -613,3 +613,9 @@ def stacker(argv):
     from . import learned_words_stacker
 
     return learned_words_stacker.main(argv)
+
+
+def r9(argv):
+    from . import learned_words_r9
+
+    return learned_words_r9.main(argv)
