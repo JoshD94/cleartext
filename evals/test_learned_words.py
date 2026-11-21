@@ -199,3 +199,12 @@ def test_rewrite_table_subtracts_own_fold():
     assert T.get("pair", key, np.array([0]))[0] == 1
     assert T.get("pair", key, np.array([-1]))[0] == 2
     assert T.get("word", _kw(np.array([1]), WIKI, KEPT), np.array([1]))[0] == 0
+
+
+def test_stacker_span_finds_the_replaced_occurrence():
+    from evals.learned_words_stacker import span
+
+    before = "use the form and use the tool"
+    after = "use the form and employ the tool"
+    assert span(before, after, "use", "employ") == (17, 20)
+    assert span(before, before, "absent", "x") is None

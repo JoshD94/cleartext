@@ -376,3 +376,21 @@ by a separate model.
   (0.67) or the pairwise model (0.76).
 - **Replay prevented two wasted windows.** Both arms would have cost
   fresh dev text and a rating pass for no expected gain.
+
+## Round 7: learning the swap decision from human rewrites (November 21)
+
+[ROUND7.md](ROUND7.md) holds the pre-registered rules.
+
+- **Data:** 329,281 aligned sentence pairs after filtering, from WikiAuto,
+  Cochrane plain-language summaries and contract simplifications. That is
+  4.07M word events (kept, replaced or dropped); 480 pairs were excluded for
+  overlapping evaluation text ([rewrite-data.json](rewrite-data.json)).
+- **Model check:** out-of-fold AUC 0.98. This mostly shows that real editor
+  replacements are easy to tell from random WordNet candidates. It says
+  little about the stage's own proposals.
+- **Replay ([rewrite-replay.json](rewrite-replay.json)):** kept 45 of 153
+  swaps, Good rate 56% (baseline 65%), AUC 0.47 for Good vs error.
+  **No-go.** No fresh text was spent.
+- **Finding:** whether editors made a word swap does not predict whether the
+  stage's swap is good. The stage already proposes plausible synonyms, and
+  the rewrite statistics do not separate the good ones from the bad ones.

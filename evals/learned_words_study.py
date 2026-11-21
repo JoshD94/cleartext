@@ -607,3 +607,9 @@ def rewrite(argv):
     from . import learned_words_rewrite
 
     return learned_words_rewrite.main(argv)
+
+
+def stacker(argv):
+    from . import learned_words_stacker
+
+    return learned_words_stacker.main(argv)
