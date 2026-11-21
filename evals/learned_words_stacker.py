@@ -209,8 +209,152 @@ def train(argv):
     print("COMPLETE")
 
 
+# --- round 8 fresh window -----------------------------------------------------------
+
+APPLY_R8 = STATE / "apply-r8"
+RATING_R8 = STATE / "rating-r8"
+OVERLAP_R8 = DIR / "panel-r8-overlap.json"
+MIN_MARGIN = 0.1  # the current stage's pre-committed simplicity margin (arm b)
+CONSISTENCY_ITEMS = 20
+
+
+def load_filter():
+    pre = json.load(open(PRECOMMIT))
+    if _sha(MODEL) != pre["model_sha256"] or tuple(pre["keys"]) != KEYS:
+        raise SystemExit("REFUSED: stacker model differs from the pre-commitment")
+    return pickle.load(open(MODEL, "rb")), pre["threshold"]
+
+
+def panel_overlap(panel):
+    """Passage ids sharing a word 8-gram with the rewrite corpora (never rated or applied)."""
+    from cleartext.learned_words.rewrite import tokens
+
+    from .learned_words_rewrite import pairs
+
+    if OVERLAP_R8.exists():
+        return set(json.load(open(OVERLAP_R8)))
+    index = {}
+    for p in panel:
+        t = tokens(p["original"])
+        for i in range(len(t) - 7):
+            index.setdefault(tuple(t[i:i + 8]), set()).add(p["id"])
+    hit = set()
+    for _, _, a, b in pairs():
+        for x in (a, b):
+            t = tokens(x)
+            for i in range(len(t) - 7):
+                hit |= index.get(tuple(t[i:i + 8]), set())
+    json.dump(sorted(hit), open(OVERLAP_R8, "w"))
+    return hit
+
+
+def score_swaps(clf, T, ids, swaps, rows):
+    A = np.array([[r["f"][k] for k in STAGE_KEYS] for r in rows], float)
+    spans = [dict(s, start=r["start"]) for s, r in zip(swaps, rows)]
+    return clf.predict_proba(np.nan_to_num(np.hstack([A, rewrite_features(T, ids, spans)])))[:, 1]
+
+
+def apply(argv):
+    import torch
+
+    from .learned_words_apply import word_swaps
+    from .learned_words_panel import PANEL_R8
+    from .learned_words_rewrite import load
+    from .learned_words_simpler import SIMPLER
+
+    torch.set_num_threads(int(argv[argv.index("--threads") + 1]) if "--threads" in argv else 4)
+    max_seconds = float(argv[argv.index("--max-seconds") + 1]) if "--max-seconds" in argv else 1380
+    clf, _ = load_filter()
+    _, T, ids, _ = load()
+    model = pickle.load(open(STATE / "model.pkl", "rb"))
+    simpler = pickle.load(open(SIMPLER, "rb"))
+    panel = json.load(open(PANEL_R8))
+    skip = panel_overlap(panel)
+    APPLY_R8.mkdir(exist_ok=True)
+    path = APPLY_R8 / "passages.jsonl"
+    done = {r["pid"] for r in read_jsonl(path)}
+    todo = [p for p in panel if p["id"] not in done and p["id"] not in skip]
+    print(f"{len(done)} done, {len(todo)} to do, {len(skip)} skipped for rewrite-corpus overlap", flush=True)
+    deadline = time.monotonic() + max_seconds
+    with open(path, "a") as f:
+        for p in todo:
+            if time.monotonic() > deadline:
+                break
+            swaps, seen = word_swaps(p["original"], model, p["id"])
+            pairs = [(s, r) for s in swaps if (r := swap_row(model, simpler, s)) is not None]
+            if pairs:
+                got, rows = zip(*pairs)
+                for s, r, x in zip(got, rows, score_swaps(clf, T, ids, got, rows)):
+                    s.update(margin=r["f"]["margin"], stack=float(x))
+            out = [s for s in swaps if "stack" in s]
+            f.write(json.dumps({"pid": p["id"], "domain": p["domain"], "kind": p["kind"], "content_words": seen,
+                                "unresolved": len(swaps) - len(out), "swaps": out}) + "\n")
+            f.flush()
+            print(f"{time.strftime('%H:%M:%S')} {p['id']} swaps={len(out)}", flush=True)
+    left = len({p["id"] for p in panel} - skip - {r["pid"] for r in read_jsonl(path)})
+    print("COMPLETE" if not left else f"PARTIAL {left} left", flush=True)
+
+
+def arm_picks(swaps, t, choose):
+    """(arm b, arm s) swaps of one passage. Arm s filters first, then applies the per-passage limits."""
+    ok = [s for s in swaps if s["margin"] >= MIN_MARGIN]
+    return choose(ok), choose([s for s in ok if s["stack"] >= t])
+
+
+def page(argv):
+    import random
+
+    from .learned_words_apply import _skey, choose
+
+    _, t = load_filter()
+    items = {}
+    for r in read_jsonl(APPLY_R8 / "passages.jsonl"):
+        for arm, chosen in zip("bs", arm_picks(r["swaps"], t, choose)):
+            for s in chosen:
+                k = _skey(s)
+                items.setdefault(k, dict(s, key=k, arms=[], domain=r["domain"], kind=r["kind"]))["arms"].append(arm)
+    items = sorted(items.values(), key=lambda x: x["key"])
+    rng = random.Random(1125)
+    old = [i for i in json.load(open(STATE / "replay/items.json")) if i["round"] == "r5" and "b" in i["arms"]]
+    rng.shuffle(old)
+    mixed = [dict(x, source="r8") for x in items] + [dict(x, source="old", old_mark=x["mark"]) for x in old[:CONSISTENCY_ITEMS]]
+    rng.shuffle(mixed)
+    RATING_R8.mkdir(exist_ok=True)
+    json.dump({"swaps": items}, open(RATING_R8 / "key.json", "w"), indent=1)
+    json.dump([{"id": f"m{n}", "source": x["source"], "key": x.get("key"), "old_mark": x.get("old_mark"),
+                "arms": x.get("arms") if x["source"] == "r8" else None} for n, x in enumerate(mixed, 1)],
+              open(RATING_R8 / "blind-mixed-map.json", "w"), indent=1)
+    json.dump([{"id": f"m{n}", "before": x["before"], "after": x["after"], "word": x["word"], "rep": x["rep"]}
+               for n, x in enumerate(mixed, 1)], open(RATING_R8 / "blind-mixed.json", "w"), indent=1)
+    print(json.dumps({"r8_items": len(items), "mixed": len(mixed), "per_arm": Counter(a for x in items for a in x["arms"])}, indent=1))
+
+
+def score(argv):
+    import csv
+
+    from .learned_words_study import wilson
+
+    mp = json.load(open(RATING_R8 / "blind-mixed-map.json"))
+    marks = {r["id"]: r["mark"] for r in csv.DictReader(open(RATING_R8 / "blind-mixed-marks.csv"))}
+    if set(marks) != {m["id"] for m in mp} or set(marks.values()) - {"good", "notsimpler", "meaning"}:
+        raise SystemExit("REFUSED: marks are incomplete or use an unknown label")
+    out = {"rated": len(marks)}
+    for arm in "bs":
+        ms = [marks[m["id"]] for m in mp if m["source"] == "r8" and arm in m["arms"]]
+        c = Counter(ms)
+        out["arm_" + arm] = {"swaps": len(ms), **c, "good_rate": c["good"] / max(1, len(ms)),
+                             "good_ci95": wilson(c["good"], len(ms)), "meaning_rate": c["meaning"] / max(1, len(ms))}
+    b, s = out["arm_b"], out["arm_s"]
+    out["keep_share"] = s["swaps"] / max(1, b["swaps"])
+    out["success"] = bool(s["good_rate"] >= 0.78 and out["keep_share"] >= 0.60 and s["meaning_rate"] <= 0.15)
+    agree = [(m["old_mark"], marks[m["id"]]) for m in mp if m["source"] == "old"]
+    out["consistency"] = {"items": len(agree), "agree": sum(a == x for a, x in agree)}
+    (REPORT / "round8.json").write_text(json.dumps(out, indent=1))
+    print(json.dumps(out, indent=1))
+
+
 def main(argv):
-    cmd = {"features": features, "train": train}
+    cmd = {"features": features, "train": train, "apply": apply, "page": page, "score": score}
     if argv[:1] and argv[0] in cmd:
         return cmd[argv[0]](argv[1:])
-    raise SystemExit("usage: learned-words stacker features|train")
+    raise SystemExit("usage: learned-words stacker features|train|apply|page|score")

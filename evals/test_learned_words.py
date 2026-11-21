@@ -208,3 +208,15 @@ def test_stacker_span_finds_the_replaced_occurrence():
     after = "use the form and employ the tool"
     assert span(before, after, "use", "employ") == (17, 20)
     assert span(before, before, "absent", "x") is None
+
+
+def test_stacker_arm_s_filters_before_the_passage_limits():
+    from evals.learned_words_apply import choose
+    from evals.learned_words_stacker import arm_picks
+
+    swaps = [{"sentence": 0, "gate": 0.9, "check": 0.9, "margin": 0.5, "stack": 0.2, "word": "a"},
+             {"sentence": 0, "gate": 0.5, "check": 0.5, "margin": 0.5, "stack": 0.8, "word": "b"},
+             {"sentence": 1, "gate": 0.9, "check": 0.9, "margin": 0.05, "stack": 0.9, "word": "c"}]
+    b, s = arm_picks(swaps, 0.5, choose)
+    assert [x["word"] for x in b] == ["a"]
+    assert [x["word"] for x in s] == ["b"]

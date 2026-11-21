@@ -2,6 +2,7 @@
 
   learned-words panel build-r4
   learned-words panel build-r5
+  learned-words panel build-r8
 
 
 Re-runs `evals/build_testset_v3.select` offline (download cache only), so it
@@ -13,7 +14,8 @@ domain 6, picked round-robin over documents from a seeded shuffle (seed
 20261119), pairwise non-overlapping. Text stays in the state directory.
 
 build-r5 (round 5) does the same with seed 20261120 and also skips every
-window that overlaps a round-4 passage.
+window that overlaps a round-4 passage. build-r8 (round 8) uses seed 20261125
+and skips every window that overlaps a round-4 or round-5 passage.
 """
 
 import hashlib
@@ -27,8 +29,10 @@ from .learned_words import STATE
 V3_STATE = Path.home() / ".local/state/cleartext/testset-v3-20261116"
 PANEL_R4 = STATE / "panel-r4/passages.json"
 PANEL_R5 = STATE / "panel-r5/passages.json"
+PANEL_R8 = STATE / "panel-r8/passages.json"
 SEED = 20261119
 SEED_R5 = 20261120
+SEED_R8 = 20261125
 PER_DOMAIN = {"standard": 14, "simple_control": 6}
 
 
@@ -42,6 +46,10 @@ def build_r4(argv):
 
 def build_r5(argv):
     return build(PANEL_R5, SEED_R5, "r5", json.load(open(PANEL_R4)))
+
+
+def build_r8(argv):
+    return build(PANEL_R8, SEED_R8, "r8", json.load(open(PANEL_R4)) + json.load(open(PANEL_R5)))
 
 
 def build(path, seed, prefix, previous):
@@ -120,4 +128,6 @@ def main(argv):
         return build_r4(argv[1:])
     if argv[:1] == ["build-r5"]:
         return build_r5(argv[1:])
-    raise SystemExit("usage: learned-words panel build-r4|build-r5")
+    if argv[:1] == ["build-r8"]:
+        return build_r8(argv[1:])
+    raise SystemExit("usage: learned-words panel build-r4|build-r5|build-r8")
