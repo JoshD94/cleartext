@@ -394,3 +394,31 @@ by a separate model.
 - **Finding:** whether editors made a word swap does not predict whether the
   stage's swap is good. The stage already proposes plausible synonyms, and
   the rewrite statistics do not separate the good ones from the bad ones.
+
+## Round 8: a filter trained on blind marks (November 21)
+
+[ROUND8.md](ROUND8.md) holds the pre-registered rules. Arm s is a logistic
+filter (C = 0.1, 31 fixed features) trained on the 334 blind-rated swaps
+from rounds 3–5, keeping the top 65% of arm-b swaps.
+
+- **Void first run:** a featurization bug dropped 134 of 334 rows. Its pass
+  (76% Good on 89 rows, baseline 58%) is void; model and pre-commitment were
+  deleted uncommitted. The fixed rerun resolves all 153 arm-b rows.
+- **Cross-validation ([stacker-cv.json](stacker-cv.json)):** 20 × 5-fold,
+  grouped by target lemma. Kept swaps 78% Good (range 74–81%) vs baseline
+  65%, 65% kept, 60% of errors removed, AUC 0.78 on arm b. **Go.**
+- **Fresh window ([round8.json](round8.json)):** arm b 17/36 Good (47%,
+  95% CI 32–63%); arm s 15/24 Good (62.5%, CI 43–79%), 67% kept. Arm s
+  removed 9 of 11 Not simpler but only 1 of 8 Changes meaning (meaning rate
+  29%). **Misses the bar** (≥ 78% Good, meaning ≤ 15%).
+- **One-time human check ([stacker-joshua60.json](stacker-joshua60.json)):**
+  on Joshua's 60 older swaps the filter kept 7 (4 Good, 3 meaning), removed
+  44 of 47 errors but also 9 of 13 Good; AUC 0.62. Spent: not used to decide
+  anything.
+- **Caveats:** the rater repeated 14 of 20 items identically, so AI marks
+  are noisy. The fresh window used leftover passages, so its arm-b baseline
+  (47%) is not comparable to earlier rounds.
+- **Finding:** the 31 signals learn "is it simpler" but not "does it keep the
+  meaning". The remaining errors are sense, verb frame, collocation and
+  register (occurred→happened, concluded→found, overseen→managed,
+  unrestricted→free, requires→needs).
