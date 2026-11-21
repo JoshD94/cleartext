@@ -44,6 +44,17 @@ averaged over repeats, arm s earns a fresh window only if all of these hold:
 
 If it fails, no fresh text is spent and the report says so.
 
+## Addendum: first run invalid (November 21, before any fresh swap)
+
+The first run lost 134 of the 334 rows, 64 of them arm-b swaps, to a
+featurization bug: the replacement was inflected a second time and no longer
+matched. It reported a pass (76% Good) on the 89 arm-b rows left, whose
+baseline was 58% instead of 65%. **That result is void.** Its model and
+pre-commitment were deleted without being committed. The fix uses the stage's
+own candidate generation, so `mask_rank` also matches application. Features,
+model, threshold rule and gate are otherwise unchanged. A rerun must resolve
+all 153 arm-b swaps to count.
+
 ## Fresh window (only if s passes)
 
 - **Passages:** new unused windows of test-set-v3 dev documents, excluding

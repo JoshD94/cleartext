@@ -60,8 +60,9 @@ def swap_row(model, simpler, s):
     if token is None:
         return None
     inst = {"id": "stack", "dataset": "stack", "group": token.lemma_.lower(), "text": text, "start": start,
-            "end": end, "target": s["word"], "gold": {}, "rated": [(s["rep"], 1.0, 3)]}
-    rows = [r for r in F.featurize(inst, given=True, generated=False) if r["word"].lower() == s["rep"].lower()]
+            "end": end, "target": s["word"], "gold": {}, "rated": []}
+    # The same candidate generation the stage ran, so rank features match application.
+    rows = [r for r in F.featurize(inst, given=False) if r["word"].lower() == s["rep"].lower()]
     if not rows:
         return None
     row = rows[0]
@@ -178,6 +179,8 @@ def train(argv):
     if PRECOMMIT.exists():
         raise SystemExit(f"REFUSED: {PRECOMMIT.name} exists")
     X, y, b, groups, swaps = dataset()
+    if b.sum() != 153:
+        raise SystemExit(f"REFUSED: {b.sum()} of 153 arm-b swaps resolved")
     marks = np.array([s["mark"] for s in swaps])
     base_good = y[b].mean()
     errors = (marks[b] != "good").sum()
