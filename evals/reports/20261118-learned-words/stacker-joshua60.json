@@ -1,0 +1,20 @@
+{
+ "marked": 60,
+ "resolved": 60,
+ "all": {
+  "good": 13,
+  "meaning": 36,
+  "notsimpler": 11
+ },
+ "kept": {
+  "good": 4,
+  "meaning": 3
+ },
+ "n_kept": 7,
+ "good_rate_all": 0.21666666666666667,
+ "good_rate_kept": 0.5714285714285714,
+ "good_kept_share": 0.3076923076923077,
+ "errors_removed_share": 0.9361702127659575,
+ "auc_good_vs_error": 0.6235679214402619,
+ "threshold": 0.5127187962827388
+}
