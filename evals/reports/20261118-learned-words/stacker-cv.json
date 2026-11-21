@@ -1,0 +1,71 @@
+{
+ "rows": 334,
+ "stage_b_rows": 153,
+ "good_rate_base": 0.6470588235294118,
+ "repeats": 20,
+ "mean": {
+  "good_rate": 0.7843765882802519,
+  "keep_share": 0.6473856209150325,
+  "errors_removed": 0.6046296296296297,
+  "auc_all": 0.7960784313725491,
+  "auc_b": 0.784502431724654
+ },
+ "min_max": {
+  "good_rate": [
+   0.7425742574257426,
+   0.81
+  ],
+  "keep_share": [
+   0.6078431372549019,
+   0.6993464052287581
+  ],
+  "errors_removed": [
+   0.5185185185185186,
+   0.6481481481481481
+  ],
+  "auc_all": [
+   0.7733362221500018,
+   0.8134185534250532
+  ],
+  "auc_b": [
+   0.7547699214365882,
+   0.8075196408529741
+  ]
+ },
+ "go": true,
+ "features": [
+  "check",
+  "nli_fw",
+  "nli_bw",
+  "nli_min",
+  "ctx_cos",
+  "sent_cos",
+  "d_pll",
+  "mask_logp",
+  "d_mask_logp",
+  "mask_rank",
+  "d_zipf",
+  "t_zipf",
+  "c_zipf",
+  "d_len",
+  "d_syll",
+  "t_senses",
+  "c_senses",
+  "margin",
+  "p_complex",
+  "p_term",
+  "pos_n",
+  "pos_v",
+  "pos_a",
+  "pos_r",
+  "all_keep",
+  "tech_keep",
+  "all_wr",
+  "all_direction",
+  "tech_n",
+  "ctx_keep_min",
+  "ctx_lift"
+ ],
+ "features_sha256": "c6fd9a44d420eced1a3cc8c76c5eb8a68a596b39a153829c8a70ddb5e1675770",
+ "source_sha256": "50b1c2fa8fbabbc303c828185fd66c29302ffa8e64a123cd5c6f36ff3cab4c95"
+}
