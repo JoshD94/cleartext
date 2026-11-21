@@ -2,6 +2,8 @@
 
   learned-words stacker features [--max-seconds N]   one feature row per rated swap (checkpointed)
   learned-words stacker train                        nested CV go/no-go; final fit and pre-commit if go
+  learned-words stacker apply | page | score         the fresh window (round 8)
+  learned-words stacker human                        Joshua's 60, once, after the window is rated
 
 Raw text and features stay in the state directory (stacker/).
 """
@@ -44,8 +46,9 @@ def span(before, after, word, rep):
     return None
 
 
-def swap_row(model, simpler, s):
-    """Stage features of one (sentence, word, replacement), or None if it does not resolve."""
+def swap_row(model, simpler, s, given=False):
+    """Stage features of one (sentence, word, replacement), or None if it does not resolve.
+    given=True also offers the replacement's lemma, for swaps another generator proposed."""
     from cleartext.features import nlp
     from cleartext.learned_words import eligibility as E
     from cleartext.learned_words import features as F
@@ -59,10 +62,13 @@ def swap_row(model, simpler, s):
     token = next((t for t in doc if t.idx == start), None)
     if token is None:
         return None
+    rated = []
+    if given and (t := F.resolve_target(token)):
+        rated = [(F.lemma_of(s["rep"], F.UPOS[t[1]]), 1.0, 3)]
     inst = {"id": "stack", "dataset": "stack", "group": token.lemma_.lower(), "text": text, "start": start,
-            "end": end, "target": s["word"], "gold": {}, "rated": []}
+            "end": end, "target": s["word"], "gold": {}, "rated": rated}
     # The same candidate generation the stage ran, so rank features match application.
-    rows = [r for r in F.featurize(inst, given=False) if r["word"].lower() == s["rep"].lower()]
+    rows = [r for r in F.featurize(inst, given=bool(rated)) if r["word"].lower() == s["rep"].lower()]
     if not rows:
         return None
     row = rows[0]
@@ -353,8 +359,52 @@ def score(argv):
     print(json.dumps(out, indent=1))
 
 
+def human(argv):
+    """Joshua's 60 marks, read once after the fresh window is rated. Aggregates only; never fits or tunes."""
+    import torch
+    from sklearn.metrics import roc_auc_score
+
+    from cleartext.learned_words import data as D
+
+    from .learned_words_rewrite import load
+    from .learned_words_simpler import SIMPLER
+
+    out_path = REPORT / "stacker-joshua60.json"
+    if out_path.exists():
+        raise SystemExit(f"REFUSED: {out_path.name} exists (this check runs once)")
+    if not (REPORT / "round8.json").exists():
+        raise SystemExit("REFUSED: rate the fresh window first")
+    torch.set_num_threads(4)
+    clf, t = load_filter()
+    _, T, ids, _ = load()
+    model = pickle.load(open(STATE / "model.pkl", "rb"))
+    simpler = pickle.load(open(SIMPLER, "rb"))
+    got, rows, marks = [], [], []
+    inst = [i for i in D.joshua60() if i["mark"] in ("good", "notsimpler", "meaning")]
+    for i in inst:
+        rep = i["old_replacement"]
+        s = {"before": i["text"], "after": i["text"][:i["start"]] + rep + i["text"][i["end"]:], "word": i["target"], "rep": rep}
+        r = swap_row(model, simpler, s, given=True)
+        if r is not None:
+            got.append(s)
+            rows.append(r)
+            marks.append(i["mark"])
+    p = score_swaps(clf, T, ids, got, rows)
+    marks = np.array(marks)
+    kept = p >= t
+    y = marks == "good"
+    res = {"marked": len(inst), "resolved": len(got), "all": dict(Counter(marks.tolist())),
+           "kept": dict(Counter(marks[kept].tolist())), "n_kept": int(kept.sum()),
+           "good_rate_all": float(y.mean()), "good_rate_kept": float(y[kept].mean()) if kept.any() else None,
+           "good_kept_share": float(kept[y].mean()), "errors_removed_share": float(1 - kept[~y].mean()),
+           "auc_good_vs_error": float(roc_auc_score(y, p)), "threshold": t}
+    json.dump(res, open(out_path, "w"), indent=1)
+    print(json.dumps(res, indent=1))
+    print("COMPLETE")
+
+
 def main(argv):
-    cmd = {"features": features, "train": train, "apply": apply, "page": page, "score": score}
+    cmd = {"features": features, "train": train, "apply": apply, "page": page, "score": score, "human": human}
     if argv[:1] and argv[0] in cmd:
         return cmd[argv[0]](argv[1:])
-    raise SystemExit("usage: learned-words stacker features|train|apply|page|score")
+    raise SystemExit("usage: learned-words stacker features|train|apply|page|score|human")
