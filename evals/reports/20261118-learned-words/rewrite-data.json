@@ -1,0 +1,18 @@
+{
+ "pairs_seen": 515953,
+ "pairs_used_dom1": 10778,
+ "status2_dom1": 41093,
+ "status0_dom1": 115408,
+ "status1_dom1": 3116,
+ "dropped_shape": 7687,
+ "pairs_used_dom0": 318503,
+ "status2_dom0": 936697,
+ "status0_dom0": 2876385,
+ "status1_dom0": 94151,
+ "dropped_overlap": 178505,
+ "dropped_excluded": 480,
+ "events": 4066850,
+ "vocab": 179593,
+ "seconds": 33,
+ "events_sha256": "221feaf8d6b9a89b920cf5f177c9bde5bac8ebac8f1c4d47b101c84c2d6ea602"
+}

@@ -1,0 +1,10 @@
+{
+ "tsar_test_top_gold_pass": {
+  "n": 363,
+  "pass": 0.8319559228650137
+ },
+ "swords_test_accepted_synonyms_pass": {
+  "n": 380,
+  "pass": 0.47368421052631576
+ }
+}

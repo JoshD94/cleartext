@@ -1,0 +1,21 @@
+{
+ "threshold": 0.31,
+ "baseline": {
+  "good": 99,
+  "notsimpler": 23,
+  "meaning": 31
+ },
+ "kept": {
+  "good": 99,
+  "notsimpler": 21,
+  "meaning": 30
+ },
+ "n_base": 153,
+ "n_kept": 150,
+ "good_rate_base": 0.6470588235294118,
+ "good_rate_kept": 0.66,
+ "keep_share": 0.9803921568627451,
+ "notsimpler_removed_share": 0.08695652173913049,
+ "auc_good_vs_notsimpler": 0.7621870882740448,
+ "go": false
+}

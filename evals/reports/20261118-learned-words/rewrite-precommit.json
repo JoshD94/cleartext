@@ -1,0 +1,65 @@
+{
+ "rule": "keep 70% of out-of-fold technical human replacements",
+ "threshold": 0.9756766830614206,
+ "rows": 297847,
+ "by_kind": {
+  "human": 58947,
+  "keep": 211093,
+  "wrong": 27807
+ },
+ "technical_rows": 21818,
+ "oof_auc": {
+  "all": 0.9834572152585124,
+  "technical": 0.9875856365606874,
+  "general": 0.9786736298985452,
+  "vs_keep": 0.9801170631607975,
+  "vs_wrong": 0.9717989910910734
+ },
+ "negatives_below_threshold": {
+  "keep": 0.9991946677530756,
+  "wrong": 0.998561513288021
+ },
+ "features": [
+  "all_n",
+  "all_keep",
+  "all_rep",
+  "all_wr",
+  "all_wr_of_rep",
+  "all_wr_of_all",
+  "all_direction",
+  "all_r_n",
+  "all_r_keep",
+  "all_r_rep",
+  "tech_n",
+  "tech_keep",
+  "tech_rep",
+  "tech_wr",
+  "tech_wr_of_rep",
+  "tech_wr_of_all",
+  "tech_direction",
+  "tech_r_n",
+  "tech_r_keep",
+  "tech_r_rep",
+  "prev_n",
+  "prev_keep",
+  "next_n",
+  "next_keep",
+  "ctx_keep_min",
+  "ctx_lift",
+  "z_w",
+  "z_r",
+  "z_gain",
+  "len_drop",
+  "wn_syn",
+  "wn_hyper",
+  "w_senses"
+ ],
+ "written": "2026-11-21 01:11:40 EST",
+ "model_sha256": "7a3afd529c59cab88c14f9285ee8da0bc0915aa700208d0dfa2880a571a9ded1",
+ "table_sha256": "2bc4b42d9975b3b1e33c2d7d61f0bf9e737059596269c7245de31bfbdf6b05c4",
+ "events_sha256": "221feaf8d6b9a89b920cf5f177c9bde5bac8ebac8f1c4d47b101c84c2d6ea602",
+ "source_sha256": {
+  "models/src/cleartext/learned_words/rewrite.py": "5d55d0e1fdf5fccb175adf07f625dd0c64abeeeeb25d24e8ec54c40e1e71314e",
+  "evals/learned_words_rewrite.py": "a587529800a8e95486077fd10f424203c65f5cfe6470b696ce6c2aa184191950"
+ }
+}

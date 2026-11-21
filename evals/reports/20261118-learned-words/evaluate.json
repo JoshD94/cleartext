@@ -1,0 +1,771 @@
+{
+ "thresholds": {
+  "tg": 0.4,
+  "tc": 0.9
+ },
+ "ablations": {
+  "full": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 36,
+    "coverage": 0.09651474530831099,
+    "precision": 0.9444444444444444,
+    "correct": 34,
+    "ci95": [
+     0.8185502589238879,
+     0.9846303362329331
+    ],
+    "precision_2plus": 0.8055555555555556
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 41,
+    "coverage": 0.17154811715481172,
+    "precision": 0.4634146341463415,
+    "correct": 19,
+    "ci95": [
+     0.32055999118185885,
+     0.6125378465402566
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 4,
+     "abstain": 54,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 2,
+    "known_label_good": 2,
+    "known_label_precision": 1.0,
+    "bad_avoided": 47,
+    "good_kept": 2,
+    "unlabelled_new_words": 4
+   }
+  },
+  "stage1_off": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 45,
+    "coverage": 0.12064343163538874,
+    "precision": 0.9333333333333333,
+    "correct": 42,
+    "ci95": [
+     0.8214312561135918,
+     0.977068383537853
+    ],
+    "precision_2plus": 0.8222222222222222
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 78,
+    "coverage": 0.3263598326359833,
+    "precision": 0.34615384615384615,
+    "correct": 27,
+    "ci95": [
+     0.2500504736568419,
+     0.4567001275044257
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 4,
+     "abstain": 53,
+     "same:meaning": 1,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 20,
+      "n": 21,
+      "same:meaning": 1
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 3,
+    "known_label_good": 2,
+    "known_label_precision": 0.6666666666666666,
+    "bad_avoided": 46,
+    "good_kept": 2,
+    "unlabelled_new_words": 4
+   }
+  },
+  "stage1_complex_only": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 45,
+    "coverage": 0.12064343163538874,
+    "precision": 0.9333333333333333,
+    "correct": 42,
+    "ci95": [
+     0.8214312561135918,
+     0.977068383537853
+    ],
+    "precision_2plus": 0.8222222222222222
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 45,
+    "coverage": 0.18828451882845187,
+    "precision": 0.5111111111111111,
+    "correct": 23,
+    "ci95": [
+     0.37004224326489743,
+     0.6504321064697549
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 4,
+     "abstain": 53,
+     "same:meaning": 1,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 20,
+      "n": 21,
+      "same:meaning": 1
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 3,
+    "known_label_good": 2,
+    "known_label_precision": 0.6666666666666666,
+    "bad_avoided": 46,
+    "good_kept": 2,
+    "unlabelled_new_words": 4
+   }
+  },
+  "stage2_wordnet_only": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 25,
+    "coverage": 0.06702412868632708,
+    "precision": 1.0,
+    "correct": 25,
+    "ci95": [
+     0.8668035060468212,
+     1.0
+    ],
+    "precision_2plus": 0.84
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 28,
+    "coverage": 0.11715481171548117,
+    "precision": 0.5357142857142857,
+    "correct": 15,
+    "ci95": [
+     0.35812395142101666,
+     0.7046869626034041
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 1,
+     "abstain": 57,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "abstain": 25,
+      "n": 26,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 2,
+    "known_label_good": 2,
+    "known_label_precision": 1.0,
+    "bad_avoided": 47,
+    "good_kept": 2,
+    "unlabelled_new_words": 1
+   }
+  },
+  "stage2_wordnet_bert": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 36,
+    "coverage": 0.09651474530831099,
+    "precision": 0.9444444444444444,
+    "correct": 34,
+    "ci95": [
+     0.8185502589238879,
+     0.9846303362329331
+    ],
+    "precision_2plus": 0.8055555555555556
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 41,
+    "coverage": 0.17154811715481172,
+    "precision": 0.4634146341463415,
+    "correct": 19,
+    "ci95": [
+     0.32055999118185885,
+     0.6125378465402566
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 4,
+     "abstain": 54,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 2,
+    "known_label_good": 2,
+    "known_label_precision": 1.0,
+    "bad_avoided": 47,
+    "good_kept": 2,
+    "unlabelled_new_words": 4
+   }
+  },
+  "stage2_bert_only": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 36,
+    "coverage": 0.09651474530831099,
+    "precision": 0.9166666666666666,
+    "correct": 33,
+    "ci95": [
+     0.7817298972308114,
+     0.9712519107287081
+    ],
+    "precision_2plus": 0.8055555555555556
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 40,
+    "coverage": 0.16736401673640167,
+    "precision": 0.45,
+    "correct": 18,
+    "ci95": [
+     0.30705075280944705,
+     0.6017117011155924
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 4,
+     "abstain": 54,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 2,
+    "known_label_good": 2,
+    "known_label_precision": 1.0,
+    "bad_avoided": 47,
+    "good_kept": 2,
+    "unlabelled_new_words": 4
+   }
+  },
+  "stage3_gate_off": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 37,
+    "coverage": 0.09919571045576407,
+    "precision": 0.918918918918919,
+    "correct": 34,
+    "ci95": [
+     0.7869900750149847,
+     0.9720399336036787
+    ],
+    "precision_2plus": 0.7837837837837838
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 41,
+    "coverage": 0.17154811715481172,
+    "precision": 0.4634146341463415,
+    "correct": 19,
+    "ci95": [
+     0.32055999118185885,
+     0.6125378465402566
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 4,
+     "abstain": 54,
+     "same:good": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 1,
+      "n": 11,
+      "abstain": 10
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 2,
+    "known_label_good": 2,
+    "known_label_precision": 1.0,
+    "bad_avoided": 47,
+    "good_kept": 2,
+    "unlabelled_new_words": 4
+   }
+  },
+  "stage3_lsbert_ranker": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 30,
+    "coverage": 0.08042895442359249,
+    "precision": 0.8,
+    "correct": 24,
+    "ci95": [
+     0.6269395261897257,
+     0.9049502189759876
+    ],
+    "precision_2plus": 0.7
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 30,
+    "coverage": 0.12552301255230125,
+    "precision": 0.4666666666666667,
+    "correct": 14,
+    "ci95": [
+     0.3023212722412823,
+     0.6385798671847496
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "abstain": 56,
+     "new_word": 3,
+     "same:good": 1
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "abstain": 11,
+      "n": 11
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "abstain": 22,
+      "n": 26,
+      "new_word": 3,
+      "same:good": 1
+     },
+     "r": {
+      "abstain": 2,
+      "n": 2
+     }
+    },
+    "known_label_swaps": 1,
+    "known_label_good": 1,
+    "known_label_precision": 1.0,
+    "bad_avoided": 47,
+    "good_kept": 1,
+    "unlabelled_new_words": 3
+   }
+  },
+  "stage4_off": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 188,
+    "coverage": 0.5040214477211796,
+    "precision": 0.7978723404255319,
+    "correct": 150,
+    "ci95": [
+     0.73476705770443,
+     0.8490479229879745
+    ],
+    "precision_2plus": 0.7074468085106383
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 134,
+    "coverage": 0.5606694560669456,
+    "precision": 0.5298507462686567,
+    "correct": 71,
+    "ci95": [
+     0.445692493208826,
+     0.6123451383915036
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 15,
+     "abstain": 34,
+     "same:meaning": 7,
+     "same:good": 4
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 3,
+      "n": 11,
+      "abstain": 4,
+      "same:meaning": 3,
+      "same:good": 1
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "same:meaning": 4,
+      "n": 26,
+      "abstain": 8,
+      "new_word": 12,
+      "same:good": 2
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 11,
+    "known_label_good": 4,
+    "known_label_precision": 0.36363636363636365,
+    "bad_avoided": 40,
+    "good_kept": 4,
+    "unlabelled_new_words": 15
+   }
+  },
+  "stage4_nli_095": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 162,
+    "coverage": 0.4343163538873995,
+    "precision": 0.845679012345679,
+    "correct": 137,
+    "ci95": [
+     0.782109072619848,
+     0.8932341464518446
+    ],
+    "precision_2plus": 0.7407407407407407
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 124,
+    "coverage": 0.5188284518828452,
+    "precision": 0.532258064516129,
+    "correct": 66,
+    "ci95": [
+     0.4447896327073294,
+     0.6177878068741526
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 12,
+     "abstain": 38,
+     "same:meaning": 6,
+     "same:good": 4
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 3,
+      "n": 11,
+      "abstain": 5,
+      "same:meaning": 2,
+      "same:good": 1
+     },
+     "n": {
+      "abstain": 21,
+      "n": 21
+     },
+     "v": {
+      "same:meaning": 4,
+      "n": 26,
+      "abstain": 11,
+      "new_word": 9,
+      "same:good": 2
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "abstain": 1
+     }
+    },
+    "known_label_swaps": 10,
+    "known_label_good": 4,
+    "known_label_precision": 0.4,
+    "bad_avoided": 41,
+    "good_kept": 4,
+    "unlabelled_new_words": 12
+   }
+  },
+  "all_gates_off": {
+   "tsar_test": {
+    "instances": 373,
+    "swaps": 370,
+    "coverage": 0.9919571045576407,
+    "precision": 0.7405405405405405,
+    "correct": 274,
+    "ci95": [
+     0.6935654303782007,
+     0.782572056728638
+    ],
+    "precision_2plus": 0.6405405405405405
+   },
+   "nnseval": {
+    "instances": 239,
+    "swaps": 238,
+    "coverage": 0.99581589958159,
+    "precision": 0.44537815126050423,
+    "correct": 106,
+    "ci95": [
+     0.3835995445125284,
+     0.5088920698333905
+    ]
+   },
+   "joshua60": {
+    "outcomes": {
+     "new_word": 34,
+     "same:meaning": 18,
+     "same:good": 6,
+     "same:notsimpler": 2
+    },
+    "marks": {
+     "good": 13,
+     "meaning": 36,
+     "notsimpler": 11
+    },
+    "by_pos": {
+     "a": {
+      "new_word": 7,
+      "n": 11,
+      "same:meaning": 3,
+      "same:good": 1
+     },
+     "n": {
+      "same:meaning": 8,
+      "n": 21,
+      "new_word": 10,
+      "same:good": 1,
+      "same:notsimpler": 2
+     },
+     "v": {
+      "same:meaning": 7,
+      "n": 26,
+      "new_word": 16,
+      "same:good": 3
+     },
+     "r": {
+      "same:good": 1,
+      "n": 2,
+      "new_word": 1
+     }
+    },
+    "known_label_swaps": 26,
+    "known_label_good": 6,
+    "known_label_precision": 0.23076923076923078,
+    "bad_avoided": 27,
+    "good_kept": 6,
+    "unlabelled_new_words": 34
+   }
+  }
+ },
+ "baselines": {
+  "tsar_test": {
+   "learned_ranker_acc1": 0.7345844504021448,
+   "lsbert_style_reimplementation_acc1": 0.5388739946380697,
+   "candidate_potential": 0.9812332439678284,
+   "official": {
+    "LSBert-baseline": 0.5978,
+    "TUNER-baseline": 0.3404,
+    "UniHD (GPT-3, best)": 0.8096,
+    "MANTIS (best non-LLM)": 0.6568
+   }
+  },
+  "nnseval": {
+   "learned_ranker_acc1": 0.4435146443514644,
+   "lsbert_style_reimplementation_acc1": 0.3682008368200837,
+   "candidate_potential": 0.9539748953974896
+  }
+ },
+ "checker_swords_test": {
+  "rows": 5180,
+  "positive_share": 0.45366795366795365,
+  "checker_auc": 0.8837373129839862,
+  "nli_min_auc": 0.7300517254341778,
+  "checker_at_tc": {
+   "accepted": 479,
+   "precision": 0.9624217118997912,
+   "recall": 0.19617021276595745
+  },
+  "nli_at_095": {
+   "accepted": 3041,
+   "precision": 0.6053929628411706,
+   "recall": 0.7834042553191489
+  }
+ }
+}

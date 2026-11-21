@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Learned word-simplification study (evals/learned_words.py), run isolated
+# (python -I): downloaded data under CLEARTEXT_LEXSIMP_RAW is only parsed.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+PY=${CLEARTEXT_PYTHON:-models/.venv/bin/python}
+DEPS=${CLEARTEXT_DEPS:-$HOME/.local/state/cleartext/status-benchmark-pr-20261101/deps}
+export OMP_NUM_THREADS=${OMP_NUM_THREADS:-2} MKL_NUM_THREADS=${MKL_NUM_THREADS:-2}
+export TOKENIZERS_PARALLELISM=false HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+exec "$PY" -I -c '
+import os, sys
+root = os.getcwd()
+sys.path[:0] = [sys.argv[1], root + "/models/src", root]
+sys.argv = ["learned-words"] + sys.argv[2:]
+from evals.learned_words import main
+main()
+' "$DEPS" "$@"

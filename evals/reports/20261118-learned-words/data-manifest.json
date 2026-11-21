@@ -1,0 +1,96 @@
+{
+ "downloaded": "2026-11-18",
+ "location": "~/.local/state/cleartext/lexsimp-data-20261118/raw (CLEARTEXT_LEXSIMP_RAW); read as data only (python -I)",
+ "files": {
+  "lexmturk/lex.mturk.14/._lex.mturk.txt": {
+   "sha256": "1e0750e7c6e2fd0e0bd834f29bc05f32be7a41a85956e4342736bc90ff597971",
+   "url": "https://cs.pomona.edu/~dkauchak/simplification/lex.mturk.14/lex.mturk.14.tar.gz"
+  },
+  "lexmturk/lex.mturk.14/README": {
+   "sha256": "e85e9491e87157fa655ddb48dd52ff404533230fd31f6b8906400a569ca63ab2",
+   "url": "https://cs.pomona.edu/~dkauchak/simplification/lex.mturk.14/lex.mturk.14.tar.gz"
+  },
+  "lexmturk/lex.mturk.14/lex.mturk.txt": {
+   "sha256": "8d119ad351b59afa8826ad414bc905a5b6a229a6161c183809875c52473adc08",
+   "url": "https://cs.pomona.edu/~dkauchak/simplification/lex.mturk.14/lex.mturk.14.tar.gz"
+  },
+  "lexmturk/lex.mturk.14.tar.gz": {
+   "sha256": "4d6a1960d1874031dc2c223c20e3cb6b38bcdcc3cfa97a1ac17ec579e084c892",
+   "url": "https://cs.pomona.edu/~dkauchak/simplification/lex.mturk.14/lex.mturk.14.tar.gz"
+  },
+  "mesh/desc2026.gz": {
+   "sha256": "ccd4d0d33bebfd4c836a59e7dd0c635b1d4e20c4f5a6abc55e2eb0ba4c8716dd",
+   "url": "https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2026.gz"
+  },
+  "nist-glossary/glossary-export.json": {
+   "sha256": "bc2a9dc2eb325d195cf3160d2eeddce81d2847256a7ef85f0afd74e5f882bf4a",
+   "url": "https://csrc.nist.gov/csrc/media/glossary/glossary-export.zip"
+  },
+  "nist-glossary/glossary-export.zip": {
+   "sha256": "f07e08e2c334283297dd1285ad752a83590328fc43b6ba28652b82e2f5a37403",
+   "url": "https://csrc.nist.gov/csrc/media/glossary/glossary-export.zip"
+  },
+  "nnseval/NNSeval.txt": {
+   "sha256": "cb1de378bd3a506ce37f73c58d228f0b2880e220dc085e4360a1950cdcff1265",
+   "url": "https://ghpaetzold.github.io/data/NNSeval.zip"
+  },
+  "nnseval/NNSeval.zip": {
+   "sha256": "87d59a0315be4aed4c78faa865a3afe880c115ff08c5a0bcac97a2402ce0a39e",
+   "url": "https://ghpaetzold.github.io/data/NNSeval.zip"
+  },
+  "nnseval/README.txt": {
+   "sha256": "02e359ff42a38a4e7b607a7d22b8a6f0d130121872647f3a5183606d909fe0fd",
+   "url": "https://ghpaetzold.github.io/data/NNSeval.zip"
+  },
+  "plainlanguage/use-simple-words-phrases.html": {
+   "sha256": "ad125b7ce018d1a6a3ed49ab9daf351fd6124f4e3cf9099c758fdd7d408ad3a5",
+   "url": "https://web.archive.org/web/2024id_/https://www.plainlanguage.gov/guidelines/words/use-simple-words-phrases/"
+  },
+  "tsar-overview/overview.pdf": {
+   "sha256": "cd5c99cc1f35004ad8813831fa58ca5a3074921dce154a5fae55c48a68d1f54e",
+   "url": "https://aclanthology.org/2022.tsar-1.31.pdf"
+  },
+  "tsar-overview/overview.txt": {
+   "sha256": "937064159941e8afcf1cb9a65e806b30d6d7f58c8602ca5f17c8f128a3fa0f1a",
+   "url": "https://aclanthology.org/2022.tsar-1.31.pdf"
+  },
+  "uscourts-glossary/glossary.html": {
+   "sha256": "7437d66c6b4ccaee8bd2bad3c9d4fe558af3fd97e9cfb138f685cce313055820",
+   "url": "https://www.uscourts.gov/glossary"
+  }
+ },
+ "already_pinned_in_models_data_raw": [
+  "tsar_trial.tsv",
+  "tsar_test.tsv",
+  "BenchLS.zip",
+  "swords_dev.json.gz",
+  "swords_test.json.gz",
+  "cwi_english_*.tsv",
+  "complex_*.tsv"
+ ],
+ "also_used": {
+  "wikisplit": "~/.local/state/cleartext/structure-expanded-20261026/wikisplit-cache (tune/validation/test)"
+ },
+ "licenses": {
+  "tsar2022": "CC BY-NC-SA 4.0 (datasets/ in LaSTUS-TALN-UPF/TSAR-2022-Shared-Task); research, non-commercial",
+  "benchls": "CC BY 4.0 (Zenodo 2552393)",
+  "nnseval": "no license stated (ghpaetzold.github.io/data); research use, not redistributed",
+  "lexmturk": "no license stated (Horn et al. 2014; authors ask users to e-mail them); research use, not redistributed",
+  "swords": "CC BY 3.0 US (p-lambda/swords)",
+  "cwi2018": "no license file (sheffieldnlp teaching mirror); research use, not redistributed",
+  "complex": "CC BY 4.0 (MMU-TDMLab/CompLex)",
+  "plainlanguage": "US federal government work, public domain (plainlanguage.gov via web.archive.org)",
+  "nist_glossary": "US federal government work, public domain (csrc.nist.gov glossary export)",
+  "mesh": "NLM MeSH 2026, free to use under NLM terms; term strings only",
+  "uscourts_glossary": "US federal government work, public domain (uscourts.gov/glossary)",
+  "wikisplit": "CC BY-SA 4.0 (google-research-datasets/wiki-split)"
+ },
+ "skipped": "none: no set forbids research use; sets without a license are used locally and not redistributed",
+ "feature_sources_sha256": {
+  "models/src/cleartext/learned_words/data.py": "979ea6ecc4f47ec032198fdc357994f21a460eee0b9b6fc5ca80273c1d7096e7",
+  "models/src/cleartext/learned_words/features.py": "61ce860f4872a10250a49566eaf26503f7805ee433d1bf809cd959100150394c",
+  "models/src/cleartext/generation.py": "12f115b43c8dc85124e3dd5373fb5650ccb10d97721c2d808369508f8b8510b1",
+  "models/src/cleartext/lexical.py": "2fc6f4f30d1466132b7c72a769548dd3bdfe7a04700648a11ac49863d39ec228",
+  "models/src/cleartext/features.py": "062f03fad04b478ec5fd0b43a5bd1313e516bbc70c314f287b902ddf40b1baf9"
+ }
+}

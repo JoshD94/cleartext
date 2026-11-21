@@ -1,0 +1,33 @@
+{
+ "rated": 57,
+ "arm_b": {
+  "swaps": 36,
+  "good": 17,
+  "notsimpler": 11,
+  "meaning": 8,
+  "good_rate": 0.4722222222222222,
+  "good_ci95": [
+   0.31985792907209337,
+   0.6299432837306053
+  ],
+  "meaning_rate": 0.2222222222222222
+ },
+ "arm_s": {
+  "swaps": 24,
+  "good": 15,
+  "meaning": 7,
+  "notsimpler": 2,
+  "good_rate": 0.625,
+  "good_ci95": [
+   0.42709619037907065,
+   0.7884086656636855
+  ],
+  "meaning_rate": 0.2916666666666667
+ },
+ "keep_share": 0.6666666666666666,
+ "success": false,
+ "consistency": {
+  "items": 20,
+  "agree": 14
+ }
+}

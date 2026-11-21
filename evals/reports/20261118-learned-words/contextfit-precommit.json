@@ -1,0 +1,78 @@
+{
+ "rule": "keep >= 90% of out-of-fold fits (A and B)",
+ "threshold": 0.23618219490246822,
+ "rows": {
+  "A": 15444,
+  "B": 28440
+ },
+ "fits": {
+  "A": 1716,
+  "B": 14220
+ },
+ "oof_auc": {
+  "all": 0.7724842260752615,
+  "A": 0.589624305861194,
+  "B": 0.7092690585554309
+ },
+ "misfits_vetoed": {
+  "A": 0.7325174825174825,
+  "B": 0.12876230661040788
+ },
+ "leave_one_glossary_out": {
+  "nist": {
+   "rows": 6040,
+   "auc": 0.6397853164334897
+  },
+  "uscourts": {
+   "rows": 232,
+   "auc": 0.6244797859690844
+  },
+  "mesh": {
+   "rows": 26106,
+   "auc": 0.5416511404168765
+  }
+ },
+ "features": [
+  "L1_ar",
+  "L1_at",
+  "L1_cr",
+  "L1_ct",
+  "L1_drop",
+  "L2_ar",
+  "L2_at",
+  "L2_cr",
+  "L2_ct",
+  "L2_drop",
+  "M_ar",
+  "M_at",
+  "M_cr",
+  "M_ct",
+  "M_drop",
+  "R1_ar",
+  "R1_at",
+  "R1_cr",
+  "R1_ct",
+  "R1_drop",
+  "R2_ar",
+  "R2_at",
+  "R2_cr",
+  "R2_ct",
+  "R2_drop",
+  "cnt_r",
+  "cnt_t",
+  "key_d",
+  "key_r",
+  "key_t",
+  "max_drop",
+  "mean_drop",
+  "orphan_frames"
+ ],
+ "written": "2026-11-20 17:38:48 EST",
+ "model_sha256": "6e35c19317b185469adc101672423c7447fa4dcac5503615a186d8c609cbb143",
+ "counts_sha256": "289197971abe3fad941b51600efa25557d37a784266d48de3226a48eebe3a732",
+ "source_sha256": {
+  "models/src/cleartext/learned_words/context_fit.py": "5a623ae85355ee33921b3f60397d1d223d0034be8bc4ce6eb3df4288145f5509",
+  "evals/learned_words_contextfit.py": "58eeeec99f4ee6fd16a28b6d5d17feec3bc442ba3d2e471abff613bdbc253fcf",
+  "evals/learned_words_corpus.py": "27388105fc68005b172bef1d73f26fe14aa41dafea5faf6f3ec777a18379a442"
+ }
+}

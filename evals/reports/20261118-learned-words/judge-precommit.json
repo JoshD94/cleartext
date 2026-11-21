@@ -1,0 +1,12 @@
+{
+ "written": "2026-11-20 07:53:34 EST",
+ "judge_t": 0.78,
+ "strict_t": null,
+ "margin": 0.1,
+ "judge_sha256": "a5d0ec038b21d60b13e799ee6b813b9ffe9c1d984a2e4acbdcb224473e20997f",
+ "source_sha256": {
+  "evals/learned_words_judge.py": "6e90caf4556e054de561b90835ab85fac66959c59f4f6b0824f87d4b2b325251",
+  "models/src/cleartext/learned_words/judge.py": "af420847492bcadc0de8d3752b4ce66402aa5986b26e9118738867a4e4aef86b"
+ },
+ "note": "written before any round-5 swap exists"
+}

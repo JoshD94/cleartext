@@ -1,0 +1,480 @@
+{
+ "rule": "Round 4: a strict meaning checker and a target-difficulty floor.\n\n  learned-words strict fit\n\nStrict checker: the same features and model family as the stage-4 checker,\ntrained only on rated SWORDS-dev substitutes (>= 3 ratings, window NLI\npresent), with label = accepted by >= 80% of annotators. The stage-4 checker\ncounted >= 50% as acceptable, so substitutes that shift nuance (crucial ->\nimportant) were positives. Its threshold (fixed before fitting): the\nsmallest value in 0.50, 0.51, ..., 0.99 whose out-of-fold SWORDS-dev\nprecision (strict label) is >= 0.90 with >= 30 rows. Tested once on rated\nSWORDS-test rows. That rule found no threshold (first run, job 1afb0ba6b4e8);\nfallback S2, fixed before any grid was seen: the threshold with the best\nout-of-fold F0.5 on the strict label (>= 30 rows).\n\nTarget floor: a target is eligible only if WordDifficulty's CWI regressor\npredicts that >= 10% of annotators (2 of 20) mark it complex. Stage 1 used\n\"at least one of 20\". Fixed a priori, not fitted.\n\nNeither reads Joshua's marks or any rated swap.",
+ "applied_rule": "fallback S2: best OOF F0.5",
+ "threshold": 0.53,
+ "dev_rows": 5372,
+ "dev_strict_positive_share": 0.07352941176470588,
+ "dev_oof_auc": 0.8485143050437074,
+ "grid": [
+  {
+   "t": 0.5,
+   "rows": 114,
+   "precision": 0.4824561403508772,
+   "recall": 0.13924050632911392,
+   "f05": 0.32314923619271446
+  },
+  {
+   "t": 0.51,
+   "rows": 110,
+   "precision": 0.4909090909090909,
+   "recall": 0.13670886075949368,
+   "f05": 0.32335329341317365
+  },
+  {
+   "t": 0.52,
+   "rows": 106,
+   "precision": 0.5,
+   "recall": 0.1341772151898734,
+   "f05": 0.3235653235653236
+  },
+  {
+   "t": 0.53,
+   "rows": 105,
+   "precision": 0.5047619047619047,
+   "recall": 0.1341772151898734,
+   "f05": 0.32515337423312884
+  },
+  {
+   "t": 0.54,
+   "rows": 98,
+   "precision": 0.5102040816326531,
+   "recall": 0.12658227848101267,
+   "f05": 0.3176620076238882
+  },
+  {
+   "t": 0.55,
+   "rows": 96,
+   "precision": 0.5,
+   "recall": 0.12151898734177215,
+   "f05": 0.3080872913992298
+  },
+  {
+   "t": 0.56,
+   "rows": 93,
+   "precision": 0.5053763440860215,
+   "recall": 0.1189873417721519,
+   "f05": 0.30638852672750977
+  },
+  {
+   "t": 0.57,
+   "rows": 90,
+   "precision": 0.5111111111111111,
+   "recall": 0.11645569620253164,
+   "f05": 0.3046357615894039
+  },
+  {
+   "t": 0.58,
+   "rows": 89,
+   "precision": 0.5056179775280899,
+   "recall": 0.11392405063291139,
+   "f05": 0.2996005326231691
+  },
+  {
+   "t": 0.59,
+   "rows": 87,
+   "precision": 0.4942528735632184,
+   "recall": 0.10886075949367088,
+   "f05": 0.2893674293405114
+  },
+  {
+   "t": 0.6,
+   "rows": 85,
+   "precision": 0.5058823529411764,
+   "recall": 0.10886075949367088,
+   "f05": 0.2925170068027211
+  },
+  {
+   "t": 0.61,
+   "rows": 83,
+   "precision": 0.5060240963855421,
+   "recall": 0.10632911392405063,
+   "f05": 0.28885832187070154
+  },
+  {
+   "t": 0.62,
+   "rows": 81,
+   "precision": 0.5185185185185185,
+   "recall": 0.10632911392405063,
+   "f05": 0.29207232267037553
+  },
+  {
+   "t": 0.63,
+   "rows": 80,
+   "precision": 0.525,
+   "recall": 0.10632911392405063,
+   "f05": 0.2937062937062937
+  },
+  {
+   "t": 0.64,
+   "rows": 78,
+   "precision": 0.5384615384615384,
+   "recall": 0.10632911392405063,
+   "f05": 0.297029702970297
+  },
+  {
+   "t": 0.65,
+   "rows": 72,
+   "precision": 0.5416666666666666,
+   "recall": 0.09873417721518987,
+   "f05": 0.28550512445095166
+  },
+  {
+   "t": 0.66,
+   "rows": 71,
+   "precision": 0.5352112676056338,
+   "recall": 0.09620253164556962,
+   "f05": 0.2798232695139911
+  },
+  {
+   "t": 0.67,
+   "rows": 68,
+   "precision": 0.5588235294117647,
+   "recall": 0.09620253164556962,
+   "f05": 0.28485757121439276
+  },
+  {
+   "t": 0.68,
+   "rows": 65,
+   "precision": 0.5538461538461539,
+   "recall": 0.09113924050632911,
+   "f05": 0.2748091603053435
+  },
+  {
+   "t": 0.69,
+   "rows": 62,
+   "precision": 0.5483870967741935,
+   "recall": 0.08607594936708861,
+   "f05": 0.2643856920684292
+  },
+  {
+   "t": 0.7,
+   "rows": 60,
+   "precision": 0.5666666666666667,
+   "recall": 0.08607594936708861,
+   "f05": 0.26771653543307083
+  },
+  {
+   "t": 0.71,
+   "rows": 58,
+   "precision": 0.5862068965517241,
+   "recall": 0.08607594936708861,
+   "f05": 0.2711323763955343
+  },
+  {
+   "t": 0.72,
+   "rows": 56,
+   "precision": 0.5892857142857143,
+   "recall": 0.08354430379746836,
+   "f05": 0.26655896607431345
+  },
+  {
+   "t": 0.73,
+   "rows": 49,
+   "precision": 0.5714285714285714,
+   "recall": 0.07088607594936709,
+   "f05": 0.23688663282571912
+  },
+  {
+   "t": 0.74,
+   "rows": 46,
+   "precision": 0.6086956521739131,
+   "recall": 0.07088607594936709,
+   "f05": 0.24179620034542318
+  },
+  {
+   "t": 0.75,
+   "rows": 44,
+   "precision": 0.5909090909090909,
+   "recall": 0.06582278481012659,
+   "f05": 0.22767075306479861
+  },
+  {
+   "t": 0.76,
+   "rows": 42,
+   "precision": 0.6190476190476191,
+   "recall": 0.06582278481012659,
+   "f05": 0.23090586145648312
+  },
+  {
+   "t": 0.77,
+   "rows": 40,
+   "precision": 0.625,
+   "recall": 0.06329113924050633,
+   "f05": 0.22522522522522523
+  },
+  {
+   "t": 0.78,
+   "rows": 40,
+   "precision": 0.625,
+   "recall": 0.06329113924050633,
+   "f05": 0.22522522522522523
+  },
+  {
+   "t": 0.79,
+   "rows": 38,
+   "precision": 0.6052631578947368,
+   "recall": 0.05822784810126582,
+   "f05": 0.21023765996343693
+  },
+  {
+   "t": 0.8,
+   "rows": 37,
+   "precision": 0.6216216216216216,
+   "recall": 0.05822784810126582,
+   "f05": 0.21178637200736647
+  },
+  {
+   "t": 0.81,
+   "rows": 33,
+   "precision": 0.6060606060606061,
+   "recall": 0.05063291139240506,
+   "f05": 0.18975332068311196
+  },
+  {
+   "t": 0.82,
+   "rows": 31,
+   "precision": 0.5806451612903226,
+   "recall": 0.04556962025316456,
+   "f05": 0.17341040462427748
+  },
+  {
+   "t": 0.83,
+   "rows": 30,
+   "precision": 0.6,
+   "recall": 0.04556962025316456,
+   "f05": 0.1747572815533981
+  },
+  {
+   "t": 0.84,
+   "rows": 28,
+   "precision": 0.6071428571428571,
+   "recall": 0.043037974683544304,
+   "f05": 0.16765285996055226
+  },
+  {
+   "t": 0.85,
+   "rows": 27,
+   "precision": 0.5925925925925926,
+   "recall": 0.04050632911392405,
+   "f05": 0.15904572564612326
+  },
+  {
+   "t": 0.86,
+   "rows": 26,
+   "precision": 0.5769230769230769,
+   "recall": 0.0379746835443038,
+   "f05": 0.1503006012024048
+  },
+  {
+   "t": 0.87,
+   "rows": 22,
+   "precision": 0.5454545454545454,
+   "recall": 0.030379746835443037,
+   "f05": 0.12422360248447205
+  },
+  {
+   "t": 0.88,
+   "rows": 17,
+   "precision": 0.5294117647058824,
+   "recall": 0.02278481012658228,
+   "f05": 0.09719222462203023
+  },
+  {
+   "t": 0.89,
+   "rows": 15,
+   "precision": 0.4666666666666667,
+   "recall": 0.017721518987341773,
+   "f05": 0.07692307692307693
+  },
+  {
+   "t": 0.9,
+   "rows": 12,
+   "precision": 0.5,
+   "recall": 0.015189873417721518,
+   "f05": 0.06772009029345373
+  },
+  {
+   "t": 0.91,
+   "rows": 10,
+   "precision": 0.5,
+   "recall": 0.012658227848101266,
+   "f05": 0.05747126436781609
+  },
+  {
+   "t": 0.92,
+   "rows": 9,
+   "precision": 0.5555555555555556,
+   "recall": 0.012658227848101266,
+   "f05": 0.05800464037122969
+  },
+  {
+   "t": 0.93,
+   "rows": 7,
+   "precision": 0.7142857142857143,
+   "recall": 0.012658227848101266,
+   "f05": 0.05910165484633569
+  },
+  {
+   "t": 0.94,
+   "rows": 5,
+   "precision": 0.6,
+   "recall": 0.007594936708860759,
+   "f05": 0.03614457831325301
+  },
+  {
+   "t": 0.95,
+   "rows": 3,
+   "precision": 1.0,
+   "recall": 0.007594936708860759,
+   "f05": 0.03685503685503686
+  },
+  {
+   "t": 0.96,
+   "rows": 2,
+   "precision": 1.0,
+   "recall": 0.005063291139240506,
+   "f05": 0.024813895781637715
+  },
+  {
+   "t": 0.97,
+   "rows": 0,
+   "precision": null,
+   "recall": 0.0,
+   "f05": 0.0
+  },
+  {
+   "t": 0.98,
+   "rows": 0,
+   "precision": null,
+   "recall": 0.0,
+   "f05": 0.0
+  },
+  {
+   "t": 0.99,
+   "rows": 0,
+   "precision": null,
+   "recall": 0.0,
+   "f05": 0.0
+  }
+ ],
+ "swords_test": {
+  "rows": 5180,
+  "strict_positive_share": 0.08243243243243244,
+  "strict_auc": 0.7972679402285553,
+  "lenient_checker_auc_on_strict_label": 0.8091273304029355,
+  "strict_at_threshold": {
+   "accepted": 141,
+   "precision": 0.36879432624113473
+  },
+  "lenient_at_tc_strict_label": {
+   "accepted": 479,
+   "precision": 0.27139874739039666
+  },
+  "both": {
+   "accepted": 95,
+   "precision": 0.4
+  },
+  "both_lenient_label": {
+   "accepted": 95,
+   "precision": 0.9894736842105263
+  }
+ },
+ "stage_effect": {
+  "tsar_test": {
+   "stage": {
+    "instances": 373,
+    "swaps": 36,
+    "coverage": 0.09651474530831099,
+    "precision": 0.9444444444444444,
+    "correct": 34,
+    "ci95": [
+     0.8185502589238879,
+     0.9846303362329331
+    ]
+   },
+   "strict": {
+    "instances": 373,
+    "swaps": 12,
+    "coverage": 0.032171581769437,
+    "precision": 1.0,
+    "correct": 12,
+    "ci95": [
+     0.7574992425007574,
+     0.9999999999999998
+    ]
+   },
+   "floor": {
+    "instances": 373,
+    "swaps": 34,
+    "coverage": 0.09115281501340483,
+    "precision": 0.9411764705882353,
+    "correct": 32,
+    "ci95": [
+     0.8090606311053629,
+     0.9837176869361575
+    ]
+   },
+   "strict_and_floor": {
+    "instances": 373,
+    "swaps": 12,
+    "coverage": 0.032171581769437,
+    "precision": 1.0,
+    "correct": 12,
+    "ci95": [
+     0.7574992425007574,
+     0.9999999999999998
+    ]
+   }
+  },
+  "nnseval": {
+   "stage": {
+    "instances": 239,
+    "swaps": 41,
+    "coverage": 0.17154811715481172,
+    "precision": 0.4634146341463415,
+    "correct": 19,
+    "ci95": [
+     0.32055999118185885,
+     0.6125378465402566
+    ]
+   },
+   "strict": {
+    "instances": 239,
+    "swaps": 19,
+    "coverage": 0.0794979079497908,
+    "precision": 0.5263157894736842,
+    "correct": 10,
+    "ci95": [
+     0.31707482511825114,
+     0.7267049451255145
+    ]
+   },
+   "floor": {
+    "instances": 239,
+    "swaps": 31,
+    "coverage": 0.1297071129707113,
+    "precision": 0.5161290322580645,
+    "correct": 16,
+    "ci95": [
+     0.3484011828697317,
+     0.6803001396872116
+    ]
+   },
+   "strict_and_floor": {
+    "instances": 239,
+    "swaps": 13,
+    "coverage": 0.05439330543933055,
+    "precision": 0.6153846153846154,
+    "correct": 8,
+    "ci95": [
+     0.3552248097226855,
+     0.8229055341876319
+    ]
+   }
+  }
+ },
+ "target_floor": {
+  "tsar_test_targets_passing": 0.9758713136729222
+ },
+ "seconds": 37.8
+}
