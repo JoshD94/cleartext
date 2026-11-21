@@ -601,3 +601,9 @@ def contextfit(argv):
     from . import learned_words_contextfit
 
     return learned_words_contextfit.main(argv)
+
+
+def rewrite(argv):
+    from . import learned_words_rewrite
+
+    return learned_words_rewrite.main(argv)

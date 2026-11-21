@@ -172,3 +172,30 @@ def test_corpus_tokens_lowercase_and_keep_hyphens():
     from evals.learned_words_corpus import tokens
 
     assert tokens("The FDA’s well-known Rule, 2024.") == ["the", "fda's", "well-known", "rule"]
+
+
+def test_rewrite_align_marks_kept_replaced_and_dropped():
+    from cleartext.learned_words.rewrite import DROPPED, KEPT, REPLACED, align
+
+    a = "the committee will commence the lengthy review".split()
+    b = "the committee will start the review".split()
+    got = {a[i]: (st, r) for i, st, r in align(a, b)}
+    assert got["committee"] == (KEPT, None)
+    assert got["commence"] == (REPLACED, "start")
+    assert got["lengthy"] == (DROPPED, None)
+
+
+def test_rewrite_table_subtracts_own_fold():
+    from cleartext.learned_words.rewrite import KEPT, REPLACED, WIKI, Table, _kp, _kw
+
+    w = np.array([1, 1, 1, 2])
+    r = np.array([3, 3, 0, 0])
+    status = np.array([REPLACED, REPLACED, KEPT, KEPT], np.int8)
+    fold = np.array([0, 1, 1, 2], np.int8)
+    dom = np.zeros(4, np.int8)
+    T = Table.build(w, np.zeros(4, np.int32), np.zeros(4, np.int32), status, r, fold, dom)
+    key = _kp(np.array([1]), np.array([3]), WIKI)
+    assert T.get("pair", key)[0] == 2
+    assert T.get("pair", key, np.array([0]))[0] == 1
+    assert T.get("pair", key, np.array([-1]))[0] == 2
+    assert T.get("word", _kw(np.array([1]), WIKI, KEPT), np.array([1]))[0] == 0
