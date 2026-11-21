@@ -409,8 +409,9 @@ from rounds 3–5, keeping the top 65% of arm-b swaps.
   65%, 65% kept, 60% of errors removed, AUC 0.78 on arm b. **Go.**
 - **Fresh window ([round8.json](round8.json)):** arm b 17/36 Good (47%,
   95% CI 32–63%); arm s 15/24 Good (62.5%, CI 43–79%), 67% kept. Arm s
-  removed 9 of 11 Not simpler but only 1 of 8 Changes meaning (meaning rate
-  29%). **Misses the bar** (≥ 78% Good, meaning ≤ 15%).
+  removed 10 of 11 Not simpler but only 1 of 8 Changes meaning (meaning rate
+  29%); one arm-s swap used a different candidate than arm b. **Misses the
+  bar** (≥ 78% Good, meaning ≤ 15%).
 - **One-time human check ([stacker-joshua60.json](stacker-joshua60.json)):**
   on Joshua's 60 older swaps the filter kept 7 (4 Good, 3 meaning), removed
   44 of 47 errors but also 9 of 13 Good; AUC 0.62. Spent: not used to decide
