@@ -37,7 +37,7 @@ def splitter():
      "The server checks each request. But the server sends a response."),
     ("The report was reviewed, and the figures were checked.",
      "The report was reviewed. The figures were checked."),
-    # Scoped guards: negation and brackets on one side no longer veto.
+    # Scoped guards: negation and brackets on one side do not veto.
     ("The store closed, but the workers did not leave.",
      "The store closed. But the workers did not leave."),
     ("The store closed (early), and the workers went home.",
@@ -281,7 +281,7 @@ class FixedTagger:
 
 
 @pytest.mark.parametrize("source,expected", [
-    # A modifier after the first verb no longer blocks a copied subject.
+    # A modifier after the first verb does not block a copied subject.
     ("The team began training at the stadium in 2009 and began competing in 2012.",
      "The team began training at the stadium in 2009. The team began competing in 2012."),
     # Only the subject's core noun phrase is copied, not its relative clause.
