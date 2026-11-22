@@ -7,13 +7,14 @@ Code is in `models/src/cleartext/learned_words/`, and it runs through `scripts/l
 
 **Status: not adopted.** F2 stays the shipped default. Joshua's own blind marks decide adoption (≥ 90% Good).
 
-**Best arm (November 22): arm p50.** It is round 12's 4-feature filter (arm-s score, sense cover, learned pair and target priors), refitted on all rated rows, keeping 50% of arm-b swaps.
+**Best arm (November 22): arm p50.** It is round 12's 4-feature filter (arm-s score, sense cover, learned pair and target priors), refitted on all rated rows, keeping 50% of arm-b swaps. Round 19's model is frozen since then.
 - Round 19: 94.9% Good (56/59), 3.4% Changes meaning, 53% of arm b's swaps. It met its pre-registered bar.
 - Frozen replication in round 20: 90.0% (54/60), 8.3% meaning (bar ≤ 8%), 55% yield.
-- Pooled over rounds 17–20: 92.2% Good (95% CI 88–95), 6.7% meaning, 53% yield.
-- Round 11's arm gs on the same four windows: 89.1% at 38%.
+- **News and encyclopedic text** (rounds 21–22, frozen): 92.2% Good (47/51, CI 81–97) at 36% of arm b's yield. Precision holds; yield falls, because most genre pairs were never rated.
+- Pooled over rounds 17–22: 92.0% Good (301/327, CI 89–95), 6.7% meaning, 49% yield.
+- Round 22's qg (refitted on 1,377 rows, genre threshold): 91.7% (33/36) at 48% yield on genre text, 8.3% meaning (bar 8%).
 
-All marks are a majority of three blind AI raters on fresh technical-corpus text.
+Marks are a majority of three blind AI raters on fresh text: technical (RFC, Federal Register, openFDA) through round 20, then news and encyclopedic text in rounds 21–22. Joshua's blind page from a window no rater has seen is ready ([JOSHUA-PAGE.md](JOSHUA-PAGE.md)).
 
 Best pre-registered arm per fresh window:
 
@@ -28,9 +29,14 @@ Best pre-registered arm per fresh window:
 | 18 | p40 (round 17's, frozen) | 52 | 88.5% (77–95) | 11.5% | 39% | 68% | no |
 | 19 | p50 (refit) | 59 | 94.9% (86–98) | 3.4% | 53% | 66% | **yes** |
 | 20 | p50 (round 19's, frozen) | 60 | 90.0% (80–95) | 8.3% | 55% | 63% | no (meaning) |
+| 21 | p50 (frozen), news + encyclopedic | 18 | 94.4% (74–99) | 0% | 26% | 65% | no (yield) |
+| 21 | q50 (refit, unseen-robust), whole window | 39 | 92.3% (80–97) | 5.1% | 35% | 63% | no (yield, unseen) |
+| 22 | qg (refit, genre threshold), news + encyclopedic | 36 | 91.7% (78–97) | 8.3% | 48% | 65% | no (meaning) |
 
 Rounds 14–16 failed their CV gates and spent no fresh text. Details are in
-the round sections below.
+the round sections below. Round 21 also measured p50 on unseen pairs: about
+13% of them kept, at 83% Good, against 93% on seen pairs
+([r21-unseen.json](r21-unseen.json)).
 
 ## Stages
 
@@ -897,3 +903,244 @@ blind raters. All three agreed on 87%.
   - One genre: RFC, Federal Register and openFDA text.
   - RFC documents are nearly used up for new panels.
   - Nothing ships until Joshua's own marks decide.
+
+## Round 21: unseen pairs, meaning residue and a genre window (November 22)
+
+[ROUND21.md](ROUND21.md) holds the pre-registered rules
+([r21-precommit.json](r21-precommit.json)).
+
+### Unseen pairs, measured honestly ([r21-unseen.json](r21-unseen.json))
+
+The measurement uses arm p's model class on all 1,259 rated rows (rounds
+3–20), with 5 repeats of nested CV at a 50% keep. Precision and yield are on
+the 827 technical-window arm-b rows.
+
+| CV grouping | Rows scored | Good | Kept |
+|---|---:|---:|---:|
+| Passage, all rows | 827 | 92.3% | 51% |
+| Passage, pair seen in training folds | ~673 | 92.7% | 60% |
+| Passage, **pair unseen** | ~154 | **82.8%** | **13%** |
+| Pair-grouped (no pair seen) | 827 | 87.3% | 51% |
+| Target-lemma-grouped (no target seen) | 827 | 87.4% | 52% |
+
+- **p50 is a context-checked lexicon.** On new pairs it keeps about 1 swap
+  in 8, and those are 83% Good.
+- **The unseen-pair swaps are hard in themselves.** Their base Good rate is
+  50%. On them:
+  - every scorer tried reaches AUC 0.73–0.75;
+  - none reaches 90% Good even on its top 10% (best: 84–89%);
+  - see [r21-explore.json](r21-explore.json).
+- **Generalizing the prior did not fix this:**
+  - back-off to the replacement lemma, the stem family (additional /
+    additionally) and the target stem family: +0 to +0.5 points;
+  - BERT static-embedding neighbours of the pair: +0.2 points in
+    pair-grouped CV;
+  - a 31-feature refit (logistic or boosted): no gain (boosted: −4 points);
+  - shrinking to the arm-s score, with a separate scorer and threshold for
+    unseen pairs: more kept (18–26%), but at 73–76% Good.
+- **Arm q50 (pre-registered):** back-off priors, the pair count, an
+  unseen × arm-s interaction, two context features, `ctx_cos` and the
+  checker score. **Gate passed** ([r21-cv.json](r21-cv.json)):
+  - passage-grouped CV: 92.1% Good at 51% kept (r50, arm p refitted on the
+    same rows: 92.1%);
+  - pair-grouped CV: 88.8% against 87.3% (+1.6 points; meaning errors 41
+    against 50);
+  - lemma-grouped CV: 89.1% against 87.5% (+1.7 points).
+
+  On passage-CV unseen rows it is no better (80.4% against 83.9% at 14%).
+  The variant was chosen after the exploratory look, on the same rows.
+
+### Meaning residue (p50, rounds 17–20)
+
+p50 made 20 errors in 255 rated swaps: 17 Changes meaning and 3 Not simpler.
+
+| Error type | Swaps | Examples |
+|---|---:|---|
+| Context frame on a well-rated pair | 14 | "has occurred"→"has happened" ×3, "it is necessary to", "orally administered", "additional input", incorporate (by reference), induces (metabolism) ×2, indicate→show ×2, informs→tells, established→created, typically→often |
+| Replacement repeats a word in the sentence | 1 (+1 Not simpler) | "Additionally … also"→"Also … also"; contain→have before "have" is also Not simpler |
+| Inside quoted regulatory text | 1 | “determines to be sufficient” → enough |
+| Broken article | 1 | "an incorrect" → "an wrong" |
+| Not simpler | 3 | discussed→mentioned, receives→gets, contain→have |
+
+Counts over all 1,259 rated rows:
+- swaps inside quotation marks: 6, all Changes meaning;
+- the replacement's stem already in the sentence: 30, 47% Good;
+- a mismatched a/an: 5, all Changes meaning.
+
+Two changes follow:
+- **a/an surface realization** for every arm. It does not change the swap
+  decision.
+- **Two learned context features** in q50. In passage-grouped out-of-fold
+  CV over p50's rounds 17–20 swaps, q50 keeps 15.4 of the 17 meaning errors
+  against r50's 15.8. It drops the quoted swap and contain→have, but keeps
+  "Also … also" and all 14 frame errors. It also drops about 5 Good swaps.
+  The frame errors remain the open problem.
+  ROUND21.md says 19 errors and 13 frame errors; the correct counts are 20
+  and 14.
+
+### Fresh window ([round21.json](round21.json))
+
+- **Panel:** 135 new passages:
+  - 45 news (Wikinews);
+  - 45 encyclopedic (Wikipedia featured-article leads);
+  - 23 Federal Register and 22 openFDA.
+
+  The genre texts were downloaded as untrusted data
+  ([r21-genre-manifest.json](r21-genre-manifest.json)). 14 passages were
+  skipped for rewrite-corpus overlap, 13 of them encyclopedic, which is
+  expected because WikiLarge comes from Wikipedia. That left 121 passages
+  (493 sentences), 138 items and three fresh blind raters.
+- **Agreement:** all three raters agreed on 89%, and pairwise agreement was
+  92%. Consistency with the old marks was 14–17 of 20.
+- **Realization:** the a/an fix changed no item in this window.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Unseen pairs (Good) |
+|---|---:|---:|---:|---:|---:|---:|
+| **News + encyclopedic (312 sentences)** | | | | | | |
+| b: current stage | 68 | 100% | 21.8 | 64.7% (53–75) | 11.8% | 40 (22) |
+| gs | 21 | 31% | 6.7 | 90.5% (71–97) | 4.8% | 9 (7) |
+| **p50 (frozen, round 19)** | **18** | **26%** | **5.8** | **94.4% (74–99)** | **0%** | 3 (2) |
+| r50 (refit, 1,259 rows) | 17 | 25% | 5.4 | 100% (82–100) | 0% | 2 (2) |
+| q50 | 18 | 26% | 5.8 | 94.4% (74–99) | 0% | 3 (2) |
+| **Technical (181 sentences)** | | | | | | |
+| b | 43 | 100% | 23.8 | 60.5% (46–74) | 20.9% | 7 (5) |
+| p50 | 21 | 49% | 11.6 | 90.5% (71–97) | 9.5% | 3 (3) |
+| q50 | 21 | 49% | 11.6 | 90.5% (71–97) | 9.5% | 3 (3) |
+| **Whole window** | | | | | | |
+| b | 111 | 100% | 22.5 | 63.1% (54–71) | 15.3% | 47 (27) |
+| p50 | 39 | 35% | 7.9 | 92.3% (80–97) | 5.1% | 6 (5) |
+| r50 | 37 | 33% | 7.5 | 94.6% (82–99) | 5.4% | 4 (4) |
+| q50 | 39 | 35% | 7.9 | 92.3% (80–97) | 5.1% | 6 (5) |
+
+- **Genre test (frozen p50): precision holds, yield does not.**
+  - On news and encyclopedic text, p50 reached 94.4% Good (17/18) with no
+    Changes meaning. It made 26% as many swaps as arm b; the bar was 40%.
+    That missed the pre-registered bar on yield alone, as predicted.
+  - It made 5.8 swaps per 100 sentences, against about 12 on technical
+    text.
+  - Arm b on these genres reached 64.7%, about its usual technical rate.
+- **Unseen pairs decide the genre gap.**
+  - 40 of arm b's 68 genre swaps used a pair absent from all 1,259 rated
+    rows (55% Good), against 7 of 43 on technical text.
+  - p50 kept 3 of the 40, and q50 also 3.
+- **q50 is not a different arm in practice.** It chose exactly p50's 39
+  swaps, so it missed its yield and unseen-pair bars. Its CV gain in the
+  unseen regimes did not translate into different decisions at this
+  threshold.
+- **Errors (p50, q50):**
+  - "orally administered" → "orally given" (again);
+  - "terminated for default" → "ended" (a legal term);
+  - centred→centered (Not simpler).
+- **Per rater:** p50 Good was 87.2%, 92.3% and 94.9%. On genre text it was
+  88.9%, 94.4% and 94.4%.
+- **Joshua's page:** by the pre-registered rule, it uses p50.
+
+## Round 22: a genre threshold, on a fresh genre window (November 22)
+
+[ROUND22.md](ROUND22.md) holds the pre-registered rules
+([r22-precommit.json](r22-precommit.json)).
+- **Model:** **arm qg** is round 21's arm q refitted on all 1,377 rated rows
+  (rounds 3–21).
+- **Threshold:** it keeps 40% of round 21's news and encyclopedic arm-b rows,
+  by passage-grouped out-of-fold score.
+- **Ablation:** arm rg is arm p with the same rule.
+- **Motivation:** ranked by q50 score, round 21's 68 genre rows were 92.6%
+  Good in their top 40%. This look used round 21's marks, now development
+  data.
+- **Gate ([r22-cv.json](r22-cv.json)): go.**
+  - Held-out genre rows: qg 92.6% Good at 40% kept (68 rows, so noisy); rg
+    92.4%.
+  - Technical rows at the technical threshold: 91.9%.
+
+Fresh window ([round22.json](round22.json)): 105 new passages (45 Wikinews,
+60 featured-article leads). 19 were skipped for rewrite-corpus overlap,
+leaving 86 passages (356 sentences), 97 items and three fresh blind raters.
+All three agreed on 87%. Consistency with the old marks was 13–18 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Unseen pairs (Good) |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 75 | 100% | 21.1 | 65.3% (54–75) | 18.7% | 43 (26) |
+| gs | 22 | 29% | 6.2 | 90.9% (72–97) | 4.5% | 11 (9) |
+| p50 (frozen, round 19) | 33 | 44% | 9.3 | 90.9% (76–97) | 9.1% | 10 (9) |
+| q50 (frozen, round 21) | 28 | 37% | 7.9 | 92.9% (77–98) | 7.1% | 9 (8) |
+| rg (refit, genre threshold) | 37 | 49% | 10.4 | 89.2% (75–96) | 10.8% | 12 (10) |
+| **qg (refit, genre threshold)** | **36** | **48%** | **10.1** | **91.7% (78–97)** | **8.3%** | 11 (10) |
+
+- **Pre-registered success: no, by one swap.** qg reached 91.7% Good and
+  48% of arm b's yield, but Changes meaning was 8.3% (3 of 36) against a
+  bar of 8%.
+- **The window, not the model, moved yield most.** Frozen p50 made 44% of
+  arm b's swaps here, against 26% on round 21's genre passages. The genre
+  threshold added 3 swaps over p50 (+4 points of yield) at about the same
+  precision.
+- **Unseen pairs did better on this window:** qg kept 11, with 10 Good, and
+  p50 kept 10, with 9 Good. On round 21's genre passages, p50 kept 3.
+- **Errors (qg):**
+  - migrate→move (loses the migration sense);
+  - "has operated Hawk 127" → "has run";
+  - "indicated a strong showing" → "showed a strong showing". The
+    repeated-stem feature was on here, but its learned weight did not
+    outweigh the pair prior.
+- **Per rater:** qg Good was 86.1%, 91.7% and 94.4%.
+
+## Rounds 21–22 summary
+
+- **Gap 1, unseen pairs:**
+  - **Measured:** p50 keeps about 13% of unseen-pair technical swaps, at
+    83% Good, against 93% on seen pairs.
+  - **No generalization tested lifts unseen-pair precision to 90% in CV.**
+    The tested ideas were back-off to the replacement, the stem family and
+    the target stem family; embedding neighbours; shrinkage to the arm-s
+    score; and refits on 31 features. The best separate unseen threshold
+    kept 18–26% at 73–76% Good.
+  - **q50 gained 1.6–1.7 points in pair- and lemma-grouped CV.** It did not
+    change any fresh decision in round 21.
+  - **On fresh text, unseen pairs were few and mostly Good when kept:**
+    round 21's p50 kept 6 (5 Good) and round 22's qg 11 (10 Good).
+- **Gap 2, meaning residue:**
+  - The a/an realization fixes a class seen 5 times in rounds 3–20 (all
+    Changes meaning). It changed no item in rounds 21–22.
+  - The quote and repeated-stem features have learned weights. They removed
+    the quoted-text error in CV but not "showed a strong showing" on fresh
+    text.
+  - Frame errors remain the main residue: "orally administered" (again in
+    round 21), "terminated for default", migrate, operated.
+- **Gap 3, genre:** on news and encyclopedic text, frozen p50 reached 92.2%
+  Good (47/51, CI 81–97) at 36% of arm b's yield over two windows. Arm b
+  there was 65%, about its technical rate.
+  - Precision transfers. Yield depends on the window: 26% in round 21 and
+    44% in round 22.
+- **Caveats:**
+  - All marks come from AI raters.
+  - The genre threshold needs the text type at run time.
+  - Encyclopedic passages lose about 30% to the rewrite-corpus overlap
+    check.
+  - The Federal Register corpus has no unused documents left (16 found for
+    Joshua's window).
+
+## Joshua's blind marking page (prepared November 22, not yet used)
+
+[JOSHUA-PAGE.md](JOSHUA-PAGE.md) holds the rules
+([joshua-precommit.json](joshua-precommit.json),
+[joshua-page.json](joshua-page.json)).
+- **Arm:** p50, by round 21's pre-registered rule, because q50 missed its
+  bars.
+- **Windows:** no AI rater has seen either one:
+  - round 21's Joshua window (124 passages after overlap checks: 43 news, 35
+    encyclopedic, 16 Federal Register, 30 openFDA);
+  - a pre-registered 40-passage openFDA supplement. It was added because
+    the Federal Register corpus ran out and p50 swaps rarely on genre text.
+- **Page:** 100 items in one seeded shuffle, with no scores or labels.
+  - 60 of the 61 p50 swaps;
+  - 40 of the 113 arm-b swaps that p50 rejects.
+
+  By source, the page holds 49 openFDA, 17 Federal Register, 19 news and 15
+  encyclopedic items.
+- **Location:** `~/Documents/cleartext-rating/rate-learned-swaps-r21.html`.
+  Marks download as `cleartext-marks-learned-swaps-r21.csv`, and the key is
+  in the state directory's `joshua-r21/key.json`.
+- **Arm b's Good rate on these windows** can be estimated as (60 × p50 Good
+  + 113 × rejected Good) / 173, from the two groups' rates. 60 of the 61 p50
+  swaps are also arm-b swaps.
+- **Use of the marks:** Joshua's marks decide adoption (≥ 90% Good). They
+  are never used to train, tune or choose anything.
