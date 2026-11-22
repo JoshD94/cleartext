@@ -643,3 +643,9 @@ def r15(argv):
     from . import learned_words_r15
 
     return learned_words_r15.main(argv)
+
+
+def r16(argv):
+    from . import learned_words_r16
+
+    return learned_words_r16.main(argv)

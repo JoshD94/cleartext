@@ -406,3 +406,13 @@ def test_r15_veto_applies_after_arm_p_and_before_the_passage_limits():
         V.max_drop = orig
     assert [x["rep"] for x in out["p40"]] == ["r0"]
     assert [x["rep"] for x in out["pv"]] == ["r1"]
+
+
+def test_r16_reuses_round_15_veto_and_arms():
+    from evals import learned_words_r15 as V15
+    from evals import learned_words_r16 as V16
+
+    assert V16.ARMS == V15.ARMS and V16.KEEP == V15.KEEP and V16.GOOD_KEPT == V15.GOOD_KEPT
+    assert V16.max_drop is V15.max_drop and V16.TECH == ("r11", "r12", "r13")
+    rows = [{"drop": float(i), "tech": True, "good": 1} for i in range(11)]
+    assert V16.cutoff(rows) == V15.cutoff(rows)
