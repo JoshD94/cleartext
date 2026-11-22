@@ -263,3 +263,52 @@ def test_r10_two_heads_multiply_survival_of_both_errors():
     expect = (1 - h.m.predict_proba(X)[:, 1]) * (1 - h.n.predict_proba(X)[:, 1])
     assert np.allclose(p, expect)
     assert p[marks == "good"].mean() > p[marks != "good"].mean()
+
+
+def test_r12_priors_smooth_and_leave_one_out():
+    from evals.learned_words_r12 import Priors
+
+    pri = Priors([("multiple", "several")] * 3 + [("occur", "happen")], [0, 0, 0, 1], a=2.0)
+    assert abs(pri.m - 0.25) < 1e-9
+    pp, pt, n = pri.rates(("multiple", "several"))
+    assert n == 3 and abs(pp - (0 + 0.5) / 5) < 1e-9 and abs(pt - pp) < 1e-9
+    pp, _, n = pri.rates(("multiple", "several"), own=0)  # the row's own label is removed
+    assert n == 2 and abs(pp - 0.5 / 4) < 1e-9
+    pp, _, n = pri.rates(("unseen", "word"))
+    assert n == 0 and abs(pp - 0.25) < 1e-9
+    assert pri.seen(("occur", "happen")) and not pri.seen(("occur", "start"))
+
+
+def test_r12_arm_p_learns_from_pair_history():
+    from evals.learned_words_r12 import ArmP
+
+    rows = []
+    for i in range(60):
+        bad = i % 3 == 0
+        rows.append({"key": ("multiple", "several") if bad else (f"w{i}", "x"), "stack": 0.7, "cover": 0.0,
+                     "good": int(not bad)})
+    m = ArmP(rows)
+    s = m.score([{"key": ("multiple", "several"), "stack": 0.7, "cover": 0.0, "good": 0},
+                 {"key": ("new", "pair"), "stack": 0.7, "cover": 0.0, "good": 0}])
+    assert s[0] < s[1]
+
+
+def test_r12_arms_filter_before_the_passage_limits():
+    from evals.learned_words_apply import choose
+    from evals.learned_words_r12 import picks
+
+    class M:
+        def score(self, rows):
+            return np.array([r["stack"] for r in rows])  # stand-in for arm p
+
+    def sw(i, sent, stack, cover=0.0, margin=0.5):
+        return {"id": i, "sentence": sent, "margin": margin, "stack": stack, "cover": cover, "gate": 1.0,
+                "check": 1.0 - i / 10, "word": "w", "rep": f"r{i}", "pos": "v"}
+
+    rec = {"all": [sw(0, 0, 0.55), sw(1, 0, 0.9), sw(2, 1, 0.9, margin=0.05)], "sense": [sw(3, 0, 0.6, 1.0)]}
+    out = picks(rec, M(), {"s": 0.5, "t": 0.8, "p": 0.8, "p65": 0.6}, choose)
+    assert [x["id"] for x in out["b"]] == [0]
+    assert [x["id"] for x in out["s"]] == [0]
+    assert [x["id"] for x in out["t"]] == [1]
+    assert [x["id"] for x in out["p"]] == [1]
+    assert [x["id"] for x in out["gs"]] == [3]
