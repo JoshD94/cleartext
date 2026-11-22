@@ -728,3 +728,39 @@ Consistency with the old marks was 15–17 of 20.
     (95.5%).
   - Rater 3 was stricter (p40: 90.7%).
 - **Round 18 replicates these exact arms, frozen, on a new window.**
+
+## Round 18: round 17's arms frozen on a new window (November 22)
+
+[ROUND18.md](ROUND18.md) holds the pre-registered rules. This is a pure
+replication: no refit and no threshold change
+([r18-precommit.json](r18-precommit.json)).
+
+Fresh window ([round18.json](round18.json)): 134 new passages (532
+sentences; one skipped for overlap), 166 items, three fresh blind raters.
+All three agreed on 87%. Consistency with the old marks was 18–19 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 135 | 100% | 25.4 | 68.1% (60–75) | 12.6% | 26 |
+| s: round-8 filter | 103 | 76% | 19.4 | 75.7% (67–83) | 16.5% | 8 |
+| gs: round 11's best | 57 | 42% | 10.7 | 84.2% (73–91) | 14.0% | 1 |
+| p: frozen round-12 arm p | 72 | 53% | 13.5 | 86.1% (76–92) | 11.1% | 2 |
+| **p40: round 17's, frozen** | **52** | **39%** | **9.8** | **88.5% (77–95)** | **11.5%** | 0 |
+| p50: round 17's, frozen | 71 | 53% | 13.3 | 87.3% (78–93) | 11.3% | 1 |
+
+- **Pre-registered success: no.** Arm p40 missed all three bars: Good
+  < 90%, Changes meaning > 8%, and 39% of arm b's swaps (bar: 40%).
+- **The window was not harder for arm b** (68%, the highest of the night),
+  but its errors sat in well-rated pairs used in the wrong frame:
+  - occurred→happened ×3 in drug labels ("anemia has happened");
+  - additional→extra ("extra input");
+  - informs→tells;
+  - established→created ("fee amounts created");
+  - necessary→needed ("it is needed to");
+  - incorporate→include (incorporation by reference).
+
+  Pair priors cannot see the frame.
+- **Rounds 17–18 pooled:**
+  - p40: 98 of 106, 92.5% Good (CI 86–96), 7.5% meaning, 41% of arm b;
+  - p50: 125 of 136, 91.9% Good (CI 86–95), 7.4% meaning, 53% of arm b;
+  - gs on the same two windows: 88 of 99, 88.9%, at 38%.
