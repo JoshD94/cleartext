@@ -691,3 +691,9 @@ def r22(argv):
     from . import learned_words_r22
 
     return learned_words_r22.main(argv)
+
+
+def joshua(argv):
+    from . import learned_words_joshua
+
+    return learned_words_joshua.main(argv)
