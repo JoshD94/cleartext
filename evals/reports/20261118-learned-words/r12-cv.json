@@ -1,0 +1,115 @@
+{
+ "rows": 506,
+ "arm_b_rows": 315,
+ "r11_arm_b_rows": 126,
+ "keep": 0.5,
+ "repeats": 20,
+ "smooth": 2.0,
+ "base_r11_b": {
+  "kept": 126,
+  "keep_share": 1.0,
+  "good_rate": 0.6587301587301587,
+  "meaning": 26,
+  "notsimpler": 17
+ },
+ "arm_s_r11_b": {
+  "kept": 93,
+  "keep_share": 0.7380952380952381,
+  "good_rate": 0.8279569892473119,
+  "meaning": 9,
+  "notsimpler": 7
+ },
+ "gs_rule_r11_b": {
+  "kept": 34,
+  "keep_share": 0.2698412698412698,
+  "good_rate": 0.9705882352941176,
+  "meaning": 1,
+  "notsimpler": 0
+ },
+ "passage_cv": {
+  "p": {
+   "kept": 64.3,
+   "keep_share": 0.5103174603174603,
+   "good_rate": 0.9618460191176222,
+   "meaning": 2.45,
+   "notsimpler": 0.0
+  },
+  "t": {
+   "kept": 63.0,
+   "keep_share": 0.5,
+   "good_rate": 0.9145065312402518,
+   "meaning": 3.7,
+   "notsimpler": 1.7
+  },
+  "p_all_b": {
+   "kept": 144.7,
+   "keep_share": 0.4593650793650794,
+   "good_rate": 0.9236823595580466,
+   "meaning": 9.1,
+   "notsimpler": 1.95
+  },
+  "t_all_b": {
+   "kept": 142.4,
+   "keep_share": 0.45206349206349206,
+   "good_rate": 0.865576410299458,
+   "meaning": 16.35,
+   "notsimpler": 2.8
+  },
+  "paired_gain_r11_b": 0.04733948787737049,
+  "good_rate_min_max_p": [
+   0.9516129032258065,
+   0.9701492537313433
+  ],
+  "auc_p_r11_b": 0.9299243485570188,
+  "auc_t_r11_b": 0.8596245446903895
+ },
+ "time_split": {
+  "p": {
+   "kept": 68,
+   "keep_share": 0.5396825396825397,
+   "good_rate": 0.9705882352941176,
+   "meaning": 2,
+   "notsimpler": 0
+  },
+  "t": {
+   "kept": 72,
+   "keep_share": 0.5714285714285714,
+   "good_rate": 0.875,
+   "meaning": 6,
+   "notsimpler": 3
+  },
+  "auc_p_r11_b": 0.9207060801344914,
+  "threshold_p": 0.5687540784824945,
+  "threshold_t": 0.6413636707955223
+ },
+ "lemma_cv_diagnostic": {
+  "p": {
+   "keep_share": 0.5083333333333333,
+   "good_rate": 0.9313727078071169,
+   "meaning": 3.85,
+   "notsimpler": 0.55
+  },
+  "t": {
+   "keep_share": 0.4992063492063492,
+   "good_rate": 0.9160605319566478,
+   "meaning": 3.65,
+   "notsimpler": 1.65
+  }
+ },
+ "r11_b_pairs_seen_in_dev": 67,
+ "go_conditions": {
+  "cv_good_ge_0.92": true,
+  "cv_paired_gain_ge_0.03": true,
+  "cv_keep_ge_0.45": true,
+  "time_split_good_ge_0.90_keep_ge_0.40": true
+ },
+ "go": true,
+ "pool_sha256": "b6e2bf023891b56d174b89f0eaf7f87059abf44eb9062d6a3a36670896f0baaa",
+ "source_sha256": {
+  "evals/learned_words_r12.py": "0d66ed85accc8ad6db4f2d07b9a005c21b5688f1f7d26ddb3429b23c8dceef7d",
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400"
+ }
+}
