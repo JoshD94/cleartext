@@ -434,3 +434,14 @@ def test_r17_refitted_arm_p_filters_before_the_passage_limits():
                 {"s": 0.5, "p": 0.5, "p40": 0.8, "p50": 0.5}, choose)
     assert [x["rep"] for x in out["p40"]] == ["r1"]
     assert [x["rep"] for x in out["p50"]] == ["r0"]
+
+
+def test_r18_replicates_round_17_arms_and_excludes_its_panel():
+    import inspect
+
+    from evals import learned_words_r17 as V17
+    from evals import learned_words_r18 as V18
+
+    assert V18.ARMS == V17.ARMS and V18.SEED != V17.SEED and V18.PER_SOURCE == V17.PER_SOURCE
+    assert "P17.PANEL" in inspect.getsource(V18.panel)
+    assert inspect.getsource(V18.picks).replace("V18", "") == inspect.getsource(V17.picks).replace("V17", "")
