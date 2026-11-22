@@ -1,0 +1,71 @@
+{
+ "rows": 750,
+ "ref_rows": 348,
+ "keep_p40": 0.4,
+ "keep_p50": 0.5,
+ "held_out_r13_p40": {
+  "kept": 52,
+  "keep_share": 0.45217391304347826,
+  "good_rate": 0.9230769230769231,
+  "meaning": 3,
+  "notsimpler": 1
+ },
+ "passage_cv": {
+  "p40": {
+   "kept": 144.8,
+   "keep_share": 0.41609195402298854,
+   "good_rate": 0.9315660865765484,
+   "meaning": 9.7,
+   "notsimpler": 0.2
+  },
+  "p50": {
+   "kept": 175.7,
+   "keep_share": 0.5048850574712643,
+   "good_rate": 0.9084369566063056,
+   "meaning": 15.7,
+   "notsimpler": 0.4
+  },
+  "p40_r11": {
+   "kept": 56.0,
+   "keep_share": 0.4444444444444445,
+   "good_rate": 0.9820928209055497,
+   "meaning": 1.0,
+   "notsimpler": 0.0
+  },
+  "p40_r12": {
+   "kept": 39.0,
+   "keep_share": 0.36448598130841126,
+   "good_rate": 0.8408382795256992,
+   "meaning": 6.2,
+   "notsimpler": 0.0
+  },
+  "p40_r13": {
+   "kept": 49.8,
+   "keep_share": 0.43304347826086953,
+   "good_rate": 0.9460758317641839,
+   "meaning": 2.5,
+   "notsimpler": 0.2
+  }
+ },
+ "go_conditions": {
+  "held_out_r13_good_ge_0.90_keep_ge_0.40": true,
+  "cv_good_ge_0.90": true,
+  "cv_keep_ge_0.38": true
+ },
+ "go": true,
+ "pool_sha256": "79bce93a195f60a5b9ead177978c69f5e70a005b9fd07b6a9421b296ad3952f8",
+ "source_sha256": {
+  "evals/learned_words_r17.py": "aa2467e299176b1c9736e569460c70eadda726072eb2ee7fcd2bccbfe689eb8c",
+  "evals/learned_words_r16.py": "e2b609fb7fde9c24c72416cd982a0cfa395553888e31ef2c4de40d50e176dabf",
+  "evals/learned_words_r15.py": "1c9e9776755fbe7be1b042bb9b0dce1deab4617d06382df60db22aa144204807",
+  "evals/learned_words_r14.py": "56a7995f1ac905df7a17039b2ae9c436d0be474d672d700fef9e49b6bc8006b2",
+  "evals/learned_words_r13.py": "59dd07fb672a0527bbfb430d0552d89ecabeea42b9609e2e77a479849f16544c",
+  "models/src/cleartext/learned_words/context_fit.py": "5a623ae85355ee33921b3f60397d1d223d0034be8bc4ce6eb3df4288145f5509",
+  "evals/learned_words_corpus.py": "27388105fc68005b172bef1d73f26fe14aa41dafea5faf6f3ec777a18379a442",
+  "evals/learned_words_r12.py": "0d66ed85accc8ad6db4f2d07b9a005c21b5688f1f7d26ddb3429b23c8dceef7d",
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400"
+ }
+}
