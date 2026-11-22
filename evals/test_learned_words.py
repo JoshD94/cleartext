@@ -445,3 +445,14 @@ def test_r18_replicates_round_17_arms_and_excludes_its_panel():
     assert V18.ARMS == V17.ARMS and V18.SEED != V17.SEED and V18.PER_SOURCE == V17.PER_SOURCE
     assert "P17.PANEL" in inspect.getsource(V18.panel)
     assert inspect.getsource(V18.picks).replace("V18", "") == inspect.getsource(V17.picks).replace("V17", "")
+
+
+def test_r19_uses_round_17_arms_with_p50_primary():
+    import inspect
+
+    from evals import learned_words_r17 as V17
+    from evals import learned_words_r19 as V19
+
+    assert V19.ARMS == V17.ARMS and V19.KEEP == 0.5 and "r18" in V19.TECH
+    assert 'M["arm_p50"]' in inspect.getsource(V19.score)
+    assert "P18.PANEL" in inspect.getsource(V19.panel)
