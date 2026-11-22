@@ -1118,6 +1118,16 @@ All three agreed on 87%. Consistency with the old marks was 13–18 of 20.
   - The Federal Register corpus has no unused documents left (16 found for
     Joshua's window).
 
+## Round 23: pre-registered, not run (November 22)
+
+[ROUND23.md](ROUND23.md) and [r23-precommit.json](r23-precommit.json) fix a
+frozen replication of round 22's arms on a new genre window. The apply job
+waited in the queue from 15:34 to 16:10 behind memory pressure and urgent
+jobs. It was cancelled so that the final verification could finish before
+the 18:00 stop. No panel was built and no swap was generated. A later run
+can use the pre-commitment as is: `learned-words r23 apply`, then `page`
+and `score`.
+
 ## Joshua's blind marking page (prepared November 22, not yet used)
 
 [JOSHUA-PAGE.md](JOSHUA-PAGE.md) holds the rules
