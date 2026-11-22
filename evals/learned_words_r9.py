@@ -7,6 +7,7 @@
   learned-words r9 panel                        fresh passages from the round-6 technical corpus
   learned-words r9 apply [--max-seconds N]      stage + arm s + arm w on the panel (checkpointed)
   learned-words r9 page | score                 three blind rater files; majority-vote scoring
+  learned-words r9 apply11 | page11 | score11   round 11: sense-limited candidates (ROUND11.md)
 
 Raw text, features and marks stay in the state directory (r9/).
 """
@@ -513,9 +514,212 @@ def score(argv):
     print(json.dumps(out, indent=1))
 
 
+# --- round 11: sense-limited candidates (ROUND11.md) --------------------------------
+
+SENSE_COVER = 0.25
+APPLY11 = DIR / "apply11.jsonl"
+RATING11 = DIR / "rating11"
+
+
+def in_sense(sn, text, start, end, lemma, pos, words):
+    """For each candidate word: the target's in-context WSD mass on senses the candidate shares."""
+    from nltk.corpus import wordnet as wn
+
+    from cleartext.learned_words import features as F
+    from cleartext.learned_words import senses as SN
+
+    ctx = SN.contextual([(text, start, end)])[0]
+    pt, _ = sn.wsd(ctx, lemma, pos)
+    allowed = ("a", "s") if pos == "a" else (pos,)
+    out = []
+    for w in words:
+        c = F.lemma_of(w, F.UPOS[pos]).replace(" ", "_")
+        syns = {x for x in wn.synsets(c) if x.pos() in allowed}
+        out.append(float(sum(p for x, p in pt.items() if x in syns)))
+    return out
+
+
+def _decide_top(model, F, decide, inst, rows, s):
+    scores = model["stage"].rank(rows)
+    top = max(zip(scores, rows), key=lambda x: x[0])[1]
+    a, b = F.window(s, inst["start"], inst["end"], top["word"])
+    fw, bw = F.entail([(a, b), (b, a)])
+    top["f"].update({"nli_fw": fw, "nli_bw": bw, "nli_min": min(fw, bw)})
+    d = decide(model, rows)[inst["id"]]
+    return d if d["word"] == top["word"] else None, top
+
+
+def word_swaps_two(text, model, pid, sn):
+    """The stage's swaps for one passage twice from one featurization: all candidates (arm b's
+    generator) and only candidates covering at least SENSE_COVER of the target's in-context sense
+    mass (arm g's generator). Mirrors learned_words_apply.word_swaps."""
+    from cleartext.features import nlp
+    from cleartext.learned_words import features as F
+
+    from .learned_words_apply import MAX_TARGETS, sent, targets
+    from .learned_words_study import decide
+
+    pool, seen = [], 0
+    for si, s in enumerate(sent(text)):
+        found = targets(nlp()(s), model, limit=1000)
+        if found:
+            elig, allc = found
+            seen += len(allc)
+            pool += [(pc * (1 - pt), si, s, t, pc, pt) for t, pc, pt in elig]
+    out = {"all": [], "sense": []}
+    for _, si, s, t, pc, pt in sorted(pool, key=lambda x: -x[0])[:MAX_TARGETS]:
+        iid = f"{pid}:{si}:{t.idx}"
+        inst = {"id": iid, "dataset": "apply", "group": t.lemma_.lower(), "text": s, "start": t.idx,
+                "end": t.idx + len(t), "target": t.text, "gold": {}, "rated": []}
+        rows = F.featurize(inst, given=False)
+        if not rows:
+            continue
+        model["extra"][iid] = {"p_complex": pc, "p_term": pt}
+        for r in rows:
+            r["f"].update(model["extra"][iid])
+        cover = in_sense(sn, s, inst["start"], inst["end"], rows[0]["lemma"], rows[0]["pos"], [r["word"] for r in rows])
+        variants = {"all": rows, "sense": [r for r, c in zip(rows, cover) if c >= SENSE_COVER]}
+        for name, rs in variants.items():
+            if not rs:
+                continue
+            d, top = _decide_top(model, F, decide, inst, rs, s)
+            if d is None or not d["swap"]:
+                continue
+            after = s[:inst["start"]] + d["word"] + s[inst["end"]:]
+            out[name].append({"pid": pid, "sentence": si, "before": s, "after": after, "word": t.text,
+                              "rep": d["word"], "pos": d["pos"], "gate": d["gate"], "check": d["check"],
+                              "p_complex": pc, "p_term": pt, "sources": top["sources"],
+                              "cover": cover[rows.index(top)] if top in rows else None})
+    return out, seen
+
+
+def apply11(argv):
+    from cleartext.learned_words import senses as SN
+
+    from .learned_words_rewrite import load
+    from .learned_words_simpler import SIMPLER
+
+    _threads(argv)
+    pre = json.load(open(REPORT / "r11-precommit.json"))
+    if _sha(TABLE) != pre["table_sha256"] or _sha(S.PRECOMMIT) != pre["arm_s_precommit_sha256"]:
+        raise SystemExit("REFUSED: sense table or arm s differ from the round-11 pre-commitment")
+    deadline = time.monotonic() + _seconds(argv, 1380)
+    clf_s, _ = S.load_filter()
+    sn = SN.load(TABLE)
+    _, T, ids, _ = load()
+    model = pickle.load(open(STATE / "model.pkl", "rb"))
+    simpler = pickle.load(open(SIMPLER, "rb"))
+    pan = json.load(open(PANEL))
+    skip = _rewrite_overlap(pan)
+    done = {r["pid"] for r in read_jsonl(APPLY11)}
+    todo = [p for p in pan if p["id"] not in done and p["id"] not in skip]
+    print(f"{len(done)} done, {len(todo)} to do, {len(skip)} skipped for rewrite-corpus overlap", flush=True)
+    with open(APPLY11, "a") as f:
+        for p in todo:
+            if time.monotonic() > deadline:
+                break
+            variants, seen = word_swaps_two(p["original"], model, p["id"], sn)
+            rec = {"pid": p["id"], "domain": p["domain"], "content_words": seen}
+            for name, swaps in variants.items():
+                got, rows = [], []
+                for s in swaps:
+                    r = S.swap_row(model, simpler, s)
+                    if r is not None:
+                        got.append(s)
+                        rows.append(r)
+                if got:
+                    for s, r, x in zip(got, rows, S.score_swaps(clf_s, T, ids, got, rows)):
+                        s.update(margin=r["f"]["margin"], stack=float(x))
+                rec[name] = [s for s in swaps if "stack" in s]
+                rec[f"unresolved_{name}"] = len(swaps) - len(rec[name])
+            f.write(json.dumps(rec) + "\n")
+            f.flush()
+            print(f"{time.strftime('%H:%M:%S')} {p['id']} all={len(rec['all'])} sense={len(rec['sense'])}", flush=True)
+    left = len({p["id"] for p in pan} - skip - {r["pid"] for r in read_jsonl(APPLY11)})
+    print("COMPLETE" if not left else f"PARTIAL {left} left", flush=True)
+
+
+ARMS11 = ("b", "s", "g", "gs")
+
+
+def picks11(rec, ts, choose):
+    """Arm b: all candidates, margin. Arm s: b + arm-s filter. Arm g: sense-limited candidates, margin.
+    Arm gs: g + arm-s filter. Filters apply before the per-passage limits."""
+    a = [s for s in rec["all"] if s["margin"] >= S.MIN_MARGIN]
+    g = [s for s in rec["sense"] if s["margin"] >= S.MIN_MARGIN]
+    return {"b": choose(a), "s": choose([s for s in a if s["stack"] >= ts]),
+            "g": choose(g), "gs": choose([s for s in g if s["stack"] >= ts])}
+
+
+def page11(argv):
+    from .learned_words_apply import _skey, choose
+
+    _, ts = S.load_filter()
+    items = {}
+    for r in read_jsonl(APPLY11):
+        for arm, chosen in picks11(r, ts, choose).items():
+            for s in chosen:
+                k = _skey(s)
+                items.setdefault(k, dict(s, key=k, arms=[], domain=r["domain"]))["arms"].append(arm)
+    items = sorted(items.values(), key=lambda x: x["key"])
+    rng = random.Random(1127)
+    old = [i for i in json.load(open(STATE / "replay/items.json")) if i["round"] == "r5" and "b" in i["arms"]]
+    rng.shuffle(old)
+    base = [dict(x, source="r11") for x in items] + [dict(x, source="old", old_mark=x["mark"]) for x in old[:CONSISTENCY_ITEMS]]
+    RATING11.mkdir(exist_ok=True)
+    json.dump({"swaps": items}, open(RATING11 / "key.json", "w"), indent=1)
+    ids = {n: f"m{n}" for n in range(1, len(base) + 1)}
+    json.dump([{"id": ids[n], "source": x["source"], "key": x.get("key"), "old_mark": x.get("old_mark"),
+                "arms": x.get("arms") if x["source"] == "r11" else None} for n, x in enumerate(base, 1)],
+              open(RATING11 / "blind-map.json", "w"), indent=1)
+    for r in range(1, RATERS + 1):
+        order = list(enumerate(base, 1))
+        random.Random(f"1127:{r}").shuffle(order)
+        json.dump([{"id": ids[n], "before": x["before"], "after": x["after"], "word": x["word"], "rep": x["rep"]}
+                   for n, x in order], open(RATING11 / f"blind-{r}.json", "w"), indent=1)
+    print(json.dumps({"r11_items": len(items), "items": len(base),
+                      "per_arm": Counter(a for x in items for a in x["arms"])}, indent=1))
+
+
+def score11(argv):
+    from .learned_words_study import wilson
+
+    mp = json.load(open(RATING11 / "blind-map.json"))
+    ids = {m["id"] for m in mp}
+    raters = []
+    for r in range(1, RATERS + 1):
+        marks = {x["id"]: x["mark"] for x in csv.DictReader(open(RATING11 / f"marks-{r}.csv"))}
+        if set(marks) != ids or set(marks.values()) - set(SEVERITY):
+            raise SystemExit(f"REFUSED: rater {r} marks are incomplete or use an unknown label")
+        raters.append(marks)
+    maj = {i: majority([m[i] for m in raters]) for i in ids}
+
+    def arm_stats(marks):
+        res = {}
+        for arm in ARMS11:
+            ms = [marks[m["id"]] for m in mp if m["source"] == "r11" and arm in m["arms"]]
+            c = Counter(ms)
+            res["arm_" + arm] = {"swaps": len(ms), **c, "good_rate": c["good"] / max(1, len(ms)),
+                                 "good_ci95": wilson(c["good"], len(ms)), "meaning_rate": c["meaning"] / max(1, len(ms))}
+        return res
+
+    out = {"items": len(ids), "raters": RATERS, "majority": arm_stats(maj), "per_rater": [arm_stats(m) for m in raters]}
+    b, gs = out["majority"]["arm_b"], out["majority"]["arm_gs"]
+    out["yield_gs"] = gs["swaps"] / max(1, b["swaps"])
+    out["success"] = bool(gs["good_rate"] >= 0.78 and gs["meaning_rate"] <= 0.15 and out["yield_gs"] >= 0.40)
+    r11 = [m["id"] for m in mp if m["source"] == "r11"]
+    out["unanimous_share"] = sum(len({m[i] for m in raters}) == 1 for i in r11) / max(1, len(r11))
+    out["pairwise_agreement"] = {f"{a + 1}-{c + 1}": sum(raters[a][i] == raters[c][i] for i in r11) / max(1, len(r11))
+                                 for a in range(RATERS) for c in range(a + 1, RATERS)}
+    old = [m for m in mp if m["source"] == "old"]
+    out["consistency_with_old"] = [sum(m["old_mark"] == rt[m["id"]] for m in old) for rt in raters] + [len(old)]
+    (REPORT / "round11.json").write_text(json.dumps(out, indent=1))
+    print(json.dumps(out, indent=1))
+
+
 def main(argv):
     cmd = {"senses": senses, "features": features, "train": train, "train-h": train_h, "panel": panel, "apply": apply,
-           "page": page, "score": score}
+           "page": page, "score": score, "apply11": apply11, "page11": page11, "score11": score11}
     if argv[:1] and argv[0] in cmd:
         return cmd[argv[0]](argv[1:])
-    raise SystemExit("usage: learned-words r9 senses|features|train|train-h|panel|apply|page|score")
+    raise SystemExit("usage: learned-words r9 senses|features|train|train-h|panel|apply|page|score|apply11|page11|score11")

@@ -1,0 +1,13 @@
+{
+ "sense_cover": 0.25,
+ "table_sha256": "443ef2bf23fee6e7d45a9df0c6d21371e38518af62ba63ad4ce678b7c14024e2",
+ "arm_s_precommit_sha256": "02ae73330ac5b29276d0087561d64f0f504686028c55cfe5720ecde77b11609d",
+ "arm_s_model_sha256": "57418cc1969df9e5a02b3938b98d14282682fda80e270e15470d9967c8bdd86d",
+ "source_sha256": {
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5"
+ },
+ "written": "2026-11-21 20:09:46 EST"
+}
