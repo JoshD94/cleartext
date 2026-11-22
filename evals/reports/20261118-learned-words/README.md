@@ -454,3 +454,27 @@ It keeps 55% of the swaps.
   mostly already present and gets cancelled.
 - **Parse stability** fires rarely and does not separate on arm b (AUC
   0.50–0.53).
+
+## Round 10: two heads (November 21)
+
+[ROUND10.md](ROUND10.md) holds the pre-registered rules. Arm h scores
+(1 − P(meaning)) × (1 − P(not simpler)) with two logistic heads on the same
+44 features.
+
+- **Cross-validation ([r10-cv.json](r10-cv.json)):** 78.1% Good against
+  77.9% for arm s, a paired gain of **+0.2 points** (bar 3); it removes 49%
+  of Changes meaning. **No-go.** No fresh text was spent.
+- **Diagnostic, not a decision:** out of fold, the 44-feature meaning head
+  reaches AUC 0.70 on arm b, *below* `ctx_cos` alone (0.79). With 137
+  meaning labels, more features add noise rather than signal. Split by
+  `ctx_cos` tertile, arm b's swaps (Good / Changes meaning / Not simpler)
+  are:
+  - low: 30 / 26 / 7;
+  - middle: 43 / 10 / 10;
+  - high: 43 / 3 / 17.
+
+  Even the best two thirds reach only about 68% Good. Filters over these
+  signals plateau near 78% in cross-validation and lower on fresh text.
+- **What this suggests:** the limit is no longer the filter. It is the
+  candidates the generator offers and the noise in single-rater labels
+  (88/114 agreement on repeated pairs).
