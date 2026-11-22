@@ -1,0 +1,72 @@
+{
+ "round": "1",
+ "written": "2026-11-22 17:57:32 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "600743932f06596722bdf8f1e2000d88c7b0e5f6ef529d8073ddaa5a86952040",
+  "models/src/cleartext/structure_v2/appositive.py": "cc917dffbc8980411e8dce2d0cb933e3f4137943a5e4089b39ca0d8f198830c9",
+  "models/src/cleartext/structure_v2/common.py": "9ef0104a6d27a00e6b6ef5d1e07cb20c6dc3735f293ba20475b993fae8480e39",
+  "models/src/cleartext/structure_v2/frames.py": "ea25fe574b586df228511d842dbd039d33a805f4eaf4984b858478a7537bff68",
+  "models/src/cleartext/structure_v2/fronted.py": "be43b35f80aeaa50930bc0af52e2028f292eef8412c65a9eb96814a3b6958f59",
+  "models/src/cleartext/structure_v2/gate.py": "b74b7eb6252604ac1bf883ff7401441d14f5db6a341e028556cef3824433f63a",
+  "models/src/cleartext/structure_v2/nominal.py": "0afe0226eb96e411bd87fb282bddc34c0deedbe061159422fd0429470f27b204",
+  "models/src/cleartext/structure_v2/passive.py": "c2c73e8897c2688c7c23fc804c5551b0e3cdc03f7d281c7f0e975b3607f127f4",
+  "models/src/cleartext/structure_v2/stage.py": "b0868e21e0f9214e843c60560bce83408152253c598cb5efa6d565f3074adc98",
+  "evals/structure_v2.py": "b068042ebea8ec1ae5a30a7378b20b5b92acc16fc8a65e876580c59a5702d232",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-A.json": "390cca671c64ecec2125a54aee5b9114f282c1c01c83f3bdb9d28204643da5a4",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-Awide.json": "5246c32530c7bd5605dac72ec6d0b916f74ea916286904e4332c8218adc54e3c",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-manifest.json": "cdc4ed4626cc8798d5563349a5c1c852980970e4cc2f20c9b7f8514bb91569a7"
+ },
+ "thresholds": {
+  "arms": [
+   "passive",
+   "chhoeng_agentive",
+   "chhoeng_auto",
+   "passive_recovered",
+   "appositive",
+   "fronted_split",
+   "fronted_move",
+   "frames",
+   "nominal",
+   "kea_negation"
+  ],
+  "per_op": 40,
+  "cap": {
+   "chhoeng_auto": 30
+  },
+  "rare_arm_wide_pool": "pool-Awide",
+  "seed": 20261122,
+  "raters": 3,
+  "majority": "2 of 3, else most severe (meaning > ungrammatical > notsimpler)",
+  "kept": {
+   "min_items": 20,
+   "good_rate_min": 0.85,
+   "meaning_rate_max": 0.1
+  },
+  "nli_floor": null,
+  "hard_checks": [
+   "numbers",
+   "negation",
+   "entities",
+   "technical_phrases",
+   "code_literals"
+  ],
+  "dev_success_combined": {
+   "all_gates_and_over_edit": true,
+   "dnli_ci_low_min": -0.005,
+   "dfk_max": 0.0
+  },
+  "combined_order": [
+   "passive",
+   "passive_recovered",
+   "nominal",
+   "frames",
+   "appositive",
+   "fronted_split",
+   "fronted_move"
+  ]
+ }
+}

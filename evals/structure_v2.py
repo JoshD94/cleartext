@@ -127,7 +127,7 @@ def run_pool(args):
         for split, buckets in (("build", range(0, 3)), ("A", range(3, 7)), ("B", range(7, 10))):
             docs = sorted(d for d in by_doc if bucket(d) in buckets)
             rng.shuffle(docs)
-            kept = []
+            kept, wide = [], []
             for d in docs:
                 if d in docs_used:
                     stats["docs_used_elsewhere"] += 1
@@ -135,17 +135,27 @@ def run_pool(args):
                 sents = by_doc[d]
                 idx = [i for i, s in enumerate(sents) if clean(s)]
                 rng.shuffle(idx)
-                for i in idx[: args.per_doc]:
+                full = len(kept) < args.per_source
+                for rank, i in enumerate(idx):
                     if grams(sents[i]) & used:
                         stats["sentences_8gram_overlap"] += 1
                         continue
-                    kept.append({"id": f"{name}:{hashlib.sha256((d + str(i)).encode()).hexdigest()[:12]}",
-                                 "source": name, "doc": d, "index": i, "sentence": sents[i],
-                                 "context": sents[max(0, i - 3): i]})
+                    row = {"id": f"{name}:{hashlib.sha256((d + str(i)).encode()).hexdigest()[:12]}",
+                           "source": name, "doc": d, "index": i, "sentence": sents[i],
+                           "context": sents[max(0, i - 3): i]}
+                    # The standard pool: at most per_doc sentences per document
+                    # until per_source; "wide" keeps every sentence of the
+                    # documents the standard pool drew from (rare operations).
+                    if full and rank < args.per_doc and len(kept) < args.per_source:
+                        kept.append(row)
+                    if full:
+                        wide.append(row)
                 if len(kept) >= args.per_source:
                     break
-            out[split] += kept[: args.per_source]
-            stats[f"{split}_sentences"] = len(kept[: args.per_source])
+            out[split] += kept
+            out.setdefault(split + "wide", []).extend(wide)
+            stats[f"{split}_sentences"] = len(kept)
+            stats[f"{split}wide_sentences"] = len(wide)
         manifest["sources"][name] = {"sha256": sha(path), **stats}
         print(name, dict(stats), flush=True)
     for split, rows in out.items():
@@ -213,6 +223,21 @@ def chhoeng_agentive(placeholder=None):
     return Arm()
 
 
+def kea_negation():
+    """Kea-Roy's double-negation rule (rewrites.negation_rewrite), unchanged,
+    for coverage."""
+    from cleartext.rewrites import negation_rewrite
+
+    class Arm:
+        def rewrite_sentence(self, sentence, context=()):
+            out, changes = negation_rewrite(sentence)
+            if out == sentence:
+                return sentence, [], []
+            return out, [{"op": "kea_negation", "rule": (changes[0].get("rule") if changes else "negation"),
+                          "before": sentence, "after": out, "features": {}}], []
+    return Arm()
+
+
 def run_apply(args):
     from cleartext.structure_v2.common import parse
     state = outside_checkout(args.state)
@@ -232,7 +257,9 @@ def run_apply(args):
     stages = {}
     with out_path.open("a") as f:
         for arm in args.ops:
-            if arm in ("chhoeng_agentive", "chhoeng_auto"):
+            if arm == "kea_negation":
+                stages[arm] = kea_negation()
+            elif arm in ("chhoeng_agentive", "chhoeng_auto"):
                 stages[arm] = chhoeng_agentive(None if arm == "chhoeng_agentive" else "auto")
             else:
                 stages[arm] = make_stage(arm, nli, args.min_entailment,
@@ -595,13 +622,27 @@ def run_judge(args):
                  f"{d['nli_mean']['ci95']}" if d else ""))
 
 
+def run_precommit(args):
+    """Hashes of the sources, brief and pools a round depends on, plus its
+    thresholds, written before the round's outputs exist."""
+    files = sorted(str(p.relative_to(ROOT)) for p in (ROOT / "models/src/cleartext/structure_v2").glob("*.py"))
+    files += ["evals/structure_v2.py", "evals/reports/20261122-structure-v2/RATER_BRIEF.md",
+              "evals/reports/20261122-structure-v2/RATER_PROMPT.md", *args.extra]
+    out = {"round": args.round, "written": time.strftime("%Y-%m-%d %H:%M:%S %Z"),
+           "source_sha256": {f: sha(ROOT / f) for f in files},
+           "inputs_sha256": {str(p): sha(p) for p in args.inputs},
+           "thresholds": json.loads(args.thresholds)}
+    write_json(Path(args.out), out)
+    print(json.dumps(out, indent=1))
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("pool")
     p.add_argument("--state", type=Path, required=True)
-    p.add_argument("--per-source", type=int, default=2500)
-    p.add_argument("--per-doc", type=int, default=12)
+    p.add_argument("--per-source", type=int, default=1500)
+    p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("apply")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--pool", type=Path, required=True)
@@ -640,9 +681,15 @@ def main(argv=None):
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--arms", nargs="+", required=True)
     p.add_argument("--out", type=Path, required=True)
+    p = sub.add_parser("precommit")
+    p.add_argument("--round", required=True)
+    p.add_argument("--inputs", nargs="*", type=Path, default=[])
+    p.add_argument("--extra", nargs="*", default=[])
+    p.add_argument("--thresholds", required=True)
+    p.add_argument("--out", type=Path, required=True)
     args = ap.parse_args(argv)
     {"pool": run_pool, "apply": run_apply, "panel": run_panel, "tally": run_tally, "dev": run_dev,
-     "score": run_score, "judge": run_judge}[args.cmd](args)
+     "score": run_score, "judge": run_judge, "precommit": run_precommit}[args.cmd](args)
 
 
 if __name__ == "__main__":

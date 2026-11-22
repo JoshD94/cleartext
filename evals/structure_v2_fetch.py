@@ -129,7 +129,7 @@ def main(argv=None):
             stats[name] = json.loads(done.read_text())
             continue
         rng = random.Random(f"{SEED}:{name}")
-        docs = []
+        docs, partial = [], False
         if name == "fedreg":
             keys = fedreg_keys(f)
             rng.shuffle(keys)
@@ -154,11 +154,14 @@ def main(argv=None):
             step = 20 if name == "goodwiki" else 1
             for i in range(0, len(picked), step):
                 if time.monotonic() > deadline:
+                    if name == "news" and docs:
+                        partial = True  # rate-limited: keep what was fetched
+                        break
                     print(f"PARTIAL ({name})")
                     return
                 got = extracts(f, api, picked[i:i + step], intro=(name == "goodwiki"))
                 docs += [(t, got[t]) for t in picked[i:i + step] if t in got]
-        if time.monotonic() > deadline:
+        if time.monotonic() > deadline and not partial:
             print(f"PARTIAL ({name})")
             return
         n = 0
@@ -168,7 +171,8 @@ def main(argv=None):
                     for s in B.sentences(B.clean(html.unescape(para))):
                         w.write(json.dumps({"doc": doc, "s": s}, ensure_ascii=False) + "\n")
                         n += 1
-        stats[name] = {"documents": len(docs), "sentences": n, "titles_listed_excluded": len(used)}
+        stats[name] = {"documents": len(docs), "sentences": n, "titles_listed_excluded": len(used),
+                       "stopped_at_deadline": partial}
         done.write_text(json.dumps(stats[name]))
         print(name, stats[name], flush=True)
     (args.out / "manifest.json").write_text(json.dumps(stats, indent=1))
