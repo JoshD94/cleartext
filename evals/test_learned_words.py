@@ -374,3 +374,35 @@ def test_r14_arms_filter_before_the_passage_limits():
     assert [x["rep"] for x in out["b"]] == ["r0"]
     assert [x["rep"] for x in out["m"]] == ["r1"]
     assert [x["rep"] for x in out["mw"]] == ["r0"]
+
+
+def test_r15_cutoff_keeps_the_set_share_of_good_technical_rows():
+    from evals.learned_words_r15 import GOOD_KEPT, cutoff
+
+    rows = [{"drop": float(i), "tech": True, "good": 1} for i in range(11)]
+    rows += [{"drop": 100.0, "tech": False, "good": 1}, {"drop": 50.0, "tech": True, "good": 0}]
+    assert abs(cutoff(rows) - 10 * GOOD_KEPT) < 1e-9
+
+
+def test_r15_veto_applies_after_arm_p_and_before_the_passage_limits():
+    from evals.learned_words_apply import choose
+    from evals import learned_words_r15 as V
+
+    class M:
+        def score(self, rows):
+            return np.array([r["stack"] for r in rows])
+
+    def sw(i, sent, stack):
+        return {"pid": "x", "sentence": sent, "margin": 0.5, "stack": stack, "cover": 0.0, "gate": 1.0,
+                "check": 1.0 - i / 10, "word": "administered", "rep": f"r{i}", "pos": "v",
+                "before": "It is administered orally.", "start": 6}
+
+    orig = V.max_drop
+    V.max_drop = lambda before, word, rep, start, own=None: {"r0": 5.0, "r1": 1.0}[rep]
+    try:
+        out = V.picks({"all": [sw(0, 0, 0.9), sw(1, 1, 0.8)], "sense": []}, M(), M(),
+                      {"s": 0.5, "p": 0.5, "p40": 0.85, "pv": 0.7, "cutoff": 2.0}, choose, {})
+    finally:
+        V.max_drop = orig
+    assert [x["rep"] for x in out["p40"]] == ["r0"]
+    assert [x["rep"] for x in out["pv"]] == ["r1"]
