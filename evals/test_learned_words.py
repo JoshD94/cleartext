@@ -574,3 +574,135 @@ def test_r23_replicates_round_22_frozen():
     assert V23.ARMS == V22.ARMS and V23.SEED != V22.SEED and V23.MODEL_QG == V22.MODEL_QG
     assert "Q22.PANEL" in inspect.getsource(V23.panel) and "joshua-r21b" in inspect.getsource(V23.panel)
     assert inspect.getsource(V23.picks) == inspect.getsource(V22.picks) and not hasattr(V23, "train")
+
+
+class _Tok:
+    def __init__(self, i, text, idx, dep="dep"):
+        self.i, self.text, self.idx, self.dep_, self.children = i, text, idx, dep, []
+        self.head = self
+
+    def __len__(self):
+        return len(self.text)
+
+
+def _sent(words, heads, deps):
+    toks, idx = [], 0
+    for i, w in enumerate(words):
+        toks.append(_Tok(i, w, idx, deps[i]))
+        idx += len(w) + 1
+    for i, h in enumerate(heads):
+        if h is not None:
+            toks[i].head = toks[h]
+            toks[h].children.append(toks[i])
+    return toks
+
+
+def test_r24_frame_neighbours_are_head_children_and_preposition_objects():
+    from cleartext.learned_words import depframe as DF
+
+    # "contract terminated for default ." : terminated is the root; for -> default
+    t = _sent(["contract", "terminated", "for", "default", "."], [1, None, 1, 2, 1],
+              ["nsubjpass", "ROOT", "prep", "pobj", "punct"])
+    assert [n.text for n in DF.neighbours(t[1])] == ["contract", "for", "default"]
+    # an adverb's neighbour is its head only
+    t = _sent(["orally", "administered", "drug"], [1, 2, None], ["advmod", "amod", "ROOT"])
+    assert [n.text for n in DF.neighbours(t[0])] == ["administered"]
+
+
+def test_r24_frame_features_are_relative_to_the_target(monkeypatch):
+    from cleartext.learned_words import depframe as DF
+
+    t = _sent(["orally", "administered", "drug"], [1, 2, None], ["advmod", "amod", "ROOT"])
+
+    class Doc(list):
+        pass
+
+    calls = []
+
+    def fake(spans, words=None, batch=16):
+        calls.append((spans, words))
+        if words is not None:  # bare frame: log P(rep), log P(target)
+            return [[-6.0, -1.0] for _ in spans]
+        # neighbours: before-swap texts first (the target predicts them well), then after-swap texts
+        return [[-0.5] if "administered" in s[0] else [-3.0] for s in spans]
+
+    monkeypatch.setattr(DF, "_masked", fake)
+    f = DF.features(lambda text: Doc(t), "orally administered drug", 7, "administered", "given")
+    assert f["dep_n"] == 2 and f["dep_max_drop"] == 2.5 and f["dep_head_drop"] == 2.5
+    assert f["frame_slot_d"] == -5.0 and set(f) == set(DF.KEYS)
+    frame = calls[1][0][0]
+    assert frame[0] == "orally administered drug" and frame[0][slice(*frame[1])] == "administered"
+    # after-swap spans are shifted by the length change only after the slot
+    after = calls[0][0][2:]
+    assert {x[0] for x in after} == {"orally given drug"} and {x[0][slice(*x[1])] for x in after} == {"orally", "drug"}
+
+
+def test_r24_pair_lexicon_reads_surface_then_lemma_pairs(tmp_path):
+    from cleartext.learned_words.pairlex import PairLex
+
+    (tmp_path / "lex.tsv").write_text("administered\tgiven\t0.9000\t3.1000\nterminate\tend\t0.5000\t2.0000\n")
+    (tmp_path / "wc.tsv").write_text("terminate\t3.5\nend\t1.2\n")
+    lx = PairLex(tmp_path / "lex.tsv", tmp_path / "wc.tsv")
+    a = lx.features("Administered", "given", ["administer", "give"])
+    assert a["sp_cplx"] == 0.9 and a["sp_miss"] == 0.0 and a["wc_miss"] == 1.0
+    b = lx.features("terminated", "ended", ["terminate", "end"])
+    assert b["sp_cplx"] == 0.5 and abs(b["wc_diff"] - 2.3) < 1e-9
+    c = lx.features("centred", "centered", ["centre", "center"])
+    assert c["sp_miss"] == 1.0 and c["spell"] > 0.9
+
+
+def test_r24_genre_threshold_applies_only_to_news_and_encyclopedic_passages():
+    import inspect
+
+    from evals import learned_words_r24 as V24
+    from evals.learned_words_apply import choose
+
+    class P:
+        def score(self, rs):
+            return np.array([r["stack"] for r in rs])
+
+    class Pri:
+        def seen(self, key):
+            return key[1] == "r0"
+
+    class F:
+        pri = Pri()
+
+        def score(self, rs):
+            return np.array([r["stack"] for r in rs])
+
+    class Lex:
+        def features(self, w, r, k):
+            return dict.fromkeys(("sp_cplx", "sp_ppdb", "sp_miss", "wc_diff", "wc_miss", "spell"), 0.0)
+
+    def sw(i, sent, stack):
+        return {"sentence": sent, "margin": 0.5, "stack": stack, "cover": 0.0, "gate": 1.0, "check": 1.0 - i / 10,
+                "word": "w", "rep": f"r{i}", "pos": "v", "before": "a w b", "after": f"a r{i} b", "x31": [0.0] * 31,
+                "fr": {}, "nb": [["child:advmod", "orally"]]}
+
+    thr = {"p50": 0.8, "qg": 0.5, "qg_tech": 0.5, "f": 0.7, "fg": 0.55}
+    rec = {"domain": "news", "all": [sw(0, 0, 0.75), sw(1, 1, 0.6), sw(2, 1, 0.5)]}
+    out = V24.picks(rec, {"p50": P(), "qg": P(), "f": F()}, thr, choose, Lex())
+    assert [x["rep"] for x in out["f"]] == ["r0"]
+    assert sorted(x["rep"] for x in out["fg"]) == ["r0", "r1"]
+    tech = V24.picks(dict(rec, domain="openfda"), {"p50": P(), "qg": P(), "f": F()}, thr, choose, Lex())
+    assert [x["rep"] for x in tech["fg"]] == ["r0"]
+    assert set(out) == set(V24.ARMS) and V24.F_ARGS["inter"] is False
+    src = inspect.getsource(V24.panel)
+    assert "joshua-r21b" in src and "G.PANEL" in src and "V3_PANEL" in src
+    assert "news2" in V24.EXT_NAMES.values() and V24.SEED not in (20261222, 20261223)
+
+
+def test_r24_frame_prior_shrinks_to_the_pair_and_leaves_the_row_out():
+    from evals import learned_words_r24 as V24
+
+    k = ("child:advmod", "orally")
+    rows = [{"key": ["administer", "give"], "good": g, "nb": nb} for g, nb in
+            [(1, []), (1, []), (1, []), (0, [k]), (0, [k])]]
+    fp = V24.FramePrior(rows)
+    new = {"key": ["administer", "give"], "nb": [k]}
+    assert fp.worst(new, 0.6) < -1.0  # 0 of 2 in this frame
+    assert fp.worst({"key": ["administer", "give"], "nb": []}, 0.6) == 0.0
+    # leave-one-out: a row alone in its frame carries no frame evidence about itself
+    lone = {"key": ["induce", "cause"], "good": 0, "nb": [("child:dobj", "metabolism")]}
+    assert V24.FramePrior([lone]).worst(lone, 0.5, own=0) == 0.0

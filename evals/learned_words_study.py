@@ -703,3 +703,9 @@ def r23(argv):
     from . import learned_words_r23
 
     return learned_words_r23.main(argv)
+
+
+def r24(argv):
+    from . import learned_words_r24
+
+    return learned_words_r24.main(argv)
