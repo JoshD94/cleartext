@@ -336,3 +336,41 @@ def test_r13_fallback_uses_runner_up_only_for_targets_without_an_accepted_top():
     assert [s["rep"] for s in out["p"]] == ["a"]
     assert sorted(s["rep"] for s in out["pn"]) == ["a", "d", "e"]
     assert sorted(s["rep"] for s in out["p65n"]) == ["a", "b", "e"]
+
+
+def test_r14_arm_m_adds_meaning_signals_to_arm_p():
+    from evals import learned_words_stacker as S
+    from evals.learned_words_r14 import ArmM
+
+    rng = np.random.RandomState(1)
+    rows = []
+    for i in range(80):
+        x = [0.0] * len(S.KEYS)
+        good = i % 2
+        x[S.KEYS.index("ctx_cos")] = 0.9 if good else 0.5
+        rows.append({"key": (f"t{i}", "r"), "stack": 0.7, "cover": 0.0, "x31": x, "good": good})
+    m = ArmM(rows)
+    hi, lo = [dict(rows[1]), dict(rows[0])]
+    hi["key"], lo["key"] = ("new", "a"), ("new", "b")
+    s = m.score([hi, lo])
+    assert s[0] > s[1]
+    assert m.clf[-1].coef_.shape[1] == 6
+
+
+def test_r14_arms_filter_before_the_passage_limits():
+    from evals.learned_words_apply import choose
+    from evals.learned_words_r14 import picks
+
+    class M:
+        def score(self, rows):
+            return np.array([r["stack"] for r in rows])
+
+    def sw(i, sent, stack, margin=0.5):
+        return {"sentence": sent, "margin": margin, "stack": stack, "cover": 0.0, "gate": 1.0, "check": 1.0 - i / 10,
+                "word": "w", "rep": f"r{i}", "pos": "v", "x31": [0.0] * 31}
+
+    rec = {"all": [sw(0, 0, 0.55), sw(1, 0, 0.9)], "sense": []}
+    out = picks(rec, M(), M(), {"s": 0.5, "p": 0.8, "m": 0.8, "mw": 0.5}, choose)
+    assert [x["rep"] for x in out["b"]] == ["r0"]
+    assert [x["rep"] for x in out["m"]] == ["r1"]
+    assert [x["rep"] for x in out["mw"]] == ["r0"]

@@ -140,7 +140,7 @@ def main(argv=None):
     f.add_argument("--datasets", default="")
     f.add_argument("--max-seconds", type=float, default=1500)
     f.add_argument("--threads", type=int, default=2)
-    for name in ("nli", "train", "evaluate", "splits", "apply", "page", "simpler", "panel", "strict", "frame", "judge", "r5", "corpus", "replay", "pairwise", "contextfit", "rewrite", "stacker", "r9", "r12", "r13"):
+    for name in ("nli", "train", "evaluate", "splits", "apply", "page", "simpler", "panel", "strict", "frame", "judge", "r5", "corpus", "replay", "pairwise", "contextfit", "rewrite", "stacker", "r9", "r12", "r13", "r14"):
         p = sub.add_parser(name)
         p.add_argument("rest", nargs="*")
     raw = list(sys.argv[1:] if argv is None else argv)
