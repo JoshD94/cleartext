@@ -764,3 +764,40 @@ All three agreed on 87%. Consistency with the old marks was 18–19 of 20.
   - p40: 98 of 106, 92.5% Good (CI 86–96), 7.5% meaning, 41% of arm b;
   - p50: 125 of 136, 91.9% Good (CI 86–95), 7.4% meaning, 53% of arm b;
   - gs on the same two windows: 88 of 99, 88.9%, at 38%.
+
+## Round 19: arm p refitted on 1,024 rows, p50 primary (November 22)
+
+[ROUND19.md](ROUND19.md) holds the pre-registered rules
+([r19-precommit.json](r19-precommit.json)).
+- **Model:** round 12's arm p, unchanged, refitted on all 1,024 rated rows
+  (rounds 3–8, 11–13, 17, 18).
+- **Arms:** p50 (primary) keeps 50% of the technical-window arm-b rows; p40
+  keeps 40% (secondary).
+- **Check ([r19-cv.json](r19-cv.json)): go.**
+  - Passage-grouped CV: p50 91.9% Good at 51% kept.
+  - Time split onto round 18: 88.4% at 51% kept.
+
+Fresh window ([round19.json](round19.json)): 135 new passages (540
+sentences), 141 items, three fresh blind raters. All three agreed on 88%.
+Consistency with the old marks was 15–16 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 112 | 100% | 20.7 | 66.1% (57–74) | 14.3% | 22 |
+| s: round-8 filter | 86 | 77% | 15.9 | 80.2% (71–87) | 11.6% | 7 |
+| gs: round 11's best | 44 | 39% | 8.1 | 93.2% (82–98) | 4.5% | 1 |
+| p: frozen round-12 arm p | 61 | 54% | 11.3 | 95.1% (87–98) | 3.3% | 1 |
+| p40: refitted, 40% keep | 55 | 49% | 10.2 | 94.5% (85–98) | 3.6% | 1 |
+| **p50: refitted, 50% keep** | **59** | **53%** | **10.9** | **94.9% (86–98)** | **3.4%** | 1 |
+
+- **Pre-registered success: yes.** Arm p50 reached 94.9% Good with 3.4%
+  Changes meaning, at 53% of arm b's swaps.
+- **Against gs:** about the same precision, with 1.34 times gs's yield.
+- **Errors:**
+  - Changes meaning: indicate→show ("slight strengthening") and
+    induces→causes (pharmacology sense);
+  - Not simpler: receives→gets.
+- **Still repetitive:** 34 distinct pairs across 59 swaps, including
+  additional→extra ×8 and administered→given ×5. Only 1 swap had an unseen
+  pair.
+- **Round 20 replicates these exact arms, frozen, on a new window.**
