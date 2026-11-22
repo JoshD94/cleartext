@@ -416,3 +416,21 @@ def test_r16_reuses_round_15_veto_and_arms():
     assert V16.max_drop is V15.max_drop and V16.TECH == ("r11", "r12", "r13")
     rows = [{"drop": float(i), "tech": True, "good": 1} for i in range(11)]
     assert V16.cutoff(rows) == V15.cutoff(rows)
+
+
+def test_r17_refitted_arm_p_filters_before_the_passage_limits():
+    from evals.learned_words_apply import choose
+    from evals.learned_words_r17 import picks
+
+    class M:
+        def score(self, rows):
+            return np.array([r["stack"] for r in rows])
+
+    def sw(i, sent, stack):
+        return {"sentence": sent, "margin": 0.5, "stack": stack, "cover": 0.0, "gate": 1.0, "check": 1.0 - i / 10,
+                "word": "w", "rep": f"r{i}", "pos": "v"}
+
+    out = picks({"all": [sw(0, 0, 0.6), sw(1, 0, 0.9)], "sense": []}, M(), M(),
+                {"s": 0.5, "p": 0.5, "p40": 0.8, "p50": 0.5}, choose)
+    assert [x["rep"] for x in out["p40"]] == ["r1"]
+    assert [x["rep"] for x in out["p50"]] == ["r0"]
