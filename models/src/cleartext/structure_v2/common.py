@@ -98,8 +98,18 @@ def keeps_capital(tok):
         return False
     if w == "I" or len(w) > 1 and (w.isupper() or any(c.isupper() for c in w[1:])):
         return True
-    if tok.ent_type_ in ("PERSON", "ORG", "GPE", "NORP", "LOC", "FAC", "PRODUCT", "EVENT", "WORK_OF_ART", "LAW"):
+    if tok.ent_type_ in ("PERSON", "GPE", "NORP", "LOC"):
         return True
+    if tok.ent_type_ in ("ORG", "FAC", "PRODUCT", "EVENT", "WORK_OF_ART", "LAW"):
+        # A one-word "entity" at the start of a sentence is often just a
+        # capitalized word ("Digital signatures ..."): lower it when it is a
+        # dictionary word and the next word is lowercase.
+        from lemminflect import getAllLemmas
+        nxt = tok.doc[tok.i + 1] if tok.i + 1 < len(tok.doc) else None
+        single = tok.ent_iob_ == "B" and (nxt is None or nxt.ent_iob_ != "I")
+        if not (single and tok.i == tok.sent.start and getAllLemmas(w.lower())
+                and nxt is not None and nxt.text[:1].islower()):
+            return True
     if tok.pos_ == "PROPN":
         nxt = tok.doc[tok.i + 1] if tok.i + 1 < len(tok.doc) else None
         if nxt is not None and nxt.text[:1].isupper():

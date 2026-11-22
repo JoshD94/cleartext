@@ -26,9 +26,13 @@ OPS = {
     "passive_we": lambda: ActiveVoice(agents=("we",)),
     "passive_recovered": lambda: ActiveVoice(agents=("we",), kinds=("recovered_we",)),
     "appositive": lambda: AppositiveSplit(),
+    "appositive_v2": lambda: AppositiveSplit(version=2),
     "fronted_split": lambda: FrontedClause(rules=("split",)),
     "fronted_move": lambda: FrontedClause(rules=("move",)),
     "frames": lambda: EmptyFrames(),
+    # Round 2: existential "there" only. Round 1 showed "It is X that ..." is
+    # usually a referential "it" ("It is a highway that links ..."), not a cleft.
+    "frames_v2": lambda: EmptyFrames(rules=("existential",)),
     "nominal": lambda: Nominalization(),
 }
 CONTEXT = 3  # preceding sentences an operation may read (agent recovery)

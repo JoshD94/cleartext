@@ -101,6 +101,13 @@ class FrontedClause:
         clause_text = span_text(clause)
         feats = {"marker": marker, "clause_len": len(clause), "main_len": len(body), "sent_len": len(sent)}
         if marker in SPLIT and "split" in self.rules:
+            if any(t.lower_ == "but" for t in body):
+                return sentence, []  # "X. But Y, but Z."
+            sub_subj = [g for g in head.children if g.dep_ in ("nsubj", "nsubjpass", "expl")]
+            main_subj = [g for g in sent.root.children if g.dep_ in ("nsubj", "nsubjpass", "expl")]
+            if (any(t.lower_ in ("it", "they", "this", "these", "its", "their") for t in sub_subj)
+                    and not any(t.tag_ == "PRP" for t in main_subj)):
+                return sentence, []  # "Although it may not ..., Congress intended X": "it" points forward
             first = upper_first(clause_text)
             second = f"{SPLIT[marker]}, {lower_first(main_text, body[0])}" if marker == "after" else \
                 f"{SPLIT[marker]} {lower_first(main_text, body[0])}"

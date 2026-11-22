@@ -57,11 +57,58 @@ def _bad_span(toks):
                for t in toks)
 
 
+PAST_ROLE = {"former", "late", "then", "previous", "onetime", "erstwhile"}
+FINITE = ("VBD", "VBZ", "VBP", "MD")
+
+
+def _risky(kind, tok, anchor, span, start, sent, final):
+    """Round-2 skips, one per failure type seen in round 1."""
+    from .passive import run_in_heading
+    if run_in_heading(sent):
+        return True  # "Esomeprazole The data described below ..."
+    if kind == "relative" and span[0].lower_ == "which":
+        # "which" pointing at a whole clause: the anchor has its own clause
+        # ("the songs they wrote, which ..."), sits inside a gerund phrase
+        # ("minimizing regulatory burden, which ..."), or "which in turn".
+        own_tokens = [t for t in anchor.subtree if t.i < start - 1]
+        if any(t.pos_ in ("VERB", "AUX") for t in own_tokens):
+            return True
+        if any(a.tag_ == "VBG" and a.dep_ != "ROOT" for a in anchor.ancestors):
+            return True
+        if len(span) > 2 and span[1].lower_ in ("in", "then", "thus", "therefore", "also"):
+            return True
+    if any(c.dep_ == "conj" for c in tok.children) or any(t.dep_ == "cc" and t.head.i == tok.i for t in span):
+        return True  # a list, not an appositive ("an organization, an organization, and an individual")
+    own = [t for t in anchor.subtree if t.i < start - 1]
+    if any(t.dep_ == "prep" and t.head.i == anchor.i for t in own):
+        return True  # "a member of the family, the most prominent ..." may describe either noun
+    if anchor.dep_ == "pobj" and anchor.head.head.pos_ not in ("VERB", "AUX"):
+        return True  # "a loss against Molla Mallory, her only amateur match"
+    if any(a.dep_ == "advcl" for a in anchor.ancestors):
+        return True  # the anchor sits inside an adverbial clause ("Although the eruption ... PST, ...")
+    if kind == "appositive":
+        for t in span:
+            if t.tag_ in FINITE and not any(a.dep_ in ("relcl", "acl") and a.i in {x.i for x in span}
+                                            for a in [t, *t.ancestors]):
+                return True  # a finite verb: probably the main clause, misparsed
+    if kind == "relative":
+        verb_tags = [tok.tag_] + [c.tag_ for c in tok.children if c.dep_ in ("aux", "auxpass")]
+        finite = next((t for t in verb_tags if t in ("VBZ", "VBP")), None)
+        aux = [c.lower_ for c in tok.children if c.dep_ in ("aux", "auxpass")] + [tok.lower_]
+        plural_verb = finite == "VBP" or "were" in aux
+        singular_verb = finite == "VBZ" or "was" in aux
+        pn = number_of(anchor)
+        if plural_verb and pn != "pl" or singular_verb and pn == "pl":
+            return True  # "a Hispanic audience, who were ..." or "records, which is ..."
+    return False
+
+
 class AppositiveSplit:
     op = "appositive"
 
-    def __init__(self, relatives=True, appositives=True, min_words=MIN_APPOS):
+    def __init__(self, relatives=True, appositives=True, min_words=MIN_APPOS, version=1):
         self.relatives, self.appositives, self.min_words = relatives, appositives, min_words
+        self.version = version  # 2 adds the round-2 skips (_risky) and present-tense definitions
 
     def _candidates(self, sent):
         out = []
@@ -116,6 +163,8 @@ class AppositiveSplit:
             final = e == sent.end - 2
             if not (subject_side or final):
                 continue
+            if self.version >= 2 and _risky(kind, tok, anchor, span, s, sent, final):
+                continue
             if anchor.left_edge.i < sent.start or any(t.text == "," for t in sent.doc[anchor.left_edge.i: s - 1]):
                 continue
             out.append({"kind": kind, "tok": tok, "anchor": anchor, "start": s, "end": e,
@@ -148,7 +197,12 @@ class AppositiveSplit:
             main_text = main.text()
             if c["kind"] == "appositive":
                 pn = number_of(c["anchor"])
-                be = agree("be", _main_tense(sent), pn)
+                tense = _main_tense(sent)
+                if self.version >= 2:
+                    # A definition is timeless ("Esomeprazole is an enantiomer
+                    # of omeprazole"), unless the appositive marks a past role.
+                    tense = "past" if any(t.lower_ in PAST_ROLE for t in span) else "pres"
+                be = agree("be", tense, pn)
                 extra = f"{upper_first(anchor_text)} {be} {span_text(span)}."
             else:
                 clause = span[1:]

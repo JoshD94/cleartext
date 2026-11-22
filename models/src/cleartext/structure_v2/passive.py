@@ -65,9 +65,50 @@ AUTHOR_VERBS = {
     "exclude", "remove", "modify", "amend", "clarify", "codify", "issue", "solicit", "request",
     "invite", "seek", "consider", "find", "use", "choose", "illustrate", "outline", "introduce",
 }
+# Round 2: verbs whose doer is often not the writer ("is found in section
+# 481(b)", "is determined in the inventory", "payment rates are established
+# under section 1847A") are dropped.
+AUTHOR_VERBS_V2 = AUTHOR_VERBS - {"find", "determine", "establish", "develop", "use", "provide", "include",
+                                  "apply", "perform", "conduct", "implement", "issue", "set", "design",
+                                  "build", "construct", "prepare", "consider", "seek", "request"}
+MAX_RECOVERED_SUBJECT = 10
 
 
 PROCESS_SUFFIXES = ("tion", "sion", "ment", "ance", "ence", "ity", "sis", "ing", "ism", "age")
+
+
+HEADING_FIRST = ("NOUN", "ADJ", "PROPN")
+
+
+TITLES = {"president", "prime", "minister", "senator", "governor", "judge", "justice", "king", "queen",
+          "prince", "princess", "pope", "saint", "mount", "lake", "river", "general", "captain", "sir", "lady",
+          "lord", "dr", "mr", "mrs", "ms", "professor", "chief", "secretary", "director", "chairman", "mayor",
+          "new", "north", "south", "east", "west", "united", "great", "supreme", "royal", "national", "federal"}
+
+
+def run_in_heading(sent):
+    """A section heading run into the sentence ("Elimination Isoproterenol is
+    metabolized ...", "Esomeprazole The data ...", "Recurrent Systemic
+    Embolism and Other Indications Oral anticoagulation ..."): a capitalized
+    function word in second place, or a capitalized dictionary word followed
+    by another capitalized word that is not a place or a title."""
+    from wordfreq import zipf_frequency
+    if len(sent) < 3:
+        return False
+    a, b = sent[0], sent[1]
+    if not (a.text[:1].isupper() and b.text[:1].isupper() and a.is_alpha and b.is_alpha):
+        return False
+    if a.text.isupper() or b.text.isupper():
+        return False  # acronyms ("FDA approved ...")
+    if b.is_stop and b.pos_ in ("DET", "ADP", "PRON", "CCONJ"):
+        return True
+    if a.ent_type_ in ("GPE", "LOC", "NORP", "FAC") or a.lower_ in TITLES:
+        return False
+    if a.is_stop or a.pos_ in ("ADP", "DET", "PRON", "CCONJ", "SCONJ", "ADV", "AUX", "NUM"):
+        return False
+    from nltk.corpus import wordnet as wn
+    # A common word (it has WordNet senses), not a name ("Barbara Kent").
+    return bool(wn.synsets(a.lower_)) and zipf_frequency(a.lower_, "en") >= 3.0
 
 
 def mass_noun(lemma):
@@ -79,6 +120,18 @@ def mass_noun(lemma):
     if not plural or plural.lower() == lemma.lower():
         return True
     return zipf_frequency(plural, "en") - zipf_frequency(lemma, "en") < -1.8
+
+
+def _np_heads(head):
+    """The phrase head and its coordinated heads ("him and her"): the only
+    pronouns whose case changes. "the research that he would publish"
+    keeps "he"."""
+    out, todo = set(), [head]
+    while todo:
+        t = todo.pop()
+        out.add(t.i)
+        todo += [c for c in t.children if c.dep_ == "conj"]
+    return out
 
 
 def _contiguous(tok):
@@ -186,8 +239,12 @@ def skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
         return "a later participle may share the passive subject"
     if subj.lower_ == "who" or subj.lower_ in ("what", "whatever"):
         return "wh subject"
-    if subj.lower_ in REL_KEEP and not (verb.dep_ == "relcl"):
-        return "relative pronoun outside a relative clause"
+    if subj.lower_ in REL_KEEP:
+        # Round 2: "tensions, which poor morale has exacerbated" is an object
+        # relative, which is harder to read than the passive subject relative.
+        return "relative pronoun subject (would become an object relative)"
+    if run_in_heading(sent):
+        return "run-in heading at the sentence start"
     if any(c.dep_ == "prep" and c.i > verb.i and not any(g.dep_ in ("pobj", "pcomp") for g in c.children)
            and c.lower_ != "by" for c in verb.children):
         return "stranded preposition"
@@ -204,6 +261,12 @@ def skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
         return "bracket or list inside the subject"
     if any(t.text == ":" and t.i < subj.left_edge.i for t in sent):
         return "heading or label before the subject"
+    if any(t.i < subj.i and (t.text == "," or t.tag_ in ("VBD", "VBZ", "VBP", "MD")
+                             or any(c.dep_.startswith("nsubj") for c in t.children)) for t in subj.subtree):
+        return "clause or comma before the subject head"
+    if agent_obj is not None and any(t.dep_ == "prep" and t.lower_ in ("as", "like", "unlike")
+                                     for t in agent_obj.subtree):
+        return "as/like phrase inside the agent may belong to the verb"
     if not _contiguous(subj) or agent is not None and not _contiguous(agent):
         return "non-projective parse"
     if any(t.text in ('"', "“", "”") for t in sent):
@@ -235,6 +298,19 @@ def skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
             return "time phrase, not an agent"
         if any(c.dep_ == "conj" for c in agent.children):
             return "coordinated by-phrases"
+        agent_ids = {t.i for t in agent.subtree}
+        if subj.tag_ != "PRP" and any(t.tag_ == "PRP$" or t.tag_ == "PRP" and t.i != agent_obj.i
+                                      for t in agent.subtree):
+            # "his grandmother was assassinated by her guards" -> "her guards
+            # assassinated his grandmother": the pronoun now comes before its antecedent.
+            return "pronoun in the agent would precede its antecedent"
+        if any(c.dep_ == "det" and c.lower_ in ("any", "no", "either", "neither") for c in agent_obj.children):
+            return "polarity determiner in the agent"
+        if any(t.lower_ == "by" and t.i != agent.i for t in agent.subtree):
+            return "a second by-phrase inside the agent (means, not a doer)"
+        nxt = sent.doc[agent.right_edge.i + 1] if agent.right_edge.i + 1 < sent.end else None
+        if nxt is not None and nxt.pos_ in ("NOUN", "PROPN", "NUM", "ADV") and nxt.i not in agent_ids:
+            return "word right after the agent suggests a misparse"
     return None
 
 
@@ -312,7 +388,9 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None):
     start = subj.left_edge.i == sent.start
     if agent_obj is not None:
         agent_toks = list(agent_obj.subtree)
-        mapped = span_text(agent_toks, lambda t: OBJ_TO_SUBJ.get(t.lower_, t.text) if t.tag_ == "PRP" else t.text)
+        heads = _np_heads(agent_obj)
+        mapped = span_text(agent_toks, lambda t: OBJ_TO_SUBJ.get(t.lower_, t.text)
+                           if t.tag_ == "PRP" and t.i in heads else t.text)
         if agent_toks[0].lower_ in OBJ_TO_SUBJ and agent_toks[0].tag_ == "PRP":
             pn = {"I": "1sg", "he": "3sg", "she": "3sg"}.get(OBJ_TO_SUBJ[agent_toks[0].lower_], "pl")
         else:
@@ -332,8 +410,9 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None):
     if relative or expletive:
         object_text = ""
     else:
+        heads = _np_heads(subj)
         object_text = span_text(subj_toks, lambda t: SUBJ_TO_OBJ.get(t.lower_, t.text)
-                                if t.tag_ == "PRP" and t.lower_ in SUBJ_TO_OBJ else t.text)
+                                if t.tag_ == "PRP" and t.lower_ in SUBJ_TO_OBJ and t.i in heads else t.text)
         if start:
             object_text = lower_first(object_text, subj_toks[0])
     group = _verb_group(verb, auxpass, auxes, pn)
@@ -379,7 +458,11 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None):
         if t.i in removed:
             continue
         out.token(t)
-    return out.text()
+    text = out.text()
+    final = sent[-1].text
+    if final.endswith((".", "!", "?")) and not text.endswith((".", "!", "?", '."', ".”")):
+        text += "."  # the period went with an abbreviation in the agent ("Warner Bros.")
+    return text
 
 
 class ActiveVoice:
@@ -438,8 +521,10 @@ class ActiveVoice:
             return "person subject"
         if in_quotes(verb):
             return "quoted"
-        if verb.lemma_ not in AUTHOR_VERBS:
+        if verb.lemma_ not in AUTHOR_VERBS_V2:
             return "not an author action verb"
+        if len(list(subj.subtree)) > MAX_RECOVERED_SUBJECT:
+            return "long subject would move after the verb"
         if any(a.lower_ in MODALS for a in _auxes(verb)) and verb.sent[0].lower_ != "we":
             return "modal passive"
         return None

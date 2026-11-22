@@ -22,7 +22,7 @@ LIGHT = {"make", "take", "give", "conduct", "perform", "carry", "undertake", "pr
 # object becomes the verb's object); "keep" keeps it. Unlisted prepositions
 # block the edit.
 TABLE = {
-    "decision": ("decide", {"on": "keep", "about": "keep", "to": "keep"}),
+    "decision": ("decide", {"on": "keep", "to": "keep"}),
     "determination": ("determine", {"of": None, "regarding": None}),
     "recommendation": ("recommend", {}),
     "assessment": ("assess", {"of": None}),
@@ -107,7 +107,7 @@ HAVE_ONLY = {"impact", "effect"}
 NO_OBJECT_OK = {"decision", "recommendation", "statement", "announcement", "choice", "conclusion", "payment",
                 "response", "reply", "suggestion", "agreement", "complaint", "action", "effort", "attempt",
                 "contribution", "application", "reference", "arrangement", "promise", "prediction", "comment",
-                "comments", "visit", "change"}
+                "comments"}
 NOMINAL_SUFFIXES = ("tion", "sion", "ment", "ysis")
 
 
@@ -215,6 +215,9 @@ class Nominalization:
                 continue
             if drop_prep is None and noun.lemma_ not in NO_OBJECT_OK:
                 continue
+            if noun.lemma_ in HAVE_ONLY and drop_prep is not None and any(
+                    c.dep_ == "prep" for g in drop_prep.children if g.dep_ == "pobj" for c in g.children):
+                continue  # "an impact on the economy of more than $200 million": the amount is the impact's
             form = verb.tag_ if verb.tag_ in ("VBD", "VBZ", "VBP", "VBG", "VBN", "VB") else None
             new = new_lemma if form == "VB" else (inflect(new_lemma, form) if form else None)
             if not new:

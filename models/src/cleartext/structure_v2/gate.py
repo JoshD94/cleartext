@@ -82,7 +82,7 @@ def passivize(sentence):
     if not auxes:
         if verb.tag_ not in ("VBD", "VBZ", "VBP"):
             return None
-        group = [agree("be", "past" if verb.tag_ == "VBD" else "pres", pn), part]
+        group = [agree("be", "past" if verb.tag_ == "VBD" else "pres", pn), *[t.text for t in between], part]
     else:
         words, first = [], True
         for t in between:

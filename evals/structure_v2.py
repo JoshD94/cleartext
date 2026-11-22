@@ -331,7 +331,8 @@ def run_panel(args):
     for it in items:
         key = (it["before"], it["after"])
         if key not in index:
-            index[key] = f"c{len(index) + 1:03d}"
+            # Hashed IDs: no arm order leaks through the card name.
+            index[key] = "c" + hashlib.sha256(f"{args.seed}|{key[0]}|{key[1]}".encode()).hexdigest()[:8]
             cards.append({"card": index[key], "context": it["context"], "before": it["before"],
                           "after": it["after"]})
         it["card"] = index[key]
@@ -421,7 +422,28 @@ def run_tally(args):
         if missing:
             raise SystemExit(f"Rater {k} is missing {len(missing)} cards")
     arms = list(dict.fromkeys(it["arm"] for it in key["items"]))
-    result, agree = tally(key["items"], marks, arms, key["per_arm"])
+    rates = key["per_arm"]
+    if args.rates_from:
+        # Edits per 100 sentences from the standard pool's apply file (rare
+        # arms draw extra items from a wider pool, but their rate is not from it).
+        recs = load_apply(state / args.rates_from)
+        rates = {a: {**key["per_arm"].get(a, {}), "changed": sum(r["changed"] for r in recs[a].values()),
+                     "sentences": len(recs[a])} for a in arms}
+    items = key["items"]
+    if args.gate:
+        # A derived arm: the rated cards of `arm` whose every edit passes the
+        # gate (no extra cards). Its per-100 rate applies the gate to the apply file.
+        from cleartext.structure_v2.gate import load_gate
+        arm, path = args.gate.split(":", 1)
+        gate = load_gate(path)
+        recs = load_apply(state / (args.rates_from or args.applied_for_gate))
+        passes = {i: bool(r["accepted"]) and all(gate(e["features"]) for e in r["accepted"])
+                  for i, r in recs[arm].items() if r["changed"]}
+        derived = [{**it, "arm": arm + "_gated"} for it in items if it["arm"] == arm and passes.get(it["id"])]
+        items = items + derived
+        arms = arms + [arm + "_gated"]
+        rates[arm + "_gated"] = {"changed": sum(passes.values()), "sentences": len(recs[arm])}
+    result, agree = tally(items, marks, arms, rates)
     out = {"panel": args.name, "arms": result, "agreement": agree, "cards": len(cards),
            "key_sha256": sha(state / f"{args.name}-key.json"),
            "marks_sha256": [sha(state / args.name / f"rater{r}" / "marks.csv") for r in range(1, args.raters + 1)]}
@@ -622,6 +644,47 @@ def run_judge(args):
                  f"{d['nli_mean']['ci95']}" if d else ""))
 
 
+def run_synthetic(args):
+    """Synthetic active->passive pairs for the passive gate: development
+    sentences (document buckets 0-2 only, never pool A/B) are passivized by
+    rule and converted back; label 1 when the original returns exactly."""
+    from cleartext.structure_v2.common import parse
+    from cleartext.structure_v2.gate import passivize
+    from cleartext.structure_v2.passive import ActiveVoice
+    state = outside_checkout(args.state)
+    rng = random.Random(7)
+    av = ActiveVoice()
+    sources = {**SOURCES, **{k: v for k, v in FRESH_SOURCES.items() if v.exists()}}
+    with (state / args.out).open("w") as out:
+        for name, path in sources.items():
+            rows = [json.loads(line)["s"] for line in gzip.open(path, "rt")
+                    if bucket(json.loads(line)["doc"]) < 3]
+            rows = [r for r in rows if clean(r)]
+            rng.shuffle(rows)
+            for active in rows[: args.per_source]:
+                passive = passivize(active)
+                if not passive:
+                    continue
+                sent = list(parse(passive).sents)
+                cands = [c for c in av.candidates(sent[0]) if c["kind"] == "agentive"] if len(sent) == 1 else []
+                if not cands:
+                    continue
+                output, _ = av.rewrite_sentence(passive)
+                out.write(json.dumps({"source": name, "active": active, "passive": passive,
+                                      "features": cands[0]["features"], "reason": cands[0]["reason"],
+                                      "output": output, "label": int(output == active)}) + "\n")
+    print("COMPLETE")
+
+
+def run_gate_train(args):
+    from cleartext.structure_v2.gate import train
+    state = outside_checkout(args.state)
+    rows = [json.loads(line) for line in (state / args.synthetic).read_text().splitlines()]
+    rows = [r for r in rows if r["reason"] is None]
+    report = train(rows, state / args.out, threshold_precision=args.precision)
+    print(json.dumps(report, indent=1))
+
+
 def run_precommit(args):
     """Hashes of the sources, brief and pools a round depends on, plus its
     thresholds, written before the round's outputs exist."""
@@ -667,6 +730,9 @@ def main(argv=None):
     p.add_argument("--name", required=True)
     p.add_argument("--raters", type=int, default=3)
     p.add_argument("--out", type=Path, required=True)
+    p.add_argument("--rates-from", help="apply file (in --state) for edits per 100 sentences")
+    p.add_argument("--gate", help="ARM:GATE.pkl adds ARM_gated, the rated ARM cards the gate keeps")
+    p.add_argument("--applied-for-gate", help="apply file for the gate when --rates-from is not given")
     p = sub.add_parser("dev")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--name", required=True)
@@ -681,6 +747,15 @@ def main(argv=None):
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--arms", nargs="+", required=True)
     p.add_argument("--out", type=Path, required=True)
+    p = sub.add_parser("synthetic")
+    p.add_argument("--state", type=Path, required=True)
+    p.add_argument("--out", required=True)
+    p.add_argument("--per-source", type=int, default=4000)
+    p = sub.add_parser("gate-train")
+    p.add_argument("--state", type=Path, required=True)
+    p.add_argument("--synthetic", required=True)
+    p.add_argument("--out", required=True)
+    p.add_argument("--precision", type=float, default=0.92)
     p = sub.add_parser("precommit")
     p.add_argument("--round", required=True)
     p.add_argument("--inputs", nargs="*", type=Path, default=[])
@@ -689,7 +764,8 @@ def main(argv=None):
     p.add_argument("--out", type=Path, required=True)
     args = ap.parse_args(argv)
     {"pool": run_pool, "apply": run_apply, "panel": run_panel, "tally": run_tally, "dev": run_dev,
-     "score": run_score, "judge": run_judge, "precommit": run_precommit}[args.cmd](args)
+     "score": run_score, "judge": run_judge, "precommit": run_precommit,
+     "synthetic": run_synthetic, "gate-train": run_gate_train}[args.cmd](args)
 
 
 if __name__ == "__main__":

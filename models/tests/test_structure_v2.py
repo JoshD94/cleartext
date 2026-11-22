@@ -24,16 +24,17 @@ def run(op, sentence, context=()):
     ("It was decided by the board that the plant would close.", "The board decided that the plant would close."),
     ("An investigation into the cause of the incident has been launched by the UN.",
      "The UN has launched an investigation into the cause of the incident."),
-    ("Every year, there are up to 2,000 quakes that can be felt by people.",
-     "Every year, there are up to 2,000 quakes that people can feel."),
     # Plural agreement for a coordinated agent; hyphenated words kept intact.
     ("The pair are subsequently joined by family, friends and colleagues of Rebecca.",
      "Family, friends and colleagues of Rebecca subsequently join the pair."),
     ("Spain's tanks were replaced by Italian anti-tank vehicles.",
      "Italian anti-tank vehicles replaced Spain's tanks."),
     # A manner adverb after the participle moves before the verb.
-    ("The natural environment of the area has been shaped largely by its geology.",
-     "Its geology has largely shaped the natural environment of the area."),
+    ("The natural environment of the area has been shaped largely by the regional geology.",
+     "The regional geology has largely shaped the natural environment of the area."),
+    # A sentence-final abbreviation keeps the sentence's period.
+    ("It was released as the lead single on November 6, 1990, by Sire and Warner Bros.",
+     "Sire and Warner Bros. released it as the lead single on November 6, 1990."),
 ])
 def test_agentive_realization(before, after):
     assert run("passive", before) == after
@@ -49,6 +50,19 @@ def test_agentive_realization(before, after):
      "bracket, comma or list inside the agent"),
     ("The final year of the magazine, as it was titled by that time, included good material.",
      "time phrase, not an agent"),
+    # Round 2 (failure types from the round-1 ratings).
+    ("Every year, there are up to 2,000 quakes that can be felt by people.",
+     "relative pronoun subject (would become an object relative)"),
+    ("Gandhi was 14 when his grandmother, Indira Gandhi, was assassinated by her security guards.",
+     "pronoun in the agent would precede its antecedent"),
+    ("These are the costs of discharges that are not covered by any financial protection on hand.",
+     "relative pronoun subject (would become an object relative)"),
+    ("The salts are readily absorbed in the gut by direct absorption of the iron by the bloodstream.",
+     "a second by-phrase inside the agent (means, not a doer)"),
+    ("Celebrity shows were criticised by public and politicians alike last month.",
+     "word right after the agent suggests a misparse"),
+    ("Elimination Isoproterenol is metabolized primarily in the liver by COMT.",
+     "run-in heading at the sentence start"),
 ])
 def test_agentive_skips(sentence, reason):
     sent = list(parse(sentence).sents)[0]
@@ -87,6 +101,8 @@ def test_recovered_we_needs_context_and_author_verb():
     ("frames", "There were five people killed in the attack on the market.",
      "Five people were killed in the attack on the market."),
     ("frames", "It was the board that approved the plan in 2019.", "The board approved the plan in 2019."),
+    ("appositive_v2", "Results appear in the journal Cancer, a journal published by the American Cancer Society.",
+     "Results appear in the journal Cancer. Cancer is a journal published by the American Cancer Society."),
     ("nominal", "The agency will conduct an evaluation of the program next year.",
      "The agency will evaluate the program next year."),
     ("nominal", "The committee made a decision on the matter.", "The committee decided on the matter."),
@@ -106,6 +122,18 @@ def test_other_operations(op, before, after):
     ("frames", "It is important that you read the label before use."),
     ("nominal", "The agency made a careful assessment of the risks."),
     ("nominal", "Students take a test at the end of the year."),
+    # Round 2 (failure types from the round-1 ratings).
+    ("frames_v2", "It is a state trunkline highway that links the two cities."),
+    ("frames_v2", "There were also comments asking the agency to expand the data."),
+    ("frames_v2", "There were 3 deaths attributed to the disease."),
+    ("appositive_v2", "The commenters included a legal advocacy organization, a labor rights organization, and an individual."),
+    ("appositive_v2", "He is a member of the Nehru-Gandhi family, the most prominent political family in India."),
+    ("appositive_v2", "CTW allowed songwriters to retain the rights to the songs, which allowed them to earn profits."),
+    ("appositive_v2", "The campaign was designed to appeal to a Hispanic audience, who were considered at risk."),
+    ("nominal", "We have made changes in other areas to reduce the burden on institutions."),
+    ("nominal", "This will help them make decisions about how to balance work and study."),
+    ("fronted_split", "Although it may not have been identified as such, Congress intended for knowledge to count."),
+    ("fronted_split", "Although some comments disagreed, we have kept the sentence, but we have changed its tense."),
 ])
 def test_other_operations_abstain(op, sentence):
     assert run(op, sentence) == sentence

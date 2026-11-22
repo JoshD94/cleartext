@@ -28,11 +28,13 @@ class EmptyFrames:
         be = first.head
         if be.lemma_ != "be" or be.i != first.i + 1 and not (be.i == first.i + 2 and sent[1].dep_ == "aux"):
             return None
-        if any(c.dep_ == "neg" for c in be.children):
-            return None
+        if any(c.dep_ in ("neg", "advmod") for c in be.children):
+            return None  # "There were also comments ..." would lose "also"
         attr = next((c for c in be.children if c.dep_ in ("attr", "nsubj") and c.i > be.i), None)
         if attr is None or attr.pos_ not in ("NOUN", "PROPN", "PRON", "NUM"):
             return None
+        if sent.doc[attr.left_edge.i].text[:1].isdigit():
+            return None  # "3 deaths (5%) were ..." would start a sentence with a digit
         det = [c for c in attr.children if c.dep_ == "det"]
         if det and det[0].lower_ in ("no",):
             return None
@@ -53,8 +55,8 @@ class EmptyFrames:
                 return None
             return np, clause, None, "relative"
         # Reduced relative: "There were five people killed" -> "Five people were killed".
-        if rel.tag_ not in ("VBN", "VBG") or rel.left_edge.i != rel.i:
-            return None
+        if rel.tag_ != "VBN" or rel.left_edge.i != rel.i:
+            return None  # "There were comments stating ..." is not "Comments were stating ..."
         np = list(sent.doc[attr.left_edge.i: rel.i])
         clause = list(sent.doc[rel.i: rel.right_edge.i + 1])
         tense = "past" if be.tag_ == "VBD" else "pres"
