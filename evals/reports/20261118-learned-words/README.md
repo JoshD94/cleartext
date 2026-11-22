@@ -584,3 +584,103 @@ score alone at the same keep.
   were Good (88%). Of the 10 unseen pairs, 7 were Good.
 - **Caveat:** each rater agreed with the 20 old round-5 marks only 14–16
   times (round 11: 19 of 20), so these raters may be stricter.
+
+## Round 13: frozen arm p on a second window, plus a runner-up fallback (November 22)
+
+[ROUND13.md](ROUND13.md) holds the pre-registered rules. Nothing was refitted.
+Round 12's arm p and thresholds were frozen before round 12 was rated. The
+only change is a fallback: when a target's top candidate yields no accepted
+swap, the stage decides again on its runner-up. The gate was:
+- round 12's CV gate had passed;
+- the model was unchanged;
+- a smoke test showed the new code reproduces round 11's swaps on 3 spent
+  passages ([r13-smoke.log](r13-smoke.log)).
+
+Fresh window ([round13.json](round13.json)): 134 new passages (530
+sentences; one skipped for rewrite-corpus overlap), 150 items, three fresh
+blind raters. All three agreed on 92%. Consistency with the old marks was
+18–19 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 115 | 100% | 21.7 | 66.1% (57–74) | 13.9% | 23 |
+| s: round-8 filter | 92 | 80% | 17.4 | 76.1% (66–84) | 14.1% | 9 |
+| gs: round 11's best | 53 | 46% | 10.0 | 83.0% (71–91) | 15.1% | 1 |
+| t: stricter arm s | 62 | 54% | 11.7 | 85.5% (75–92) | 14.5% | 0 |
+| **p: frozen arm p** | **64** | **56%** | **12.1** | **89.1% (79–95)** | **9.4%** | 1 |
+| p65 | 83 | 72% | 15.7 | 80.7% (71–88) | 12.0% | 6 |
+| pn: p + fallback | 71 | 62% | 13.4 | 84.5% (74–91) | 14.1% | 1 |
+| p65n | 94 | 82% | 17.7 | 78.7% (69–86) | 14.9% | 6 |
+
+- **Pre-registered success (arm pn): no.** The fallback added 7 swaps and
+  only 3 were Good; the others included significant→major and
+  determine→find.
+- **Replication (arm p): no.** It reached 89.1% and 9.4% against bars of
+  90% and 8%, at 56% yield.
+- **Over its two fresh windows, arm p is 100 of 115 Good: 87.0%, at about
+  half of arm b's yield.** On both windows it is the best arm, at a higher
+  yield than gs (round 12: +6.5 points; round 13: +6.1).
+- **Arm p's 7 errors:**
+  - Changes meaning: selected→chosen, terminated→ended, indicate→show,
+    determine→find, maintained→had and emphasize→state;
+  - Not simpler: selects→chooses.
+
+  By source: openFDA 19 of 22 Good, Federal Register 21 of 23, RFC 17 of 19.
+
+## Round 14: two meaning signals added to arm p (November 22)
+
+[ROUND14.md](ROUND14.md) holds the pre-registered rules. Arm m adds two
+stage signals to arm p's four features: `ctx_cos` and the checker score.
+On round 12's high-scoring swaps they separated Good from Changes meaning
+(AUC 0.72–0.73). Arm m was refitted on 620 rows, with round 12 added.
+
+- **CV ([r14-cv.json](r14-cv.json)): no-go.** No fresh text was spent.
+  - The keep rule needed some keep from 40% to 60% to reach ≥ 92% on round
+    12's arm-b rows. None did; the best was 86.7% at 40%.
+  - Arm m beat a refitted arm p by only 0.4–1.3 points.
+  - On the time split onto round 12, it scored 87.2% against 85.0% (bar: +3
+    points).
+- **Diagnostic:** with lemma-grouped folds, where no priors exist, arm m
+  scored 90.3% against 86.3%. The two signals help on unseen words, but
+  priors already cover most of that gain.
+
+## Round 15: a corpus-collocation veto after arm p (November 22)
+
+[ROUND15.md](ROUND15.md) holds the pre-registered rules.
+- **Signal:** round 6's `max_drop`, the largest fall in corpus association
+  from target to replacement around the swap. Counts come from the
+  technical corpus with the swap's source document removed.
+- **Where it works:** on rounds 11–12 arm-b swaps it separates Good from
+  Changes meaning with AUC 0.71, and 0.84 among swaps arm p keeps. On
+  rounds 3–8 text, which the corpus does not match, it scores 0.56. That
+  explains round 6's failure.
+- **Linear version:** adding it to arm p gained only 0.5–1.5 points.
+- **Arm pv:** a refitted arm p at a 60% keep, then a veto on `max_drop`
+  above the 80th percentile seen on Good technical swaps.
+
+- **CV ([r15-cv.json](r15-cv.json)): no-go**, on one of four criteria. No
+  fresh text was spent.
+  - Passage-grouped CV: arm pv reached 94.7% Good at 45.6% kept. Arm p40,
+    the refitted arm p at a 40% keep, reached 92.7% at 40.6%. The paired
+    gain was +2.05 points; the bar was 3.
+  - On round 12's rows: arm pv 90.5% at 40% kept, arm p40 85.2% at 37%.
+  - Time split onto round 12: arm pv 90.0% against arm p40's 85.0%, both at
+    37% kept.
+- **Design flaw in the gate:** it compared the arms at different yields.
+  It also reused the rows where the veto was found, so the result counted
+  as no-go. Round 16 tests the same arm on unseen marks instead.
+
+## Round 16: the veto, gated on round 13's unseen marks (November 22)
+
+[ROUND16.md](ROUND16.md), written before round 13 was rated, tests round 15's
+arm pv exactly as specified on round 13's 115 rated arm-b swaps. No design
+step had seen those marks.
+
+- **Gate ([r16-cv.json](r16-cv.json)): no-go.**
+  - Arm pv reached 84.1% Good at 55% kept.
+  - Arm p40, the refitted arm p at a 40% keep (round 15's comparator),
+    reached **92.3% (48/52) at 45% kept**.
+- **The veto was overfit to rounds 11–12.** It removed Good swaps on round
+  13 and let meaning errors through. No fresh text was spent.
+- **A stricter threshold was the result that held on unseen data.** Round
+  17 tests it on a fresh window.
