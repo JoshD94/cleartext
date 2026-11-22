@@ -5,8 +5,32 @@ The protocol and thresholds were fixed before fitting ([PROTOCOL.md](PROTOCOL.md
 Raw text, candidate rows and predictions stay in `~/.local/state/cleartext/learned-words-20261118/`.
 Code is in `models/src/cleartext/learned_words/`, and it runs through `scripts/learned-words`.
 
-**Status: not adopted.** F2 stays the shipped default. Fresh-text blind Good rate by round: 54% (r2), 64% (r3), 62% (r4), 69% (r5); round 6's two arms failed the replay gate. Joshua's round-2 blind
-marks on 98 new swaps will decide adoption (≥ 90% Good).
+**Status: not adopted.** F2 stays the shipped default. Joshua's own blind marks decide adoption (≥ 90% Good).
+
+**Best arm (November 22): arm p50.** It is round 12's 4-feature filter (arm-s score, sense cover, learned pair and target priors), refitted on all rated rows, keeping 50% of arm-b swaps.
+- Round 19: 94.9% Good (56/59), 3.4% Changes meaning, 53% of arm b's swaps. It met its pre-registered bar.
+- Frozen replication in round 20: 90.0% (54/60), 8.3% meaning (bar ≤ 8%), 55% yield.
+- Pooled over rounds 17–20: 92.2% Good (95% CI 88–95), 6.7% meaning, 53% yield.
+- Round 11's arm gs on the same four windows: 89.1% at 38%.
+
+All marks are a majority of three blind AI raters on fresh technical-corpus text.
+
+Best pre-registered arm per fresh window:
+
+| Round | Arm | Swaps | Good (95% CI) | Changes meaning | Yield vs b | Arm b Good | Bar met |
+|---|---|---:|---:|---:|---:|---:|---|
+| 2–5 | stage | 33–98 | 54–71% | — | — | — | (single rater) |
+| 8 | s | 24 | 62.5% (43–79) | 29% | 67% | 47% | no |
+| 11 | gs | 38 | 94.7% (83–99) | 2.6% | 30% | 66% | no (yield) |
+| 12 | p | 51 | 84.3% (72–92) | 15.7% | 48% | 56% | no |
+| 13 | pn (frozen p + fallback) | 71 | 84.5% (74–91) | 14.1% | 62% | 66% | no |
+| 17 | p40 (refit) | 54 | 96.3% (87–99) | 3.7% | 44% | 63% | **yes** |
+| 18 | p40 (round 17's, frozen) | 52 | 88.5% (77–95) | 11.5% | 39% | 68% | no |
+| 19 | p50 (refit) | 59 | 94.9% (86–98) | 3.4% | 53% | 66% | **yes** |
+| 20 | p50 (round 19's, frozen) | 60 | 90.0% (80–95) | 8.3% | 55% | 63% | no (meaning) |
+
+Rounds 14–16 failed their CV gates and spent no fresh text. Details are in
+the round sections below.
 
 ## Stages
 
@@ -801,3 +825,75 @@ Consistency with the old marks was 15–16 of 20.
   additional→extra ×8 and administered→given ×5. Only 1 swap had an unseen
   pair.
 - **Round 20 replicates these exact arms, frozen, on a new window.**
+
+## Round 20: round 19's arms frozen on a new window (November 22)
+
+[ROUND20.md](ROUND20.md) holds the rules. This is a pure replication
+([r20-precommit.json](r20-precommit.json)). The panel rule found only 118
+passages: 45 Federal Register, 45 openFDA and 28 RFC. RFC documents were
+nearly used up by the five earlier panels, and one passage was skipped for
+overlap. That left 117 passages (478 sentences), 134 items and three fresh
+blind raters. All three agreed on 87%.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 109 | 100% | 22.8 | 63.3% (54–72) | 16.5% | 22 |
+| s: round-8 filter | 86 | 79% | 18.0 | 75.6% (66–83) | 16.3% | 7 |
+| gs: round 11's best | 40 | 37% | 8.4 | 85.0% (71–93) | 12.5% | 1 |
+| p: frozen round-12 arm p | 61 | 56% | 12.8 | 86.9% (76–93) | 11.5% | 1 |
+| p40: round 19's, frozen | 50 | 46% | 10.5 | 92.0% (81–97) | 8.0% | 0 |
+| **p50: round 19's, frozen** | **60** | **55%** | **12.6** | **90.0% (80–95)** | **8.3%** | 1 |
+
+- **Pre-registered success: no, by one swap.** Arm p50 reached 90.0% Good
+  and 55% yield, but Changes meaning was 8.3% (5 of 60) against a bar of 8%.
+  The secondary p40 would have met all three bars.
+- **Rounds 19–20 pooled (same model):**
+  - p50: 110 of 119, 92.4% Good (CI 86–96), 5.9% meaning, 54% yield;
+  - p40: 98 of 105, 93.3% (87–97), 48% yield.
+
+## Overnight summary (rounds 12–20)
+
+- **Precision and yield:** refitted arm p at a 50% keep is pooled over
+  rounds 17–20 at **92.2% Good (CI 88–95), 6.7% Changes meaning, 53% of
+  arm b's swaps** (about 12 per 100 sentences).
+  - Round 11's arm gs reached 89.1% at 38% on the same windows.
+  - The frozen round-12 arm p reached 89.6% (CI 86–92) over six windows.
+- **Pre-registered bars:**
+  - met in rounds 17 (p40) and 19 (p50);
+  - missed in rounds 12, 13, 18 and 20 (round 20 by one meaning error);
+  - three rounds (14, 15, 16) failed their CV gates and spent no fresh text.
+
+### Gaps found overnight
+
+- **Strictness, not sense limits, drove gs.** At equal yield, the arm-s
+  score alone (arm t) matched or beat gs on both later windows: 75.5% vs
+  77.8% at 1.5 times gs's yield in round 12, and 85.5% vs 83.0% in round 13.
+- **Learned pair priors carry most of the precision.** The (target,
+  replacement) history from earlier blind marks separates swaps the stage's
+  signals cannot. Most of arm p's swaps reuse rated pairs, so it acts as a
+  context-checked lexicon learned from AI raters.
+  - Unseen pairs are few, and arm p rejects most of them: round 12 had 10 at
+    7 Good; round 13 had 10 at 7 Good; round 17 had p40 at 1 of 1.
+  - Pairs that recur in a window dominate it: additional→extra made 10 of
+    p40's 54 swaps.
+- **Windows differ more than arms do.** Arm b ranged from 56% to 66% Good,
+  and every filter moved with it. Round 12's drug-label collocations held
+  every arm below 85%.
+- **The fallback and the veto both failed.**
+  - On round 13's fresh window, runner-up candidates were 3 of 7 Good.
+  - The corpus-collocation veto looked strong on rounds 11–12 but failed on
+    round 13's unseen marks. Round 16's gate stopped it before a window was
+    spent on it.
+- **Errors left in the best arm are context frames.** A well-rated pair
+  fails in the wrong frame: "anemia has happened", "extra input", "it is
+  needed to", "indicate → show" (a stronger claim). Pair priors cannot see
+  the frame, and no stage signal tested overnight separated these cases on
+  unseen data.
+- **The base stage caps yield.** Only about 13% of featurized targets become
+  a swap, and about a third of passages get none. Any filter can keep only
+  a share of about 20 swaps per 100 sentences.
+- **Caveats:**
+  - All marks come from AI raters.
+  - One genre: RFC, Federal Register and openFDA text.
+  - RFC documents are nearly used up for new panels.
+  - Nothing ships until Joshua's own marks decide.
