@@ -697,3 +697,9 @@ def joshua(argv):
     from . import learned_words_joshua
 
     return learned_words_joshua.main(argv)
+
+
+def r23(argv):
+    from . import learned_words_r23
+
+    return learned_words_r23.main(argv)

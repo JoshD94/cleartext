@@ -563,3 +563,14 @@ def test_r22_genre_threshold_arms_filter_before_the_passage_limits():
     assert set(out) == set(V22.ARMS)
     src = inspect.getsource(V22.panel)
     assert "Q.JDIR" in src and "Q.DIR" in src and "V3_PANEL" in src
+
+
+def test_r23_replicates_round_22_frozen():
+    import inspect
+
+    from evals import learned_words_r22 as V22
+    from evals import learned_words_r23 as V23
+
+    assert V23.ARMS == V22.ARMS and V23.SEED != V22.SEED and V23.MODEL_QG == V22.MODEL_QG
+    assert "Q22.PANEL" in inspect.getsource(V23.panel) and "joshua-r21b" in inspect.getsource(V23.panel)
+    assert inspect.getsource(V23.picks) == inspect.getsource(V22.picks) and not hasattr(V23, "train")
