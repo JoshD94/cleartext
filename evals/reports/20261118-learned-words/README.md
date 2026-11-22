@@ -516,3 +516,71 @@ raters marked 155 items; the majority mark counts
   - All raters are AI.
   - The text is one technical genre.
   - Nothing ships; Joshua's marks decide adoption.
+
+## Round 12: pair priors and sense cover on the arm-s score (November 22)
+
+[ROUND12.md](ROUND12.md) holds the pre-registered rules
+([r12-precommit.json](r12-precommit.json)).
+
+**Arm p** is a 4-feature logistic (C = 0.1) trained on all 506 rated rows,
+with round 11 now development data. Its features:
+- the logit of the arm-s score;
+- the in-context sense cover;
+- smoothed past Good rates of the (target, replacement) lemma pair and of
+  the target lemma.
+
+It keeps 50% of round-11-like arm-b swaps. Arm t is the ablation: the arm-s
+score alone at the same keep.
+
+- **Why:** two findings from the development rows.
+  - Round 11's sense cut threw away 45 Good arm-s swaps.
+  - Pairs recur: 71 of round 11's 135 swaps had a pair already rated in
+    rounds 3–8, and that history predicted the mark (multiple→several
+    failed 5 of 5).
+- **CV ([r12-cv.json](r12-cv.json)):** **go**, with the caveat that the
+  design came after a time-split look.
+  - Passage-grouped nested CV on round 11's arm-b rows: 96.2% Good at 51%
+    kept, against 91.5% for arm t (+4.7 points).
+  - Time split (rounds 3–8 → 11): 97.1% at 54% kept.
+  - Lemma-grouped, where no prior is available: 93.1%.
+- **Fresh window ([round12.json](round12.json)):** 135 new technical-corpus
+  passages (546 sentences, none from round-11 documents). Three fresh blind
+  raters marked 134 items. All three agreed on 92%; pairwise agreement
+  was 94–96%.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 107 | 100% | 19.6 | 56.1% (47–65) | 24.3% | 21 |
+| s: round-8 filter | 74 | 69% | 13.6 | 73.0% (62–82) | 24.3% | 2 |
+| gs: round 11's best | 36 | 34% | 6.6 | 77.8% (62–88) | 19.4% | 1 |
+| t: stricter arm s | 53 | 50% | 9.7 | 75.5% (62–85) | 24.5% | 0 |
+| **p: arm p** | **51** | **48%** | **9.3** | **84.3% (72–92)** | **15.7%** | 0 |
+| p65: arm p, 65% keep | 70 | 65% | 12.8 | 78.6% (68–87) | 21.4% | 0 |
+
+- **Pre-registered success: no.** Arm p missed both quality bars (Good
+  ≥ 90%, Changes meaning ≤ 8%) but met the yield bar (48% ≥ 40%).
+- **Relative result:** arm p is the best arm on this window.
+  - It beats arm t by 9 points at the same yield, so the priors and cover
+    add precision beyond a stricter threshold.
+  - It beats gs by 6.5 points at 1.4 times gs's yield.
+- **The window was harder.** Arm b fell from 65.9% in round 11 to 56.1%,
+  and gs from 94.7% to 77.8%.
+  - The drop is in openFDA drug labels. Arm b had 19 Good of 37 there
+    (round 11: 32 of 43), and arm p had 15 of 20. On Federal Register and
+    RFC text, arm p reached 18 of 20 and 10 of 11.
+- **Arm p's 8 errors are all Changes meaning,** mostly broken
+  collocations and frames:
+  - "sufficient numbers of" → "enough numbers of" (×2);
+  - "orally administered" → "orally given";
+  - "prolonged administration" → "long administration";
+  - "potential … as well as" → "possible";
+  - "permitted vessels" (licensed) → "allowed";
+  - satisfactory→good;
+  - originated→made.
+
+  Arm p removed every Not simpler swap and 18 of arm b's 26 Changes
+  meaning.
+- **Seen pairs:** 41 of arm p's 51 swaps had a rated pair, and 36 of those
+  were Good (88%). Of the 10 unseen pairs, 7 were Good.
+- **Caveat:** each rater agreed with the 20 old round-5 marks only 14–16
+  times (round 11: 19 of 20), so these raters may be stricter.
