@@ -250,3 +250,16 @@ def test_r9_arm_w_filters_before_the_passage_limits():
     assert [x["id"] for x in b] == [0]
     assert [x["id"] for x in s] == [0]
     assert [x["id"] for x in w] == [1]
+
+
+def test_r10_two_heads_multiply_survival_of_both_errors():
+    from evals.learned_words_r9 import TwoHeads
+
+    rng = np.random.RandomState(0)
+    X = rng.normal(size=(120, 3))
+    marks = np.array(["meaning" if x[0] > 0.8 else "notsimpler" if x[1] > 0.8 else "good" for x in X])
+    h = TwoHeads(X, marks)
+    p = h.predict_proba(X)[:, 1]
+    expect = (1 - h.m.predict_proba(X)[:, 1]) * (1 - h.n.predict_proba(X)[:, 1])
+    assert np.allclose(p, expect)
+    assert p[marks == "good"].mean() > p[marks != "good"].mean()

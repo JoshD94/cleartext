@@ -3,6 +3,7 @@
   learned-words r9 senses [--max-seconds N]     SemCor sense table (checkpointed)
   learned-words r9 features [--max-seconds N]   31 arm-s + 13 new features for the 371 dev rows
   learned-words r9 train                        nested CV go/no-go; final fit and pre-commit if go
+  learned-words r9 train-h                      round 10: two-head arm h, same gate (ROUND10.md)
   learned-words r9 panel                        fresh passages from the round-6 technical corpus
   learned-words r9 apply [--max-seconds N]      stage + arm s + arm w on the panel (checkpointed)
   learned-words r9 page | score                 three blind rater files; majority-vote scoring
@@ -33,6 +34,9 @@ APPLY = DIR / "apply.jsonl"
 RATING = DIR / "rating"
 PRECOMMIT = REPORT / "r9-precommit.json"
 CV_REPORT = REPORT / "r9-cv.json"
+MODEL_H = DIR / "model-h.pkl"
+PRECOMMIT_H = REPORT / "r10-precommit.json"
+CV_REPORT_H = REPORT / "r10-cv.json"
 CORPUS = STATE / "corpus"
 KEEP = 0.55
 REPEATS = 20
@@ -200,6 +204,98 @@ def train(argv):
     print("COMPLETE")
 
 
+# --- round 10: two heads (ROUND10.md) -----------------------------------------------
+
+class TwoHeads:
+    """P(Good) = (1 - P(Changes meaning)) * (1 - P(Not simpler)), each head a logistic on 44 features."""
+
+    def __init__(self, X, marks):
+        self.m = S._fit(X, (marks == "meaning").astype(int))
+        self.n = S._fit(X, (marks == "notsimpler").astype(int))
+
+    def predict_proba(self, X):
+        p = (1 - self.m.predict_proba(X)[:, 1]) * (1 - self.n.predict_proba(X)[:, 1])
+        return np.column_stack([1 - p, p])
+
+
+def _oof_h(X, marks, groups, seed):
+    from sklearn.model_selection import GroupKFold
+
+    p = np.zeros(len(marks))
+    for tr, te in GroupKFold(5, shuffle=True, random_state=seed).split(X, marks, groups):
+        p[te] = TwoHeads(X[tr], marks[tr]).predict_proba(X[te])[:, 1]
+    return p
+
+
+def nested_h(X, marks, b, groups, seed):
+    from sklearn.model_selection import GroupKFold
+
+    score, keep = np.zeros(len(marks)), np.zeros(len(marks), bool)
+    for tr, te in GroupKFold(5, shuffle=True, random_state=seed).split(X, marks, groups):
+        inner = _oof_h(X[tr], marks[tr], groups[tr], seed + 1)
+        t = np.quantile(inner[b[tr]], 1 - KEEP)
+        score[te] = TwoHeads(X[tr], marks[tr]).predict_proba(X[te])[:, 1]
+        keep[te] = score[te] >= t
+    return score, keep
+
+
+def _runs(nest, y, marks, b, groups, seed_base):
+    from sklearn.metrics import roc_auc_score
+
+    meaning_b = (marks[b] == "meaning").sum()
+    runs = []
+    for k in range(REPEATS):
+        score, keep = nest(seed_base + 10 * k)
+        kb = keep & b
+        runs.append({"good_rate": float(y[kb].mean()) if kb.any() else 0.0,
+                     "keep_share": float(kb.sum() / b.sum()),
+                     "meaning_removed": float(1 - (marks[kb] == "meaning").sum() / meaning_b),
+                     "errors_removed": float(1 - (marks[kb] != "good").sum() / (marks[b] != "good").sum()),
+                     "auc_good_b": float(roc_auc_score(y[b], score[b])),
+                     "auc_meaning_b": float(roc_auc_score(marks[b] == "meaning", -score[b]))})
+    return {"mean": {k: float(np.mean([r[k] for r in runs])) for k in runs[0]},
+            "min_max": {k: [float(np.min([r[k] for r in runs])), float(np.max([r[k] for r in runs]))] for k in runs[0]},
+            "runs_good_rate": [r["good_rate"] for r in runs]}
+
+
+def train_h(argv):
+    if PRECOMMIT_H.exists():
+        raise SystemExit(f"REFUSED: {PRECOMMIT_H.name} exists")
+    if json.load(open(CV_REPORT))["features_sha256"] != _sha(FEATURES):
+        raise SystemExit("REFUSED: features differ from round 9")
+    Xs, Xw, marks, b, groups, swaps = dataset()
+    y = (marks == "good").astype(int)
+    base = float(y[b].mean())
+    res = {"rows": len(y), "arm_b_rows": int(b.sum()), "good_rate_base": base,
+           "meaning_base": int((marks[b] == "meaning").sum()), "keep": KEEP, "repeats": REPEATS}
+    res["s"] = _runs(lambda sd: nested(Xs, y, b, groups, sd), y, marks, b, groups, SEED)
+    res["h"] = _runs(lambda sd: nested_h(Xw, marks, b, groups, sd), y, marks, b, groups, SEED)
+    h = res["h"]["mean"]
+    res["paired_good_gain"] = float(np.mean(np.array(res["h"]["runs_good_rate"]) - np.array(res["s"]["runs_good_rate"])))
+    res["go"] = bool(res["paired_good_gain"] >= 0.03 and h["meaning_removed"] >= 0.5 and h["good_rate"] >= base + 0.10)
+    res["features_sha256"] = _sha(FEATURES)
+    res["table_sha256"] = _sha(TABLE)
+    res["source_sha256"] = {p: _sha(p) for p in ("evals/learned_words_r9.py", "models/src/cleartext/learned_words/senses.py")}
+    json.dump(res, open(CV_REPORT_H, "w"), indent=1)
+    print(json.dumps({k: v for k, v in res.items() if k not in ("s", "h")} | {"s": res["s"]["mean"], "h": h}, indent=1))
+    if res["go"]:
+        oof = _oof_h(Xw, marks, groups, SEED)
+        t = float(np.quantile(oof[b], 1 - KEEP))
+        pickle.dump(TwoHeads(Xw, marks), open(MODEL_H, "wb"))
+        json.dump({"threshold": t, "keep": KEEP, "model_sha256": _sha(MODEL_H), "table_sha256": _sha(TABLE),
+                   "features_sha256": _sha(FEATURES), "arm_s_precommit_sha256": _sha(S.PRECOMMIT),
+                   "written": time.strftime("%Y-%m-%d %H:%M:%S %Z")}, open(PRECOMMIT_H, "w"), indent=1)
+        print(f"pre-committed threshold {t:.4f}")
+    print("COMPLETE")
+
+
+def load_h():
+    pre = json.load(open(PRECOMMIT_H))
+    if _sha(MODEL_H) != pre["model_sha256"] or _sha(TABLE) != pre["table_sha256"]:
+        raise SystemExit("REFUSED: arm h model or sense table differ from the pre-commitment")
+    return pickle.load(open(MODEL_H, "rb")), pre["threshold"]
+
+
 # --- fresh window ------------------------------------------------------------------
 
 def _ok_sentence(s):
@@ -271,7 +367,7 @@ def apply(argv):
     _threads(argv)
     deadline = time.monotonic() + _seconds(argv, 1380)
     clf_s, _ = S.load_filter()
-    clf_w, _ = load_w()
+    clf_w, _ = load_h()  # round 10: arm h (arm w did not pass round 9)
     sn = SN.load(TABLE)
     _, T, ids, _ = load()
     model = pickle.load(open(STATE / "model.pkl", "rb"))
@@ -339,7 +435,7 @@ def page(argv):
     from .learned_words_apply import _skey, choose
 
     _, ts = S.load_filter()
-    _, tw = load_w()
+    _, tw = load_h()
     items = {}
     for r in read_jsonl(APPLY):
         for arm, chosen in zip("bsw", picks(r["swaps"], ts, tw, choose)):
@@ -413,13 +509,13 @@ def score(argv):
                                  for a, c in pairs}
     old = [m for m in mp if m["source"] == "old"]
     out["consistency_with_old"] = [sum(m["old_mark"] == rt[m["id"]] for m in old) for rt in raters] + [len(old)]
-    (REPORT / "round9.json").write_text(json.dumps(out, indent=1))
+    (REPORT / "round10.json").write_text(json.dumps(out, indent=1))
     print(json.dumps(out, indent=1))
 
 
 def main(argv):
-    cmd = {"senses": senses, "features": features, "train": train, "panel": panel, "apply": apply,
+    cmd = {"senses": senses, "features": features, "train": train, "train-h": train_h, "panel": panel, "apply": apply,
            "page": page, "score": score}
     if argv[:1] and argv[0] in cmd:
         return cmd[argv[0]](argv[1:])
-    raise SystemExit("usage: learned-words r9 senses|features|train|panel|apply|page|score")
+    raise SystemExit("usage: learned-words r9 senses|features|train|train-h|panel|apply|page|score")
