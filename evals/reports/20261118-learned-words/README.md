@@ -478,3 +478,41 @@ It keeps 55% of the swaps.
 - **What this suggests:** the limit is no longer the filter. It is the
   candidates the generator offers and the noise in single-rater labels
   (88/114 agreement on repeated pairs).
+
+## Round 11: sense-limited candidates (November 21)
+
+[ROUND11.md](ROUND11.md) holds the pre-registered rules
+([r11-precommit.json](r11-precommit.json)). The generator may propose only
+words that cover at least 25% of the target's in-context sense mass, using
+the round-9 SemCor table. The fresh window is 135 technical-corpus
+passages (45 RFC, 45 Federal Register, 45 openFDA). Three fresh blind
+raters marked 155 items; the majority mark counts
+([round11.json](round11.json)).
+
+| Arm | Swaps | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|
+| b: current stage | 126 | 65.9% (57–74) | 20.6% | 17 |
+| s: b + round-8 filter | 95 | 83.2% (74–89) | 9.5% | 7 |
+| g: sense-limited candidates | 51 | 72.5% (59–83) | 15.7% | 6 |
+| **gs: g + round-8 filter** | **38** | **94.7% (83–99)** | **2.6%** | 1 |
+
+- **Pre-registered success: no.** Arm gs meets the quality bars
+  (≥ 78% Good, ≤ 15% Changes meaning) by a wide margin, but makes 30% as
+  many swaps as arm b against a required 40%.
+- **Arm s meets every round-8 bar on this window:** 83% Good, 9.5% meaning,
+  75% of arm b's swaps kept. Round 8's window gave it 62.5% on leftover dev
+  passages. The difference may be the text (cleaner technical prose) or
+  the raters (three, with a majority), so it is not a replication.
+- **The two mechanisms combine as predicted.** The sense limit cuts meaning
+  errors (21% → 16%), the filter cuts Not simpler, and together they leave
+  2 errors in 38: creates→makes (Not simpler) and lifetimes→lives (meaning).
+- **Raters:** all three agree on 90% of items, and pairwise agreement is
+  92–95%. Each agrees with the old round-5 marks on 19 of 20.
+  Per-rater Good for arm gs is 95% from each rater.
+- **Caveats:**
+  - Arm gs is conservative and repetitive: 38 swaps over 30 distinct
+    pairs, including additional→extra ×6, frequently→often ×3 and
+    occurred→happened ×3.
+  - All raters are AI.
+  - The text is one technical genre.
+  - Nothing ships; Joshua's marks decide adoption.
