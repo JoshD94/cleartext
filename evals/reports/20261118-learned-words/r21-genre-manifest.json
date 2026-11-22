@@ -1,0 +1,16 @@
+{
+ "news": {
+  "titles_listed": 22113,
+  "documents": 220,
+  "sentences": 2722,
+  "dropped_v3_8gram_overlap": 0,
+  "sha256": "fa7036c2b0d12979009f3581b84a4f3e8870611db5b33904efaab33aa0f53d19"
+ },
+ "wiki": {
+  "titles_listed": 7034,
+  "documents": 220,
+  "sentences": 3145,
+  "dropped_v3_8gram_overlap": 0,
+  "sha256": "a79b2d908a9e0b0aa0ce0ffb40d23b58aa7ee8c5bd6b6b55e62836a207579aec"
+ }
+}

@@ -673,3 +673,15 @@ def r20(argv):
     from . import learned_words_r20
 
     return learned_words_r20.main(argv)
+
+
+def r21(argv):
+    from . import learned_words_r21
+
+    return learned_words_r21.main(argv)
+
+
+def genre(argv):
+    from . import learned_words_genre
+
+    return learned_words_genre.main(argv)

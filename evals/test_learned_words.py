@@ -467,3 +467,76 @@ def test_r20_replicates_round_19_frozen():
     assert V20.ARMS == V19.ARMS and V20.SEED != V19.SEED
     assert "P19.PANEL" in inspect.getsource(V20.panel) and "P19.MODEL" in inspect.getsource(V20.load_v)
     assert 'M["arm_p50"]' in inspect.getsource(V20.score)
+
+
+def test_r21_article_realization_agrees_with_the_replacement():
+    from cleartext.learned_words.realize import fix_article
+
+    s = "Mail often has an wrong address."
+    assert fix_article(s, s.index("wrong"), "wrong") == "Mail often has a wrong address."
+    s = "It is a important step."
+    assert fix_article(s, s.index("important"), "important") == "It is an important step."
+    s = "An odd case and a user."
+    assert fix_article(s, s.index("odd"), "odd") == s
+    assert fix_article(s, s.index("user"), "user") == s
+    s = "A easy fix."
+    assert fix_article(s, s.index("easy"), "easy") == "An easy fix."
+    s = "This is the wrong one."
+    assert fix_article(s, s.index("wrong"), "wrong") == s
+
+
+def test_r21_context_features_are_quotes_and_repeated_stems():
+    from evals.learned_words_r21 import context, start_of
+
+    b = 'Evidence that “the agency determines to be sufficient” to act.'
+    a = b.replace("sufficient", "enough")
+    assert start_of(b, a) == b.index("sufficient")
+    assert context(b, a, "enough") == [1.0, 0.0]
+    b = "Additionally, the operator may also log it."
+    assert context(b, b.replace("Additionally", "Also"), "Also") == [0.0, 1.0]
+    b = "The sets contain parts that have DEHP."
+    assert context(b, b.replace("contain", "have"), "have") == [0.0, 1.0]
+
+
+def test_r21_arm_q_learns_priors_and_context_and_filters_before_the_passage_limits():
+    from evals import learned_words_r21 as V21
+    from evals.learned_words_apply import choose
+
+    rng = random.Random(0)
+    rows = []
+    for i in range(200):
+        bad = i % 2
+        rows.append({"key": ["multiple", "several"] if bad else ["additional", "extra"], "good": 1 - bad,
+                     "stack": rng.uniform(0.3, 0.9), "cover": 0.5, "ctx": [float(bad and i % 4 == 1), 0.0],
+                     "x31": [rng.random() for _ in range(31)]})
+    q = V21.ArmQ(rows)
+    good, bad = q.score([dict(rows[0], good=0), dict(rows[1], good=0)])
+    assert good > bad and q.seen(("additional", "extra")) and not q.seen(("x", "y"))
+
+    class M:
+        def score(self, rs):
+            return np.array([r["stack"] for r in rs])
+
+    def sw(i, sent, stack):
+        return {"sentence": sent, "margin": 0.5, "stack": stack, "cover": 0.0, "gate": 1.0, "check": 1.0 - i / 10,
+                "word": "w", "rep": f"r{i}", "pos": "v", "before": "a w b", "after": f"a r{i} b",
+                "x31": [0.0] * 31}
+
+    models = {"p": M(), "p50": M(), "r50": M(), "q50": M()}
+    thr = {"s": 0.5, "p": 0.5, "p50": 0.8, "r50": 0.5, "q50": 0.8}
+    out = V21.picks({"all": [sw(0, 0, 0.6), sw(1, 0, 0.9)], "sense": []}, models, thr, V21.ARMS, choose)
+    assert [x["rep"] for x in out["q50"]] == ["r1"] and [x["rep"] for x in out["r50"]] == ["r0"]
+    assert set(out) == set(V21.ARMS)
+
+
+def test_r21_joshua_page_is_blind_and_never_trains():
+    import inspect
+
+    from evals import learned_words_r21 as V21
+
+    src = inspect.getsource(V21.joshua_page)
+    assert "fit" not in src and "ArmQ(" not in src and "J_BEST" in src and "b_rejected" in src
+    page = V21._html([{"id": "j1", "before": "Data indicate a trend.", "after": "Data show a trend.",
+                       "word": "indicate", "rep": "show"}])
+    assert "<mark>show</mark>" in page and "score" not in page.lower().replace("scores are hidden", "")
+    assert "joshua60" not in inspect.getsource(V21).lower() and "LOCKED" not in inspect.getsource(V21)

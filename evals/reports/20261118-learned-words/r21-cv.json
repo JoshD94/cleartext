@@ -1,0 +1,265 @@
+{
+ "rows": 1259,
+ "ref_rows": 827,
+ "keep": 0.5,
+ "repeats": 10,
+ "passage": {
+  "q50": {
+   "all": {
+    "kept": 419.2,
+    "keep_share": 0.5068923821039903,
+    "good_rate": 0.9207953039315935,
+    "meaning": 31.0,
+    "notsimpler": 2.2
+   },
+   "seen_pair": {
+    "kept": 397.9,
+    "keep_share": 0.5926393530789789,
+    "good_rate": 0.9268423068429923,
+    "meaning": 26.9,
+    "notsimpler": 2.2
+   },
+   "unseen_pair": {
+    "kept": 21.3,
+    "keep_share": 0.13668508804826557,
+    "good_rate": 0.8036993313109797,
+    "meaning": 4.1,
+    "notsimpler": 0.0
+   },
+   "unseen_pair_rows": 155.6,
+   "good_rate_by_repeat": [
+    0.9241706161137441,
+    0.9202898550724637,
+    0.9248826291079812,
+    0.9200968523002422,
+    0.9268867924528302,
+    0.9211822660098522,
+    0.9180327868852459,
+    0.9146919431279621,
+    0.9166666666666666,
+    0.9210526315789473
+   ]
+  },
+  "r50": {
+   "all": {
+    "kept": 422.2,
+    "keep_share": 0.5105199516324064,
+    "good_rate": 0.9206735957665515,
+    "meaning": 31.3,
+    "notsimpler": 2.2
+   },
+   "seen_pair": {
+    "kept": 400.7,
+    "keep_share": 0.5968583003096176,
+    "good_rate": 0.9248816519159526,
+    "meaning": 27.9,
+    "notsimpler": 2.2
+   },
+   "unseen_pair": {
+    "kept": 21.5,
+    "keep_share": 0.137891453694724,
+    "good_rate": 0.8391269799994057,
+    "meaning": 3.4,
+    "notsimpler": 0.0
+   },
+   "unseen_pair_rows": 155.6,
+   "good_rate_by_repeat": [
+    0.9196217494089834,
+    0.9256594724220624,
+    0.9247058823529412,
+    0.920863309352518,
+    0.9223529411764706,
+    0.9232613908872902,
+    0.9145496535796767,
+    0.9174528301886793,
+    0.9218009478672986,
+    0.9164677804295943
+   ]
+  },
+  "paired_gain": 0.00012170816504210036
+ },
+ "pair": {
+  "q50": {
+   "all": {
+    "kept": 415.7,
+    "keep_share": 0.5026602176541717,
+    "good_rate": 0.8884164222397107,
+    "meaning": 41.1,
+    "notsimpler": 5.3
+   },
+   "seen_pair": {
+    "kept": 0.0,
+    "keep_share": 0.0,
+    "good_rate": 0.0,
+    "meaning": 0.0,
+    "notsimpler": 0.0
+   },
+   "unseen_pair": {
+    "kept": 415.7,
+    "keep_share": 0.5026602176541717,
+    "good_rate": 0.8884164222397107,
+    "meaning": 41.1,
+    "notsimpler": 5.3
+   },
+   "unseen_pair_rows": 827.0,
+   "good_rate_by_repeat": [
+    0.8811188811188811,
+    0.8957345971563981,
+    0.891566265060241,
+    0.8875878220140515,
+    0.8869346733668342,
+    0.8800904977375565,
+    0.8987951807228916,
+    0.8896882494004796,
+    0.8875305623471883,
+    0.8851174934725848
+   ]
+  },
+  "r50": {
+   "all": {
+    "kept": 415.0,
+    "keep_share": 0.501813784764208,
+    "good_rate": 0.8729237527951936,
+    "meaning": 49.9,
+    "notsimpler": 2.8
+   },
+   "seen_pair": {
+    "kept": 0.0,
+    "keep_share": 0.0,
+    "good_rate": 0.0,
+    "meaning": 0.0,
+    "notsimpler": 0.0
+   },
+   "unseen_pair": {
+    "kept": 415.0,
+    "keep_share": 0.501813784764208,
+    "good_rate": 0.8729237527951936,
+    "meaning": 49.9,
+    "notsimpler": 2.8
+   },
+   "unseen_pair_rows": 827.0,
+   "good_rate_by_repeat": [
+    0.8626506024096385,
+    0.8798185941043084,
+    0.8765133171912833,
+    0.8695652173913043,
+    0.8753117206982544,
+    0.8733031674208145,
+    0.8795180722891566,
+    0.8722358722358723,
+    0.8813131313131313,
+    0.8590078328981723
+   ]
+  },
+  "paired_gain": 0.015492669444517094
+ },
+ "lemma": {
+  "q50": {
+   "all": {
+    "kept": 421.2,
+    "keep_share": 0.509310761789601,
+    "good_rate": 0.8914089697184633,
+    "meaning": 40.6,
+    "notsimpler": 5.2
+   },
+   "seen_pair": {
+    "kept": 0.0,
+    "keep_share": 0.0,
+    "good_rate": 0.0,
+    "meaning": 0.0,
+    "notsimpler": 0.0
+   },
+   "unseen_pair": {
+    "kept": 421.2,
+    "keep_share": 0.509310761789601,
+    "good_rate": 0.8914089697184633,
+    "meaning": 40.6,
+    "notsimpler": 5.2
+   },
+   "unseen_pair_rows": 827.0,
+   "good_rate_by_repeat": [
+    0.8987951807228916,
+    0.8939759036144578,
+    0.8855721393034826,
+    0.9009661835748792,
+    0.8952380952380953,
+    0.8985849056603774,
+    0.8791946308724832,
+    0.8778280542986425,
+    0.8902147971360382,
+    0.893719806763285
+   ]
+  },
+  "r50": {
+   "all": {
+    "kept": 428.5,
+    "keep_share": 0.5181378476420797,
+    "good_rate": 0.8746749057691672,
+    "meaning": 49.9,
+    "notsimpler": 3.8
+   },
+   "seen_pair": {
+    "kept": 0.0,
+    "keep_share": 0.0,
+    "good_rate": 0.0,
+    "meaning": 0.0,
+    "notsimpler": 0.0
+   },
+   "unseen_pair": {
+    "kept": 428.5,
+    "keep_share": 0.5181378476420797,
+    "good_rate": 0.8746749057691672,
+    "meaning": 49.9,
+    "notsimpler": 3.8
+   },
+   "unseen_pair_rows": 827.0,
+   "good_rate_by_repeat": [
+    0.8738317757009346,
+    0.8717948717948718,
+    0.8729016786570744,
+    0.8764568764568764,
+    0.8732718894009217,
+    0.8781609195402299,
+    0.8775981524249422,
+    0.8738095238095238,
+    0.8767772511848341,
+    0.8721461187214612
+   ]
+  },
+  "paired_gain": 0.016734063949296264
+ },
+ "go_conditions": {
+  "passage_cv_good_ge_0.90": true,
+  "passage_cv_keep_ge_0.45": true,
+  "passage_cv_gain_ge_-0.01": true,
+  "pair_cv_gain_ge_0.01": true,
+  "lemma_cv_gain_ge_0.01": true
+ },
+ "go": true,
+ "r50_check": {
+  "passage_cv_good_ge_0.90": true,
+  "passage_cv_keep_ge_0.45": true
+ },
+ "r50_go": true,
+ "pool_sha256": "36acc1bcb1ab8127926777b81cdb5daf15e63fde8d35349ab5f328569bbeb49c",
+ "source_sha256": {
+  "evals/learned_words_r21.py": "e4d4916ac37736612d7c49c2301bf6296c3956811c95f18d19e2f9fcce88c877",
+  "evals/learned_words_genre.py": "8777ff1e8727326a596398c69a22c85973839974990c5859efc8c1cdd936b509",
+  "models/src/cleartext/learned_words/realize.py": "c884dcf322686239dcf1955f3495e93f8f833151994661a819f9cb79bed53c7d",
+  "evals/learned_words_r20.py": "db877be77b24c77a235fa644d87a37dde5eb679c1b0c4490ae7cdbd90eb2078d",
+  "evals/learned_words_r19.py": "b910fd173832f24d5bac8c05187ebc26d6d37863c052deb33bc8be6c94ed2402",
+  "evals/learned_words_r18.py": "f6830a7465e821d8eedc0557ed9403b79d68014bb24e8710be35111a719bd55a",
+  "evals/learned_words_r17.py": "aa2467e299176b1c9736e569460c70eadda726072eb2ee7fcd2bccbfe689eb8c",
+  "evals/learned_words_r16.py": "e2b609fb7fde9c24c72416cd982a0cfa395553888e31ef2c4de40d50e176dabf",
+  "evals/learned_words_r15.py": "1c9e9776755fbe7be1b042bb9b0dce1deab4617d06382df60db22aa144204807",
+  "evals/learned_words_r14.py": "56a7995f1ac905df7a17039b2ae9c436d0be474d672d700fef9e49b6bc8006b2",
+  "evals/learned_words_r13.py": "59dd07fb672a0527bbfb430d0552d89ecabeea42b9609e2e77a479849f16544c",
+  "models/src/cleartext/learned_words/context_fit.py": "5a623ae85355ee33921b3f60397d1d223d0034be8bc4ce6eb3df4288145f5509",
+  "evals/learned_words_corpus.py": "27388105fc68005b172bef1d73f26fe14aa41dafea5faf6f3ec777a18379a442",
+  "evals/learned_words_r12.py": "0d66ed85accc8ad6db4f2d07b9a005c21b5688f1f7d26ddb3429b23c8dceef7d",
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400"
+ }
+}
