@@ -684,3 +684,47 @@ step had seen those marks.
   13 and let meaning errors through. No fresh text was spent.
 - **A stricter threshold was the result that held on unseen data.** Round
   17 tests it on a fresh window.
+
+## Round 17: arm p refitted on 750 rows at a 40% keep (November 22)
+
+[ROUND17.md](ROUND17.md) holds the pre-registered rules
+([r17-precommit.json](r17-precommit.json)).
+- **Model:** round 12's arm p, unchanged, refitted on all 750 rated rows
+  (rounds 3–8, 11–13).
+- **Arms:** p40 (primary) keeps 40% of the rounds 11–13 arm-b rows by
+  passage-grouped out-of-fold score; p50 keeps 50% (secondary).
+- **Check ([r17-cv.json](r17-cv.json)): go.**
+  - Passage-grouped CV: 93.2% Good at 42% kept.
+  - Held-out evidence: round 15's p40, scored on round 13's unseen marks,
+    reached 92.3% at 45%. That number was read before this protocol was
+    written.
+
+Fresh window ([round17.json](round17.json)): 135 new passages (542
+sentences), 148 items, three fresh blind raters. All three agreed on 88%.
+Consistency with the old marks was 15–17 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|---:|---:|
+| b: current stage | 123 | 100% | 22.7 | 63.4% (55–71) | 18.7% | 22 |
+| s: round-8 filter | 87 | 71% | 16.1 | 80.5% (71–87) | 11.5% | 7 |
+| gs: round 11's best | 42 | 34% | 7.7 | 95.2% (84–99) | 4.8% | 0 |
+| p: frozen round-12 arm p | 66 | 54% | 12.2 | 95.5% (87–98) | 4.5% | 0 |
+| **p40: refitted, 40% keep** | **54** | **44%** | **10.0** | **96.3% (87–99)** | **3.7%** | 0 |
+| p50: refitted, 50% keep | 65 | 53% | 12.0 | 96.9% (89–99) | 3.1% | 0 |
+
+- **Pre-registered success: yes.** Arm p40 reached 96.3% Good with 3.7%
+  Changes meaning, at 44% of arm b's swaps; the bar was 40%.
+- **Against gs:** about the same precision, with 1.3 times gs's yield
+  (p50: 1.5 times).
+- **Errors:** indicate→show ("overstates") and Additionally→Also ("Also
+  … also"). The frozen arm p also made significant→major in a statistical
+  sense.
+- **Caveats:**
+  - This window was easier than round 12's; arm b reached 63% here against
+    56% there.
+  - Arm p40 leans on memorized pairs. Only 1 of its 54 swaps had a pair
+    never rated before, it used only 28 distinct pairs, and 10 of the 54
+    were additional→extra. Without additional→extra it reached 42 of 44
+    (95.5%).
+  - Rater 3 was stricter (p40: 90.7%).
+- **Round 18 replicates these exact arms, frozen, on a new window.**
