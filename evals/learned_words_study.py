@@ -685,3 +685,9 @@ def genre(argv):
     from . import learned_words_genre
 
     return learned_words_genre.main(argv)
+
+
+def r22(argv):
+    from . import learned_words_r22
+
+    return learned_words_r22.main(argv)

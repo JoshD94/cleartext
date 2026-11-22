@@ -540,3 +540,26 @@ def test_r21_joshua_page_is_blind_and_never_trains():
                        "word": "indicate", "rep": "show"}])
     assert "<mark>show</mark>" in page and "score" not in page.lower().replace("scores are hidden", "")
     assert "joshua60" not in inspect.getsource(V21).lower() and "LOCKED" not in inspect.getsource(V21)
+
+
+def test_r22_genre_threshold_arms_filter_before_the_passage_limits():
+    import inspect
+
+    from evals import learned_words_r22 as V22
+    from evals.learned_words_apply import choose
+
+    class M:
+        def score(self, rs):
+            return np.array([r["stack"] for r in rs])
+
+    def sw(i, sent, stack):
+        return {"sentence": sent, "margin": 0.5, "stack": stack, "cover": 0.0, "gate": 1.0, "check": 1.0 - i / 10,
+                "word": "w", "rep": f"r{i}", "pos": "v", "before": "a w b", "after": f"a r{i} b", "x31": [0.0] * 31}
+
+    thr = {"s": 0.5, "p50": 0.8, "q50": 0.8, "rg": 0.5, "qg": 0.5}
+    out = V22.picks({"all": [sw(0, 0, 0.6), sw(1, 0, 0.9)], "sense": []}, {k: M() for k in ("p50", "q50", "rg", "qg")},
+                    thr, choose)
+    assert [x["rep"] for x in out["q50"]] == ["r1"] and [x["rep"] for x in out["qg"]] == ["r0"]
+    assert set(out) == set(V22.ARMS)
+    src = inspect.getsource(V22.panel)
+    assert "Q.JDIR" in src and "Q.DIR" in src and "V3_PANEL" in src
