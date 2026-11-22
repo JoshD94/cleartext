@@ -312,3 +312,27 @@ def test_r12_arms_filter_before_the_passage_limits():
     assert [x["id"] for x in out["t"]] == [1]
     assert [x["id"] for x in out["p"]] == [1]
     assert [x["id"] for x in out["gs"]] == [3]
+
+
+def test_r13_fallback_uses_runner_up_only_for_targets_without_an_accepted_top():
+    from evals.learned_words_apply import choose
+    from evals.learned_words_r13 import fallback, picks
+
+    def sw(tid, sent, p, rep, margin=0.5):
+        return {"target_id": tid, "sentence": sent, "margin": margin, "stack": p, "cover": 0.0, "gate": 1.0,
+                "check": p, "word": "w", "rep": rep, "pos": "v", "p": p}
+
+    top = [sw("t1", 0, 0.9, "a"), sw("t2", 1, 0.3, "b")]
+    run = [sw("t1", 0, 0.95, "c"), sw("t2", 1, 0.8, "d"), sw("t3", 2, 0.9, "e")]
+    got = fallback(top, run, lambda s: s["p"] >= 0.5)
+    assert [s["rep"] for s in got] == ["a", "d", "e"]
+
+    class M:
+        def score(self, rows):
+            return np.array([r["stack"] for r in rows])
+
+    rec = {"all": top, "next": run, "sense": []}
+    out = picks(rec, M(), {"s": 0.5, "t": 0.5, "p": 0.5, "p65": 0.2}, choose)
+    assert [s["rep"] for s in out["p"]] == ["a"]
+    assert sorted(s["rep"] for s in out["pn"]) == ["a", "d", "e"]
+    assert sorted(s["rep"] for s in out["p65n"]) == ["a", "b", "e"]
