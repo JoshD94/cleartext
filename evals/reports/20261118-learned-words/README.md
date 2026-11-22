@@ -423,3 +423,34 @@ from rounds 3–5, keeping the top 65% of arm-b swaps.
   meaning". The remaining errors are sense, verb frame, collocation and
   register (occurred→happened, concluded→found, overseen→managed,
   unrestricted→free, requires→needs).
+
+## Round 9: sense match and parse stability (November 21)
+
+[ROUND9.md](ROUND9.md) holds the pre-registered rules. Arm w adds 13
+features to arm s:
+- sense match: BERT sense vectors built from SemCor (25,805 synsets, 37,176
+  sentences), with the target disambiguated in the original sentence and
+  the replacement in the new one;
+- parse stability: the swapped sentence is re-parsed and compared.
+
+It keeps 55% of the swaps.
+
+- **Cross-validation ([r9-cv.json](r9-cv.json)):** 371 rows, 189 of them
+  arm-b (base 61% Good, 39 Changes meaning), 20 × nested 5-fold grouped by
+  lemma, with arm s refitted at the same 55% keep. Arm w reaches 78.8% Good
+  against 77.9% for arm s, a paired gain of **+0.9 points** where the bar
+  was 3. It removes 51% of Changes meaning (arm s 49%). **No-go.** No fresh
+  text was spent.
+- **Diagnostic, not a decision:** on arm-b rows, the existing `ctx_cos`
+  separates Changes meaning well on its own (AUC 0.79), and the new
+  cross-fit feature does too (0.74; the two correlate at r = 0.71). Yet both
+  combined models reach only 0.57–0.58 meaning AUC. The single
+  Good-vs-rest label mixes two errors that pull in opposite directions:
+  - Changes meaning falls as contextual similarity rises;
+  - Not simpler rises with it, since near-identical words such as
+    sceptical→skeptical score highest.
+
+  A linear model of "Good" cannot express that, so the sense signal is
+  mostly already present and gets cancelled.
+- **Parse stability** fires rarely and does not separate on arm b (AUC
+  0.50–0.53).
