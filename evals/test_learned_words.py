@@ -456,3 +456,14 @@ def test_r19_uses_round_17_arms_with_p50_primary():
     assert V19.ARMS == V17.ARMS and V19.KEEP == 0.5 and "r18" in V19.TECH
     assert 'M["arm_p50"]' in inspect.getsource(V19.score)
     assert "P18.PANEL" in inspect.getsource(V19.panel)
+
+
+def test_r20_replicates_round_19_frozen():
+    import inspect
+
+    from evals import learned_words_r19 as V19
+    from evals import learned_words_r20 as V20
+
+    assert V20.ARMS == V19.ARMS and V20.SEED != V19.SEED
+    assert "P19.PANEL" in inspect.getsource(V20.panel) and "P19.MODEL" in inspect.getsource(V20.load_v)
+    assert 'M["arm_p50"]' in inspect.getsource(V20.score)
