@@ -1,6 +1,6 @@
 # Learned word stage
 
-An opt-in, trained word simplifier with four stages: eligibility
+A trained word simplifier (arm p50 is on by default since November 23; see [DEFAULT_PIPELINE.md](DEFAULT_PIPELINE.md)) with four stages: eligibility
 (complex word and term protection), candidates, ranker with a no-swap gate,
 and per-edit checkers for swaps and splits. It uses no LLM. Code is in
 `src/cleartext/learned_words/`; the study driver is `evals/learned_words.py`,

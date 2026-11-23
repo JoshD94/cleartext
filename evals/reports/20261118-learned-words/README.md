@@ -5,7 +5,7 @@ The protocol and thresholds were fixed before fitting ([PROTOCOL.md](PROTOCOL.md
 Raw text, candidate rows and predictions stay in `~/.local/state/cleartext/learned-words-20261118/`.
 Code is in `models/src/cleartext/learned_words/`, and it runs through `scripts/learned-words`.
 
-**Status: not adopted.** F2 stays the shipped default. Joshua's own blind marks decide adoption (≥ 90% Good).
+**Status: adopted (November 23).** Arm p50 is on by default after F2 and structure v3 ([DEFAULT_PIPELINE.md](../../../models/docs/DEFAULT_PIPELINE.md)). Adoption bar (≥ 90% Good on the blind adoption page): met, 56/60 = 93.3% (marked by Claude at Joshua's request; see [JOSHUA-PAGE.md](JOSHUA-PAGE.md)).
 
 **Best arm (November 22): arm p50.** It is round 12's 4-feature filter (arm-s score, sense cover, learned pair and target priors), refitted on all rated rows, keeping 50% of arm-b swaps. Round 19's model is frozen since then.
 - Round 19: 94.9% Good (56/59), 3.4% Changes meaning, 53% of arm b's swaps. It met its pre-registered bar.
