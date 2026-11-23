@@ -1,0 +1,16 @@
+[Unit]
+Description=Cloudflare quick tunnel for the ClearText demo (registers its URL with cleartext-ai2.pages.dev)
+After=network-online.target cleartext-demo.service
+Wants=cleartext-demo.service
+
+[Service]
+WorkingDirectory=%h/Documents/projects/cleartext
+ExecStart=/usr/bin/python3 demo-web/tunnel.py
+Environment=DEMO_PORT=8737 PYTHONUNBUFFERED=1
+Restart=always
+RestartSec=10
+MemoryMax=256M
+UMask=0077
+
+[Install]
+WantedBy=default.target

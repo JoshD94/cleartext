@@ -1,0 +1,257 @@
+"use strict";
+
+const MAX = 2000;
+const $ = (id) => document.getElementById(id);
+const els = {
+  text: $("text"), run: $("run"), count: $("count"), examples: $("examples"),
+  status: $("status"), steps: $("steps"), result: $("result"), offline: $("offline"),
+};
+
+// Feather icons (1.75 stroke, round ends).
+const ICON = {
+  split: '<path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.17-2.83L3 3"/><path d="m15 9 6-6"/>',
+  shuffle: '<polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>',
+  type: '<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>',
+  arrow: '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>',
+  check: '<polyline points="20 6 9 17 4 12"/>',
+  x: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+  copy: '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+  info: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+};
+const icon = (name, cls = "") => `<svg class="f ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[name]}</svg>`;
+
+const STEPS = [
+  { key: "f2", title: "Split long sentences", icon: "split", working: "Splitting long sentences" },
+  { key: "structure", title: "Untangle sentence structure", icon: "shuffle", working: "Untangling sentence structure" },
+  { key: "words", title: "Swap hard words", icon: "type", working: "Swapping hard words" },
+];
+
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+
+// --- word diff (LCS over words, spaces and punctuation) ---------------------------------
+function tokens(s) { return s.match(/\s+|[\p{L}\p{N}'’-]+|[^\s\p{L}\p{N}]/gu) || []; }
+function diff(a, b) {
+  const A = tokens(a), B = tokens(b), n = A.length, m = B.length;
+  if (n * m > 4e6) return [{ t: "same", s: b }];
+  const W = m + 1, L = new Uint16Array((n + 1) * W);
+  for (let i = n - 1; i >= 0; i--)
+    for (let j = m - 1; j >= 0; j--)
+      L[i * W + j] = A[i] === B[j] ? L[(i + 1) * W + j + 1] + 1 : Math.max(L[(i + 1) * W + j], L[i * W + j + 1]);
+  const out = [];
+  const push = (t, s) => { const last = out[out.length - 1]; if (last && last.t === t) last.s += s; else out.push({ t, s }); };
+  let i = 0, j = 0;
+  while (i < n && j < m) {
+    if (A[i] === B[j]) { push("same", A[i]); i++; j++; }
+    else if (L[(i + 1) * W + j] >= L[i * W + j + 1]) push("del", A[i++]);
+    else push("add", B[j++]);
+  }
+  while (i < n) push("del", A[i++]);
+  while (j < m) push("add", B[j++]);
+  // Whitespace-only edits read as noise: fold them into the text.
+  return out.map((p) => (p.t !== "same" && !p.s.trim() ? { t: p.t === "add" ? "same" : "skip", s: p.s } : p))
+    .filter((p) => p.t !== "skip");
+}
+function diffHTML(a, b) {
+  return diff(a, b).map((p) => p.t === "same" ? esc(p.s)
+    : p.t === "add" ? `<ins>${esc(p.s)}</ins>` : `<del>${esc(p.s)}</del>`).join("");
+}
+
+// --- rendering ----------------------------------------------------------------------------
+function changeCount(step) {
+  if (step.key === "f2") return step.groups.reduce((n, g) => n + g.edits.length, 0);
+  return step.edits.length;
+}
+
+function tagsFor(step) {
+  if (step.key === "words") {
+    return step.edits.map((e) => `<span class="swap"><span class="from">${esc(e.word)}</span>${icon("arrow")}<span class="to">${esc(e.replacement)}</span></span>`).join("");
+  }
+  const counts = new Map();
+  const labels = step.key === "f2" ? step.groups.flatMap((g) => g.edits.map(() => g.name)) : step.edits.map((e) => e.label);
+  labels.forEach((l) => counts.set(l, (counts.get(l) || 0) + 1));
+  return [...counts].map(([l, n]) => `<span class="tag">${esc(l)}${n > 1 ? ` <b>×${n}</b>` : ""}</span>`).join("");
+}
+
+function stepState(state, n) {
+  if (state === "waiting") return `<span class="step-state"><span class="dot"></span>Waiting</span>`;
+  if (state === "ran") return `<span class="step-state"><span class="dot"></span>Done</span>`;
+  if (state === "working") return `<span class="step-state"><span class="dot live"></span>Working</span>`;
+  if (!n) return `<span class="step-state"><span class="dot"></span>Nothing to change</span>`;
+  return `<span class="step-state changed"><span class="dot"></span>${plural(n, "change", "changes")}</span>`;
+}
+
+const skeletonBody = (lines) => `<div class="step-body"><div class="sk-text">${lines.map((w) =>
+  `<div class="skeleton sk-line" style="width:${w}%"></div>`).join("")}</div><div class="tags"><div class="skeleton sk-tag"></div></div></div>`;
+
+function renderSteps(progress, trace, lines) {
+  const at = STEPS.findIndex((s) => s.key === progress);
+  els.steps.innerHTML = STEPS.map((s, k) => {
+    const head = (state, n) => `<div class="step-head">${icon(s.icon, "icon")}<span class="step-title">${s.title}</span>${stepState(state, n)}</div>`;
+    if (!trace) {
+      const state = k < at ? "ran" : k === at ? "working" : "waiting";
+      return `<article class="card step">${head(state)}${skeletonBody(lines)}</article>`;
+    }
+    const step = trace.steps[k], n = step.changed ? changeCount(step) || 1 : 0;
+    if (!step.changed) return `<article class="card step">${head("done", 0)}</article>`;
+    return `<article class="card step">${head("done", n)}<div class="step-body"><p class="passage">${diffHTML(step.before, step.after)}</p><div class="tags">${tagsFor(step)}</div></div></article>`;
+  }).join("");
+  els.steps.hidden = false;
+}
+
+function renderResult(trace) {
+  const g = trace.grade;
+  const kept = [
+    ...trace.kept.numbers.map((x) => ({ ...x, kind: "number" })),
+    ...trace.kept.negations.map((x) => ({ ...x, kind: "negation" })),
+    ...trace.kept.names.map((x) => ({ ...x, kind: "name" })),
+  ];
+  const keptCount = kept.filter((x) => x.kept).length;
+  const keptHTML = kept.length ? `<div class="kept"><span class="label">Kept</span>${kept.slice(0, 10).map((x) =>
+    `<span class="tag${x.kept ? "" : " lost"}">${icon(x.kept ? "check" : "x")}${esc(x.item)}</span>`).join("")}${kept.length > 10 ? `<span class="label">+${kept.length - 10} more</span>` : ""}</div>` : "";
+  const same = trace.output === trace.input;
+  els.result.innerHTML = `
+    <div class="result-head"><h2>Simplified text</h2>
+      <button class="btn" type="button" id="copy">${icon("copy")}<span>Copy</span></button></div>
+    <p class="passage">${esc(trace.output)}</p>
+    ${same ? `<div class="notice">${icon("info")}<span>Your text came out unchanged. ClearText only edits when it is confident the meaning stays the same.</span></div>` : ""}
+    <div class="facts">
+      <div class="metric"><span class="figure"><span class="was">${g.before}</span>${icon("arrow")}<span>${g.after}</span></span><span class="what">School grade<br>reading level</span></div>
+      ${keptHTML}
+    </div>`;
+  els.result.hidden = false;
+  $("copy").onclick = async () => {
+    try { await navigator.clipboard.writeText(trace.output); $("copy").querySelector("span").textContent = "Copied"; } catch {}
+    setTimeout(() => { const c = $("copy"); if (c) c.querySelector("span").textContent = "Copy"; }, 1600);
+  };
+  void keptCount;
+}
+
+function setStatus(html, live = true, seconds = null) {
+  els.status.innerHTML = `<span class="dot${live ? " live" : ""}"></span><span>${html}</span>${seconds !== null ? `<span class="time">${seconds}s</span>` : ""}`;
+  els.status.hidden = false;
+}
+function setNotice(text) {
+  els.status.innerHTML = `<div class="notice">${icon("info")}<span>${esc(text)}</span></div>`;
+  els.status.hidden = false;
+}
+
+// --- API ---------------------------------------------------------------------------------
+async function api(path, body) {
+  const res = await fetch(`/api/${path}`, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : {});
+  let data = {};
+  try { data = await res.json(); } catch { data = { offline: true }; }
+  return { status: res.status, data };
+}
+
+let busy = false, offline = false;
+
+function setOffline(on) {
+  offline = on;
+  els.offline.hidden = !on;
+  updateCount();
+  if (on) { els.steps.hidden = true; els.result.hidden = true; els.status.hidden = true; }
+}
+
+async function checkHealth() {
+  try {
+    const { data } = await api("health");
+    setOffline(!data.ok);
+  } catch { setOffline(true); }
+}
+
+const ERRORS = {
+  too_long: "That's over 2,000 characters. Try a shorter piece.",
+  too_short: "Paste at least a full sentence.",
+  rate: "You've hit the limit for now. Try again in a few minutes.",
+  active: "Your last text is still running. Wait for it to finish.",
+  busy: "Lots of people are trying it right now. Try again in a minute.",
+  failed: "Something went wrong on this text. Try another one.",
+  timeout: "This one took too long. Try a shorter piece.",
+};
+
+function linesFor(text) {
+  const n = Math.min(6, Math.max(2, Math.ceil(text.length / 95)));
+  return Array.from({ length: n }, (_, i) => (i === n - 1 ? 55 : 92 + ((i * 7) % 8)));
+}
+
+async function simplify() {
+  const text = els.text.value.trim();
+  if (busy || offline || !text) return;
+  if (text.length > MAX) return setNotice(ERRORS.too_long);
+  busy = true;
+  els.run.disabled = true;
+  els.result.hidden = true;
+  const lines = linesFor(text);
+  const started = Date.now();
+  let res;
+  try { res = await api("simplify", { text }); } catch { res = { status: 503, data: { offline: true } }; }
+  if (res.status !== 202) {
+    busy = false; updateCount();
+    if (res.data.offline) return setOffline(true);
+    return setNotice(ERRORS[res.data.error] || ERRORS.failed);
+  }
+  const id = res.data.id;
+  renderSteps(null, null, lines);
+  setStatus("Sending your text", true, 0);
+  let stage = null, misses = 0;
+  while (true) {
+    await new Promise((r) => setTimeout(r, 1200));
+    let job;
+    try { job = await api(`jobs/${id}`); } catch { job = { status: 503, data: { offline: true } }; }
+    const secs = Math.round((Date.now() - started) / 1000);
+    if (job.status !== 200) {
+      if (++misses < 8) continue;
+      busy = false; updateCount();
+      return job.data.offline ? setOffline(true) : setNotice(ERRORS.failed);
+    }
+    misses = 0;
+    const j = job.data;
+    if (j.status === "queued") {
+      setStatus(j.position > 1 ? `Waiting for ${plural(j.position - 1, "person", "people")} ahead of you` : "Next in line", true, secs);
+    } else if (j.status === "running") {
+      if (j.stage !== stage && STEPS.some((s) => s.key === j.stage)) { stage = j.stage; renderSteps(stage, null, lines); }
+      const step = STEPS.find((s) => s.key === j.stage);
+      setStatus(j.stage === "loading" ? "Waking up the models. The first run takes about two minutes" : `${step ? step.working : "Working"}`, true, secs);
+    } else if (j.status === "done") {
+      els.status.hidden = true;
+      renderSteps(null, j.trace, lines);
+      renderResult(j.trace);
+      break;
+    } else {
+      els.steps.hidden = true;
+      setNotice(ERRORS[j.error] || ERRORS.failed);
+      break;
+    }
+  }
+  busy = false;
+  updateCount();
+}
+
+function updateCount() {
+  const n = els.text.value.length;
+  els.count.textContent = `${n.toLocaleString("en-US")} / 2,000`;
+  els.count.classList.toggle("over", n > MAX);
+  els.run.disabled = busy || offline || !els.text.value.trim() || n > MAX;
+  els.run.querySelector(".btn-text").textContent = busy ? "Working" : "Simplify";
+}
+
+async function init() {
+  els.text.addEventListener("input", updateCount);
+  els.text.addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) simplify(); });
+  els.run.addEventListener("click", simplify);
+  try {
+    const examples = await (await fetch("examples.json")).json();
+    for (const ex of examples) {
+      const b = document.createElement("button");
+      b.className = "btn"; b.type = "button"; b.textContent = ex.title;
+      b.onclick = () => { if (busy) return; els.text.value = ex.text; updateCount(); };
+      els.examples.appendChild(b);
+    }
+  } catch {}
+  updateCount();
+  await checkHealth();
+  setInterval(() => { if (offline && !busy) checkHealth(); }, 30000);
+}
+
+init();

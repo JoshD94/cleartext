@@ -1,0 +1,9 @@
+# Cloudflare Pages project "cleartext" (https://cleartext-ai2.pages.dev), personal account.
+# Deploy from this directory: npx -y wrangler@4 pages deploy (see demo-web/README.md).
+name = "cleartext"
+pages_build_output_dir = "public"
+compatibility_date = "2026-11-01"
+
+[[kv_namespaces]]
+binding = "DEMO_KV"
+id = "61f84b30e14746d1bd9037d03f30610a"

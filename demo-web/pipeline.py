@@ -1,0 +1,239 @@
+"""The default pipeline for the public demo, with a per-stage trace.
+
+Runs exactly the stages of `evals/default_pipeline.py`:
+  1. F2 via `param_sweeps.SweepGenerator(plan, state, signature).predict(F2, text)`,
+     with the parameter-sweep dev plan's generation settings (its models and runs);
+  2. `DefaultAfterF2.structure` (structure v4, `KEPT_V4`, 0.5 entailment floor);
+  3. `DefaultAfterF2.words` (learned words, arm p50).
+`DefaultAfterF2.__call__` is these two calls in this order; running them one at a
+time only exposes the intermediate text.
+
+Submitted text never touches disk: the study memos (`ensemble_study.DiskMemo`,
+`structure_v2.SmallNLI`) are replaced in this process by in-memory equivalents
+(same keys and values, memoization only), and the scratch state directory must
+stay empty (`DemoPipeline.check_no_writes`). No source file is edited, so cached
+study signatures stay valid. No LLM is used.
+"""
+
+import json
+import os
+import re
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+STAGES = ("f2", "structure", "words")
+
+# Plain-language names for the trace.
+F2_STAGE_NAMES = {
+    "phrase": "Phrase rewrite",
+    "phrases": "Phrase rewrite",
+    "learned seq2seq": "Sentence split",
+    "dependency compound split": "Sentence split",
+    "structure": "Sentence split",
+}
+STRUCTURE_OP_NAMES = {
+    "passive_v5": "Passive to active",
+    "passive_v7": "Passive to active",
+    "passive_recovered": "Passive to active",
+    "appositive_v4": "Side note moved out",
+    "fronted_split": "Opening clause split off",
+    "nominal_v3": "Noun phrase to verb",
+}
+
+
+def _ensure_paths():
+    for p in (ROOT / "models/src", ROOT):
+        if str(p) not in sys.path:
+            sys.path.insert(0, str(p))
+    deps = os.environ.get("CLEARTEXT_EVAL_DEPS")
+    if deps and deps not in sys.path:
+        sys.path.append(deps)
+
+
+class _MemoryMemo:
+    """In-memory stand-in for ensemble_study.DiskMemo (same interface)."""
+
+    def __init__(self, root, namespace, signature, fallback=None):
+        self.values = _MemoryMemo.store.setdefault((namespace, signature), {})
+
+    store = {}
+
+    @staticmethod
+    def _k(key):
+        return json.dumps(key, sort_keys=True, default=str)
+
+    def __contains__(self, key):
+        return self._k(key) in self.values
+
+    def __getitem__(self, key):
+        return self.values[self._k(key)]
+
+    def __setitem__(self, key, value):
+        self.values[self._k(key)] = value
+
+
+def _no_disk_writes():
+    """Swap the study's disk memos for in-memory ones in this process only."""
+    from evals import ensemble_study as S
+    from evals import structure_v2 as SV
+
+    S.DiskMemo = _MemoryMemo
+
+    class MemorySmallNLI(SV.SmallNLI):
+        def __init__(self, memo):
+            self.memo_path, self.memo, self.model = None, {}, None
+
+        def __call__(self, a, b):
+            if (a, b) not in self.memo:
+                if self.model is None:
+                    from cleartext.teammate_stages import EntailmentVeto
+                    hub = Path.home() / ".cache/huggingface/hub"
+                    path = hub / ("models--cross-encoder--nli-deberta-v3-small/snapshots/"
+                                  "fa2804872c3b4bd748f38c0185cc85775361e735")
+                    self.model = EntailmentVeto(model=path)
+                self.memo[(a, b)] = float(self.model.score(a, b))
+            return self.memo[(a, b)]
+
+    SV.SmallNLI = MemorySmallNLI
+
+
+def clear_memos():
+    """Bound memory between requests (memos only cache deterministic calls)."""
+    for values in _MemoryMemo.store.values():
+        values.clear()
+
+
+def generation_plan():
+    """The parameter-sweep dev plan's generation settings, with its word-stage runs
+    resolved to this checkout's models/runs (same run directories by name)."""
+    from evals import structure_v2 as SV
+    plan = json.loads((SV.SWEEP_DEV / "plan.json").read_text())
+    runs = plan["generation"]["runs"]
+    for level, path in runs.items():
+        local = ROOT / "models/runs" / Path(path).name
+        if not Path(path).exists():
+            runs[level] = str(local)
+    plan.pop("reuse", None)
+    return plan
+
+
+# --- trace helpers (pure; unit-tested) -------------------------------------------
+
+def fk_grade(text):
+    try:
+        import textstat
+        return round(float(textstat.flesch_kincaid_grade(text)), 1)
+    except ImportError:
+        from evals.readability import flesch_kincaid_grade
+        return round(float(flesch_kincaid_grade(text)), 1)
+
+
+def kept_items(source, output):
+    """Numbers, negations and names in the input, and whether each survives."""
+    from evals import preservation as PR
+
+    def present(item):
+        return re.search(r"(?<!\w)" + re.escape(item.lower()) + r"(?!\w)", output.lower()) is not None
+
+    groups = {
+        "numbers": list(dict.fromkeys(PR.extract_numbers(source))),
+        "negations": list(dict.fromkeys(PR.extract_negations(source))),
+        "names": list(dict.fromkeys(PR.extract_entities(source))),
+    }
+    return {k: [{"item": it, "kept": present(it)} for it in v] for k, v in groups.items()}
+
+
+def f2_edits(result):
+    """F2's per-edit records grouped by sub-stage (plain-language names)."""
+    groups = {}
+    for e, stage in zip(result.get("edits", []), result.get("stages", [])):
+        name = F2_STAGE_NAMES.get(stage, "Sentence split" if "split" in str(stage) else "Phrase rewrite")
+        before = e.get("before") or e.get("source") or e.get("original") or e.get("phrase") or ""
+        after = e.get("after") or e.get("output") or e.get("replacement") or ""
+        groups.setdefault(name, []).append({"stage": stage, "before": before, "after": after})
+    return [{"name": k, "edits": v} for k, v in groups.items()]
+
+
+def structure_edits(edits):
+    return [{"op": e.get("op"), "label": STRUCTURE_OP_NAMES.get(e.get("op"), "Sentence rewrite"),
+             "before": e.get("before", ""), "after": e.get("after", "")} for e in edits]
+
+
+def word_edits(edits):
+    return [{"word": e["word"], "replacement": e["rep"]} for e in edits]
+
+
+def build_trace(text, f2_result, after_structure, s_edits, final, w_edits, seconds):
+    f2_out = f2_result["output"]
+    return {
+        "input": text,
+        "steps": [
+            {"key": "f2", "title": "Split long sentences", "before": text, "after": f2_out,
+             "changed": f2_out != text, "groups": f2_edits(f2_result)},
+            {"key": "structure", "title": "Untangle sentence structure", "before": f2_out,
+             "after": after_structure, "changed": after_structure != f2_out,
+             "edits": structure_edits(s_edits)},
+            {"key": "words", "title": "Swap hard words", "before": after_structure, "after": final,
+             "changed": final != after_structure, "edits": word_edits(w_edits)},
+        ],
+        "output": final,
+        "grade": {"before": fk_grade(text), "after": fk_grade(final)},
+        "kept": kept_items(text, final),
+        "seconds": {k: round(v, 2) for k, v in seconds.items()},
+    }
+
+
+# --- the pipeline ------------------------------------------------------------------
+
+class DemoPipeline:
+    def __init__(self, threads=4):
+        _ensure_paths()
+        os.environ.setdefault("HF_HUB_OFFLINE", "1")
+        os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+        os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+        _no_disk_writes()
+        from evals import param_sweeps as P
+        from evals.default_pipeline import F2, DefaultAfterF2
+        self.F2 = F2
+        self.scratch = Path(tempfile.mkdtemp(prefix="cleartext-demo-"))
+        plan = generation_plan()
+        signature = P.signatures(plan)[0]
+        self.f2 = P.SweepGenerator(plan, self.scratch, signature, threads)
+        self.after = DefaultAfterF2(self.scratch, threads)
+        import torch
+        torch.set_num_threads(threads)
+
+    def check_no_writes(self):
+        written = [p for p in self.scratch.rglob("*")]
+        if written:
+            raise RuntimeError(f"demo scratch state is not empty ({len(written)} paths)")
+
+    def warm(self, progress=lambda stage: None):
+        """Load every model with a tiny fixed sentence (not user text)."""
+        self.run("The committee was informed by the director that numerous changes were necessary.",
+                 progress)
+
+    def run(self, text, progress=lambda stage: None):
+        seconds = {}
+        t = time.monotonic()
+        progress("f2")
+        self.f2.decisions, self.f2.dirty = {}, set()  # = StudyGenerator.begin with an empty state
+        f2_result = self.f2.predict(self.F2, text)
+        seconds["f2"] = time.monotonic() - t
+        t = time.monotonic()
+        progress("structure")
+        after_structure, s_edits = self.after.structure.rewrite(f2_result["output"])
+        seconds["structure"] = time.monotonic() - t
+        t = time.monotonic()
+        progress("words")
+        final, w_edits = self.after.words.rewrite(after_structure, "passage")
+        seconds["words"] = time.monotonic() - t
+        self.f2.decisions, self.f2.dirty = {}, set()
+        clear_memos()
+        self.after.structure.entailment.memo.clear() if hasattr(
+            getattr(self.after.structure, "entailment", None), "memo") else None
+        self.check_no_writes()
+        return build_trace(text, f2_result, after_structure, s_edits, final, w_edits, seconds)
