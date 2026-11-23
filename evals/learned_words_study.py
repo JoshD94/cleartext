@@ -709,3 +709,9 @@ def r24(argv):
     from . import learned_words_r24
 
     return learned_words_r24.main(argv)
+
+
+def r25(argv):
+    from . import learned_words_r25
+
+    return learned_words_r25.main(argv)

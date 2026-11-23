@@ -706,3 +706,20 @@ def test_r24_frame_prior_shrinks_to_the_pair_and_leaves_the_row_out():
     # leave-one-out: a row alone in its frame carries no frame evidence about itself
     lone = {"key": ["induce", "cause"], "good": 0, "nb": [("child:dobj", "metabolism")]}
     assert V24.FramePrior([lone]).worst(lone, 0.5, own=0) == 0.0
+
+
+def test_r25_replicates_round_24_frozen_on_its_own_window():
+    import inspect
+
+    from evals import learned_words_r24 as V24
+    from evals import learned_words_r25 as V25
+
+    before = (V24.DIR, V24.PANEL, V24.APPLY, V24.PRECOMMIT, V24.SEED, V24.panel)
+    with V25.window():
+        assert V24.DIR == V25.DIR and V24.APPLY == V25.APPLY and V24.PRECOMMIT == V25.PRECOMMIT
+        assert V24.panel is V25.panel and V24.SEED == V25.SEED != before[4]
+    assert (V24.DIR, V24.PANEL, V24.APPLY, V24.PRECOMMIT, V24.SEED, V24.panel) == before
+    assert V25.picks is V24.picks and V25.POOL == V24.POOL and not hasattr(V25, "train")
+    src = inspect.getsource(V25.panel)
+    assert "R24_PANEL" in src and "joshua-r21b" in src and '"r25-' in src
+    assert '"r24"' not in inspect.getsource(V25.page) + inspect.getsource(V25.score)
