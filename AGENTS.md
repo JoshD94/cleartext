@@ -110,6 +110,11 @@ versions, input/model/source hashes and completion/failure receipts.
   dev state's memos only while every source stays byte-identical; on dev it
   did not make words beat F2 (`evals/reports/20261118-swap-window-veto/`).
 
+- `cleartext.structure_v2` (opt-in, after F2): only `KEPT` (fronted-clause
+  split, passive → "we") met the 85% blind-rating bar; by-phrase passive
+  flips plateau near 78% (`evals/reports/20261122-structure-v2/`). Rated
+  items cannot validate rules written from them; use a fresh window.
+
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
 handback, close only resources created for the task and leave a short handoff.

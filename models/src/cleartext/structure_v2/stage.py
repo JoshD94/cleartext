@@ -40,6 +40,10 @@ OPS = {
     "nominal_v2": lambda: Nominalization(version=2),
 }
 CONTEXT = 3  # preceding sentences an operation may read (agent recovery)
+# The operations that met the pre-registered bar on fresh text (majority
+# Good >= 85%, Changes meaning <= 10%; evals/reports/20261122-structure-v2),
+# in the combined stage's order. Opt-in: StructureV2(ops=KEPT).
+KEPT = ("passive_recovered", "fronted_split")
 
 
 def build(name, **kwargs):

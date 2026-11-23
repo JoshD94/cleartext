@@ -211,3 +211,13 @@ def test_titles_keep_their_capital():
     doc = parse("Wings for My Flight was published in 1991.")
     assert lower_first("Wings for My Flight", doc[0], titles=True) == "Wings for My Flight"
     assert lower_first("Wings for My Flight", doc[0]) == "wings for My Flight"
+
+
+def test_kept_stage_on_a_passage():
+    from cleartext.structure_v2 import KEPT
+    text = ("We reviewed every comment we received. These comments are summarized in this section. "
+            "Although the rule took effect in May, some States asked for more time to comply.")
+    out, edits = StructureV2(ops=KEPT).rewrite(text)
+    assert out == ("We reviewed every comment we received. We summarize these comments in this section. "
+                   "The rule took effect in May. But some States asked for more time to comply.")
+    assert [e["op"] for e in edits] == ["passive", "fronted"]
