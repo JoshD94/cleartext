@@ -53,7 +53,7 @@ function diff(a, b) {
     .filter((p) => p.t !== "skip");
 }
 // Changes separated only by spaces read as one replacement: "<del>, and many</del><ins>. Many</ins>".
-function wordHTML(parts) {
+function wordHTML(parts, kind = () => "") {
   const out = [];
   for (let k = 0; k < parts.length; k++) {
     if (parts[k].t === "same") { out.push(esc(parts[k].s)); continue; }
@@ -67,9 +67,10 @@ function wordHTML(parts) {
     }
     k--;
     out.push((del || add).match(/^\s*/)[0]);
-    if (del.trim()) out.push(`<del>${esc(del.trim())}</del>`);
+    const cls = kind(del.trim(), add.trim());
+    if (del.trim()) out.push(`<del${cls}>${esc(del.trim())}</del>`);
     if (del.trim() && add.trim()) out.push(" ");
-    if (add.trim()) out.push(`<ins>${esc(add.trim())}</ins>`);
+    if (add.trim()) out.push(`<ins${cls}>${esc(add.trim())}</ins>`);
     out.push((add || del).match(/\s*$/)[0]);
   }
   return out.join("");
@@ -78,7 +79,7 @@ function wordHTML(parts) {
 // Sentences matched first; a changed run is shown word by word when that reads
 // cleanly (a split, a swap), else as the old sentence struck and the new one marked.
 function sentences(s) { return s.split(/(?<=[.!?]["”’)]?)\s+(?=["“(]?[\p{Lu}\p{N}])/u).filter(Boolean); }
-function diffHTML(a, b) {
+function diffHTML(a, b, kind = () => "", wordLevel = false) {
   const A = sentences(a), B = sentences(b), n = A.length, m = B.length, W = m + 1;
   const L = new Uint16Array((n + 1) * W);
   for (let i = n - 1; i >= 0; i--)
@@ -90,8 +91,11 @@ function diffHTML(a, b) {
     if (!dels.length && !adds.length) return;
     const parts = diff(dels.join(" "), adds.join(" "));
     const changes = parts.filter((p) => p.t !== "same").length;
-    if (!dels.length || !adds.length || changes <= 2 * Math.max(dels.length, adds.length)) out.push(wordHTML(parts));
-    else out.push(`<del>${esc(dels.join(" "))}</del> <ins>${esc(adds.join(" "))}</ins>`);
+    if (wordLevel || !dels.length || !adds.length || changes <= 2 * Math.max(dels.length, adds.length)) out.push(wordHTML(parts, kind));
+    else {
+      const cls = kind(dels.join(" "), adds.join(" "));
+      out.push(`<del${cls}>${esc(dels.join(" "))}</del> <ins${cls}>${esc(adds.join(" "))}</ins>`);
+    }
     dels = []; adds = [];
   };
   while (i < n || j < m) {
@@ -326,7 +330,6 @@ async function init() {
 }
 
 // --- views: "Try it" and "Results" ---------------------------------------------------------
-ICON.external = '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>';
 
 // Moves a segmented control's pill under its selected button.
 function placePill(seg, animate = true) {
@@ -342,7 +345,7 @@ function select(seg, btn) {
 }
 
 const nav = $("nav");
-let results = null, system = "default", verdict = "All";
+let results = null, system = "default";
 
 function showView(view, animate = true) {
   const btn = nav.querySelector(`[data-view="${view}"]`) || nav.querySelector('[data-view="try"]');
@@ -367,7 +370,7 @@ async function loadResults() {
   if (results) return;
   try { results = await (await fetch("results.json")).json(); } catch { return; }
   renderResultsSummary();
-  renderSystem();
+  renderText();
   $("r-note").hidden = false;
 }
 
@@ -384,56 +387,43 @@ function renderResultsSummary() {
   $("r-compare").innerHTML = `<h2>Against Chhoeng's passive converter</h2>
     <table class="r-table"><thead><tr><th></th><th>Changed</th><th>Grade</th><th>Meaning</th><th title="Meaning score below 0.80">&lt; 0.80</th></tr></thead>
     <tbody>${row(d, "ClearText")}${row(p, "Passive converter")}</tbody></table>`;
-  $("r-steps").innerHTML = `<h2>ClearText by step</h2><div class="r-rows">${STEPS.map((s) =>
-    `<div class="r-row">${icon(s.icon, "icon")}<span>${s.title}</span><span class="v">${d.steps[s.key]}</span></div>`).join("")}</div>`;
   const seg = $("r-system");
   seg.innerHTML = Object.entries(results.systems).map(([k, s]) =>
     `<button type="button" role="tab" data-system="${k}" aria-selected="${k === system}">${esc(s.name)} <span class="n">${s.changed}</span></button>`).join("");
   seg.onclick = (e) => {
     const btn = e.target.closest("button");
     if (!btn || btn.dataset.system === system) return;
-    system = btn.dataset.system; verdict = "All";
+    system = btn.dataset.system;
     select(seg, btn);
-    renderSystem();
+    renderText();
   };
   requestAnimationFrame(() => placePill(seg, false));
 }
 
-function itemTags(tags) {
-  return tags.map((t) => t.from !== undefined
-    ? `<span class="swap"><span class="from">${esc(t.from)}</span>${icon("arrow")}<span class="to">${esc(t.to)}</span></span>`
-    : `<span class="tag">${esc(t.text)}${t.count > 1 ? ` <b>×${t.count}</b>` : ""}</span>`).join("");
-}
-
-function renderSystem() {
-  const s = results.systems[system];
-  const chips = [["All", s.changed], ...Object.entries(s.verdicts).filter(([, n]) => n)];
-  const box = $("r-verdicts");
-  box.innerHTML = chips.map(([v, n]) =>
-    `<button type="button" class="btn chip" data-verdict="${esc(v)}" aria-pressed="${v === verdict}">${esc(v)} <span class="n">${n}</span></button>`).join("");
-  box.onclick = (e) => {
-    const btn = e.target.closest("button");
-    if (!btn) return;
-    verdict = btn.dataset.verdict;
-    box.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    renderItems();
+// Which step made a change: a word swap, a structure rewrite, else a split.
+// The passive converter only rewrites passives.
+function kindFor(x) {
+  if (system !== "default") return () => ' class="k-structure"';
+  const lower = (t) => t.toLowerCase();
+  return (del, add) => {
+    const k = (x.swaps || []).some(([w, r]) => lower(del) === lower(w) && lower(add) === lower(r)) ? "words"
+      : (x.structure || []).some((after) => add && after.includes(add)) ? "structure" : "split";
+    return ` class="k-${k}"`;
   };
-  renderItems();
 }
 
-function renderItems() {
-  const items = results.systems[system].items.filter((x) => verdict === "All" || x.verdict === verdict);
-  $("r-list").innerHTML = items.map((x) => `
-    <article class="card r-item">
-      <div class="r-item-head">
-        <span class="verdict${x.verdict === "Reads well" ? " good" : ""}"><span class="dot"></span>${esc(x.verdict)}</span>
-        <span class="tag domain">${esc(x.domain)}</span>
-        <span class="grade" title="School grade, before and after">${gradeHTML(x.grade)}</span>
-        <a class="icon-btn" href="${esc(x.source)}" target="_blank" rel="noopener" title="${esc(x.title)}" aria-label="Source paper">${icon("external")}</a>
-      </div>
-      <p class="passage">${diffHTML(x.before, x.after)}</p>
-      <div class="tags">${itemTags(x.tags)}</div>
-    </article>`).join("");
+function renderText() {
+  const s = results.systems[system];
+  $("r-legend").innerHTML = s.legend.map((l) =>
+    `<span class="key"><span class="swatch k-${l.kind}"></span>${esc(l.label)} <span class="n">${l.count}</span></span>`).join("");
+  $("r-body").innerHTML = results.groups.map((g) => {
+    const paras = [];
+    for (let i = 0; i < g.sentences.length; i += 5) paras.push(g.sentences.slice(i, i + 5));
+    return `<h3>${esc(g.domain)}</h3>${paras.map((para) => `<p class="passage">${para.map((x) => {
+      const out = x.out[system];
+      return `<span title="${esc(x.title)}">${out ? diffHTML(x.text, out, kindFor(x), system === "default") : esc(x.text)}</span>`;
+    }).join(" ")}</p>`).join("")}`;
+  }).join("");
 }
 
 showView(location.hash.slice(1) || "try", false);
