@@ -103,6 +103,40 @@ def _risky(kind, tok, anchor, span, start, sent, final):
     return False
 
 
+# Structure v3 (version 4, round 6): only a definite or named anchor, and a
+# second parser must find the same appositive or relative clause.
+INDEFINITE_V4 = {"one", "another", "some", "any", "each", "every", "no", "many", "several", "few", "both", "all",
+                 "only", "other", "such", "most", "certain", "various"}
+
+
+def _risky_v4(kind, tok, anchor, span, start, sent):
+    """Version-4 skips (a whitelist on top of version 3)."""
+    from .common import parse_second
+    doc = sent.doc
+    own = [t for t in anchor.subtree if t.i < start - 1]
+    if any(t.lower_ in INDEFINITE_V4 or t.dep_ == "nummod" or t.like_num for t in own):
+        return "indefinite, numbered or focused anchor"
+    if anchor.pos_ != "PROPN" and not any(c.dep_ in ("det", "poss") for c in anchor.children):
+        return "bare common-noun anchor"
+    if any(t.text in ("(", ")", "[", "]", "-", "–", "—") for t in own):
+        return "bracket or hyphen in the anchor"
+    left = own[0] if own else anchor
+    prev = doc[left.i - 1] if left.i > sent.start else None
+    if prev is not None and prev.text != "," and prev.pos_ in ("ADJ", "NOUN", "PROPN", "PUNCT", "NUM"):
+        return "anchor may start earlier (misparse)"
+    if kind == "relative":
+        aux = [c for c in tok.children if c.dep_ in ("aux", "auxpass")]
+        if tok.tag_ == "VBG" and any(a.lemma_ == "be" for a in aux):
+            return "progressive relative clause (a time relation)"
+    d2 = parse_second(doc.text)
+    if [t.text for t in d2] != [t.text for t in doc]:
+        return "second parser tokenizes differently"
+    t2 = d2[tok.i]
+    if t2.dep_ != tok.dep_ or t2.head.i != anchor.i or {t.i for t in t2.subtree} != {t.i for t in span}:
+        return "second parser disagrees on the span or its anchor"
+    return None
+
+
 class AppositiveSplit:
     op = "appositive"
 
@@ -166,6 +200,8 @@ class AppositiveSplit:
             if self.version >= 3 and not subject_side:
                 continue  # round 2: sentence-final material often describes another noun or the event
             if self.version >= 2 and _risky(kind, tok, anchor, span, s, sent, final):
+                continue
+            if self.version >= 4 and _risky_v4(kind, tok, anchor, span, s, sent):
                 continue
             if anchor.left_edge.i < sent.start or any(t.text == "," for t in sent.doc[anchor.left_edge.i: s - 1]):
                 continue

@@ -1,6 +1,7 @@
 """Structure v2 operations: realization and skip rules on fixed sentences.
 
-These need only the pipeline's spaCy model (en_core_web_sm) and lemminflect.
+These need only the pipeline's spaCy models (en_core_web_sm; en_core_web_md for
+the version-5 agreement checks) and lemminflect; BERT is patched out.
 """
 
 import pytest
@@ -8,6 +9,13 @@ import pytest
 from cleartext.structure_v2 import StructureV2
 from cleartext.structure_v2.common import parse
 from cleartext.structure_v2.passive import ActiveVoice
+
+
+@pytest.fixture(autouse=True)
+def no_bert(monkeypatch):
+    """passive_v5's fluency floor needs BERT-base; these tests check the rules, so
+    the fluency drop is fixed at 0 (test_round6_fluency_floor sets it)."""
+    monkeypatch.setattr("cleartext.structure_v2.fluency.fluency_drop", lambda before, after: 0.0)
 
 
 def run(op, sentence, context=()):
@@ -221,3 +229,54 @@ def test_kept_stage_on_a_passage():
     assert out == ("We reviewed every comment we received. We summarize these comments in this section. "
                    "The rule took effect in May. But some States asked for more time to comply.")
     assert [e["op"] for e in edits] == ["passive", "fronted"]
+
+
+@pytest.mark.parametrize("sentence", [
+    # Structure v3, round 6 (passive_v5): failure types from the round 4-5 ratings.
+    "The episode was watched by 19.9 million viewers, becoming the most watched show of the year.",
+    "He was released by the Chargers after three seasons, compiling a 4-14 record as the starter.",
+    "Risk assessments can be performed only by certified risk assessors.",
+    "The suspension is introduced at body temperature by gravity.",
+    "The drug is absorbed by both diffusion and active transport mechanisms.",
+    "Repeat doses should be preceded by a test dose of the drug.",
+    "He has been appointed as cardinal since 2024 by the late Pope Francis.",
+    "The ships were attacked by American bombers that badly damaged the harbor.",
+    "Initially, the mode supported four players, though it was cut to two by the game's release.",
+    "The man was then subdued by passengers, pinned to the floor, then strapped into a seat.",
+    # Dev check on old pools.
+    "Emtricitabine is eliminated by a combination of glomerular filtration and tubular secretion.",
+    "The claim is not supported by explanation or analysis.",
+    "The document was prepared by the Agency in order to be published within two months.",
+    "The study asked how many plans would be affected by the rule.",
+    "The employer stays home until the employer is notified by the employee of the test results.",
+    "The bioavailability was not altered by the co-administration of antacids.",
+])
+def test_round6_abstains(sentence):
+    assert run("passive_v5", sentence) == sentence
+
+
+@pytest.mark.parametrize("before, after", [
+    ("The decision was approved by the board.", "The board approved the decision."),
+    ("In later years, the song was covered by two other singers.",
+     "In later years, two other singers covered the song."),
+    ("The needs of the patient cannot be met by standard solutions.",
+     "Standard solutions cannot meet the needs of the patient."),
+    ("Applications are typically completed by the office staff.",
+     "The office staff typically completes applications."),
+    ("The rule was challenged by OSHA.", "OSHA challenged the rule."),
+])
+def test_round6_operations(before, after):
+    assert run("passive_v5", before) == after
+
+
+def test_round6_fluency_floor(monkeypatch):
+    monkeypatch.setattr("cleartext.structure_v2.fluency.fluency_drop", lambda before, after: -20.0)
+    assert run("passive_v5", "The decision was approved by the board.") == "The decision was approved by the board."
+    monkeypatch.setattr("cleartext.structure_v2.fluency.fluency_drop", lambda before, after: -3.0)
+    assert run("passive_v5", "The decision was approved by the board.") == "The board approved the decision."
+
+
+def test_round6_output_check():
+    from cleartext.structure_v2.passive import output_check_v5
+    assert output_check_v5("The board approved the decision.", "approve", "The board", "the decision") is None
+    assert output_check_v5("The board approved.", "approve", "The board", "the decision") is not None

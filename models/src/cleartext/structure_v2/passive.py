@@ -219,20 +219,320 @@ def _features(verb, subj, auxpass, agent_obj, kind, sent):
     }
 
 
+# Round 4: instruments and procedures are means, not doers ("by a 420-3 vote",
+# "by a slow infusion", "by the Cockcroft-Gault formula").
+MEANS_V4 = {"vote", "votes", "infusion", "formula", "method", "means", "process", "route", "test", "equation",
+            "procedure", "technique", "injection", "instrument", "device", "margin", "majority", "ballot",
+            "referendum", "assay", "inhalation", "ingestion", "dialysis", "hemodialysis"}
+
+
 def skip_reason(verb, subj, auxpass, agent, agent_obj, sent, version=2):
     reason = _skip_reason(verb, subj, auxpass, agent, agent_obj, sent)
     if reason is None and version >= 3:
         reason = _skip_reason_v3(verb, subj, agent, agent_obj, sent)
     if reason is None and version >= 4:
         reason = _skip_reason_v4(verb, subj, agent, agent_obj, sent)
+    if reason is None and version >= 5:
+        reason = _skip_reason_v5(verb, subj, auxpass, agent, agent_obj, sent)
     return reason
 
 
-# Round 4: instruments and procedures are means, not doers ("by a 420-3 vote",
-# "by a slow infusion", "by the Cockcroft-Gault formula").
-MEANS_V4 = {"vote", "votes", "infusion", "formula", "method", "means", "process", "route", "test", "equation",
-            "procedure", "technique", "injection", "instrument", "device", "margin", "majority", "ballot",
-            "referendum", "assay", "inhalation", "ingestion", "dialysis", "hemodialysis"}
+# Structure v3 (version 5, November 23): v4 plus a whitelist. The flip is
+# kept only when the agent is a plain noun phrase that ends its clause or is
+# followed by a verb-attached prepositional phrase or a finite clause, nothing
+# scopes over the agent, and a second parser agrees on the subject, the
+# agent and what attaches to it.
+FOCUS_V5 = {"only", "solely", "exclusively", "primarily", "mainly", "mostly", "largely", "partly", "partially",
+            "both", "either", "neither", "even", "also", "just", "entirely", "almost", "chiefly", "predominantly",
+            "principally", "jointly", "merely", "alone", "too", "part", "particularly", "especially", "mainly",
+            "wholly", "fully", "directly", "indirectly", "together", "independently", "simultaneously",
+            "preferably", "ideally", "possibly", "necessarily", "exactly", "precisely"}
+# BERT-base pseudo-log-likelihood of the rewrite minus the source's
+# (structure_v2.fluency); below this the rewrite is usually garbled (dev
+# items: 13 of the 15 rewrites under -16 were marked not Good).
+FLUENCY_FLOOR_V5 = -16.0
+# Words whose scope changes when the agent moves in front of them.
+SCOPE_FOCUS_V5 = {"only", "solely", "exclusively", "even", "just", "merely", "primarily", "mainly", "mostly", "largely",
+                  "partly", "partially", "chiefly", "predominantly", "principally", "entirely", "wholly", "fully",
+                  "preferably", "ideally", "necessarily", "alone"}
+# Second dev check (November 23): "by" as a criterion ("stratified by risk
+# factors"), degree adverbs that make the participle an adjective
+# ("extremely burdened"), and pronouns that would change their antecedent.
+CRITERION_VERBS_V5 = {"stratify", "sort", "group", "classify", "categorize", "categorise", "order", "divide",
+                      "organize", "organise", "arrange", "weight", "adjust", "normalize", "scale", "index", "rank",
+                      "sum", "aggregate", "split", "separate", "break", "multiply", "summarize", "summarise"}
+DEGREE_V5 = {"very", "extremely", "highly", "deeply", "greatly", "so", "too", "quite", "rather", "increasingly",
+             "more", "most", "less", "least", "somewhat", "slightly", "heavily", "strongly", "badly", "well",
+             "better", "best", "fairly", "pretty", "really", "particularly", "especially"}
+THIRD_PRONOUNS = {"it", "its", "itself", "they", "them", "their", "theirs", "themselves", "he", "him", "his",
+                  "himself", "she", "her", "hers", "herself"}
+MEANS_V5 = MEANS_V4 | {"gravity", "strangulation", "suffocation", "drowning", "hanging", "diffusion", "filtration",
+                       "secretion", "transport", "mechanism", "mechanisms", "use", "usage", "excretion", "absorption",
+                       "metabolism", "hydrolysis", "conjugation", "dissolution", "force", "pressure", "heat",
+                       "light", "hand", "machine", "reference", "contrast", "way", "dint", "virtue", "fax",
+                       "telephone", "phone", "letter"}
+# "by the game's release": a time, not a doer.
+EVENT_TIME_V5 = TIME_WORDS | {"release", "launch", "end", "start", "beginning", "completion", "close", "opening",
+                              "debut", "premiere", "arrival", "departure", "death", "conclusion", "onset", "outbreak",
+                              "middle", "turn", "dawn", "age"}
+# Relations rather than actions: the active is wrong or no simpler
+# ("a test dose should precede repeat doses", "excitation manifests this effect").
+RELATION_VERBS_V5 = {"precede", "follow", "accompany", "manifest", "mediate", "relate", "characterize",
+                     "characterise", "distinguish", "flank", "constitute", "comprise", "offset", "outweigh",
+                     "exceed", "reflect", "indicate", "evidence", "suggest", "imply", "underlie", "typify",
+                     "exemplify", "denote", "mark", "represent", "measure", "quantify", "estimate", "calculate",
+                     "approximate", "define", "base", "determine", "govern", "limit", "derive", "intend",
+                     "mean"}
+# Verbs with an "of" complement ("notified the employer of the results").
+OF_VERBS_V5 = {"notify", "inform", "advise", "warn", "remind", "accuse", "convince", "assure", "rob", "deprive",
+               "relieve", "cure", "suspect", "apprise", "persuade", "clear", "absolve", "acquit", "convict", "tell"}
+DRUG_SUFFIX_V5 = re.compile(r"(?:ine|ide|ate|mab|nib|pril|sartan|statin|olol|azole|cillin|mycin|cycline|vir|tide|"
+                            r"one|ol|in|ium|ase|am|ax|ix|ex|il|an|ene|yl)$")
+AGENT_DEPS_V5 = {"det", "amod", "compound", "poss", "nummod", "case", "cc", "conj", "quantmod", "nmod", "predet",
+                 "advmod", "punct", "pobj", "prep"}
+CLAUSE_DEPS_BAD_V5 = {"xcomp", "acl", "conj", "ccomp", "dep", "parataxis", "oprd", "acomp", "attr", "relcl",
+                      "appos", "dobj", "dative", "csubj", "intj", "meta"}
+BRACKETS = ("(", ")", "[", "]", "{", "}")
+
+
+def _finite_clause(tok):
+    """An adverbial clause with its own subject ("as floodwaters rose")."""
+    return any(c.dep_ in ("nsubj", "nsubjpass", "expl") for c in tok.children) and tok.tag_ in (
+        "VBD", "VBZ", "VBP", "MD") or any(c.dep_ in ("nsubj", "nsubjpass") for c in tok.children) and any(
+        c.dep_ == "aux" and c.tag_ in ("VBD", "VBZ", "VBP", "MD") for c in tok.children)
+
+
+def _clause_after(verb, agent, sent):
+    return [t for t in verb.subtree if t.i > agent.right_edge.i and not (t.is_punct and t.i >= sent.end - 1)]
+
+
+def v5_reasons(verb, subj, auxpass, agent, agent_obj, sent):
+    """Every version-5 reason to skip this clause, in order (a generator)."""
+    if agent is None:
+        return
+    doc = sent.doc
+    agent_toks = list(agent.subtree)
+    agent_ids = {t.i for t in agent_toks}
+    # The agent itself: a plain noun phrase.
+    if len(agent_toks) - 1 > 8:
+        yield "v5: agent longer than 8 words"
+    if any(t.dep_ not in AGENT_DEPS_V5 for t in agent_toks if t.i not in (agent.i, agent_obj.i)):
+        yield "v5: clause or other modifier inside the agent"
+    if any(t.dep_ == "prep" and t.lower_ != "of" for t in agent_toks if t.i != agent.i):
+        yield "v5: prepositional phrase other than 'of' inside the agent (attachment)"
+    if any(t.dep_ == "prep" and t.head.pos_ == "PROPN" for t in agent_toks if t.i != agent.i):
+        yield "v5: 'of' phrase on a name in the agent (attachment)"
+    if any(t.is_punct and t.text not in ("-", "–", "'s", "’s", ".", "&") for t in agent_toks):
+        yield "v5: punctuation inside the agent"
+    if any(t.lower_ in FOCUS_V5 for t in agent_toks) or any(t.lower_ in FOCUS_V5 for t in sent if verb.i < t.i < agent.i):
+        yield "v5: focus word scopes over the agent"
+    nxt = doc[agent.right_edge.i + 1] if agent.right_edge.i + 1 < sent.end else None
+    if nxt is not None and nxt.lower_ in ("alone", "too", "either", "only", "themselves", "itself", "himself", "herself"):
+        yield "v5: focus word after the agent"
+    # Dev check on old pools (November 23): contrastive coordination, a
+    # post-head adjective, an "of" phrase that may be the verb's
+    # ("notified by the employee of the results"), a split hyphenated word.
+    if any(t.lower_ in ("rather", "instead", "not", "unlike", "well") for t in agent_toks):
+        yield "v5: contrastive coordination inside the agent"
+    post = [t for t in agent_toks if t.i > agent_obj.i]
+    of_ids = set()
+    for t in post:
+        if t.dep_ == "prep" and t.lower_ == "of" and t.head.i == agent_obj.i:
+            of_ids |= {x.i for x in t.subtree}
+    conj_ids = set()
+    for t in post:
+        if t.dep_ in ("cc", "conj") and t.head.i in {agent_obj.i} | conj_ids | of_ids:
+            conj_ids |= {x.i for x in t.subtree}
+    if any(t.i not in of_ids | conj_ids for t in post):
+        yield "v5: modifier after the agent's head noun"
+    if of_ids and verb.lemma_ in OF_VERBS_V5:
+        yield "v5: 'of' phrase may belong to the verb"
+    if nxt is not None and (nxt.text in ("-", "–") or doc[agent.right_edge.i].whitespace_ == "" and nxt.is_alpha):
+        yield "v5: hyphenated word split at the agent's end"
+    head = agent_obj.lemma_.lower()
+    if head in MEANS_V5 or agent_obj.lower_ in MEANS_V5:
+        yield "v5: means, instrument or rule as the agent"
+    if head in EVENT_TIME_V5:
+        yield "v5: event or time as the agent"
+    if not agent_obj.ent_type_ and agent_obj.pos_ != "PROPN":
+        from nltk.corpus import wordnet as wn
+        senses = wn.synsets(head, "n")
+        if senses and senses[0].lexname() in ("noun.process", "noun.time", "noun.quantity", "noun.shape",
+                                              "noun.location"):
+            yield f"v5: agent head is a {senses[0].lexname()[5:]} noun"  # "by the side of the road"
+        if not senses and re.search(r"(?:ation|ition|sis|ysis|ment)$", head):
+            yield "v5: agent head is an unknown process noun"
+    if agent_obj.tag_ in ("WDT", "WP", "WP$"):
+        yield "v5: wh-word agent"
+    if any(c.dep_ == "neg" for c in verb.children) and not any(
+            c.dep_ in ("det", "poss", "nummod") for c in agent_obj.children) and agent_obj.tag_ == "NN":
+        from nltk.corpus import wordnet as wn
+        senses = wn.synsets(head, "n")
+        if senses and senses[0].lexname() in ("noun.cognition", "noun.communication"):
+            # "is not supported by explanation" (none was given) is not
+            # "explanation does not support it".
+            yield "v5: negated passive with a bare evidence noun as the agent"
+    subj_q = {t.lower_ for t in subj.subtree} & {"every", "each", "all", "no", "none", "few", "many", "most", "not"}
+    agent_indef = any(c.dep_ in ("det", "nummod") and (c.lower_ in ("a", "an", "some", "one") or c.like_num)
+                      for c in agent_obj.children)
+    if subj_q and agent_indef:
+        yield "v5: quantifiers in both phrases (scope would change)"
+    if subj.tag_ == "PRP" and len(agent_toks) - 1 > 6:
+        yield "v5: pronoun object after a long agent (not simpler)"
+    if verb.lemma_ in RELATION_VERBS_V5:
+        yield "v5: relation verb, not an action"
+    # The clause around it.
+    if any(t.text in BRACKETS for t in sent if t.i < verb.i) and any(t.text in BRACKETS for t in sent if t.i > verb.i):
+        yield "v5: clause inside brackets"
+    for c in verb.children:
+        if c.dep_ in CLAUSE_DEPS_BAD_V5:
+            yield f"v5: {c.dep_} on the verb"
+        if c.dep_ == "advcl" and not _finite_clause(c):
+            yield "v5: non-finite adverbial clause on the verb (would attach to the new subject)"
+        if c.dep_ == "npadvmod" and c.i > agent.i and c.pos_ != "NOUN":
+            yield "v5: loose modifier after the agent"
+    after = _clause_after(verb, agent, sent)
+    if after:
+        first = next((t for t in after if not t.is_punct), None)
+        if any(t.text in BRACKETS + (":", ";", "—", "–", "-") for t in after):
+            yield "v5: bracket or dash after the agent"
+        if any(t.head.i in agent_ids for t in after):
+            yield "v5: material after the agent attaches to it"
+        if after[0].text == ",":
+            if first is not None and (first.tag_ in ("VBG", "VBN", "JJ", "RB") or first.pos_ in ("VERB", "ADJ")):
+                yield "v5: comma and a participle or adjective after the agent"
+        if first is not None and first.pos_ not in ("ADP", "SCONJ", "ADV"):
+            yield "v5: word after the agent starts no phrase of the verb (misparse)"
+        if first is not None and first.pos_ == "ADP" and doc[agent.right_edge.i].text[:1].isupper():
+            nxt2 = doc[first.i + 1] if first.i + 1 < sent.end else None
+            if nxt2 is not None and (nxt2.text[:1].isupper() or nxt2.lower_ == "the" and first.i + 2 < sent.end
+                                     and doc[first.i + 2].text[:1].isupper()):
+                yield "v5: capitalized phrase after a name (may be part of a title)"
+    # Second dev check: scope, adjectival participles, criterion "by",
+    # pronoun reference, footnote markers and abbreviations.
+    auxes = _auxes(verb)
+    group_toks = [t for t in sent if auxes and auxes[0].i < t.i < agent.i]
+    if any(t.lower_ in SCOPE_FOCUS_V5 for t in group_toks):
+        yield "v5: focus word in the verb group ('could only be provided by')"
+    if any(t.lower_ in DEGREE_V5 and t.head.i == verb.i for t in sent if t.i < verb.i) or any(
+            c.dep_ == "advmod" and c.lower_ in DEGREE_V5 for c in verb.children):
+        yield "v5: degree adverb on the participle (an adjective, not an action)"
+    if verb.lemma_ in CRITERION_VERBS_V5:
+        yield "v5: criterion or measure verb ('stratified by')"
+    if agent_obj.lower_ in ("it", "them", "this", "that", "these", "those"):
+        yield "v5: pronoun or demonstrative agent (antecedent may follow)"
+    # A later pronoun that could now pick up the agent, which comes first
+    # ("notice was not required by the APA ..., it provided guidance").
+    agent_pl = number_of(agent_obj) == "pl"
+    for t in sent:
+        if t.i <= agent.right_edge.i or t.lower_ not in THIRD_PRONOUNS or t.tag_ not in ("PRP", "PRP$"):
+            continue
+        plural = t.lower_ in ("they", "them", "their", "theirs", "themselves")
+        personal = t.lower_ not in ("it", "its", "itself") and not plural
+        if plural == agent_pl and (not personal or agent_obj.ent_type_ == "PERSON" or agent_obj.tag_ == "PRP"):
+            yield "v5: a later pronoun may change its antecedent"
+            break
+    if any("\\" in t.text for t in sent) or any(t.text.endswith(".") and len(t.text) > 1 for t in agent_toks):
+        yield "v5: footnote marker or abbreviation"
+    low = sent.text.lower()
+    if any(p in low for p in ("much less", "let alone", "not to mention", "still less")):
+        yield "v5: 'much less' / 'let alone' coordination"
+    from nltk.corpus import wordnet as wn
+    if not wn.synsets(verb.lemma_, "v"):
+        yield "v5: lemma is not a dictionary verb (an adjective such as 'unaltered')"
+    from lemminflect import getLemma
+    if verb.lemma_ != (getLemma(verb.text.lower(), upos="VERB") or ("",))[0]:
+        yield "v5: the two lemmatizers disagree ('installed' -> 'instal')"
+    neg = any(c.dep_ == "neg" for c in verb.children)
+    negs = [c for c in verb.children if c.dep_ == "neg"]
+    if negs and len([a for a in auxes if a.i != auxpass.i]) == 0 and any(
+            t.dep_ == "advmod" and t.i < negs[0].i for t in group_toks):
+        yield "v5: do-support with an adverb before 'not' ('does also not')"
+    if after and any(t.lower_ == "as" and t.i + 1 < sent.end and doc[t.i + 1].tag_ in ("PRP", "VBN") for t in after):
+        yield "v5: 'as it ...' / 'as described' after the agent (may describe the agent)"
+    # Tense and adverbs.
+    if any(a.lemma_ == "have" for a in auxes) and any(t.lower_ == "since" for t in sent):
+        yield "v5: perfect with 'since'"
+    pre_adv = [t for t in sent if auxes and auxes[0].i < t.i < verb.i and t.dep_ == "advmod"]
+    post_adv = [c for c in verb.children if c.dep_ == "advmod" and verb.i < c.i < agent.i]
+    if pre_adv and post_adv:
+        yield "v5: adverbs on both sides of the participle"
+    if any(any(c.dep_ == "aux" and c.lower_ == "to" for c in t.children) or t.lower_ == "order" and
+           t.i + 1 < sent.end and doc[t.i + 1].lower_ == "to" for t in verb.subtree if t.i > verb.i and t.i not in agent_ids):
+        yield "v5: infinitive after the verb (its doer may change)"
+    # The old subject: plain, and not a heading.
+    if any(t.text in BRACKETS for t in subj.subtree):
+        yield "v5: bracket in the subject"
+    if any(t.tag_ in ("WRB", "WDT", "WP", "WP$") or t.dep_ == "mark" for t in subj.subtree):
+        yield "v5: wh-word or complementizer in the subject"
+    prev = doc[subj.left_edge.i - 1] if subj.left_edge.i > sent.start else None
+    if prev is not None and (prev.pos_ == "ADP" and prev.dep_ not in ("mark", "advmod") or prev.pos_ in (
+            "VERB", "AUX") and (any(c.dep_ == "conj" for c in subj.children) or subj.left_edge.lower_ == "that")):
+        yield "v5: subject right after a verb or preposition (misparse)"  # "surveys farmers and ranchers and the FLS is"
+    first = subj.left_edge
+    if first.i == sent.start and first.text[:1].isupper() and first.lower_ not in ("i",) and (
+            keeps_capital(first) or lower_first(first.text, first, titles=True, ids=True) == first.text):
+        from nltk.corpus import wordnet as wn
+        from .common import parse_second
+        ent2 = parse_second(doc.text)[first.i].ent_type_
+        drug = DRUG_SUFFIX_V5.search(first.lower_) and not wn.synsets(first.lower_)
+        if first.ent_type_ != ent2 or not first.ent_type_ or drug:
+            yield "v5: sentence-initial capitalized word would stay capitalized (name of unknown type)"
+    if subj.left_edge.i == sent.start and subj.left_edge.pos_ == "PROPN" and not subj.left_edge.ent_type_:
+        yield "v5: sentence-initial capitalized word of unknown type"
+    reason = _agreement_reason(verb, subj, agent, sent)
+    if reason:
+        yield reason
+
+
+def _skip_reason_v5(verb, subj, auxpass, agent, agent_obj, sent):
+    return next(v5_reasons(verb, subj, auxpass, agent, agent_obj, sent), None)
+
+
+def _agreement_reason(verb, subj, agent, sent):
+    """None when en_core_web_md finds the same passive: same subject span,
+    same agent span, and the same attachment (to the agent or not) for every
+    word after the agent."""
+    from .common import parse_second
+    doc = sent.doc
+    d2 = parse_second(doc.text)
+    if [t.text for t in d2] != [t.text for t in doc]:
+        return "v5: second parser tokenizes differently"
+    v2 = d2[verb.i]
+    s2 = [c for c in v2.children if c.dep_ == "nsubjpass"]
+    a2 = [c for c in v2.children if c.dep_ == "agent"]
+    if not s2 or not a2:
+        return "v5: second parser finds no passive with this agent"
+    if {t.i for t in s2[0].subtree} != {t.i for t in subj.subtree}:
+        return "v5: second parser disagrees on the subject"
+    agent_ids = {t.i for t in agent.subtree}
+    if {t.i for t in a2[0].subtree} != agent_ids:
+        return "v5: second parser disagrees on the agent"
+    for t in sent:
+        if t.i > agent.right_edge.i and (d2[t.i].head.i in agent_ids) != (t.head.i in agent_ids):
+            return "v5: second parser attaches later words differently"
+    return None
+
+
+def output_check_v5(output, verb_lemma, subject_text, object_text):
+    """The rewrite parses as intended under either parser: a verb with this
+    lemma whose subject is the new subject and whose object starts with the
+    old subject (a following phrase may attach to the object)."""
+    from .common import parse_second
+    norm = lambda s: re.sub(r"\s+", " ", s).strip().lower()
+    for parser in (parse, parse_second):
+        sents = list(parser(output).sents)
+        if len(sents) != 1:
+            continue
+        for tok in sents[0]:
+            if tok.lemma_.lower() != verb_lemma.lower() or not tok.tag_.startswith("VB"):
+                continue
+            subj = [c for c in tok.children if c.dep_ == "nsubj"]
+            obj = [c for c in tok.children if c.dep_ == "dobj"]
+            if subj and obj and norm(span_text(subj[0].subtree)) == norm(subject_text) \
+                    and norm(span_text(obj[0].subtree)).startswith(norm(object_text)):
+                return None
+    return "v5: output does not parse with the intended subject and object"
 
 
 def _skip_reason_v4(verb, subj, agent, agent_obj, sent):
@@ -475,13 +775,15 @@ def _verb_group(verb, auxpass, auxes, pn):
     return joined
 
 
+PARTITIVE_PLURAL = {"number", "lot", "couple", "variety", "range", "majority", "handful", "host", "dozen", "plenty",
+                    "minority", "third", "quarter", "half", "percent", "proportion"}
 QUANTIFIER_PLURAL = {"some", "many", "few", "several", "both", "all", "others", "most"}
 
 
-def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
+def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2, info=None):
     """Rewrite one passive clause. new_subject: (text, agreement) for a
     recovered agent; otherwise the by-phrase is used. Returns the sentence
-    text or None."""
+    text or None; `info` (a dict) receives the new subject and object text."""
     agent = next((c for c in verb.children if c.dep_ == "agent"), None)
     agent_obj = next((c for c in agent.children if c.dep_ == "pobj"), None) if agent is not None else None
     auxes = _auxes(verb)
@@ -501,6 +803,13 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
             if version >= 3 and (agent_obj.lower_ in QUANTIFIER_PLURAL
                                  or any(t.lower_ == "both" for t in agent_obj.subtree)):
                 pn = "pl"  # "criticised by some" -> "some have"; "both the oral and parenteral ..." 
+            if version >= 5 and (any(ch.isdigit() for ch in agent_obj.text) or agent_obj.text.isupper()
+                                 and len(agent_obj.text) > 1) and not any(c.dep_ == "conj" for c in agent_obj.children):
+                pn = "3sg"  # "CYP2C9 metabolizes", "OSHA cites"
+            if version >= 5 and agent_obj.lemma_.lower() in PARTITIVE_PLURAL and any(
+                    c.dep_ == "prep" and c.lower_ == "of" and any(g.tag_ in ("NNS", "NNPS") for g in c.children)
+                    for c in agent_obj.children):
+                pn = "pl"  # "a number of studies have shown"
         subject_text = mapped
     elif new_subject is not None:
         subject_text, pn = new_subject
@@ -520,10 +829,18 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
         object_text = span_text(subj_toks, lambda t: SUBJ_TO_OBJ.get(t.lower_, t.text)
                                 if t.tag_ == "PRP" and t.lower_ in SUBJ_TO_OBJ and t.i in heads else t.text)
         if start:
-            object_text = lower_first(object_text, subj_toks[0], titles=version >= 4)
+            object_text = lower_first(object_text, subj_toks[0], titles=version >= 4, ids=version >= 5)
+    if info is not None:
+        info.update(subject=subject_text, object=object_text, relative=relative or expletive)
     group = _verb_group(verb, auxpass, auxes, pn)
     if group is None:
         return None
+    if version >= 5:
+        # "cannot" is two tokens; keep it one word ("can not meet" -> "cannot meet").
+        for k in range(len(group) - 1):
+            if group[k].lower() == "can" and group[k + 1].lower() == "not" and re.search(r"(?i)\bcannot\b", sent.text):
+                group = group[:k] + [group[k] + group[k + 1]] + group[k + 2:]
+                break
     from wordfreq import zipf_frequency
     if zipf_frequency(group[-1], "en") < 1.0 and zipf_frequency(verb.text, "en") >= 1.0:
         return None  # an inflection guessed for an unknown verb ("interconvertes")
@@ -657,10 +974,20 @@ class ActiveVoice:
                     continue
                 if self.gate is not None and not self.gate(row["features"]):
                     continue
+                info = {}
                 out = convert_clause(sent, row["verb"], row["subj"], row["auxpass"], row["new_subject"],
-                                     version=self.version)
+                                     version=self.version, info=info)
                 if out is None or out == current:
                     continue
+                if self.version >= 5 and row["kind"] == "agentive":
+                    if info.get("relative") or output_check_v5(out, row["verb"].lemma_, info["subject"],
+                                                               info["object"]) is not None:
+                        continue
+                    from .fluency import fluency_drop
+                    drop = fluency_drop(current, out)
+                    row["features"]["fluency_drop"] = round(drop, 2)
+                    if drop < FLUENCY_FLOOR_V5:
+                        continue
                 edits.append(Edit(self.op, row["kind"], current, out, row["features"]))
                 current, done = out, True
                 break

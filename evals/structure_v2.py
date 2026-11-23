@@ -119,8 +119,12 @@ def run_pool_c(args):
                "pool-Bwide.json"]
     if args.name in ("D", "E"):
         earlier += ["pool-C.json", "pool-Cwide.json"]
-    if args.name == "E":
+    if args.name in ("E", "F", "G"):
         earlier += ["pool-D.json", "pool-Dwide.json"]
+    if args.name in ("F", "G"):
+        earlier += ["pool-E.json", "pool-Ewide.json"]
+    if args.name == "G":
+        earlier += ["pool-F.json", "pool-Fwide.json"]
     for f in earlier:
         for r in json.loads((state / f).read_text()):
             docs_used.add(r["doc"])
@@ -129,7 +133,7 @@ def run_pool_c(args):
     used = set()
     for t in texts_used:
         used |= grams(t)
-    suffix = {"C": "3", "D": "4", "E": "5"}[args.name]
+    suffix = {"C": "3", "D": "4", "E": "5", "F": "6", "G": "7"}[args.name]
     rng = random.Random(SEED + int(suffix))
     pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
     for path in sorted(Path(args.download).glob("*.jsonl.gz")):
@@ -463,11 +467,13 @@ def tally(items, marks, arms, rated_sentences):
         out[arm] = {
             "n": n, "good": c["good"], "good_rate": c["good"] / n if n else None,
             "good_ci95": wilson(c["good"], n), "marks": dict(c),
+            "meaning_rate": c["meaning"] / n if n else None, "meaning_ci95": wilson(c["meaning"], n),
             "per_rater_good_rate": [r["good"] / n if n else None for r in per_rater],
             "unanimous_good": sum(all(m[it["card"]] == "good" for m in marks) for it in sel),
             "by_rule": {k: {"n": len(v), "good": v.count("good"), "good_ci95": wilson(v.count("good"), len(v)),
                             "marks": dict(Counter(v))} for k, v in by_rule.items()},
-            "by_source": {k: {"n": len(v), "good": v.count("good")} for k, v in by_source.items()},
+            "by_source": {k: {"n": len(v), "good": v.count("good"), "meaning": v.count("meaning")}
+                          for k, v in by_source.items()},
             "edits_per_100_sentences": 100 * info.get("changed", 0) / info["sentences"] if info.get("sentences") else None,
             "changed": info.get("changed"), "sentences": info.get("sentences"),
         }
@@ -776,7 +782,7 @@ def main(argv=None):
     p = sub.add_parser("pool-c")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--download", type=Path, required=True)
-    p.add_argument("--name", default="C", choices=("C", "D", "E"))
+    p.add_argument("--name", default="C", choices=("C", "D", "E", "F", "G"))
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("apply")

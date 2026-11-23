@@ -119,13 +119,14 @@ def keeps_capital(tok):
     return False
 
 
-def lower_first(text, tok, titles=False):
+def lower_first(text, tok, titles=False, ids=False):
     if not text or keeps_capital(tok):
         return text
     if titles:
         # Round 4: a capitalized run ("Wings for My Flight", "Operation NANOOK
-        # 2008") is a title or name; keep its first capital.
-        nxt = [t for t in tok.doc[tok.i + 1: tok.i + 4] if t.is_alpha]
+        # 2008") is a title or name; keep its first capital. ids (round 6):
+        # also before a code or identifier ("Form CMS-855A").
+        nxt = [t for t in tok.doc[tok.i + 1: tok.i + 4] if t.is_alpha or ids and not t.is_punct]
         if any(t.text[:1].isupper() for t in nxt):
             return text
     return text[0].lower() + text[1:]
@@ -193,6 +194,19 @@ def hard_checks(source, output):
 def parse(text):
     """Cached spaCy parse of a sentence or passage (the pipeline's model)."""
     return nlp()(text)
+
+
+@lru_cache(1)
+def second_nlp():
+    """A second, independently trained parser (en_core_web_md) for the
+    structure v3 agreement check; it shares the small model's tokenizer."""
+    import spacy
+    return spacy.load("en_core_web_md")
+
+
+@lru_cache(maxsize=20000)
+def parse_second(text):
+    return second_nlp()(text)
 
 
 def sentence_spans(text):

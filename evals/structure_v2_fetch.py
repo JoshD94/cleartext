@@ -137,7 +137,10 @@ def used_generics():
 
 WINDOWS = {3: {"fedreg": ("2021-07-01", "2021-12-31"), "openfda": "[20230101+TO+20231231]"},
            4: {"fedreg": ("2021-01-01", "2021-06-30"), "openfda": "[20210101+TO+20211231]"},
-           5: {"fedreg": ("2020-07-01", "2020-12-31"), "openfda": "[20200101+TO+20201231]"}}
+           5: {"fedreg": ("2020-07-01", "2020-12-31"), "openfda": "[20200101+TO+20201231]"},
+           # Structure v3 (rounds 6-7, November 23): two more disjoint windows.
+           6: {"fedreg": ("2020-01-01", "2020-06-30"), "openfda": "[20190101+TO+20191231]"},
+           7: {"fedreg": ("2019-07-01", "2019-12-31"), "openfda": "[20180101+TO+20181231]"}}
 
 
 def round3(args, deadline):
@@ -189,7 +192,12 @@ def round3(args, deadline):
             for skip in range(0, 5000, 100):
                 if len(docs) >= R3_CAPS[name] or time.monotonic() > deadline:
                     break
-                page = f.json(f"{fda_url}&limit=100&skip={skip}", delay=0.5)
+                try:
+                    page = f.json(f"{fda_url}&limit=100&skip={skip}", delay=0.5)
+                except B.urllib.error.HTTPError as e:
+                    if e.code == 404:
+                        break  # past the last label of a small window (round 7: 2018)
+                    raise
                 for lab in page.get("results", []):
                     gen = [g.lower() for g in lab.get("openfda", {}).get("generic_name", [])]
                     doc = f"fda-{lab['set_id']}"
@@ -241,7 +249,7 @@ def main(argv=None):
     ap.add_argument("--previous", default=str(Path.home() / ".local/state/cleartext/structure-20261122/download"))
     args = ap.parse_args(argv)
     deadline = time.monotonic() + args.max_seconds
-    if args.round in (3, 4, 5):
+    if args.round in (3, 4, 5, 6, 7):
         args.out.mkdir(parents=True, exist_ok=True)
         return round3(args, deadline)
     f = Fetcher(args.out / "http")

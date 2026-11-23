@@ -26,10 +26,15 @@ OPS = {
     "passive_we": lambda: ActiveVoice(agents=("we",)),
     "passive_v3": lambda: ActiveVoice(version=3),
     "passive_v4": lambda: ActiveVoice(version=4),
+    # Structure v3 (round 6): v4 plus a whitelist, a second-parser agreement
+    # check, an output parse check and a BERT fluency floor; by-phrase
+    # passives only. Round 6 adds the 0.5 entailment floor (min_entailment).
+    "passive_v5": lambda: ActiveVoice(version=5, kinds=("agentive",)),
     "passive_recovered": lambda: ActiveVoice(agents=("we",), kinds=("recovered_we",)),
     "appositive": lambda: AppositiveSplit(),
     "appositive_v2": lambda: AppositiveSplit(version=2),
     "appositive_v3": lambda: AppositiveSplit(version=3),
+    "appositive_v4": lambda: AppositiveSplit(version=4),  # round 6: definite or named anchors
     "fronted_split": lambda: FrontedClause(rules=("split",)),
     "fronted_move": lambda: FrontedClause(rules=("move",)),
     "frames": lambda: EmptyFrames(),
