@@ -35,3 +35,20 @@ offline (E7, E14). Text is the authored examples only.
   fall back to "old sentence struck, new sentence marked" (E4).
 - Op labels fell back to "Sentence rewrite" (edits carry the op family, not `_v4`).
 - Sentence-opening words ("Applicants") were listed as names under "Facts kept".
+
+## Results tab (2026-11-23, edit mode)
+
+New header switch (Try it / Results) and a Results view for Chhoeng's 200 research-paper
+sentences (`site/public/results.json`, built by `tools/build_results.py` from a local
+`evals/sentence_set.py` run). Headless shots, 1440×900 and 390×844 (3×), light and dark;
+before = live site, after = local files.
+
+- Never list: no eyebrows or captions under the title (source and caveats sit in one
+  quiet note at the end), no row lines (table uses spacing), one accent (selected
+  pill is a white card on the grey track; "Reads well" dot is the accent, other verdicts grey),
+  every control 30–36 px with the shared radius, Feather icons, external-source link is a
+  real icon button with a hover fill.
+- Always list: segmented pill slides (220 ms); verdict counts are the list's filters;
+  phone keeps metric tiles two-up then one, the system switch full width, and drops
+  the domain tag so each card head stays on one line.
+- Placeholder: none. Verdicts are one reviewer's reading, stated in the note.
