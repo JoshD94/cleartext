@@ -1,0 +1,57 @@
+{
+ "round": "9",
+ "written": "2026-11-23 02:51:57 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "9d03c0965779d10eba1aa227b4cee78307b4b855414d7262d20988d560e0e835",
+  "models/src/cleartext/structure_v2/appositive.py": "346b96c8ba6edc8d0722099ec4e73d3c33a767ba1fa9ed211bc99072a081948f",
+  "models/src/cleartext/structure_v2/common.py": "5e062915e45718e6d1da5d85860fc21e010ce94c32ac4c13aa49783d761fd978",
+  "models/src/cleartext/structure_v2/fluency.py": "df091bf7efb1e3702ab253e72abc8d6816b6895f0d51435198a1ad14083c568d",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "6b7cd1b48f8855e6d65246f53da617851eca90462e996cf71cc348408fbfd64b",
+  "models/src/cleartext/structure_v2/passive.py": "00525326f48e94eff7ecb6792c4758d70db805787426fda3b866d9a80e610595",
+  "models/src/cleartext/structure_v2/stage.py": "0ca42e32c9cf5d399c60177c4b835526f184c09958f1e6fa0208cfcc2345cd7e",
+  "evals/structure_v2.py": "c4fe2df2c225c445576dc79a41d0352551ea315ddab34fabf1fadd15d2b98c95",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "evals/structure_v2_fetch.py": "19e4b17118937406859659a2b37d6c96c12c65e3bc8b104f41313ed1c0e18ec7",
+  "evals/reports/20261123-structure-v4/ROUND8.md": "b65db311b523f6e145cdfc0f7c3bee93274bc09fc6e9b790ea10f00ba503898e",
+  "evals/reports/20261123-structure-v4/ROUND9.md": "6a3e00607b3cc259d93d3e7a9dbddc2eb0585502ca92133bd8bed03319e31fa8",
+  "evals/reports/20261123-structure-v4/round8.json": "78974d45f406df1196f75c7617b097196bce1be096926ba5635f4bed3be46097"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-J.json": "0bddd9ebbfb5a3f0cf4795b9c462ca81caa49076dc43cb383ff1678d36eaf79a",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Jwide.json": "fd111a8ee4e24fb72cbf5d28787f8f73595cee8fcfec73641c367873681cc9cb",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-K.json": "ef0c78b2a88c458578e34a9c0528ec68b92fab61ae355b2023af080a2d19332b",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Kwide.json": "385f97f54156c3b19c25aca5a00768ee43b23459ec3cf26a0aa64787ad1fcbe0",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Jwide-f.json": "4b1af0ad36b1947802da103f8ce768b14f86d72a6e286af412ad4ae361890ad4",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Kwide-f.json": "878d6d697963b9061e0e612c78fefc5c8ac559e6101564f1794849316223bfb9",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-JKwide-f.json": "25fbaf9f8d4a7ad1cb50f474b5fadc06118e58ec8115273b2e0fe8e5d4e30120",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-JK.json": "6116cf2b8e1ccbe558dce142d2f5e4177a1cf08192cec33a9468513837acf3e2",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-J-manifest.json": "d5b02511b1cdcdf127e5790876d7332c597a820faa0a81da6592486f35583185",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-K-manifest.json": "ee12292de13b65a0f566278e11cffea5ecb6627ad19343c88470af2c2483e1bc",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/download9/manifest.json": "84e24d9a51f5c29a25ec57e8640cc9be87de637010d67ad4739ad2ffd8bb618f",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/download11/manifest.json": "e7778468e84f913d3a5664a2ace02f55a9c77f76dec9411d08152bfda6e10889",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r9_apply.sh": "96268178078a9a809e24098b8cad04ec5b4c282491dacd195247f18f00b7e489",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r9_apply_wide.sh": "cc336de7c7da45657dd43794d416e57c6cf9c5beaa3195a677808dc06e2be31b",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r9_panel.sh": "e1c6c2e22a318fdff92494cc22659c9d80d8e2c53e58a2aeefd7baad6df41e64",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r9_pool.sh": "24b32313d47814849feccb049474a1a9023382bc82a290ec20304175512ca72b"
+ },
+ "thresholds": {
+  "n_min": 40,
+  "good_min": 0.9,
+  "meaning_max": 0.08,
+  "pooled_rounds": [
+   8,
+   9
+  ],
+  "min_entailment": 0.5,
+  "caps": {
+   "passive_v6": 100,
+   "nominal_v3": 60,
+   "passive_v5": 50
+  },
+  "seed": 20261122
+ }
+}
