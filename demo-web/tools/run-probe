@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/../.."
+export CLEARTEXT_EVAL_DEPS=$HOME/.local/state/cleartext/status-benchmark-pr-20261101/deps
+export PYTHONPATH="models/src:.:$CLEARTEXT_EVAL_DEPS" HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
+out=${PROBE_OUT:-$TMPDIR}
+mkdir -p "$out"; cd "$out"
+"$OLDPWD/models/.venv/bin/python" "$OLDPWD/demo-web/tools/probe.py" "$@" 2>&1 | tee probe.log

@@ -13,6 +13,7 @@ outputs, evaluation reports and reproducible experiments.
 - `models/evidence/`: committed aggregate results and manifests.
 - `evals/`: Kea-Roy's readability/preservation suite and pipeline adapters.
 - `evals/reports/20261021-v7/`: the six-passage submitted-report baseline.
+- `demo-web/`: public demo of the default pipeline (see its README).
 
 ## Environment and accounts
 
@@ -119,6 +120,9 @@ versions, input/model/source hashes and completion/failure receipts.
 - `cleartext.structure_v2`: new ops get a new version and preset (`KEPT_V3`
   fixed, `KEPT_V4` opt-in); rated items cannot validate rules written from
   them: use a fresh window (`pool-c` excludes 8-grams of all earlier pools).
+- Public demo (cleartext-ai2.pages.dev): backend runs on Yoga as `cleartext-demo` and
+  `cleartext-tunnel` user services; the Pages Function finds the quick-tunnel URL in KV
+  (re-registered on restart). Submitted text is never written to disk or logged.
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before

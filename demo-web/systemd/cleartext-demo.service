@@ -1,0 +1,20 @@
+[Unit]
+Description=ClearText public demo backend (127.0.0.1:8737; public via cleartext-tunnel)
+After=network.target
+
+[Service]
+WorkingDirectory=%h/Documents/projects/cleartext
+ExecStart=%h/Documents/projects/cleartext/models/.venv/bin/python demo-web/server.py
+Environment=DEMO_PORT=8737 DEMO_THREADS=4
+Environment=CLEARTEXT_EVAL_DEPS=%h/.local/state/cleartext/status-benchmark-pr-20261101/deps
+Environment=HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1
+Environment=OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4
+Restart=always
+RestartSec=5
+Nice=10
+MemoryMax=5632M
+MemorySwapMax=2G
+UMask=0077
+
+[Install]
+WantedBy=default.target

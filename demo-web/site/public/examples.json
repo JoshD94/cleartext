@@ -1,0 +1,8 @@
+[
+ {"id": "library", "title": "Town news",
+  "text": "The new library, which was designed by a local architect, was opened by the mayor on Saturday after numerous delays. Residents had waited nearly three years for the building, and many of them attended the ceremony despite the cold weather. The project was funded by state grants and private donations."},
+ {"id": "notice", "title": "Official notice",
+  "text": "Applicants must submit the completed form before March 15, and they should retain a copy for their records. The committee will make a decision within thirty days of receiving the application. Requests that are submitted after the deadline will not be considered."},
+ {"id": "curie", "title": "History",
+  "text": "Marie Curie, a physicist and chemist, conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize, and she remains the only person to win the prize in two different sciences. Her discoveries were utilized by physicians to treat tumors."}
+]

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ClearText</title>
+<meta name="description" content="Paste a paragraph and watch ClearText make it easier to read, one step at a time.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%233c6fe0'/%3E%3Cpath d='M9 11h14M9 16h10M9 21h6' stroke='white' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <span class="wordmark">ClearText</span>
+</header>
+
+<main class="page">
+  <h1>Make text easier to read</h1>
+
+  <section class="card input-card" aria-label="Your text">
+    <label class="label" for="text">Your text</label>
+    <textarea id="text" rows="7" maxlength="2000" spellcheck="false"
+      placeholder="Paste a paragraph, up to 2,000 characters"></textarea>
+    <div class="input-foot">
+      <div class="examples" id="examples">
+        <span class="label">Try</span>
+      </div>
+      <div class="go">
+        <span class="count" id="count">0 / 2,000</span>
+        <button class="btn primary" id="run" type="button">
+          <span class="btn-text">Simplify</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" class="status" aria-live="polite" hidden></section>
+
+  <section id="steps" class="steps" aria-label="Steps" hidden></section>
+
+  <section id="result" class="card result" aria-label="Simplified text" hidden></section>
+
+  <section id="offline" class="empty" hidden>
+    <svg class="empty-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2l20 20"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 4.17-2.65"/><path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76"/><path d="M16.85 11.25a10 10 0 0 1 2.22 1.68"/><path d="M5 13a10 10 0 0 1 5.24-2.76"/><path d="M12 20h.01"/></svg>
+    <p class="empty-title">The demo is offline right now</p>
+  </section>
+</main>
+
+<footer class="foot">ClearText · CS 4701 · No LLMs · Your text is never saved</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
