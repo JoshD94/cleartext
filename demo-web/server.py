@@ -61,7 +61,7 @@ def child_main(conn, threads):
                 import pipeline
                 pipe = pipeline.DemoPipeline(threads=threads)
                 conn.send({"event": "loaded", "seconds": round(time.monotonic() - t, 1)})
-            trace = pipe.run(msg["text"], lambda s: conn.send({"event": "stage", "stage": s}))
+            trace = pipe.run(msg["text"], lambda s, done=None: conn.send({"event": "stage", "stage": s, "done": done}))
             conn.send({"event": "done", "trace": trace})
         except Exception as exc:  # never echo the message: it may quote the text
             conn.send({"event": "error", "kind": type(exc).__name__})
@@ -124,7 +124,7 @@ class Engine:
                 self.loaded = True
                 log(f"engine loaded in {msg['seconds']}s")
             elif msg["event"] == "stage":
-                on_event(msg["stage"])
+                on_event(msg["stage"], msg.get("done"))
             elif msg["event"] == "done":
                 return msg["trace"]
             elif msg["event"] == "error":
@@ -188,6 +188,8 @@ class Jobs:
             out = {"id": jid, "status": job["status"], "stage": job["stage"], "cold": job["cold"],
                    "position": (list(self.pending).index(jid) + 1) if jid in self.pending else 0,
                    "elapsed": round((job["finished"] or now) - (job["started"] or now), 1)}
+            if job["status"] == "running":
+                out["steps"] = list(job.get("steps", []))
             if job["status"] == "done":
                 out["trace"] = job["trace"]
             if job["status"] == "failed":
@@ -217,15 +219,18 @@ class Jobs:
                 job["status"], job["started"] = "running", time.monotonic()
                 job["cold"] = not self.engine.loaded
                 job["stage"] = "loading" if job["cold"] else "f2"
+                job["steps"] = []
                 text, job["text"] = job["text"], None
         if jid is None:
             if self.engine.alive and time.monotonic() - self.last_work > self.idle_seconds:
                 self.engine.stop()
             return False
 
-        def on_stage(stage):
+        def on_stage(stage, done=None):
             with self.lock:
                 job["stage"] = stage
+                if done is not None:
+                    job["steps"].append(done)
 
         t = time.monotonic()
         try:

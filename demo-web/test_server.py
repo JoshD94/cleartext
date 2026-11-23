@@ -18,9 +18,9 @@ TEXT = "The report was written by the committee. It was not finished in 2019, an
 
 
 def fake_trace(text):
-    f2 = {"output": text.replace(", and", ". And"), "stages": ["dependency compound split"],
-          "edits": [{"stage": "dependency compound split", "before": "a, and b", "after": "a. And b"}]}
-    s_edits = [{"op": "passive_v5", "rule": "by_agent", "before": "The report was written by the committee.",
+    f2 = {"output": text.replace(", and", ". And"), "stages": ["structure"],
+          "edits": [{"stage": "structure", "rule": "learned t5", "before": text, "after": "x"}]}
+    s_edits = [{"op": "passive", "rule": "by_agent", "before": "The report was written by the committee.",
                 "after": "The committee wrote the report."}]
     after_s = f2["output"].replace("The report was written by the committee.", "The committee wrote the report.")
     return DP.build_trace(text, f2, after_s, s_edits, after_s, [], {"f2": 1.0, "structure": 0.5, "words": 0.2})
@@ -38,7 +38,7 @@ class FakeEngine:
             on_event("loading")
             self.loaded = True
         for s in DP.STAGES:
-            on_event(s)
+            on_event(s, {"key": "prev"} if s != "f2" else None)
         self.gate.wait(5)
         self.calls.append(len(text))
         if "boom" in text:
@@ -98,10 +98,30 @@ def test_job_lifecycle_and_trace(api):
     assert set(trace["grade"]) == {"before", "after"}
     kept = trace["kept"]
     assert {"item": "2019", "kept": True} in kept["numbers"]
+    assert all(i["item"] != "The" for i in kept["names"])
     assert {"item": "not", "kept": True} in kept["negations"]
     assert any(i["item"] == "Paris" for i in kept["names"])
     # The submitted text is dropped from the job once it runs.
     assert jobs.jobs[body["id"]]["text"] is None
+
+
+def test_running_job_shows_finished_steps(api):
+    call, jobs, engine = api
+    jid = call("/api/simplify", {"text": TEXT})[1]["id"]
+    engine.gate.clear()
+    threading.Thread(target=jobs.step, daemon=True).start()
+    for _ in range(100):
+        view = call(f"/api/jobs/{jid}")[1]
+        if view["status"] == "running" and len(view.get("steps", [])) == 2:
+            break
+        threading.Event().wait(0.02)
+    assert view["stage"] == "words" and view["steps"] == [{"key": "prev"}, {"key": "prev"}]
+    engine.gate.set()
+
+
+def test_kept_names_skip_sentence_openers():
+    kept = DP.kept_items("Applicants must apply. Marie Curie won. She met Paris officials.", "x")
+    assert [n["item"] for n in kept["names"]] == ["Marie Curie", "Paris"]
 
 
 def test_second_job_is_warm(api):
@@ -151,12 +171,16 @@ def test_no_text_in_logs(api, capsys):
 
 
 def test_f2_grouping_and_labels():
-    groups = DP.f2_edits({"stages": ["phrases", "learned seq2seq", "dependency compound split"],
-                          "edits": [{"before": "in order to", "after": "to"}, {"before": "a", "after": "b"},
-                                    {"before": "c", "after": "d"}]})
-    assert [(g["name"], len(g["edits"])) for g in groups] == [("Phrase rewrite", 1), ("Sentence split", 2)]
-    assert all(op in DP.STRUCTURE_OP_NAMES for op in
-               ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split", "nominal_v3", "passive_v7"))
+    groups = DP.f2_edits({"stages": ["structure", "structure", "structure"],
+                          "edits": [{"start": 0, "end": 11, "source": "in order to", "replacement": "to"},
+                                    {"stage": "structure", "rule": "learned t5", "before": "a", "after": "b"},
+                                    {"stage": "structure", "rule": "compound", "before": "c", "after": "d"}]})
+    assert [(g["name"], g["count"]) for g in groups] == [("Sentence split", 2), ("Phrase rewrite", 1)]
+    assert groups[1]["edits"] == [{"from": "in order to", "to": "to"}]
+    labels = DP.structure_edits([{"op": op, "before": "a", "after": "b"}
+                                 for op in ("passive", "appositive", "fronted", "nominal", "frames")])
+    assert [e["label"] for e in labels] == ["Passive to active", "Side note made its own sentence",
+                                            "Opening clause split off", "Noun turned into a verb", "Sentence rewrite"]
 
 
 def test_repeat_text_is_served_from_memory(api):

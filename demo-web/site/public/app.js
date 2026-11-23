@@ -52,14 +52,60 @@ function diff(a, b) {
   return out.map((p) => (p.t !== "same" && !p.s.trim() ? { t: p.t === "add" ? "same" : "skip", s: p.s } : p))
     .filter((p) => p.t !== "skip");
 }
+// Changes separated only by spaces read as one replacement: "<del>, and many</del><ins>. Many</ins>".
+function wordHTML(parts) {
+  const out = [];
+  for (let k = 0; k < parts.length; k++) {
+    if (parts[k].t === "same") { out.push(esc(parts[k].s)); continue; }
+    let del = "", add = "";
+    for (; k < parts.length; k++) {
+      const q = parts[k];
+      if (q.t === "del") del += q.s;
+      else if (q.t === "add") add += q.s;
+      else if (!q.s.trim() && parts[k + 1] && parts[k + 1].t !== "same") { del += q.s; add += q.s; }
+      else break;
+    }
+    k--;
+    out.push((del || add).match(/^\s*/)[0]);
+    if (del.trim()) out.push(`<del>${esc(del.trim())}</del>`);
+    if (del.trim() && add.trim()) out.push(" ");
+    if (add.trim()) out.push(`<ins>${esc(add.trim())}</ins>`);
+    out.push((add || del).match(/\s*$/)[0]);
+  }
+  return out.join("");
+}
+
+// Sentences matched first; a changed run is shown word by word when that reads
+// cleanly (a split, a swap), else as the old sentence struck and the new one marked.
+function sentences(s) { return s.split(/(?<=[.!?]["”’)]?)\s+(?=["“(]?[\p{Lu}\p{N}])/u).filter(Boolean); }
 function diffHTML(a, b) {
-  return diff(a, b).map((p) => p.t === "same" ? esc(p.s)
-    : p.t === "add" ? `<ins>${esc(p.s)}</ins>` : `<del>${esc(p.s)}</del>`).join("");
+  const A = sentences(a), B = sentences(b), n = A.length, m = B.length, W = m + 1;
+  const L = new Uint16Array((n + 1) * W);
+  for (let i = n - 1; i >= 0; i--)
+    for (let j = m - 1; j >= 0; j--)
+      L[i * W + j] = A[i] === B[j] ? L[(i + 1) * W + j + 1] + 1 : Math.max(L[(i + 1) * W + j], L[i * W + j + 1]);
+  const out = [];
+  let i = 0, j = 0, dels = [], adds = [];
+  const flush = () => {
+    if (!dels.length && !adds.length) return;
+    const parts = diff(dels.join(" "), adds.join(" "));
+    const changes = parts.filter((p) => p.t !== "same").length;
+    if (!dels.length || !adds.length || changes <= 2 * Math.max(dels.length, adds.length)) out.push(wordHTML(parts));
+    else out.push(`<del>${esc(dels.join(" "))}</del> <ins>${esc(adds.join(" "))}</ins>`);
+    dels = []; adds = [];
+  };
+  while (i < n || j < m) {
+    if (i < n && j < m && A[i] === B[j]) { flush(); out.push(esc(A[i])); i++; j++; }
+    else if (j >= m || (i < n && L[(i + 1) * W + j] >= L[i * W + j + 1])) dels.push(A[i++]);
+    else adds.push(B[j++]);
+  }
+  flush();
+  return out.join(" ");
 }
 
 // --- rendering ----------------------------------------------------------------------------
 function changeCount(step) {
-  if (step.key === "f2") return step.groups.reduce((n, g) => n + g.edits.length, 0);
+  if (step.key === "f2") return step.groups.reduce((n, g) => n + g.count, 0);
   return step.edits.length;
 }
 
@@ -67,35 +113,48 @@ function tagsFor(step) {
   if (step.key === "words") {
     return step.edits.map((e) => `<span class="swap"><span class="from">${esc(e.word)}</span>${icon("arrow")}<span class="to">${esc(e.replacement)}</span></span>`).join("");
   }
+  const swap = (a, b) => `<span class="swap"><span class="from">${esc(a)}</span>${icon("arrow")}<span class="to">${esc(b)}</span></span>`;
+  if (step.key === "f2") {
+    return step.groups.map((g) => g.name === "Phrase rewrite" ? g.edits.map((e) => swap(e.from, e.to)).join("")
+      : `<span class="tag">${esc(g.name)}${g.count > 1 ? ` <b>×${g.count}</b>` : ""}</span>`).join("");
+  }
   const counts = new Map();
-  const labels = step.key === "f2" ? step.groups.flatMap((g) => g.edits.map(() => g.name)) : step.edits.map((e) => e.label);
+  const labels = step.edits.map((e) => e.label);
   labels.forEach((l) => counts.set(l, (counts.get(l) || 0) + 1));
   return [...counts].map(([l, n]) => `<span class="tag">${esc(l)}${n > 1 ? ` <b>×${n}</b>` : ""}</span>`).join("");
 }
 
 function stepState(state, n) {
   if (state === "waiting") return `<span class="step-state"><span class="dot"></span>Waiting</span>`;
-  if (state === "ran") return `<span class="step-state"><span class="dot"></span>Done</span>`;
   if (state === "working") return `<span class="step-state"><span class="dot live"></span>Working</span>`;
-  if (!n) return `<span class="step-state"><span class="dot"></span>Nothing to change</span>`;
+  if (!n) return `<span class="step-state"><span class="dot"></span>No change</span>`;
   return `<span class="step-state changed"><span class="dot"></span>${plural(n, "change", "changes")}</span>`;
 }
 
 const skeletonBody = (lines) => `<div class="step-body"><div class="sk-text">${lines.map((w) =>
   `<div class="skeleton sk-line" style="width:${w}%"></div>`).join("")}</div><div class="tags"><div class="skeleton sk-tag"></div></div></div>`;
 
-function renderSteps(progress, trace, lines) {
+function stepHTML(s, state, step, lines) {
+  const n = step && step.changed ? changeCount(step) || 1 : 0;
+  const head = `<div class="step-head">${icon(s.icon, "icon")}<span class="step-title">${s.title}</span>${stepState(step ? "done" : state, n)}</div>`;
+  if (!step) return head + skeletonBody(lines);
+  if (!step.changed) return head;
+  return `${head}<div class="step-body"><p class="passage">${diffHTML(step.before, step.after)}</p><div class="tags">${tagsFor(step)}</div></div>`;
+}
+
+// Cards are created once per run (with the entry motion) and then updated in place.
+function renderSteps(progress, steps, lines) {
   const at = STEPS.findIndex((s) => s.key === progress);
-  els.steps.innerHTML = STEPS.map((s, k) => {
-    const head = (state, n) => `<div class="step-head">${icon(s.icon, "icon")}<span class="step-title">${s.title}</span>${stepState(state, n)}</div>`;
-    if (!trace) {
-      const state = k < at ? "ran" : k === at ? "working" : "waiting";
-      return `<article class="card step">${head(state)}${skeletonBody(lines)}</article>`;
-    }
-    const step = trace.steps[k], n = step.changed ? changeCount(step) || 1 : 0;
-    if (!step.changed) return `<article class="card step">${head("done", 0)}</article>`;
-    return `<article class="card step">${head("done", n)}<div class="step-body"><p class="passage">${diffHTML(step.before, step.after)}</p><div class="tags">${tagsFor(step)}</div></div></article>`;
-  }).join("");
+  if (els.steps.children.length !== STEPS.length) {
+    els.steps.innerHTML = STEPS.map(() => `<article class="card step enter"></article>`).join("");
+  }
+  STEPS.forEach((s, k) => {
+    const step = steps[k];
+    const state = k === at ? "working" : "waiting";
+    const html = stepHTML(s, state, step, lines);
+    const card = els.steps.children[k];
+    if (card.dataset.html !== html) { card.innerHTML = html; card.dataset.html = html; }
+  });
   els.steps.hidden = false;
 }
 
@@ -107,7 +166,7 @@ function renderResult(trace) {
     ...trace.kept.names.map((x) => ({ ...x, kind: "name" })),
   ];
   const keptCount = kept.filter((x) => x.kept).length;
-  const keptHTML = kept.length ? `<div class="kept"><span class="label">Kept</span>${kept.slice(0, 10).map((x) =>
+  const keptHTML = kept.length ? `<div class="kept"><span class="label">Facts kept</span>${kept.slice(0, 10).map((x) =>
     `<span class="tag${x.kept ? "" : " lost"}">${icon(x.kept ? "check" : "x")}${esc(x.item)}</span>`).join("")}${kept.length > 10 ? `<span class="label">+${kept.length - 10} more</span>` : ""}</div>` : "";
   const same = trace.output === trace.input;
   els.result.innerHTML = `
@@ -192,9 +251,10 @@ async function simplify() {
     return setNotice(ERRORS[res.data.error] || ERRORS.failed);
   }
   const id = res.data.id;
-  renderSteps(null, null, lines);
+  els.steps.innerHTML = "";
+  renderSteps(null, [], lines);
   setStatus("Sending your text", true, 0);
-  let stage = null, misses = 0;
+  let misses = 0;
   while (true) {
     await new Promise((r) => setTimeout(r, 1200));
     let job;
@@ -210,12 +270,12 @@ async function simplify() {
     if (j.status === "queued") {
       setStatus(j.position > 1 ? `Waiting for ${plural(j.position - 1, "person", "people")} ahead of you` : "Next in line", true, secs);
     } else if (j.status === "running") {
-      if (j.stage !== stage && STEPS.some((s) => s.key === j.stage)) { stage = j.stage; renderSteps(stage, null, lines); }
+      renderSteps(j.stage, j.steps || [], lines);
       const step = STEPS.find((s) => s.key === j.stage);
       setStatus(j.stage === "loading" ? "Waking up the models. The first run takes about two minutes" : `${step ? step.working : "Working"}`, true, secs);
     } else if (j.status === "done") {
       els.status.hidden = true;
-      renderSteps(null, j.trace, lines);
+      renderSteps(null, j.trace.steps, lines);
       renderResult(j.trace);
       break;
     } else {

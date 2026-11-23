@@ -36,6 +36,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scrollbar-gutter: stable; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
@@ -103,9 +104,10 @@ textarea::placeholder { color: var(--muted); }
 
 /* Steps */
 .steps { display: flex; flex-direction: column; gap: 12px; }
-.step { padding: 14px 16px; animation: rise 260ms var(--ease) both; }
-.step:nth-child(2) { animation-delay: 40ms; }
-.step:nth-child(3) { animation-delay: 80ms; }
+.step { padding: 14px 16px; }
+.step.enter { animation: rise 260ms var(--ease) both; }
+.step.enter:nth-child(2) { animation-delay: 40ms; }
+.step.enter:nth-child(3) { animation-delay: 80ms; }
 .step-head { display: flex; align-items: center; gap: 10px; min-height: 24px; }
 .step-head .icon { width: 16px; height: 16px; flex: none; color: var(--ink); }
 .step-title { font-weight: 600; }

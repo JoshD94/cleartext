@@ -26,21 +26,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STAGES = ("f2", "structure", "words")
 
-# Plain-language names for the trace.
-F2_STAGE_NAMES = {
-    "phrase": "Phrase rewrite",
-    "phrases": "Phrase rewrite",
-    "learned seq2seq": "Sentence split",
-    "dependency compound split": "Sentence split",
-    "structure": "Sentence split",
-}
+# Plain-language names for the trace. Structure v4 edits carry the operator family
+# ("passive" for passive_v5/passive_recovered/passive_v7, "appositive", "fronted", "nominal").
 STRUCTURE_OP_NAMES = {
-    "passive_v5": "Passive to active",
-    "passive_v7": "Passive to active",
-    "passive_recovered": "Passive to active",
-    "appositive_v4": "Side note moved out",
-    "fronted_split": "Opening clause split off",
-    "nominal_v3": "Noun phrase to verb",
+    "passive": "Passive to active",
+    "appositive": "Side note made its own sentence",
+    "fronted": "Opening clause split off",
+    "nominal": "Noun turned into a verb",
 }
 
 
@@ -131,6 +123,14 @@ def fk_grade(text):
         return round(float(flesch_kincaid_grade(text)), 1)
 
 
+def _initial_only(name, text):
+    """A one-word "name" that only ever opens a sentence ("Applicants") is not shown."""
+    if " " in name:
+        return False
+    hits = [m.start() for m in re.finditer(r"(?<!\w)" + re.escape(name) + r"(?!\w)", text)]
+    return all(i == 0 or re.search(r"[.!?][\"”’)]?\s+$", text[:i]) for i in hits)
+
+
 def kept_items(source, output):
     """Numbers, negations and names in the input, and whether each survives."""
     from evals import preservation as PR
@@ -141,24 +141,33 @@ def kept_items(source, output):
     groups = {
         "numbers": list(dict.fromkeys(PR.extract_numbers(source))),
         "negations": list(dict.fromkeys(PR.extract_negations(source))),
-        "names": list(dict.fromkeys(PR.extract_entities(source))),
+        "names": [n for n in dict.fromkeys(PR.extract_entities(source)) if not _initial_only(n, source)],
     }
     return {k: [{"item": it, "kept": present(it)} for it in v] for k, v in groups.items()}
 
 
 def f2_edits(result):
-    """F2's per-edit records grouped by sub-stage (plain-language names)."""
-    groups = {}
-    for e, stage in zip(result.get("edits", []), result.get("stages", [])):
-        name = F2_STAGE_NAMES.get(stage, "Sentence split" if "split" in str(stage) else "Phrase rewrite")
-        before = e.get("before") or e.get("source") or e.get("original") or e.get("phrase") or ""
-        after = e.get("after") or e.get("output") or e.get("replacement") or ""
-        groups.setdefault(name, []).append({"stage": stage, "before": before, "after": after})
-    return [{"name": k, "edits": v} for k, v in groups.items()]
+    """F2's edits grouped by sub-stage: authored phrase rewrites (source -> replacement)
+    and sentence splits (T5 / compound splitter; their records hold whole passages)."""
+    phrases, splits = [], 0
+    for e in result.get("edits", []):
+        if "source" in e and "replacement" in e:
+            phrases.append({"from": e["source"], "to": e["replacement"]})
+        else:
+            splits += 1
+    groups = []
+    if splits:
+        groups.append({"name": "Sentence split", "count": splits, "edits": []})
+    if phrases:
+        groups.append({"name": "Phrase rewrite", "count": len(phrases), "edits": phrases})
+    return groups
 
 
 def structure_edits(edits):
-    return [{"op": e.get("op"), "label": STRUCTURE_OP_NAMES.get(e.get("op"), "Sentence rewrite"),
+    def label(op):
+        return next((v for k, v in STRUCTURE_OP_NAMES.items() if str(op).startswith(k)), "Sentence rewrite")
+
+    return [{"op": e.get("op"), "label": label(e.get("op")),
              "before": e.get("before", ""), "after": e.get("after", "")} for e in edits]
 
 
@@ -166,19 +175,28 @@ def word_edits(edits):
     return [{"word": e["word"], "replacement": e["rep"]} for e in edits]
 
 
+def f2_step(text, f2_result):
+    out = f2_result["output"]
+    return {"key": "f2", "title": "Split long sentences", "before": text, "after": out,
+            "changed": out != text, "groups": f2_edits(f2_result)}
+
+
+def structure_step(before, after, s_edits):
+    return {"key": "structure", "title": "Untangle sentence structure", "before": before, "after": after,
+            "changed": after != before, "edits": structure_edits(s_edits)}
+
+
+def words_step(before, after, w_edits):
+    return {"key": "words", "title": "Swap hard words", "before": before, "after": after,
+            "changed": after != before, "edits": word_edits(w_edits)}
+
+
 def build_trace(text, f2_result, after_structure, s_edits, final, w_edits, seconds):
     f2_out = f2_result["output"]
     return {
         "input": text,
-        "steps": [
-            {"key": "f2", "title": "Split long sentences", "before": text, "after": f2_out,
-             "changed": f2_out != text, "groups": f2_edits(f2_result)},
-            {"key": "structure", "title": "Untangle sentence structure", "before": f2_out,
-             "after": after_structure, "changed": after_structure != f2_out,
-             "edits": structure_edits(s_edits)},
-            {"key": "words", "title": "Swap hard words", "before": after_structure, "after": final,
-             "changed": final != after_structure, "edits": word_edits(w_edits)},
-        ],
+        "steps": [f2_step(text, f2_result), structure_step(f2_out, after_structure, s_edits),
+                  words_step(after_structure, final, w_edits)],
         "output": final,
         "grade": {"before": fk_grade(text), "after": fk_grade(final)},
         "kept": kept_items(text, final),
@@ -211,12 +229,9 @@ class DemoPipeline:
         if written:
             raise RuntimeError(f"demo scratch state is not empty ({len(written)} paths)")
 
-    def warm(self, progress=lambda stage: None):
-        """Load every model with a tiny fixed sentence (not user text)."""
-        self.run("The committee was informed by the director that numerous changes were necessary.",
-                 progress)
-
-    def run(self, text, progress=lambda stage: None):
+    def run(self, text, progress=lambda stage, done=None: None):
+        """The default pipeline on one text. progress(stage, done) is called as each
+        stage starts, with the finished previous step (for the live trace)."""
         seconds = {}
         t = time.monotonic()
         progress("f2")
@@ -224,11 +239,11 @@ class DemoPipeline:
         f2_result = self.f2.predict(self.F2, text)
         seconds["f2"] = time.monotonic() - t
         t = time.monotonic()
-        progress("structure")
+        progress("structure", f2_step(text, f2_result))
         after_structure, s_edits = self.after.structure.rewrite(f2_result["output"])
         seconds["structure"] = time.monotonic() - t
         t = time.monotonic()
-        progress("words")
+        progress("words", structure_step(f2_result["output"], after_structure, s_edits))
         final, w_edits = self.after.words.rewrite(after_structure, "passage")
         seconds["words"] = time.monotonic() - t
         self.f2.decisions, self.f2.dirty = {}, set()
