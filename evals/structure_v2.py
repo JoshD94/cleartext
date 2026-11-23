@@ -117,8 +117,10 @@ def run_pool_c(args):
     docs_used, texts_used, files = used_texts()
     earlier = ["pool-build.json", "pool-A.json", "pool-B.json", "pool-buildwide.json", "pool-Awide.json",
                "pool-Bwide.json"]
-    if args.name == "D":
+    if args.name in ("D", "E"):
         earlier += ["pool-C.json", "pool-Cwide.json"]
+    if args.name == "E":
+        earlier += ["pool-D.json", "pool-Dwide.json"]
     for f in earlier:
         for r in json.loads((state / f).read_text()):
             docs_used.add(r["doc"])
@@ -127,10 +129,11 @@ def run_pool_c(args):
     used = set()
     for t in texts_used:
         used |= grams(t)
-    rng = random.Random(SEED + (3 if args.name == "C" else 4))
+    suffix = {"C": "3", "D": "4", "E": "5"}[args.name]
+    rng = random.Random(SEED + int(suffix))
     pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
     for path in sorted(Path(args.download).glob("*.jsonl.gz")):
-        name = path.name.split(".")[0] + ("3" if args.name == "C" else "4")
+        name = path.name.split(".")[0] + suffix
         by_doc = defaultdict(list)
         for line in gzip.open(path, "rt"):
             r = json.loads(line)
@@ -773,7 +776,7 @@ def main(argv=None):
     p = sub.add_parser("pool-c")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--download", type=Path, required=True)
-    p.add_argument("--name", default="C", choices=("C", "D"))
+    p.add_argument("--name", default="C", choices=("C", "D", "E"))
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("apply")

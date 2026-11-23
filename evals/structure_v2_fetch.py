@@ -136,7 +136,8 @@ def used_generics():
 
 
 WINDOWS = {3: {"fedreg": ("2021-07-01", "2021-12-31"), "openfda": "[20230101+TO+20231231]"},
-           4: {"fedreg": ("2021-01-01", "2021-06-30"), "openfda": "[20210101+TO+20211231]"}}
+           4: {"fedreg": ("2021-01-01", "2021-06-30"), "openfda": "[20210101+TO+20211231]"},
+           5: {"fedreg": ("2020-07-01", "2020-12-31"), "openfda": "[20200101+TO+20201231]"}}
 
 
 def round3(args, deadline):
@@ -240,7 +241,7 @@ def main(argv=None):
     ap.add_argument("--previous", default=str(Path.home() / ".local/state/cleartext/structure-20261122/download"))
     args = ap.parse_args(argv)
     deadline = time.monotonic() + args.max_seconds
-    if args.round in (3, 4):
+    if args.round in (3, 4, 5):
         args.out.mkdir(parents=True, exist_ok=True)
         return round3(args, deadline)
     f = Fetcher(args.out / "http")

@@ -1,0 +1,22 @@
+{
+ "rows": 146,
+ "good": 128,
+ "by_round": {
+  "rating-r1:1": 18,
+  "rating-r1:0": 1,
+  "rating-r2:1": 27,
+  "rating-r2:0": 3,
+  "rating-r3:1": 46,
+  "rating-r3:0": 2,
+  "rating-r4:1": 37,
+  "rating-r4:0": 12
+ },
+ "fit_r1_r3_score_r4_auc": 0.4391891891891892,
+ "r4_good_rate_when_keeping": {
+  "0.5": 0.75,
+  "0.7": 0.7058823529411765,
+  "0.85": 0.7380952380952381
+ },
+ "r4_base_good_rate": 0.7551020408163265,
+ "cv5_all_rows_auc": 0.5842013888888888
+}
