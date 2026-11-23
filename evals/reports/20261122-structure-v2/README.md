@@ -224,4 +224,4 @@ percentage of correct outputs.
 `python -m evals.structure_v2 pool|pool-c …`, `apply`, `panel`, rate,
 `tally --rates-from …`; dev: `dev`, `score` (queue), `judge`. Queue jobs
 (Yoga, personal, `later`): dev scoring `9739ec70322d`, `e7320da1bcb6`,
-`adac92bf2a33`, `f9e6b404c759`, `6c55eed1c673`; `scripts/verify` `014d07d2bb0c` and, on the final commit, `bc290ce9e860` (687 passed).
+`adac92bf2a33`, `f9e6b404c759`, `6c55eed1c673`; `scripts/verify` `014d07d2bb0c` and, on the final commit, `bc290ce9e860` and after round 5 `e56e6a45b9ac` (687 passed each).
