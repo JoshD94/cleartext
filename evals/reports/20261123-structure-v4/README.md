@@ -1,25 +1,36 @@
-# Sentence structure v4: passive coordination and nominalization (rounds 8–9), November 23, 2026
+# Sentence structure v4: passive coordination and nominalization (rounds 8–10), November 23, 2026
 
 Structure v3 (rounds 6–7) left two by-phrase passive results open: `passive_v5`
 passed the bar (Good ≥ 90%, Changes meaning ≤ 8%, three blind raters) but
 fired on only 0.39 sentences per 100, and outside the Federal Register it was
 89.8% Good (44/49). Nominalization → verb had been dropped because it fired
 too rarely to fill a round. Structure v4 adds two versioned operations,
-rated with exactly the v3 protocol on fresh text. No LLM is in the pipeline.
+rated with exactly the v3 protocol on new public text (round 8 partly repeated earlier text; correction below). No LLM is in the pipeline.
 Raw text, cards and marks stay in `~/.local/state/cleartext/structure-20261123/`;
 this folder holds protocols, precommits and aggregates.
 
 ## Answer
 
-- **Both new operations pass the bar on fresh text** (pre-registered; three
-  new blind Opus raters per round, majority mark; rounds 8 and 9 ran
-  identical operation code on disjoint fresh windows):
+- **Correction (independent review, November 23).** Rounds 8 and 9 were
+  meant to be fresh, but round 8 was not entirely: 15 of its rated items
+  share an 8-gram with an earlier pool, rating key or the dev pool (repeated
+  openFDA label text; pools H and I were never 8-gram-checked against pools
+  C–E or the dev pool): 6 of 100 `passive_v6` items, 2 `nominal_v3` and 7
+  `passive_v5`. Two are exact repeats (card `c3981497a`, rated in round 5;
+  `cea1fbf91`, seen by the dev rater). All 15 were Good. Round 9 has none.
+  Counts without them ([overlap-r8-r9.json](overlap-r8-r9.json)):
 
-| Operation | Round 8 | Round 9 | Pooled 8 + 9 | Meaning, pooled | Per 100 sentences | Decision |
-|---|---|---|---|---:|---:|---|
-| **`passive_v6`** | 90/100 = 90.0% [83–94] | 92/100 = 92.0% [85–96] | **182/200 = 91.0% [86–94]** | 3.5% [1.7–7.0] | 0.51 (v5: 0.39) | **passes** (round 8 test, round 9 confirmation) |
-| **`nominal_v3`** | 20/20 (n < 40) | 60/60 = 100% [94–100] | **80/80 = 100% [95–100]** | 0% [0–4.6] | 0.03 mixed; 0.07 in Federal Register text | **passes** (pooled n = 80, as ROUND8.md pre-registered) |
-| `passive_v5` (reference) | 46/50 = 92.0% [81–97] | 47/50 = 94.0% [84–98] | 93/100 = 93.0% [86–97] | 2.0% [0.6–7.0] | 0.39 | reference (unchanged) |
+| Operation | Round 8 without repeats | Round 9 | Pooled without repeats | Meaning, pooled | Decision |
+|---|---|---|---|---:|---|
+| `passive_v6` | 84/94 = **89.4%** [82–94] | 92/100 = 92.0% [85–96] | 176/194 = 90.7% [85.8–94.1] | 3.6% | **not kept**: round 8, its pre-registered test, misses 90% |
+| **`nominal_v3`** | 18/18 | 60/60 | **78/78 = 100% [95.3–100]** | 0% | **kept** (pooled n ≥ 40, as ROUND8.md pre-registered) |
+| `passive_v5` (reference) | 39/43 = 90.7% | 47/50 = 94.0% | 86/93 = 92.5% [85–96] | 2.2% | reference (unchanged) |
+
+  With every item (as first reported): `passive_v6` 90/100 in round 8,
+  182/200 = 91.0% pooled; `nominal_v3` 80/80. **`KEPT_V4` = `KEPT_V3` +
+  `nominal_v3`.** Pools from L on exclude 8-gram overlaps with every earlier
+  pool, rating key and the dev pool (`earlier_rated` in `evals/structure_v2.py`,
+  tested). `passive_v7` and round 10 follow below.
 
 - **`passive_v6` raises recall, not the Good rate.** On the unfiltered
   standard pools (11,847 sentences) it fires on 0.51 sentences per 100
@@ -39,7 +50,7 @@ this folder holds protocols, precommits and aggregates.
   the song."; "She is shot and killed by …"). A skip for coordinated
   participles before the agent is the obvious `passive_v7` fix; it is not in
   `passive_v6` because the rated code cannot change, and it is unrated.
-- **`nominal_v3`**: every one of 80 rated items was Good (all three raters
+- **`nominal_v3`**: every one of 80 rated items (78 without repeats) was Good (all three raters
   agreed on all of them). The price is coverage: 76 of the 80 items are
   Federal Register sentences, and the operation fires on about 0.07 of 100
   Federal Register sentences (180 in 244,384) and almost never elsewhere
@@ -47,7 +58,7 @@ this folder holds protocols, precommits and aggregates.
 - **On top of F2** (test set v3 dev split, [DEV_V4.md](DEV_V4.md),
   [dev-judge-v4.json](dev-judge-v4.json)): `KEPT_V4` (= `combo-v4-all`)
   gives exactly `KEPT_V3`'s outputs: neither new operation fires on any of
-  F2's 100 dev passages. ΔFK −0.031 [−0.067, −0.003], Δ passage NLI +0.0003
+  F2's 100 dev passages (so `KEPT_V3` + `nominal_v3` also equals `KEPT_V3`). ΔFK −0.031 [−0.067, −0.003], Δ passage NLI +0.0003
   [+0.0001, +0.0005], every gate and the over-edit gate pass, as for
   `KEPT_V3`. The dev rule is met, but it says nothing about the new
   operations.
@@ -160,7 +171,7 @@ the identical rewrite and it failed the same way.
   Opus dev rater on 120 outputs of the first v6/v3 versions (split 67/74,
   clause coordination 13/13, nominal 32/33); its failures gave the last rules
   (ROUND8.md). Rated items of rounds 8–9 were not used to change any rule.
-- **Fresh windows:** pool H (Wikinews, Good articles, Federal Register
+- **New windows:** pool H (Wikinews, Good articles, Federal Register
   2019-01..06, openFDA 2017), pool I (Federal Register 2018-01..06), pool J
   (Wikinews, Good articles, Federal Register 2018-07..12, openFDA 2016), pool
   K (Federal Register 2016-07..2017-12, 400 rules); titles, labels and date
@@ -178,9 +189,8 @@ the identical rewrite and it failed the same way.
 
 - Raters are Opus models, not people; agreement is high and they may share
   blind spots. The dev check used one rater.
-- `passive_v6`'s round-8 pass was at the boundary (90.0%, lower bound 83%);
-  the pooled result (91.0%, lower bound 86%) is the stronger evidence, and
-  its coordination-split shape alone is 89.1%.
+- `passive_v6`'s round-8 result was at the boundary with every item (90.0%)
+  and under it without the six repeated items (89.4%); it is not kept.
 - The rated items are mostly Good-article sentences (118 of 200 `passive_v6`
   items; many are film, TV and music credits, "written by X and directed by
   Y"), because round robin over sources draws on whichever source has
@@ -192,7 +202,8 @@ the identical rewrite and it failed the same way.
   the unfiltered standard pools. Pools H and I were excluded by 8-gram
   against pools build/A/B/F/G but not C–E (documents were already disjoint
   through the fetcher; the same gap existed for pools F and G); pools J and K
-  add C–E. The builder's source labels use its own suffixes (pool I is
+  add C–E. Neither excluded the dev pool or rating keys; 15 round-8 items
+  repeat earlier text (correction above). Pool L and later use every file. The builder's source labels use its own suffixes (pool I is
   `fedreg9`, pool J `*10`, pool K `fedreg11`), not the download numbers.
 - The round-9 wide apply was resumed twice from its checkpoint (queue time
   limit; the nominal step's time budget was raised from 800 to 1,500 s after

@@ -110,12 +110,50 @@ def clean(s):
             and not re.match(r"(?:[A-Z]{2,}\s+(?:&\s+)?){2,}", s))  # an all-caps heading run into the sentence
 
 
+LEGACY_POOLS = ("C", "D", "E", "F", "G", "H", "I", "J", "K")
+
+
+def earlier_rated(dirs, name):
+    """(documents, texts, files) of everything a new pool must not share an
+    8-gram with: every earlier pool (standard, wide, prefiltered) in each
+    state directory, every rating key's rated sentences and the dev pools and
+    dev rating keys (`dev/`). Pools H and I missed pools C-E and the dev pool
+    (round 8: 15 rated items shared 8-grams, two were exact repeats), so pools
+    from L on take every file rather than a hand-kept list."""
+    docs, texts, files = set(), [], []
+    for d in dirs:
+        d = Path(d)
+        for f in sorted(d.glob("pool-*.json")) + sorted(d.glob("dev/devpool*.json")):
+            own = f.name.startswith((f"pool-{name}.", f"pool-{name}wide", f"pool-{name}-"))
+            if own or f.name.endswith("-manifest.json"):
+                continue
+            rows = json.loads(f.read_text())
+            for r in rows if isinstance(rows, list) else []:
+                if r.get("doc"):
+                    docs.add(r["doc"])
+                if isinstance(r.get("sentence"), str):
+                    texts.append(r["sentence"])
+            files.append(str(f))
+        for f in sorted(d.glob("rating-*-key.json")) + sorted(d.glob("dev/devrate*-key.json")):
+            rows = json.loads(f.read_text())
+            rows = rows.get("items", []) if isinstance(rows, dict) else rows
+            texts += [r["before"] for r in rows if isinstance(r.get("before"), str)]
+            files.append(str(f))
+    return docs, texts, files
+
+
 def run_pool_c(args):
     """Pool C (round 3): every document of a new download directory is fresh,
     so all buckets are used. Exclusions add the round 1-2 pools to the usual
     earlier panels."""
     state = outside_checkout(args.state)
     docs_used, texts_used, files = used_texts()
+    if args.name not in LEGACY_POOLS:
+        d, t, f = earlier_rated(sorted({OLD_STATE, state}), args.name)
+        docs_used |= d
+        texts_used += t
+        files += f
+        return _pool_c_body(args, state, docs_used, texts_used, files)
     earlier = ["pool-build.json", "pool-A.json", "pool-B.json", "pool-buildwide.json", "pool-Awide.json",
                "pool-Bwide.json"]
     if args.name in ("D", "E"):
@@ -148,10 +186,16 @@ def run_pool_c(args):
             docs_used.add(r["doc"])
             texts_used.append(r["sentence"])
         files.append(str(state / f))
+    return _pool_c_body(args, state, docs_used, texts_used, files)
+
+
+def _pool_c_body(args, state, docs_used, texts_used, files):
+    V4 = ("H", "I", "J", "K")
+    wide_all = args.name in V4 or args.name not in LEGACY_POOLS
     used = set()
     for t in texts_used:
         used |= grams(t)
-    suffix = {"C": "3", "D": "4", "E": "5", "F": "6", "G": "7", "H": "8", "I": "9", "J": "10", "K": "11"}[args.name]
+    suffix = str(ord(args.name) - ord("A") + 1)  # C -> 3 ... K -> 11, L -> 12
     rng = random.Random(SEED + int(suffix))
     pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
     for path in sorted(Path(args.download).glob("*.jsonl.gz")):
@@ -170,7 +214,7 @@ def run_pool_c(args):
             sents = by_doc[d]
             idx = [i for i, x in enumerate(sents) if clean(x)]
             rng.shuffle(idx)
-            full = len(kept) < args.per_source or args.name in V4
+            full = len(kept) < args.per_source or wide_all
             for rank, i in enumerate(idx):
                 if grams(sents[i]) & used:
                     stats["sentences_8gram_overlap"] += 1
@@ -182,7 +226,7 @@ def run_pool_c(args):
                     kept.append(row)
                 if full:
                     wide.append(row)
-            if len(kept) >= args.per_source and args.name not in V4:
+            if len(kept) >= args.per_source and not wide_all:
                 break
         pool += kept
         stats[f"{args.name}_sentences"] = len(kept)
@@ -839,7 +883,7 @@ def main(argv=None):
     p = sub.add_parser("pool-c")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--download", type=Path, required=True)
-    p.add_argument("--name", default="C", choices=("C", "D", "E", "F", "G", "H", "I", "J", "K"))
+    p.add_argument("--name", default="C", choices=LEGACY_POOLS + ("L", "M", "N"))
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("prefilter")

@@ -20,7 +20,7 @@ text, edits = stage.rewrite(f2_output)   # (text, edits), like the other stages
 # which passed Good >= 90% / meaning <= 8% with the 0.5 entailment floor.
 stage = StructureV2(ops=KEPT_V3, entailment=EntailmentVeto().score, min_entailment=0.5)
 
-# Structure v4: KEPT_V4 = KEPT_V3 + passive_v6 (coordinated passives) + nominal_v3.
+# Structure v4: KEPT_V4 = KEPT_V3 + nominal_v3 (nominalization -> verb).
 stage = StructureV2(ops=KEPT_V4, entailment=EntailmentVeto().score, min_entailment=0.5)
 ```
 
@@ -28,8 +28,8 @@ stage = StructureV2(ops=KEPT_V4, entailment=EntailmentVeto().score, min_entailme
 
 | Op | Good | Edits / 100 sentences | Status |
 |---|---|---:|---|
-| **`passive_v6`** (v4: v5 + coordination) | **91.0% [86–94]**, meaning 3.5% (rounds 8+9, 200 items; outside the Federal Register 90.5%) | ~0.5 (v5 0.39 on the same pools) | in `KEPT_V4` |
-| **`nominal_v3`** (v4) | **100% [95–100]**, meaning 0% (rounds 8+9, 80 items, 76 Federal Register) | ~0.07 in Federal Register text, ~0 elsewhere | in `KEPT_V4` |
+| `passive_v6` (v4: v5 + coordination) | 90.7% [86–94], meaning 3.6% (rounds 8+9 without 8-gram repeats, 194 items); round 8 alone 84/94 = 89.4%, under its pre-registered 90% | ~0.5 (v5 0.39 on the same pools) | not kept |
+| **`nominal_v3`** (v4) | **100% [95–100]**, meaning 0% (rounds 8+9, 78 items without repeats, 74 Federal Register) | ~0.07 in Federal Register text, ~0 elsewhere | in `KEPT_V4` |
 | **`passive_v5`** (by-phrase, v3) | **94.1% [88–97]**, meaning 4.2% (rounds 6+7, 118 items) | ~0.4 | in `KEPT_V3` |
 | **`appositive_v4`** (v3) | **93.8% [83–98]**, meaning 0% (rounds 6+7, 48 items) | ~0.3 | in `KEPT_V3` |
 | `fronted_split` | 92.9% [84–97] (rounds 2+3, 70 items) | ~0.4 | in `KEPT` and `KEPT_V3` |
@@ -51,7 +51,9 @@ on none of them).
 v2–v5 skipped: a second clause with its own subject flipped in place, and
 "S was V-ed by A and VP2" split into "A V-ed S. S VP2." (each half flipped
 under the v5 rules; the split shape alone scored 89.1%, and its known failure
-is two participles sharing one by-phrase, "written and produced by X").
+is two participles sharing one by-phrase, "written and produced by X"). Six of
+its round-8 items repeated text from earlier pools; without them round 8
+missed its bar, so `passive_v6` is not kept.
 `nominal_v3` uses curated pairs only, whitelisted light verbs, second-parser
 agreement, an output parse check and the fluency floor. Neither fires on F2's
 dev outputs, so `KEPT_V4` equals `KEPT_V3` there.

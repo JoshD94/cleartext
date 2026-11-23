@@ -369,10 +369,33 @@ def test_round8_split_skips_means_and_long_subjects():
 def test_kept_v4_extends_kept_v3():
     from cleartext.structure_v2 import KEPT_V3, KEPT_V4
     assert KEPT_V3 == ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
-    assert KEPT_V4 == KEPT_V3 + ("passive_v6", "nominal_v3")
+    assert KEPT_V4 == KEPT_V3 + ("nominal_v3",)
     text = ("The episode was written by Dan Greaney and directed by Mark Kirkland. "
             "The agency conducted an evaluation of the program last year.")
     out, edits = StructureV2(ops=KEPT_V4).rewrite(text)
-    assert out == ("Dan Greaney wrote the episode. Mark Kirkland directed the episode. "
+    assert out == ("The episode was written by Dan Greaney and directed by Mark Kirkland. "
                    "The agency evaluated the program last year.")
-    assert [e["rule"] for e in edits] == ["agentive_split", "table"]
+    assert [e["rule"] for e in edits] == ["table"]
+
+
+# Round 10: passive_v7 = passive_v6 plus a skip for coordinated participles
+# that share one by-phrase (sentences written for the test, not rated items).
+@pytest.mark.parametrize("sentence", [
+    "The album was recorded and mixed by Steve Albini.",
+    "She was shot and wounded by a police officer.",
+])
+def test_round10_passive_v7_skips_shared_participles(sentence):
+    assert run("passive_v6", sentence) != sentence  # v6 splits and drops the first participle's doer
+    assert run("passive_v7", sentence) == sentence
+
+
+@pytest.mark.parametrize("before, after", [
+    ("The film was released in 2004 and directed by Ang Lee.",
+     "The film was released in 2004. Ang Lee directed the film."),
+    ("The episode was written by Dan Greaney and directed by Mark Kirkland.",
+     "Dan Greaney wrote the episode. Mark Kirkland directed the episode."),
+    ("The rule was challenged by OSHA.", "OSHA challenged the rule."),
+])
+def test_round10_passive_v7_keeps_other_v6_shapes(before, after):
+    assert run("passive_v6", before) == after
+    assert run("passive_v7", before) == after

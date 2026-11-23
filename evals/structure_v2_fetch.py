@@ -147,7 +147,9 @@ WINDOWS = {3: {"fedreg": ("2021-07-01", "2021-12-31"), "openfda": "[20230101+TO+
            # Round 8 nominalization items (Federal Register only: the op fires on ~0.03% of sentences).
            10: {"fedreg": ("2018-01-01", "2018-06-30")},
            # Round 9 nominalization items: 18 months of Federal Register rules.
-           11: {"fedreg": ("2016-07-01", "2017-12-31")}}
+           11: {"fedreg": ("2016-07-01", "2017-12-31")},
+           # Round 10 (passive_v7, November 23): one more disjoint window of every source.
+           12: {"fedreg": ("2016-01-01", "2016-06-30"), "openfda": "[20150101+TO+20151231]"}}
 # Rounds 8-9 take more Wikinews and Good-article documents (v3's pass leaned on Federal Register text).
 R8_CAPS = {"news": 400, "goodwiki": 800, "fedreg": 20, "openfda": 150}
 R10_CAPS = {"fedreg": 120}
@@ -263,7 +265,7 @@ def main(argv=None):
     ap.add_argument("--previous", default=str(Path.home() / ".local/state/cleartext/structure-20261122/download"))
     args = ap.parse_args(argv)
     deadline = time.monotonic() + args.max_seconds
-    if args.round in (3, 4, 5, 6, 7, 8, 9, 10, 11):
+    if args.round in (3, 4, 5, 6, 7, 8, 9, 10, 11, 12):
         args.out.mkdir(parents=True, exist_ok=True)
         return round3(args, deadline)
     f = Fetcher(args.out / "http")

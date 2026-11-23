@@ -999,7 +999,7 @@ class ActiveVoice:
             if not done:
                 break
         if self.version >= 6 and not edits and (self.kinds is None or "agentive_split" in self.kinds):
-            out = split_coordinated_v6(current)
+            out = split_coordinated_v6(current, version=self.version)
             if out is not None:
                 edits.append(Edit(self.op, "agentive_split", current, out, {}))
                 current = out
@@ -1103,7 +1103,27 @@ def _split_subject_ok(subj):
     return first.lower_ in SPLIT_DETS_V6 or first.dep_ == "poss" and first.tag_ != "PRP$"
 
 
-def split_coordinated_v6(text):
+def shared_agent_participles_v7(root, c2, cc):
+    """Version 7 (round 10): 'S was written and produced by A' -- two or more
+    coordinated participles with one by-phrase after the last. The by-phrase
+    reads as shared by every participle, so a split that gives it only to the
+    last ('S was written. A produced S.') drops who did the first. True when
+    the first participle has no agent and no complement before the
+    conjunction, and the by-phrase belongs to the participle chain that
+    starts at the second verb."""
+    if any(c.dep_ == "agent" for c in root.children):
+        return False
+    if any(c.dep_ not in ("advmod", "punct", "neg") for c in root.children if root.i < c.i < cc.i):
+        return False
+    chain, frontier = [], [c2]
+    while frontier:
+        t = frontier.pop()
+        chain.append(t)
+        frontier += [c for c in t.children if c.dep_ == "conj" and c.tag_ in ("VBN", "VBD")]
+    return any(c.dep_ == "agent" for t in chain for c in t.children)
+
+
+def split_coordinated_v6(text, version=6):
     """'S was V-ed by A [...], and/but VP2.' -> 'A V-ed S [...]. [But] S VP2.'
     (VP2 flipped too when v5 allows it). Both halves must be complete clauses
     under both parsers, the subject must start the sentence (no fronted
@@ -1133,6 +1153,8 @@ def split_coordinated_v6(text):
     if c2.right_edge.i != end - 1 or not sent[-1].text in (".", "!", "?"):
         return None
     if any(t.dep_ == "preconj" or t.lower_ in ("both", "either", "neither") for t in root.children):
+        return None
+    if version >= 7 and shared_agent_participles_v7(root, c2, cc):
         return None
     cut = cc.i - 1 if doc[cc.i - 1].text == "," else cc.i
     first_toks = [t for t in sent if t.i < cut]

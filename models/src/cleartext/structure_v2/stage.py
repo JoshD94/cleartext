@@ -34,6 +34,8 @@ OPS = {
     # the coordination split ("S was V-ed by A and VP2" -> "A V-ed S. S VP2")
     # and skips for the rated round 6-7 v5 failures; 0.5 entailment floor.
     "passive_v6": lambda: ActiveVoice(version=6, kinds=("agentive", "agentive_conj", "agentive_split")),
+    # passive_v7 (round 10): v6 plus a skip for coordinated participles sharing one by-phrase.
+    "passive_v7": lambda: ActiveVoice(version=7, kinds=("agentive", "agentive_conj", "agentive_split")),
     "passive_recovered": lambda: ActiveVoice(agents=("we",), kinds=("recovered_we",)),
     "appositive": lambda: AppositiveSplit(),
     "appositive_v2": lambda: AppositiveSplit(version=2),
@@ -61,11 +63,12 @@ KEPT = ("passive_recovered", "fronted_split")
 # floor: StructureV2(ops=KEPT_V3, entailment=EntailmentVeto().score,
 # min_entailment=0.5). Order as in the dev run (DEV_V3.md).
 KEPT_V3 = ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
-# Structure v4 (rounds 8-9, evals/reports/20261123-structure-v4): passive_v6
-# (rounds 8+9 pooled 182/200 Good, 3.5% meaning) and nominal_v3 (80/80, 0%)
-# met the same bar, rated with the 0.5 entailment floor. KEPT_V3 is unchanged;
-# passive_v6 runs after passive_v5 and converts what v5 left.
-KEPT_V4 = KEPT_V3 + ("passive_v6", "nominal_v3")
+# Structure v4 (rounds 8-9, evals/reports/20261123-structure-v4): nominal_v3
+# met the same bar (80/80 Good; 78/78 without the two items that share
+# 8-grams with earlier pools), rated with the 0.5 entailment floor. passive_v6
+# is not kept: without its six round-8 overlaps round 8 alone is 84/94 (89.4%),
+# below the pre-registered 90%. KEPT_V3 is unchanged.
+KEPT_V4 = KEPT_V3 + ("nominal_v3",)
 
 
 def build(name, **kwargs):

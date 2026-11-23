@@ -1,0 +1,426 @@
+{
+ "overlapping_items": {
+  "8": [
+   {
+    "arm": "passive_v6",
+    "id": "openfda8:83d01c5c159c",
+    "card": "c3981497a",
+    "files": [
+     "pool-E.json",
+     "pool-Ewide.json",
+     "rating-r5-key.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v6",
+    "id": "openfda8:09d143394699",
+    "card": "cb7159a8f",
+    "files": [
+     "pool-E.json",
+     "pool-Ewide.json",
+     "rating-r5-key.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v6",
+    "id": "openfda8:2eeb6ae0011f",
+    "card": "ce1566761",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v6",
+    "id": "openfda8:66c4ce596da2",
+    "card": "cea1fbf91",
+    "files": [
+     "devpool.json",
+     "devrate8-key.json",
+     "pool-Cwide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v6",
+    "id": "openfda8:79c1e8e800d6",
+    "card": "cb8ee5d29",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v6",
+    "id": "goodwiki8:f544d877530b",
+    "card": "c5f7a2ede",
+    "files": [
+     "pool-E.json",
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "nominal_v3",
+    "id": "openfda8:715d9e964e9d",
+    "card": "caa105601",
+    "files": [
+     "pool-Ewide.json",
+     "rating-r5-key.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "nominal_v3",
+    "id": "fedreg9:a9c32e1f7a6f",
+    "card": "c9b53d5e0",
+    "files": [
+     "pool-Cwide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:79c1e8e800d6",
+    "card": "cb8ee5d29",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:f6e3ea49df04",
+    "card": "cf5af0e67",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:2eeb6ae0011f",
+    "card": "ce1566761",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:09d143394699",
+    "card": "cb7159a8f",
+    "files": [
+     "pool-E.json",
+     "pool-Ewide.json",
+     "rating-r5-key.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:83d01c5c159c",
+    "card": "c3981497a",
+    "files": [
+     "pool-E.json",
+     "pool-Ewide.json",
+     "rating-r5-key.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:19a3f178ac7c",
+    "card": "cef38cc83",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   },
+   {
+    "arm": "passive_v5",
+    "id": "openfda8:764d851e28d4",
+    "card": "c406c55c2",
+    "files": [
+     "pool-Ewide.json"
+    ],
+    "majority": "good"
+   }
+  ]
+ },
+ "results": {
+  "r8/passive_v6/all": {
+   "n": 100,
+   "good": 90,
+   "good_rate": 0.9,
+   "good_ci95": [
+    0.8256,
+    0.9448
+   ],
+   "meaning": 2,
+   "meaning_rate": 0.02,
+   "meaning_ci95": [
+    0.0055,
+    0.07
+   ]
+  },
+  "r8/passive_v6/clean": {
+   "n": 94,
+   "good": 84,
+   "good_rate": 0.8936,
+   "good_ci95": [
+    0.8151,
+    0.9412
+   ],
+   "meaning": 2,
+   "meaning_rate": 0.0213,
+   "meaning_ci95": [
+    0.0059,
+    0.0743
+   ]
+  },
+  "r8/nominal_v3/all": {
+   "n": 20,
+   "good": 20,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.8389,
+    1.0
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.1611
+   ]
+  },
+  "r8/nominal_v3/clean": {
+   "n": 18,
+   "good": 18,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.8241,
+    1.0
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.1759
+   ]
+  },
+  "r8/passive_v5/all": {
+   "n": 50,
+   "good": 46,
+   "good_rate": 0.92,
+   "good_ci95": [
+    0.8116,
+    0.9685
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.0713
+   ]
+  },
+  "r8/passive_v5/clean": {
+   "n": 43,
+   "good": 39,
+   "good_rate": 0.907,
+   "good_ci95": [
+    0.784,
+    0.9632
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.082
+   ]
+  },
+  "pooled/passive_v6/all": {
+   "n": 200,
+   "good": 182,
+   "good_rate": 0.91,
+   "good_ci95": [
+    0.8622,
+    0.9423
+   ],
+   "meaning": 7,
+   "meaning_rate": 0.035,
+   "meaning_ci95": [
+    0.0171,
+    0.0705
+   ]
+  },
+  "pooled/passive_v6/clean": {
+   "n": 194,
+   "good": 176,
+   "good_rate": 0.9072,
+   "good_ci95": [
+    0.8581,
+    0.9405
+   ],
+   "meaning": 7,
+   "meaning_rate": 0.0361,
+   "meaning_ci95": [
+    0.0176,
+    0.0726
+   ]
+  },
+  "pooled/nominal_v3/all": {
+   "n": 80,
+   "good": 80,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.9542,
+    1.0
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.0458
+   ]
+  },
+  "pooled/nominal_v3/clean": {
+   "n": 78,
+   "good": 78,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.9531,
+    1.0
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.0469
+   ]
+  },
+  "pooled/passive_v5/all": {
+   "n": 100,
+   "good": 93,
+   "good_rate": 0.93,
+   "good_ci95": [
+    0.8625,
+    0.9657
+   ],
+   "meaning": 2,
+   "meaning_rate": 0.02,
+   "meaning_ci95": [
+    0.0055,
+    0.07
+   ]
+  },
+  "pooled/passive_v5/clean": {
+   "n": 93,
+   "good": 86,
+   "good_rate": 0.9247,
+   "good_ci95": [
+    0.8527,
+    0.9631
+   ],
+   "meaning": 2,
+   "meaning_rate": 0.0215,
+   "meaning_ci95": [
+    0.0059,
+    0.0751
+   ]
+  },
+  "r9/passive_v6/all": {
+   "n": 100,
+   "good": 92,
+   "good_rate": 0.92,
+   "good_ci95": [
+    0.85,
+    0.9589
+   ],
+   "meaning": 5,
+   "meaning_rate": 0.05,
+   "meaning_ci95": [
+    0.0215,
+    0.1118
+   ]
+  },
+  "r9/passive_v6/clean": {
+   "n": 100,
+   "good": 92,
+   "good_rate": 0.92,
+   "good_ci95": [
+    0.85,
+    0.9589
+   ],
+   "meaning": 5,
+   "meaning_rate": 0.05,
+   "meaning_ci95": [
+    0.0215,
+    0.1118
+   ]
+  },
+  "r9/nominal_v3/all": {
+   "n": 60,
+   "good": 60,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.9398,
+    1.0
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.0602
+   ]
+  },
+  "r9/nominal_v3/clean": {
+   "n": 60,
+   "good": 60,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.9398,
+    1.0
+   ],
+   "meaning": 0,
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.0602
+   ]
+  },
+  "r9/passive_v5/all": {
+   "n": 50,
+   "good": 47,
+   "good_rate": 0.94,
+   "good_ci95": [
+    0.8378,
+    0.9794
+   ],
+   "meaning": 2,
+   "meaning_rate": 0.04,
+   "meaning_ci95": [
+    0.011,
+    0.1346
+   ]
+  },
+  "r9/passive_v5/clean": {
+   "n": 50,
+   "good": 47,
+   "good_rate": 0.94,
+   "good_ci95": [
+    0.8378,
+    0.9794
+   ],
+   "meaning": 2,
+   "meaning_rate": 0.04,
+   "meaning_ci95": [
+    0.011,
+    0.1346
+   ]
+  }
+ },
+ "method": "majority of the three round raters; 'clean' drops rated items whose before-sentence shares an 8-gram with any earlier pool (A-G, and H-I for round 9), earlier rating key (rounds 1-7, round 8 for round 9) or the dev pool / dev rating key"
+}
