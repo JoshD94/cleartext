@@ -124,15 +124,25 @@ def run_pool_c(args):
         earlier += ["pool-D.json", "pool-Dwide.json"]
     if args.name in ("F", "G"):
         earlier += ["pool-E.json", "pool-Ewide.json"]
-    if args.name in ("G", "H", "I"):
+    V4 = ("H", "I", "J", "K")
+    if args.name in ("J", "K"):
+        # Rounds 3-7 excluded only some earlier pools by 8-gram (documents were
+        # already disjoint through the fetcher); from round 9 every one is.
+        earlier += ["pool-C.json", "pool-Cwide.json", "pool-D.json", "pool-Dwide.json", "pool-E.json",
+                    "pool-Ewide.json"]
+    if args.name in ("G",) + V4:
         earlier += ["pool-F.json", "pool-Fwide.json"]
-    if args.name in ("H", "I"):
+    if args.name in V4:
         earlier += ["pool-G.json", "pool-Gwide.json"]
     # Structure v4 (rounds 8-9) keeps its state in a new directory; the
     # earlier pools stay in the structure v2/v3 one.
-    earlier = [f if (state / f).exists() or args.name not in ("H", "I") else str(OLD_STATE / f) for f in earlier]
-    if args.name == "I":
+    earlier = [f if (state / f).exists() or args.name not in V4 else str(OLD_STATE / f) for f in earlier]
+    if args.name in ("I", "J", "K"):
         earlier += ["pool-H.json", "pool-Hwide.json"]
+    if args.name in ("J", "K"):
+        earlier += ["pool-I.json", "pool-Iwide.json"]
+    if args.name == "K":
+        earlier += ["pool-J.json", "pool-Jwide.json"]
     for f in earlier:
         for r in json.loads((state / f).read_text()):
             docs_used.add(r["doc"])
@@ -141,7 +151,7 @@ def run_pool_c(args):
     used = set()
     for t in texts_used:
         used |= grams(t)
-    suffix = {"C": "3", "D": "4", "E": "5", "F": "6", "G": "7", "H": "8", "I": "9"}[args.name]
+    suffix = {"C": "3", "D": "4", "E": "5", "F": "6", "G": "7", "H": "8", "I": "9", "J": "10", "K": "11"}[args.name]
     rng = random.Random(SEED + int(suffix))
     pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
     for path in sorted(Path(args.download).glob("*.jsonl.gz")):
@@ -160,7 +170,7 @@ def run_pool_c(args):
             sents = by_doc[d]
             idx = [i for i, x in enumerate(sents) if clean(x)]
             rng.shuffle(idx)
-            full = len(kept) < args.per_source or args.name in ("H", "I")
+            full = len(kept) < args.per_source or args.name in V4
             for rank, i in enumerate(idx):
                 if grams(sents[i]) & used:
                     stats["sentences_8gram_overlap"] += 1
@@ -172,7 +182,7 @@ def run_pool_c(args):
                     kept.append(row)
                 if full:
                     wide.append(row)
-            if len(kept) >= args.per_source and args.name not in ("H", "I"):
+            if len(kept) >= args.per_source and args.name not in V4:
                 break
         pool += kept
         stats[f"{args.name}_sentences"] = len(kept)
@@ -829,7 +839,7 @@ def main(argv=None):
     p = sub.add_parser("pool-c")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--download", type=Path, required=True)
-    p.add_argument("--name", default="C", choices=("C", "D", "E", "F", "G", "H", "I"))
+    p.add_argument("--name", default="C", choices=("C", "D", "E", "F", "G", "H", "I", "J", "K"))
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("prefilter")
