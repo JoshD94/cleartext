@@ -57,8 +57,6 @@ versions, input/model/source hashes and completion/failure receipts.
 - `evals/pipeline_benchmark.py` explicitly loads T5 and supports the larger
   frozen development panel. Require an independent input file and complete
   expected system list when scoring; never silently drop missing predictions.
-- `evals/status_report_benchmark.py` exposes explicit replay settings and can
-  import a historical source archive against unchanged local model artifacts.
 - Report automatic metrics with denominators, abstentions and changed-only
   results. Embedding/NLI scores are not percentages of correct outputs.
 - `evals/ensemble_study.py` binds cached outputs to the source of
@@ -70,18 +68,16 @@ versions, input/model/source hashes and completion/failure receipts.
 - Previously inspected development panels cannot become independent test sets.
   Preserve reserved-domain restrictions and keep larger-panel raw text and
   predictions local. The six historical authored examples have public evidence.
-- Keep experimental morphology, grammar preprocessing, stricter thresholds and
-  source-anchored split selection opt-in unless separately authorized and shown
-  to meet their recorded adoption criteria.
+- Keep other experimental stages (morphology, grammar preprocessing, stricter
+  thresholds) opt-in unless authorized and shown to meet adoption criteria.
 - `compound_only` and `compound_full_guarded` select the opt-in dependency
   compound splitter. Week 7 `structure_only` retains the old rules; neither name
   selects T5. Passive conversion and negation rewriting belong to teammates.
   Chhoeng's `passive/` and `pos_tag/` code runs unchanged through
   `cleartext/teammate_stages.py` (opt-in); never put those folders on
   `sys.path`: `pos_tag/evaluate.py` shadows Hugging Face `evaluate`.
-  Since November 9 these arms use scoped guards and no tagger; the November 2
-  results used today's `guards="strict"`. The WikiSplit tagger model is a
-  local artifact (see `evals/reports/20261109-compound-tagger/`).
+  The WikiSplit tagger model is a local artifact
+  (`evals/reports/20261109-compound-tagger/`).
 - The 90-passage native ladder exceeded a 75-minute Yoga queue limit while
   computing lexical-only. Whole-system logging/checkpoints lose partial work.
   Use per-passage checkpoints and bounded batches; bind resume data to frozen
