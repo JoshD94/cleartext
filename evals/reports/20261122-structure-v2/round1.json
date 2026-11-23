@@ -1,0 +1,637 @@
+{
+ "panel": "rating-r1",
+ "arms": {
+  "passive": {
+   "n": 40,
+   "good": 29,
+   "good_rate": 0.725,
+   "good_ci95": [
+    0.5716504406714658,
+    0.8389198382222256
+   ],
+   "marks": {
+    "good": 29,
+    "ungrammatical": 5,
+    "meaning": 5,
+    "notsimpler": 1
+   },
+   "per_rater_good_rate": [
+    0.725,
+    0.7,
+    0.725
+   ],
+   "unanimous_good": 28,
+   "by_rule": {
+    "agentive": {
+     "n": 40,
+     "good": 29,
+     "good_ci95": [
+      0.5716504406714658,
+      0.8389198382222256
+     ],
+     "marks": {
+      "good": 29,
+      "ungrammatical": 5,
+      "meaning": 5,
+      "notsimpler": 1
+     }
+    }
+   },
+   "by_source": {
+    "goodwiki": {
+     "n": 7,
+     "good": 6
+    },
+    "openfda": {
+     "n": 7,
+     "good": 3
+    },
+    "wiki": {
+     "n": 7,
+     "good": 5
+    },
+    "news": {
+     "n": 7,
+     "good": 4
+    },
+    "fedreg2": {
+     "n": 6,
+     "good": 5
+    },
+    "news2": {
+     "n": 6,
+     "good": 6
+    }
+   },
+   "edits_per_100_sentences": 1.82474008062805,
+   "changed": 86,
+   "sentences": 4713
+  },
+  "chhoeng_agentive": {
+   "n": 40,
+   "good": 17,
+   "good_rate": 0.425,
+   "good_ci95": [
+    0.2850939246378106,
+    0.5780493157309589
+   ],
+   "marks": {
+    "ungrammatical": 15,
+    "good": 17,
+    "meaning": 6,
+    "notsimpler": 2
+   },
+   "per_rater_good_rate": [
+    0.4,
+    0.425,
+    0.45
+   ],
+   "unanimous_good": 16,
+   "by_rule": {
+    "agentive": {
+     "n": 40,
+     "good": 17,
+     "good_ci95": [
+      0.2850939246378106,
+      0.5780493157309589
+     ],
+     "marks": {
+      "ungrammatical": 15,
+      "good": 17,
+      "meaning": 6,
+      "notsimpler": 2
+     }
+    }
+   },
+   "by_source": {
+    "wiki": {
+     "n": 7,
+     "good": 2
+    },
+    "fedreg": {
+     "n": 2,
+     "good": 0
+    },
+    "openfda": {
+     "n": 7,
+     "good": 3
+    },
+    "fedreg2": {
+     "n": 6,
+     "good": 3
+    },
+    "news2": {
+     "n": 6,
+     "good": 6
+    },
+    "news": {
+     "n": 6,
+     "good": 1
+    },
+    "goodwiki": {
+     "n": 6,
+     "good": 2
+    }
+   },
+   "edits_per_100_sentences": 3.9253129641417357,
+   "changed": 185,
+   "sentences": 4713
+  },
+  "chhoeng_auto": {
+   "n": 30,
+   "good": 1,
+   "good_rate": 0.03333333333333333,
+   "good_ci95": [
+    0.005908590316197976,
+    0.16670391146115726
+   ],
+   "marks": {
+    "meaning": 26,
+    "good": 1,
+    "ungrammatical": 3
+   },
+   "per_rater_good_rate": [
+    0.13333333333333333,
+    0.03333333333333333,
+    0.0
+   ],
+   "unanimous_good": 0,
+   "by_rule": {
+    "auto": {
+     "n": 30,
+     "good": 1,
+     "good_ci95": [
+      0.005908590316197976,
+      0.16670391146115726
+     ],
+     "marks": {
+      "meaning": 26,
+      "good": 1,
+      "ungrammatical": 3
+     }
+    }
+   },
+   "by_source": {
+    "fedreg2": {
+     "n": 5,
+     "good": 0
+    },
+    "goodwiki": {
+     "n": 4,
+     "good": 0
+    },
+    "openfda": {
+     "n": 4,
+     "good": 0
+    },
+    "news": {
+     "n": 4,
+     "good": 1
+    },
+    "rfc": {
+     "n": 1,
+     "good": 0
+    },
+    "fedreg": {
+     "n": 4,
+     "good": 0
+    },
+    "wiki": {
+     "n": 4,
+     "good": 0
+    },
+    "news2": {
+     "n": 4,
+     "good": 0
+    }
+   },
+   "edits_per_100_sentences": 26.88308932739232,
+   "changed": 1267,
+   "sentences": 4713
+  },
+  "passive_recovered": {
+   "n": 22,
+   "good": 17,
+   "good_rate": 0.7727272727272727,
+   "good_ci95": [
+    0.5656004665183513,
+    0.898769600787933
+   ],
+   "marks": {
+    "good": 17,
+    "meaning": 2,
+    "notsimpler": 3
+   },
+   "per_rater_good_rate": [
+    0.7727272727272727,
+    0.8181818181818182,
+    0.8181818181818182
+   ],
+   "unanimous_good": 17,
+   "by_rule": {
+    "recovered_we": {
+     "n": 22,
+     "good": 17,
+     "good_ci95": [
+      0.5656004665183513,
+      0.898769600787933
+     ],
+     "marks": {
+      "good": 17,
+      "meaning": 2,
+      "notsimpler": 3
+     }
+    }
+   },
+   "by_source": {
+    "fedreg2": {
+     "n": 22,
+     "good": 17
+    }
+   },
+   "edits_per_100_sentences": 0.042435815828559306,
+   "changed": 2,
+   "sentences": 4713
+  },
+  "appositive": {
+   "n": 40,
+   "good": 30,
+   "good_rate": 0.75,
+   "good_ci95": [
+    0.5980603845146479,
+    0.8581288142561201
+   ],
+   "marks": {
+    "meaning": 8,
+    "ungrammatical": 2,
+    "good": 30
+   },
+   "per_rater_good_rate": [
+    0.675,
+    0.775,
+    0.75
+   ],
+   "unanimous_good": 27,
+   "by_rule": {
+    "relative": {
+     "n": 21,
+     "good": 17,
+     "good_ci95": [
+      0.5999943512871267,
+      0.9233243500065463
+     ],
+     "marks": {
+      "meaning": 3,
+      "good": 17,
+      "ungrammatical": 1
+     }
+    },
+    "appositive": {
+     "n": 19,
+     "good": 13,
+     "good_ci95": [
+      0.46010407504696654,
+      0.8463562100152995
+     ],
+     "marks": {
+      "ungrammatical": 1,
+      "good": 13,
+      "meaning": 5
+     }
+    }
+   },
+   "by_source": {
+    "goodwiki": {
+     "n": 7,
+     "good": 6
+    },
+    "openfda": {
+     "n": 4,
+     "good": 2
+    },
+    "news2": {
+     "n": 7,
+     "good": 6
+    },
+    "fedreg2": {
+     "n": 7,
+     "good": 6
+    },
+    "fedreg": {
+     "n": 2,
+     "good": 0
+    },
+    "wiki": {
+     "n": 7,
+     "good": 5
+    },
+    "news": {
+     "n": 6,
+     "good": 5
+    }
+   },
+   "edits_per_100_sentences": 1.6549968173138128,
+   "changed": 78,
+   "sentences": 4713
+  },
+  "fronted_split": {
+   "n": 40,
+   "good": 38,
+   "good_rate": 0.95,
+   "good_ci95": [
+    0.8349612250489412,
+    0.9861793327384413
+   ],
+   "marks": {
+    "good": 38,
+    "ungrammatical": 1,
+    "meaning": 1
+   },
+   "per_rater_good_rate": [
+    0.9,
+    0.95,
+    0.95
+   ],
+   "unanimous_good": 36,
+   "by_rule": {
+    "split": {
+     "n": 40,
+     "good": 38,
+     "good_ci95": [
+      0.8349612250489412,
+      0.9861793327384413
+     ],
+     "marks": {
+      "good": 38,
+      "ungrammatical": 1,
+      "meaning": 1
+     }
+    }
+   },
+   "by_source": {
+    "wiki": {
+     "n": 2,
+     "good": 2
+    },
+    "news": {
+     "n": 2,
+     "good": 2
+    },
+    "goodwiki": {
+     "n": 3,
+     "good": 3
+    },
+    "fedreg2": {
+     "n": 17,
+     "good": 15
+    },
+    "openfda": {
+     "n": 16,
+     "good": 16
+    }
+   },
+   "edits_per_100_sentences": 0.3819223424570337,
+   "changed": 18,
+   "sentences": 4713
+  },
+  "fronted_move": {
+   "n": 40,
+   "good": 0,
+   "good_rate": 0.0,
+   "good_ci95": [
+    0.0,
+    0.08762160245846368
+   ],
+   "marks": {
+    "notsimpler": 33,
+    "meaning": 6,
+    "ungrammatical": 1
+   },
+   "per_rater_good_rate": [
+    0.025,
+    0.0,
+    0.0
+   ],
+   "unanimous_good": 0,
+   "by_rule": {
+    "move": {
+     "n": 40,
+     "good": 0,
+     "good_ci95": [
+      0.0,
+      0.08762160245846368
+     ],
+     "marks": {
+      "notsimpler": 33,
+      "meaning": 6,
+      "ungrammatical": 1
+     }
+    }
+   },
+   "by_source": {
+    "openfda": {
+     "n": 20,
+     "good": 0
+    },
+    "fedreg2": {
+     "n": 19,
+     "good": 0
+    },
+    "news2": {
+     "n": 1,
+     "good": 0
+    }
+   },
+   "edits_per_100_sentences": 0.31826861871419476,
+   "changed": 15,
+   "sentences": 4713
+  },
+  "frames": {
+   "n": 14,
+   "good": 6,
+   "good_rate": 0.42857142857142855,
+   "good_ci95": [
+    0.21380798780428648,
+    0.6740935558247106
+   ],
+   "marks": {
+    "good": 6,
+    "meaning": 6,
+    "ungrammatical": 2
+   },
+   "per_rater_good_rate": [
+    0.5714285714285714,
+    0.2857142857142857,
+    0.42857142857142855
+   ],
+   "unanimous_good": 4,
+   "by_rule": {
+    "reduced": {
+     "n": 7,
+     "good": 4,
+     "good_ci95": [
+      0.25045836275303557,
+      0.8417801460075546
+     ],
+     "marks": {
+      "good": 4,
+      "meaning": 2,
+      "ungrammatical": 1
+     }
+    },
+    "cleft": {
+     "n": 3,
+     "good": 0,
+     "good_ci95": [
+      0.0,
+      0.5614970356393196
+     ],
+     "marks": {
+      "meaning": 3
+     }
+    },
+    "relative": {
+     "n": 4,
+     "good": 2,
+     "good_ci95": [
+      0.15003898774401986,
+      0.8499610122559802
+     ],
+     "marks": {
+      "good": 2,
+      "meaning": 1,
+      "ungrammatical": 1
+     }
+    }
+   },
+   "by_source": {
+    "fedreg2": {
+     "n": 7,
+     "good": 2
+    },
+    "wiki": {
+     "n": 2,
+     "good": 1
+    },
+    "news2": {
+     "n": 1,
+     "good": 1
+    },
+    "openfda": {
+     "n": 4,
+     "good": 2
+    }
+   },
+   "edits_per_100_sentences": 0.10608953957139826,
+   "changed": 5,
+   "sentences": 4713
+  },
+  "nominal": {
+   "n": 40,
+   "good": 36,
+   "good_rate": 0.9,
+   "good_ci95": [
+    0.7694822464406407,
+    0.9604204715925885
+   ],
+   "marks": {
+    "good": 36,
+    "ungrammatical": 3,
+    "meaning": 1
+   },
+   "per_rater_good_rate": [
+    0.875,
+    0.9,
+    0.9
+   ],
+   "unanimous_good": 35,
+   "by_rule": {
+    "table": {
+     "n": 40,
+     "good": 36,
+     "good_ci95": [
+      0.7694822464406407,
+      0.9604204715925885
+     ],
+     "marks": {
+      "good": 36,
+      "ungrammatical": 3,
+      "meaning": 1
+     }
+    }
+   },
+   "by_source": {
+    "fedreg": {
+     "n": 1,
+     "good": 1
+    },
+    "news2": {
+     "n": 1,
+     "good": 1
+    },
+    "openfda": {
+     "n": 1,
+     "good": 1
+    },
+    "fedreg2": {
+     "n": 37,
+     "good": 33
+    }
+   },
+   "edits_per_100_sentences": 0.10608953957139826,
+   "changed": 5,
+   "sentences": 4713
+  },
+  "kea_negation": {
+   "n": 1,
+   "good": 1,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.2065493117918027,
+    1.0
+   ],
+   "marks": {
+    "good": 1
+   },
+   "per_rater_good_rate": [
+    0.0,
+    1.0,
+    1.0
+   ],
+   "unanimous_good": 0,
+   "by_rule": {
+    "not-un-prefix": {
+     "n": 1,
+     "good": 1,
+     "good_ci95": [
+      0.2065493117918027,
+      1.0
+     ],
+     "marks": {
+      "good": 1
+     }
+    }
+   },
+   "by_source": {
+    "goodwiki": {
+     "n": 1,
+     "good": 1
+    }
+   },
+   "edits_per_100_sentences": 0.021217907914279653,
+   "changed": 1,
+   "sentences": 4713
+  }
+ },
+ "agreement": {
+  "all_three": 0.8191126279863481,
+  "pairwise": 0.8725824800910125
+ },
+ "cards": 293,
+ "key_sha256": "cdc382fcca714afae02aa69220d599887d9dfd5c09ac69e43b6460480e147a60",
+ "marks_sha256": [
+  "00a2e73323425c960e60ed7058b3e65815608d7fb723419e9db9a0c1f61ee84f",
+  "988b96024ab4311beee6d867487672f6bf71f7044b8f4e5f58aa6b727723404e",
+  "a1257dfdcc049891964a9380e0d64cbc2e737fef4b4c1c9516d6a219a085be16"
+ ]
+}

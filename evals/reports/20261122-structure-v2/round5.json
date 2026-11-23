@@ -1,0 +1,141 @@
+{
+ "panel": "rating-r5",
+ "arms": {
+  "passive_v4": {
+   "n": 60,
+   "good": 49,
+   "good_rate": 0.8166666666666667,
+   "good_ci95": [
+    0.7008024615073325,
+    0.8944220315709903
+   ],
+   "marks": {
+    "good": 49,
+    "ungrammatical": 3,
+    "notsimpler": 4,
+    "meaning": 4
+   },
+   "per_rater_good_rate": [
+    0.8166666666666667,
+    0.8166666666666667,
+    0.7833333333333333
+   ],
+   "unanimous_good": 47,
+   "by_rule": {
+    "agentive": {
+     "n": 60,
+     "good": 49,
+     "good_ci95": [
+      0.7008024615073325,
+      0.8944220315709903
+     ],
+     "marks": {
+      "good": 49,
+      "ungrammatical": 3,
+      "notsimpler": 4,
+      "meaning": 4
+     }
+    }
+   },
+   "by_source": {
+    "news5": {
+     "n": 14,
+     "good": 12
+    },
+    "goodwiki5": {
+     "n": 23,
+     "good": 19
+    },
+    "fedreg5": {
+     "n": 5,
+     "good": 5
+    },
+    "openfda5": {
+     "n": 18,
+     "good": 13
+    }
+   },
+   "edits_per_100_sentences": 1.1724386724386724,
+   "changed": 65,
+   "sentences": 5544
+  },
+  "nominal_v2": {
+   "n": 24,
+   "good": 16,
+   "good_rate": 0.6666666666666666,
+   "good_ci95": [
+    0.46706316684738447,
+    0.8202780976355061
+   ],
+   "marks": {
+    "good": 16,
+    "meaning": 4,
+    "ungrammatical": 4
+   },
+   "per_rater_good_rate": [
+    0.75,
+    0.6666666666666666,
+    0.6666666666666666
+   ],
+   "unanimous_good": 16,
+   "by_rule": {
+    "table": {
+     "n": 22,
+     "good": 16,
+     "good_ci95": [
+      0.5184826582032107,
+      0.8684923978853596
+     ],
+     "marks": {
+      "good": 16,
+      "ungrammatical": 4,
+      "meaning": 2
+     }
+    },
+    "mined": {
+     "n": 2,
+     "good": 0,
+     "good_ci95": [
+      0.0,
+      0.6576197760453506
+     ],
+     "marks": {
+      "meaning": 2
+     }
+    }
+   },
+   "by_source": {
+    "news5": {
+     "n": 1,
+     "good": 1
+    },
+    "openfda5": {
+     "n": 2,
+     "good": 2
+    },
+    "goodwiki5": {
+     "n": 1,
+     "good": 1
+    },
+    "fedreg5": {
+     "n": 20,
+     "good": 12
+    }
+   },
+   "edits_per_100_sentences": 0.09018759018759019,
+   "changed": 5,
+   "sentences": 5544
+  }
+ },
+ "agreement": {
+  "all_three": 0.9156626506024096,
+  "pairwise": 0.9397590361445783
+ },
+ "cards": 83,
+ "key_sha256": "48f8a8c44f5d258b3cd809d1a17bb8a03e2278a7d44fc549bdc44de6d2148942",
+ "marks_sha256": [
+  "4f47990946bb89ec0e8bc9a8574ffb30843bb86937d52d192ffc701dca484496",
+  "39bb52de82d9a2d2ec4a2eb54df5a1bde27b10abb3c784bfc999b68380304e1a",
+  "54d684f187d60ddb36d40f8a4345a912449b1720ddaa6a03c683d65ede6d0bc3"
+ ]
+}

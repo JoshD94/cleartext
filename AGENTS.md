@@ -120,6 +120,10 @@ versions, input/model/source hashes and completion/failure receipts.
   via `apply --panel onestop-dev`); OneStopEnglish dev is now used for rated swaps.
   Rounds 4–5 used unused dev-document windows (`panel build-r4/-r5`); the
   fine-tuned judge (`judge.py`) was rejected: it lost to the GBM models.
+- `cleartext.structure_v2` (opt-in, after F2): only `KEPT` (fronted-clause
+  split, passive → "we") met the 85% blind-rating bar; by-phrase passive
+  flips plateau near 78% (`evals/reports/20261122-structure-v2/`). Rated
+  items cannot validate rules written from them; use a fresh window.
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before

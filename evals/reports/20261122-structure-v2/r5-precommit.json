@@ -1,0 +1,41 @@
+{
+ "round": "5",
+ "written": "2026-11-22 21:09:09 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "2af903c9aae57db53245dcbf6486da5f14a7fd3d232668782af4c7771c1d8dec",
+  "models/src/cleartext/structure_v2/appositive.py": "cf76b9e33df4fccc4d675c91fb1e358f561f356f80739da7545942f5a6831fda",
+  "models/src/cleartext/structure_v2/common.py": "a14c621ca0fb96acb6c829240dbbc63f0d0ba3bf08e45ea02d8695cdcf09d7a6",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "a9b37a17086b90560c69d22cd56d0dc59ab8d1d0dee9b86513838e841202949f",
+  "models/src/cleartext/structure_v2/passive.py": "db7e16de726163b21f1c1bc83a955989cab74690af51fd5b0307fa6676b94b2e",
+  "models/src/cleartext/structure_v2/stage.py": "1fa70bc12c7c783ae69ebe423976e9f7755e74446972d39e07542ae8d058ce4d",
+  "evals/structure_v2.py": "3c635f3ebafd756ee06a8578e78c9bd84423ff59b68cb8c3682d7c0724e1745f",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "models/tests/test_structure_v2.py": "5038b98c61c05771f9d2c4243431547fb8ae480257a793700d65553ef6e75fcb",
+  "evals/structure_v2_fetch.py": "20138a4b06b7b56c1b4e3dfe512cd5ffde782e00856cbb99f3b3f163d72ef180",
+  "evals/reports/20261122-structure-v2/rated_gate_check.py": "ec2a785442942f159ff7552649daa0384344bc621c29893b22cf24f1111bfb75"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-E.json": "caa1164a5fed55cbd4459f59c165f2333bafad3e38268a9ac169ca599b4daa1b",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-Ewide.json": "ff9fed207fdd2b15c008c47f6206e43071efd1729f19c871daa26e82456e091a",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-E-manifest.json": "d0005a43f2f2e11b9741af04943bd77437c572a04cd7596830373cef65b99936",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/download5/manifest.json": "68a73a59f6c31939f4f47977853ca9fe8bcfc7eaa778886c49252ffbc9edbe29"
+ },
+ "thresholds": {
+  "arms": [
+   "passive_v4",
+   "nominal_v2"
+  ],
+  "cap": {
+   "passive_v4": 60,
+   "nominal_v2": 40
+  },
+  "rare_arm_wide_pool": "pool-Ewide",
+  "decision": "rounds 4+5 pooled (identical code): n >= 20, Good >= 0.85, meaning <= 0.10",
+  "gate": "none (rated-gate.json: no signal)",
+  "op_code_commit": "e9e6f24"
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "round": "6",
+ "written": "2026-11-23 00:10:33 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "2af903c9aae57db53245dcbf6486da5f14a7fd3d232668782af4c7771c1d8dec",
+  "models/src/cleartext/structure_v2/appositive.py": "346b96c8ba6edc8d0722099ec4e73d3c33a767ba1fa9ed211bc99072a081948f",
+  "models/src/cleartext/structure_v2/common.py": "5e062915e45718e6d1da5d85860fc21e010ce94c32ac4c13aa49783d761fd978",
+  "models/src/cleartext/structure_v2/fluency.py": "df091bf7efb1e3702ab253e72abc8d6816b6895f0d51435198a1ad14083c568d",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "a9b37a17086b90560c69d22cd56d0dc59ab8d1d0dee9b86513838e841202949f",
+  "models/src/cleartext/structure_v2/passive.py": "6b057234cd5639aa4f9a4e6b32cf6f0db624f6e92b99955f00993b110f9db268",
+  "models/src/cleartext/structure_v2/stage.py": "28c63a88251789a5fb088d7a2808c08b8d5818c76b71803ea11f48232ece3aa9",
+  "evals/structure_v2.py": "acd36fe21bdab35a5d77d4bebd9abbe99d4c865e8fcdc2e406b9507632865406",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "models/tests/test_structure_v2.py": "18baf5bc6e9a264fe36f24502eb3c91cf1fb8fcb707aa4ee15e35ceade57be5f",
+  "evals/structure_v2_fetch.py": "936ceebb4f1ed53b008a35d8bfd31f09852e589e274206c253438474b44ce105",
+  "models/src/cleartext/contextual.py": "b34b11d068267849a42e8b7e0e5729820be462e8dde54205283f3a490cb85841",
+  "models/src/cleartext/teammate_stages.py": "a3b42805faa558e3a3ca04900476a8cc07fee28ce083518c09af710891a84dfe",
+  "evals/reports/20261122-structure-v2/ROUND6.md": "8ead7b845deebffd58bd95262524d77d852a356682e05020be10676178a8af6f"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-F.json": "841295eff3e69c6ad9c7b76439d73da6c1f48d3ec3771b50203eea9527448c45",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-Fwide.json": "a2b5b93dffdca7c1d976cd33f94e064fd10c747348889e3c7c27aa900f7cf660",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-F-manifest.json": "89377364c9a4efc077ba556b0009adb023af0ffe2197e53ec398ce107e444272",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/download6/manifest.json": "dd9a575feb4feaa66191fe540ac34c00cdcac32c782686143a2be3f0e8d26922",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/r6_apply.sh": "c53555377748d1122612131f458f9211309ffdd32d6ceb1af777a675d48a273b",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/r6_apply_wide.sh": "75583b5401e72ebf9f680fd60470a25598e33401949ea94c9865470eaebc2a0f",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/r6_panel.sh": "2aa865715d28896c01d49550605b458525bacd5ab2ec132f16994fb0bc3affb1",
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/meta.json": "7456349002fa8cf31111051bd37fdbea67a1b7f7a0a60ce235466f98a6758125",
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_sm/en_core_web_sm-3.8.0/parser/model": "e0098910535a863d430082ece57455d5fa071cd4ca3a0054e80582076c752b1e",
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/meta.json": "5bcf739c5ac3b0038fc218d3227f8600e35a420e29fbe4c6bcc643688ab63b1b",
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/parser/model": "9d2f5ec9fe1cdf6b709cc3bcf746e82788ee3561f1f659a9bc94dadcd7648225",
+  "/home/joshuadirga/Documents/projects/cleartext/models/.venv/lib/python3.12/site-packages/en_core_web_md/en_core_web_md-3.8.0/ner/model": "7454af3a8d841f9724f932f95b06591a13da659e0f99dd44ebbb2be804739d6d",
+  "/home/joshuadirga/.cache/huggingface/hub/blobs/44/44172b48ce7a9d951000a9d76ae331b155df32c9fd4e93239a233d720f471725": "68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3",
+  "/home/joshuadirga/.cache/huggingface/hub/blobs/3a/3a9c57043e195d65bc3a07e5280c6aec6a448892a603fd02ecdbfd9ce3cdb3e4": "ebc79588dd73ccfb6a3f6078519cfbf512c5305384c5ea1845bc71cd32216e86"
+ },
+ "thresholds": {
+  "arms": [
+   "passive_v5",
+   "appositive_v4",
+   "passive_v4"
+  ],
+  "cap": {
+   "passive_v5": 80,
+   "appositive_v4": 60,
+   "passive_v4": 60
+  },
+  "items_from": {
+   "passive_v5": "pool-Fwide",
+   "appositive_v4": "pool-Fwide",
+   "passive_v4": "pool-F"
+  },
+  "rates_from": "pool-F",
+  "min_entailment": {
+   "passive_v5": 0.5,
+   "appositive_v4": 0.5,
+   "passive_v4": null
+  },
+  "nli_model": "cross-encoder/nli-deberta-v3-small@fa2804872c3b4bd748f38c0185cc85775361e735 (min of both directions)",
+  "fluency_floor_v5": -16.0,
+  "fluency_model": "bert-base-uncased (cleartext.contextual)",
+  "second_parser": "en_core_web_md 3.8.0",
+  "pass_rule": "each new arm, round 6 alone: n >= 40, majority Good >= 0.90, majority meaning <= 0.08; n < 40 inconclusive",
+  "majority": "2 of 3; three-way split takes the most severe (meaning > ungrammatical > notsimpler)",
+  "raters": "3 fresh general-purpose Opus subagents, RATER_BRIEF/RATER_PROMPT verbatim, own shuffles",
+  "seed": 20261122
+ }
+}
