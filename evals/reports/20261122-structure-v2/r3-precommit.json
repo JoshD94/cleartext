@@ -1,0 +1,70 @@
+{
+ "round": "3",
+ "written": "2026-11-22 19:42:53 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "600743932f06596722bdf8f1e2000d88c7b0e5f6ef529d8073ddaa5a86952040",
+  "models/src/cleartext/structure_v2/appositive.py": "cf76b9e33df4fccc4d675c91fb1e358f561f356f80739da7545942f5a6831fda",
+  "models/src/cleartext/structure_v2/common.py": "e4e02e9f9d076f700a9bf8d60687bf28bd262806bfe1a750a6ee49cd4ca2d508",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "89b5d26ee10e9000f76a7c7724a79f57cb8a4d5e40dc9b22aed7a580224c25c2",
+  "models/src/cleartext/structure_v2/passive.py": "ec3d4ed557b6ad68ab7f049164120cadad9f359e8f6966a324cabf3208eb4245",
+  "models/src/cleartext/structure_v2/stage.py": "58ae0e1d42c6983135cec153ba6a34bbaf2cac653e18658640c1b137c36cd1c8",
+  "evals/structure_v2.py": "52907c36650bd49dabd163fd3e56c8eebb80acb7654f9f1eb9e7d65ef37665ee",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "models/tests/test_structure_v2.py": "ba4db05ab245b6f08ffc01e0ce17e474ab7c309ef25706edb6af25ae426698ee",
+  "evals/structure_v2_fetch.py": "4a8b86af33ea93c520e7ee7c02b4844c9fc24dd3270bea4e9c263b0901bf01e9"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-C.json": "b6709949b7653dda91c01106e90a02c3114d24f82d2a17f2c1252d18f9b403db",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-Cwide.json": "dc5067876d40b7b4edd0ab0b56f637ea65feb260aaea5c65a9350102dff209ae",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-C-manifest.json": "e6679fe46b83d6156476f7d6943bc5a877980456e5d3768defafe2a68200209e",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/download3/manifest.json": "857136b85a2beb5f8c302bddee74464001eb8cf5948ae7db66cbb226a6f09956"
+ },
+ "thresholds": {
+  "arms": [
+   "passive_v3",
+   "appositive_v3",
+   "frames_v2",
+   "passive_recovered",
+   "nominal",
+   "fronted_split"
+  ],
+  "cap": {
+   "passive_v3": 60,
+   "appositive_v3": 40,
+   "frames_v2": 40,
+   "passive_recovered": 30,
+   "nominal": 30,
+   "fronted_split": 30
+  },
+  "rare_arm_wide_pool": "pool-Cwide",
+  "seed": 20261122,
+  "raters": 3,
+  "majority": "2 of 3, else most severe",
+  "kept_new": {
+   "min_items": 20,
+   "good_rate_min": 0.85,
+   "meaning_rate_max": 0.1,
+   "on": "round 3 alone"
+  },
+  "frames_v2": "same rule on round 2 + 3 pooled",
+  "confirmation": "kept unless pooled round 2+3 Good < 0.85 or meaning > 0.10",
+  "combined_order": [
+   "passive_v3",
+   "passive_recovered",
+   "nominal",
+   "frames_v2",
+   "appositive_v3",
+   "fronted_split"
+  ],
+  "dev_success_combined": {
+   "all_gates_and_over_edit": true,
+   "dnli_ci_low_min": -0.005,
+   "dfk_max": 0.0
+  },
+  "round2_code_commit": "53c5f12"
+ }
+}

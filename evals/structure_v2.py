@@ -109,6 +109,65 @@ def clean(s):
             and not re.match(r"(?:[A-Z]{2,}\s+(?:&\s+)?){2,}", s))  # an all-caps heading run into the sentence
 
 
+def run_pool_c(args):
+    """Pool C (round 3): every document of a new download directory is fresh,
+    so all buckets are used. Exclusions add the round 1-2 pools to the usual
+    earlier panels."""
+    state = outside_checkout(args.state)
+    docs_used, texts_used, files = used_texts()
+    for f in ("pool-build.json", "pool-A.json", "pool-B.json", "pool-buildwide.json", "pool-Awide.json",
+              "pool-Bwide.json"):
+        for r in json.loads((state / f).read_text()):
+            docs_used.add(r["doc"])
+            texts_used.append(r["sentence"])
+        files.append(str(state / f))
+    used = set()
+    for t in texts_used:
+        used |= grams(t)
+    rng = random.Random(SEED + 3)
+    pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
+    for path in sorted(Path(args.download).glob("*.jsonl.gz")):
+        name = path.name.split(".")[0] + "3"
+        by_doc = defaultdict(list)
+        for line in gzip.open(path, "rt"):
+            r = json.loads(line)
+            by_doc[r["doc"]].append(r["s"])
+        docs = sorted(by_doc)
+        rng.shuffle(docs)
+        stats, kept = Counter(), []
+        for d in docs:
+            if d in docs_used:
+                stats["docs_used_elsewhere"] += 1
+                continue
+            sents = by_doc[d]
+            idx = [i for i, x in enumerate(sents) if clean(x)]
+            rng.shuffle(idx)
+            full = len(kept) < args.per_source
+            for rank, i in enumerate(idx):
+                if grams(sents[i]) & used:
+                    stats["sentences_8gram_overlap"] += 1
+                    continue
+                row = {"id": f"{name}:{hashlib.sha256((d + str(i)).encode()).hexdigest()[:12]}",
+                       "source": name, "doc": d, "index": i, "sentence": sents[i],
+                       "context": sents[max(0, i - 3): i]}
+                if full and rank < args.per_doc and len(kept) < args.per_source:
+                    kept.append(row)
+                if full:
+                    wide.append(row)
+            if len(kept) >= args.per_source:
+                break
+        pool += kept
+        stats["C_sentences"] = len(kept)
+        manifest["sources"][name] = {"sha256": sha(path), **stats}
+        print(name, dict(stats), flush=True)
+    write_json(state / "pool-C.json", pool)
+    write_json(state / "pool-Cwide.json", wide)
+    manifest["pool_C_sha256"] = sha(state / "pool-C.json")
+    manifest["pool_Cwide_sha256"] = sha(state / "pool-Cwide.json")
+    write_json(state / "pool-C-manifest.json", manifest)
+    print(len(pool), len(wide))
+
+
 def run_pool(args):
     state = outside_checkout(args.state)
     docs_used, texts_used, files = used_texts()
@@ -706,6 +765,11 @@ def main(argv=None):
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
+    p = sub.add_parser("pool-c")
+    p.add_argument("--state", type=Path, required=True)
+    p.add_argument("--download", type=Path, required=True)
+    p.add_argument("--per-source", type=int, default=1500)
+    p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("apply")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--pool", type=Path, required=True)
@@ -763,7 +827,7 @@ def main(argv=None):
     p.add_argument("--thresholds", required=True)
     p.add_argument("--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    {"pool": run_pool, "apply": run_apply, "panel": run_panel, "tally": run_tally, "dev": run_dev,
+    {"pool": run_pool, "pool-c": run_pool_c, "apply": run_apply, "panel": run_panel, "tally": run_tally, "dev": run_dev,
      "score": run_score, "judge": run_judge, "precommit": run_precommit,
      "synthetic": run_synthetic, "gate-train": run_gate_train}[args.cmd](args)
 

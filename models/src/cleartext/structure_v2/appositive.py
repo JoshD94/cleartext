@@ -163,6 +163,8 @@ class AppositiveSplit:
             final = e == sent.end - 2
             if not (subject_side or final):
                 continue
+            if self.version >= 3 and not subject_side:
+                continue  # round 2: sentence-final material often describes another noun or the event
             if self.version >= 2 and _risky(kind, tok, anchor, span, s, sent, final):
                 continue
             if anchor.left_edge.i < sent.start or any(t.text == "," for t in sent.doc[anchor.left_edge.i: s - 1]):
@@ -202,6 +204,11 @@ class AppositiveSplit:
                     # A definition is timeless ("Esomeprazole is an enantiomer
                     # of omeprazole"), unless the appositive marks a past role.
                     tense = "past" if any(t.lower_ in PAST_ROLE for t in span) else "pres"
+                if self.version >= 3 and c["anchor"].ent_type_ == "PERSON" and _main_tense(sent) == "past":
+                    tense = "past"  # "Marcellus Leonard, a merchant, proposed it in the 1890s" -> "was"
+                if self.version >= 3 and c["anchor"].pos_ == "PROPN" and c["anchor"].text.endswith("s") \
+                        and any(d.lower_ == "the" for d in c["anchor"].children):
+                    pn = "pl"  # "The Montreal Canadiens are ..."
                 be = agree("be", tense, pn)
                 extra = f"{upper_first(anchor_text)} {be} {span_text(span)}."
             else:

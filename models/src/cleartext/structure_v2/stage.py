@@ -24,9 +24,11 @@ from .passive import ActiveVoice
 OPS = {
     "passive": lambda: ActiveVoice(),
     "passive_we": lambda: ActiveVoice(agents=("we",)),
+    "passive_v3": lambda: ActiveVoice(version=3),
     "passive_recovered": lambda: ActiveVoice(agents=("we",), kinds=("recovered_we",)),
     "appositive": lambda: AppositiveSplit(),
     "appositive_v2": lambda: AppositiveSplit(version=2),
+    "appositive_v3": lambda: AppositiveSplit(version=3),
     "fronted_split": lambda: FrontedClause(rules=("split",)),
     "fronted_move": lambda: FrontedClause(rules=("move",)),
     "frames": lambda: EmptyFrames(),

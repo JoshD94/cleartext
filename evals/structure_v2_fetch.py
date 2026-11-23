@@ -114,12 +114,124 @@ def fedreg_keys(f):
     return sorted(set(keys))
 
 
+# Round 3: a third fresh window, disjoint from rounds 1-2 and the word stage.
+FDA_2023 = ("https://api.fda.gov/drug/label.json?search=effective_time:[20230101+TO+20231231]+AND+"
+            "openfda.product_type:%22HUMAN+PRESCRIPTION+DRUG%22+AND+_exists_:clinical_pharmacology")
+FDA_FIELDS = ("indications_and_usage", "dosage_and_administration", "clinical_pharmacology",
+              "warnings_and_cautions", "adverse_reactions", "use_in_specific_populations", "clinical_studies")
+R3_CAPS = {"news": 150, "goodwiki": 300, "fedreg": 40, "openfda": 150}
+WORDS_CORPUS = Path.home() / ".local/state/cleartext/learned-words-20261118/corpus"
+
+
+def used_generics():
+    """Generic names in every earlier openFDA panel source (word-stage corpus, test set v3)."""
+    out = set()
+    path = WORDS_CORPUS / "openfda.jsonl.gz"
+    v3 = Path.home() / ".local/state/cleartext/testset-v3-20261116/panel/all.json"
+    for p in json.loads(v3.read_text()):
+        m = re.search(r"\(([^)]+)\) prescribing information", p.get("source_title", ""))
+        if m:
+            out.add(m.group(1).lower())
+    return out
+
+
+def round3(args, deadline):
+    f = Fetcher(args.out / "http")
+    previous = used_titles()
+    for old in (Path(args.previous) / "news.jsonl.gz", Path(args.previous) / "goodwiki.jsonl.gz"):
+        if old.exists():
+            previous |= {json.loads(line)["doc"] for line in gzip.open(old, "rt")}
+    old_fda = set()
+    if (WORDS_CORPUS / "openfda.jsonl.gz").exists():
+        old_fda = {json.loads(line)["doc"] for line in gzip.open(WORDS_CORPUS / "openfda.jsonl.gz", "rt")}
+    generics = used_generics()
+    stats = {}
+    for name in ("goodwiki", "fedreg", "openfda", "news"):
+        out, done = args.out / f"{name}.jsonl.gz", args.out / f"{name}.done"
+        if done.exists():
+            stats[name] = json.loads(done.read_text())
+            continue
+        rng = random.Random(f"{SEED}:r3:{name}")
+        docs, partial = [], False
+        if name == "fedreg":
+            keys = []
+            url = ("https://www.federalregister.gov/api/v1/documents.json?per_page=1000&order=oldest"
+                   "&conditions[type][]=RULE&conditions[significant]=1"
+                   "&conditions[publication_date][gte]=2021-07-01&conditions[publication_date][lte]=2021-12-31"
+                   "&fields[]=document_number&fields[]=title&fields[]=raw_text_url&fields[]=publication_date")
+            while url:
+                page = f.json(url, delay=1.0)
+                keys += [f"{r['document_number']}|{r['publication_date']}|{r['raw_text_url']}|{r['title']}"
+                         for r in page.get("results", []) if r.get("raw_text_url")]
+                url = page.get("next_page_url")
+            keys = sorted(set(keys))
+            rng.shuffle(keys)
+            for key in keys:
+                if len(docs) >= R3_CAPS[name] or time.monotonic() > deadline:
+                    break
+                loaded = B.fedreg_load(f, key)
+                if loaded:
+                    docs.append((loaded[0]["source_doc"], [b for b in loaded[1] if len(b.split()) >= 6]))
+        elif name == "openfda":
+            names = set()
+            for skip in range(0, 5000, 100):
+                if len(docs) >= R3_CAPS[name] or time.monotonic() > deadline:
+                    break
+                page = f.json(f"{FDA_2023}&limit=100&skip={skip}", delay=0.5)
+                for lab in page.get("results", []):
+                    gen = [g.lower() for g in lab.get("openfda", {}).get("generic_name", [])]
+                    doc = f"fda-{lab['set_id']}"
+                    if not gen or gen[0] in names or any(g in generics for g in gen) or doc in old_fda:
+                        continue
+                    names.add(gen[0])
+                    paras = []
+                    for k in FDA_FIELDS:
+                        for t in lab.get(k, []):
+                            t = B._FDA_HEADINGS.sub(" 99 ", B.clean(t))
+                            paras += [x for x in re.split(r"(?:^|\s)\d{1,2}(?:\.\d{1,2})?\s+(?=[A-Z])", t)
+                                      if len(x.split()) >= 6]
+                    docs.append((doc, paras))
+        else:
+            api, cat = APIS[name]
+            listed = titles(f, api, cat, deadline)
+            if listed is None:
+                print(f"PARTIAL ({name} titles)")
+                return
+            order = [t for t in listed if t not in previous]
+            rng.shuffle(order)
+            picked = order[: R3_CAPS[name]]
+            step = 20 if name == "goodwiki" else 1
+            for i in range(0, len(picked), step):
+                if time.monotonic() > deadline:
+                    partial = True
+                    break
+                got = extracts(f, api, picked[i:i + step], intro=(name == "goodwiki"))
+                docs += [(t, got[t]) for t in picked[i:i + step] if t in got]
+        n = 0
+        with gzip.open(out, "wt") as w:
+            for doc, paras in docs:
+                for para in paras:
+                    for sent in B.sentences(B.clean(html.unescape(para))):
+                        w.write(json.dumps({"doc": doc, "s": sent}, ensure_ascii=False) + "\n")
+                        n += 1
+        stats[name] = {"documents": len(docs), "sentences": n, "stopped_at_deadline": partial}
+        done.write_text(json.dumps(stats[name]))
+        print(name, stats[name], flush=True)
+    (args.out / "manifest.json").write_text(json.dumps(stats, indent=1))
+    print("COMPLETE")
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--max-seconds", type=float, default=1500)
+    ap.add_argument("--round", type=int, default=1)
+    ap.add_argument("--previous", default=str(Path.home() / ".local/state/cleartext/structure-20261122/download"))
     args = ap.parse_args(argv)
     deadline = time.monotonic() + args.max_seconds
+    if args.round == 3:
+        args.out.mkdir(parents=True, exist_ok=True)
+        return round3(args, deadline)
     f = Fetcher(args.out / "http")
     used = used_titles()
     stats = {}

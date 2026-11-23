@@ -151,3 +151,30 @@ def test_stage_passage_shape():
     out, edits = StructureV2(ops=("passive",)).rewrite(text)
     assert out == "We measured the samples twice. An independent lab checked the results. Nothing else changed."
     assert [e["op"] for e in edits] == ["passive"]
+
+
+@pytest.mark.parametrize("op, sentence", [
+    # Round 3 (failure types from the round-2 ratings).
+    ("passive_v3", "Lidocaine HCl is metabolized rapidly by the liver."),
+    ("passive_v3", "Elimination half-life was prolonged by about 60% in cirrhotic subjects."),
+    ("passive_v3", "It is flanked by a statue of William Prescott to the south and an entrance building to the north."),
+    ("passive_v3", "Bioavailability is also slightly enhanced by the presence of food but unaffected by antacids."),
+    ("passive_v3", "Care should be taken since this may be followed by a small slough."),
+    ("passive_v3", "If these values are weighted by mass percentage, then the blend has a GWP of about 287."),
+    ("passive_v3", "Metabolism — Tadalafil is predominantly metabolized by CYP3A4 to a catechol metabolite."),
+    ("appositive_v3", "Ryan supported the American Health Care Act, the House Republican plan to repeal the ACA."),
+])
+def test_round3_abstains(op, sentence):
+    assert run(op, sentence) == sentence
+
+
+@pytest.mark.parametrize("op, before, after", [
+    ("passive_v3", "The execution method has been criticised by some.", "Some have criticised the execution method."),
+    ("passive_v3", "The cake was eaten by John.", "John ate the cake."),
+    ("appositive_v3", "Marcellus Leonard, a merchant from nearby Saranac Lake, proposed the highway in the 1890s.",
+     "Marcellus Leonard proposed the highway in the 1890s. Marcellus Leonard was a merchant from nearby Saranac Lake."),
+    ("appositive_v3", "Dementia, a progressive neurodegenerative disorder, affects memory and reasoning.",
+     "Dementia affects memory and reasoning. Dementia is a progressive neurodegenerative disorder."),
+])
+def test_round3_operations(op, before, after):
+    assert run(op, before) == after

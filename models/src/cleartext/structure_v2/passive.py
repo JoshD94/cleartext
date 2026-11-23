@@ -22,6 +22,8 @@ implementation (his code is unchanged) that adds:
 Every candidate carries features for the learned gate (structure_v2.gate).
 """
 
+import re
+
 from .common import (parse, Edit, Pieces, SUBJ_TO_OBJ, OBJ_TO_SUBJ, agree, in_quotes, inflect,
                      keeps_capital, lower_first, number_of, span_text, upper_first)
 
@@ -86,7 +88,7 @@ TITLES = {"president", "prime", "minister", "senator", "governor", "judge", "jus
           "new", "north", "south", "east", "west", "united", "great", "supreme", "royal", "national", "federal"}
 
 
-def run_in_heading(sent):
+def run_in_heading(sent, zipf_min=3.0):
     """A section heading run into the sentence ("Elimination Isoproterenol is
     metabolized ...", "Esomeprazole The data ...", "Recurrent Systemic
     Embolism and Other Indications Oral anticoagulation ..."): a capitalized
@@ -108,7 +110,7 @@ def run_in_heading(sent):
         return False
     from nltk.corpus import wordnet as wn
     # A common word (it has WordNet senses), not a name ("Barbara Kent").
-    return bool(wn.synsets(a.lower_)) and zipf_frequency(a.lower_, "en") >= 3.0
+    return bool(wn.synsets(a.lower_)) and zipf_frequency(a.lower_, "en") >= zipf_min
 
 
 def mass_noun(lemma):
@@ -217,7 +219,65 @@ def _features(verb, subj, auxpass, agent_obj, kind, sent):
     }
 
 
-def skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
+def skip_reason(verb, subj, auxpass, agent, agent_obj, sent, version=2):
+    reason = _skip_reason(verb, subj, auxpass, agent, agent_obj, sent)
+    if reason is None and version >= 3:
+        reason = _skip_reason_v3(verb, subj, agent, agent_obj, sent)
+    return reason
+
+
+def _skip_reason_v3(verb, subj, agent, agent_obj, sent):
+    """Round-3 skips, one per failure type in the round-2 ratings."""
+    first = sent[0]
+    if fda_heading(sent) or run_in_heading(sent, zipf_min=2.0):
+        return "run-in heading at the sentence start"
+    if subj.lower_ in ("this", "that", "these", "those"):
+        return "demonstrative subject (vague as an object)"
+    if any(t.text == "," or t.tag_ in ("WP", "WP$", "WDT") for t in subj.subtree):
+        return "comma or wh-word inside the subject"
+    if subj.left_edge.i == sent.start and first.text[:1].isupper() and first.pos_ == "PROPN" \
+            and first.ent_type_ not in ("PERSON", "ORG", "GPE", "NORP", "LOC", "FAC", "EVENT", "WORK_OF_ART"):
+        # "Lidocaine HCl is metabolized ..." -> "... metabolizes Lidocaine HCl": a capitalized
+        # name that may be a common noun would sit capitalized mid-sentence.
+        return "capitalized sentence-initial name of unknown type"
+    if agent is None:
+        return None
+    if (agent_obj.tag_ == "NN" and agent_obj.lower_.endswith("age") and not mass_noun(agent_obj.lemma_)
+            and not any(c.dep_ in ("det", "poss", "nummod", "predet", "conj") for c in agent_obj.children)):
+        return "bare count noun agent"  # "weighted by mass percentage" (round 2 exempted -age nouns)
+    if agent_obj.like_num or agent_obj.tag_ == "CD" or agent_obj.ent_type_ in ("PERCENT", "QUANTITY", "MONEY",
+                                                                             "CARDINAL") \
+            or any(t.text == "%" for t in agent_obj.subtree):
+        return "a measure phrase, not a doer (by about 60%)"
+    agent_ids = {t.i for t in agent.subtree}
+    for t in sent:
+        if t.i <= agent.right_edge.i or t.is_punct and t.i == sent.end - 1:
+            continue
+        if t.head.i in agent_ids:
+            return "material after the agent belongs to it"
+        if t.dep_ in ("cc", "conj", "preconj") and t.head.i in agent_ids | {verb.i}:
+            return "coordination after the agent"
+        if t.dep_ == "cc" and t.head.pos_ in ("NOUN", "PROPN"):
+            return "noun coordination after the agent (may belong to it)"
+        if t.lower_ in ("as", "and", "or", "but") and t.i == agent.right_edge.i + 2 and \
+                sent.doc[agent.right_edge.i + 1].text == ",":
+            return "coordination after the agent"
+    return None
+
+
+FDA_HEADING = re.compile(
+    r"^(?:Absorption|Distribution|Metabolism|Elimination|Excretion|Drug Interactions|Pharmacokinetics|"
+    r"Pharmacodynamics|Specific Populations|Microbiology|Mechanism of Action|Hemodialysis|Pregnancy|Lactation|"
+    r"Pediatrics?|Geriatrics?|Renal Impairment|Hepatic Impairment|Carcinogenesis|Overdosage|"
+    r"Metabolism and Elimination|Absorption and Distribution)(?:\s*[:—–-]\s*|\s+(?=[A-Z]))")
+
+
+def fda_heading(sent):
+    """A drug-label subheading run into the sentence ("Metabolism — Tadalafil ...")."""
+    return bool(FDA_HEADING.match(sent.text))
+
+
+def _skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
     auxes = _auxes(verb)
     if any(a.i < subj.i for a in auxes):
         return "question or inverted order"
@@ -377,7 +437,10 @@ def _verb_group(verb, auxpass, auxes, pn):
     return joined
 
 
-def convert_clause(sent, verb, subj, auxpass, new_subject=None):
+QUANTIFIER_PLURAL = {"some", "many", "few", "several", "both", "all", "others", "most"}
+
+
+def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
     """Rewrite one passive clause. new_subject: (text, agreement) for a
     recovered agent; otherwise the by-phrase is used. Returns the sentence
     text or None."""
@@ -395,6 +458,9 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None):
             pn = {"I": "1sg", "he": "3sg", "she": "3sg"}.get(OBJ_TO_SUBJ[agent_toks[0].lower_], "pl")
         else:
             pn = number_of(agent_obj)
+            if version >= 3 and (agent_obj.lower_ in QUANTIFIER_PLURAL
+                                 or any(t.lower_ == "both" for t in agent_obj.subtree)):
+                pn = "pl"  # "criticised by some" -> "some have"; "both the oral and parenteral ..." 
         subject_text = mapped
     elif new_subject is not None:
         subject_text, pn = new_subject
@@ -473,13 +539,14 @@ class ActiveVoice:
 
     op = "passive"
 
-    def __init__(self, agents=(), max_clauses=2, gate=None, max_agent_len=12, kinds=None):
+    def __init__(self, agents=(), max_clauses=2, gate=None, max_agent_len=12, kinds=None, version=2):
         unknown = set(agents) - {"we"}
         if unknown:
             raise ValueError(f"Unknown agent sources: {sorted(unknown)}")
         self.agents, self.max_clauses, self.gate = tuple(agents), max_clauses, gate
         # kinds: convert only these candidate kinds ("agentive", "recovered_we").
         self.kinds = None if kinds is None else frozenset(kinds)
+        self.version = version  # 3 adds the round-3 skips and agreement fixes
         self.max_agent_len = max_agent_len
 
     def candidates(self, sent, context=()):
@@ -490,7 +557,7 @@ class ActiveVoice:
             agent = next((c for c in verb.children if c.dep_ == "agent"), None)
             agent_obj = next((c for c in agent.children if c.dep_ == "pobj"), None) if agent is not None else None
             kind = "agentive" if agent is not None else "agentless"
-            reason = skip_reason(verb, subj, auxpass, agent, agent_obj, sent)
+            reason = skip_reason(verb, subj, auxpass, agent, agent_obj, sent, self.version)
             new_subject = None
             if reason is None and agent is None:
                 reason = self._agentless_reason(verb, subj, auxpass, sent, we)
@@ -546,7 +613,8 @@ class ActiveVoice:
                     continue
                 if self.gate is not None and not self.gate(row["features"]):
                     continue
-                out = convert_clause(sent, row["verb"], row["subj"], row["auxpass"], row["new_subject"])
+                out = convert_clause(sent, row["verb"], row["subj"], row["auxpass"], row["new_subject"],
+                                     version=self.version)
                 if out is None or out == current:
                     continue
                 edits.append(Edit(self.op, row["kind"], current, out, row["features"]))
