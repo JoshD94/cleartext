@@ -1,0 +1,224 @@
+{
+ "panel": "rating-r6",
+ "arms": {
+  "passive_v5": {
+   "n": 63,
+   "good": 58,
+   "good_rate": 0.9206349206349206,
+   "good_ci95": [
+    0.827296900554489,
+    0.9656241530407488
+   ],
+   "marks": {
+    "meaning": 3,
+    "good": 58,
+    "notsimpler": 1,
+    "ungrammatical": 1
+   },
+   "meaning_rate": 0.047619047619047616,
+   "meaning_ci95": [
+    0.01632616874092256,
+    0.1309096792792932
+   ],
+   "per_rater_good_rate": [
+    0.9206349206349206,
+    0.9365079365079365,
+    0.9206349206349206
+   ],
+   "unanimous_good": 58,
+   "by_rule": {
+    "agentive": {
+     "n": 63,
+     "good": 58,
+     "good_ci95": [
+      0.827296900554489,
+      0.9656241530407488
+     ],
+     "marks": {
+      "meaning": 3,
+      "good": 58,
+      "notsimpler": 1,
+      "ungrammatical": 1
+     }
+    }
+   },
+   "by_source": {
+    "news6": {
+     "n": 14,
+     "good": 12,
+     "meaning": 1
+    },
+    "fedreg6": {
+     "n": 34,
+     "good": 34,
+     "meaning": 0
+    },
+    "openfda6": {
+     "n": 8,
+     "good": 6,
+     "meaning": 2
+    },
+    "goodwiki6": {
+     "n": 7,
+     "good": 6,
+     "meaning": 0
+    }
+   },
+   "edits_per_100_sentences": 0.4466678577809541,
+   "changed": 25,
+   "sentences": 5597
+  },
+  "appositive_v4": {
+   "n": 22,
+   "good": 21,
+   "good_rate": 0.9545454545454546,
+   "good_ci95": [
+    0.7820195397089796,
+    0.991930572468161
+   ],
+   "marks": {
+    "good": 21,
+    "ungrammatical": 1
+   },
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.14865487660514556
+   ],
+   "per_rater_good_rate": [
+    0.9545454545454546,
+    0.9545454545454546,
+    0.9545454545454546
+   ],
+   "unanimous_good": 21,
+   "by_rule": {
+    "relative": {
+     "n": 17,
+     "good": 17,
+     "good_ci95": [
+      0.8156818626193445,
+      1.0
+     ],
+     "marks": {
+      "good": 17
+     }
+    },
+    "appositive": {
+     "n": 5,
+     "good": 4,
+     "good_ci95": [
+      0.375534627029995,
+      0.9637758917743693
+     ],
+     "marks": {
+      "ungrammatical": 1,
+      "good": 4
+     }
+    }
+   },
+   "by_source": {
+    "fedreg6": {
+     "n": 6,
+     "good": 6,
+     "meaning": 0
+    },
+    "news6": {
+     "n": 12,
+     "good": 12,
+     "meaning": 0
+    },
+    "openfda6": {
+     "n": 1,
+     "good": 1,
+     "meaning": 0
+    },
+    "goodwiki6": {
+     "n": 3,
+     "good": 2,
+     "meaning": 0
+    }
+   },
+   "edits_per_100_sentences": 0.2501340003573343,
+   "changed": 14,
+   "sentences": 5597
+  },
+  "passive_v4": {
+   "n": 60,
+   "good": 49,
+   "good_rate": 0.8166666666666667,
+   "good_ci95": [
+    0.7008024615073325,
+    0.8944220315709903
+   ],
+   "marks": {
+    "good": 49,
+    "ungrammatical": 5,
+    "meaning": 4,
+    "notsimpler": 2
+   },
+   "meaning_rate": 0.06666666666666667,
+   "meaning_ci95": [
+    0.02622869854224924,
+    0.1592535740874143
+   ],
+   "per_rater_good_rate": [
+    0.8,
+    0.8,
+    0.8166666666666667
+   ],
+   "unanimous_good": 47,
+   "by_rule": {
+    "agentive": {
+     "n": 60,
+     "good": 49,
+     "good_ci95": [
+      0.7008024615073325,
+      0.8944220315709903
+     ],
+     "marks": {
+      "good": 49,
+      "ungrammatical": 5,
+      "meaning": 4,
+      "notsimpler": 2
+     }
+    }
+   },
+   "by_source": {
+    "news6": {
+     "n": 23,
+     "good": 18,
+     "meaning": 1
+    },
+    "openfda6": {
+     "n": 10,
+     "good": 8,
+     "meaning": 2
+    },
+    "goodwiki6": {
+     "n": 23,
+     "good": 19,
+     "meaning": 1
+    },
+    "fedreg6": {
+     "n": 4,
+     "good": 4,
+     "meaning": 0
+    }
+   },
+   "edits_per_100_sentences": 1.1792031445417188,
+   "changed": 66,
+   "sentences": 5597
+  }
+ },
+ "agreement": {
+  "all_three": 0.9583333333333334,
+  "pairwise": 0.9722222222222222
+ },
+ "cards": 120,
+ "key_sha256": "2c06e6207d3e82433983debffd1dc6c3e6c0cfce0f8f6701e2587bbead12fcc4",
+ "marks_sha256": [
+  "76c8872d57afe6ca4293de48dd72b41882d34f16f4bd114420624df39e05da00",
+  "b6d4648e04002c0c0178c2fecb419d01703e0135cf9c9a291e6115860d6f0e7e",
+  "50b167c0141be197cd55613047070ab6723e24828ae11ef7926b5b13827b804c"
+ ]
+}
