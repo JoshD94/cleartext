@@ -52,14 +52,40 @@ function diff(a, b) {
   return out.map((p) => (p.t !== "same" && !p.s.trim() ? { t: p.t === "add" ? "same" : "skip", s: p.s } : p))
     .filter((p) => p.t !== "skip");
 }
+const wordHTML = (parts) => parts.map((p) => p.t === "same" ? esc(p.s)
+  : p.t === "add" ? `<ins>${esc(p.s)}</ins>` : `<del>${esc(p.s)}</del>`).join("");
+
+// Sentences matched first; a changed run is shown word by word when that reads
+// cleanly (a split, a swap), else as the old sentence struck and the new one marked.
+function sentences(s) { return s.split(/(?<=[.!?]["”’)]?)\s+(?=["“(]?[\p{Lu}\p{N}])/u).filter(Boolean); }
 function diffHTML(a, b) {
-  return diff(a, b).map((p) => p.t === "same" ? esc(p.s)
-    : p.t === "add" ? `<ins>${esc(p.s)}</ins>` : `<del>${esc(p.s)}</del>`).join("");
+  const A = sentences(a), B = sentences(b), n = A.length, m = B.length, W = m + 1;
+  const L = new Uint16Array((n + 1) * W);
+  for (let i = n - 1; i >= 0; i--)
+    for (let j = m - 1; j >= 0; j--)
+      L[i * W + j] = A[i] === B[j] ? L[(i + 1) * W + j + 1] + 1 : Math.max(L[(i + 1) * W + j], L[i * W + j + 1]);
+  const out = [];
+  let i = 0, j = 0, dels = [], adds = [];
+  const flush = () => {
+    if (!dels.length && !adds.length) return;
+    const parts = diff(dels.join(" "), adds.join(" "));
+    const changes = parts.filter((p) => p.t !== "same").length;
+    if (!dels.length || !adds.length || changes <= 2 * Math.max(dels.length, adds.length)) out.push(wordHTML(parts));
+    else out.push(`<del>${esc(dels.join(" "))}</del> <ins>${esc(adds.join(" "))}</ins>`);
+    dels = []; adds = [];
+  };
+  while (i < n || j < m) {
+    if (i < n && j < m && A[i] === B[j]) { flush(); out.push(esc(A[i])); i++; j++; }
+    else if (j >= m || (i < n && L[(i + 1) * W + j] >= L[i * W + j + 1])) dels.push(A[i++]);
+    else adds.push(B[j++]);
+  }
+  flush();
+  return out.join(" ");
 }
 
 // --- rendering ----------------------------------------------------------------------------
 function changeCount(step) {
-  if (step.key === "f2") return step.groups.reduce((n, g) => n + g.edits.length, 0);
+  if (step.key === "f2") return step.groups.reduce((n, g) => n + g.count, 0);
   return step.edits.length;
 }
 
@@ -67,8 +93,13 @@ function tagsFor(step) {
   if (step.key === "words") {
     return step.edits.map((e) => `<span class="swap"><span class="from">${esc(e.word)}</span>${icon("arrow")}<span class="to">${esc(e.replacement)}</span></span>`).join("");
   }
+  const swap = (a, b) => `<span class="swap"><span class="from">${esc(a)}</span>${icon("arrow")}<span class="to">${esc(b)}</span></span>`;
+  if (step.key === "f2") {
+    return step.groups.map((g) => g.name === "Phrase rewrite" ? g.edits.map((e) => swap(e.from, e.to)).join("")
+      : `<span class="tag">${esc(g.name)}${g.count > 1 ? ` <b>×${g.count}</b>` : ""}</span>`).join("");
+  }
   const counts = new Map();
-  const labels = step.key === "f2" ? step.groups.flatMap((g) => g.edits.map(() => g.name)) : step.edits.map((e) => e.label);
+  const labels = step.edits.map((e) => e.label);
   labels.forEach((l) => counts.set(l, (counts.get(l) || 0) + 1));
   return [...counts].map(([l, n]) => `<span class="tag">${esc(l)}${n > 1 ? ` <b>×${n}</b>` : ""}</span>`).join("");
 }

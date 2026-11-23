@@ -1,10 +1,11 @@
 // Headless screenshots of the live demo for the erp-ui self-audit.
 // node shoot.mjs <base-url> <out-dir> states|offline
 // Needs the `playwright` package on NODE_PATH; run through the job queue.
-import { chromium } from "playwright";
+import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
 
+const { chromium } = createRequire(import.meta.url)("playwright"); // found via NODE_PATH
 const [base, out, mode = "states"] = process.argv.slice(2);
 fs.mkdirSync(out, { recursive: true });
 const VIEWS = { desktop: { width: 1440, height: 900 }, phone: { width: 390, height: 844, deviceScaleFactor: 3, isMobile: true, hasTouch: true } };
@@ -29,10 +30,10 @@ async function run(p, example, view, tag, captureRunning) {
     await p.waitForTimeout(2500);
     await shot(p, `${view}-running-${tag}`);
     // Catch a later stage too, if it shows up before the result.
-    try {
-      await p.waitForFunction(() => /Untangling|Swapping/.test(document.querySelector("#status")?.textContent || ""), null, { timeout: 600000 });
-      await shot(p, `${view}-running-stage`);
-    } catch { log("no later stage captured"); }
+    await p.waitForFunction(() => /Untangling|Swapping/.test(document.querySelector("#status")?.textContent || "")
+      || !document.querySelector("#result").hidden, null, { timeout: 600000 });
+    if (await p.$("#result[hidden]")) await shot(p, `${view}-running-stage`);
+    else log("no later stage captured");
   }
   await p.waitForSelector("#result:not([hidden]), #status .notice", { timeout: 900000 });
   await p.waitForTimeout(500);

@@ -26,21 +26,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STAGES = ("f2", "structure", "words")
 
-# Plain-language names for the trace.
-F2_STAGE_NAMES = {
-    "phrase": "Phrase rewrite",
-    "phrases": "Phrase rewrite",
-    "learned seq2seq": "Sentence split",
-    "dependency compound split": "Sentence split",
-    "structure": "Sentence split",
-}
+# Plain-language names for the trace. Structure v4 edits carry the operator family
+# ("passive" for passive_v5/passive_recovered/passive_v7, "appositive", "fronted", "nominal").
 STRUCTURE_OP_NAMES = {
-    "passive_v5": "Passive to active",
-    "passive_v7": "Passive to active",
-    "passive_recovered": "Passive to active",
-    "appositive_v4": "Side note moved out",
-    "fronted_split": "Opening clause split off",
-    "nominal_v3": "Noun phrase to verb",
+    "passive": "Passive to active",
+    "appositive": "Side note made its own sentence",
+    "fronted": "Opening clause split off",
+    "nominal": "Noun turned into a verb",
 }
 
 
@@ -147,18 +139,27 @@ def kept_items(source, output):
 
 
 def f2_edits(result):
-    """F2's per-edit records grouped by sub-stage (plain-language names)."""
-    groups = {}
-    for e, stage in zip(result.get("edits", []), result.get("stages", [])):
-        name = F2_STAGE_NAMES.get(stage, "Sentence split" if "split" in str(stage) else "Phrase rewrite")
-        before = e.get("before") or e.get("source") or e.get("original") or e.get("phrase") or ""
-        after = e.get("after") or e.get("output") or e.get("replacement") or ""
-        groups.setdefault(name, []).append({"stage": stage, "before": before, "after": after})
-    return [{"name": k, "edits": v} for k, v in groups.items()]
+    """F2's edits grouped by sub-stage: authored phrase rewrites (source -> replacement)
+    and sentence splits (T5 / compound splitter; their records hold whole passages)."""
+    phrases, splits = [], 0
+    for e in result.get("edits", []):
+        if "source" in e and "replacement" in e:
+            phrases.append({"from": e["source"], "to": e["replacement"]})
+        else:
+            splits += 1
+    groups = []
+    if splits:
+        groups.append({"name": "Sentence split", "count": splits, "edits": []})
+    if phrases:
+        groups.append({"name": "Phrase rewrite", "count": len(phrases), "edits": phrases})
+    return groups
 
 
 def structure_edits(edits):
-    return [{"op": e.get("op"), "label": STRUCTURE_OP_NAMES.get(e.get("op"), "Sentence rewrite"),
+    def label(op):
+        return next((v for k, v in STRUCTURE_OP_NAMES.items() if str(op).startswith(k)), "Sentence rewrite")
+
+    return [{"op": e.get("op"), "label": label(e.get("op")),
              "before": e.get("before", ""), "after": e.get("after", "")} for e in edits]
 
 

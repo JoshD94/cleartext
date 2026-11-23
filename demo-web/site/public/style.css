@@ -36,6 +36,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scrollbar-gutter: stable; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
