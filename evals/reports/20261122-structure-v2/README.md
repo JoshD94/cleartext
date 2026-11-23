@@ -128,7 +128,8 @@ service." (not simpler).
   `6e32c21adaf0`, `40c84e5b8f8b`; pools `25d960c7a279` (F), `1864f81efca5`
   (G); round 6 applies `4f2ae841b4c8`, `3d717b3bba31`; round 7 applies
   `a556e92141ac`, `2593e1e34b57`; dev on F2 `440a9f30cff1` (judge run
-  inline: F2 metrics reproduced on 87 of 87 rescored passages).
+  inline: F2 metrics reproduced on 87 of 87 rescored passages);
+  `scripts/verify` on the results commit `0823f0ae4bae` (711 passed).
 
 ### v3 disclosures
 
