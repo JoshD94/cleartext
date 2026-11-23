@@ -53,10 +53,10 @@ def pct(x):
 ROWS = [  # (label, [(round, arm)], decision)
     ("Fronted because/although/after clause → split", [(1, "fronted_split"), (2, "fronted_split"), (3, "fronted_split")], "kept"),
     ("Passive → “we” from context", [(1, "passive_recovered"), (2, "passive_recovered"), (3, "passive_recovered")], "kept"),
-    ("Passive → active, by-phrase (mine)", [(1, "passive"), (2, "passive"), (3, "passive_v3"), (4, "passive_v4")], "not kept"),
+    ("Passive → active, by-phrase (mine)", [(1, "passive"), (2, "passive"), (3, "passive_v3"), (4, "passive_v4"), (5, "passive_v4")], "not kept"),
     ("Chhoeng's converter, by-phrase only", [(1, "chhoeng_agentive"), (2, "chhoeng_agentive")], "comparator"),
     ("Chhoeng's converter, someone/people", [(1, "chhoeng_auto")], "comparator"),
-    ("Light verb + noun → verb", [(1, "nominal"), (2, "nominal"), (3, "nominal"), (4, "nominal_v2")], "dropped"),
+    ("Light verb + noun → verb", [(1, "nominal"), (2, "nominal"), (3, "nominal"), (4, "nominal_v2"), (5, "nominal_v2")], "dropped"),
     ("Appositive / who-which → own sentence", [(1, "appositive"), (2, "appositive_v2"), (3, "appositive_v3")], "not kept"),
     ("There is … who → plain clause", [(1, "frames"), (2, "frames_v2"), (3, "frames_v2")], "too few"),
     ("Fronted if/when clause → moved after", [(1, "fronted_move")], "dropped"),
@@ -65,12 +65,12 @@ ROWS = [  # (label, [(round, arm)], decision)
 
 def main():
     state = Path(sys.argv[1])
-    R = {r: json.loads((HERE / f"round{r}.json").read_text())["arms"] for r in (1, 2, 3, 4)}
+    R = {r: json.loads((HERE / f"round{r}.json").read_text())["arms"] for r in (1, 2, 3, 4, 5)}
     dev = json.loads((HERE / "dev-judge.json").read_text())["systems"]
     rows = []
     for label, cells, decision in ROWS:
         tds = []
-        for r in (1, 2, 3, 4):
+        for r in (1, 2, 3, 4, 5):
             arm = next((a for rr, a in cells if rr == r), None)
             v = R[r].get(arm) if arm else None
             tds.append(f"<td>{v['good']}/{v['n']}<br><small>{pct(v['good_rate'])}</small></td>" if v else "<td>–</td>")
@@ -104,8 +104,8 @@ details{{margin:3px 0}} summary{{cursor:pointer;color:var(--acc)}} ul{{margin:4p
 .wrap{{overflow-x:auto}} b{{color:var(--fg)}}
 </style></head><body><main>
 <h1>Sentence structure beyond splitting</h1>
-<p><b>Two operations pass</b> (≥ 85% Good, ≤ 10% meaning changes, fresh text, three blind Opus raters): fronted-clause split (92.9% over rounds 2–3) and passive → “we” from context (91.4%, Federal Register text). By-phrase passive → active tops out at 78% (Chhoeng's: 37–42%). Majority Good per round; rounds use new fresh text each time.</p>
-<div class="wrap"><table><tr><th>Operation</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>per 100 sent.</th><th></th></tr>{''.join(rows)}</table></div>
+<p><b>Two operations pass</b> (≥ 85% Good, ≤ 10% meaning changes, fresh text, three blind Opus raters): fronted-clause split (92.9% over rounds 2–3) and passive → “we” from context (91.4%, Federal Register text). By-phrase passive → active tops out at 78.9% over its last two rounds (Chhoeng's: 37–42%). Majority Good per round; rounds use new fresh text each time.</p>
+<div class="wrap"><table><tr><th>Operation</th><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>per 100 sent.</th><th></th></tr>{''.join(rows)}</table></div>
 <h2>After F2, test set v3 dev (100 passages)</h2>
 <div class="wrap"><table><tr><th>System</th><th>Changed</th><th>FK</th><th>ΔFK</th><th>ΔNLI [CI low]</th><th>Gates</th></tr>{''.join(dev_rows)}</table></div>
 <h2>Examples (good first, then failures)</h2>{''.join(ex)}

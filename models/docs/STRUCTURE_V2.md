@@ -21,8 +21,8 @@ text, edits = stage.rewrite(f2_output)   # (text, edits), like the other stages
 |---|---|---:|---|
 | `fronted_split` | 92.9% [84–97] (rounds 2+3, 70 items) | ~0.4 | in `KEPT` |
 | `passive_recovered` | 91.4% [83–96] (70; Federal Register text) | ~0.05 | in `KEPT` |
-| `passive` (rounds 1, 2), `passive_v3`, `passive_v4` (by-phrase) | 72%, 61%, 78%, 76% | ~1 | not kept |
-| `nominal` / `nominal_v2` | 90%, 88%, 77% / 80% (15) | ~0.1 | dropped |
+| `passive` (rounds 1, 2), `passive_v3`, `passive_v4` (by-phrase) | 72%, 61%, 78%; v4 78.9% [70–86] (109 items, rounds 4+5) | ~1 | not kept |
+| `nominal` / `nominal_v2` | 90%, 88%, 77% / 72% (39, rounds 4+5) | ~0.1 | dropped |
 | `appositive` / `_v2` / `_v3` | 75% / 75% / 71% | 0.3–1.7 | not kept |
 | `frames` / `frames_v2` | 43% / 77% (13 items) | ~0.1 | too few |
 | `fronted_move` | 0% (not simpler) | 0.3 | dropped |
@@ -77,6 +77,6 @@ gradient-boosting gate (it did not raise human Good).
 - The operations parse each sentence with `en_core_web_sm`; misparses are
   the main source of errors that the skip rules do not catch. Replaying
   rated items through rules written from them overstates quality (passive
-  v4: 90–96% on replay, 76% on fresh text).
+  v4: 90–96% on replay, 76% and 82% on two fresh windows).
 - The modules live under `models/src/cleartext/`, so they change
   `ensemble_study.generation_sources()` for any newly frozen plan.

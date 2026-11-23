@@ -3,7 +3,7 @@
 Joshua asked how to improve the sentence-structure stage other than by
 splitting, starting with passive to active. This study built seven
 rule-based operations (no LLM), rated each one blind on fresh public text in
-four pre-registered rounds, and ran the passing ones after F2 on the test set
+five pre-registered rounds, and ran the passing ones after F2 on the test set
 v3 dev split. Raw text and marks stay in
 `~/.local/state/cleartext/structure-20261122/`; this folder holds protocols,
 precommits and aggregates.
@@ -23,9 +23,11 @@ precommits and aggregates.
     [83–96] (64/70). Almost all items are Federal Register rules: **0.05–0.07
     per 100** sentences of mixed text.
 - **Passive with a by-phrase does not reach the bar.** My converter goes from
-  72% Good (round 1) to 61%, 78% and 76% across four versions on fresh text,
-  against 42% and 37% for Chhoeng's converter on the same pools and 3% for
-  his default "someone/people" placeholder. Each round fixed the failures it
+  72% Good (round 1) to 61%, 78% and 76% across four versions on fresh text;
+  a fifth, confirmation round of the last version gave 82%, so v4 pools to
+  **78.9% [70–86]** over 109 items with 12.8% meaning changes (81.9% outside
+  drug labels). Chhoeng's converter scored 42% and 37% on the same pools,
+  and 3% with his default "someone/people" placeholder. Each round fixed the failures it
   saw, and each fresh window showed new ones (parse errors around the
   by-phrase, trailing participles that re-attach to the new subject, means
   phrases like "by a slow infusion", drug-label headings).
@@ -36,7 +38,10 @@ precommits and aggregates.
 - **A learned gate did not help.** Gradient boosting on 1,589 synthetic
   active → passive → active round trips (out-of-fold AUC 0.77) keeps the 77%
   of flips most likely to round-trip exactly, but on rated items the kept
-  subset scored 63% Good against 61% for all flips.
+  subset scored 63% Good against 61% for all flips. A gate trained on the
+  blind marks themselves (146 rated v4 outputs, 18 failures) scored AUC 0.44
+  on round 4 when fit on rounds 1–3 ([rated-gate.json](rated-gate.json)),
+  so none was pre-registered.
 - **On top of F2 (dev, 100 passages)** the two kept operations change 3
   passages: ΔFK −0.011 [−0.028, 0], Δ passage NLI +0.0002 [0, +0.0004];
   every gate and the over-edit gate pass, so the pre-registered dev rule is
@@ -53,20 +58,20 @@ pool of that round. Code versions differ by round (see the round protocols);
 |---|---|---|---|---|---:|---|
 | **Fronted clause split** | 38/40 = 95% [83–99] | 37/40 = 92% [80–97] | 28/30 = 93% [79–98] | – | 0.38–0.49 | **kept** (r2+r3 92.9% [84–97]) |
 | **Passive → "we" (recovered agent)** | 17/22 = 77% [57–90] | 37/40 = 92% [80–97] | 27/30 = 90% [74–97] | – | 0.04–0.07 | **kept** (r2+r3 91.4% [83–96]) |
-| Passive → active, by-phrase (mine) | 29/40 = 72% [57–84] | 35/57 = 61% [48–73] | v3 47/60 = 78% [66–87] | v4 37/49 = 76% [62–85] | 0.9–1.8 | not kept |
+| Passive → active, by-phrase (mine) | 29/40 = 72% [57–84] | 35/57 = 61% [48–73] | v3 47/60 = 78% [66–87] | v4 37/49 = 76% [62–85]; round 5: 49/60 = 82% [70–89] | 0.9–1.8 | not kept (v4 rounds 4+5: 86/109 = 78.9% [70–86]) |
 | … with the synthetic gate | – | 12/19 = 63% [41–81] | – | – | 0.49 | not kept |
 | Chhoeng's converter, by-phrase only | 17/40 = 42% [29–58] | 11/30 = 37% [22–54] | – | – | 3.9–4.1 | comparator |
 | Chhoeng's converter, default (someone/people) | 1/30 = 3% [1–17] | – | – | – | 26.9 | comparator |
-| Nominalization → verb | 36/40 = 90% [77–96] | 35/40 = 88% [74–95] | 23/30 = 77% [59–88] | v2 12/15 = 80% [55–93] | 0.05–0.18 | dropped (r2+r3 82.9% [72–90]) |
+| Nominalization → verb | 36/40 = 90% [77–96] | 35/40 = 88% [74–95] | 23/30 = 77% [59–88] | v2 12/15 = 80% [55–93]; round 5: 16/24 = 67% [47–82] | 0.05–0.18 | dropped (r2+r3 82.9% [72–90]; v2 rounds 4+5 71.8% [56–83]) |
 | Appositive / who-which → own sentence | 30/40 = 75% [60–86] | v2 30/40 = 75% [60–86] | v3 24/34 = 71% [54–83] | – | 0.3–1.7 | not kept |
 | "There is … who" / "it is … that" | 6/14 = 43% [21–67] | v2 5/7 | v2 5/6 | – | 0.0–0.1 | inconclusive (13 items) |
 | Fronted *if/when* clause moved after | 0/40 = 0% [0–9] (33 not simpler) | – | – | – | 0.32 | dropped |
 | Kea-Roy's double negation (existing rule) | 1 edit in 20,316 sentences | – | – | – | 0.02 | coverage only |
 
-Raters: three separate general-purpose Opus subagents per round (twelve in
+Raters: three separate general-purpose Opus subagents per round (fifteen in
 all), [RATER_BRIEF.md](RATER_BRIEF.md) and [RATER_PROMPT.md](RATER_PROMPT.md)
 verbatim, each with its own shuffle and no arm names. All three agreed on
-82%, 94%, 91% and 92% of cards in rounds 1–4. These are model raters, not
+82%, 94%, 91%, 92% and 92% of cards in rounds 1–5. These are model raters, not
 people: their agreement is high and they may share blind spots.
 
 ### Top failure types (from the rated failures)
@@ -181,13 +186,14 @@ percentage of correct outputs.
   input hashes, thresholds) were committed before that round produced any
   output: [ROUND1.md](ROUND1.md) `537491b`, [ROUND2.md](ROUND2.md)
   `53c5f12`, [ROUND3.md](ROUND3.md) `a66af31`, [ROUND4.md](ROUND4.md)
-  `e9e6f24`. Results: [round1.json](round1.json) … [round4.json](round4.json).
-- **Fresh text.** Four disjoint windows of 4,713, 3,870, 5,630 and 5,492
-  sentences (plus "wide" pools of the same documents for rare operations),
+  `e9e6f24`, [ROUND5.md](ROUND5.md) `9a697b5` (confirmation, no code
+  change). Results: [round1.json](round1.json) … [round5.json](round5.json).
+- **Fresh text.** Five disjoint windows of 4,713, 3,870, 5,630, 5,492 and
+  5,544 sentences (plus "wide" pools of the same documents for rare operations),
   from Wikinews, Wikipedia Featured and Good-article leads, Federal
-  Register significant rules (2021-01..06, 2021-07..12, 2023-07..12 and the
-  word stage's unused 2022–23 documents), openFDA labels (2021, 2023 and the
-  word stage's unused 2022 labels) and RFCs. Every document used by the word
+  Register significant rules (2020-07..12, 2021-01..06, 2021-07..12,
+  2023-07..12 and the word stage's unused 2022–23 documents), openFDA labels
+  (2020, 2021, 2023 and the word stage's unused 2022 labels) and RFCs. Every document used by the word
   stage's panels or test set v3, and every sentence sharing a word 8-gram
   with them or with an earlier window, was excluded. The locked test split
   was never read.
