@@ -308,6 +308,17 @@ async function init() {
       b.onclick = () => { if (busy) return; els.text.value = ex.text; updateCount(); };
       els.examples.appendChild(b);
     }
+    const pool = [...await (await fetch("random-examples.json")).json(), ...examples.map((ex) => ex.text)];
+    const r = document.createElement("button");
+    r.className = "btn"; r.type = "button"; r.title = "Load a random example";
+    r.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg><span>Random</span>';
+    r.onclick = () => {
+      if (busy) return;
+      const choices = pool.filter((t) => t !== els.text.value);
+      els.text.value = choices[Math.floor(Math.random() * choices.length)];
+      updateCount();
+    };
+    els.examples.appendChild(r);
   } catch {}
   updateCount();
   await checkHealth();
