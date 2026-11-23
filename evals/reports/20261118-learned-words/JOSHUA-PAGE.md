@@ -40,3 +40,21 @@ set v3's panel file (exclusion only) or the rewrite corpora.
   the window counts in the key.
 - **Use of the marks:** Joshua's marks decide adoption. They are never used
   to train, tune or choose anything.
+
+## Result (November 22)
+
+Joshua asked Claude (Opus 5.5, the orchestrator of this work) to mark the
+page in his place. The marks were made from the page text alone, before the
+key was opened; they stay in the state directory (`joshua-r21/claude-marks.csv`,
+`claude-marks-result.json`). This is one AI rater, not a human check.
+
+| Group | Items | Good (95% CI) | Changes meaning | Not simpler |
+|---|---:|---:|---:|---:|
+| p50 swaps | 60 | **93.3% (84–97)** | 4 | 0 |
+| arm-b swaps p50 rejects | 40 | 37.5% (24–53) | 14 | 11 |
+
+- **Adoption bar (≥ 90% Good): met by p50.**
+- p50's four meaning errors: "cardiovascular mortality" → death,
+  "incorporate by reference" → include (twice, a legal term of art), "all
+  subsequent patches" → "all next patches".
+- Arm b's Good rate on these windows, rebuilt from the two groups: about 57%.
