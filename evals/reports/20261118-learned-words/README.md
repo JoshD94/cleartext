@@ -1205,6 +1205,47 @@ pairwise agreement was 94–95%. Consistency with the old marks was 16–17 of 2
 - Round 23 was folded in: frozen qg on this genre window reached 38/43 (88.4%)
   on genre passages.
 
+## Round 25: round 24's arms frozen on a harder window (November 22)
+
+[ROUND25.md](ROUND25.md) holds the rules ([r25-precommit.json](r25-precommit.json)).
+Nothing was refitted. The window had more technical text: 40 Wikinews and 50
+featured-article leads (new titles), 50 openFDA labels, and the single
+Federal Register passage still unused. 12 passages were skipped for
+rewrite-corpus overlap, leaving 129 passages (525 sentences), 147 items and
+three fresh blind raters. All three agreed on 87%; pairwise agreement was
+89–95%. Consistency with the old marks was 17–18 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler | Unseen pairs (Good) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| b | 124 | 100% | 23.6 | 58.9% (50–67) | 24.2% | 21 | 40 (15) |
+| p50 (frozen) | 67 | 54% | 12.8 | 86.6% (76–93) | 11.9% | 1 | 6 (5) |
+| qg (frozen) | 73 | 59% | 13.9 | 83.6% (73–90) | 12.3% | 3 | 10 (7) |
+| **f (frozen)** | **69** | **56%** | **13.1** | **85.5% (75–92)** | **13.0%** | 1 | 7 (5) |
+| fg (frozen) | 72 | 58% | 13.7 | 83.3% (73–90) | 13.9% | 2 | 9 (5) |
+
+- **Replication: no.** Arm f missed both quality bars (Good ≥ 90%, meaning
+  ≤ 8%); so did every arm.
+- **The window was hard.** Arm b reached 58.9% Good with 24.2% Changes
+  meaning, its worst since round 12, and only 15 of its 40 unseen-pair swaps
+  were Good. News passages were hardest: f kept 11 Good of 15 there.
+- **f's 10 errors:**
+  - frames on well-rated pairs: "5.4% discontinued from the clinical trials" →
+    "stopped from" (twice), "medals were awarded in" → given;
+  - a repeated word: "had experienced" → "had had", and "later … subsequently"
+    → "later … later". The learned repeated-stem feature fired on both, but its
+    weight (−0.7 logit) did not outweigh the pair prior;
+  - senses and register: escalated→increased, admitted→said, acquired→got,
+    featured→had;
+  - Not simpler: established→founded.
+- **The frame prior did not fire on these frames.** It has evidence only where
+  the same pair was rated in the same frame (for example "orally
+  administered"); none of round 25's frames had been rated before. The
+  masked-LM drop on "from" was moderate (1.0–1.1 nats) and its weight is small.
+- **Per rater:** f Good was 89.9%, 88.4% and 79.7%.
+- **Rounds 24–25 pooled (frozen):** f 127/141 (90.1%, CI 84–94), 7.8%
+  meaning, 55% yield; p50 122/135 (90.4%, CI 84–94), 7.4% meaning, 53%.
+  Arm f and p50 are statistically the same.
+
 ## Joshua's blind marking page (prepared November 22, not yet used)
 
 [JOSHUA-PAGE.md](JOSHUA-PAGE.md) holds the rules

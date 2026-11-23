@@ -723,3 +723,49 @@ def test_r25_replicates_round_24_frozen_on_its_own_window():
     src = inspect.getsource(V25.panel)
     assert "R24_PANEL" in src and "joshua-r21b" in src and '"r25-' in src
     assert '"r24"' not in inspect.getsource(V25.page) + inspect.getsource(V25.score)
+
+
+def test_r26_unseen_cut_targets_precision_and_never_tightens():
+    from evals import learned_words_r26 as V26
+
+    sc = np.linspace(1.0, 0.0, 40)
+    good = np.array([1] * 25 + [0, 1, 0, 1, 0] + [0] * 10)
+    t = V26.unseen_cut(sc, good, 0.9)
+    assert sc[24] >= t > sc[30]  # the lowest score where the kept rows are still >= 90% Good
+    assert V26.unseen_cut(sc, good, 0.2) == 0.2  # never stricter than the seen threshold
+    assert V26.unseen_cut(sc[:5], good[:5], 0.9) == 0.9  # fewer than UNSEEN_MIN_KEPT rows: seen threshold
+
+
+def test_r26_unseen_threshold_applies_only_to_pairs_outside_f2_pool():
+    from evals import learned_words_r24 as V24
+    from evals import learned_words_r26 as V26
+    from evals.learned_words_apply import choose
+
+    class P:
+        def score(self, rs):
+            return np.array([r["stack"] for r in rs])
+
+    class Pri:
+        def seen(self, key):
+            return key[1] == "r0"
+
+    class M(P):
+        pri = Pri()
+
+    class Lex:
+        def features(self, w, r, k):
+            return dict.fromkeys(V24.LEX, 0.0)
+
+    def sw(i, sent, stack):
+        return {"sentence": sent, "margin": 0.5, "stack": stack, "cover": 0.0, "gate": 1.0, "check": 1.0, "word": "w",
+                "rep": f"r{i}", "pos": "v", "before": "a w b", "after": f"a r{i} b", "x31": [0.0] * 31, "fr": {}, "nb": []}
+
+    thr = {"p50": 0.8, "f": 0.7, "f2": 0.7, "f2u_unseen": 0.55}
+    out = V26.picks({"domain": "news", "all": [sw(0, 0, 0.75), sw(1, 1, 0.6), sw(2, 2, 0.5)]},
+                    {"p50": P(), "f": M(), "f2": M()}, thr, choose, Lex())
+    assert [x["rep"] for x in out["f2"]] == ["r0"] and sorted(x["rep"] for x in out["f2u"]) == ["r0", "r1"]
+    assert set(out) == set(V26.ARMS)
+    before = (V24.DIR, V24.panel, V24.load_models)
+    with V26.window():
+        assert V24.DIR == V26.DIR and V24.panel is V26.panel and V24.load_models is V26.load_models
+    assert (V24.DIR, V24.panel, V24.load_models) == before
