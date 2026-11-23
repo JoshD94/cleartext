@@ -1,0 +1,222 @@
+{
+ "panel": "rating-r7",
+ "arms": {
+  "passive_v5": {
+   "n": 55,
+   "good": 53,
+   "good_rate": 0.9636363636363636,
+   "good_ci95": [
+    0.8767653592704914,
+    0.9899704588009981
+   ],
+   "marks": {
+    "good": 53,
+    "meaning": 2
+   },
+   "meaning_rate": 0.03636363636363636,
+   "meaning_ci95": [
+    0.010029541199001908,
+    0.1232346407295086
+   ],
+   "per_rater_good_rate": [
+    0.9454545454545454,
+    0.9454545454545454,
+    0.9636363636363636
+   ],
+   "unanimous_good": 51,
+   "by_rule": {
+    "agentive": {
+     "n": 55,
+     "good": 53,
+     "good_ci95": [
+      0.8767653592704914,
+      0.9899704588009981
+     ],
+     "marks": {
+      "good": 53,
+      "meaning": 2
+     }
+    }
+   },
+   "by_source": {
+    "fedreg7": {
+     "n": 35,
+     "good": 33,
+     "meaning": 2
+    },
+    "openfda7": {
+     "n": 6,
+     "good": 6,
+     "meaning": 0
+    },
+    "news7": {
+     "n": 6,
+     "good": 6,
+     "meaning": 0
+    },
+    "goodwiki7": {
+     "n": 8,
+     "good": 8,
+     "meaning": 0
+    }
+   },
+   "edits_per_100_sentences": 0.33153027394870005,
+   "changed": 19,
+   "sentences": 5731
+  },
+  "appositive_v4": {
+   "n": 26,
+   "good": 24,
+   "good_rate": 0.9230769230769231,
+   "good_ci95": [
+    0.7585844605936842,
+    0.9786449117205875
+   ],
+   "marks": {
+    "good": 24,
+    "ungrammatical": 1,
+    "notsimpler": 1
+   },
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.12872892362858793
+   ],
+   "per_rater_good_rate": [
+    0.9230769230769231,
+    0.9230769230769231,
+    0.9230769230769231
+   ],
+   "unanimous_good": 24,
+   "by_rule": {
+    "appositive": {
+     "n": 17,
+     "good": 16,
+     "good_ci95": [
+      0.7301796914154303,
+      0.9895395991310502
+     ],
+     "marks": {
+      "good": 16,
+      "ungrammatical": 1
+     }
+    },
+    "relative": {
+     "n": 9,
+     "good": 8,
+     "good_ci95": [
+      0.565000291629209,
+      0.9801091125830901
+     ],
+     "marks": {
+      "good": 8,
+      "notsimpler": 1
+     }
+    }
+   },
+   "by_source": {
+    "news7": {
+     "n": 16,
+     "good": 14,
+     "meaning": 0
+    },
+    "goodwiki7": {
+     "n": 4,
+     "good": 4,
+     "meaning": 0
+    },
+    "fedreg7": {
+     "n": 3,
+     "good": 3,
+     "meaning": 0
+    },
+    "openfda7": {
+     "n": 3,
+     "good": 3,
+     "meaning": 0
+    }
+   },
+   "edits_per_100_sentences": 0.34897923573547374,
+   "changed": 20,
+   "sentences": 5731
+  },
+  "passive_v4": {
+   "n": 54,
+   "good": 41,
+   "good_rate": 0.7592592592592593,
+   "good_ci95": [
+    0.6305247570705963,
+    0.8535570856343475
+   ],
+   "marks": {
+    "good": 41,
+    "ungrammatical": 6,
+    "notsimpler": 2,
+    "meaning": 5
+   },
+   "meaning_rate": 0.09259259259259259,
+   "meaning_ci95": [
+    0.040201134502611466,
+    0.19909882696104841
+   ],
+   "per_rater_good_rate": [
+    0.7592592592592593,
+    0.7592592592592593,
+    0.7592592592592593
+   ],
+   "unanimous_good": 41,
+   "by_rule": {
+    "agentive": {
+     "n": 54,
+     "good": 41,
+     "good_ci95": [
+      0.6305247570705963,
+      0.8535570856343475
+     ],
+     "marks": {
+      "good": 41,
+      "ungrammatical": 6,
+      "notsimpler": 2,
+      "meaning": 5
+     }
+    }
+   },
+   "by_source": {
+    "openfda7": {
+     "n": 12,
+     "good": 7,
+     "meaning": 1
+    },
+    "goodwiki7": {
+     "n": 21,
+     "good": 18,
+     "meaning": 1
+    },
+    "news7": {
+     "n": 17,
+     "good": 13,
+     "meaning": 2
+    },
+    "fedreg7": {
+     "n": 4,
+     "good": 3,
+     "meaning": 1
+    }
+   },
+   "edits_per_100_sentences": 0.9422439364857791,
+   "changed": 54,
+   "sentences": 5731
+  }
+ },
+ "agreement": {
+  "all_three": 0.9565217391304348,
+  "pairwise": 0.9710144927536232
+ },
+ "cards": 115,
+ "key_sha256": "08a10a6d8238e3fb1f61bdd2da0f2778dc0098c7b7334da28a4e7ea535d94fe0",
+ "marks_sha256": [
+  "6dda0d2ce9fd652e4a8613def7acb368b78864aaa2e42d5808d749e1c06d9b70",
+  "36b00fec6a246b185c92a963f8879dd6e3da6112d57a41ca592ce8061d3e18a5",
+  "319286d0488d967c12778a5c48513c4f64250a10dfe25ec30e2c13f20e1cf31c"
+ ]
+}

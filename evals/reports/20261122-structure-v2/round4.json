@@ -1,0 +1,132 @@
+{
+ "panel": "rating-r4",
+ "arms": {
+  "passive_v4": {
+   "n": 49,
+   "good": 37,
+   "good_rate": 0.7551020408163265,
+   "good_ci95": [
+    0.6191368089723774,
+    0.8539765480255896
+   ],
+   "marks": {
+    "good": 37,
+    "meaning": 10,
+    "ungrammatical": 2
+   },
+   "per_rater_good_rate": [
+    0.7346938775510204,
+    0.7551020408163265,
+    0.7346938775510204
+   ],
+   "unanimous_good": 35,
+   "by_rule": {
+    "agentive": {
+     "n": 49,
+     "good": 37,
+     "good_ci95": [
+      0.6191368089723774,
+      0.8539765480255896
+     ],
+     "marks": {
+      "good": 37,
+      "meaning": 10,
+      "ungrammatical": 2
+     }
+    }
+   },
+   "by_source": {
+    "openfda4": {
+     "n": 8,
+     "good": 5
+    },
+    "news4": {
+     "n": 15,
+     "good": 11
+    },
+    "goodwiki4": {
+     "n": 18,
+     "good": 14
+    },
+    "fedreg4": {
+     "n": 8,
+     "good": 7
+    }
+   },
+   "edits_per_100_sentences": 0.8922068463219228,
+   "changed": 49,
+   "sentences": 5492
+  },
+  "nominal_v2": {
+   "n": 15,
+   "good": 12,
+   "good_rate": 0.8,
+   "good_ci95": [
+    0.5481455107594471,
+    0.9295245070826608
+   ],
+   "marks": {
+    "good": 12,
+    "ungrammatical": 1,
+    "notsimpler": 1,
+    "meaning": 1
+   },
+   "per_rater_good_rate": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "unanimous_good": 12,
+   "by_rule": {
+    "table": {
+     "n": 14,
+     "good": 12,
+     "good_ci95": [
+      0.600586202762663,
+      0.959906079092351
+     ],
+     "marks": {
+      "good": 12,
+      "ungrammatical": 1,
+      "notsimpler": 1
+     }
+    },
+    "mined": {
+     "n": 1,
+     "good": 0,
+     "good_ci95": [
+      0.0,
+      0.7934506882081973
+     ],
+     "marks": {
+      "meaning": 1
+     }
+    }
+   },
+   "by_source": {
+    "fedreg4": {
+     "n": 13,
+     "good": 10
+    },
+    "news4": {
+     "n": 2,
+     "good": 2
+    }
+   },
+   "edits_per_100_sentences": 0.05462490895848507,
+   "changed": 3,
+   "sentences": 5492
+  }
+ },
+ "agreement": {
+  "all_three": 0.9206349206349206,
+  "pairwise": 0.9470899470899471
+ },
+ "cards": 63,
+ "key_sha256": "fa4e6a293ddd6dc19ea0c89df690ad8596fd9bac26f9b3406000f34f3ce77887",
+ "marks_sha256": [
+  "4973f062ec19d2223b68aef9159633f566236facf0abd8ff5bd460c04ca8f58e",
+  "ddfd577f1652457d0b4d7255ac11d688ef3f7431b7cdb5cbeeb34935e0dc1b71",
+  "7dd5b2cb736d1f8606cd9d875521701528c69d75ae2d136a7f2256fa45d3a03d"
+ ]
+}

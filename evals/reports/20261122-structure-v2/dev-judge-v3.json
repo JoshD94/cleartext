@@ -1,0 +1,2610 @@
+{
+ "systems": {
+  "F2": {
+   "summary": {
+    "n": 100,
+    "changed": 65,
+    "fk_grade": 12.850630184169653,
+    "fk_delta": -1.7760239398072795,
+    "kea_S": 0.2700412442025813,
+    "nli_mean": 0.9745994850993156,
+    "sent_nli_mean": 0.9855688022545405,
+    "entities": 1.0,
+    "entities_capitalized": 1.0,
+    "changed_token_rate": 0.018913705820732835,
+    "nli_abstained": 0,
+    "nli_below_080": 2,
+    "numbers_failed": 0,
+    "negations_failed": 0
+   },
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "changed_vs_F2": 0
+  },
+  "combo-kept2": {
+   "summary": {
+    "n": 100,
+    "changed": 67,
+    "fk_grade": 12.840014206178914,
+    "fk_delta": -1.7866399177980157,
+    "kea_S": 0.27021911082618205,
+    "nli_mean": 0.9747915601730347,
+    "sent_nli_mean": 0.9855735185813336,
+    "entities": 1.0,
+    "entities_capitalized": 0.99875,
+    "changed_token_rate": 0.020028480963307387,
+    "nli_abstained": 0,
+    "nli_below_080": 2,
+    "numbers_failed": 0,
+    "negations_failed": 0
+   },
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "changed_vs_F2": 3,
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.010615977990735992,
+     "ci95": [
+      -0.028208808540677487,
+      0.0
+     ],
+     "n": 100,
+     "passages_nonzero": 3
+    },
+    "kea_S": {
+     "mean": 0.00017786662360077198,
+     "ci95": [
+      0.0,
+      0.0004997907530990642
+     ],
+     "n": 100,
+     "passages_nonzero": 3
+    },
+    "nli_mean": {
+     "mean": 0.00019207507371902467,
+     "ci95": [
+      0.0,
+      0.0004295209050178528
+     ],
+     "n": 100,
+     "passages_nonzero": 3
+    },
+    "sent_nli_mean": {
+     "mean": 4.7163267930361295e-06,
+     "ci95": [
+      -5.988597869870383e-06,
+      2.013757824897877e-05
+     ],
+     "n": 100,
+     "passages_nonzero": 3
+    },
+    "entities": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 100,
+     "passages_nonzero": 0
+    }
+   },
+   "changed_only": {
+    "n": 3,
+    "nli_mean": 0.9914406935373942,
+    "f2_nli_mean": 0.9850381910800934,
+    "fk": 12.511378459899495,
+    "f2_fk": 12.865244392924028,
+    "newly_below_080": 0
+   }
+  },
+  "combo-v3": {
+   "summary": {
+    "n": 100,
+    "changed": 69,
+    "fk_grade": 12.819392231954005,
+    "fk_delta": -1.8072618920229269,
+    "kea_S": 0.2704454407715369,
+    "nli_mean": 0.9748671495914459,
+    "sent_nli_mean": 0.9855861706804662,
+    "entities": 1.0,
+    "entities_capitalized": 0.99875,
+    "changed_token_rate": 0.023096707084165086,
+    "nli_abstained": 0,
+    "nli_below_080": 2,
+    "numbers_failed": 0,
+    "negations_failed": 0
+   },
+   "gates": {
+    "nli_mean_ge_095": true,
+    "nli_below_080_le_5pct": true,
+    "numbers_negations_all": true,
+    "entities_ge_rule_based": true
+   },
+   "over_edit": {
+    "changed_token_rate_le_010": true,
+    "no_control_nli_below_080": true
+   },
+   "changed_vs_F2": 5,
+   "vs_F2": {
+    "fk_grade": {
+     "mean": -0.03123795221564727,
+     "ci95": [
+      -0.0668887880865313,
+      -0.002987341772151808
+     ],
+     "n": 100,
+     "passages_nonzero": 5
+    },
+    "kea_S": {
+     "mean": 0.0004041965689556104,
+     "ci95": [
+      3.380911770325179e-05,
+      0.000884074026831286
+     ],
+     "n": 100,
+     "passages_nonzero": 5
+    },
+    "nli_mean": {
+     "mean": 0.00026766449213027954,
+     "ci95": [
+      5.649149417877197e-05,
+      0.000530867002904415
+     ],
+     "n": 100,
+     "passages_nonzero": 5
+    },
+    "sent_nli_mean": {
+     "mean": 1.7368425925573528e-05,
+     "ci95": [
+      -3.0617415904976574e-06,
+      4.7156274318691515e-05
+     ],
+     "n": 100,
+     "passages_nonzero": 5
+    },
+    "entities": {
+     "mean": 0.0,
+     "ci95": [
+      0.0,
+      0.0
+     ],
+     "n": 100,
+     "passages_nonzero": 0
+    }
+   },
+   "changed_only": {
+    "n": 5,
+    "nli_mean": 0.9907484889030457,
+    "f2_nli_mean": 0.98539519906044,
+    "fk": 12.583326052979935,
+    "f2_fk": 13.20808509729288,
+    "newly_below_080": 0
+   }
+  }
+ },
+ "per_passage": {
+  "F2": [
+   {
+    "id": "cs-v3-003",
+    "fk_grade": 12.690348837209303,
+    "kea_S": 0.30698574499517517,
+    "nli_mean": 0.9851506948471069,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-004",
+    "fk_grade": 10.266317829457368,
+    "kea_S": 0.2779048684534275,
+    "nli_mean": 0.9938033223152161,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-005",
+    "fk_grade": 10.762105263157899,
+    "kea_S": 0.2754234698456431,
+    "nli_mean": 0.9427405297756195,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-006",
+    "fk_grade": 12.421481481481482,
+    "kea_S": 0.3103796102617842,
+    "nli_mean": 0.9839615523815155,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-007",
+    "fk_grade": 13.583661971830988,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9897776246070862,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-008",
+    "fk_grade": 9.370712643678157,
+    "kea_S": 0.28532358493104504,
+    "nli_mean": 0.989504337310791,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-011",
+    "fk_grade": 6.727500000000003,
+    "kea_S": 0.27529866086516513,
+    "nli_mean": 0.9559588432312012,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-012",
+    "fk_grade": 13.076842105263157,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9893487691879272,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-013",
+    "fk_grade": 13.056666666666668,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.990204930305481,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-014",
+    "fk_grade": 11.925917808219179,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931146502494812,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-015",
+    "fk_grade": 20.275000000000002,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9672754406929016,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-016",
+    "fk_grade": 19.199375000000007,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9940177202224731,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-039",
+    "fk_grade": 9.103571428571428,
+    "kea_S": 0.2865542977444821,
+    "nli_mean": 0.9930431842803955,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-040",
+    "fk_grade": 7.812115384615385,
+    "kea_S": 0.36413201907226667,
+    "nli_mean": 0.9940744340419769,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-001",
+    "fk_grade": 12.548283132530123,
+    "kea_S": 0.28302481026694676,
+    "nli_mean": 0.9847612679004669,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-002",
+    "fk_grade": 19.22850877192982,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9904435276985168,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-013",
+    "fk_grade": 17.40478260869566,
+    "kea_S": 0.2856317756827112,
+    "nli_mean": 0.9912605285644531,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-014",
+    "fk_grade": 20.194285714285716,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.957287073135376,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-015",
+    "fk_grade": 12.433181818181819,
+    "kea_S": 0.2956761106455079,
+    "nli_mean": 0.9911346435546875,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-016",
+    "fk_grade": 18.006086956521738,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9776902794837952,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-017",
+    "fk_grade": 11.245771604938273,
+    "kea_S": 0.27596178042719804,
+    "nli_mean": 0.7771285772323608,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-018",
+    "fk_grade": 25.356772151898742,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9839643239974976,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-025",
+    "fk_grade": 15.906184210526316,
+    "kea_S": 0.28025723624326826,
+    "nli_mean": 0.9916337728500366,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-026",
+    "fk_grade": 23.12613861386139,
+    "kea_S": 0.26772205534555515,
+    "nli_mean": 0.821542501449585,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-033",
+    "fk_grade": 12.63995575221239,
+    "kea_S": 0.2903424971170235,
+    "nli_mean": 0.9820684790611267,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-034",
+    "fk_grade": 20.70090909090909,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9862011075019836,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-039",
+    "fk_grade": 15.517500000000002,
+    "kea_S": 0.26923316223647803,
+    "nli_mean": 0.9659243524074554,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-040",
+    "fk_grade": 14.763214285714287,
+    "kea_S": 0.26551041689925564,
+    "nli_mean": 0.9919667840003967,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-003",
+    "fk_grade": 10.99779710144928,
+    "kea_S": 0.2601419062606295,
+    "nli_mean": 0.98649662733078,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-004",
+    "fk_grade": 11.474805970149255,
+    "kea_S": 0.29886226056740794,
+    "nli_mean": 0.9862650036811829,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-007",
+    "fk_grade": 12.04705056179775,
+    "kea_S": 0.29529990098260583,
+    "nli_mean": 0.9946816563606262,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-008",
+    "fk_grade": 8.673439153439155,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931252002716064,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "pol-v3-017",
+    "fk_grade": 3.8731250000000017,
+    "kea_S": 0.26350193979964914,
+    "nli_mean": 0.9933564960956573,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-018",
+    "fk_grade": 6.839238095238098,
+    "kea_S": 0.27770564564751177,
+    "nli_mean": 0.9946067631244659,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-019",
+    "fk_grade": 7.693000000000001,
+    "kea_S": 0.3365243331664654,
+    "nli_mean": 0.9849827587604523,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-020",
+    "fk_grade": 8.610000000000003,
+    "kea_S": 0.27667508470850954,
+    "nli_mean": 0.9880281090736389,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-021",
+    "fk_grade": 5.793650793650794,
+    "kea_S": 0.29349223669060337,
+    "nli_mean": 0.986535370349884,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-022",
+    "fk_grade": 7.576666666666668,
+    "kea_S": 0.269467245419298,
+    "nli_mean": 0.9893661439418793,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-033",
+    "fk_grade": 8.48444444444445,
+    "kea_S": 0.26799832160859893,
+    "nli_mean": 0.9909870624542236,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-034",
+    "fk_grade": 6.310213483146068,
+    "kea_S": 0.2797774019334494,
+    "nli_mean": 0.9787913858890533,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-039",
+    "fk_grade": 2.570931263858096,
+    "kea_S": 0.26838309479838884,
+    "nli_mean": 0.9855185449123383,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-040",
+    "fk_grade": 5.778333333333332,
+    "kea_S": 0.27438130717626835,
+    "nli_mean": 0.9832566380500793,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-009",
+    "fk_grade": 15.043774647887325,
+    "kea_S": 0.26669580880991395,
+    "nli_mean": 0.986952155828476,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-010",
+    "fk_grade": 15.923947368421054,
+    "kea_S": 0.2669317091208906,
+    "nli_mean": 0.9866061508655548,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-011",
+    "fk_grade": 13.101116504854371,
+    "kea_S": 0.2665160771799166,
+    "nli_mean": 0.965475857257843,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-012",
+    "fk_grade": 14.85520930232558,
+    "kea_S": 0.27062351316329253,
+    "nli_mean": 0.9841378629207611,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-021",
+    "fk_grade": 19.105882352941183,
+    "kea_S": 0.2811115022730218,
+    "nli_mean": 0.9921844303607941,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-022",
+    "fk_grade": 12.556882716049387,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.993008017539978,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-025",
+    "fk_grade": 14.82315170940171,
+    "kea_S": 0.2631759979002832,
+    "nli_mean": 0.9901670217514038,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-026",
+    "fk_grade": 17.36357142857143,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9901024103164673,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-031",
+    "fk_grade": 10.424573170731708,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9538209438323975,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-032",
+    "fk_grade": 17.524186746987954,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9858390688896179,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-035",
+    "fk_grade": 14.203545454545456,
+    "kea_S": 0.2898216782702226,
+    "nli_mean": 0.9941698908805847,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-036",
+    "fk_grade": 15.479833333333332,
+    "kea_S": 0.2735385415756214,
+    "nli_mean": 0.9901507496833801,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-039",
+    "fk_grade": 17.664315789473687,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9968054294586182,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-040",
+    "fk_grade": 5.324074074074076,
+    "kea_S": 0.2660710708713292,
+    "nli_mean": 0.9860576093196869,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-001",
+    "fk_grade": 19.103684210526314,
+    "kea_S": 0.27668739499515077,
+    "nli_mean": 0.9824792444705963,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-002",
+    "fk_grade": 21.549545454545456,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9887385368347168,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-005",
+    "fk_grade": 16.93974358974359,
+    "kea_S": 0.20651347645741683,
+    "nli_mean": 0.9769920706748962,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-006",
+    "fk_grade": 7.931934426229507,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9914520978927612,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-013",
+    "fk_grade": 16.787500000000005,
+    "kea_S": 0.3004937107109392,
+    "nli_mean": 0.9560212194919586,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-014",
+    "fk_grade": 14.98090909090909,
+    "kea_S": 0.2949265562724788,
+    "nli_mean": 0.9732815623283386,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-017",
+    "fk_grade": 25.308695652173913,
+    "kea_S": 0.26492787764662534,
+    "nli_mean": 0.9805285930633545,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-018",
+    "fk_grade": 17.054838709677416,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9902709722518921,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-019",
+    "fk_grade": 16.79333333333334,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9882148504257202,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-020",
+    "fk_grade": 9.609885057471267,
+    "kea_S": 0.27702968208862583,
+    "nli_mean": 0.6216249763965607,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-027",
+    "fk_grade": 10.91890060240964,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.969334602355957,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-028",
+    "fk_grade": 18.657313432835817,
+    "kea_S": 0.2735234838738264,
+    "nli_mean": 0.9731490910053253,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-041",
+    "fk_grade": 13.425245901639347,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9918707609176636,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-042",
+    "fk_grade": 14.455119266055046,
+    "kea_S": 0.3092839919640973,
+    "nli_mean": 0.9916006028652191,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-004",
+    "fk_grade": 16.77714285714286,
+    "kea_S": 0.264328738249258,
+    "nli_mean": 0.9828610718250275,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-008",
+    "fk_grade": 14.159220430107528,
+    "kea_S": 0.2866548790329905,
+    "nli_mean": 0.9912999272346497,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-009",
+    "fk_grade": 18.795714285714286,
+    "kea_S": 0.2732886951258137,
+    "nli_mean": 0.9344092607498169,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-013",
+    "fk_grade": 13.531355140186921,
+    "kea_S": 0.3015680414515048,
+    "nli_mean": 0.9713734686374664,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-014",
+    "fk_grade": 16.20876767676768,
+    "kea_S": 0.28935533296600896,
+    "nli_mean": 0.9850651919841766,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-016",
+    "fk_grade": 15.123684210526317,
+    "kea_S": 0.2870404492702829,
+    "nli_mean": 0.9174483120441437,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-018",
+    "fk_grade": 13.388695652173912,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9741293787956238,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "sci-v3-019",
+    "fk_grade": 12.54063157894737,
+    "kea_S": 0.29637397721291847,
+    "nli_mean": 0.9876118898391724,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-023",
+    "fk_grade": 14.835,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.99128258228302,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "sci-v3-025",
+    "fk_grade": 11.711882911392404,
+    "kea_S": 0.29168569326647825,
+    "nli_mean": 0.9788924753665924,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-026",
+    "fk_grade": 17.581666666666667,
+    "kea_S": 0.26302553024382513,
+    "nli_mean": 0.8032717704772949,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-032",
+    "fk_grade": 15.631596638655463,
+    "kea_S": 0.26489524306224593,
+    "nli_mean": 0.9680454730987549,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-035",
+    "fk_grade": 13.663333333333338,
+    "kea_S": 0.28665739012264047,
+    "nli_mean": 0.9931544959545135,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-036",
+    "fk_grade": 18.504692307692313,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9803820848464966,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-005",
+    "fk_grade": 8.251984126984127,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9923690557479858,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-009",
+    "fk_grade": 8.940000000000001,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9914793372154236,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-010",
+    "fk_grade": 7.045000000000002,
+    "kea_S": 0.2894542154157676,
+    "nli_mean": 0.9917158484458923,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-011",
+    "fk_grade": 14.715714285714288,
+    "kea_S": 0.3023418671089564,
+    "nli_mean": 0.9835095107555389,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-012",
+    "fk_grade": 7.406492753623191,
+    "kea_S": 0.2723506854991728,
+    "nli_mean": 0.991547554731369,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-018",
+    "fk_grade": 6.182941176470592,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9900209903717041,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-021",
+    "fk_grade": 6.6689102564102605,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9906702041625977,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-027",
+    "fk_grade": 16.618125000000003,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9895921945571899,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-030",
+    "fk_grade": 8.612000000000002,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9868810176849365,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-033",
+    "fk_grade": 5.636923076923079,
+    "kea_S": 0.27128304060175285,
+    "nli_mean": 0.9949807524681091,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-037",
+    "fk_grade": 7.8776086956521745,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931846261024475,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-041",
+    "fk_grade": 8.093876404494381,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9792848825454712,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-042",
+    "fk_grade": 6.6536363636363625,
+    "kea_S": 0.26441784721868755,
+    "nli_mean": 0.9883543252944946,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-043",
+    "fk_grade": 6.877435897435898,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9916020035743713,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-047",
+    "fk_grade": 5.327386363636364,
+    "kea_S": 0.26599771857721993,
+    "nli_mean": 0.9944933950901031,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-048",
+    "fk_grade": 4.724999999999998,
+    "kea_S": 0.2694093184953273,
+    "nli_mean": 0.9890176355838776,
+    "entities": 1.0,
+    "changed": true
+   }
+  ],
+  "combo-kept2": [
+   {
+    "id": "cs-v3-003",
+    "fk_grade": 12.690348837209303,
+    "kea_S": 0.30698574499517517,
+    "nli_mean": 0.9851506948471069,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-004",
+    "fk_grade": 10.266317829457368,
+    "kea_S": 0.2779048684534275,
+    "nli_mean": 0.9938033223152161,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-005",
+    "fk_grade": 10.762105263157899,
+    "kea_S": 0.2754234698456431,
+    "nli_mean": 0.9427405297756195,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-006",
+    "fk_grade": 12.421481481481482,
+    "kea_S": 0.3103796102617842,
+    "nli_mean": 0.9839615523815155,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-007",
+    "fk_grade": 13.583661971830988,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9897776246070862,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-008",
+    "fk_grade": 9.370712643678157,
+    "kea_S": 0.28532358493104504,
+    "nli_mean": 0.989504337310791,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-011",
+    "fk_grade": 6.727500000000003,
+    "kea_S": 0.27529866086516513,
+    "nli_mean": 0.9559588432312012,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-012",
+    "fk_grade": 13.076842105263157,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9893487691879272,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-013",
+    "fk_grade": 13.056666666666668,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.990204930305481,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-014",
+    "fk_grade": 11.925917808219179,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931146502494812,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-015",
+    "fk_grade": 20.275000000000002,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9672754406929016,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-016",
+    "fk_grade": 19.199375000000007,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9940177202224731,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-039",
+    "fk_grade": 9.103571428571428,
+    "kea_S": 0.2865542977444821,
+    "nli_mean": 0.9930431842803955,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-040",
+    "fk_grade": 7.812115384615385,
+    "kea_S": 0.36413201907226667,
+    "nli_mean": 0.9940744340419769,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-001",
+    "fk_grade": 12.548283132530123,
+    "kea_S": 0.28302481026694676,
+    "nli_mean": 0.9847612679004669,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-002",
+    "fk_grade": 19.22850877192982,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9904435276985168,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-013",
+    "fk_grade": 17.40478260869566,
+    "kea_S": 0.2856317756827112,
+    "nli_mean": 0.9912605285644531,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-014",
+    "fk_grade": 20.194285714285716,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.957287073135376,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-015",
+    "fk_grade": 12.433181818181819,
+    "kea_S": 0.2956761106455079,
+    "nli_mean": 0.9911346435546875,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-016",
+    "fk_grade": 18.006086956521738,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9776902794837952,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-017",
+    "fk_grade": 11.245771604938273,
+    "kea_S": 0.27596178042719804,
+    "nli_mean": 0.7771285772323608,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-018",
+    "fk_grade": 25.356772151898742,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9839643239974976,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-025",
+    "fk_grade": 15.906184210526316,
+    "kea_S": 0.28025723624326826,
+    "nli_mean": 0.9916337728500366,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-026",
+    "fk_grade": 23.12613861386139,
+    "kea_S": 0.26772205534555515,
+    "nli_mean": 0.821542501449585,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-033",
+    "fk_grade": 12.63995575221239,
+    "kea_S": 0.2903424971170235,
+    "nli_mean": 0.9820684790611267,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-034",
+    "fk_grade": 20.59363636363636,
+    "kea_S": 0.25101927813705355,
+    "nli_mean": 0.9935363233089447,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-039",
+    "fk_grade": 15.517500000000002,
+    "kea_S": 0.26923316223647803,
+    "nli_mean": 0.9659243524074554,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-040",
+    "fk_grade": 14.763214285714287,
+    "kea_S": 0.26551041689925564,
+    "nli_mean": 0.9919667840003967,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-003",
+    "fk_grade": 10.99779710144928,
+    "kea_S": 0.2601419062606295,
+    "nli_mean": 0.98649662733078,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-004",
+    "fk_grade": 11.474805970149255,
+    "kea_S": 0.29886226056740794,
+    "nli_mean": 0.9862650036811829,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-007",
+    "fk_grade": 12.04705056179775,
+    "kea_S": 0.29529990098260583,
+    "nli_mean": 0.9946816563606262,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-008",
+    "fk_grade": 8.673439153439155,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931252002716064,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "pol-v3-017",
+    "fk_grade": 3.8731250000000017,
+    "kea_S": 0.26350193979964914,
+    "nli_mean": 0.9933564960956573,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-018",
+    "fk_grade": 6.839238095238098,
+    "kea_S": 0.27770564564751177,
+    "nli_mean": 0.9946067631244659,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-019",
+    "fk_grade": 7.693000000000001,
+    "kea_S": 0.3365243331664654,
+    "nli_mean": 0.9849827587604523,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-020",
+    "fk_grade": 8.610000000000003,
+    "kea_S": 0.27667508470850954,
+    "nli_mean": 0.9880281090736389,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-021",
+    "fk_grade": 5.793650793650794,
+    "kea_S": 0.29349223669060337,
+    "nli_mean": 0.986535370349884,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-022",
+    "fk_grade": 7.576666666666668,
+    "kea_S": 0.269467245419298,
+    "nli_mean": 0.9893661439418793,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-033",
+    "fk_grade": 8.48444444444445,
+    "kea_S": 0.26799832160859893,
+    "nli_mean": 0.9909870624542236,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-034",
+    "fk_grade": 6.310213483146068,
+    "kea_S": 0.2797774019334494,
+    "nli_mean": 0.9787913858890533,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-039",
+    "fk_grade": 2.570931263858096,
+    "kea_S": 0.26838309479838884,
+    "nli_mean": 0.9855185449123383,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-040",
+    "fk_grade": 5.778333333333332,
+    "kea_S": 0.27438130717626835,
+    "nli_mean": 0.9832566380500793,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-009",
+    "fk_grade": 15.043774647887325,
+    "kea_S": 0.26669580880991395,
+    "nli_mean": 0.986952155828476,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-010",
+    "fk_grade": 15.923947368421054,
+    "kea_S": 0.2669317091208906,
+    "nli_mean": 0.9866061508655548,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-011",
+    "fk_grade": 13.101116504854371,
+    "kea_S": 0.2665160771799166,
+    "nli_mean": 0.965475857257843,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-012",
+    "fk_grade": 14.85520930232558,
+    "kea_S": 0.27062351316329253,
+    "nli_mean": 0.9841378629207611,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-021",
+    "fk_grade": 19.105882352941183,
+    "kea_S": 0.2811115022730218,
+    "nli_mean": 0.9921844303607941,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-022",
+    "fk_grade": 12.556882716049387,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.993008017539978,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-025",
+    "fk_grade": 14.82315170940171,
+    "kea_S": 0.2631759979002832,
+    "nli_mean": 0.9901670217514038,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-026",
+    "fk_grade": 17.36357142857143,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9901024103164673,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-031",
+    "fk_grade": 10.424573170731708,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9538209438323975,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-032",
+    "fk_grade": 17.524186746987954,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9858390688896179,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-035",
+    "fk_grade": 14.203545454545456,
+    "kea_S": 0.2898216782702226,
+    "nli_mean": 0.9941698908805847,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-036",
+    "fk_grade": 15.479833333333332,
+    "kea_S": 0.2735385415756214,
+    "nli_mean": 0.9901507496833801,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-039",
+    "fk_grade": 17.664315789473687,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9968054294586182,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-040",
+    "fk_grade": 5.324074074074076,
+    "kea_S": 0.2660710708713292,
+    "nli_mean": 0.9860576093196869,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-001",
+    "fk_grade": 19.103684210526314,
+    "kea_S": 0.27668739499515077,
+    "nli_mean": 0.9824792444705963,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-002",
+    "fk_grade": 21.549545454545456,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9887385368347168,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-005",
+    "fk_grade": 16.93974358974359,
+    "kea_S": 0.20651347645741683,
+    "nli_mean": 0.9769920706748962,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-006",
+    "fk_grade": 7.931934426229507,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9914520978927612,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-013",
+    "fk_grade": 16.787500000000005,
+    "kea_S": 0.3004937107109392,
+    "nli_mean": 0.9560212194919586,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-014",
+    "fk_grade": 14.98090909090909,
+    "kea_S": 0.2949265562724788,
+    "nli_mean": 0.9732815623283386,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-017",
+    "fk_grade": 25.308695652173913,
+    "kea_S": 0.26492787764662534,
+    "nli_mean": 0.9805285930633545,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-018",
+    "fk_grade": 17.054838709677416,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9902709722518921,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-019",
+    "fk_grade": 16.79333333333334,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9882148504257202,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-020",
+    "fk_grade": 9.609885057471267,
+    "kea_S": 0.27702968208862583,
+    "nli_mean": 0.6216249763965607,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-027",
+    "fk_grade": 10.91890060240964,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.969334602355957,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-028",
+    "fk_grade": 18.657313432835817,
+    "kea_S": 0.2735234838738264,
+    "nli_mean": 0.9731490910053253,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-041",
+    "fk_grade": 13.425245901639347,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9918707609176636,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-042",
+    "fk_grade": 14.455119266055046,
+    "kea_S": 0.3092839919640973,
+    "nli_mean": 0.9916006028652191,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-004",
+    "fk_grade": 16.77714285714286,
+    "kea_S": 0.264328738249258,
+    "nli_mean": 0.9828610718250275,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-008",
+    "fk_grade": 14.159220430107528,
+    "kea_S": 0.2866548790329905,
+    "nli_mean": 0.9912999272346497,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-009",
+    "fk_grade": 18.795714285714286,
+    "kea_S": 0.2732886951258137,
+    "nli_mean": 0.9344092607498169,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-013",
+    "fk_grade": 13.531355140186921,
+    "kea_S": 0.3015680414515048,
+    "nli_mean": 0.9713734686374664,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-014",
+    "fk_grade": 16.20876767676768,
+    "kea_S": 0.28935533296600896,
+    "nli_mean": 0.9850651919841766,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-016",
+    "fk_grade": 15.123684210526317,
+    "kea_S": 0.2870404492702829,
+    "nli_mean": 0.9174483120441437,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-018",
+    "fk_grade": 13.388695652173912,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9741293787956238,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "sci-v3-019",
+    "fk_grade": 12.54063157894737,
+    "kea_S": 0.29637397721291847,
+    "nli_mean": 0.9876118898391724,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-023",
+    "fk_grade": 14.835,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.99128258228302,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "sci-v3-025",
+    "fk_grade": 11.562515822784814,
+    "kea_S": 0.2935166718696282,
+    "nli_mean": 0.9863787889480591,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-026",
+    "fk_grade": 17.581666666666667,
+    "kea_S": 0.26302553024382513,
+    "nli_mean": 0.8032717704772949,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-032",
+    "fk_grade": 15.631596638655463,
+    "kea_S": 0.26489524306224593,
+    "nli_mean": 0.9680454730987549,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-035",
+    "fk_grade": 13.663333333333338,
+    "kea_S": 0.28665739012264047,
+    "nli_mean": 0.9931544959545135,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-036",
+    "fk_grade": 18.504692307692313,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9803820848464966,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-005",
+    "fk_grade": 8.251984126984127,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9923690557479858,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-009",
+    "fk_grade": 8.940000000000001,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9914793372154236,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-010",
+    "fk_grade": 7.045000000000002,
+    "kea_S": 0.2894542154157676,
+    "nli_mean": 0.9917158484458923,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-011",
+    "fk_grade": 14.715714285714288,
+    "kea_S": 0.3023418671089564,
+    "nli_mean": 0.9835095107555389,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-012",
+    "fk_grade": 7.406492753623191,
+    "kea_S": 0.2723506854991728,
+    "nli_mean": 0.991547554731369,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-018",
+    "fk_grade": 5.377983193277313,
+    "kea_S": 0.26542502872680557,
+    "nli_mean": 0.9944069683551788,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-021",
+    "fk_grade": 6.6689102564102605,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9906702041625977,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-027",
+    "fk_grade": 16.618125000000003,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9895921945571899,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-030",
+    "fk_grade": 8.612000000000002,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9868810176849365,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-033",
+    "fk_grade": 5.636923076923079,
+    "kea_S": 0.27128304060175285,
+    "nli_mean": 0.9949807524681091,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-037",
+    "fk_grade": 7.8776086956521745,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931846261024475,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-041",
+    "fk_grade": 8.093876404494381,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9792848825454712,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-042",
+    "fk_grade": 6.6536363636363625,
+    "kea_S": 0.26441784721868755,
+    "nli_mean": 0.9883543252944946,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-043",
+    "fk_grade": 6.877435897435898,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9916020035743713,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-047",
+    "fk_grade": 5.327386363636364,
+    "kea_S": 0.26599771857721993,
+    "nli_mean": 0.9944933950901031,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-048",
+    "fk_grade": 4.724999999999998,
+    "kea_S": 0.2694093184953273,
+    "nli_mean": 0.9890176355838776,
+    "entities": 1.0,
+    "changed": true
+   }
+  ],
+  "combo-v3": [
+   {
+    "id": "cs-v3-003",
+    "fk_grade": 12.690348837209303,
+    "kea_S": 0.30698574499517517,
+    "nli_mean": 0.9851506948471069,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-004",
+    "fk_grade": 10.266317829457368,
+    "kea_S": 0.2779048684534275,
+    "nli_mean": 0.9938033223152161,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-005",
+    "fk_grade": 10.762105263157899,
+    "kea_S": 0.2754234698456431,
+    "nli_mean": 0.9427405297756195,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-006",
+    "fk_grade": 12.421481481481482,
+    "kea_S": 0.3103796102617842,
+    "nli_mean": 0.9839615523815155,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-007",
+    "fk_grade": 13.583661971830988,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9897776246070862,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-008",
+    "fk_grade": 9.370712643678157,
+    "kea_S": 0.28532358493104504,
+    "nli_mean": 0.989504337310791,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-011",
+    "fk_grade": 6.727500000000003,
+    "kea_S": 0.27529866086516513,
+    "nli_mean": 0.9559588432312012,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-012",
+    "fk_grade": 13.076842105263157,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9893487691879272,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-013",
+    "fk_grade": 13.056666666666668,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.990204930305481,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-014",
+    "fk_grade": 11.925917808219179,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931146502494812,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-015",
+    "fk_grade": 20.275000000000002,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9672754406929016,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-016",
+    "fk_grade": 19.199375000000007,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9940177202224731,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "cs-v3-039",
+    "fk_grade": 9.103571428571428,
+    "kea_S": 0.2865542977444821,
+    "nli_mean": 0.9930431842803955,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "cs-v3-040",
+    "fk_grade": 7.812115384615385,
+    "kea_S": 0.36413201907226667,
+    "nli_mean": 0.9940744340419769,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-001",
+    "fk_grade": 12.548283132530123,
+    "kea_S": 0.28302481026694676,
+    "nli_mean": 0.9847612679004669,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-002",
+    "fk_grade": 19.22850877192982,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9904435276985168,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-013",
+    "fk_grade": 17.40478260869566,
+    "kea_S": 0.2856317756827112,
+    "nli_mean": 0.9912605285644531,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-014",
+    "fk_grade": 20.194285714285716,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.957287073135376,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-015",
+    "fk_grade": 12.433181818181819,
+    "kea_S": 0.2956761106455079,
+    "nli_mean": 0.9911346435546875,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-016",
+    "fk_grade": 18.006086956521738,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9776902794837952,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-017",
+    "fk_grade": 11.245771604938273,
+    "kea_S": 0.27596178042719804,
+    "nli_mean": 0.7771285772323608,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-018",
+    "fk_grade": 25.356772151898742,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9839643239974976,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "corp-v3-025",
+    "fk_grade": 15.906184210526316,
+    "kea_S": 0.28025723624326826,
+    "nli_mean": 0.9916337728500366,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-026",
+    "fk_grade": 23.12613861386139,
+    "kea_S": 0.26772205534555515,
+    "nli_mean": 0.821542501449585,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-033",
+    "fk_grade": 12.63995575221239,
+    "kea_S": 0.2903424971170235,
+    "nli_mean": 0.9820684790611267,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-034",
+    "fk_grade": 20.59363636363636,
+    "kea_S": 0.25101927813705355,
+    "nli_mean": 0.9935363233089447,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-039",
+    "fk_grade": 15.517500000000002,
+    "kea_S": 0.26923316223647803,
+    "nli_mean": 0.9659243524074554,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "corp-v3-040",
+    "fk_grade": 14.763214285714287,
+    "kea_S": 0.26551041689925564,
+    "nli_mean": 0.9919667840003967,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-003",
+    "fk_grade": 10.99779710144928,
+    "kea_S": 0.2601419062606295,
+    "nli_mean": 0.98649662733078,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-004",
+    "fk_grade": 11.474805970149255,
+    "kea_S": 0.29886226056740794,
+    "nli_mean": 0.9862650036811829,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-007",
+    "fk_grade": 12.04705056179775,
+    "kea_S": 0.29529990098260583,
+    "nli_mean": 0.9946816563606262,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-008",
+    "fk_grade": 8.673439153439155,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931252002716064,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "pol-v3-017",
+    "fk_grade": 3.8731250000000017,
+    "kea_S": 0.26350193979964914,
+    "nli_mean": 0.9933564960956573,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-018",
+    "fk_grade": 6.839238095238098,
+    "kea_S": 0.27770564564751177,
+    "nli_mean": 0.9946067631244659,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-019",
+    "fk_grade": 7.693000000000001,
+    "kea_S": 0.3365243331664654,
+    "nli_mean": 0.9849827587604523,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-020",
+    "fk_grade": 8.610000000000003,
+    "kea_S": 0.27667508470850954,
+    "nli_mean": 0.9880281090736389,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-021",
+    "fk_grade": 5.793650793650794,
+    "kea_S": 0.29349223669060337,
+    "nli_mean": 0.986535370349884,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-022",
+    "fk_grade": 7.576666666666668,
+    "kea_S": 0.269467245419298,
+    "nli_mean": 0.9893661439418793,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-033",
+    "fk_grade": 8.48444444444445,
+    "kea_S": 0.26799832160859893,
+    "nli_mean": 0.9909870624542236,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-034",
+    "fk_grade": 6.310213483146068,
+    "kea_S": 0.2797774019334494,
+    "nli_mean": 0.9787913858890533,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-039",
+    "fk_grade": 2.570931263858096,
+    "kea_S": 0.26838309479838884,
+    "nli_mean": 0.9855185449123383,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "pol-v3-040",
+    "fk_grade": 5.778333333333332,
+    "kea_S": 0.27438130717626835,
+    "nli_mean": 0.9832566380500793,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-009",
+    "fk_grade": 15.043774647887325,
+    "kea_S": 0.26669580880991395,
+    "nli_mean": 0.986952155828476,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-010",
+    "fk_grade": 15.923947368421054,
+    "kea_S": 0.2669317091208906,
+    "nli_mean": 0.9866061508655548,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-011",
+    "fk_grade": 13.101116504854371,
+    "kea_S": 0.2665160771799166,
+    "nli_mean": 0.965475857257843,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-012",
+    "fk_grade": 14.85520930232558,
+    "kea_S": 0.27062351316329253,
+    "nli_mean": 0.9841378629207611,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-021",
+    "fk_grade": 19.105882352941183,
+    "kea_S": 0.2811115022730218,
+    "nli_mean": 0.9921844303607941,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-022",
+    "fk_grade": 12.556882716049387,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.993008017539978,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-025",
+    "fk_grade": 14.82315170940171,
+    "kea_S": 0.2631759979002832,
+    "nli_mean": 0.9901670217514038,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-026",
+    "fk_grade": 17.36357142857143,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9901024103164673,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-031",
+    "fk_grade": 10.424573170731708,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9538209438323975,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-032",
+    "fk_grade": 17.524186746987954,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9858390688896179,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-035",
+    "fk_grade": 14.203545454545456,
+    "kea_S": 0.2898216782702226,
+    "nli_mean": 0.9941698908805847,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-036",
+    "fk_grade": 15.479833333333332,
+    "kea_S": 0.2735385415756214,
+    "nli_mean": 0.9901507496833801,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "health-v3-039",
+    "fk_grade": 17.664315789473687,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9968054294586182,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "health-v3-040",
+    "fk_grade": 5.324074074074076,
+    "kea_S": 0.2660710708713292,
+    "nli_mean": 0.9860576093196869,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-001",
+    "fk_grade": 19.103684210526314,
+    "kea_S": 0.27668739499515077,
+    "nli_mean": 0.9824792444705963,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-002",
+    "fk_grade": 21.549545454545456,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9887385368347168,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-005",
+    "fk_grade": 16.93974358974359,
+    "kea_S": 0.20651347645741683,
+    "nli_mean": 0.9769920706748962,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-006",
+    "fk_grade": 7.931934426229507,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9914520978927612,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-013",
+    "fk_grade": 16.787500000000005,
+    "kea_S": 0.3004937107109392,
+    "nli_mean": 0.9560212194919586,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-014",
+    "fk_grade": 14.98090909090909,
+    "kea_S": 0.2949265562724788,
+    "nli_mean": 0.9732815623283386,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-017",
+    "fk_grade": 25.308695652173913,
+    "kea_S": 0.26492787764662534,
+    "nli_mean": 0.9805285930633545,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-018",
+    "fk_grade": 17.054838709677416,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9902709722518921,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-019",
+    "fk_grade": 16.79333333333334,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9882148504257202,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-020",
+    "fk_grade": 9.609885057471267,
+    "kea_S": 0.27702968208862583,
+    "nli_mean": 0.6216249763965607,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-027",
+    "fk_grade": 10.91890060240964,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.969334602355957,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-028",
+    "fk_grade": 18.657313432835817,
+    "kea_S": 0.2735234838738264,
+    "nli_mean": 0.9731490910053253,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "legal-v3-041",
+    "fk_grade": 13.425245901639347,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9918707609176636,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "legal-v3-042",
+    "fk_grade": 14.455119266055046,
+    "kea_S": 0.3092839919640973,
+    "nli_mean": 0.9916006028652191,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-004",
+    "fk_grade": 16.77714285714286,
+    "kea_S": 0.264328738249258,
+    "nli_mean": 0.9828610718250275,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-008",
+    "fk_grade": 14.159220430107528,
+    "kea_S": 0.2866548790329905,
+    "nli_mean": 0.9912999272346497,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-009",
+    "fk_grade": 18.795714285714286,
+    "kea_S": 0.2732886951258137,
+    "nli_mean": 0.9344092607498169,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-013",
+    "fk_grade": 13.531355140186921,
+    "kea_S": 0.3015680414515048,
+    "nli_mean": 0.9713734686374664,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-014",
+    "fk_grade": 16.20876767676768,
+    "kea_S": 0.28935533296600896,
+    "nli_mean": 0.9850651919841766,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-016",
+    "fk_grade": 15.123684210526317,
+    "kea_S": 0.2870404492702829,
+    "nli_mean": 0.9174483120441437,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-018",
+    "fk_grade": 13.388695652173912,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9741293787956238,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "sci-v3-019",
+    "fk_grade": 12.54063157894737,
+    "kea_S": 0.29637397721291847,
+    "nli_mean": 0.9876118898391724,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-023",
+    "fk_grade": 14.835,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.99128258228302,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "sci-v3-025",
+    "fk_grade": 11.562515822784814,
+    "kea_S": 0.2935166718696282,
+    "nli_mean": 0.9863787889480591,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-026",
+    "fk_grade": 17.581666666666667,
+    "kea_S": 0.26302553024382513,
+    "nli_mean": 0.8032717704772949,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-032",
+    "fk_grade": 15.631596638655463,
+    "kea_S": 0.26489524306224593,
+    "nli_mean": 0.9680454730987549,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-035",
+    "fk_grade": 13.663333333333338,
+    "kea_S": 0.28665739012264047,
+    "nli_mean": 0.9931544959545135,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "sci-v3-036",
+    "fk_grade": 17.23773584905661,
+    "kea_S": 0.2566323508671011,
+    "nli_mean": 0.9866778552532196,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-005",
+    "fk_grade": 8.251984126984127,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9923690557479858,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-009",
+    "fk_grade": 8.144759036144578,
+    "kea_S": 0.2664892667753146,
+    "nli_mean": 0.992742508649826,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-010",
+    "fk_grade": 7.045000000000002,
+    "kea_S": 0.2894542154157676,
+    "nli_mean": 0.9917158484458923,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-011",
+    "fk_grade": 14.715714285714288,
+    "kea_S": 0.3023418671089564,
+    "nli_mean": 0.9835095107555389,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-012",
+    "fk_grade": 7.406492753623191,
+    "kea_S": 0.2723506854991728,
+    "nli_mean": 0.991547554731369,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-018",
+    "fk_grade": 5.377983193277313,
+    "kea_S": 0.26542502872680557,
+    "nli_mean": 0.9944069683551788,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-021",
+    "fk_grade": 6.6689102564102605,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9906702041625977,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-027",
+    "fk_grade": 16.618125000000003,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9895921945571899,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-030",
+    "fk_grade": 8.612000000000002,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9868810176849365,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-033",
+    "fk_grade": 5.636923076923079,
+    "kea_S": 0.27128304060175285,
+    "nli_mean": 0.9949807524681091,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-037",
+    "fk_grade": 7.8776086956521745,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9931846261024475,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-041",
+    "fk_grade": 8.093876404494381,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9792848825454712,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-042",
+    "fk_grade": 6.6536363636363625,
+    "kea_S": 0.26441784721868755,
+    "nli_mean": 0.9883543252944946,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-043",
+    "fk_grade": 6.877435897435898,
+    "kea_S": 0.25024431155346594,
+    "nli_mean": 0.9916020035743713,
+    "entities": 1.0,
+    "changed": false
+   },
+   {
+    "id": "simple-v3-047",
+    "fk_grade": 5.327386363636364,
+    "kea_S": 0.26599771857721993,
+    "nli_mean": 0.9944933950901031,
+    "entities": 1.0,
+    "changed": true
+   },
+   {
+    "id": "simple-v3-048",
+    "fk_grade": 4.724999999999998,
+    "kea_S": 0.2694093184953273,
+    "nli_mean": 0.9890176355838776,
+    "entities": 1.0,
+    "changed": true
+   }
+  ]
+ },
+ "f2_metrics_reproduced": "87/87"
+}

@@ -1,0 +1,73 @@
+{
+ "round": "2",
+ "written": "2026-11-22 18:52:35 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "600743932f06596722bdf8f1e2000d88c7b0e5f6ef529d8073ddaa5a86952040",
+  "models/src/cleartext/structure_v2/appositive.py": "6297bddab155dce4d9ff791f35f53cb7a2bf3c733c3d4d7271f10bfd11c9ae5f",
+  "models/src/cleartext/structure_v2/common.py": "e4e02e9f9d076f700a9bf8d60687bf28bd262806bfe1a750a6ee49cd4ca2d508",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "89b5d26ee10e9000f76a7c7724a79f57cb8a4d5e40dc9b22aed7a580224c25c2",
+  "models/src/cleartext/structure_v2/passive.py": "a1d1847d7deb9503ca1216ea75b234be906ac31020c1a22948cd3248b69fc082",
+  "models/src/cleartext/structure_v2/stage.py": "7a14d26bfb3d44d2c5ecc8d649a22733e0a86d0e8ce36466bfeaa1281751a8b9",
+  "evals/structure_v2.py": "049353ca89e13a7978490e4c71a4bc291189e010734073b69b2aa3ac6f882fda",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "models/tests/test_structure_v2.py": "b3d9e4db6cf618d25c14c9219df3b659c1fbae73fc5ec28b91e1dccc749419fd"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-B.json": "fb071fffe66f40663b8a2a61d7fb4cf8b47bc4f858c4c43c30dd7f6280d92dae",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-Bwide.json": "378f49a6d27b23df9a31568095c55865de7df8d6e4531ac2185dd286516b42fc",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-manifest.json": "cdc4ed4626cc8798d5563349a5c1c852980970e4cc2f20c9b7f8514bb91569a7",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/gate-synth-r2.pkl": "bc26fb477abe71865d112fb4d2319d889fe8b206f2038876bc831f1400d727de",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/synthetic-r2.jsonl": "6c176cc938cf466596198a6644491a6c747e6a5de0a8b2b84a251ea680705274"
+ },
+ "thresholds": {
+  "arms": [
+   "passive",
+   "chhoeng_agentive",
+   "passive_recovered",
+   "appositive_v2",
+   "fronted_split",
+   "nominal",
+   "frames_v2"
+  ],
+  "cap": {
+   "passive": 60,
+   "chhoeng_agentive": 30,
+   "passive_recovered": 40,
+   "appositive_v2": 40,
+   "fronted_split": 40,
+   "nominal": 40,
+   "frames_v2": 40
+  },
+  "derived": {
+   "passive_gated": "rated passive cards whose edits all pass gate-synth-r2.pkl (threshold 0.8394)"
+  },
+  "rare_arm_wide_pool": "pool-Bwide",
+  "seed": 20261122,
+  "raters": 3,
+  "majority": "2 of 3, else most severe (meaning > ungrammatical > notsimpler)",
+  "kept": {
+   "min_items": 20,
+   "good_rate_min": 0.85,
+   "meaning_rate_max": 0.1
+  },
+  "gate_rule": "passive_gated replaces passive only if passive misses and passive_gated meets the kept rule with >= 20 items",
+  "combined_order": [
+   "passive",
+   "passive_recovered",
+   "nominal",
+   "frames_v2",
+   "appositive_v2",
+   "fronted_split"
+  ],
+  "dev_success_combined": {
+   "all_gates_and_over_edit": true,
+   "dnli_ci_low_min": -0.005,
+   "dfk_max": 0.0
+  },
+  "round1_code_commit": "537491b"
+ }
+}
