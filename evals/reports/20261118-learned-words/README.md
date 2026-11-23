@@ -1246,6 +1246,37 @@ three fresh blind raters. All three agreed on 87%; pairwise agreement was
   meaning, 55% yield; p50 122/135 (90.4%, CI 84–94), 7.4% meaning, 53%.
   Arm f and p50 are statistically the same.
 
+## Round 26: refit on all rated rows (November 22)
+
+[ROUND26.md](ROUND26.md) holds the pre-registered rules
+([r26-precommit.json](r26-precommit.json)); results in
+[round26.json](round26.json).
+
+- **Gate ([r26-cv.json](r26-cv.json)):** f2 (arm f refitted on every rated
+  row through round 25) passed at 93.6% Good on held-out technical rows. The
+  separate unseen-pair threshold (f2u) found no lower cut that stayed at
+  90% Good, so f2u was not rated.
+- **Fresh window:** 124 passages (Wikinews, featured-article leads,
+  openFDA), 494 sentences, 114 new swaps plus 20 consistency items, three
+  fresh blind raters. 88% unanimous; pairwise agreement 90–95%; consistency
+  with old marks 17–20 of 20. Arm b reached 64.5%, a normal window.
+
+| Arm | Swaps | Yield vs b | Good (95% CI) | Changes meaning | Not simpler | Unseen pairs (Good) |
+|---|---:|---:|---:|---:|---:|---:|
+| b | 110 | 100% | 64.5% (55–73) | 20.9% | 16 | 30 (14) |
+| p50 (frozen) | 54 | 49% | 96.3% (88–99) | 3.7% | 0 | 1 (1) |
+| f (frozen) | 57 | 52% | 93.0% (83–97) | 7.0% | 0 | 4 (3) |
+| **f2** | **54** | **49%** | **94.4% (85–98)** | **5.6%** | 0 | 3 (2) |
+
+- **Pre-registered success for f2: yes** (Good ≥ 90%, meaning ≤ 8%, yield
+  ≥ 40%).
+- **Errors kept:** confirmed→said ("officer confirmed the man had been shot",
+  f, f2), detonated→exploded ("a suicide bomber detonated", f, f2),
+  persisted→continued (pharmacology, all three), featuring→having (p50).
+- **Frozen across rounds 24–26:** p50 174/189 (92.1%); f 180/198 (90.9%).
+- **Unseen pairs remain the gap:** arm b's unseen-pair swaps were only 47%
+  Good here (14 of 30), and every filter keeps 1–4 of them.
+
 ## Joshua's blind marking page (prepared November 22, not yet used)
 
 [JOSHUA-PAGE.md](JOSHUA-PAGE.md) holds the rules
