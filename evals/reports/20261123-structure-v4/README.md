@@ -216,7 +216,7 @@ the identical rewrite and it failed the same way.
   (wide), `b020b3abc0c1` (standard + replay); round 9 applies `b2cb1b40455d`,
   `ec71b75bca9f`, `cf5bd57dbfcc` (wide, checkpointed, resumed twice),
   `5095caeaced3` (standard); dev on F2 `92e8de96a8a6` (judge run inline: F2
-  metrics reproduced); `scripts/verify` `ded7371967fc` on the results commit `d6c0c66` (782 passed).
+  metrics reproduced); `scripts/verify` `ded7371967fc` on the results commit `d6c0c66` (782 passed); round 10 `3427e6d0cc2e` on `00a1699` (791 passed).
   Round 10: fetch `205878418f42`, pool L `b6485d2996eb`, apply
   `4c21592e1078`, dev on F2 `88b3ba30dc67`.
 
