@@ -172,7 +172,7 @@ the identical rewrite and it failed the same way.
   (wide), `b020b3abc0c1` (standard + replay); round 9 applies `b2cb1b40455d`,
   `ec71b75bca9f`, `cf5bd57dbfcc` (wide, checkpointed, resumed twice),
   `5095caeaced3` (standard); dev on F2 `92e8de96a8a6` (judge run inline: F2
-  metrics reproduced); `scripts/verify` VERIFY_PLACEHOLDER.
+  metrics reproduced); `scripts/verify` `ded7371967fc` on the results commit `d6c0c66` (782 passed).
 
 ## Disclosures
 
