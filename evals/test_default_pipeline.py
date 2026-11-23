@@ -1,11 +1,11 @@
 """Default pipeline wiring (no models loaded)."""
 
-from cleartext.structure_v2 import KEPT_V3
+from cleartext.structure_v2 import KEPT_V4
 from evals import default_pipeline as D
 
 
 def test_default_structure_is_kept_v3():
-    assert D.STRUCTURE_OPS == tuple(KEPT_V3)
+    assert D.STRUCTURE_OPS == tuple(KEPT_V4)
     assert D.MIN_ENTAILMENT == 0.5 and D.WORDS_ARM == "p50"
     assert '"t5.min_entailment":0.5' in D.F2 and D.F2.startswith("words=off")
 
