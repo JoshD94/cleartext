@@ -2,7 +2,7 @@
 
 Lexical simplification for CS 4701 using frozen BERT and small trained models. Given a sentence, the pipeline finds hard words, proposes simpler replacements, scores them with the ensemble, and applies edits that pass its acceptance and safety checks. It also reports predicted reading level before and after.
 
-The current default is v7. The stronger 52-feature ranker and six inspection blocks are separate, opt-in runs. The demo still uses v7. Novel BERT replacements failed their acceptance checks and remain disabled in safe configurations.
+**The default system (since November 23, 2026) is F2 → structure v3 → learned words p50**: the safe T5/compound split, rule-based passive → active, appositive extraction and fronted-clause splits, then the trained word stage. See [docs/DEFAULT_PIPELINE.md](docs/DEFAULT_PIPELINE.md) and `evals/default_pipeline.py`. The sentence demo below is a separate process and still runs the v7 lexical library described in this section; the stronger 52-feature ranker and six inspection blocks are separate, opt-in runs. Novel BERT replacements failed their acceptance checks and remain disabled in safe configurations.
 
 [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) indexes the results and limits of each experiment. [docs/cleartext-steps.html](docs/cleartext-steps.html) and [docs/report.txt](docs/report.txt) describe the earlier pipeline; use the experiment documents for subsequent changes.
 
