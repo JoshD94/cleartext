@@ -116,9 +116,9 @@ versions, input/model/source hashes and completion/failure receipts.
   invalidates the feature state. Joshua's 60 marked swaps, the round-2 page and
   `stacker-joshua60.json` are held out: never train, tune or choose on them.
   Its split checker (rejects 38/73 F2 splits) stays opt-in.
-- `cleartext.structure_v2`: new ops get a new version name and preset
-  (`KEPT_V3` is fixed); rated items cannot validate rules written from them,
-  so use a fresh window (`evals/reports/20261122-structure-v2/`).
+- `cleartext.structure_v2`: new ops get a new version and preset (`KEPT_V3`
+  fixed, `KEPT_V4` opt-in); rated items cannot validate rules written from
+  them: use a fresh window (`pool-c` excludes 8-grams of all earlier pools).
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before

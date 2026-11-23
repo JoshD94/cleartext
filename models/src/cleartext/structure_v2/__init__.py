@@ -7,6 +7,6 @@ clauses (split with a connective, or moved after the main clause), empty
 nominalization to a verb. See models/docs/STRUCTURE_V2.md.
 """
 
-from .stage import KEPT, KEPT_V3, OPS, StructureV2
+from .stage import KEPT, KEPT_V3, KEPT_V4, OPS, StructureV2
 
-__all__ = ["KEPT", "KEPT_V3", "OPS", "StructureV2"]
+__all__ = ["KEPT", "KEPT_V3", "KEPT_V4", "OPS", "StructureV2"]

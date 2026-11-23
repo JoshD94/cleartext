@@ -10,7 +10,7 @@ measured on its own (evidence:
 No LLM is used.
 
 ```python
-from cleartext.structure_v2 import KEPT, KEPT_V3, StructureV2
+from cleartext.structure_v2 import KEPT, KEPT_V3, KEPT_V4, StructureV2
 from cleartext.teammate_stages import EntailmentVeto
 
 stage = StructureV2(ops=KEPT)            # the two v2 operations that passed (Good >= 85%)
@@ -19,12 +19,19 @@ text, edits = stage.rewrite(f2_output)   # (text, edits), like the other stages
 # Structure v3: adds by-phrase passive -> active and appositive extraction,
 # which passed Good >= 90% / meaning <= 8% with the 0.5 entailment floor.
 stage = StructureV2(ops=KEPT_V3, entailment=EntailmentVeto().score, min_entailment=0.5)
+
+# Structure v4: KEPT_V4 = KEPT_V3 + nominal_v3 (nominalization -> verb)
+# + passive_v7 (coordinated passives; v6 without the shared-participle split).
+stage = StructureV2(ops=KEPT_V4, entailment=EntailmentVeto().score, min_entailment=0.5)
 ```
 
 ## Results (fresh text, three blind Opus raters, majority Good)
 
 | Op | Good | Edits / 100 sentences | Status |
 |---|---|---:|---|
+| **`passive_v7`** (v4: v6 + shared-participle skip) | **97.0% [92–99]**, meaning 0% [0–3.7] (round 10, fresh window, 100 items, no 8-gram repeats) | ~0.7 (v6 0.77 on the same pool) | in `KEPT_V4` |
+| `passive_v6` (v4: v5 + coordination) | 90.7% [86–94], meaning 3.6% (rounds 8+9 without 8-gram repeats, 194 items); round 8 alone 84/94 = 89.4%, under its pre-registered 90% | ~0.5 (v5 0.39 on the same pools) | not kept |
+| **`nominal_v3`** (v4) | **100% [95–100]**, meaning 0% (rounds 8+9, 78 items without repeats, 74 Federal Register) | ~0.07 in Federal Register text, ~0 elsewhere | in `KEPT_V4` |
 | **`passive_v5`** (by-phrase, v3) | **94.1% [88–97]**, meaning 4.2% (rounds 6+7, 118 items) | ~0.4 | in `KEPT_V3` |
 | **`appositive_v4`** (v3) | **93.8% [83–98]**, meaning 0% (rounds 6+7, 48 items) | ~0.3 | in `KEPT_V3` |
 | `fronted_split` | 92.9% [84–97] (rounds 2+3, 70 items) | ~0.4 | in `KEPT` and `KEPT_V3` |
@@ -41,6 +48,21 @@ of 100 passages (ΔFK −0.011, Δ passage NLI +0.0002, all gates pass) and
 `KEPT_V3` 5 (ΔFK −0.031, Δ NLI +0.0003, all gates pass; `passive_v5` fires
 on none of them).
 
+**Structure v4** ([evals/reports/20261123-structure-v4](../../evals/reports/20261123-structure-v4/README.md)):
+`passive_v6` keeps every v5 rule and check and adds the coordination shapes
+v2–v5 skipped: a second clause with its own subject flipped in place, and
+"S was V-ed by A and VP2" split into "A V-ed S. S VP2." (each half flipped
+under the v5 rules; the split shape alone scored 89.1%, and its known failure
+is two participles sharing one by-phrase, "written and produced by X"). Six of
+its round-8 items repeated text from earlier pools; without them round 8
+missed its bar, so `passive_v6` is not kept. `passive_v7` is `passive_v6`
+plus one skip: no split when a by-phrase after coordinated participles reads
+as shared ("written and produced by X"); it passed round 10 on a fresh
+window (97/100). On F2's dev outputs `KEPT_V4` still equals `KEPT_V3`.
+`nominal_v3` uses curated pairs only, whitelisted light verbs, second-parser
+agreement, an output parse check and the fluency floor. Neither fires on F2's
+dev outputs, so `KEPT_V4` equals `KEPT_V3` there.
+
 ## Operations (`models/src/cleartext/structure_v2/`)
 
 | Op | Example | Module |
@@ -51,7 +73,8 @@ on none of them).
 | `fronted_split` | "Although X, Y." to "X. But Y." (because → So, after → Then) | `fronted.py` |
 | `fronted_move` | "If X, Y." to "Y if X." | `fronted.py` |
 | `frames` | "There are many people who live here." to "Many people live here."; "It was the board that approved it." to "The board approved it." | `frames.py` |
-| `nominal` | "conduct an evaluation of the program" to "evaluate the program" | `nominal.py` |
+| `nominal` (`_v2`, `_v3`) | "conduct an evaluation of the program" to "evaluate the program" | `nominal.py` |
+| `passive_v6`/`_v7` split | "The episode was written by X and directed by Y." to "X wrote the episode. Y directed the episode." (v7 skips "written and produced by X") | `passive.py` |
 
 Every edit must pass the F2 hard checks (numbers, negation, entities,
 technical phrases, code literals) or it is dropped. An optional

@@ -227,13 +227,15 @@ MEANS_V4 = {"vote", "votes", "infusion", "formula", "method", "means", "process"
 
 
 def skip_reason(verb, subj, auxpass, agent, agent_obj, sent, version=2):
-    reason = _skip_reason(verb, subj, auxpass, agent, agent_obj, sent)
+    reason = _skip_reason(verb, subj, auxpass, agent, agent_obj, sent, conj_clause=version >= 6)
     if reason is None and version >= 3:
         reason = _skip_reason_v3(verb, subj, agent, agent_obj, sent)
     if reason is None and version >= 4:
         reason = _skip_reason_v4(verb, subj, agent, agent_obj, sent)
     if reason is None and version >= 5:
         reason = _skip_reason_v5(verb, subj, auxpass, agent, agent_obj, sent)
+    if reason is None and version >= 6:
+        reason = next(v6_reasons(verb, subj, auxpass, agent, agent_obj, sent), None)
     return reason
 
 
@@ -615,7 +617,7 @@ def fda_heading(sent):
     return bool(FDA_HEADING.match(sent.text))
 
 
-def _skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
+def _skip_reason(verb, subj, auxpass, agent, agent_obj, sent, conj_clause=False):
     auxes = _auxes(verb)
     if any(a.i < subj.i for a in auxes):
         return "question or inverted order"
@@ -623,7 +625,8 @@ def _skip_reason(verb, subj, auxpass, agent, agent_obj, sent):
         return "infinitive passive"
     if _aux_lemma(auxpass) not in ("be", "get"):
         return "unrecognized passive helper"
-    if verb.dep_ == "conj" or any(c.dep_ == "conj" and c.pos_ in ("VERB", "AUX")
+    if verb.dep_ == "conj" and not (conj_clause and _own_clause_conj(verb, subj)) or any(
+            c.dep_ == "conj" and c.pos_ in ("VERB", "AUX")
                                   and not any(g.dep_.startswith("nsubj") for g in c.children)
                                   for c in verb.children):
         return "coordinated predicate shares the subject"
@@ -918,6 +921,8 @@ class ActiveVoice:
             agent = next((c for c in verb.children if c.dep_ == "agent"), None)
             agent_obj = next((c for c in agent.children if c.dep_ == "pobj"), None) if agent is not None else None
             kind = "agentive" if agent is not None else "agentless"
+            if self.version >= 6 and agent is not None and verb.dep_ == "conj":
+                kind = "agentive_conj"  # v6: the second of two clauses, flipped in place
             reason = skip_reason(verb, subj, auxpass, agent, agent_obj, sent, self.version)
             new_subject = None
             if reason is None and agent is None:
@@ -979,7 +984,7 @@ class ActiveVoice:
                                      version=self.version, info=info)
                 if out is None or out == current:
                     continue
-                if self.version >= 5 and row["kind"] == "agentive":
+                if self.version >= 5 and row["kind"] in ("agentive", "agentive_conj"):
                     if info.get("relative") or output_check_v5(out, row["verb"].lemma_, info["subject"],
                                                                info["object"]) is not None:
                         continue
@@ -993,4 +998,230 @@ class ActiveVoice:
                 break
             if not done:
                 break
+        if self.version >= 6 and not edits and (self.kinds is None or "agentive_split" in self.kinds):
+            out = split_coordinated_v6(current, version=self.version)
+            if out is not None:
+                edits.append(Edit(self.op, "agentive_split", current, out, {}))
+                current = out
         return current, edits
+
+
+# Structure v4 (version 6, November 23): v5 plus two coordination shapes that
+# v2-v5 always skipped ("coordinated predicate shares the subject", about a
+# quarter of the by-phrase passives in news and encyclopedic text), and
+# skips for the rated v5 failures of rounds 6-7. v2-v5 outputs are unchanged.
+LIGHT_VERBS_V6 = {"do", "make", "have", "give", "take", "get", "meet", "greet"}
+SUBORD_ING_V6 = {"while", "whilst", "when", "whenever", "after", "before", "upon", "on", "since", "until", "by",
+                 "without", "despite", "in"}
+SPLIT_DETS_V6 = {"the", "this", "that", "these", "those"}
+# Dev check (old pools): "were taken by caesarean section".
+MEANS_V6 = {"section", "caesarean", "cesarean", "injection", "infusion", "inhalation", "mouth", "route", "surgery",
+            "procedure", "method", "technique", "means", "catheter", "tube", "syringe", "pump", "device"}
+# PLL margin (nats) needed to decide whether a past-tense-looking second verb
+# shares the passive helper ("was designed ... and erected" vs "and served").
+SHARE_MARGIN_V6 = 2.0
+
+
+def _own_clause_conj(verb, subj):
+    """A passive that is the second of two coordinated clauses, with its own
+    subject ("..., but his methods were questioned by other members"): the
+    flip stays inside its clause."""
+    head = verb.head
+    return (subj.head.i == verb.i and head.pos_ in ("VERB", "AUX") and head.i < subj.left_edge.i
+            and any(c.dep_ == "cc" and head.i < c.i < subj.left_edge.i for c in list(head.children) + list(verb.children))
+            and subj.left_edge.i > head.i)
+
+
+def v6_reasons(verb, subj, auxpass, agent, agent_obj, sent):
+    """Version-6 skips added to v5 (from the rated round 6-7 v5 failures)."""
+    if agent is None or agent_obj is None:
+        return
+    doc = sent.doc
+    agent_ids = {t.i for t in agent.subtree}
+    # "a tree hit a man whilst working": a subordinated participle after the agent.
+    for t in sent:
+        if t.i > agent.right_edge.i and t.tag_ == "VBG" and t.i not in agent_ids:
+            marks = {c.lower_ for c in t.children if c.dep_ in ("mark", "advmod", "prep")}
+            prev = doc[t.i - 1].lower_ if t.i > sent.start else ""
+            if marks & SUBORD_ING_V6 or prev in SUBORD_ING_V6 or prev == ",":
+                yield "v6: participle clause after the agent (would describe the new subject)"
+                break
+    # "their oxidations" after "allopurinol and oxipurinol": coordinated agents are plural.
+    if any(c.dep_ == "conj" for c in agent_obj.children):
+        later = [t for t in sent if t.i > agent.right_edge.i and t.lower_ in ("they", "them", "their", "theirs",
+                                                                              "themselves")]
+        if later:
+            yield "v6: a later plural pronoun may now refer to the coordinated agent"
+    # "MTA Bridges and Tunnels": a name containing "and" is one organization.
+    if any(c.dep_ == "conj" for c in agent_obj.children) and agent_obj.ent_type_ in ("ORG", "FAC", "WORK_OF_ART",
+                                                                                      "PRODUCT", "EVENT", "LAW"):
+        ent = next((e for e in doc.ents if e.start <= agent_obj.i < e.end), None)
+        if ent is not None and any(t.lower_ in ("and", "&") for t in ent):
+            yield "v6: a name with 'and' as the agent (one organization)"
+    if agent_obj.lemma_.lower() in MEANS_V6 or any(t.lower_ in MEANS_V6 for t in agent_obj.subtree if t.dep_ == "amod"):
+        yield "v6: a medical or technical means as the agent"
+    # "be done by", "met by applause": light or reception verbs.
+    if verb.lemma_ in LIGHT_VERBS_V6:
+        yield "v6: light or reception verb"
+    # "repeated inversion of the bag must mix": a procedure noun as the doer.
+    if not agent_obj.ent_type_ and agent_obj.pos_ != "PROPN" and re.search(
+            r"(?:tion|sion|ment|ance|ence|ing|ure|ysis)$", agent_obj.lower_) and not any(
+            c.dep_ in ("poss",) for c in agent_obj.children):
+        yield "v6: an action or procedure noun as the agent"
+
+
+def _flip_v5(text):
+    """The v6 in-place by-phrase flip of one half (every v5 rule and check
+    plus the v6 skips; no further split), or None."""
+    out, edits = _V5().rewrite_sentence(text)
+    return out if edits else None
+
+
+_V5_CACHE = []
+
+
+def _V5():
+    if not _V5_CACHE:
+        _V5_CACHE.append(ActiveVoice(version=6, kinds=("agentive",)))
+    return _V5_CACHE[0]
+
+
+def _split_subject_ok(subj):
+    toks = list(subj.subtree)
+    if len(toks) > 7 or any(t.text in BRACKETS + (",", ";", ":", '"', "“", "”") for t in toks):
+        return False
+    if subj.tag_ == "PRP":
+        return subj.lower_ in ("he", "she", "it", "they", "we", "i")
+    if any(t.tag_ in ("PRP", "PRP$", "WDT", "WP", "WP$") or t.like_num or t.dep_ in ("relcl", "acl", "prep")
+           for t in toks if t.i != subj.i):
+        return False
+    if len(toks) > 5 or any(t.tag_ == "POS" or t.lower_ == "of" for t in toks):
+        return False  # "The song's development pays homage": a long or possessive phrase repeated reads badly
+    first = toks[0]
+    if subj.pos_ == "PROPN" or subj.ent_type_:
+        return first.lower_ not in ("a", "an", "some", "one", "another", "every", "each", "no", "any")
+    return first.lower_ in SPLIT_DETS_V6 or first.dep_ == "poss" and first.tag_ != "PRP$"
+
+
+def shared_agent_participles_v7(root, c2, cc):
+    """Version 7 (round 10): 'S was written and produced by A' -- two or more
+    coordinated participles with one by-phrase after the last. The by-phrase
+    reads as shared by every participle, so a split that gives it only to the
+    last ('S was written. A produced S.') drops who did the first. True when
+    the first participle has no agent and no complement before the
+    conjunction, and the by-phrase belongs to the participle chain that
+    starts at the second verb."""
+    if any(c.dep_ == "agent" for c in root.children):
+        return False
+    if any(c.dep_ not in ("advmod", "punct", "neg") for c in root.children if root.i < c.i < cc.i):
+        return False
+    chain, frontier = [], [c2]
+    while frontier:
+        t = frontier.pop()
+        chain.append(t)
+        frontier += [c for c in t.children if c.dep_ == "conj" and c.tag_ in ("VBN", "VBD")]
+    return any(c.dep_ == "agent" for t in chain for c in t.children)
+
+
+def split_coordinated_v6(text, version=6):
+    """'S was V-ed by A [...], and/but VP2.' -> 'A V-ed S [...]. [But] S VP2.'
+    (VP2 flipped too when v5 allows it). Both halves must be complete clauses
+    under both parsers, the subject must start the sentence (no fronted
+    phrase scoping over both halves), and at least one half must flip under
+    every v5 rule and check. None when any condition fails."""
+    from .common import parse_second
+    doc = parse(text)
+    sents = list(doc.sents)
+    if len(sents) != 1:
+        return None
+    sent = sents[0]
+    root = sent.root
+    if root.pos_ not in ("VERB", "AUX"):
+        return None
+    subj = next((c for c in root.children if c.dep_ in ("nsubj", "nsubjpass")), None)
+    conjs = [c for c in root.children if c.dep_ == "conj" and c.pos_ in ("VERB", "AUX")]
+    if subj is None or len(conjs) != 1 or subj.left_edge.i != sent.start:
+        return None
+    c2 = conjs[0]
+    if any(g.dep_.startswith("nsubj") or g.dep_ == "expl" for g in c2.children):
+        return None  # its own subject: clause coordination, flipped in place
+    ccs = [c for c in root.children if c.dep_ == "cc" and c.i < c2.i]
+    if len(ccs) != 1 or ccs[0].lower_ not in ("and", "but") or ccs[0].i != c2.left_edge.i - 1:
+        return None
+    cc = ccs[0]
+    end = sent.end - 1 if sent[-1].is_punct else sent.end
+    if c2.right_edge.i != end - 1 or not sent[-1].text in (".", "!", "?"):
+        return None
+    if any(t.dep_ == "preconj" or t.lower_ in ("both", "either", "neither") for t in root.children):
+        return None
+    if version >= 7 and shared_agent_participles_v7(root, c2, cc):
+        return None
+    cut = cc.i - 1 if doc[cc.i - 1].text == "," else cc.i
+    first_toks = [t for t in sent if t.i < cut]
+    if any(t.head.i >= cc.i for t in first_toks if t.i != root.i) or any(t.text in BRACKETS + (";", ":", "—", "–")
+                                                                         for t in sent):
+        return None
+    if any(t.text in ('"', "“", "”") for t in sent):
+        return None
+    if not _split_subject_ok(subj):
+        return None
+    auxes = _auxes(root)
+    if any(c.dep_ == "neg" for c in root.children if c.i < root.i):
+        return None  # negation may scope over both halves
+    # The second half needs its own finite verb group.
+    own_aux = any(g.dep_ in ("aux", "auxpass") and g.i < c2.i for g in c2.children)
+    # "was designed by X and erected in 1843": a participle without an object
+    # shares the passive helper, even when tagged as a past tense.
+    from .common import parse_second
+    tagged_vbn = c2.tag_ == "VBN" and parse_second(doc.text)[c2.i].tag_ == "VBN"
+    ambiguous = (not own_aux and any(a.dep_ == "auxpass" for a in auxes) and c2.tag_ in ("VBD", "VBN")
+                 and not tagged_vbn and not any(g.dep_ in ("dobj", "dative", "xcomp", "ccomp") for g in c2.children)
+                 and (inflect(c2.lemma_, "VBN") or "").lower() == c2.lower_)
+    shares = False
+    if ambiguous:
+        # "was designed by X and erected in 1843" (shares "was") or "was
+        # interviewed by X and responded to Y" (does not): the pipeline's
+        # BERT decides which second sentence reads as English, by a margin.
+        from .fluency import pll
+        subj_t = subj.text if subj.tag_ == "PRP" else span_text(subj.subtree)
+        rest_t = span_text(t for t in sent if c2.left_edge.i <= t.i)
+        with_aux = pll(f"{upper_first(subj_t)} {' '.join(a.text for a in auxes)} {rest_t}")
+        without = pll(f"{upper_first(subj_t)} {rest_t}")
+        if abs(with_aux - without) < SHARE_MARGIN_V6:
+            return None
+        shares = with_aux > without
+    if not shares and (own_aux or ambiguous or c2.tag_ in ("VBD", "VBZ", "VBP")):
+        aux_text = ""
+        if c2.tag_ == "VBD" and root.tag_ == "VBN" and not any(a.lemma_ in ("be", "get") for a in auxes) and not own_aux:
+            # "has written X and published Y": VBD/VBN ambiguity with a shared "has"
+            if auxes:
+                return None
+    elif (shares or c2.tag_ == "VBN") and auxes and all(a.dep_ in ("aux", "auxpass") for a in auxes):
+        aux_text = " ".join(a.text for a in auxes)
+        if any(a.lower_ in ("being",) for a in auxes):
+            return None
+    else:
+        return None
+    subj_text = span_text(subj.subtree)
+    subj_text = subj_text if subj.tag_ != "PRP" else subj.text
+    s1 = span_text(first_toks).rstrip()
+    if not s1.endswith((".", "!", "?")):
+        s1 += "."
+    rest = span_text(t for t in sent if c2.left_edge.i <= t.i)
+    lead = "But " if cc.lower_ == "but" else ""
+    subj2 = lower_first(subj_text, subj.left_edge, titles=True, ids=True) if lead else upper_first(subj_text)
+    s2 = f"{lead}{subj2} {(aux_text + ' ') if aux_text else ''}{rest}"
+    # Both halves must parse as one complete clause with this subject.
+    for half, verb_text in ((s1, root.text), (s2, c2.text)):
+        for parser in (parse, parse_second):
+            hs = list(parser(half).sents)
+            if len(hs) != 1:
+                return None
+            r = hs[0].root
+            hsubj = next((c for c in r.children if c.dep_ in ("nsubj", "nsubjpass")), None)
+            if r.text != verb_text or hsubj is None or span_text(hsubj.subtree).lower() != subj_text.lower():
+                return None
+    f1, f2 = _flip_v5(s1), _flip_v5(s2)
+    if f1 is None and f2 is None:
+        return None
+    return f"{f1 or s1} {f2 or s2}"

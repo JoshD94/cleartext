@@ -154,7 +154,7 @@ class Nominalization:
     op = "nominal"
 
     def __init__(self, mine=True, version=1):
-        self.mine = mine
+        self.mine = mine and version < 3  # v3: curated table only
         self.version = version  # 2 adds the round-3 skips
 
     def rewrite_sentence(self, sentence, context=()):
@@ -254,7 +254,88 @@ class Nominalization:
                     continue
                 out.token(t)
             text = out.text()
+            if self.version >= 3 and v3_reason(sent, verb, noun, drop_prep, new_lemma, text) is not None:
+                continue
             feats = {"light": verb.lemma_, "noun": noun.lemma_, "verb": new_lemma,
                      "mined": int(noun.lemma_ not in TABLE), "sent_len": len(sent)}
             return text, [Edit(self.op, "table" if noun.lemma_ in TABLE else "mined", sentence, text, feats)]
         return sentence, []
+
+
+# Structure v4 (version 3, November 23): v2 plus a whitelist and the generic
+# v5 checks. The rated v1-v2 failures were the noun's preposition or comment
+# left on the verb ("decided regarding", "suggested, if ..., of what"), a
+# pronoun that lost its antecedent ("unable to pay when they are due"), a
+# modifier of the noun left on the verb ("changing paragraph X suggested by
+# a commenter") and "provide/offer" pairs that change the claim ("providing
+# measurements of" is not "measuring").
+LIGHT_V3 = {"make", "conduct", "perform", "carry", "undertake", "have", "reach"}
+PRONOUNS_V3 = {"it", "its", "they", "them", "their", "theirs", "itself", "themselves", "this", "these", "those",
+               "which", "that"}
+FLUENCY_FLOOR_V3 = -16.0
+NEEDS_OBJECT_V3 = {"recommendation", "statement", "announcement", "choice", "prediction", "promise", "suggestion",
+                   "comment", "comments", "payment", "arrangement", "reference", "contribution", "application"}
+
+
+def v3_reason(sent, verb, noun, drop_prep, new_lemma, text):
+    """None if the version-3 nominalization edit passes every check."""
+    import re
+    from .common import parse_second, span_text
+    doc = sent.doc
+    if drop_prep is None and noun.lemma_ in NEEDS_OBJECT_V3:
+        return "v3: the verb needs an object ('will recommend next month')"
+    if verb.lemma_ not in LIGHT_V3:
+        return "v3: light verb outside the whitelist (provide/offer/give change the claim)"
+    if any(t.dep_ in ("acl", "relcl", "appos", "amod", "advmod", "npadvmod") for t in noun.children if t.i > noun.i):
+        return "v3: modifier of the noun would be left on the verb"
+    tail = [t for t in sent if t.i > noun.i]
+    if drop_prep is not None:
+        if doc[noun.i + 1].i != drop_prep.i:
+            return "v3: the complement does not follow the noun directly"
+        tail = [t for t in sent if t.i > drop_prep.right_edge.i]
+    if tail and tail[0].text == "," and len(tail) > 1 and tail[1].text not in ("and", "but", "which"):
+        if any(t.lower_ == "of" for t in tail):
+            return "v3: interrupted complement after a comma"
+    if any(t.lower_ in PRONOUNS_V3 and t.tag_ in ("PRP", "PRP$", "WDT", "DT") for t in sent if t.i > noun.i and
+           (drop_prep is None or t.i > drop_prep.right_edge.i)):
+        return "v3: a later pronoun may have referred to the noun"
+    if drop_prep is not None and (any(c.dep_ in ("conj", "cc") for c in drop_prep.children) or any(
+            g.dep_ == "pobj" and (g.tag_ == "VBG" or g.pos_ == "VERB") for g in drop_prep.children)):
+        return "v3: coordinated or gerund complement ('changes to X and to Y', 'an impact on hindering')"
+    if any(c.dep_ in ("oprd", "acomp", "ccomp", "xcomp", "dative", "attr") for c in verb.children):
+        return "v3: complement on the light verb"
+    if any(t.dep_ == "neg" for t in verb.children) or any(t.lower_ in ("no", "any") for t in noun.children):
+        return "v3: negation or polarity on the noun or verb"
+    # A second, separately trained parser agrees on the verb, the noun and the complement.
+    d2 = parse_second(doc.text)
+    if [t.text for t in d2] != [t.text for t in doc]:
+        return "v3: second parser tokenizes differently"
+    v2, n2 = d2[verb.i], d2[noun.i]
+    if n2.head.i != verb.i or n2.dep_ != "dobj" or v2.lemma_ != verb.lemma_:
+        return "v3: second parser disagrees on the light verb and its object"
+    if drop_prep is not None and d2[drop_prep.i].head.i != drop_prep.head.i:
+        return "v3: second parser attaches the complement differently"
+    # The rewrite parses as intended: the new verb keeps the subject and,
+    # when the complement was dropped, takes its object.
+    subj = next((c for c in verb.children if c.dep_ in ("nsubj",)), None)
+    pobj = next((g for g in drop_prep.children if g.dep_ == "pobj"), None) if drop_prep is not None else None
+    norm = lambda x: re.sub(r"\s+", " ", x).strip().lower()
+    ok = False
+    for parser in (parse, parse_second):
+        out = list(parser(text).sents)
+        if len(out) != 1:
+            continue
+        for tok in out[0]:
+            if tok.lemma_.lower() != new_lemma or not tok.tag_.startswith("VB"):
+                continue
+            s_ok = subj is None or any(c.dep_ == "nsubj" and norm(span_text(c.subtree)) == norm(span_text(subj.subtree))
+                                       for c in tok.children)
+            o_ok = pobj is None or any(c.dep_ == "dobj" and c.text == pobj.text for c in tok.children)
+            if s_ok and o_ok:
+                ok = True
+        if not ok:
+            return "v3: rewrite does not parse with the intended subject and object"
+    from .fluency import fluency_drop
+    if fluency_drop(sent.text, text) < FLUENCY_FLOOR_V3:
+        return "v3: fluency drop below the floor"
+    return None

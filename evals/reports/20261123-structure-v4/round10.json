@@ -1,0 +1,99 @@
+{
+ "panel": "rating-r10",
+ "arms": {
+  "passive_v7": {
+   "n": 100,
+   "good": 97,
+   "good_rate": 0.97,
+   "good_ci95": [
+    0.9154806351014251,
+    0.9897454760557185
+   ],
+   "marks": {
+    "good": 97,
+    "ungrammatical": 2,
+    "notsimpler": 1
+   },
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0.0,
+    0.03699349876899627
+   ],
+   "per_rater_good_rate": [
+    0.95,
+    0.97,
+    0.96
+   ],
+   "unanimous_good": 94,
+   "by_rule": {
+    "agentive": {
+     "n": 53,
+     "good": 52,
+     "good_ci95": [
+      0.9005708784814801,
+      0.9966615466486537
+     ],
+     "marks": {
+      "good": 52,
+      "ungrammatical": 1
+     }
+    },
+    "agentive_split": {
+     "n": 43,
+     "good": 42,
+     "good_ci95": [
+      0.8794100644159603,
+      0.99588291277121
+     ],
+     "marks": {
+      "good": 42,
+      "ungrammatical": 1
+     }
+    },
+    "agentive_conj": {
+     "n": 4,
+     "good": 3,
+     "good_ci95": [
+      0.3006418400969081,
+      0.954412739704631
+     ],
+     "marks": {
+      "good": 3,
+      "notsimpler": 1
+     }
+    }
+   },
+   "by_source": {
+    "news12": {
+     "n": 4,
+     "good": 4,
+     "meaning": 0
+    },
+    "fedreg12": {
+     "n": 20,
+     "good": 18,
+     "meaning": 0
+    },
+    "goodwiki12": {
+     "n": 76,
+     "good": 75,
+     "meaning": 0
+    }
+   },
+   "edits_per_100_sentences": 0.7320644216691069,
+   "changed": 20,
+   "sentences": 2732
+  }
+ },
+ "agreement": {
+  "all_three": 0.97,
+  "pairwise": 0.98
+ },
+ "cards": 100,
+ "key_sha256": "acbf9754d7933a62ea00ad654ed8944507dfda17beb2ccb28a448d73ddd1a345",
+ "marks_sha256": [
+  "fd934f5d7ac6792b26e58dbe24eb792e875fbd9bf381f8d87cd77179ebcac959",
+  "596c28da3292b0ea992892de17b9cf95d5bc35f58f02b1f8c188c4bd7a52f4fe",
+  "d34ded10cb732f008fea4d375058046314aacc674949f1b22255153090f7071a"
+ ]
+}

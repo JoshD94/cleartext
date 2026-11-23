@@ -1,0 +1,42 @@
+{
+ "round": "10",
+ "written": "2026-11-23 04:28:46 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "2860c8ca96c82a6ab886350fefba692db9cde3ef927318e38beccd3b246be5da",
+  "models/src/cleartext/structure_v2/appositive.py": "346b96c8ba6edc8d0722099ec4e73d3c33a767ba1fa9ed211bc99072a081948f",
+  "models/src/cleartext/structure_v2/common.py": "5e062915e45718e6d1da5d85860fc21e010ce94c32ac4c13aa49783d761fd978",
+  "models/src/cleartext/structure_v2/fluency.py": "df091bf7efb1e3702ab253e72abc8d6816b6895f0d51435198a1ad14083c568d",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "6b7cd1b48f8855e6d65246f53da617851eca90462e996cf71cc348408fbfd64b",
+  "models/src/cleartext/structure_v2/passive.py": "e9f4e81823b3bc40944462d3734a40baa7984d670ab2a3e1cdcaee11bdd611c5",
+  "models/src/cleartext/structure_v2/stage.py": "cdf61de3a3dae96d15080ef26f3c001cc95de735c085dd79f0bf4318f00b7ff8",
+  "evals/structure_v2.py": "7922d5143570c3cf735ec8b22b16d6dba88a3ba6ddd057bed14814a386b0234f",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "evals/structure_v2_fetch.py": "cd9b77814202e9e40c594868d260e00682cb5589733561b301dd6206a4d53150",
+  "evals/reports/20261123-structure-v4/ROUND10.md": "b3fb8defe1f35e69da1957f98fe0f064749a79371ecd89294b199a0a0136bb6d"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-L.json": "519750d0c5eaab878e4ae746b3d203c307aaed93b300a2632b410664e73a87fa",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Lwide.json": "c02ab2492dec95573897bb939fd2b8a43ff9cc61f936dde1ab5dd35083c12526",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Lwide-f.json": "1de3d3ea2aea2fa0ce1243757c93f3114b3a978ecb4a4a9d76ef32dbebad7b94",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-L-manifest.json": "9830ad563eebde2922804803853d3eb676eb2a743658bd7efcfa42c27ca3ee52",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r10_pool.sh": "bf887d6365e64b2a4d4a8b9f8534fb58e2fbb52fa0aae75d7d079c4e2f0a687a",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r10_apply.sh": "17db013f4bccdc2799dab2e18095e80a05913141b22d8fb9c78bcdfdac3e4837",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r10_panel.sh": "785ad13765eca8d3bccf620788a7adbc439b52a4b15ea85a472e1620ec458f77",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/fetch12.sh": "a09075a565ff0debf7bbe881766dc4ee9e95151b0c27c97006e49b465f5c7921",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/rater_prompt.py": "2b6e13756b4e2f605dcadc8d6ce0af56d6b0c9166296054d70c23b961660d75e"
+ },
+ "thresholds": {
+  "arm": "passive_v7",
+  "min_n": 40,
+  "good_min": 0.9,
+  "meaning_max": 0.08,
+  "cap": 100,
+  "raters": 3,
+  "seed": 20261122,
+  "min_entailment": 0.5
+ }
+}

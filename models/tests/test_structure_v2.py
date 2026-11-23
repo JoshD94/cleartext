@@ -16,6 +16,8 @@ def no_bert(monkeypatch):
     """passive_v5's fluency floor needs BERT-base; these tests check the rules, so
     the fluency drop is fixed at 0 (test_round6_fluency_floor sets it)."""
     monkeypatch.setattr("cleartext.structure_v2.fluency.fluency_drop", lambda before, after: 0.0)
+    # passive_v6 decides an ambiguous shared helper by BERT; equal scores abstain.
+    monkeypatch.setattr("cleartext.structure_v2.fluency.pll", lambda text: 0.0)
 
 
 def run(op, sentence, context=()):
@@ -289,3 +291,113 @@ def test_kept_v3_stage_on_a_passage():
     assert out == ("The board approved the plan. Nicolas Sarkozy welcomed the news. "
                    "Nicolas Sarkozy was the president of France.")
     assert [e["op"] for e in edits] == ["passive", "appositive"]
+
+
+# Structure v4 (round 8): passive_v6 and nominal_v3.
+@pytest.mark.parametrize("before, after", [
+    # Coordination split: both halves complete clauses, each flipped when v5 allows it.
+    ("The episode was written by Dan Greaney and directed by Mark Kirkland.",
+     "Dan Greaney wrote the episode. Mark Kirkland directed the episode."),
+    ("The cast and crew praised the episode.", "The cast and crew praised the episode."),
+    # The second of two clauses, with its own subject, flips in place.
+    ("Tod was initially successful in his official role, but his methods were questioned by other members "
+     "of the East India Company.",
+     "Tod was initially successful in his official role, but other members of the East India Company "
+     "questioned his methods."),
+    # Plain v5 shapes are unchanged.
+    ("The rule was challenged by OSHA.", "OSHA challenged the rule."),
+])
+def test_round8_passive_v6(before, after):
+    assert run("passive_v6", before) == after
+
+
+@pytest.mark.parametrize("sentence", [
+    # A fronted phrase scopes over both halves: no split.
+    "In 1990, the bridge was designed by the city engineer and opened to traffic.",
+    # Rated v5 failures of rounds 6-7.
+    "A man was hit by a tree whilst working on a construction site.",
+    "The petition must be done by the petitioner within thirty days.",
+    # An indefinite subject cannot be repeated.
+    "A new school was built by the council and opened in 1990.",
+    # Negation could scope over both halves.
+    "The plan was not approved by the board and returned to the committee.",
+])
+def test_round8_passive_v6_abstains(sentence):
+    assert run("passive_v6", sentence) == sentence
+
+
+def test_round8_v5_unchanged_on_coordination():
+    s = "The episode was written by Dan Greaney and directed by Mark Kirkland."
+    assert run("passive_v5", s) == s
+
+
+@pytest.mark.parametrize("before, after", [
+    ("The agency conducted an evaluation of the program last year.", "The agency evaluated the program last year."),
+    ("The committee made a decision on the matter.", "The committee decided on the matter."),
+])
+def test_round8_nominal_v3(before, after):
+    assert run("nominal_v3", before) == after
+
+
+@pytest.mark.parametrize("sentence", [
+    "The board will make a recommendation next month.",
+    "For a variety of reasons, consumers sometimes are unable or unwilling to make payments when they are due.",
+    "Each employee must provide documentation of the most recent test result to the employer.",
+    "The commenters provided suggestions on the range of accessories.",
+])
+def test_round8_nominal_v3_abstains(sentence):
+    assert run("nominal_v3", sentence) == sentence
+
+
+def test_round8_shared_helper_by_fluency(monkeypatch):
+    s = "The obelisk was designed by Solomon Willard and erected between 1825 and 1843."
+    assert run("passive_v6", s) == s  # equal scores: abstain
+    monkeypatch.setattr("cleartext.structure_v2.fluency.pll", lambda t: 0.0 if "was erected" in t else -10.0)
+    assert run("passive_v6", s) == ("Solomon Willard designed the obelisk. "
+                                    "The obelisk was erected between 1825 and 1843.")
+    monkeypatch.setattr("cleartext.structure_v2.fluency.pll", lambda t: 0.0 if "Morton responded" in t else -10.0)
+    assert run("passive_v6", "Morton was interviewed by the Associated Press, and responded to the statements.") == (
+        "The Associated Press interviewed Morton. Morton responded to the statements.")
+
+
+def test_round8_split_skips_means_and_long_subjects():
+    for s in ("The offspring were taken by caesarean section and did not show any anomalies.",
+              "The song's development was motivated by Lopez's heritage and pays homage to her career."):
+        assert run("passive_v6", s) == s
+
+
+def test_kept_v4_extends_kept_v3():
+    from cleartext.structure_v2 import KEPT_V3, KEPT_V4
+    assert KEPT_V3 == ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
+    assert KEPT_V4 == KEPT_V3 + ("nominal_v3", "passive_v7")
+    text = ("The episode was written by Dan Greaney and directed by Mark Kirkland. "
+            "The agency conducted an evaluation of the program last year. "
+            "The album was recorded and mixed by Steve Albini.")
+    out, edits = StructureV2(ops=KEPT_V4).rewrite(text)
+    assert out == ("Dan Greaney wrote the episode. Mark Kirkland directed the episode. "
+                   "The agency evaluated the program last year. "
+                   "The album was recorded and mixed by Steve Albini.")
+    assert sorted(e["rule"] for e in edits) == ["agentive_split", "table"]
+
+
+# Round 10: passive_v7 = passive_v6 plus a skip for coordinated participles
+# that share one by-phrase (sentences written for the test, not rated items).
+@pytest.mark.parametrize("sentence", [
+    "The album was recorded and mixed by Steve Albini.",
+    "She was shot and wounded by a police officer.",
+])
+def test_round10_passive_v7_skips_shared_participles(sentence):
+    assert run("passive_v6", sentence) != sentence  # v6 splits and drops the first participle's doer
+    assert run("passive_v7", sentence) == sentence
+
+
+@pytest.mark.parametrize("before, after", [
+    ("The film was released in 2004 and directed by Ang Lee.",
+     "The film was released in 2004. Ang Lee directed the film."),
+    ("The episode was written by Dan Greaney and directed by Mark Kirkland.",
+     "Dan Greaney wrote the episode. Mark Kirkland directed the episode."),
+    ("The rule was challenged by OSHA.", "OSHA challenged the rule."),
+])
+def test_round10_passive_v7_keeps_other_v6_shapes(before, after):
+    assert run("passive_v6", before) == after
+    assert run("passive_v7", before) == after
