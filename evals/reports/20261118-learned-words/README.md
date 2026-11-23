@@ -1128,6 +1128,83 @@ the 18:00 stop. No panel was built and no swap was generated. A later run
 can use the pre-commitment as is: `learned-words r23 apply`, then `page`
 and `score`.
 
+## Round 24: a dependency-frame prior and public pair priors (November 22)
+
+[ROUND24.md](ROUND24.md) holds the pre-registered rules
+([r24-precommit.json](r24-precommit.json)).
+
+### What was new
+
+- **Dependency-frame prior** (the main signal): a learned Good rate for the
+  (target, replacement) pair in one dependency frame of the target, keyed by
+  relation and neighbour lemma, e.g. (administer, give, child:advmod, orally).
+  It shrinks to the pair's own rate, leaves the row out, and enters the model
+  as the most negative frame deviation. It differs from rounds 6 and 15–16:
+  it is anchored on the parse rather than a word window, scored relative to
+  the pair, learned from marks, and needs no corpus.
+- **Masked-LM frame features** on the same dependency neighbours
+  (`cleartext.learned_words.depframe`): how much less BERT predicts each
+  neighbour after the swap, and the slot preference in the bare frame.
+  Singly they are weak (AUC 0.42–0.60 for Good vs Changes meaning).
+- **Public pair priors** for unseen pairs (`cleartext.learned_words.pairlex`;
+  [r24-data.json](r24-data.json)): SimplePPDB++ relative complexity and PPDB
+  2.0 score for the exact pair (1.63M single-word rules, MIT license), the
+  15,000-word human complexity lexicon from the same release, and a
+  spelling-similarity ratio. Complexity separates Good from Not simpler (AUC
+  0.77–0.81) but not meaning errors.
+- **Dropped after a look:** whether the exact pair is a human simplification
+  in BenchLS, LexMTurk, TSAR or SWORDS gold (attested pairs 60.6% Good,
+  unattested 59.6%); WordNet relation type; unseen-pair interactions and
+  separate unseen thresholds ([r24-explore.json](r24-explore.json)).
+
+### Gate ([r24-cv.json](r24-cv.json)): go
+
+Passage-grouped nested CV, 10 repeats, all 1,454 rated rows, 50% of
+technical arm-b rows kept:
+
+| | Tech Good | Frame errors kept | Unseen kept (Good) | Genre Good |
+|---|---:|---:|---:|---:|
+| r50 (arm p refitted) | 91.8% | 25.8 of 27.5 | 36.0 (31.2) | 94.1% |
+| **f** | **92.9%** | **19.1** | **44.6 (38.7)** | **95.5%** |
+
+The paired gain was +1.1 points. "Frame errors" are held-out Changes-meaning
+rows on a pair ≥ 70% Good over ≥ 3 training rows. The design was chosen after
+a look at the same rows, so the gate is optimistic.
+
+### Fresh window ([round24.json](round24.json))
+
+137 new passages (45 Wikinews and 60 featured-article leads from titles never
+fetched before, 45 openFDA labels; 13 skipped for rewrite-corpus overlap),
+563 sentences, 153 items, three fresh blind raters. All three agreed on 92%;
+pairwise agreement was 94–95%. Consistency with the old marks was 16–17 of 20.
+
+| Arm | Swaps | Yield vs b | Per 100 sentences | Good (95% CI) | Changes meaning | Not simpler | Unseen pairs (Good) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| b | 131 | 100% | 23.3 | 75.6% (68–82) | 6.1% | 24 | 41 (28) |
+| p50 (frozen) | 68 | 52% | 12.1 | 94.1% (86–98) | 2.9% | 2 | 8 (7) |
+| qg (frozen) | 75 | 57% | 13.3 | 92.0% (84–96) | 4.0% | 3 | 14 (13) |
+| **f** | **72** | **55%** | **12.8** | **94.4% (87–98)** | **2.8%** | 2 | 7 (7) |
+| fg | 75 | 57% | 13.3 | 93.3% (85–97) | 2.7% | 3 | 9 (8) |
+
+- **Pre-registered success: yes.** Arm f reached 94.4% Good with 2.8% Changes
+  meaning, at 55% of arm b's swaps. fg also met its bars.
+- **But the window was easy.** Arm b reached 75.6%, against 63–66% on every
+  earlier window, and made a single frame error on a well-rated pair:
+  "occurred in 4 (1.3%) of 297 patients" → happened. f and p50 both kept it.
+  So the window could not show the frame prior's effect.
+- **Unseen pairs did not improve.** f kept 7 of arm b's 41 unseen-pair swaps
+  (all Good), p50 8 (7 Good) and qg 14 (13 Good). Arm b's unseen swaps were 68%
+  Good; f rejected 21 Good ones, such as manifestation→sign, chiefly→mainly,
+  prohibit→ban and assaulted→attacked. f's secondary unseen goal (1.25 × p50)
+  was missed.
+- **f's errors:** occurred→happened and arrives→comes ("comes on the scene"),
+  both Changes meaning; arrive→come and established→founded, Not simpler.
+- **Per rater:** f Good was 94.4%, 95.8% and 94.4%.
+- **On news and encyclopedic text alone:** f 37/40 (92.5%), p50 32/35, at 47%
+  and 41% of arm b's genre swaps.
+- Round 23 was folded in: frozen qg on this genre window reached 38/43 (88.4%)
+  on genre passages.
+
 ## Joshua's blind marking page (prepared November 22, not yet used)
 
 [JOSHUA-PAGE.md](JOSHUA-PAGE.md) holds the rules
