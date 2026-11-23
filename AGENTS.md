@@ -104,7 +104,7 @@ versions, input/model/source hashes and completion/failure receipts.
   + checks, `word_veto=`). `evals/swap_veto.py freeze` reuses the Nov 16 sweep
   dev state's memos only while every source stays byte-identical; on dev it
   did not make words beat F2 (`evals/reports/20261118-swap-window-veto/`).
-- **Default pipeline (on since Nov 23): F2 → structure v3 (`KEPT_V3`, 0.5
+- **Default pipeline (on since Nov 23): F2 → structure v4 (`KEPT_V4`, 0.5
   entailment floor) → learned words arm p50** (`evals/default_pipeline.py`,
   `models/docs/DEFAULT_PIPELINE.md`). F2 output comes from `ensemble_study`/
   `param_sweeps`; `default_pipeline run` applies the later stages. The v7 demo

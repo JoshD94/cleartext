@@ -11,8 +11,8 @@ this folder holds protocols, precommits and aggregates.
 
 ## Answer
 
-- **`KEPT_V4` = `KEPT_V3` + (`nominal_v3`, `passive_v7`)** (opt-in; the
-  default pipeline keeps `KEPT_V3`). `passive_v6` is not kept (correction
+- **`KEPT_V4` = `KEPT_V3` + (`nominal_v3`, `passive_v7`)** (on by default since Nov 23 via `evals/default_pipeline.py`).
+  `passive_v6` is not kept (correction
   below); `passive_v7` replaces it.
 - **`passive_v7` passes round 10** (pre-registered in [ROUND10.md](ROUND10.md)
   and [r10-precommit.json](r10-precommit.json) at `5caf1b5` before any
