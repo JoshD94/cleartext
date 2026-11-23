@@ -41,7 +41,14 @@ def load_inputs(paths):
 def read_rows(path):
     if not path.exists():
         return {}
-    return {r["id"]: r for r in map(json.loads, path.read_text().splitlines()) if r}
+    rows = {}
+    for line in path.read_text().splitlines():
+        try:
+            r = json.loads(line)
+        except json.JSONDecodeError:  # a killed run can leave a partial last line
+            continue
+        rows[r["id"]] = r
+    return rows
 
 
 def run(args):
@@ -110,7 +117,8 @@ def summarize(rows):
              "nli_mean_changed": mean(r["outputs"][name]["nli"]["nli_mean"] for r in ch),
              "nli_forward_changed": mean(r["outputs"][name]["nli"]["nli_forward"] for r in ch),
              "nli_backward_changed": mean(r["outputs"][name]["nli"]["nli_backward"] for r in ch),
-             "nli_below_080": sum(1 for r in ch if (r["outputs"][name]["nli"]["nli_mean"] or 0) < 0.8),
+             "nli_below_080": sum(1 for r in ch if r["outputs"][name]["nli"]["nli_mean"] is not None
+                                  and r["outputs"][name]["nli"]["nli_mean"] < 0.8),
              "nli_abstained": sum(1 for r in ch if r["outputs"][name]["nli"]["nli_mean"] is None)}
         if name == "default":
             s["stage_changed"] = {k: sum(1 for r in rows for st in r["outputs"][name]["steps"]
