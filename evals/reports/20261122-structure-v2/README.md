@@ -1,14 +1,149 @@
-# Sentence structure beyond splitting (structure v2), November 22, 2026
+# Sentence structure beyond splitting (structure v2 and v3), November 22–23, 2026
 
 Joshua asked how to improve the sentence-structure stage other than by
-splitting, starting with passive to active. This study built seven
-rule-based operations (no LLM), rated each one blind on fresh public text in
-five pre-registered rounds, and ran the passing ones after F2 on the test set
-v3 dev split. Raw text and marks stay in
-`~/.local/state/cleartext/structure-20261122/`; this folder holds protocols,
-precommits and aggregates.
+splitting, starting with passive to active. Structure v2 (rounds 1–5,
+November 22) built seven rule-based operations (no LLM), rated each one blind
+on fresh public text, and ran the passing ones after F2 on the test set v3 dev
+split. Structure v3 (rounds 6–7, November 23) pushed by-phrase passive →
+active and appositive extraction to a stricter bar: **≥ 90% Good and ≤ 8%
+Changes meaning** (majority of three blind raters) on fresh text. Raw text
+and marks stay in `~/.local/state/cleartext/structure-20261122/`; this
+folder holds protocols, precommits and aggregates. Results page:
+`report-v3.html` in that directory (`make_page_v3.py`).
 
-## Answer
+## Answer (structure v3, rounds 6–7)
+
+- **By-phrase passive → active now meets the bar.** `passive_v5`: rounds 6
+  + 7 pooled (identical code, two fresh windows) **111/118 = 94.1% Good
+  [88–97], 5/118 = 4.2% Changes meaning [1.8–9.5]**; round 6 alone 58/63 =
+  92.1% [83–97] with 4.8% meaning (the pre-registered test), round 7 alone
+  (confirmation) 53/55 = 96.4% [88–99] with 3.6%. It fires on **0.39
+  sentences per 100** (0.45 and 0.33 on the two standard pools), about 37%
+  of v4's 1.06. On the same windows v4 scored 90/114 = 78.9% with 7.9%
+  meaning changes, as in rounds 4–5.
+- **By source** (pooled): Federal Register 67/69, Wikinews 18/20,
+  Wikipedia Good articles 14/15, openFDA 12/14. Outside the Federal
+  Register that is 44/49 = 89.8%: the pass leans on regulatory text, which
+  is also where the rated items concentrate (the wide pools are mostly
+  Federal Register sentences). Round 7's 20 non-Federal-Register items
+  were all Good; round 6's were 24/29.
+- **Appositive extraction also meets it.** `appositive_v4` (named or
+  definite anchors, second-parser agreement): pooled **45/48 = 93.8% Good
+  [83–98], no meaning change [0–7]**, round 6 21/22, round 7 24/26; 0.30
+  per 100 sentences. ROUND7.md fixed the pooled decision before round 7.
+- **Not retried:** nominalization → verb (fires on 0.05–0.18 sentences per
+  100, too rare to fill a 40-item round in two windows) and moving if/when
+  clauses (0% in round 1).
+- **What made the difference** was abstaining by shape instead of patching
+  failures. v5 converts a by-phrase passive only when the agent is a plain
+  noun phrase that ends its clause or is followed by a verb-attached phrase,
+  nothing scopes over it, the verb is an action, and four generic checks
+  agree: a second, separately trained parser (`en_core_web_md`) finds the
+  same subject, agent and attachments; the rewrite parses with the intended
+  subject and object; Chhoeng's NLI scorer (the F2 split floor) gives at
+  least 0.5 in both directions; and the pipeline's BERT-base
+  pseudo-log-likelihood drops by no more than 16 nats.
+- **Ideas from the brief:** (a) a second parser with an agreement
+  requirement: used; no stronger parser (e.g. `en_core_web_trf`) is
+  installed and none was downloaded. (b) agreement and tense: lemminflect
+  checks and number rules for codes, acronyms and partitives; pronoun case
+  was already handled. (c) a trained rewrite model or ranker: not trained;
+  the BERT fluency drop is used only as a floor (AUC 0.68 on 395 labelled
+  dev items, too weak for a ranker). (d) smarter abstention: the main
+  lever.
+- **Dev checks before round 6 were sobering:** on never-rated sentences of
+  old pools, one Opus dev rater gave the first v5 90.5% (143/158) and, after
+  fixing those failures, a second batch (mostly Federal Register) only 79.3%
+  (65/82). Its failures added the last rules (scope words in the verb group,
+  criterion verbs such as "stratified by", later pronouns, footnote
+  markers, adjectival participles, lemmatizer disagreement) and the fluency
+  floor. A relaxed variant (longer agents with prepositional phrases) scored
+  89.5% there and was dropped before round 6.
+- **On top of F2 (dev split, descriptive, [DEV_V3.md](DEV_V3.md)):**
+  `combo-v3` (`passive_v5`, `passive_recovered`, `appositive_v4`,
+  `fronted_split`, 0.5 entailment floor) changes 5 of 100 passages (2
+  appositive splits, 2 "we" recoveries, 1 fronted split; `passive_v5` fires
+  on none of F2's dev outputs): ΔFK −0.031 [−0.067, −0.003], Δ passage NLI
+  +0.0003 [+0.0001, +0.0005]; every gate and the over-edit gate pass
+  ([dev-judge-v3.json](dev-judge-v3.json); `KEPT` alone: 3 passages, ΔFK
+  −0.011). The effect on readability scores stays small because the
+  operations fire rarely.
+
+### Structure v3 results (blind majority marks, fresh text)
+
+| Operation | Round 6 (pool F) | Round 7 (pool G) | Pooled | Meaning, pooled | Per 100 | Decision |
+|---|---|---|---|---:|---:|---|
+| **`passive_v5`** | 58/63 = 92.1% [83–97] | 53/55 = 96.4% [88–99] | **111/118 = 94.1% [88–97]** | 4.2% [1.8–9.5] | 0.39 | **passes** |
+| **`appositive_v4`** | 21/22 = 95.5% [78–99] | 24/26 = 92.3% [76–98] | **45/48 = 93.8% [83–98]** | 0% [0–7] | 0.30 | **passes** (pooled n = 48) |
+| `passive_v4` (reference) | 49/60 = 81.7% [70–89] | 41/54 = 75.9% [63–85] | 90/114 = 78.9% [71–85] | 7.9% [4–14] | 1.06 | reference |
+
+Six new raters (three per round, general-purpose Opus subagents, brief and
+wrapper verbatim, own shuffles); all three agreed on 96% of cards in both
+rounds. Per 100 sentences uses the standard pools (5,597 and 5,731
+sentences); the v5 and appositive items come from the wide pools of the
+same documents (29,847 and 28,678 sentences), the v4 items from the
+standard pools. Results: [round6.json](round6.json), [round7.json](round7.json).
+
+**Rated failures** (all of them). `passive_v5`: "a tree hit a man whilst
+working on a construction site" (the trailing clause now attaches to the
+tree), "applause and some standing ovations met Pence's words" (not
+simpler), "when allopurinol and oxipurinol inhibit their oxidations"
+("their" can now point at the drugs), "MTA Bridges and Tunnels operate it"
+(one organization made plural), "repeated inversion of the diluent bag must
+mix the constituted solution" (a procedure as the doer), "whether the
+discharges caused the evacuations to water" (a phrase left behind), "the
+petitioner must do the fraud or willful misrepresentation" (the light verb
+"be done by"). `appositive_v4`: "Negritos is the archipelago's earliest
+inhabitants" (agreement), "Lopez Obrador was a former mayor" (tense with
+"former"), "Amtrak resumed Saturday evening. Amtrak had halted its Cascades
+service." (not simpler).
+
+### How v3 was run
+
+- **Code:** `models/src/cleartext/structure_v2/passive.py`
+  (`ActiveVoice(version=5)`, `v5_reasons`, `output_check_v5`),
+  `fluency.py` (BERT-base pseudo-log-likelihood via `cleartext.contextual`),
+  `appositive.py` (`version=4`), `common.py` (`parse_second`,
+  `en_core_web_md`); ops `passive_v5` and `appositive_v4` in `stage.py`;
+  tests in `models/tests/test_structure_v2.py` (BERT patched out).
+- **Pre-registration:** [ROUND6.md](ROUND6.md) and
+  [r6-precommit.json](r6-precommit.json) at `803eefd` (code, model and pool
+  hashes, thresholds) before any round-6 output; [ROUND7.md](ROUND7.md) and
+  [r7-precommit.json](r7-precommit.json) at `f5d39e0` (operation sources
+  byte-identical to round 6) before any round-7 output; [DEV_V3.md](DEV_V3.md)
+  at `75ca137` before the dev outputs.
+- **Fresh windows:** pool F (Wikinews and Good-article titles not in any
+  earlier window, Federal Register significant rules 2020-01..06, openFDA
+  labels effective 2019) and pool G (new titles, Federal Register
+  2019-07..12, openFDA 2018), with every earlier exclusion (word-stage
+  panels, test set v3 `panel/all.json`, pools A–F, 8-gram overlap). The
+  locked test split was never read.
+- **Dev material:** the rated v4 items of rounds 1–5 and never-rated
+  sentences of the old pools (dev checks 1 and 2, one dev rater each, cards
+  in `v3dev/` in the state directory). In-sample replay of the final rules
+  keeps 284 of the 446 labelled items, 281 of them Good; that figure is
+  optimistic by construction.
+- **Queue jobs** (Yoga, personal, `later`): dev applies `fe95624ee658`,
+  `4c2711349b7a`, `c76998afd4c9`, `00ec56812910`; NLI and BERT dev scores
+  `6e32c21adaf0`, `40c84e5b8f8b`; pools `25d960c7a279` (F), `1864f81efca5`
+  (G); round 6 applies `4f2ae841b4c8`, `3d717b3bba31`; round 7 applies
+  `a556e92141ac`, `2593e1e34b57`; dev on F2 `440a9f30cff1` (judge run
+  inline: F2 metrics reproduced on 87 of 87 rescored passages).
+
+### v3 disclosures
+
+- Raters are Opus models, not people; their agreement is high and they may
+  share blind spots. The dev checks used one rater, not a majority.
+- Two new operations were tested per round, so one passing by chance is
+  somewhat more likely than for a single test; both also held in the
+  confirmation round.
+- `passive_v5` needs `en_core_web_md` (MIT, installed in the venv but not
+  used by F2), and its rated configuration includes the 0.5 entailment floor
+  (pass `entailment=` and `min_entailment=0.5` to `StructureV2`).
+- The v3 rules were written from failures on Federal Register, openFDA,
+  Wikinews and Wikipedia text; other genres are untested.
+
+## Structure v2 answer (rounds 1–5)
 
 - **Two operations pass the bar** (majority Good ≥ 85%, Changes meaning ≤ 10%,
   n ≥ 20, on fresh text):
@@ -225,3 +360,9 @@ percentage of correct outputs.
 `tally --rates-from …`; dev: `dev`, `score` (queue), `judge`. Queue jobs
 (Yoga, personal, `later`): dev scoring `9739ec70322d`, `e7320da1bcb6`,
 `adac92bf2a33`, `f9e6b404c759`, `6c55eed1c673`; `scripts/verify` `014d07d2bb0c` and, on the final commit, `bc290ce9e860` and after round 5 `e56e6a45b9ac` (687 passed each).
+
+Structure v3 (rounds 6–7): the state directory's `r6_apply.sh`,
+`r6_apply_wide.sh`, `r6_panel.sh` and the `r7_*` equivalents (queue
+scripts), then `tally --name rating-r6 --rates-from r6-apply.jsonl` (and
+`rating-r7`, `r7-apply.jsonl`); `python make_page_v3.py STATE_DIR` writes
+`report-v3.html`; dev on F2: `dev_v3.sh`, then `judge`.

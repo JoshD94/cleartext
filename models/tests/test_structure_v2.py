@@ -280,3 +280,12 @@ def test_round6_output_check():
     from cleartext.structure_v2.passive import output_check_v5
     assert output_check_v5("The board approved the decision.", "approve", "The board", "the decision") is None
     assert output_check_v5("The board approved.", "approve", "The board", "the decision") is not None
+
+
+def test_kept_v3_stage_on_a_passage():
+    from cleartext.structure_v2 import KEPT_V3
+    text = ("The plan was approved by the board. Nicolas Sarkozy, the president of France, welcomed the news.")
+    out, edits = StructureV2(ops=KEPT_V3).rewrite(text)
+    assert out == ("The board approved the plan. Nicolas Sarkozy welcomed the news. "
+                   "Nicolas Sarkozy was the president of France.")
+    assert [e["op"] for e in edits] == ["passive", "appositive"]

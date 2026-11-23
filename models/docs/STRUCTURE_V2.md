@@ -9,18 +9,25 @@ measured on its own (evidence:
 No LLM is used.
 
 ```python
-from cleartext.structure_v2 import KEPT, StructureV2
+from cleartext.structure_v2 import KEPT, KEPT_V3, StructureV2
+from cleartext.teammate_stages import EntailmentVeto
 
-stage = StructureV2(ops=KEPT)            # the two operations that passed
+stage = StructureV2(ops=KEPT)            # the two v2 operations that passed (Good >= 85%)
 text, edits = stage.rewrite(f2_output)   # (text, edits), like the other stages
+
+# Structure v3: adds by-phrase passive -> active and appositive extraction,
+# which passed Good >= 90% / meaning <= 8% with the 0.5 entailment floor.
+stage = StructureV2(ops=KEPT_V3, entailment=EntailmentVeto().score, min_entailment=0.5)
 ```
 
 ## Results (fresh text, three blind Opus raters, majority Good)
 
 | Op | Good | Edits / 100 sentences | Status |
 |---|---|---:|---|
-| `fronted_split` | 92.9% [84–97] (rounds 2+3, 70 items) | ~0.4 | in `KEPT` |
-| `passive_recovered` | 91.4% [83–96] (70; Federal Register text) | ~0.05 | in `KEPT` |
+| **`passive_v5`** (by-phrase, v3) | **94.1% [88–97]**, meaning 4.2% (rounds 6+7, 118 items) | ~0.4 | in `KEPT_V3` |
+| **`appositive_v4`** (v3) | **93.8% [83–98]**, meaning 0% (rounds 6+7, 48 items) | ~0.3 | in `KEPT_V3` |
+| `fronted_split` | 92.9% [84–97] (rounds 2+3, 70 items) | ~0.4 | in `KEPT` and `KEPT_V3` |
+| `passive_recovered` | 91.4% [83–96] (70; Federal Register text) | ~0.05 | in `KEPT` and `KEPT_V3` |
 | `passive` (rounds 1, 2), `passive_v3`, `passive_v4` (by-phrase) | 72%, 61%, 78%; v4 78.9% [70–86] (109 items, rounds 4+5) | ~1 | not kept |
 | `nominal` / `nominal_v2` | 90%, 88%, 77% / 72% (39, rounds 4+5) | ~0.1 | dropped |
 | `appositive` / `_v2` / `_v3` | 75% / 75% / 71% | 0.3–1.7 | not kept |
@@ -29,15 +36,17 @@ text, edits = stage.rewrite(f2_output)   # (text, edits), like the other stages
 
 Chhoeng's converter on the same text: 42% and 37% (by-phrase only), 3%
 ("someone/people"). After F2 on the test set v3 dev split, `KEPT` changes 3
-of 100 passages (ΔFK −0.011, Δ passage NLI +0.0002, all gates pass).
+of 100 passages (ΔFK −0.011, Δ passage NLI +0.0002, all gates pass) and
+`KEPT_V3` 5 (ΔFK −0.031, Δ NLI +0.0003, all gates pass; `passive_v5` fires
+on none of them).
 
 ## Operations (`models/src/cleartext/structure_v2/`)
 
 | Op | Example | Module |
 |---|---|---|
-| `passive` (`_v3`, `_v4`) | "The UN has launched an investigation" from "An investigation has been launched by the UN" | `passive.py` |
+| `passive` (`_v3`, `_v4`, `_v5`) | "The UN has launched an investigation" from "An investigation has been launched by the UN" | `passive.py` |
 | `passive_recovered` | "We analyzed the samples" from "The samples were analyzed", only when the preceding sentences speak as "we" and the verb is an author action | `passive.py` |
-| `appositive` | "Amman is the capital of Jordan." split off from "…based in Amman, the capital of Jordan." | `appositive.py` |
+| `appositive` (`_v2`–`_v4`) | "Amman is the capital of Jordan." split off from "…based in Amman, the capital of Jordan." | `appositive.py` |
 | `fronted_split` | "Although X, Y." to "X. But Y." (because → So, after → Then) | `fronted.py` |
 | `fronted_move` | "If X, Y." to "Y if X." | `fronted.py` |
 | `frames` | "There are many people who live here." to "Many people live here."; "It was the board that approved it." to "The board approved it." | `frames.py` |
@@ -62,6 +71,16 @@ technical phrases, code literals) or it is dropped. An optional
 - **Double negation** is Kea-Roy's rule (`rewrites.negation_rewrite`,
   [NEGATION.md](NEGATION.md)); it is not re-implemented here.
 
+**Structure v3 (`passive_v5`, `appositive_v4`)** converts only a whitelisted
+clause shape (a plain agent noun phrase that ends its clause or is followed
+by a verb-attached phrase, nothing scoping over it, an action verb) and
+requires four generic checks: `en_core_web_md` agrees with
+`en_core_web_sm` on the subject, agent and attachments; the rewrite parses
+with the intended subject and object (`output_check_v5`); the BERT-base
+pseudo-log-likelihood of the rewrite drops by at most 16 nats
+(`fluency.py`, `FLUENCY_FLOOR_V5`); and, as rated, the 0.5 entailment floor.
+`v5_reasons(...)` lists every rule a clause fails.
+
 Versioned ops (`passive_v3`, `appositive_v2`, `nominal_v2`, ...) add the
 skips each rating round motivated without changing the earlier versions'
 outputs; `gate.py` holds the synthetic active→passive round trip and its
@@ -78,5 +97,12 @@ gradient-boosting gate (it did not raise human Good).
   the main source of errors that the skip rules do not catch. Replaying
   rated items through rules written from them overstates quality (passive
   v4: 90–96% on replay, 76% and 82% on two fresh windows).
+- `passive_v5` and `appositive_v4` load `en_core_web_md` (installed in the
+  venv; F2 does not use it) and `passive_v5` loads BERT-base; on a new host
+  both must be present offline. Their measured configuration includes the
+  0.5 entailment floor, which `StructureV2` applies only when given a scorer.
+- Coverage is the price of the v3 precision: `passive_v5` converts about a
+  third of what v4 converts (0.39 vs 1.06 sentences per 100), and on F2's
+  dev outputs it found nothing to convert.
 - The modules live under `models/src/cleartext/`, so they change
   `ensemble_study.generation_sources()` for any newly frozen plan.

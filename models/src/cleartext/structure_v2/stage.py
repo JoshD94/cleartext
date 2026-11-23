@@ -49,6 +49,11 @@ CONTEXT = 3  # preceding sentences an operation may read (agent recovery)
 # Good >= 85%, Changes meaning <= 10%; evals/reports/20261122-structure-v2),
 # in the combined stage's order. Opt-in: StructureV2(ops=KEPT).
 KEPT = ("passive_recovered", "fronted_split")
+# Structure v3 (rounds 6-7): the stricter bar (Good >= 90%, meaning <= 8%)
+# was met by passive_v5 and appositive_v4, rated with the 0.5 entailment
+# floor: StructureV2(ops=KEPT_V3, entailment=EntailmentVeto().score,
+# min_entailment=0.5). Order as in the dev run (DEV_V3.md).
+KEPT_V3 = ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
 
 
 def build(name, **kwargs):
