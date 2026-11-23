@@ -109,7 +109,11 @@ evidence for the bar.
   every fresh document. `prefilter` then drops wide-pool sentences that
   none of the rated ops can change (no "by"; no light verb before a table
   noun), so the wide apply fits the queue. Edits per 100 sentences come
-  from the unfiltered standard pools H + I. Pool sizes and hashes are in
+  from the unfiltered standard pools H + I. Sizes: H 4,952 standard and
+  18,951 wide sentences, I 1,500 and 18,628; the prefilter keeps 6,263 wide
+  sentences (Federal Register 4,134, Good articles 1,319, openFDA 457,
+  Wikinews 353). Pool I's source label is `fedreg9` (the builder's suffix
+  for pool I); its text is download10, not the round-9 window. Hashes are in
   [r8-precommit.json](r8-precommit.json). The pool files were built before
   this file; no sentence has been read or rewritten. The locked test split
   is never read. `download9` (round 9 window) is fetched, unread, for a
@@ -132,7 +136,12 @@ evidence for the bar.
   on a three-way split.
 - **Pass (each new op, round 8 alone):** n ≥ 40, majority Good ≥ 90%, and
   majority Changes meaning ≤ 8%. An op with n < 40 is inconclusive (n ≥ 20
-  is still reported). Reported: Wilson 95% intervals, every mark, per-kind
+  is still reported). `nominal_v3` fires on about 0.03% of Federal Register
+  sentences in the dev pools, so round 8 will likely give fewer than 40
+  items: in that case it is judged on rounds 8 + 9 pooled (identical code;
+  round 9 adds a larger Federal Register window, `download11`, 2016-07..
+  2017-12, being fetched now and unread), by this same bar, under a ROUND9.md
+  written before any round-9 output. Reported: Wilson 95% intervals, every mark, per-kind
   (`agentive`, `agentive_conj`, `agentive_split`) and per-source results,
   Good outside the Federal Register, per-rater rates, agreement, edits per
   100 standard-pool sentences.

@@ -1,0 +1,50 @@
+{
+ "round": "8",
+ "written": "2026-11-23 02:16:12 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "9d03c0965779d10eba1aa227b4cee78307b4b855414d7262d20988d560e0e835",
+  "models/src/cleartext/structure_v2/appositive.py": "346b96c8ba6edc8d0722099ec4e73d3c33a767ba1fa9ed211bc99072a081948f",
+  "models/src/cleartext/structure_v2/common.py": "5e062915e45718e6d1da5d85860fc21e010ce94c32ac4c13aa49783d761fd978",
+  "models/src/cleartext/structure_v2/fluency.py": "df091bf7efb1e3702ab253e72abc8d6816b6895f0d51435198a1ad14083c568d",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "6b7cd1b48f8855e6d65246f53da617851eca90462e996cf71cc348408fbfd64b",
+  "models/src/cleartext/structure_v2/passive.py": "00525326f48e94eff7ecb6792c4758d70db805787426fda3b866d9a80e610595",
+  "models/src/cleartext/structure_v2/stage.py": "0ca42e32c9cf5d399c60177c4b835526f184c09958f1e6fa0208cfcc2345cd7e",
+  "evals/structure_v2.py": "deaac654fca941c2f55ac76a28b9f302904440c6a4c074074447b7bb790b3afb",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "evals/structure_v2_fetch.py": "19e4b17118937406859659a2b37d6c96c12c65e3bc8b104f41313ed1c0e18ec7",
+  "evals/reports/20261123-structure-v4/ROUND8.md": "b65db311b523f6e145cdfc0f7c3bee93274bc09fc6e9b790ea10f00ba503898e"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-H.json": "e58fef41a0e0e399e38cf1b70f14738ad80ac6ed04f478ecb8115cd1971e82a9",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Hwide.json": "8af06343ac1ab8d34dad84e12d9fad9f6a2b5c6a72bf2276bfd117af074ab285",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-I.json": "a8b8d57b06fe89d9cbfa3f4a3d7b63f1da4afbb99315f1d5f2439cf7da9fe367",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-Iwide.json": "5b7a27ba670197de41338536f80ecc59f708fcb5c804d28c96c637e5ba9a0fad",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-HIwide-f.json": "f330d955b87532253356c764d7735e4a730d2635573e0b7e428fb0b757154de8",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-H-manifest.json": "ab3cf2670a4a6cfeb3b2ddc50154323cce68fd4ec41687820e866c1bd3443c93",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/pool-I-manifest.json": "a931c5a151dcc3f355c2c4b5e1fd98bb3972c87dbe87e64b66f047b52b677877",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/download8/manifest.json": "7af7e3a9b46ccef6d327391232d2964922954e0a793abb310f1d38b492b9a78d",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/download10/manifest.json": "8de9312140bd4c9625a9bc84c869912f85deb9837a75899fc6a59e00a7b56263",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r8_apply.sh": "612cb49d95db4993e8593a549e7b1ed556de9c5e0e3e2bf323fda0c08b36ceef",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r8_apply_wide.sh": "79b78febb391dfc0a56f11e81a94c89f34cc0665841ee111a50187eaae458041",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r8_panel.sh": "98ee678d555f4116d404ccf40e9b9c119af9d4d80fd155df5a0e666d41e1896b",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261123/r8_pool.sh": "f24b2df467d6bc8aa56540c039e128261335025022db6506fd5402658606f53a"
+ },
+ "thresholds": {
+  "n_min": 40,
+  "good_min": 0.9,
+  "meaning_max": 0.08,
+  "min_entailment": 0.5,
+  "fluency_floor": -16.0,
+  "share_margin_nats": 2.0,
+  "caps": {
+   "passive_v6": 100,
+   "nominal_v3": 60,
+   "passive_v5": 50
+  },
+  "seed": 20261122
+ }
+}
