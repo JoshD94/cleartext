@@ -351,7 +351,7 @@ function showView(view, animate = true) {
   if (!animate) placePill(nav, false);
   $("view-try").hidden = view !== "try";
   $("view-results").hidden = view !== "results";
-  if (view === "results") loadResults();
+  if (view === "results") { placePill($("r-system"), false); loadResults(); }
 }
 nav.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
