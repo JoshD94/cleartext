@@ -38,6 +38,7 @@ SOURCES = {"news": WORDS / "genre/news.jsonl.gz", "wiki": WORDS / "genre/wiki.js
            "openfda": WORDS / "corpus/openfda.jsonl.gz"}
 # Downloaded for this study (structure_v2_fetch.py): sources no earlier panel drew from.
 DOWNLOAD = STATE_ROOT / "structure-20261122/download"
+OLD_STATE = STATE_ROOT / "structure-20261122"  # pools A-G (structure v2/v3)
 FRESH_SOURCES = {"news2": DOWNLOAD / "news.jsonl.gz", "goodwiki": DOWNLOAD / "goodwiki.jsonl.gz",
                  "fedreg2": DOWNLOAD / "fedreg.jsonl.gz"}
 F2 = ('words=off|phrases=authored|structure=t5+compound_tagger|negation=off|grammar=off|terms=off#'
@@ -123,8 +124,15 @@ def run_pool_c(args):
         earlier += ["pool-D.json", "pool-Dwide.json"]
     if args.name in ("F", "G"):
         earlier += ["pool-E.json", "pool-Ewide.json"]
-    if args.name == "G":
+    if args.name in ("G", "H", "I"):
         earlier += ["pool-F.json", "pool-Fwide.json"]
+    if args.name in ("H", "I"):
+        earlier += ["pool-G.json", "pool-Gwide.json"]
+    # Structure v4 (rounds 8-9) keeps its state in a new directory; the
+    # earlier pools stay in the structure v2/v3 one.
+    earlier = [f if (state / f).exists() or args.name not in ("H", "I") else str(OLD_STATE / f) for f in earlier]
+    if args.name == "I":
+        earlier += ["pool-H.json", "pool-Hwide.json"]
     for f in earlier:
         for r in json.loads((state / f).read_text()):
             docs_used.add(r["doc"])
@@ -133,7 +141,7 @@ def run_pool_c(args):
     used = set()
     for t in texts_used:
         used |= grams(t)
-    suffix = {"C": "3", "D": "4", "E": "5", "F": "6", "G": "7"}[args.name]
+    suffix = {"C": "3", "D": "4", "E": "5", "F": "6", "G": "7", "H": "8", "I": "9"}[args.name]
     rng = random.Random(SEED + int(suffix))
     pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
     for path in sorted(Path(args.download).glob("*.jsonl.gz")):
@@ -152,7 +160,7 @@ def run_pool_c(args):
             sents = by_doc[d]
             idx = [i for i, x in enumerate(sents) if clean(x)]
             rng.shuffle(idx)
-            full = len(kept) < args.per_source
+            full = len(kept) < args.per_source or args.name in ("H", "I")
             for rank, i in enumerate(idx):
                 if grams(sents[i]) & used:
                     stats["sentences_8gram_overlap"] += 1
@@ -164,7 +172,7 @@ def run_pool_c(args):
                     kept.append(row)
                 if full:
                     wide.append(row)
-            if len(kept) >= args.per_source:
+            if len(kept) >= args.per_source and args.name not in ("H", "I"):
                 break
         pool += kept
         stats[f"{args.name}_sentences"] = len(kept)
@@ -351,6 +359,45 @@ def run_apply(args):
                 f.flush()
                 print(f"{k}/{len(pool)} {time.monotonic() - started:.0f}s", flush=True)
     print("COMPLETE", flush=True)
+
+
+def could_fire(sentence, ops):
+    """A cheap superset test (structure v4): False only when none of `ops`
+    can change the sentence (by-phrase passives need the word "by"; the
+    nominalization ops need a light verb within three words before a table
+    noun). Used to shrink the wide pools that supply rated items; edits per
+    100 sentences always come from the unfiltered standard pools."""
+    from cleartext.structure_v2.nominal import LIGHT, TABLE
+    for op in ops:
+        if op.startswith("passive") and op != "passive_recovered" and re.search(r"(?i)\bby\b", sentence):
+            return True
+        if op.startswith("nominal"):
+            low = sentence.lower()
+            words = re.findall(r"[a-z]+", low)
+            nouns = set(TABLE) | {n + "s" for n in TABLE} | {"analyses", "inquiries", "studies", "replies",
+                                                              "deliveries", "discoveries", "surveys"}
+            lights = {"make", "makes", "made", "making", "take", "takes", "took", "taken", "taking", "give", "gives",
+                      "gave", "given", "giving", "conduct", "conducts", "conducted", "conducting", "perform",
+                      "performs", "performed", "performing", "carry", "carries", "carried", "carrying",
+                      "undertake", "undertakes", "undertook", "undertaken", "undertaking", "provide", "provides",
+                      "provided", "providing", "reach", "reaches", "reached", "reaching", "have", "has", "had",
+                      "having", "offer", "offers", "offered", "offering", "effect", "effects", "effected",
+                      "accomplish", "accomplished", "implement", "implemented", "do", "does", "did", "done"}
+            for k, w in enumerate(words):
+                if w in lights and any(x in nouns for x in words[k + 1:k + 5]):
+                    return True
+        if not (op.startswith("passive") or op.startswith("nominal")):
+            return True
+    return False
+
+
+def run_prefilter(args):
+    state = outside_checkout(args.state)
+    rows = []
+    for path in args.pools:
+        rows += [r for r in json.loads(Path(path).read_text()) if could_fire(r["sentence"], args.ops)]
+    write_json(state / args.out, rows)
+    print(len(rows), Counter(r["source"] for r in rows))
 
 
 def load_apply(path):
@@ -782,9 +829,14 @@ def main(argv=None):
     p = sub.add_parser("pool-c")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--download", type=Path, required=True)
-    p.add_argument("--name", default="C", choices=("C", "D", "E", "F", "G"))
+    p.add_argument("--name", default="C", choices=("C", "D", "E", "F", "G", "H", "I"))
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
+    p = sub.add_parser("prefilter")
+    p.add_argument("--state", type=Path, required=True)
+    p.add_argument("--pools", nargs="+", type=Path, required=True)
+    p.add_argument("--ops", nargs="+", required=True)
+    p.add_argument("--out", required=True)
     p = sub.add_parser("apply")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--pool", type=Path, required=True)
@@ -842,7 +894,7 @@ def main(argv=None):
     p.add_argument("--thresholds", required=True)
     p.add_argument("--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    {"pool": run_pool, "pool-c": run_pool_c, "apply": run_apply, "panel": run_panel, "tally": run_tally, "dev": run_dev,
+    {"pool": run_pool, "pool-c": run_pool_c, "prefilter": run_prefilter, "apply": run_apply, "panel": run_panel, "tally": run_tally, "dev": run_dev,
      "score": run_score, "judge": run_judge, "precommit": run_precommit,
      "synthetic": run_synthetic, "gate-train": run_gate_train}[args.cmd](args)
 

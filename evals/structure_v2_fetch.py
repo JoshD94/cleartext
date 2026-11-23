@@ -140,7 +140,15 @@ WINDOWS = {3: {"fedreg": ("2021-07-01", "2021-12-31"), "openfda": "[20230101+TO+
            5: {"fedreg": ("2020-07-01", "2020-12-31"), "openfda": "[20200101+TO+20201231]"},
            # Structure v3 (rounds 6-7, November 23): two more disjoint windows.
            6: {"fedreg": ("2020-01-01", "2020-06-30"), "openfda": "[20190101+TO+20191231]"},
-           7: {"fedreg": ("2019-07-01", "2019-12-31"), "openfda": "[20180101+TO+20181231]"}}
+           7: {"fedreg": ("2019-07-01", "2019-12-31"), "openfda": "[20180101+TO+20181231]"},
+           # Structure v4 (rounds 8-9, November 23): more news and encyclopedic text, fewer rules.
+           8: {"fedreg": ("2019-01-01", "2019-06-30"), "openfda": "[20170101+TO+20171231]"},
+           9: {"fedreg": ("2018-07-01", "2018-12-31"), "openfda": "[20160101+TO+20161231]"},
+           # Round 8 nominalization items (Federal Register only: the op fires on ~0.03% of sentences).
+           10: {"fedreg": ("2018-01-01", "2018-06-30")}}
+# Rounds 8-9 take more Wikinews and Good-article documents (v3's pass leaned on Federal Register text).
+R8_CAPS = {"news": 400, "goodwiki": 800, "fedreg": 20, "openfda": 150}
+R10_CAPS = {"fedreg": 120}
 
 
 def round3(args, deadline):
@@ -157,10 +165,13 @@ def round3(args, deadline):
         if path.exists():
             old_fda |= {json.loads(line)["doc"] for line in gzip.open(path, "rt")}
     window = WINDOWS[args.round]
-    fda_url = FDA_2023.replace("[20230101+TO+20231231]", window["openfda"])
+    fda_url = FDA_2023.replace("[20230101+TO+20231231]", window.get("openfda", "[20230101+TO+20231231]"))
     generics = used_generics()
+    caps = R10_CAPS if args.round == 10 else R8_CAPS if args.round >= 8 else R3_CAPS
     stats = {}
     for name in ("goodwiki", "fedreg", "openfda", "news"):
+        if name not in caps:
+            continue
         out, done = args.out / f"{name}.jsonl.gz", args.out / f"{name}.done"
         if done.exists():
             stats[name] = json.loads(done.read_text())
@@ -182,7 +193,7 @@ def round3(args, deadline):
             keys = sorted(set(keys))
             rng.shuffle(keys)
             for key in keys:
-                if len(docs) >= R3_CAPS[name] or time.monotonic() > deadline:
+                if len(docs) >= caps[name] or time.monotonic() > deadline:
                     break
                 loaded = B.fedreg_load(f, key)
                 if loaded:
@@ -190,7 +201,7 @@ def round3(args, deadline):
         elif name == "openfda":
             names = set()
             for skip in range(0, 5000, 100):
-                if len(docs) >= R3_CAPS[name] or time.monotonic() > deadline:
+                if len(docs) >= caps[name] or time.monotonic() > deadline:
                     break
                 try:
                     page = f.json(f"{fda_url}&limit=100&skip={skip}", delay=0.5)
@@ -219,7 +230,7 @@ def round3(args, deadline):
                 return
             order = [t for t in listed if t not in previous]
             rng.shuffle(order)
-            picked = order[: R3_CAPS[name]]
+            picked = order[: caps[name]]
             step = 20 if name == "goodwiki" else 1
             for i in range(0, len(picked), step):
                 if time.monotonic() > deadline:
@@ -249,7 +260,7 @@ def main(argv=None):
     ap.add_argument("--previous", default=str(Path.home() / ".local/state/cleartext/structure-20261122/download"))
     args = ap.parse_args(argv)
     deadline = time.monotonic() + args.max_seconds
-    if args.round in (3, 4, 5, 6, 7):
+    if args.round in (3, 4, 5, 6, 7, 8, 9, 10):
         args.out.mkdir(parents=True, exist_ok=True)
         return round3(args, deadline)
     f = Fetcher(args.out / "http")

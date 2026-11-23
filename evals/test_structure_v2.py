@@ -33,3 +33,11 @@ def test_pool_helpers():
     assert not S.clean("Too short.")
     assert not S.clean("DOSAGE AND ADMINISTRATION The dose is one tablet taken twice a day with food.")
     assert S.grams("a b c d e f g h i", 8) == {tuple("abcdefgh"), tuple("bcdefghi")}
+
+
+def test_prefilter_superset():
+    assert S.could_fire("The rule was challenged by OSHA.", ["passive_v6"])
+    assert not S.could_fire("OSHA challenged the rule.", ["passive_v6"])
+    assert S.could_fire("The agency conducted an evaluation of the program.", ["nominal_v3"])
+    assert not S.could_fire("The agency evaluated the program.", ["nominal_v3"])
+    assert S.could_fire("Anything at all.", ["fronted_split"])

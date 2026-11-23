@@ -30,6 +30,10 @@ OPS = {
     # check, an output parse check and a BERT fluency floor; by-phrase
     # passives only. Round 6 adds the 0.5 entailment floor (min_entailment).
     "passive_v5": lambda: ActiveVoice(version=5, kinds=("agentive",)),
+    # Structure v4 (round 8): v5 plus clause coordination flipped in place,
+    # the coordination split ("S was V-ed by A and VP2" -> "A V-ed S. S VP2")
+    # and skips for the rated round 6-7 v5 failures; 0.5 entailment floor.
+    "passive_v6": lambda: ActiveVoice(version=6, kinds=("agentive", "agentive_conj", "agentive_split")),
     "passive_recovered": lambda: ActiveVoice(agents=("we",), kinds=("recovered_we",)),
     "appositive": lambda: AppositiveSplit(),
     "appositive_v2": lambda: AppositiveSplit(version=2),
@@ -43,6 +47,9 @@ OPS = {
     "frames_v2": lambda: EmptyFrames(rules=("existential",)),
     "nominal": lambda: Nominalization(),
     "nominal_v2": lambda: Nominalization(version=2),
+    # Structure v4 (round 8): table pairs only, whitelisted light verbs,
+    # second-parser agreement, output parse check and the BERT fluency floor.
+    "nominal_v3": lambda: Nominalization(version=3),
 }
 CONTEXT = 3  # preceding sentences an operation may read (agent recovery)
 # The operations that met the pre-registered bar on fresh text (majority
