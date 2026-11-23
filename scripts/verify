@@ -46,6 +46,7 @@ mkdir -p "$evidence"
   evals/test_swap_veto.py \
   models/tests/test_swap_veto.py \
   evals/test_learned_words.py \
+  evals/test_default_pipeline.py \
   models/tests/test_structure_v2.py \
   evals/test_structure_v2.py \
   --junitxml="$evidence/pytest.xml" | tee "$evidence/pytest.log"

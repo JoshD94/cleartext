@@ -87,7 +87,6 @@ versions, input/model/source hashes and completion/failure receipts.
   Use per-passage checkpoints and bounded batches; bind resume data to frozen
   source, input, model and runtime signatures. Automatic scores remain pending
   until the complete expected matrix is present. Raw checkpoints stay local.
-
 - Test set v3 (`evals/data/testset_v3/`, protocol in
   `evals/reports/20261116-testset-v3/PROTOCOL.md`): 300 passages + 544
   OneStopEnglish sentences, text local only. The **test split is locked**
@@ -109,21 +108,21 @@ versions, input/model/source hashes and completion/failure receipts.
   + checks, `word_veto=`). `evals/swap_veto.py freeze` reuses the Nov 16 sweep
   dev state's memos only while every source stays byte-identical; on dev it
   did not make words beat F2 (`evals/reports/20261118-swap-window-veto/`).
-
-- `cleartext.learned_words` (opt-in; `scripts/learned-words`, runs `python -I`)
-  is the trained word stage; downloads live in CLEARTEXT_LEXSIMP_RAW, rows and
-  models in `~/.local/state/cleartext/learned-words-20261118/`. Editing its
-  `features.py`/`data.py` invalidates the feature state (new dir). Joshua's 60
-  marked swaps are held out: never train or tune on them or the round-2 page.
-  Its split checker is too strict on F2 (rejects 38/73): keep it opt-in.
-  Round 3 adds `simpler.py` (word-difficulty margin, rule R2 = 0.1, opt-in
-  via `apply --panel onestop-dev`); OneStopEnglish dev is now used for rated swaps.
-  Rounds 4–5 used unused dev-document windows (`panel build-r4/-r5`); the
-  fine-tuned judge (`judge.py`) was rejected: it lost to the GBM models.
-- `cleartext.structure_v2` (opt-in, after F2): only `KEPT` (fronted-clause
-  split, passive → "we") met the 85% blind-rating bar; by-phrase passive
-  flips plateau near 78% (`evals/reports/20261122-structure-v2/`). Rated
-  items cannot validate rules written from them; use a fresh window.
+- **Default pipeline (on since Nov 23): F2 → structure v3 (`KEPT_V3`, 0.5
+  entailment floor) → learned words arm p50** (`evals/default_pipeline.py`,
+  `models/docs/DEFAULT_PIPELINE.md`). F2 output comes from `ensemble_study`/
+  `param_sweeps`; `default_pipeline run` applies the later stages. The v7 demo
+  is a separate, unchanged process. Each stage passed blind ratings on fresh
+  text; the stages were not rated jointly (dev gates only).
+- `cleartext.learned_words` (`scripts/learned-words`, runs `python -I`): rows
+  and models in `~/.local/state/cleartext/learned-words-20261118/`; p50 is
+  round 19's frozen `r19/model.pkl`, SHA-pinned. Editing `features.py`/`data.py`
+  invalidates the feature state. Joshua's 60 marked swaps, the round-2 page and
+  `stacker-joshua60.json` are held out: never train, tune or choose on them.
+  Its split checker (rejects 38/73 F2 splits) stays opt-in.
+- `cleartext.structure_v2`: new ops get a new version name and preset
+  (`KEPT_V3` is fixed); rated items cannot validate rules written from them,
+  so use a fresh window (`evals/reports/20261122-structure-v2/`).
 
 Do not commit credentials, environment files, model binaries, downloaded
 corpora or raw client data. Keep failed attempts and provenance honest. Before
