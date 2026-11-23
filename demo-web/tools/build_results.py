@@ -3,87 +3,68 @@
     python demo-web/tools/build_results.py <state-dir> <inputs.json>... > demo-web/site/public/results.json
 
 The sentences are public arXiv/NBER abstract sentences (Chhoeng's
-`passive/ps_sentences.json` and `passive/b_sentences.json`). Only changed
-sentences are published, with their source link. Verdicts are one reading by
-Claude (not a blind rating), listed here so they are reviewable.
+`passive/ps_sentences.json` and `passive/b_sentences.json`). All 200 are
+published in input order with each system's output (null when unchanged), so
+the page can show them as one text with the changes highlighted. For ClearText,
+`swaps` (word stage) and `structure` (structure-stage sentences) let the page
+colour each change by the step that made it; every other change is a split.
 """
 
 import json
 import sys
 from pathlib import Path
 
-SYSTEMS = {"default": "ClearText", "passive_auto": "Passive converter"}
-VERDICTS = {
-    "default": {
-        "Fragment": ["ps-020", "ps-047", "ps-075", "ps-089", "bus-002", "bus-010", "bus-012",
-                     "bus-040", "bus-083", "bus-086"],
-        "Meaning shift": ["ps-001", "ps-014", "bus-035", "bus-046"],
-        "Punctuation only": ["bus-001"],
-    },
-    "passive_auto": {
-        "Awkward": ["ps-025", "ps-029", "ps-057", "bus-051", "bus-075", "bus-079"],
-        "Broken": ["ps-003", "ps-017", "ps-019", "ps-031", "bus-012", "bus-062", "bus-081"],
-    },
-}
-ORDER = {"default": ["Reads well", "Fragment", "Meaning shift", "Punctuation only"],
-         "passive_auto": ["Reads well", "Awkward", "Broken"]}
 DOMAINS = {"political_science": "Political science", "business": "Business"}
-STRUCTURE = {"passive": "Passive to active", "appositive": "Side note made its own sentence",
-             "fronted": "Opening clause split off", "nominal": "Noun turned into a verb"}
-
-
-def tags(system, out):
-    if system != "default":
-        return [{"text": "Passive to active"}]
-    found = []
-    for step in out["steps"]:
-        if not step["changed"]:
-            continue
-        for e in step["edits"]:
-            if step["key"] == "f2":
-                if e["name"] == "Phrase rewrite":
-                    found += [{"from": x["from"], "to": x["to"]} for x in e["edits"]]
-                else:
-                    found.append({"text": e["name"], "count": e["count"]})
-            elif step["key"] == "structure":
-                found.append({"text": next((v for k, v in STRUCTURE.items() if str(e["op"]).startswith(k)),
-                                           "Sentence rewrite")})
-            else:
-                found.append({"from": e["word"], "to": e["replacement"]})
-    return found
+SYSTEMS = {"default": "ClearText", "passive_auto": "Passive converter"}
+LEGEND = {
+    "default": [("split", "Split sentence", "f2"), ("structure", "Passive to active", "structure"),
+                ("words", "Simpler word", "words")],
+    "passive_auto": [("structure", "Passive to active", None)],
+}
 
 
 def main(state, *inputs):
-    rows = [json.loads(line) for line in (Path(state) / "rows.jsonl").read_text().splitlines()]
-    meta = {x["id"]: x for p in inputs for x in json.loads(Path(p).read_text())}
-    assert {r["id"] for r in rows} == set(meta), "run is incomplete"
-    summary = json.loads((Path(state) / "summary.json").read_text())["all"]
-    out = {"sentences": len(rows), "systems": {}}
-    for system, name in SYSTEMS.items():
-        s = summary["systems"][system]
-        verdict = {i: v for v, ids in VERDICTS[system].items() for i in ids}
-        items = []
-        for r in rows:
-            o = r["outputs"][system]
-            if not o["changed"]:
-                continue
-            m = meta[r["id"]]
-            items.append({"id": r["id"], "domain": DOMAINS.get(r["domain"], r["domain"]),
-                          "source": m["source_url"], "title": m["source_title"],
-                          "before": r["text"], "after": o["output"],
-                          "grade": [r["fk"], o["fk"]], "nli": round(o["nli"]["nli_mean"], 3),
-                          "verdict": verdict.get(r["id"], "Reads well"), "tags": tags(system, o)})
-        unknown = set(verdict) - {x["id"] for x in items}
-        assert not unknown, f"verdicts for unchanged sentences: {unknown}"
-        counts = {v: sum(1 for x in items if x["verdict"] == v) for v in ORDER[system]}
-        out["systems"][system] = {
+    rows = {r["id"]: r for r in map(json.loads, (Path(state) / "rows.jsonl").read_text().splitlines())}
+    items = [x for p in inputs for x in json.loads(Path(p).read_text())]
+    assert {x["id"] for x in items} == set(rows), "run is incomplete"
+    summary = json.loads((Path(state) / "summary.json").read_text())["all"]["systems"]
+
+    systems = {}
+    for key, name in SYSTEMS.items():
+        s = summary[key]
+        steps = s.get("stage_changed", {})
+        systems[key] = {
             "name": name, "changed": s["changed"],
             "grade": [round(s["fk_before_changed"], 1), round(s["fk_after_changed"], 1)],
             "nli": s["nli_mean_changed"], "below080": s["nli_below_080"],
-            "verdicts": counts, "items": items}
-        if system == "default":
-            out["systems"][system]["steps"] = s["stage_changed"]
-            out["systems"][system]["lost"] = sum(s["items_lost"].values())
+            "legend": [{"kind": k, "label": label, "count": steps[step] if step else s["changed"]}
+                       for k, label, step in LEGEND[key]]}
+        if key == "default":
+            systems[key]["lost"] = sum(s["items_lost"].values())
+
+    groups = []
+    for x in items:
+        r = rows[x["id"]]
+        domain = DOMAINS.get(r["domain"], r["domain"])
+        if not groups or groups[-1]["domain"] != domain:
+            groups.append({"domain": domain, "sentences": []})
+        d = r["outputs"]["default"]
+        swaps, structure = [], []
+        for step in d["steps"]:
+            if step["changed"] and step["key"] == "words":
+                swaps += [[e["word"], e["replacement"]] for e in step["edits"]]
+            if step["changed"] and step["key"] == "structure":
+                structure += [e["after"] for e in step["edits"]]
+        sentence = {"id": x["id"], "title": x["source_title"], "text": r["text"],
+                    "out": {k: (r["outputs"][k]["output"] if r["outputs"][k]["changed"] else None)
+                            for k in SYSTEMS}}
+        if swaps:
+            sentence["swaps"] = swaps
+        if structure:
+            sentence["structure"] = structure
+        groups[-1]["sentences"].append(sentence)
+
+    out = {"sentences": len(items), "systems": systems, "groups": groups}
     json.dump(out, sys.stdout, indent=1, ensure_ascii=False)
     sys.stdout.write("\n")
 

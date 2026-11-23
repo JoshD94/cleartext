@@ -52,3 +52,13 @@ before = live site, after = local files.
   phone keeps metric tiles two-up then one, the system switch full width, and drops
   the domain tag so each card head stays on one line.
 - Placeholder: none. Verdicts are one reviewer's reading, stated in the note.
+
+## Results tab as one text (2026-11-23, Joshua: "one big text piece, with highlights")
+
+The per-sentence cards and verdict chips are replaced by one card holding all 200
+sentences in order (paragraphs of five, a heading per field), with the same strike +
+insert diff as the Try tab. Inserted text is tinted by the step that made it, with a
+legend on top: split (blue), passive to active (violet), simpler word (amber). Three
+hues break the one-accent rule at Joshua's request; tints stay soft and have dark-mode
+values. ClearText changes always diff word by word; the converter's rewrites keep the
+whole-sentence strike. Hovering a sentence shows its paper.
