@@ -1,0 +1,1653 @@
+{
+ "sentences": 200,
+ "systems": {
+  "default": {
+   "name": "ClearText",
+   "changed": 60,
+   "grade": [
+    17.1,
+    13.9
+   ],
+   "nli": 0.985,
+   "below080": 0,
+   "verdicts": {
+    "Reads well": 45,
+    "Fragment": 10,
+    "Meaning shift": 4,
+    "Punctuation only": 1
+   },
+   "items": [
+    {
+     "id": "ps-001",
+     "domain": "Political science",
+     "source": "https://arxiv.org/abs/2602.08160",
+     "title": "Effect of Electoral Seat Bias on Political Polarization: A Computational Perspective",
+     "before": "However, political institutions stand out, because -- while capable of exacerbating or alleviating polarization -- they can be re-engineered more readily than others.",
+     "after": "However, political institutions stand out. While capable of exacerbating or alleviating polarization, they can be re-engineered more readily than others.",
+     "grade": [
+      19.6,
+      15.4
+     ],
+     "nli": 0.965,
+     "verdict": "Meaning shift",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-002",
+     "domain": "Political science",
+     "source": "https://arxiv.org/abs/2601.16181",
+     "title": "Engineering polarization: How contradictory stimulation systematically undermines political moderation",
+     "before": "We develop a stochastic model of opinion dynamics to analyze how noise and differential susceptibility reshape the political spectrum.",
+     "after": "We develop a stochastic model of opinion dynamics to study how noise and differential susceptibility reshape the political spectrum.",
+     "grade": [
+      18.5,
+      17.9
+     ],
+     "nli": 0.986,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "analyze",
+       "to": "study"
+      }
+     ]
+    },
+    {
+     "id": "ps-007",
+     "domain": "Political science",
+     "source": "https://arxiv.org/abs/2601.05093",
+     "title": "Why Are Some Countries More Politically Fragmented Online Than Others?",
+     "before": "While prior research has predominantly focused on polarization in the United States, there remains a limited body of research on political divides in multiparty systems, and no universal method for comparing fragmentation across countries.",
+     "after": "While prior research has predominantly focused on polarization in the United States, there remains a limited body of research on political divides in multiparty systems. There is no universal method for comparing fragmentation across countries.",
+     "grade": [
+      22.3,
+      15.5
+     ],
+     "nli": 0.984,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-008",
+     "domain": "Political science",
+     "source": "https://econpapers.repec.org/paper/arxpapers/2603.03619.htm",
+     "title": "Candidate Moderation under Instant Runoff and Condorcet Voting: Evidence from the Cooperative Election Study",
+     "before": "Under these assumptions, their results indicate that Condorcet methods tend to yield winners who are substantially more moderate than those produced by IRV.",
+     "after": "Under these assumptions, their results show that Condorcet methods tend to yield winners who are substantially more moderate than those produced by IRV.",
+     "grade": [
+      12.9,
+      11.8
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "indicate",
+       "to": "show"
+      }
+     ]
+    },
+    {
+     "id": "ps-009",
+     "domain": "Political science",
+     "source": "https://researchwith.stevens.edu/en/publications/more-chances-fewer-problems-revisiting-ranked-choice-voting-error/",
+     "title": "More Chances, Fewer Problems? Revisiting Ranked Choice Voting Errors in New York City",
+     "before": "Findings show that overall ballot voiding declined substantially between 2021 and 2025, but district-level patterns linking errors to lower education persist, albeit in an attenuated manner.",
+     "after": "Findings show that overall ballot voiding declined substantially between 2021 and 2025. But district-level patterns linking errors to lower education continue, albeit in an attenuated manner.",
+     "grade": [
+      18.6,
+      14.0
+     ],
+     "nli": 0.993,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      },
+      {
+       "from": "persist",
+       "to": "continue"
+      }
+     ]
+    },
+    {
+     "id": "ps-013",
+     "domain": "Political science",
+     "source": "https://arxiv.org/html/2601.05213v1",
+     "title": "Estimating Consensus Ideal Points Using Multi-Source Data",
+     "before": "We propose a method, consensus multidimensional scaling (CoMDS), which better aligns with how applied scholars use ideal points in practice.",
+     "after": "We propose a method, consensus multidimensional scaling (CoMDS). This method better aligns with how applied scholars use ideal points in practice.",
+     "grade": [
+      13.5,
+      9.9
+     ],
+     "nli": 0.99,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-014",
+     "domain": "Political science",
+     "source": "https://escholarship.org/content/qt8s31h6c9/qt8s31h6c9.pdf",
+     "title": "Democratic Backsliding and Foreign Policy",
+     "before": "This paper demonstrates that backsliding states are more likely than full democracies to engage in aggressive actions toward other states, which has important academic and policy implications for understanding the international ramifications of democratic erosion.",
+     "after": "This paper shows that backsliding states are more likely than full democracies to engage in aggressive actions toward other states. This paper has important academic and policy implications for understanding the international ramifications of democratic erosion.",
+     "grade": [
+      23.7,
+      16.3
+     ],
+     "nli": 0.967,
+     "verdict": "Meaning shift",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      },
+      {
+       "from": "demonstrates",
+       "to": "shows"
+      }
+     ]
+    },
+    {
+     "id": "ps-020",
+     "domain": "Political science",
+     "source": "https://www.sppm.tsinghua.edu.cn/__local/2/55/86/C6F484220DD56E774CA20B0232B_7167DC2E_15600.doc",
+     "title": "Partisans of Color: Asian American and Latino Party ID in an Era of Racialization and Polarization",
+     "before": "Asian and Latino adults regularly navigate the straits between their racial and American identities—two categories, sorted along partisan lines, that shape their sense of belonging in the US.",
+     "after": "Asian and Latino adults regularly navigate the straits between their racial and American identities. Two categories, sorted along partisan lines, that shape their sense of belonging in the US.",
+     "grade": [
+      18.5,
+      12.4
+     ],
+     "nli": 0.973,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-021",
+     "domain": "Political science",
+     "source": "https://www.sppm.tsinghua.edu.cn/__local/E/77/CE/F50B2A22296A50189748D697A4A_F5DD31E9_18A00.doc",
+     "title": "Endogenous Colonial Borders: Precolonial States and Geography in the Partition of Africa",
+     "before": "Water bodies, often major ones, comprised the primary border feature much more frequently than straight lines.",
+     "after": "Water bodies, often major ones, comprised the primary border feature much more often than straight lines.",
+     "grade": [
+      10.6,
+      9.8
+     ],
+     "nli": 0.996,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "frequently",
+       "to": "often"
+      }
+     ]
+    },
+    {
+     "id": "ps-024",
+     "domain": "Political science",
+     "source": "https://www.sppm.tsinghua.edu.cn/__local/9/2A/B6/2A196EF9A7F0001FB9C62D7FAB4_46BC0AB2_17C00.doc",
+     "title": "Engineering Territory: Space and Colonies in Silicon Valley",
+     "before": "Although space colonization appears to belong to the world of science fiction, private corporations owned by Silicon Valley billionaires—and supported by the US state—have spent billions making it a reality.",
+     "after": "Although space colonization seems to belong to the world of science fiction, private corporations owned by Silicon Valley billionaires—and supported by the US state—have spent billions making it a reality.",
+     "grade": [
+      18.5,
+      18.1
+     ],
+     "nli": 0.994,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "appears",
+       "to": "seems"
+      }
+     ]
+    },
+    {
+     "id": "ps-027",
+     "domain": "Political science",
+     "source": "https://arxiv.org/pdf/2412.16746v3",
+     "title": "Unpacking Political Bias in Large Language Models: Insights Across Topic Polarization",
+     "before": "The results indicate political biases evolve with model scale and release date, and are also influenced by regional factors of LLMs.",
+     "after": "The results show political biases evolve with model scale and release date. Regional factors of LLMs also influence the results.",
+     "grade": [
+      14.0,
+      9.6
+     ],
+     "nli": 0.925,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      },
+      {
+       "text": "Passive to active"
+      },
+      {
+       "from": "indicate",
+       "to": "show"
+      }
+     ]
+    },
+    {
+     "id": "ps-040",
+     "domain": "Political science",
+     "source": "https://hcss.nl/report/catching-the-trigger-predicting-interstate-conflict/catching_the_trigger_including_automated_event_data_in_interstate_conflict_prediction/",
+     "title": "Catching the Trigger: Including Automated Event Data in Interstate Conflict Prediction",
+     "before": "Additionally, the project seeks to identify the driving factors in model construction by calculating feature importance scores.",
+     "after": "Also, the project seeks to identify the driving factors in model construction by calculating feature importance scores.",
+     "grade": [
+      16.0,
+      13.9
+     ],
+     "nli": 0.994,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "Additionally",
+       "to": "Also"
+      }
+     ]
+    },
+    {
+     "id": "ps-043",
+     "domain": "Political science",
+     "source": "https://eprints.gla.ac.uk/390192/1/390192.pdf",
+     "title": "Conceptualising and measuring deliberative quality: A review",
+     "before": "This article reviews the literature on deliberative quality, a key concept used in deliberative democracy scholarship to assess how closely actual deliberation approximates normative ideals.",
+     "after": "This article reviews the literature on deliberative quality, a key concept used in deliberative democracy scholarship. It assesses how closely actual deliberation approximates normative ideals.",
+     "grade": [
+      23.0,
+      18.5
+     ],
+     "nli": 0.967,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-047",
+     "domain": "Political science",
+     "source": "https://resolve.cambridge.org/core/journals/journal-of-international-and-comparative-social-policy/article/implementation-arrangements-and-policy-success-in-active-social-policies-evidence-from-italys-minimum-income-scheme/591A7D12FB7E2BC32C97288D90808C1F",
+     "title": "Implementation Arrangements and Policy Success in Active Social Policies: Evidence from Italy's Minimum Income Scheme",
+     "before": "Implementation arrangements are increasingly recognized as a decisive factor in the success of contemporary welfare policies, particularly those that combine income support with activation requirements.",
+     "after": "Implementation arrangements are increasingly recognized as a decisive factor in the success of contemporary welfare policies. Particularly those that combine income support with activation requirements.",
+     "grade": [
+      22.0,
+      17.1
+     ],
+     "nli": 0.988,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-048",
+     "domain": "Political science",
+     "source": "https://www.cambridge.org/core/journals/journal-of-international-and-comparative-social-policy/article/nexus-between-welfare-rescaling-and-administrative-burden-the-case-of-minimum-income-provision-in-spain/1EBDCBCE069EBB0CC683B1C92D831899",
+     "title": "Nexus Between Welfare Rescaling and Administrative Burden: The Case of Minimum Income Provision in Spain",
+     "before": "Qualitative fieldwork with frontline professionals and policy experts shows that welfare rescaling heightened claimants’ administrative burdens due to inter-institutional misfit among governance levels.",
+     "after": "Qualitative fieldwork with frontline professionals and policy experts shows that welfare rescaling increased claimants’ administrative burdens due to inter-institutional misfit among governance levels.",
+     "grade": [
+      20.6,
+      20.6
+     ],
+     "nli": 0.995,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "heightened",
+       "to": "increased"
+      }
+     ]
+    },
+    {
+     "id": "ps-051",
+     "domain": "Political science",
+     "source": "https://www.cambridge.org/core/product/F69AEA3F6DFCF446427DE2753DCEA189",
+     "title": "Do Governments Put Their Money Where Their Mouth Is? Policy Adoption And Administrative Resource Provision in 15 OECD Countries",
+     "before": "What we term “empty responsiveness” is a situation where politicians adopt public policies in response to political demands, but these policies fail to make the promised impact due to lacking resources for policy implementation.",
+     "after": "What we term “empty responsiveness” is a situation where politicians adopt public policies in response to political demands. But these policies fail to make the promised impact due to lacking resources for policy implementation.",
+     "grade": [
+      20.6,
+      13.9
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-058",
+     "domain": "Political science",
+     "source": "https://core.ac.uk/download/210999726.pdf",
+     "title": "Rebel Organizations in Crackdown and Truce",
+     "before": "This exercise shows just how common long-term truces are: since the end of the Cold War, more civil conflicts have ended in a truce than in a rebel victory or peace agreement.",
+     "after": "This exercise shows just how common long-term truces are. Since the end of the Cold War, more civil conflicts have ended in a truce than in a rebel victory or peace agreement.",
+     "grade": [
+      13.1,
+      6.9
+     ],
+     "nli": 0.992,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-065",
+     "domain": "Political science",
+     "source": "https://preprints.apsanet.org/engage/apsa/article-details/6a73657c810b9dcc82ca88c6",
+     "title": "Explaining Partisan Polarization in Vaccine Attitudes: Misinformation, Elite Cues, and Opinion Updating",
+     "before": "Partisan differences in U.S. vaccine attitudes increased substantially during the 2010s, but the mechanisms behind this divergence remain contested.",
+     "after": "Partisan differences in U.S. vaccine attitudes increased substantially during the 2010s. But the mechanisms behind this divergence remain contested.",
+     "grade": [
+      13.6,
+      12.3
+     ],
+     "nli": 0.989,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-068",
+     "domain": "Political science",
+     "source": "https://www.cogitatiopress.com/politicsandgovernance/article/download/11959/4956",
+     "title": "Consensus About the European Union? Understanding the Views of Citizens and Political Parties",
+     "before": "The EU occupies a unique position in contemporary political science as both a subject of intense scholarly inquiry and a locus of contested normative politics.",
+     "after": "The EU has a unique position in contemporary political science as both a subject of intense scholarly inquiry and a locus of contested normative politics.",
+     "grade": [
+      18.2,
+      17.3
+     ],
+     "nli": 0.988,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "occupies",
+       "to": "has"
+      }
+     ]
+    },
+    {
+     "id": "ps-071",
+     "domain": "Political science",
+     "source": "https://www.cogitatiopress.com/politicsandgovernance/article/download/11116/4862",
+     "title": "Citizens’ Trust in the European Union During Crisis and Conflicts Across 10 Countries",
+     "before": "Euroscepticism is diminishing and trust in Europe has been growing since 2018 and in particular since 2022.",
+     "after": "Euroscepticism is diminishing. Trust in Europe has been growing since 2018 and in particular since 2022.",
+     "grade": [
+      10.5,
+      7.4
+     ],
+     "nli": 0.996,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-075",
+     "domain": "Political science",
+     "source": "https://www.law.georgetown.edu/public-policy-journal/wp-content/uploads/sites/23/2020/10/Considering-Legitmacy-18-2.pdf",
+     "title": "Considering Legitimacy",
+     "before": "This Article on Richard Fallon’s Law and Legitimacy in the Supreme Court focuses on public acceptance of the Supreme Court’s authority, what Fallon calls sociological legitimacy.",
+     "after": "This Article on Richard Fallon’s Law and Legitimacy in the Supreme Court focuses on public acceptance of the Supreme Court’s authority. What Fallon calls sociological legitimacy.",
+     "grade": [
+      19.1,
+      14.0
+     ],
+     "nli": 0.99,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "ps-078",
+     "domain": "Political science",
+     "source": "https://openpublishing.library.umass.edu/uulrj/article/3567/galley/3191/download",
+     "title": "Troubled Times for The U.S. Supreme Court",
+     "before": "This article analyzes the decrease in public trust of the Supreme Court across recent years.",
+     "after": "This article studies the decrease in public trust of the Supreme Court across recent years.",
+     "grade": [
+      9.9,
+      8.4
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "analyzes",
+       "to": "studies"
+      }
+     ]
+    },
+    {
+     "id": "ps-081",
+     "domain": "Political science",
+     "source": "https://hir.harvard.edu/equal-representation-the-debate-over-gender-quotas-part-1",
+     "title": "Equal Representation? The Debate Over Gender Quotas (Part 1)",
+     "before": "More than 130 nations have modified their constitutions, electoral laws, or party rules to specify a threshold of women to be selected or nominated to a political body.",
+     "after": "More than 130 nations have changed their constitutions, electoral laws, or party rules to specify a threshold of women to be selected or nominated to a political body.",
+     "grade": [
+      16.8,
+      16.0
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "modified",
+       "to": "changed"
+      }
+     ]
+    },
+    {
+     "id": "ps-082",
+     "domain": "Political science",
+     "source": "https://resolve.cambridge.org/core/journals/british-journal-of-political-science/article/gender-quotas-and-models-of-political-citizenship/D2B606311DA650272600DBC6B3130BD3",
+     "title": "Gender Quotas and Models of Political Citizenship",
+     "before": "Gender quotas have spread rapidly around the world in recent years.",
+     "after": "Gender quotas have spread quickly around the world in recent years.",
+     "grade": [
+      6.9,
+      5.9
+     ],
+     "nli": 0.996,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "rapidly",
+       "to": "quickly"
+      }
+     ]
+    },
+    {
+     "id": "ps-088",
+     "domain": "Political science",
+     "source": "https://mgt.tum.de/fileadmin/mgt.tum.de/faculty_and_research/mppe/30_Public_support_EU_4_.pdf",
+     "title": "Public support for more ambitious climate policies",
+     "before": "Using different descriptions of policies, we demonstrate that in general, more ambitious policies reduce public support.",
+     "after": "Using different descriptions of policies, we show that in general, more ambitious policies reduce public support.",
+     "grade": [
+      15.7,
+      14.3
+     ],
+     "nli": 0.994,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "demonstrate",
+       "to": "show"
+      }
+     ]
+    },
+    {
+     "id": "ps-089",
+     "domain": "Political science",
+     "source": "https://theloop.ecpr.eu/the-populist-radical-right-as-a-governing-logic/",
+     "title": "The populist radical right as a governing logic",
+     "before": "Across Europe, the populist radical right is shaping democratic politics, even in places where radical-right parties are not in power.",
+     "after": "Across Europe, the populist radical right is shaping democratic politics. Even in places where radical-right parties are not in power.",
+     "grade": [
+      15.2,
+      11.3
+     ],
+     "nli": 0.99,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-001",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w35593",
+     "title": "More Frequent Than You Think: Revisiting Capital Structure Adjustment",
+     "before": "This paper revisits the empirical evidence on capital structure adjustment and the prevalence of financing “inaction.”",
+     "after": "This paper revisits the empirical evidence on capital structure adjustment and the prevalence of financing “inaction”.",
+     "grade": [
+      16.5,
+      16.5
+     ],
+     "nli": 0.988,
+     "verdict": "Punctuation only",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-002",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w35593",
+     "title": "More Frequent Than You Think: Revisiting Capital Structure Adjustment",
+     "before": "We show that the conclusion of infrequent leverage adjustment is sensitive to two methodological choices: high adjustment thresholds and reliance on net balance-sheet changes.",
+     "after": "We show that the conclusion of infrequent leverage adjustment is sensitive to two methodological choices. High adjustment thresholds and reliance on net balance-sheet changes.",
+     "grade": [
+      16.9,
+      12.2
+     ],
+     "nli": 0.989,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-003",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w35593",
+     "title": "More Frequent Than You Think: Revisiting Capital Structure Adjustment",
+     "before": "Using lower thresholds and gross flows from cash-flow statements, we find adjustment is far more frequent than previously documented, and the pattern reveals pronounced size-based heterogeneity.",
+     "after": "Using lower thresholds and gross flows from cash-flow statements, we find adjustment is far more frequent than previously documented. The pattern reveals pronounced size-based heterogeneity.",
+     "grade": [
+      17.2,
+      12.4
+     ],
+     "nli": 0.983,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-004",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w35593",
+     "title": "More Frequent Than You Think: Revisiting Capital Structure Adjustment",
+     "before": "Smaller firms exhibit considerable inertia consistent with fixed costs; the largest firms (e.g., top 1% by assets) behave as if frictions are negligible.",
+     "after": "Smaller firms exhibit considerable inertia consistent with fixed costs. The largest firms (e.g., top 1% by assets) behave as if frictions are negligible.",
+     "grade": [
+      9.9,
+      8.4
+     ],
+     "nli": 0.982,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-008",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w34985",
+     "title": "Contract Enforcement and Young Firm Capital Structure: A Global Perspective",
+     "before": "Using ORBIS balance-sheet data for 23 economies, we show that short-term leverage rises while long-term leverage falls early in firms’ life cycles, with this pattern persisting longer where contract enforcement is weaker.",
+     "after": "Using ORBIS balance-sheet data for 23 economies, we show that short-term leverage rises while long-term leverage falls early in firms’ life cycles. This pattern continues longer where contract enforcement is weaker.",
+     "grade": [
+      17.5,
+      11.4
+     ],
+     "nli": 0.992,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      },
+      {
+       "from": "persists",
+       "to": "continues"
+      }
+     ]
+    },
+    {
+     "id": "bus-010",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w34985",
+     "title": "Contract Enforcement and Young Firm Capital Structure: A Global Perspective",
+     "before": "The framework decomposes the funding gap into within-firm borrowing constraints that ease with repayment history and a scale distortion identifiable through cross-country comparisons.",
+     "after": "The framework decomposes the funding gap into within-firm borrowing constraints that ease with repayment history. A scale distortion identifiable through cross-country comparisons.",
+     "grade": [
+      19.0,
+      15.0
+     ],
+     "nli": 0.833,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-012",
+     "domain": "Business",
+     "source": "https://econpapers.repec.org/RePEc:cpr:ceprdp:20511",
+     "title": "Investment-Based Trade-Off Theory",
+     "before": "When frequent re-balancing of firm leverage is restricted due to capital structure stickiness (or refinancing frictions), optimal capital structure reflects current and future investment profitability.",
+     "after": "When frequent re-balancing of firm leverage is restricted due to capital structure stickiness (or refinancing frictions). Ideal capital structure shows current and future investment profitability.",
+     "grade": [
+      21.1,
+      15.2
+     ],
+     "nli": 0.995,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      },
+      {
+       "from": "reflects",
+       "to": "shows"
+      }
+     ]
+    },
+    {
+     "id": "bus-014",
+     "domain": "Business",
+     "source": "https://doaj.org/article/024684e00f37445daae22721b4212cf0",
+     "title": "Determinants of consumer-based brand equity in the FMCG personal care sector: An empirical PLS-SEM examination",
+     "before": "The growing competitiveness of India’s FMCG personal care sector has increased the strategic importance of strengthening Consumer-Based Brand Equity (CBBE), particularly in categories with high product similarity and low switching costs.",
+     "after": "The growing competitiveness of India’s FMCG personal care sector has increased the strategic importance of strengthening Consumer-Based Brand Equity (CBBE). This is particularly in categories with high product similarity and low switching costs.",
+     "grade": [
+      21.2,
+      14.8
+     ],
+     "nli": 0.985,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-021",
+     "domain": "Business",
+     "source": "https://www.nepjol.info/index.php/tmr/article/download/96911/73476/280751",
+     "title": "Impact of brand loyalty on consumer repurchase intention in Nepali retail markets",
+     "before": "The aim of the present research was to investigate the impact of \"brand loyalty\" on customer repurchase intention in the retail markets of Nepal, considering \"customer satisfaction\" as a mediating variable.",
+     "after": "The aim of the present research was to investigate the impact of \"brand loyalty\" on customer repurchase intention in the retail markets of Nepal. The study considered \"customer satisfaction\" as a mediating variable.",
+     "grade": [
+      20.1,
+      13.7
+     ],
+     "nli": 0.993,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-025",
+     "domain": "Business",
+     "source": "https://www.redalyc.org/journal/5718/571882233003/html/",
+     "title": "Experiential Retail in the Smartphone Industry: Consumer Behaviour and Brand Loyalty",
+     "before": "The goal of this study is to examine the impact of experiential retail on purchasing decisions and brand loyalty in the smartphone industry.",
+     "after": "The goal of this study is to examine the impact of experiential retail on buying decisions and brand loyalty in the smartphone industry.",
+     "grade": [
+      14.4,
+      13.9
+     ],
+     "nli": 0.988,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "purchasing",
+       "to": "buying"
+      }
+     ]
+    },
+    {
+     "id": "bus-026",
+     "domain": "Business",
+     "source": "https://www.redalyc.org/journal/5718/571882233003/html/",
+     "title": "Experiential Retail in the Smartphone Industry: Consumer Behaviour and Brand Loyalty",
+     "before": "Descriptive statistics, ANOVA, regression and Pearson correlation analysis are performed in research.",
+     "after": "Descriptive statistics, ANOVA, regression and Pearson correlation analysis are done in research.",
+     "grade": [
+      16.6,
+      15.6
+     ],
+     "nli": 0.997,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "performed",
+       "to": "done"
+      }
+     ]
+    },
+    {
+     "id": "bus-032",
+     "domain": "Business",
+     "source": "https://www.nature.com/nature-index/topics/l4/strategic-management-and-competitive-advantage",
+     "title": "Strategic Management and Competitive Advantage",
+     "before": "In practice, strategic management encompasses strategic planning, resource allocation, performance measurement and continuous adjustment to evolving market, technological and regulatory landscapes.",
+     "after": "In practice, strategic management includes strategic planning, resource allocation, performance measurement and continuous adjustment to evolving market, technological and regulatory landscapes.",
+     "grade": [
+      24.6,
+      23.5
+     ],
+     "nli": 0.989,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "encompasses",
+       "to": "includes"
+      }
+     ]
+    },
+    {
+     "id": "bus-034",
+     "domain": "Business",
+     "source": "https://stax.strath.ac.uk/downloads/zp38wc94s?locale=de",
+     "title": "Sources of Sustained Competitive Advantage: A Resource-Based Analysis",
+     "before": "It is one of the few empirical studies that attempt to explore firm-level sources of sustained competitive advantage from inside the organization.",
+     "after": "It is one of the few empirical studies that try to explore firm-level sources of sustained competitive advantage from inside the organization.",
+     "grade": [
+      15.5,
+      15.0
+     ],
+     "nli": 0.99,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "attempt",
+       "to": "try"
+      }
+     ]
+    },
+    {
+     "id": "bus-035",
+     "domain": "Business",
+     "source": "https://stax.strath.ac.uk/downloads/zp38wc94s?locale=de",
+     "title": "Sources of Sustained Competitive Advantage: A Resource-Based Analysis",
+     "before": "The study is based on 26 semi-structured interviews with senior management team members, drawn from a purposive cross-sectional sample of 11 high-performing firms in Switzerland and adjacent countries.",
+     "after": "The study is based on 26 semi-structured interviews with senior management team members. The study is drawn from a purposive cross-sectional sample of 11 high-performing firms in Switzerland and adjacent countries.",
+     "grade": [
+      16.4,
+      11.0
+     ],
+     "nli": 0.983,
+     "verdict": "Meaning shift",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-039",
+     "domain": "Business",
+     "source": "https://www.emerald.com/insight/content/doi/10.1108/eb046396/full/html",
+     "title": "Competitive Advantage and Firm Performance",
+     "before": "Competitive advantage is perhaps the most widely used term in strategic management, yet it remains poorly defined and operationalized.",
+     "after": "Competitive advantage is perhaps the most widely used term in strategic management. Yet it remains poorly defined and operationalized.",
+     "grade": [
+      14.8,
+      11.1
+     ],
+     "nli": 0.993,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-040",
+     "domain": "Business",
+     "source": "https://www.emerald.com/insight/content/doi/10.1108/eb046396/full/html",
+     "title": "Competitive Advantage and Firm Performance",
+     "before": "This paper makes three observations regarding competitive advantage and conceptually explores the various patterns of relationship between competitive advantage and firm performance.",
+     "after": "This paper makes three observations regarding competitive advantage. Conceptually explores the various patterns of relationship between competitive advantage and firm performance.",
+     "grade": [
+      20.9,
+      17.2
+     ],
+     "nli": 0.983,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-042",
+     "domain": "Business",
+     "source": "https://www.emerald.com/insight/content/doi/10.1108/eb046396/full/html",
+     "title": "Competitive Advantage and Firm Performance",
+     "before": "The ultimate purpose of this article is to help generate a healthy debate among strategy scholars on the usefulness of the competitive advantage construct for our theory building and testing.",
+     "after": "The ultimate purpose of this article is to help create a healthy debate among strategy scholars on the usefulness of the competitive advantage construct for our theory building and testing.",
+     "grade": [
+      17.7,
+      17.4
+     ],
+     "nli": 0.985,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "generate",
+       "to": "create"
+      }
+     ]
+    },
+    {
+     "id": "bus-046",
+     "domain": "Business",
+     "source": "https://ro.ecu.edu.au/ecuworks2022-2026/9141",
+     "title": "From disruption to recovery: Strategies for resilient and adaptable supply chains",
+     "before": "This study assesses sustainable, integrative, adaptable, and risk-averse strategies crucial for improving resilience in supply chains and alleviating disruptions.",
+     "after": "This study measures sustainable, integrative, adaptable, and risk-averse strategies crucial for improving resilience in supply chains and alleviating disruptions.",
+     "grade": [
+      21.0,
+      20.4
+     ],
+     "nli": 0.99,
+     "verdict": "Meaning shift",
+     "tags": [
+      {
+       "from": "assesses",
+       "to": "measures"
+      }
+     ]
+    },
+    {
+     "id": "bus-048",
+     "domain": "Business",
+     "source": "https://ro.ecu.edu.au/ecuworks2022-2026/9141",
+     "title": "From disruption to recovery: Strategies for resilient and adaptable supply chains",
+     "before": "Research indicates that prompt information sharing and cooperative problem-solving improve supply chain flexibility, whereas risk management tactics alleviate threats and guarantee strong performance under fluctuating conditions.",
+     "after": "Research shows that prompt information sharing and cooperative problem-solving improve supply chain flexibility, whereas risk management tactics alleviate threats and guarantee strong performance under fluctuating conditions.",
+     "grade": [
+      23.1,
+      22.2
+     ],
+     "nli": 0.987,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "indicates",
+       "to": "shows"
+      }
+     ]
+    },
+    {
+     "id": "bus-049",
+     "domain": "Business",
+     "source": "https://ro.ecu.edu.au/ecuworks2022-2026/9141",
+     "title": "From disruption to recovery: Strategies for resilient and adaptable supply chains",
+     "before": "These integrated techniques facilitate company continuity and expedite recovery from disruptions.",
+     "after": "These integrated techniques facilitate company continuity. These integrated techniques expedite recovery from disruptions.",
+     "grade": [
+      20.9,
+      19.6
+     ],
+     "nli": 0.984,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-050",
+     "domain": "Business",
+     "source": "https://digitalcommons.georgiasouthern.edu/research_symposium/2026/2026/113/",
+     "title": "Aligning Supply Chain Resilience Strategies with Disruption Archetypes: A Review, Framework, and Future Research Agenda",
+     "before": "Research on supply chain resilience has expanded alongside rising global volatility, yet the literature remains fragmented in how it links resilience strategies to specific disruption profiles.",
+     "after": "Research on supply chain resilience has expanded alongside rising global volatility. Yet the literature remains fragmented in how it links resilience strategies to specific disruption profiles.",
+     "grade": [
+      20.4,
+      15.3
+     ],
+     "nli": 0.99,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-051",
+     "domain": "Business",
+     "source": "https://digitalcommons.georgiasouthern.edu/research_symposium/2026/2026/113/",
+     "title": "Aligning Supply Chain Resilience Strategies with Disruption Archetypes: A Review, Framework, and Future Research Agenda",
+     "before": "This synthesis enhances theoretical coherence and provides practical guidance for designing resilience strategies that are better matched to today’s increasingly turbulent operating environment.",
+     "after": "This synthesis enhances theoretical coherence. This synthesis provides practical guidance for designing resilience strategies that are better matched to today’s increasingly turbulent operating environment.",
+     "grade": [
+      22.6,
+      18.6
+     ],
+     "nli": 0.98,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-052",
+     "domain": "Business",
+     "source": "https://trid.trb.org/View/2706743",
+     "title": "Supply chain resilience: A systematic literature review of definitions, drivers, and practices",
+     "before": "The need to strengthen supply chain resilience (SCRES) has intensified amid escalating global disruptions and uncertainties, leading to a significant rise in academic research over the past 15 years.",
+     "after": "The need to strengthen supply chain resilience (SCRES) has intensified amid increasing global disruptions and uncertainties, leading to a significant rise in academic research over the past 15 years.",
+     "grade": [
+      18.5,
+      18.1
+     ],
+     "nli": 0.99,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "escalating",
+       "to": "increasing"
+      }
+     ]
+    },
+    {
+     "id": "bus-056",
+     "domain": "Business",
+     "source": "https://www.ebsco.com/research-starters/business-and-management/current-issues-entrepreneurship",
+     "title": "Current Issues in Entrepreneurship",
+     "before": "Current issues in entrepreneurship encompass a range of challenges and considerations faced by modern entrepreneurs as they navigate the complexities of starting and running a business.",
+     "after": "Current issues in entrepreneurship include a range of challenges and considerations faced by modern entrepreneurs as they navigate the complexities of starting and running a business.",
+     "grade": [
+      18.2,
+      17.7
+     ],
+     "nli": 0.989,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "encompass",
+       "to": "include"
+      }
+     ]
+    },
+    {
+     "id": "bus-066",
+     "domain": "Business",
+     "source": "https://www.mheducation.com/highered/blog/2026/07/organization-teamwork-and-communication-in-the-hybrid-workplace",
+     "title": "Organization, Teamwork, and Communication in the Hybrid Workplace",
+     "before": "Remote work is often discussed as an employee benefit, but for businesses, it is also a question of organizational design.",
+     "after": "Remote work is often discussed as an employee benefit. But for businesses, it is also a question of organizational design.",
+     "grade": [
+      14.0,
+      10.1
+     ],
+     "nli": 0.992,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-068",
+     "domain": "Business",
+     "source": "https://www.mheducation.com/highered/blog/2026/07/organization-teamwork-and-communication-in-the-hybrid-workplace",
+     "title": "Organization, Teamwork, and Communication in the Hybrid Workplace",
+     "before": "Remote work can improve productivity, but it can also leave workers more isolated.",
+     "after": "Remote work can improve productivity. But it can also leave workers more isolated.",
+     "grade": [
+      11.3,
+      8.7
+     ],
+     "nli": 0.996,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-082",
+     "domain": "Business",
+     "source": "https://financetp.fa.ru/jour/article/download/4281/1849",
+     "title": "Audit Quality and Earnings Management: With Reference to Family-Owned Firms",
+     "before": "This finding indicates that business group firms are quite concerned about earnings quality and less likely to be involved in earnings management practices for India.",
+     "after": "This finding shows that business group firms are quite concerned about earnings quality and less likely to be involved in earnings management practices for India.",
+     "grade": [
+      14.5,
+      13.5
+     ],
+     "nli": 0.994,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "from": "indicates",
+       "to": "shows"
+      }
+     ]
+    },
+    {
+     "id": "bus-083",
+     "domain": "Business",
+     "source": "https://www.um.edu.mt/library/oar/handle/123456789/143668",
+     "title": "Investigating earnings management within Maltese limited companies",
+     "before": "Lastly, External Auditors face challenges such as quality gaps between Big 4 and non-Big 4 firms, and client resistance during efforts to detect Earnings Management.",
+     "after": "Lastly, External Auditors face challenges such as quality gaps between Big 4 and non-Big 4 firms. Client resistance during efforts to detect Earnings Management.",
+     "grade": [
+      15.4,
+      10.7
+     ],
+     "nli": 0.964,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-084",
+     "domain": "Business",
+     "source": "https://docs.iza.org/dp18991.pdf",
+     "title": "AI Adoption by Firms: Insights from the Literature and the German Innovation Survey",
+     "before": "Generative AI (GenAI), in particular, has further expanded the scope of applications, enabling firms and workers to automate tasks previously thought to require human judgment, creativity, or skills.",
+     "after": "Generative AI (GenAI), in particular, has further expanded the scope of applications. It allows firms and workers to automate tasks previously thought to require human judgment, creativity, or skills.",
+     "grade": [
+      19.4,
+      12.9
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      },
+      {
+       "from": "enables",
+       "to": "allows"
+      }
+     ]
+    },
+    {
+     "id": "bus-086",
+     "domain": "Business",
+     "source": "https://www.richmondfed.org/-/media/RichmondFedOrg/research/national_economy/cfo_survey/academic_publications/AI_survey.pdf",
+     "title": "Artificial Intelligence, Productivity, and the Workforce: Evidence from Corporate Executives",
+     "before": "We document substantial heterogeneity in AI adoption across firms, with more than half having already invested, though many smaller firms are only beginning to do so.",
+     "after": "We document substantial heterogeneity in AI adoption across firms, with more than half having already invested. Although many smaller firms are only beginning to do so.",
+     "grade": [
+      16.8,
+      12.2
+     ],
+     "nli": 0.993,
+     "verdict": "Fragment",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-087",
+     "domain": "Business",
+     "source": "https://www.richmondfed.org/-/media/RichmondFedOrg/research/national_economy/cfo_survey/academic_publications/AI_survey.pdf",
+     "title": "Artificial Intelligence, Productivity, and the Workforce: Evidence from Corporate Executives",
+     "before": "AI-attributed productivity growth was already positive in 2025 (about 0.6 percent) and is expected to increase further in 2026.",
+     "after": "AI-attributed productivity growth was already positive in 2025 (about 0.6 percent). It is expected to increase further in 2026.",
+     "grade": [
+      9.9,
+      9.9
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-091",
+     "domain": "Business",
+     "source": "https://www.nber.org/papers/w36003",
+     "title": "AI as Shared Business Infrastructure: Firm Growth and the Distribution of Gains",
+     "before": "Generative AI improves performance on individual tasks, but whether those gains translate into firm growth, and for which firms, remains an open question.",
+     "after": "Generative AI improves performance on individual tasks. But whether those gains translate into firm growth, and for which firms, remains an open question.",
+     "grade": [
+      13.4,
+      8.9
+     ],
+     "nli": 0.995,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-095",
+     "domain": "Business",
+     "source": "https://www.bis.org/publ/work1325.htm",
+     "title": "AI adoption, productivity and employment: evidence from European firms",
+     "before": "AI adoption increases labour productivity in the short run by 4% on average, driven by capital deepening rather than job displacement.",
+     "after": "AI adoption increases labour productivity in the short run by 4% on average. This is driven by capital deepening rather than job displacement.",
+     "grade": [
+      15.1,
+      10.4
+     ],
+     "nli": 0.991,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "id": "bus-099",
+     "domain": "Business",
+     "source": "https://www.mdpi.com/2076-3387/15/12/499",
+     "title": "Employee Retention Dynamics: A Systematic Review Mapping the Knowledge Evolution of Embeddedness Theory in Human Resource Management (1995–2025)",
+     "before": "Embeddedness theory offers a vital framework to understand retention dynamics, yet its development within HRM lacks systematic mapping.",
+     "after": "Embeddedness theory offers a vital framework to understand retention dynamics. Yet its development within HRM lacks systematic mapping.",
+     "grade": [
+      17.0,
+      13.5
+     ],
+     "nli": 0.994,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Sentence split",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "steps": {
+    "f2": 39,
+    "structure": 1,
+    "words": 27
+   },
+   "lost": 0
+  },
+  "passive_auto": {
+   "name": "Passive converter",
+   "changed": 20,
+   "grade": [
+    16.2,
+    16.6
+   ],
+   "nli": 0.871,
+   "below080": 4,
+   "verdicts": {
+    "Reads well": 7,
+    "Awkward": 6,
+    "Broken": 7
+   },
+   "items": [
+    {
+     "id": "ps-003",
+     "domain": "Political science",
+     "source": "https://www.networkscienceinstitute.org/publications/toward-an-integrated-and-globally-equitable-understanding-of-political-polarization",
+     "title": "Toward an integrated and globally equitable understanding of political polarization",
+     "before": "In this account, polarization has been blamed for populism, the erosion of social cohesion, the loss of trust in the institutions of democracy, legislative dysfunction, and the collective failure to address existential risks such as Covid-19 or climate change.",
+     "after": "In this account, someone has blamed polarization the erosion of social cohesion, the loss of trust in the institutions of democracy, legislative dysfunction, and the collective failure to address existential risks such as Covid-19 or climate change for populism.",
+     "grade": [
+      21.1,
+      21.4
+     ],
+     "nli": 0.989,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-017",
+     "domain": "Political science",
+     "source": "https://ui.adsabs.harvard.edu/abs/2020Sci...369.1192H",
+     "title": "Democracy’s backsliding in the international environment",
+     "before": "If the end of the 20th century was defined by the relatively widespread acceptance of democracy, the second decade of the 21st century is marked by concerns about backsliding in new and established democracies alike and by a notable decline in foreign support for democracy around the world.",
+     "after": "If the relatively widespread acceptance of democracy defined the end of the 20th century, concerns about backsliding in new and established democracies alike and by a notable decline in foreign support for democracy around the world mark the second decade of the 21st century.",
+     "grade": [
+      23.5,
+      22.8
+     ],
+     "nli": 0.993,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-019",
+     "domain": "Political science",
+     "source": "https://www.sppm.tsinghua.edu.cn/__local/2/55/86/C6F484220DD56E774CA20B0232B_7167DC2E_15600.doc",
+     "title": "Group Prototypicality and Boundary Definition: Comparing White and Black Perceptions of Whether Latinos Are American",
+     "before": "Strikingly, among all respondents, U.S. born Latinos are seen as less American when their parent is undocumented.",
+     "after": "Strikingly, people see among all respondents, U.S. born Latinos as less American when people undocumente their parent.",
+     "grade": [
+      9.9,
+      10.6
+     ],
+     "nli": 0.988,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-025",
+     "domain": "Political science",
+     "source": "https://econpapers.repec.org/RePEc:cdl:globco:qt2fr503jf",
+     "title": "Information Control in Autocracies: A Review Essay",
+     "before": "We now understand that censorship, propaganda, surveillance, and repression should be seen as producing integrated systems of control that should be studied as such.",
+     "after": "We now understand that someone should see censorship, propaganda, surveillance, and repression as producing integrated systems of control that someone should study as such.",
+     "grade": [
+      14.9,
+      15.9
+     ],
+     "nli": 0.963,
+     "verdict": "Awkward",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-029",
+     "domain": "Political science",
+     "source": "https://arxiv.org/html/2604.27633",
+     "title": "Political Bias Audits of LLMs Capture Sycophancy to the Inferred Auditor",
+     "before": "Political bias in LLMs is therefore not a fixed point on an ideological scale but a response profile that must be mapped across realistic interlocutors.",
+     "after": "Political bias in LLMs is therefore not a fixed point on an ideological scale but a response profile that someone must map across realistic interlocutors.",
+     "grade": [
+      15.4,
+      15.9
+     ],
+     "nli": 0.969,
+     "verdict": "Awkward",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-031",
+     "domain": "Political science",
+     "source": "https://arxiv.org/abs/1709.01596",
+     "title": "Evaluating Partisan Gerrymandering in Wisconsin",
+     "before": "We find that there is substantial variability in the election outcome depending on what maps are used.",
+     "after": "We find that there is substantial variability in the election outcome depending on people maps use what.",
+     "grade": [
+      11.2,
+      11.9
+     ],
+     "nli": 0.568,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-047",
+     "domain": "Political science",
+     "source": "https://resolve.cambridge.org/core/journals/journal-of-international-and-comparative-social-policy/article/implementation-arrangements-and-policy-success-in-active-social-policies-evidence-from-italys-minimum-income-scheme/591A7D12FB7E2BC32C97288D90808C1F",
+     "title": "Implementation Arrangements and Policy Success in Active Social Policies: Evidence from Italy's Minimum Income Scheme",
+     "before": "Implementation arrangements are increasingly recognized as a decisive factor in the success of contemporary welfare policies, particularly those that combine income support with activation requirements.",
+     "after": "People increasingly recognize implementation arrangements as a decisive factor in the success of contemporary welfare policies, particularly those that combine income support with activation requirements.",
+     "grade": [
+      22.0,
+      22.5
+     ],
+     "nli": 0.988,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-057",
+     "domain": "Political science",
+     "source": "https://scholarlypublications.universiteitleiden.nl/access/item:3177929/download",
+     "title": "Ceasefires as bargaining instruments in intrastate conflicts: ceasefire objectives and their effects on peace negotiations",
+     "before": "War entrepreneurs have long been recognized as a major risk to peace.",
+     "after": "Someone has long recognized war entrepreneurs as a major risk to peace.",
+     "grade": [
+      6.8,
+      7.8
+     ],
+     "nli": 0.987,
+     "verdict": "Awkward",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-059",
+     "domain": "Political science",
+     "source": "https://cadmus.eui.eu//bitstream/1814/70051/1/DUURSMA_FLIERVOET_2020.pdf",
+     "title": "Fueling Factionalism? The Impact of Peace Processes on Rebel Group Fragmentation in Civil Wars",
+     "before": "While peace processes increase the likelihood that a civil war is resolved, they can also complicate peace by increasing the risk of rebel fragmentation.",
+     "after": "While peace processes increase the likelihood that people resolve a civil war, they can also complicate peace by increasing the risk of rebel fragmentation.",
+     "grade": [
+      13.4,
+      13.9
+     ],
+     "nli": 0.988,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-061",
+     "domain": "Political science",
+     "source": "https://gsdrc.org/?p=55113",
+     "title": "Partial Peace: Rebel Groups Inside and Outside Civil War Settlements",
+     "before": "Previous research proposes that peace is more likely to be durable if all rebel groups are included in the settlement reached.",
+     "after": "Previous research proposes that peace is more likely to be durable if people include all rebel groups in the settlement reached.",
+     "grade": [
+      11.7,
+      11.7
+     ],
+     "nli": 0.935,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "ps-086",
+     "domain": "Political science",
+     "source": "https://faculty.washington.edu/cadolph/articles/dapCarbon.pdf",
+     "title": "Policy Design and Public Support for Carbon Tax: Evidence from a 2018 U.S. National Online Survey Experiment",
+     "before": "Public support for policy instruments is influenced by perceptions of how benefits and costs are distributed across various groups.",
+     "after": "Perceptions of how people distribute benefits and costs across various groups influence public support for policy instruments.",
+     "grade": [
+      14.8,
+      15.3
+     ],
+     "nli": 0.963,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-012",
+     "domain": "Business",
+     "source": "https://econpapers.repec.org/RePEc:cpr:ceprdp:20511",
+     "title": "Investment-Based Trade-Off Theory",
+     "before": "When frequent re-balancing of firm leverage is restricted due to capital structure stickiness (or refinancing frictions), optimal capital structure reflects current and future investment profitability.",
+     "after": "People - balancing of firm leverage restrict when frequent re capital structure stickiness (or refinancing frictions) due to, optimal capital structure reflects current and future investment profitability.",
+     "grade": [
+      21.1,
+      20.4
+     ],
+     "nli": 0.624,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-026",
+     "domain": "Business",
+     "source": "https://www.redalyc.org/journal/5718/571882233003/html/",
+     "title": "Experiential Retail in the Smartphone Industry: Consumer Behaviour and Brand Loyalty",
+     "before": "Descriptive statistics, ANOVA, regression and Pearson correlation analysis are performed in research.",
+     "after": "People perform descriptive statistics, ANOVA, regression and Pearson correlation analysis in research.",
+     "grade": [
+      16.6,
+      17.6
+     ],
+     "nli": 0.995,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-051",
+     "domain": "Business",
+     "source": "https://digitalcommons.georgiasouthern.edu/research_symposium/2026/2026/113/",
+     "title": "Aligning Supply Chain Resilience Strategies with Disruption Archetypes: A Review, Framework, and Future Research Agenda",
+     "before": "This synthesis enhances theoretical coherence and provides practical guidance for designing resilience strategies that are better matched to today’s increasingly turbulent operating environment.",
+     "after": "This synthesis enhances theoretical coherence and provides practical guidance for designing resilience strategies that people better match to today ’s increasingly turbulent operating environment.",
+     "grade": [
+      22.6,
+      22.8
+     ],
+     "nli": 0.531,
+     "verdict": "Awkward",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-062",
+     "domain": "Business",
+     "source": "https://www.nber.org/system/files/working_papers/w28990/w28990.pdf",
+     "title": "Innovation-Driven Entrepreneurship",
+     "before": "While there are myriad forms of entrepreneurship, ranging from self-employment to small and medium size enterprises to technology-and innovation-driven startups, recent research provides evidence that the relationship between entrepreneurship and economic growth is driven not by overall quantity of new firm entry, but rather by a small subset of high-growth startups that are primarily categorized as innovation-driven.",
+     "after": "While there are myriad forms of entrepreneurship, ranging from self - employment to small and medium size enterprises to technology - and innovation - driven startups, recent research provides evidence that overall quantity of new firm entry drives the relationship between entrepreneurship and economic growth, but rather by a small subset of high - growth startups that people primarily categorize as innovation - driven.",
+     "grade": [
+      31.1,
+      30.6
+     ],
+     "nli": 0.017,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-066",
+     "domain": "Business",
+     "source": "https://www.mheducation.com/highered/blog/2026/07/organization-teamwork-and-communication-in-the-hybrid-workplace",
+     "title": "Organization, Teamwork, and Communication in the Hybrid Workplace",
+     "before": "Remote work is often discussed as an employee benefit, but for businesses, it is also a question of organizational design.",
+     "after": "People often discuss remote work as an employee benefit, but for businesses, it is also a question of organizational design.",
+     "grade": [
+      14.0,
+      14.6
+     ],
+     "nli": 0.994,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-075",
+     "domain": "Business",
+     "source": "https://zenodo.org/records/18782483",
+     "title": "Earnings Management, Audit Firm Size, and Audit Quality: A Literature Review",
+     "before": "Using a literature review approach based on 71 scientific articles, four main discussions were identified.",
+     "after": "Using a literature review approach based on 71 scientific articles, someone identified four main discussions.",
+     "grade": [
+      14.6,
+      15.4
+     ],
+     "nli": 0.976,
+     "verdict": "Awkward",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-079",
+     "domain": "Business",
+     "source": "https://financetp.fa.ru/jour/article/download/4281/1849",
+     "title": "Audit Quality and Earnings Management: With Reference to Family-Owned Firms",
+     "before": "BIG_4 is used as a dummy variable for measuring the audit quality of firms.",
+     "after": "People use big_4 as a dummy variable for measuring the audit quality of firms.",
+     "grade": [
+      9.3,
+      10.1
+     ],
+     "nli": 0.995,
+     "verdict": "Awkward",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-080",
+     "domain": "Business",
+     "source": "https://financetp.fa.ru/jour/article/download/4281/1849",
+     "title": "Audit Quality and Earnings Management: With Reference to Family-Owned Firms",
+     "before": "To examine the association between earnings management and audit quality, Panel fixed effect model is used.",
+     "after": "To examine the association between earnings management and audit quality, people use Panel fixed effect model.",
+     "grade": [
+      14.3,
+      15.0
+     ],
+     "nli": 0.98,
+     "verdict": "Reads well",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    },
+    {
+     "id": "bus-081",
+     "domain": "Business",
+     "source": "https://financetp.fa.ru/jour/article/download/4281/1849",
+     "title": "Audit Quality and Earnings Management: With Reference to Family-Owned Firms",
+     "before": "The results signify that audit quality is negatively associated with earnings management.",
+     "after": "The results signify people negatively associate that audit quality with earnings management.",
+     "grade": [
+      16.6,
+      16.6
+     ],
+     "nli": 0.975,
+     "verdict": "Broken",
+     "tags": [
+      {
+       "text": "Passive to active"
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

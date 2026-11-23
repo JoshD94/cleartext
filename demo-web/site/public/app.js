@@ -325,4 +325,117 @@ async function init() {
   setInterval(() => { if (offline && !busy) checkHealth(); }, 30000);
 }
 
+// --- views: "Try it" and "Results" ---------------------------------------------------------
+ICON.external = '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>';
+
+// Moves a segmented control's pill under its selected button.
+function placePill(seg, animate = true) {
+  const on = seg.querySelector('[aria-selected="true"]');
+  if (!on) return;
+  seg.classList.toggle("still", !animate);
+  seg.style.setProperty("--pill-x", `${on.offsetLeft}px`);
+  seg.style.setProperty("--pill-w", `${on.offsetWidth}px`);
+}
+function select(seg, btn) {
+  seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-selected", String(b === btn)));
+  placePill(seg);
+}
+
+const nav = $("nav");
+let results = null, system = "default", verdict = "All";
+
+function showView(view, animate = true) {
+  const btn = nav.querySelector(`[data-view="${view}"]`) || nav.querySelector('[data-view="try"]');
+  view = btn.dataset.view;
+  select(nav, btn);
+  if (!animate) placePill(nav, false);
+  $("view-try").hidden = view !== "try";
+  $("view-results").hidden = view !== "results";
+  if (view === "results") { placePill($("r-system"), false); loadResults(); }
+}
+nav.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  const view = btn.dataset.view;
+  history.replaceState(null, "", view === "try" ? location.pathname : `#${view}`);
+  showView(view);
+});
+window.addEventListener("hashchange", () => showView(location.hash.slice(1) || "try"));
+window.addEventListener("resize", () => document.querySelectorAll(".seg").forEach((s) => placePill(s, false)));
+
+async function loadResults() {
+  if (results) return;
+  try { results = await (await fetch("results.json")).json(); } catch { return; }
+  renderResultsSummary();
+  renderSystem();
+  $("r-note").hidden = false;
+}
+
+const fmt1 = (x) => Number(x).toFixed(1);
+const gradeHTML = (g) => `<span class="was">${fmt1(g[0])}</span>${icon("arrow")}<span>${fmt1(g[1])}</span>`;
+
+function renderResultsSummary() {
+  const d = results.systems.default, p = results.systems.passive_auto;
+  $("r-metrics").innerHTML = `
+    <div class="metric"><span class="figure">${d.changed}<span class="was">/ ${results.sentences}</span></span><span class="what">Sentences<br>changed</span></div>
+    <div class="metric" title="Numbers, negations and names"><span class="figure">${d.lost}</span><span class="what">Facts<br>lost</span></div>
+    <div class="metric"><span class="figure">${gradeHTML(d.grade)}</span><span class="what">School grade of<br>changed sentences</span></div>`;
+  const row = (s, name) => `<tr><td>${name}</td><td>${s.changed}</td><td>${fmt1(s.grade[0])} → ${fmt1(s.grade[1])}</td><td>${s.nli.toFixed(2)}</td><td>${s.below080}</td></tr>`;
+  $("r-compare").innerHTML = `<h2>Against Chhoeng's passive converter</h2>
+    <table class="r-table"><thead><tr><th></th><th>Changed</th><th>Grade</th><th>Meaning</th><th title="Meaning score below 0.80">&lt; 0.80</th></tr></thead>
+    <tbody>${row(d, "ClearText")}${row(p, "Passive converter")}</tbody></table>`;
+  $("r-steps").innerHTML = `<h2>ClearText by step</h2><div class="r-rows">${STEPS.map((s) =>
+    `<div class="r-row">${icon(s.icon, "icon")}<span>${s.title}</span><span class="v">${d.steps[s.key]}</span></div>`).join("")}</div>`;
+  const seg = $("r-system");
+  seg.innerHTML = Object.entries(results.systems).map(([k, s]) =>
+    `<button type="button" role="tab" data-system="${k}" aria-selected="${k === system}">${esc(s.name)} <span class="n">${s.changed}</span></button>`).join("");
+  seg.onclick = (e) => {
+    const btn = e.target.closest("button");
+    if (!btn || btn.dataset.system === system) return;
+    system = btn.dataset.system; verdict = "All";
+    select(seg, btn);
+    renderSystem();
+  };
+  requestAnimationFrame(() => placePill(seg, false));
+}
+
+function itemTags(tags) {
+  return tags.map((t) => t.from !== undefined
+    ? `<span class="swap"><span class="from">${esc(t.from)}</span>${icon("arrow")}<span class="to">${esc(t.to)}</span></span>`
+    : `<span class="tag">${esc(t.text)}${t.count > 1 ? ` <b>×${t.count}</b>` : ""}</span>`).join("");
+}
+
+function renderSystem() {
+  const s = results.systems[system];
+  const chips = [["All", s.changed], ...Object.entries(s.verdicts).filter(([, n]) => n)];
+  const box = $("r-verdicts");
+  box.innerHTML = chips.map(([v, n]) =>
+    `<button type="button" class="btn chip" data-verdict="${esc(v)}" aria-pressed="${v === verdict}">${esc(v)} <span class="n">${n}</span></button>`).join("");
+  box.onclick = (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    verdict = btn.dataset.verdict;
+    box.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+    renderItems();
+  };
+  renderItems();
+}
+
+function renderItems() {
+  const items = results.systems[system].items.filter((x) => verdict === "All" || x.verdict === verdict);
+  $("r-list").innerHTML = items.map((x) => `
+    <article class="card r-item">
+      <div class="r-item-head">
+        <span class="verdict${x.verdict === "Reads well" ? " good" : ""}"><span class="dot"></span>${esc(x.verdict)}</span>
+        <span class="tag domain">${esc(x.domain)}</span>
+        <span class="grade" title="School grade, before and after">${gradeHTML(x.grade)}</span>
+        <a class="icon-btn" href="${esc(x.source)}" target="_blank" rel="noopener" title="${esc(x.title)}" aria-label="Source paper">${icon("external")}</a>
+      </div>
+      <p class="passage">${diffHTML(x.before, x.after)}</p>
+      <div class="tags">${itemTags(x.tags)}</div>
+    </article>`).join("");
+}
+
+showView(location.hash.slice(1) || "try", false);
+
 init();
