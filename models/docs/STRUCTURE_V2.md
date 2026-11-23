@@ -1,9 +1,10 @@
 # Structure v2: sentence operations beyond splitting
 
-F2 (the shipped default) simplifies structure only by splitting long
-sentences (T5 plus the compound splitter). Structure v2 adds rewrites that
+F2 (the safe split) simplifies structure only by splitting long
+sentences (T5 plus the compound splitter). Since November 23, `KEPT_V3`
+runs after F2 by default ([DEFAULT_PIPELINE.md](DEFAULT_PIPELINE.md)). Structure v2 adds rewrites that
 change how a sentence is built, not how many sentences there are. Each one
-is rule-based on the pipeline's spaCy parse, opt-in, applied after F2, and
+is rule-based on the pipeline's spaCy parse, applied after F2, and
 measured on its own (evidence:
 [evals/reports/20261122-structure-v2](../../evals/reports/20261122-structure-v2/README.md)).
 No LLM is used.
