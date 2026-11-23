@@ -1,0 +1,1002 @@
+[
+ {
+  "domain": "political_science",
+  "id": "ps-001",
+  "original": "However, political institutions stand out, because -- while capable of exacerbating or alleviating polarization -- they can be re-engineered more readily than others.",
+  "source_doc": "arXiv:2602.08160",
+  "source_title": "Effect of Electoral Seat Bias on Political Polarization: A Computational Perspective",
+  "source_url": "https://arxiv.org/abs/2602.08160",
+  "subfield": "comparative_politics",
+  "word_count": 23
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-002",
+  "original": "We develop a stochastic model of opinion dynamics to analyze how noise and differential susceptibility reshape the political spectrum.",
+  "source_doc": "arXiv:2601.16181",
+  "source_title": "Engineering polarization: How contradictory stimulation systematically undermines political moderation",
+  "source_url": "https://arxiv.org/abs/2601.16181",
+  "subfield": "political_methodology",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-003",
+  "original": "In this account, polarization has been blamed for populism, the erosion of social cohesion, the loss of trust in the institutions of democracy, legislative dysfunction, and the collective failure to address existential risks such as Covid-19 or climate change.",
+  "source_doc": "Nature Communications (2026)",
+  "source_title": "Toward an integrated and globally equitable understanding of political polarization",
+  "source_url": "https://www.networkscienceinstitute.org/publications/toward-an-integrated-and-globally-equitable-understanding-of-political-polarization",
+  "subfield": "comparative_politics",
+  "word_count": 39
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-004",
+  "original": "Experimental research finds that interventions reliably reducing affective polarization do not reduce support for antidemocratic candidates or partisan violence.",
+  "source_doc": "APSA Preprints 6a09dbad810b9dcc823ab997",
+  "source_title": "The Structural Turn in Polarization Research: Why Individual- Level Interventions Do Not Suffice",
+  "source_url": "https://preprints.apsanet.org/engage/apsa/article-details/6a09dbad810b9dcc823ab997",
+  "subfield": "american_politics",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-005",
+  "original": "This shift reflects the growing recognition that polarization is not merely a divergence of policy preferences, but a multifaceted phenomenon shaped by emotional, social, technological, and epistemic processes.",
+  "source_doc": "UWS Research Portal",
+  "source_title": "The evolving study of political polarization",
+  "source_url": "https://research-portal.uws.ac.uk/en/publications/the-evolving-study-of-political-polarization/",
+  "subfield": "political_behavior",
+  "word_count": 28
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-006",
+  "original": "However, we show that even stronger notions of polarization, requiring divergence beyond marginal beliefs, are inconsistent with Bayesian rationality.",
+  "source_doc": "arXiv:2509.02513",
+  "source_title": "Bayesian Polarization",
+  "source_url": "https://arxiv.org/abs/2509.02513",
+  "subfield": "formal_theory",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-007",
+  "original": "While prior research has predominantly focused on polarization in the United States, there remains a limited body of research on political divides in multiparty systems, and no universal method for comparing fragmentation across countries.",
+  "source_doc": "arXiv:2601.05093",
+  "source_title": "Why Are Some Countries More Politically Fragmented Online Than Others?",
+  "source_url": "https://arxiv.org/abs/2601.05093",
+  "subfield": "comparative_politics",
+  "word_count": 34
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-008",
+  "original": "Under these assumptions, their results indicate that Condorcet methods tend to yield winners who are substantially more moderate than those produced by IRV.",
+  "source_doc": "arXiv:2603.03619",
+  "source_title": "Candidate Moderation under Instant Runoff and Condorcet Voting: Evidence from the Cooperative Election Study",
+  "source_url": "https://econpapers.repec.org/paper/arxpapers/2603.03619.htm",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 23
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-009",
+  "original": "Findings show that overall ballot voiding declined substantially between 2021 and 2025, but district-level patterns linking errors to lower education persist, albeit in an attenuated manner.",
+  "source_doc": "Stevens Research (2026)",
+  "source_title": "More Chances, Fewer Problems? Revisiting Ranked Choice Voting Errors in New York City",
+  "source_url": "https://researchwith.stevens.edu/en/publications/more-chances-fewer-problems-revisiting-ranked-choice-voting-error/",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 26
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-010",
+  "original": "The term 'Electoral Behavior' describes how people and groups participate in elections, including their voting decisions, political leanings and levels of participation.",
+  "source_doc": "zenodo:20112069",
+  "source_title": "Artificial Intelligence In Electoral Behavior Studies: A Study",
+  "source_url": "https://zenodo.org/records/20112069",
+  "subfield": "political_behavior",
+  "word_count": 22
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-011",
+  "original": "The analysis provides evidence that legislators in the minority party as well as legislators with a moderate constituency are more likely to have different ideal points for procedural versus final passage votes.",
+  "source_doc": "arXiv:2312.15049",
+  "source_title": "Explaining Differences in Voting Patterns Across Voting Domains Using Hierarchical Bayesian Models",
+  "source_url": "https://arxiv.org/html/2312.15049v2",
+  "subfield": "legislative_politics",
+  "word_count": 32
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-012",
+  "original": "The results show that restoring metric structure to ideal point estimation provides a clearer and more coherent inference about party cohesion, factional divisions, and multidimensional legislative behavior.",
+  "source_doc": "arXiv:2512.11610",
+  "source_title": "Euclidean Ideal Point Estimation From Roll-Call Data via Distance-Based Bipartite Network Models",
+  "source_url": "https://arxiv.org/html/2512.11610v1",
+  "subfield": "legislative_politics",
+  "word_count": 27
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-013",
+  "original": "We propose a method, consensus multidimensional scaling (CoMDS), which better aligns with how applied scholars use ideal points in practice.",
+  "source_doc": "arXiv:2601.05213",
+  "source_title": "Estimating Consensus Ideal Points Using Multi-Source Data",
+  "source_url": "https://arxiv.org/html/2601.05213v1",
+  "subfield": "political_methodology",
+  "word_count": 20
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-014",
+  "original": "This paper demonstrates that backsliding states are more likely than full democracies to engage in aggressive actions toward other states, which has important academic and policy implications for understanding the international ramifications of democratic erosion.",
+  "source_doc": "IGCC Working Paper No. 2 (2024)",
+  "source_title": "Democratic Backsliding and Foreign Policy",
+  "source_url": "https://escholarship.org/content/qt8s31h6c9/qt8s31h6c9.pdf",
+  "subfield": "international_relations",
+  "word_count": 35
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-015",
+  "original": "Changes in international politics has left democracy with weaker ideational support in the global arena, potentially facilitating backsliding.",
+  "source_doc": "doi:10.1017/S1537592722003334",
+  "source_title": "The International Context of Democratic Backsliding: Rethinking the Role of Third Wave “Prodemocracy” Global Actors",
+  "source_url": "https://www.cambridge.org/core/product/69864D8323490DC35AA7FDD6F4A1DF95/core-reader",
+  "subfield": "international_relations",
+  "word_count": 18
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-016",
+  "original": "Opportunistic authoritarians, by contrast, come to power via conventional political appeals but later turn against democracy for the sake of personal political survival.",
+  "source_doc": "Carnegie Endowment (2022)",
+  "source_title": "Understanding and Responding to Global Democratic Backsliding",
+  "source_url": "https://carnegieendowment.org/2022/10/20/understanding-and-responding-to-global-democratic-backsliding-pub-88173",
+  "subfield": "comparative_politics",
+  "word_count": 23
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-017",
+  "original": "If the end of the 20th century was defined by the relatively widespread acceptance of democracy, the second decade of the 21st century is marked by concerns about backsliding in new and established democracies alike and by a notable decline in foreign support for democracy around the world.",
+  "source_doc": "doi:10.1126/science.abb2434",
+  "source_title": "Democracy’s backsliding in the international environment",
+  "source_url": "https://ui.adsabs.harvard.edu/abs/2020Sci...369.1192H",
+  "subfield": "international_relations",
+  "word_count": 48
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-018",
+  "original": "How can governments in racially divided societies protect vulnerable populations from political violence after large-scale internal conflict?",
+  "source_doc": "APSR 120(1), Feb 2026",
+  "source_title": "Black Troops, White Rage, and Political Violence in the Postbellum American South",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/2/F4/34/8CF8A8BDA849D68F03C5679E1AB_91C6B1A3_14400.doc",
+  "subfield": "american_politics",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-019",
+  "original": "Strikingly, among all respondents, U.S. born Latinos are seen as less American when their parent is undocumented.",
+  "source_doc": "APSR 119(4), Nov 2025",
+  "source_title": "Group Prototypicality and Boundary Definition: Comparing White and Black Perceptions of Whether Latinos Are American",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/2/55/86/C6F484220DD56E774CA20B0232B_7167DC2E_15600.doc",
+  "subfield": "race_ethnicity_and_politics",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-020",
+  "original": "Asian and Latino adults regularly navigate the straits between their racial and American identities—two categories, sorted along partisan lines, that shape their sense of belonging in the US.",
+  "source_doc": "APSR 119(4), Nov 2025",
+  "source_title": "Partisans of Color: Asian American and Latino Party ID in an Era of Racialization and Polarization",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/2/55/86/C6F484220DD56E774CA20B0232B_7167DC2E_15600.doc",
+  "subfield": "race_ethnicity_and_politics",
+  "word_count": 28
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-021",
+  "original": "Water bodies, often major ones, comprised the primary border feature much more frequently than straight lines.",
+  "source_doc": "APSR 119(1), Feb 2025",
+  "source_title": "Endogenous Colonial Borders: Precolonial States and Geography in the Partition of Africa",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/E/77/CE/F50B2A22296A50189748D697A4A_F5DD31E9_18A00.doc",
+  "subfield": "comparative_politics",
+  "word_count": 16
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-022",
+  "original": "Our analysis of these new data shows the influence of city employees was an important contributor to the spread of civil service in American local government.",
+  "source_doc": "APSR 119(2), May 2025",
+  "source_title": "Civil Service Adoption in America: The Political Influence of City Employees",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/8/5E/E2/203E387C54F415DB2A5938D4F4B_A00189DD_16E00.doc",
+  "subfield": "public_administration",
+  "word_count": 26
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-023",
+  "original": "The profession has been increasing efforts to ensure ethical research in politics and international relations (IR) with robust institutional review procedures.",
+  "source_doc": "APSR 119(2), May 2025",
+  "source_title": "To Report or Not to Report on Research Ethics in Political Science and International Relations: A New Dimension of Gender-Based Inequality",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/8/5E/E2/203E387C54F415DB2A5938D4F4B_A00189DD_16E00.doc",
+  "subfield": "political_methodology",
+  "word_count": 21
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-024",
+  "original": "Although space colonization appears to belong to the world of science fiction, private corporations owned by Silicon Valley billionaires—and supported by the US state—have spent billions making it a reality.",
+  "source_doc": "APSR 118(3), Aug 2024",
+  "source_title": "Engineering Territory: Space and Colonies in Silicon Valley",
+  "source_url": "https://www.sppm.tsinghua.edu.cn/__local/9/2A/B6/2A196EF9A7F0001FB9C62D7FAB4_46BC0AB2_17C00.doc",
+  "subfield": "political_theory",
+  "word_count": 30
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-025",
+  "original": "We now understand that censorship, propaganda, surveillance, and repression should be seen as producing integrated systems of control that should be studied as such.",
+  "source_doc": "IGCC Working Paper No. 2 (2026)",
+  "source_title": "Information Control in Autocracies: A Review Essay",
+  "source_url": "https://econpapers.repec.org/RePEc:cdl:globco:qt2fr503jf",
+  "subfield": "comparative_politics",
+  "word_count": 24
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-026",
+  "original": "AI offers authoritarian leaders three crucial advantages: scale, speed, and efficiency.",
+  "source_doc": "Carnegie Endowment (2026)",
+  "source_title": "The Disruptive Politics of AI",
+  "source_url": "https://carnegieendowment.org/russia-eurasia/research/2026/09/the-disruptive-politics-of-ai",
+  "subfield": "comparative_politics",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-027",
+  "original": "The results indicate political biases evolve with model scale and release date, and are also influenced by regional factors of LLMs.",
+  "source_doc": "arXiv:2412.16746",
+  "source_title": "Unpacking Political Bias in Large Language Models: Insights Across Topic Polarization",
+  "source_url": "https://arxiv.org/pdf/2412.16746v3",
+  "subfield": "political_communication",
+  "word_count": 21
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-028",
+  "original": "Moreover, the Political Compass Test is not a scientifically valid survey instrument.",
+  "source_doc": "arXiv:2503.16148",
+  "source_title": "Only a Little to the Left: A Theory-grounded Measure of Political Bias in Large Language Models",
+  "source_url": "https://arxiv.org/html/2503.16148v1",
+  "subfield": "political_methodology",
+  "word_count": 12
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-029",
+  "original": "Political bias in LLMs is therefore not a fixed point on an ideological scale but a response profile that must be mapped across realistic interlocutors.",
+  "source_doc": "arXiv:2604.27633",
+  "source_title": "Political Bias Audits of LLMs Capture Sycophancy to the Inferred Auditor",
+  "source_url": "https://arxiv.org/html/2604.27633",
+  "subfield": "political_methodology",
+  "word_count": 25
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-030",
+  "original": "By comparing survey responses of models to those of human reference populations, researchers aim to infer the demographics, political opinions, or values best represented by current language models.",
+  "source_doc": "arXiv:2306.07951",
+  "source_title": "Questioning the Survey Responses of Large Language Models",
+  "source_url": "https://arxiv.org/abs/2306.07951",
+  "subfield": "public_opinion",
+  "word_count": 28
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-031",
+  "original": "We find that there is substantial variability in the election outcome depending on what maps are used.",
+  "source_doc": "arXiv:1709.01596",
+  "source_title": "Evaluating Partisan Gerrymandering in Wisconsin",
+  "source_url": "https://arxiv.org/abs/1709.01596",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-032",
+  "original": "In this paper we present an ensemble analysis of the enacted districts to provide mathematical context for claims made about these maps in litigation.",
+  "source_doc": "arXiv:2509.07328",
+  "source_title": "Free Elections in the Free State: Ensemble Analysis of Redistricting in New Hampshire",
+  "source_url": "https://arxiv.org/abs/2509.07328",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 24
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-033",
+  "original": "The mathematics of redistricting is an area of study that has exploded in recent years.",
+  "source_doc": "arXiv:2503.13521",
+  "source_title": "States of Disarray: Cleaning Data for Gerrymandering Analysis",
+  "source_url": "https://arxiv.org/abs/2503.13521",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 15
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-034",
+  "original": "To audit political district maps for partisan gerrymandering, one may determine a baseline for the expected distribution of partisan outcomes by sampling an ensemble of maps.",
+  "source_doc": "arXiv:2203.06552",
+  "source_title": "Mathematically Quantifying Non-responsiveness of the 2021 Georgia Congressional Districting Plan",
+  "source_url": "https://arxiv.org/abs/2203.06552",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 26
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-035",
+  "original": "Ensemble analysis is a well-studied, widely agreed-upon technique in the modern study of gerrymandering.",
+  "source_doc": "arXiv:2409.17186",
+  "source_title": "Don't Trust A Single Gerrymandering Metric",
+  "source_url": "https://arxiv.org/abs/2409.17186",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 14
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-036",
+  "original": "The second step of the process is to use some mathematical metric to compare the enacted voting plan to those in the ensemble.",
+  "source_doc": "arXiv:2111.02540",
+  "source_title": "A Comparison of Metrics for the Identification of Partisan Gerrymandering",
+  "source_url": "https://arxiv.org/abs/2111.02540",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 23
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-037",
+  "original": "Of the 93 state legislative geographies described above, our ensembles found at least one majority-Black district in 52 of them (27 lower house, 25 upper house).",
+  "source_doc": "arXiv:2409.06801",
+  "source_title": "Understanding and Mitigating the Impacts of Differentially Private Census Data on State Level Redistricting",
+  "source_url": "https://arxiv.org/abs/2409.06801",
+  "subfield": "race_ethnicity_and_politics",
+  "word_count": 26
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-038",
+  "original": "The forecasts rely on natural language processing (NLP) and machine learning techniques to leverage a large corpus of newspaper text for predicting sudden onsets of violence in peaceful countries.",
+  "source_doc": "doi:10.1017/dap.2024.10",
+  "source_title": "Introducing a Global Dataset on Conflict Forecasts and News Topics",
+  "source_url": "https://www.econ.cam.ac.uk/research/pub-abstracts?pub=1661",
+  "subfield": "conflict_and_security",
+  "word_count": 29
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-039",
+  "original": "Scholars and practitioners in international relations have a strong interest in forecasting international conflict.",
+  "source_doc": "ORCA Cardiff 119199",
+  "source_title": "A Bayesian Forecasting Model of International Conflict",
+  "source_url": "https://orca.cardiff.ac.uk/119199/1/Bayesian%20Forecasting%20JDMS%20Final%20Accepted%20Copy.pdf",
+  "subfield": "conflict_and_security",
+  "word_count": 14
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-040",
+  "original": "Additionally, the project seeks to identify the driving factors in model construction by calculating feature importance scores.",
+  "source_doc": "HCSS Report",
+  "source_title": "Catching the Trigger: Including Automated Event Data in Interstate Conflict Prediction",
+  "source_url": "https://hcss.nl/report/catching-the-trigger-predicting-interstate-conflict/catching_the_trigger_including_automated_event_data_in_interstate_conflict_prediction/",
+  "subfield": "conflict_and_security",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-041",
+  "original": "Unfortunately, forecasting conflicts has remained largely elusive to scholars of international relations.",
+  "source_doc": "arXiv:1402.7011",
+  "source_title": "Saving Human Lives: What Complexity Science and Information Systems can Contribute",
+  "source_url": "https://arxiv.org/abs/1402.7011",
+  "subfield": "conflict_and_security",
+  "word_count": 12
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-042",
+  "original": "Indeed, developing Wiredu’s arguments corrects a longstanding oversight in much deliberative theory which fails to treat pluralism robustly.",
+  "source_doc": "ORA Oxford uuid:5da32709-bde0-4414-b869-9f4435c0e330",
+  "source_title": "Citizen deliberation and a communalist ethics of freedom",
+  "source_url": "https://ora.ox.ac.uk/objects/uuid:5da32709-bde0-4414-b869-9f4435c0e330",
+  "subfield": "political_theory",
+  "word_count": 18
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-043",
+  "original": "This article reviews the literature on deliberative quality, a key concept used in deliberative democracy scholarship to assess how closely actual deliberation approximates normative ideals.",
+  "source_doc": "doi:10.1177/14789299261469395",
+  "source_title": "Conceptualising and measuring deliberative quality: A review",
+  "source_url": "https://eprints.gla.ac.uk/390192/1/390192.pdf",
+  "subfield": "political_theory",
+  "word_count": 25
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-044",
+  "original": "This essay explores the problem of legitimation crises in deliberative systems.",
+  "source_doc": "doi:10.1177/0090591720968596",
+  "source_title": "Justification Crisis: Brexit, Trump, and Deliberative Breakdown",
+  "source_url": "https://publikationen.ub.uni-frankfurt.de/files/62217/0090591720968596.pdf",
+  "subfield": "political_theory",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-045",
+  "original": "There is an ongoing concern in democratic theory with the state of modern democracy.",
+  "source_doc": "Cambridge Core book review 617F4D793157A4FD76D441ABEC31261C",
+  "source_title": "Cristina Lafont, Democracy without Shortcuts: A Participatory Conception of Deliberative Democracy (Oxford: Oxford University Press, 2020)",
+  "source_url": "https://www.cambridge.org/core/product/617F4D793157A4FD76D441ABEC31261C/core-reader",
+  "subfield": "political_theory",
+  "word_count": 14
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-046",
+  "original": "I propose an alternative account of deliberative democracy with an eye specifically to legitimacy: deliberative democracy as a political culture.",
+  "source_doc": "Keele Repository 455442",
+  "source_title": "Justification, Critique and Deliberative Legitimacy: The Limits of Mini-Publics",
+  "source_url": "https://keele-repository.worktribe.com/OutputFile/455442",
+  "subfield": "political_theory",
+  "word_count": 20
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-047",
+  "original": "Implementation arrangements are increasingly recognized as a decisive factor in the success of contemporary welfare policies, particularly those that combine income support with activation requirements.",
+  "source_doc": "Journal of International and Comparative Social Policy",
+  "source_title": "Implementation Arrangements and Policy Success in Active Social Policies: Evidence from Italy's Minimum Income Scheme",
+  "source_url": "https://resolve.cambridge.org/core/journals/journal-of-international-and-comparative-social-policy/article/implementation-arrangements-and-policy-success-in-active-social-policies-evidence-from-italys-minimum-income-scheme/591A7D12FB7E2BC32C97288D90808C1F",
+  "subfield": "public_policy",
+  "word_count": 25
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-048",
+  "original": "Qualitative fieldwork with frontline professionals and policy experts shows that welfare rescaling heightened claimants’ administrative burdens due to inter-institutional misfit among governance levels.",
+  "source_doc": "Journal of International and Comparative Social Policy",
+  "source_title": "Nexus Between Welfare Rescaling and Administrative Burden: The Case of Minimum Income Provision in Spain",
+  "source_url": "https://www.cambridge.org/core/journals/journal-of-international-and-comparative-social-policy/article/nexus-between-welfare-rescaling-and-administrative-burden-the-case-of-minimum-income-provision-in-spain/1EBDCBCE069EBB0CC683B1C92D831899",
+  "subfield": "public_policy",
+  "word_count": 23
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-049",
+  "original": "Street-level bureaucracy research argues that the local community shapes policy implementation.",
+  "source_doc": "Social Policy & Administration (spol.70053)",
+  "source_title": "Street‐Level Policymaking: From Local Political Preferences to Welfare Policy Delivery",
+  "source_url": "https://ifp.nyu.edu/2026/journal-article-abstracts/spol-70053/",
+  "subfield": "public_administration",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-050",
+  "original": "Implementation arrangements and structures have long been a concern in the fields of public policy and public administration research.",
+  "source_doc": "Review of Policy Research (2025)",
+  "source_title": "Implementation arrangements as institutions: Assessments and prospects",
+  "source_url": "https://cris.unibo.it/retrieve/handle/11585/1007656/0acbce9d-7287-41bd-bb1e-9f5f698b6c2d/Editorial_Review%20of%20Policy%20Research%20-%202025%20-%20Casula%20-%20Implementation%20arrangements%20as%20institutions%20%20Assessments%20and%20prospects.pdf",
+  "subfield": "public_policy",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-051",
+  "original": "What we term “empty responsiveness” is a situation where politicians adopt public policies in response to political demands, but these policies fail to make the promised impact due to lacking resources for policy implementation.",
+  "source_doc": "Cambridge Core F69AEA3F6DFCF446427DE2753DCEA189",
+  "source_title": "Do Governments Put Their Money Where Their Mouth Is? Policy Adoption And Administrative Resource Provision in 15 OECD Countries",
+  "source_url": "https://www.cambridge.org/core/product/F69AEA3F6DFCF446427DE2753DCEA189",
+  "subfield": "public_policy",
+  "word_count": 34
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-052",
+  "original": "The accessibility of social media platforms has facilitated the rapid spread of such misinformation, particularly in the context of prevailing political polarization.",
+  "source_doc": "EBSCO Research Starters",
+  "source_title": "Political Misinformation and Social Media",
+  "source_url": "https://www.ebsco.com/research-starters/social-sciences-and-humanities/political-misinformation-and-social-media",
+  "subfield": "political_communication",
+  "word_count": 22
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-053",
+  "original": "But what happens when political elites themselves propagate falsehoods online?",
+  "source_doc": "MIT Sloan (2022)",
+  "source_title": "New MIT Sloan research measures exposure to misinformation from political elites on Twitter",
+  "source_url": "https://mitsloan.mit.edu/node/38412",
+  "subfield": "political_communication",
+  "word_count": 10
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-054",
+  "original": "The spread of misinformation on social media poses a major threat to democracy in the United States.",
+  "source_doc": "VU Amsterdam",
+  "source_title": "Misinformation on social media: a threat to democracy in the U.S.",
+  "source_url": "https://vu.nl/en/research/misinformation-on-social-media-a-threat-to-democracy-in-the-u-s",
+  "subfield": "political_communication",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-055",
+  "original": "Exclusive peace agreements are a counterinsurgency strategy.",
+  "source_doc": "UC Berkeley dissertation (escholarship qt0798055m)",
+  "source_title": "Peace Agreements as Counterinsurgency",
+  "source_url": "https://escholarship.org/content/qt0798055m/qt0798055m.pdf",
+  "subfield": "conflict_and_security",
+  "word_count": 7
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-056",
+  "original": "This study aims to explore the role of rebel group legitimacy and ideology in durable peace (DP) following peace agreements to end civil wars.",
+  "source_doc": "doi:10.1108/IJCMA-01-2023-0015",
+  "source_title": "Rebel group legitimacy, ideology and durable peace",
+  "source_url": "https://emerald.com/insight/content/doi/10.1108/IJCMA-01-2023-0015",
+  "subfield": "conflict_and_security",
+  "word_count": 24
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-057",
+  "original": "War entrepreneurs have long been recognized as a major risk to peace.",
+  "source_doc": "hdl:1887/3176458",
+  "source_title": "Ceasefires as bargaining instruments in intrastate conflicts: ceasefire objectives and their effects on peace negotiations",
+  "source_url": "https://scholarlypublications.universiteitleiden.nl/access/item:3177929/download",
+  "subfield": "conflict_and_security",
+  "word_count": 12
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-058",
+  "original": "This exercise shows just how common long-term truces are: since the end of the Cold War, more civil conflicts have ended in a truce than in a rebel victory or peace agreement.",
+  "source_doc": "CORE 210999726",
+  "source_title": "Rebel Organizations in Crackdown and Truce",
+  "source_url": "https://core.ac.uk/download/210999726.pdf",
+  "subfield": "conflict_and_security",
+  "word_count": 32
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-059",
+  "original": "While peace processes increase the likelihood that a civil war is resolved, they can also complicate peace by increasing the risk of rebel fragmentation.",
+  "source_doc": "EUI Cadmus 1814/70051",
+  "source_title": "Fueling Factionalism? The Impact of Peace Processes on Rebel Group Fragmentation in Civil Wars",
+  "source_url": "https://cadmus.eui.eu//bitstream/1814/70051/1/DUURSMA_FLIERVOET_2020.pdf",
+  "subfield": "conflict_and_security",
+  "word_count": 24
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-060",
+  "original": "In many civil wars, the rebel side often consists of multiple rebel groups.",
+  "source_doc": "UMD DRUM dissertation (2015)",
+  "source_title": "Civil War Settlements and Combatants’ Behaviors: Strategy, Perception, and Reputation",
+  "source_url": "https://api.drum.lib.umd.edu/server/api/core/bitstreams/ffbad18d-cb34-458c-868d-90f898ae27b6/content",
+  "subfield": "conflict_and_security",
+  "word_count": 13
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-061",
+  "original": "Previous research proposes that peace is more likely to be durable if all rebel groups are included in the settlement reached.",
+  "source_doc": "World Bank Working Paper 4572",
+  "source_title": "Partial Peace: Rebel Groups Inside and Outside Civil War Settlements",
+  "source_url": "https://gsdrc.org/?p=55113",
+  "subfield": "conflict_and_security",
+  "word_count": 21
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-062",
+  "original": "Parties can significantly influence their supporter’s policy views via endorsement cues raising worries about manipulation of mass opinion.",
+  "source_doc": "hdl:1887/3264111",
+  "source_title": "Partisan Influence in Suspicious Times",
+  "source_url": "https://scholarlypublications.universiteitleiden.nl/access/item%3A3264112/view",
+  "subfield": "public_opinion",
+  "word_count": 18
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-063",
+  "original": "Electoral integrity has come under increasing pressure in the United States.",
+  "source_doc": "doi:10.1017/S0007123426101343",
+  "source_title": "How Violations of Electoral Integrity Undermine Partisan Attachments",
+  "source_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/2721C7CFBA94D9B2F4408E6214D3C39B",
+  "subfield": "elections_and_electoral_systems",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-064",
+  "original": "Yet recent research has begun to “flip the causal arrow,” exploring how partisanship can influence social identities.",
+  "source_doc": "APSA Preprints 69d5cf764770e67d92b91ba9",
+  "source_title": "Evolution by National Election? Partisanship, Voting Behavior, and Sentiments toward Marginalized Groups",
+  "source_url": "https://preprints-apsa.prod.orp.cambridge.org/engage/apsa/article-details/69d5cf764770e67d92b91ba9",
+  "subfield": "political_behavior",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-065",
+  "original": "Partisan differences in U.S. vaccine attitudes increased substantially during the 2010s, but the mechanisms behind this divergence remain contested.",
+  "source_doc": "APSA Preprints 6a73657c810b9dcc82ca88c6",
+  "source_title": "Explaining Partisan Polarization in Vaccine Attitudes: Misinformation, Elite Cues, and Opinion Updating",
+  "source_url": "https://preprints.apsanet.org/engage/apsa/article-details/6a73657c810b9dcc82ca88c6",
+  "subfield": "public_opinion",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-066",
+  "original": "A number of recent studies have challenged the presumed causal role of group attitudes, primarily through the use of panel data.",
+  "source_doc": "doi:10.1017/XPS.2024.3",
+  "source_title": "The Policy Basis of Group Sentiments",
+  "source_url": "https://resolve.cambridge.org/core/services/aop-cambridge-core/content/view/FBDA0CE7977E88219D216DBFFC969384/S204984702400030Xa.pdf/the-policy-basis-of-group-sentiments.pdf",
+  "subfield": "public_opinion",
+  "word_count": 21
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-067",
+  "original": "This study examines variation in far-right parties’ positions on the European Union (EU) by analytically distinguishing between radical and extreme-right actors and analysing their EU-related discourse.",
+  "source_doc": "doi:10.3389/fpos.2026.1907339",
+  "source_title": "Not all far-right Euroscepticism is the same: ideological opposition and modes of systemic integration in EU discourse",
+  "source_url": "https://www.frontiersin.org/journals/political-science/articles/10.3389/fpos.2026.1907339/full",
+  "subfield": "european_politics",
+  "word_count": 26
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-068",
+  "original": "The EU occupies a unique position in contemporary political science as both a subject of intense scholarly inquiry and a locus of contested normative politics.",
+  "source_doc": "doi:10.17645/pag.11959",
+  "source_title": "Consensus About the European Union? Understanding the Views of Citizens and Political Parties",
+  "source_url": "https://www.cogitatiopress.com/politicsandgovernance/article/download/11959/4956",
+  "subfield": "european_politics",
+  "word_count": 25
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-069",
+  "original": "In the first decades of European integration, criticism of the path taken by the European Community did not contain a fundamental challenge.",
+  "source_doc": "doi:10.5195/valeus.2026.19",
+  "source_title": "Dilemmas of EU Critique",
+  "source_url": "https://valeus.pitt.edu/index.php/valeus/article/download/19/14/93",
+  "subfield": "european_politics",
+  "word_count": 22
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-070",
+  "original": "The overarching aim is to understand how ideological, structural, and communicative dynamics interact to challenge the cohesion of the European Union (EU).",
+  "source_doc": "University of Iceland PhD thesis (2026)",
+  "source_title": "Brexit: A Case Study in Post-Truth Politics and European Disintegration",
+  "source_url": "https://opinvisindi.is/bitstreams/01f01bd8-831a-4c46-b66f-00f955e25496/download",
+  "subfield": "european_politics",
+  "word_count": 22
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-071",
+  "original": "Euroscepticism is diminishing and trust in Europe has been growing since 2018 and in particular since 2022.",
+  "source_doc": "doi:10.17645/pag.11116",
+  "source_title": "Citizens’ Trust in the European Union During Crisis and Conflicts Across 10 Countries",
+  "source_url": "https://www.cogitatiopress.com/politicsandgovernance/article/download/11116/4862",
+  "subfield": "european_politics",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-072",
+  "original": "Ideology is a key predictor of parties’ discourse in contemporary times, including their rhetoric on the EU.",
+  "source_doc": "doi:10.17645/pag.11084",
+  "source_title": "Rhetorical Consensus About the EU? Comparing Established and New Parties in Europe",
+  "source_url": "https://www.cogitatiopress.com/politicsandgovernance/article/download/11084/4768",
+  "subfield": "european_politics",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-073",
+  "original": "Poles were also strongly aware of the benefits of European integration.",
+  "source_doc": "doi:10.17645/pag.11082",
+  "source_title": "Deconstructing Polish Euro‐Enthusiasm: The Illusory Incongruence of Party Narratives With Public Opinion",
+  "source_url": "https://www.cogitatiopress.com/politicsandgovernance/article/download/11082/4823",
+  "subfield": "european_politics",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-074",
+  "original": "How does public support for European integration relate to the broader political views of European citizens?",
+  "source_doc": "doi:10.17645/pag.10965",
+  "source_title": "Political Ideology, Policy Attitudes, and Public Support for European Integration",
+  "source_url": "https://www.cogitatiopress.com/politicsandgovernance/article/download/10965/4796",
+  "subfield": "public_opinion",
+  "word_count": 16
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-075",
+  "original": "This Article on Richard Fallon’s Law and Legitimacy in the Supreme Court focuses on public acceptance of the Supreme Court’s authority, what Fallon calls sociological legitimacy.",
+  "source_doc": "Georgetown Journal of Law & Public Policy 18(2)",
+  "source_title": "Considering Legitimacy",
+  "source_url": "https://www.law.georgetown.edu/public-policy-journal/wp-content/uploads/sites/23/2020/10/Considering-Legitmacy-18-2.pdf",
+  "subfield": "judicial_politics",
+  "word_count": 26
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-076",
+  "original": "To what degree is the legitimacy of the U.S. Supreme Court currently at risk?",
+  "source_doc": "Penn State Pure",
+  "source_title": "Reconsidering Positivity Theory: What Roles do Politicization, Ideological Disagreement, and Legal Realism Play in Shaping U.S. Supreme Court Legitimacy?",
+  "source_url": "https://pure.psu.edu/en/publications/reconsidering-positivity-theory-what-roles-do-politicization-ideo/",
+  "subfield": "judicial_politics",
+  "word_count": 14
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-077",
+  "original": "Does understanding how U.S. Supreme Court justices actually decide cases undermine the institutional legitimacy of the nation's highest court?",
+  "source_doc": "Law & Society Review",
+  "source_title": "Has Legal Realism Damaged the Legitimacy of the U.S. Supreme Court?",
+  "source_url": "https://cambridge.org/core/journals/law-and-society-review/article/has-legal-realism-damaged-the-legitimacy-of-the-us-supreme-court/556A196622E82F733049A8DF8E4D8DD6",
+  "subfield": "judicial_politics",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-078",
+  "original": "This article analyzes the decrease in public trust of the Supreme Court across recent years.",
+  "source_doc": "UMass Undergraduate Law Review",
+  "source_title": "Troubled Times for The U.S. Supreme Court",
+  "source_url": "https://openpublishing.library.umass.edu/uulrj/article/3567/galley/3191/download",
+  "subfield": "judicial_politics",
+  "word_count": 15
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-079",
+  "original": "These results help dispel the myth that quotas trade short-term gains in women's descriptive representation for long-term exclusion from political power.",
+  "source_doc": "doi:10.1017/S0003055415000611",
+  "source_title": "Gender Quotas and Women's Political Leadership",
+  "source_url": "https://www.cambridge.org/core/product/0C8CC7B51CC37871A1B1FD925A8AA976",
+  "subfield": "gender_and_politics",
+  "word_count": 21
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-080",
+  "original": "Recent years have witnessed the rapid diffusion of electoral gender quotas.",
+  "source_doc": "International Feminist Journal of Politics",
+  "source_title": "Quotas as a ‘Fast Track’ to Equal Representation for Women",
+  "source_url": "https://giwps.georgetown.edu/?p=28029",
+  "subfield": "gender_and_politics",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-081",
+  "original": "More than 130 nations have modified their constitutions, electoral laws, or party rules to specify a threshold of women to be selected or nominated to a political body.",
+  "source_doc": "Harvard International Review",
+  "source_title": "Equal Representation? The Debate Over Gender Quotas (Part 1)",
+  "source_url": "https://hir.harvard.edu/equal-representation-the-debate-over-gender-quotas-part-1",
+  "subfield": "gender_and_politics",
+  "word_count": 28
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-082",
+  "original": "Gender quotas have spread rapidly around the world in recent years.",
+  "source_doc": "British Journal of Political Science (2009)",
+  "source_title": "Gender Quotas and Models of Political Citizenship",
+  "source_url": "https://resolve.cambridge.org/core/journals/british-journal-of-political-science/article/gender-quotas-and-models-of-political-citizenship/D2B606311DA650272600DBC6B3130BD3",
+  "subfield": "gender_and_politics",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-083",
+  "original": "Consequently, support for climate policies strongly depends on their specific modalities.",
+  "source_doc": "NBER Working Paper 30265",
+  "source_title": "Fighting Climate Change: International Attitudes Toward Climate Policies",
+  "source_url": "https://www.nber.org/system/files/working_papers/w30265/revisions/w30265.rev1.pdf",
+  "subfield": "environmental_politics",
+  "word_count": 11
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-084",
+  "original": "In this paper, we address one of the main obstacles to carbon taxes: public opposition.",
+  "source_doc": "PMC6473478",
+  "source_title": "Overcoming public resistance to carbon taxes",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6473478",
+  "subfield": "environmental_politics",
+  "word_count": 15
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-085",
+  "original": "Our study thus grapples with the question of where people’s perceptions of policy costs come from.",
+  "source_doc": "Cambridge Core 74CAB40FD99D0395CA9BF52537AAE6D0",
+  "source_title": "How do Europeans want to fight climate change? Comparing and explaining public support for a wide variety of policies",
+  "source_url": "https://www.cambridge.org/core/product/74CAB40FD99D0395CA9BF52537AAE6D0/core-reader",
+  "subfield": "environmental_politics",
+  "word_count": 16
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-086",
+  "original": "Public support for policy instruments is influenced by perceptions of how benefits and costs are distributed across various groups.",
+  "source_doc": "Public Administration (forthcoming, 2020)",
+  "source_title": "Policy Design and Public Support for Carbon Tax: Evidence from a 2018 U.S. National Online Survey Experiment",
+  "source_url": "https://faculty.washington.edu/cadolph/articles/dapCarbon.pdf",
+  "subfield": "environmental_politics",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-087",
+  "original": "A high perceived national unemployment rate will increase public aversion of all climate policies, especially for carbon tax.",
+  "source_doc": "AgEcon Search 322170",
+  "source_title": "Understanding Public Acceptability of Climate Policies in Europe",
+  "source_url": "https://ageconsearch.umn.edu/record/322170/files/22711.pdf",
+  "subfield": "environmental_politics",
+  "word_count": 18
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-088",
+  "original": "Using different descriptions of policies, we demonstrate that in general, more ambitious policies reduce public support.",
+  "source_doc": "TUM working paper (2023)",
+  "source_title": "Public support for more ambitious climate policies",
+  "source_url": "https://mgt.tum.de/fileadmin/mgt.tum.de/faculty_and_research/mppe/30_Public_support_EU_4_.pdf",
+  "subfield": "environmental_politics",
+  "word_count": 16
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-089",
+  "original": "Across Europe, the populist radical right is shaping democratic politics, even in places where radical-right parties are not in power.",
+  "source_doc": "ECPR The Loop (2026)",
+  "source_title": "The populist radical right as a governing logic",
+  "source_url": "https://theloop.ecpr.eu/the-populist-radical-right-as-a-governing-logic/",
+  "subfield": "comparative_politics",
+  "word_count": 20
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-090",
+  "original": "This article provides a comparative analysis of the transnational parties unquestionably located to the right of the European People’s Party in the European Parliament.",
+  "source_doc": "doi:10.1177/17816858261444212",
+  "source_title": "The heterogeneity of the ‘far right’",
+  "source_url": "https://www.martenscentre.eu/wp-content/uploads/2026/03/12.pdf",
+  "subfield": "european_politics",
+  "word_count": 24
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-091",
+  "original": "Over the past decade, commentators have repeatedly assessed and reassessed right-wing populist fortunes in Europe based on the most recent election results.",
+  "source_doc": "Pew Research Center (2026)",
+  "source_title": "Right-Wing Populism in the Decade Since Brexit",
+  "source_url": "https://www.pewresearch.org/global/2026/05/28/right-wing-populism-in-the-decade-since-brexit.md",
+  "subfield": "comparative_politics",
+  "word_count": 22
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-092",
+  "original": "The emergence and institutional consolidation of the Populist Radical Right (PRR) is among the most consequential developments in European politics in the 21st century.",
+  "source_doc": "Societies 15(8):211",
+  "source_title": "Populist Radical Right: Illiberal Erosion or Liberal Decay? Assessing Theoretical Explanations in the Wake of the 2024 European Parliament Election",
+  "source_url": "https://mdpi.com/2075-4698/15/8/211",
+  "subfield": "comparative_politics",
+  "word_count": 24
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-093",
+  "original": "For many political scientists, then, the rush to free trade has been unexpected.",
+  "source_doc": "Annu. Rev. Polit. Sci. 1999. 2:91–114",
+  "source_title": "The Political Economy of International Trade",
+  "source_url": "https://edisciplinas.usp.br/mod/resource/view.php?id=4651089",
+  "subfield": "international_political_economy",
+  "word_count": 13
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-094",
+  "original": "We also discuss some puzzles and controversies that have emerged in recent work.",
+  "source_doc": "Handbook of International Trade (2003)",
+  "source_title": "The Political Economy of Trade Policy: Empirical Approaches",
+  "source_url": "https://econwpa.ub.uni-muenchen.de/econ-wp/it/papers/0503/0503003.pdf",
+  "subfield": "international_political_economy",
+  "word_count": 13
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-095",
+  "original": "Explaining trade protectionism has been one of the most fruitful areas for the application of public choice analysis.",
+  "source_doc": "ResearchGate 4810578",
+  "source_title": "Trade Protectionism",
+  "source_url": "https://Researchgate.net/publication/4810578_Trade_Protectionism.pdf",
+  "subfield": "international_political_economy",
+  "word_count": 18
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-096",
+  "original": "The history of trade policy is one of the longest among all forms of economic interventions of government.",
+  "source_doc": "Intersect 18(1), 2024",
+  "source_title": "The Political Economy of Trade Policies: Origins, Effectiveness, and Limitations",
+  "source_url": "https://ojs.stanford.edu/ojs/index.php/intersect/article/download/3133/1735/11290",
+  "subfield": "international_political_economy",
+  "word_count": 18
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-097",
+  "original": "A growing body of scholarship investigates the extent to which national partisan polarization filters down to the local level.",
+  "source_doc": "HKS Working Paper RWP25-005",
+  "source_title": "Partisan Polarization in Local Politics",
+  "source_url": "https://www.hks.harvard.edu/publications/partisan-polarization-local-politics",
+  "subfield": "local_and_urban_politics",
+  "word_count": 19
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-098",
+  "original": "What are the traits of a good local leader?",
+  "source_doc": "doi:10.1561/113.00000035",
+  "source_title": "What Makes a Good Local Leader? Evidence from U.S. Mayors and City Managers",
+  "source_url": "https://nowpublishers.com/article/Details/PIP-0035",
+  "subfield": "local_and_urban_politics",
+  "word_count": 9
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-099",
+  "original": "How does representation in municipal government work if partisan selection in elections is not affecting policy outcomes?",
+  "source_doc": "CORE 83230857",
+  "source_title": "Mayoral Partisanship and the Size of Municipal Government",
+  "source_url": "https://core.ac.uk/download/83230857.pdf",
+  "subfield": "local_and_urban_politics",
+  "word_count": 17
+ },
+ {
+  "domain": "political_science",
+  "id": "ps-100",
+  "original": "This chapter provides an overview of research on the role of mayors in immigration and integration policies in the context of the United States and Europe.",
+  "source_doc": "University of Copenhagen event paper (2025)",
+  "source_title": "Mayors and Migration Policies in the United States and Europe",
+  "source_url": "https://jura.ku.dk/privategovernance/english/calendar/2025/mayors-and-migration-policies-in-the-united-states-and-europe/amis_degraauw_mayors_migrationpolicies.pdf",
+  "subfield": "local_and_urban_politics",
+  "word_count": 26
+ }
+]
