@@ -175,7 +175,7 @@ function renderResult(trace) {
     <p class="passage">${esc(trace.output)}</p>
     ${same ? `<div class="notice">${icon("info")}<span>Your text came out unchanged. ClearText only edits when it is confident the meaning stays the same.</span></div>` : ""}
     <div class="facts">
-      <div class="metric"><span class="figure"><span class="was">${g.before}</span>${icon("arrow")}<span>${g.after}</span></span><span class="what">School grade<br>reading level</span></div>
+      <div class="metric"><span class="figure"><span class="was">${Number(g.before).toFixed(1)}</span>${icon("arrow")}<span>${Number(g.after).toFixed(1)}</span></span><span class="what">School grade<br>reading level</span></div>
       ${keptHTML}
     </div>`;
   els.result.hidden = false;
