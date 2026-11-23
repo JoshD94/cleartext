@@ -1,0 +1,269 @@
+{
+ "rounds": [
+  8,
+  9
+ ],
+ "note": "rounds 8 + 9 pooled (identical operation code; r9-precommit.json)",
+ "arms": {
+  "passive_v6": {
+   "n": 200,
+   "good": 182,
+   "good_rate": 0.91,
+   "good_ci95": [
+    0.8622342807918277,
+    0.9423125513396227
+   ],
+   "marks": {
+    "good": 182,
+    "ungrammatical": 10,
+    "meaning": 7,
+    "notsimpler": 1
+   },
+   "meaning_rate": 0.035,
+   "meaning_ci95": [
+    0.01705554191525804,
+    0.07047061188687749
+   ],
+   "by_rule": {
+    "agentive": {
+     "n": 132,
+     "good": 121,
+     "good_ci95": [
+      0.8569354767964342,
+      0.95283203384347
+     ]
+    },
+    "agentive_split": {
+     "n": 55,
+     "good": 49,
+     "good_ci95": [
+      0.7817445080840346,
+      0.9490327502899663
+     ]
+    },
+    "agentive_conj": {
+     "n": 13,
+     "good": 12,
+     "good_ci95": [
+      0.666860488286395,
+      0.986289578909774
+     ]
+    }
+   },
+   "by_source": {
+    "openfda8": {
+     "n": 8,
+     "good": 8
+    },
+    "goodwiki8": {
+     "n": 39,
+     "good": 36
+    },
+    "fedreg8": {
+     "n": 11,
+     "good": 10
+    },
+    "news8": {
+     "n": 14,
+     "good": 11
+    },
+    "fedreg9": {
+     "n": 28,
+     "good": 25
+    },
+    "news10": {
+     "n": 7,
+     "good": 7
+    },
+    "goodwiki10": {
+     "n": 79,
+     "good": 71
+    },
+    "fedreg10": {
+     "n": 14,
+     "good": 14
+    }
+   },
+   "outside_federal_register": {
+    "n": 147,
+    "good": 133,
+    "good_ci95": [
+     0.8464884964425465,
+     0.9424192805211231
+    ]
+   },
+   "edits_per_100": {
+    "round8": 0.49597024178549287,
+    "round9": 0.5375347544022243,
+    "sentences": [
+     6452,
+     5395
+    ],
+    "changed": [
+     32,
+     29
+    ]
+   }
+  },
+  "nominal_v3": {
+   "n": 80,
+   "good": 80,
+   "good_rate": 1.0,
+   "good_ci95": [
+    0.9541818697747756,
+    0.9999999999999999
+   ],
+   "marks": {
+    "good": 80
+   },
+   "meaning_rate": 0.0,
+   "meaning_ci95": [
+    0,
+    0.04581813022522419
+   ],
+   "by_rule": {
+    "table": {
+     "n": 80,
+     "good": 80,
+     "good_ci95": [
+      0.9541818697747756,
+      0.9999999999999999
+     ]
+    }
+   },
+   "by_source": {
+    "openfda8": {
+     "n": 1,
+     "good": 1
+    },
+    "goodwiki8": {
+     "n": 1,
+     "good": 1
+    },
+    "fedreg9": {
+     "n": 18,
+     "good": 18
+    },
+    "fedreg10": {
+     "n": 1,
+     "good": 1
+    },
+    "fedreg11": {
+     "n": 57,
+     "good": 57
+    },
+    "news10": {
+     "n": 2,
+     "good": 2
+    }
+   },
+   "outside_federal_register": {
+    "n": 4,
+    "good": 4,
+    "good_ci95": [
+     0.5101091596030786,
+     0.9999999999999999
+    ]
+   },
+   "edits_per_100": {
+    "round8": 0.0,
+    "round9": 0.07414272474513438,
+    "sentences": [
+     6452,
+     5395
+    ],
+    "changed": [
+     0,
+     4
+    ]
+   }
+  },
+  "passive_v5": {
+   "n": 100,
+   "good": 93,
+   "good_rate": 0.93,
+   "good_ci95": [
+    0.8625048519384759,
+    0.9656807391201874
+   ],
+   "marks": {
+    "good": 93,
+    "ungrammatical": 5,
+    "meaning": 2
+   },
+   "meaning_rate": 0.02,
+   "meaning_ci95": [
+    0.0055019675006616475,
+    0.07001179131757478
+   ],
+   "by_rule": {
+    "agentive": {
+     "n": 100,
+     "good": 93,
+     "good_ci95": [
+      0.8625048519384759,
+      0.9656807391201874
+     ]
+    }
+   },
+   "by_source": {
+    "fedreg8": {
+     "n": 10,
+     "good": 9
+    },
+    "openfda8": {
+     "n": 10,
+     "good": 10
+    },
+    "news8": {
+     "n": 10,
+     "good": 8
+    },
+    "goodwiki8": {
+     "n": 10,
+     "good": 9
+    },
+    "fedreg9": {
+     "n": 10,
+     "good": 10
+    },
+    "news10": {
+     "n": 7,
+     "good": 7
+    },
+    "goodwiki10": {
+     "n": 29,
+     "good": 26
+    },
+    "openfda10": {
+     "n": 1,
+     "good": 1
+    },
+    "fedreg10": {
+     "n": 13,
+     "good": 13
+    }
+   },
+   "outside_federal_register": {
+    "n": 67,
+    "good": 61,
+    "good_ci95": [
+     0.8180724770954599,
+     0.9583090496057276
+    ]
+   },
+   "edits_per_100": {
+    "round8": 0.402975821450713,
+    "round9": 0.3707136237256719,
+    "sentences": [
+     6452,
+     5395
+    ],
+    "changed": [
+     26,
+     20
+    ]
+   }
+  }
+ }
+}

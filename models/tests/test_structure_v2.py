@@ -364,3 +364,15 @@ def test_round8_split_skips_means_and_long_subjects():
     for s in ("The offspring were taken by caesarean section and did not show any anomalies.",
               "The song's development was motivated by Lopez's heritage and pays homage to her career."):
         assert run("passive_v6", s) == s
+
+
+def test_kept_v4_extends_kept_v3():
+    from cleartext.structure_v2 import KEPT_V3, KEPT_V4
+    assert KEPT_V3 == ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
+    assert KEPT_V4 == KEPT_V3 + ("passive_v6", "nominal_v3")
+    text = ("The episode was written by Dan Greaney and directed by Mark Kirkland. "
+            "The agency conducted an evaluation of the program last year.")
+    out, edits = StructureV2(ops=KEPT_V4).rewrite(text)
+    assert out == ("Dan Greaney wrote the episode. Mark Kirkland directed the episode. "
+                   "The agency evaluated the program last year.")
+    assert [e["rule"] for e in edits] == ["agentive_split", "table"]

@@ -61,6 +61,11 @@ KEPT = ("passive_recovered", "fronted_split")
 # floor: StructureV2(ops=KEPT_V3, entailment=EntailmentVeto().score,
 # min_entailment=0.5). Order as in the dev run (DEV_V3.md).
 KEPT_V3 = ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
+# Structure v4 (rounds 8-9, evals/reports/20261123-structure-v4): passive_v6
+# (rounds 8+9 pooled 182/200 Good, 3.5% meaning) and nominal_v3 (80/80, 0%)
+# met the same bar, rated with the 0.5 entailment floor. KEPT_V3 is unchanged;
+# passive_v6 runs after passive_v5 and converts what v5 left.
+KEPT_V4 = KEPT_V3 + ("passive_v6", "nominal_v3")
 
 
 def build(name, **kwargs):
