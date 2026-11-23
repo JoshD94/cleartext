@@ -1,0 +1,186 @@
+{
+ "all": {
+  "sentences": 200,
+  "systems": {
+   "default": {
+    "changed": 60,
+    "errors": 0,
+    "fk_before_all": 15.87,
+    "fk_after_all": 14.928,
+    "fk_before_changed": 17.062,
+    "fk_after_changed": 13.925,
+    "nli_mean_changed": 0.985,
+    "nli_forward_changed": 0.987,
+    "nli_backward_changed": 0.982,
+    "nli_below_080": 0,
+    "nli_abstained": 0,
+    "stage_changed": {
+     "f2": 39,
+     "structure": 1,
+     "words": 27
+    },
+    "structure_ops": {
+     "passive": 1
+    },
+    "items_lost": {
+     "numbers": 0,
+     "negations": 0,
+     "names": 0
+    }
+   },
+   "passive_auto": {
+    "changed": 20,
+    "errors": 0,
+    "fk_before_all": 15.87,
+    "fk_after_all": 15.909,
+    "fk_before_changed": 16.245,
+    "fk_after_changed": 16.64,
+    "nli_mean_changed": 0.871,
+    "nli_forward_changed": 0.804,
+    "nli_backward_changed": 0.938,
+    "nli_below_080": 4,
+    "nli_abstained": 0
+   },
+   "passive_by": {
+    "changed": 3,
+    "errors": 0,
+    "fk_before_all": 15.87,
+    "fk_after_all": 15.865,
+    "fk_before_changed": 23.133,
+    "fk_after_changed": 22.833,
+    "nli_mean_changed": 0.666,
+    "nli_forward_changed": 0.664,
+    "nli_backward_changed": 0.668,
+    "nli_below_080": 1,
+    "nli_abstained": 0
+   }
+  },
+  "passive_auto_vs_default": {
+   "passive_auto_changed": 20,
+   "default_also_changed": 5,
+   "default_structure_changed": 0
+  }
+ },
+ "business": {
+  "sentences": 100,
+  "systems": {
+   "default": {
+    "changed": 34,
+    "errors": 0,
+    "fk_before_all": 16.116,
+    "fk_after_all": 15.068,
+    "fk_before_changed": 17.406,
+    "fk_after_changed": 14.324,
+    "nli_mean_changed": 0.984,
+    "nli_forward_changed": 0.988,
+    "nli_backward_changed": 0.98,
+    "nli_below_080": 0,
+    "nli_abstained": 0,
+    "stage_changed": {
+     "f2": 24,
+     "structure": 0,
+     "words": 13
+    },
+    "structure_ops": {},
+    "items_lost": {
+     "numbers": 0,
+     "negations": 0,
+     "names": 0
+    }
+   },
+   "passive_auto": {
+    "changed": 9,
+    "errors": 0,
+    "fk_before_all": 16.116,
+    "fk_after_all": 16.145,
+    "fk_before_changed": 17.8,
+    "fk_after_changed": 18.122,
+    "nli_mean_changed": 0.787,
+    "nli_forward_changed": 0.697,
+    "nli_backward_changed": 0.878,
+    "nli_below_080": 3,
+    "nli_abstained": 0
+   },
+   "passive_by": {
+    "changed": 1,
+    "errors": 0,
+    "fk_before_all": 16.116,
+    "fk_after_all": 16.109,
+    "fk_before_changed": 31.1,
+    "fk_after_changed": 30.4,
+    "nli_mean_changed": 0.008,
+    "nli_forward_changed": 0.004,
+    "nli_backward_changed": 0.013,
+    "nli_below_080": 1,
+    "nli_abstained": 0
+   }
+  },
+  "passive_auto_vs_default": {
+   "passive_auto_changed": 9,
+   "default_also_changed": 4,
+   "default_structure_changed": 0
+  }
+ },
+ "political_science": {
+  "sentences": 100,
+  "systems": {
+   "default": {
+    "changed": 26,
+    "errors": 0,
+    "fk_before_all": 15.623,
+    "fk_after_all": 14.789,
+    "fk_before_changed": 16.612,
+    "fk_after_changed": 13.404,
+    "nli_mean_changed": 0.985,
+    "nli_forward_changed": 0.985,
+    "nli_backward_changed": 0.985,
+    "nli_below_080": 0,
+    "nli_abstained": 0,
+    "stage_changed": {
+     "f2": 15,
+     "structure": 1,
+     "words": 14
+    },
+    "structure_ops": {
+     "passive": 1
+    },
+    "items_lost": {
+     "numbers": 0,
+     "negations": 0,
+     "names": 0
+    }
+   },
+   "passive_auto": {
+    "changed": 11,
+    "errors": 0,
+    "fk_before_all": 15.623,
+    "fk_after_all": 15.673,
+    "fk_before_changed": 14.973,
+    "fk_after_changed": 15.427,
+    "nli_mean_changed": 0.939,
+    "nli_forward_changed": 0.891,
+    "nli_backward_changed": 0.987,
+    "nli_below_080": 1,
+    "nli_abstained": 0
+   },
+   "passive_by": {
+    "changed": 2,
+    "errors": 0,
+    "fk_before_all": 15.623,
+    "fk_after_all": 15.621,
+    "fk_before_changed": 19.15,
+    "fk_after_changed": 19.05,
+    "nli_mean_changed": 0.995,
+    "nli_forward_changed": 0.994,
+    "nli_backward_changed": 0.995,
+    "nli_below_080": 0,
+    "nli_abstained": 0
+   }
+  },
+  "passive_auto_vs_default": {
+   "passive_auto_changed": 11,
+   "default_also_changed": 1,
+   "default_structure_changed": 0
+  }
+ }
+}
