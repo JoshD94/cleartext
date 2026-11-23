@@ -67,8 +67,10 @@ KEPT_V3 = ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
 # met the same bar (80/80 Good; 78/78 without the two items that share
 # 8-grams with earlier pools), rated with the 0.5 entailment floor. passive_v6
 # is not kept: without its six round-8 overlaps round 8 alone is 84/94 (89.4%),
-# below the pre-registered 90%. KEPT_V3 is unchanged.
-KEPT_V4 = KEPT_V3 + ("nominal_v3",)
+# below the pre-registered 90%. passive_v7 (v6 plus a skip for coordinated
+# participles sharing one by-phrase) passed round 10 on a fresh window
+# (97/100 Good, 0% meaning; ROUND10.md). KEPT_V3 is unchanged.
+KEPT_V4 = KEPT_V3 + ("nominal_v3", "passive_v7")
 
 
 def build(name, **kwargs):

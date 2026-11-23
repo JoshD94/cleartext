@@ -11,6 +11,30 @@ this folder holds protocols, precommits and aggregates.
 
 ## Answer
 
+- **`KEPT_V4` = `KEPT_V3` + (`nominal_v3`, `passive_v7`)** (opt-in; the
+  default pipeline keeps `KEPT_V3`). `passive_v6` is not kept (correction
+  below); `passive_v7` replaces it.
+- **`passive_v7` passes round 10** (pre-registered in [ROUND10.md](ROUND10.md)
+  and [r10-precommit.json](r10-precommit.json) at `5caf1b5` before any
+  output; new window pool L, no rated item shares an 8-gram with any earlier
+  pool, rating key or the dev pool; three new blind Opus raters, majority):
+  **97/100 Good = 97.0% [91.5–99.0], Changes meaning 0/100 = 0% [0–3.7]**
+  ([round10.json](round10.json)). By shape: in-place 52/53, coordination
+  split 42/43, clause coordination 3/4. Sources: Good articles 75/76,
+  Federal Register 18/20, Wikinews 4/4. All three raters agreed on 97 of 100
+  cards. It fires on 0.73 per 100 standard pool-L sentences (`passive_v6`
+  0.77 on the same pool; 20 vs 21 of 2,732). The three failures: "the SHOP
+  will ever send no ineligibility notification" (negative polarity item
+  left after the flip), "Edward Reed designed them. They built to make use
+  of …" (a shared "were" dropped in a split), and one not simpler (a
+  clause-coordination flip with "neither").
+- **Dev on F2** (test set v3 dev split; [dev-judge-v4b.json](dev-judge-v4b.json),
+  queue job `88b3ba30dc67`): `KEPT_V4` gives exactly `KEPT_V3`'s outputs
+  (5 of 100 passages changed; neither new op fires there): ΔFK −0.031
+  [−0.067, −0.003], Δ passage NLI +0.0003 [+0.0001, +0.0005], every gate
+  and the over-edit gate pass. The dev rule is met; it says nothing about
+  the new ops.
+
 - **Correction (independent review, November 23).** Rounds 8 and 9 were
   meant to be fresh, but round 8 was not entirely: 15 of its rated items
   share an 8-gram with an earlier pool, rating key or the dev pool (repeated
@@ -27,10 +51,10 @@ this folder holds protocols, precommits and aggregates.
 | `passive_v5` (reference) | 39/43 = 90.7% | 47/50 = 94.0% | 86/93 = 92.5% [85–96] | 2.2% | reference (unchanged) |
 
   With every item (as first reported): `passive_v6` 90/100 in round 8,
-  182/200 = 91.0% pooled; `nominal_v3` 80/80. **`KEPT_V4` = `KEPT_V3` +
-  `nominal_v3`.** Pools from L on exclude 8-gram overlaps with every earlier
-  pool, rating key and the dev pool (`earlier_rated` in `evals/structure_v2.py`,
-  tested). `passive_v7` and round 10 follow below.
+  182/200 = 91.0% pooled; `nominal_v3` 80/80. Pools from L on exclude 8-gram
+  overlaps with every earlier pool, rating key and the dev pool
+  (`earlier_rated` in `evals/structure_v2.py`, tested). The rest of this
+  section is the original rounds 8–9 analysis, with every item.
 
 - **`passive_v6` raises recall, not the Good rate.** On the unfiltered
   standard pools (11,847 sentences) it fires on 0.51 sentences per 100
@@ -48,7 +72,7 @@ this folder holds protocols, precommits and aggregates.
   check never showed: two participles sharing one by-phrase ("The song was
   written and produced by Torres" → "The song was written. Torres produced
   the song."; "She is shot and killed by …"). A skip for coordinated
-  participles before the agent is the obvious `passive_v7` fix; it is not in
+  participles before the agent is the `passive_v7` fix (round 10); it is not in
   `passive_v6` because the rated code cannot change, and it is unrated.
 - **`nominal_v3`**: every one of 80 rated items (78 without repeats) was Good (all three raters
   agreed on all of them). The price is coverage: 76 of the 80 items are
@@ -110,9 +134,18 @@ the identical rewrite and it failed the same way.
   evaluation of the 3-way splits in two zones in accordance with established
   criteria." → "Wyoming would evaluate the 3-way splits in two zones in
   accordance with established criteria."
-- `nominal_v3` (openFDA label, public domain): "Based on animal data,
-  azacitidine could have an effect on male or female fertility." → "…
-  azacitidine could affect male or female fertility."
+- `nominal_v3` (Wikinews, CC BY 2.5, round 9): "A lower court was given 10
+  days to make a decision on whether the above requirements are met." → "A
+  lower court was given 10 days to decide on whether the above requirements
+  are met."
+- `passive_v7` (split, Wikipedia, CC BY-SA 4.0, round 10): "The tower was
+  developed by Extell Development Company and designed by Christian de
+  Portzamparc." → "Extell Development Company developed the tower. Christian
+  de Portzamparc designed the tower."
+- `passive_v7` (split, Federal Register, round 10): "This rule meets the
+  criteria for a significant regulatory action under EO 12866 and has been
+  reviewed by OMB." → "This rule meets the criteria for a significant
+  regulatory action under EO 12866. OMB has reviewed this rule."
 
 ## What was built
 
@@ -184,9 +217,16 @@ the identical rewrite and it failed the same way.
   `ec71b75bca9f`, `cf5bd57dbfcc` (wide, checkpointed, resumed twice),
   `5095caeaced3` (standard); dev on F2 `92e8de96a8a6` (judge run inline: F2
   metrics reproduced); `scripts/verify` `ded7371967fc` on the results commit `d6c0c66` (782 passed).
+  Round 10: fetch `205878418f42`, pool L `b6485d2996eb`, apply
+  `4c21592e1078`, dev on F2 `88b3ba30dc67`.
 
 ## Disclosures
 
+- Round 10 rated one operation only (raters saw only passive rewrites), 76
+  of its 100 items are Good-article sentences (many film, TV and music
+  credits) and only 4 are Wikinews (the news fetch stopped at its time
+  limit after 57 documents; openFDA 2015 gave 4 labels and no rated item).
+  Its raters are Opus models, like those of rounds 8–9.
 - Raters are Opus models, not people; agreement is high and they may share
   blind spots. The dev check used one rater.
 - `passive_v6`'s round-8 result was at the boundary with every item (90.0%)
@@ -218,4 +258,6 @@ the identical rewrite and it failed the same way.
 `r8_apply_wide.sh`, `r8_panel.sh`, three raters (`rater_prompt.py`), `tally
 --name rating-r8 --rates-from r8-apply.jsonl`; the same with `r9_*` and
 `rating-r9`; dev on F2: `dev_v4.sh`, then `judge --arms combo-v3 combo-v4-p6
-combo-v4-n3 combo-v4-all`.
+combo-v4-n3 combo-v4-all`. Round 10 (`env12.sh`): `fetch12.sh`,
+`r10_pool.sh`, `r10_apply.sh`, `r10_panel.sh`, three raters, `tally --name
+rating-r10 --rates-from r10-apply.jsonl`, `dev_v4b.sh`.

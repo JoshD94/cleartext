@@ -369,13 +369,15 @@ def test_round8_split_skips_means_and_long_subjects():
 def test_kept_v4_extends_kept_v3():
     from cleartext.structure_v2 import KEPT_V3, KEPT_V4
     assert KEPT_V3 == ("passive_v5", "passive_recovered", "appositive_v4", "fronted_split")
-    assert KEPT_V4 == KEPT_V3 + ("nominal_v3",)
+    assert KEPT_V4 == KEPT_V3 + ("nominal_v3", "passive_v7")
     text = ("The episode was written by Dan Greaney and directed by Mark Kirkland. "
-            "The agency conducted an evaluation of the program last year.")
+            "The agency conducted an evaluation of the program last year. "
+            "The album was recorded and mixed by Steve Albini.")
     out, edits = StructureV2(ops=KEPT_V4).rewrite(text)
-    assert out == ("The episode was written by Dan Greaney and directed by Mark Kirkland. "
-                   "The agency evaluated the program last year.")
-    assert [e["rule"] for e in edits] == ["table"]
+    assert out == ("Dan Greaney wrote the episode. Mark Kirkland directed the episode. "
+                   "The agency evaluated the program last year. "
+                   "The album was recorded and mixed by Steve Albini.")
+    assert sorted(e["rule"] for e in edits) == ["agentive_split", "table"]
 
 
 # Round 10: passive_v7 = passive_v6 plus a skip for coordinated participles
