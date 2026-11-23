@@ -48,6 +48,7 @@ ARMS = ("b", "p50", "f", "f2", "f2u")
 REPEATS = 10
 SOURCES = ("evals/learned_words_r26.py",) + F25.SOURCES
 _docs = F._docs
+R24_PANEL = F.PANEL  # captured at import: window() repoints F.PANEL at round 26's own panel
 
 
 def _sha(p):
@@ -269,7 +270,7 @@ def panel():
         raise SystemExit(f"REFUSED: {PANEL} exists")
     prev = []
     for p in (R.PANEL, Q.P12.PANEL, Q.P13.PANEL, Q.P17.PANEL, Q.P18.PANEL, Q.P19.PANEL, Q.P20.PANEL,
-              Q.DIR / "passages.json", Q.JDIR / "passages.json", STATE / "joshua-r21b/passages.json", G.PANEL, F.PANEL, F25.PANEL):
+              Q.DIR / "passages.json", Q.JDIR / "passages.json", STATE / "joshua-r21b/passages.json", G.PANEL, R24_PANEL, F25.PANEL):
         prev += json.load(open(p))
     used = [x["original"] for x in prev]
     for p in ("panel-r4", "panel-r5", "panel-r8"):

@@ -766,6 +766,9 @@ def test_r26_unseen_threshold_applies_only_to_pairs_outside_f2_pool():
     assert [x["rep"] for x in out["f2"]] == ["r0"] and sorted(x["rep"] for x in out["f2u"]) == ["r0", "r1"]
     assert set(out) == set(V26.ARMS)
     before = (V24.DIR, V24.panel, V24.load_models)
+    import inspect
+
+    assert "R24_PANEL" in inspect.getsource(V26.panel) and V26.R24_PANEL == V24.PANEL != V26.PANEL
     with V26.window():
         assert V24.DIR == V26.DIR and V24.panel is V26.panel and V24.load_models is V26.load_models
     assert (V24.DIR, V24.panel, V24.load_models) == before

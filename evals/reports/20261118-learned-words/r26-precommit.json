@@ -60,5 +60,12 @@
   "wiki": 55,
   "openfda": 45
  },
- "written": "2026-11-22 21:26:35 EST"
+ "written": "2026-11-22 21:26:35 EST",
+ "source_fix": {
+  "note": "apply crashed before the panel was built: the exclusion list read round 24's panel through F.PANEL, which window() repoints at round 26's own (absent) panel. Fixed by capturing round 24's panel path at import. No panel, swap or score existed; models, thresholds and arms are unchanged.",
+  "changed": {
+   "evals/learned_words_r26.py": "dcc872a81ce617e49a91f77a616d7aaf3ba53958063d7447fe23711c63bc45af"
+  },
+  "written": "2026-11-22 21:27:19 EST"
+ }
 }
