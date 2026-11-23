@@ -135,15 +135,25 @@ def used_generics():
     return out
 
 
+WINDOWS = {3: {"fedreg": ("2021-07-01", "2021-12-31"), "openfda": "[20230101+TO+20231231]"},
+           4: {"fedreg": ("2021-01-01", "2021-06-30"), "openfda": "[20210101+TO+20211231]"}}
+
+
 def round3(args, deadline):
+    """Rounds 3 and 4: new titles and date windows, disjoint from every earlier window."""
     f = Fetcher(args.out / "http")
     previous = used_titles()
-    for old in (Path(args.previous) / "news.jsonl.gz", Path(args.previous) / "goodwiki.jsonl.gz"):
-        if old.exists():
-            previous |= {json.loads(line)["doc"] for line in gzip.open(old, "rt")}
+    olds = [Path(p) for p in args.previous.split(",")]
+    for d in olds:
+        for old in (d / "news.jsonl.gz", d / "goodwiki.jsonl.gz"):
+            if old.exists():
+                previous |= {json.loads(line)["doc"] for line in gzip.open(old, "rt")}
     old_fda = set()
-    if (WORDS_CORPUS / "openfda.jsonl.gz").exists():
-        old_fda = {json.loads(line)["doc"] for line in gzip.open(WORDS_CORPUS / "openfda.jsonl.gz", "rt")}
+    for path in [WORDS_CORPUS / "openfda.jsonl.gz", *(d / "openfda.jsonl.gz" for d in olds)]:
+        if path.exists():
+            old_fda |= {json.loads(line)["doc"] for line in gzip.open(path, "rt")}
+    window = WINDOWS[args.round]
+    fda_url = FDA_2023.replace("[20230101+TO+20231231]", window["openfda"])
     generics = used_generics()
     stats = {}
     for name in ("goodwiki", "fedreg", "openfda", "news"):
@@ -151,13 +161,14 @@ def round3(args, deadline):
         if done.exists():
             stats[name] = json.loads(done.read_text())
             continue
-        rng = random.Random(f"{SEED}:r3:{name}")
+        rng = random.Random(f"{SEED}:r{args.round}:{name}")
         docs, partial = [], False
         if name == "fedreg":
             keys = []
             url = ("https://www.federalregister.gov/api/v1/documents.json?per_page=1000&order=oldest"
                    "&conditions[type][]=RULE&conditions[significant]=1"
-                   "&conditions[publication_date][gte]=2021-07-01&conditions[publication_date][lte]=2021-12-31"
+                   f"&conditions[publication_date][gte]={window['fedreg'][0]}"
+                   f"&conditions[publication_date][lte]={window['fedreg'][1]}"
                    "&fields[]=document_number&fields[]=title&fields[]=raw_text_url&fields[]=publication_date")
             while url:
                 page = f.json(url, delay=1.0)
@@ -177,7 +188,7 @@ def round3(args, deadline):
             for skip in range(0, 5000, 100):
                 if len(docs) >= R3_CAPS[name] or time.monotonic() > deadline:
                     break
-                page = f.json(f"{FDA_2023}&limit=100&skip={skip}", delay=0.5)
+                page = f.json(f"{fda_url}&limit=100&skip={skip}", delay=0.5)
                 for lab in page.get("results", []):
                     gen = [g.lower() for g in lab.get("openfda", {}).get("generic_name", [])]
                     doc = f"fda-{lab['set_id']}"
@@ -229,7 +240,7 @@ def main(argv=None):
     ap.add_argument("--previous", default=str(Path.home() / ".local/state/cleartext/structure-20261122/download"))
     args = ap.parse_args(argv)
     deadline = time.monotonic() + args.max_seconds
-    if args.round == 3:
+    if args.round in (3, 4):
         args.out.mkdir(parents=True, exist_ok=True)
         return round3(args, deadline)
     f = Fetcher(args.out / "http")

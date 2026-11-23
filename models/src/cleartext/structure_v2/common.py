@@ -119,9 +119,15 @@ def keeps_capital(tok):
     return False
 
 
-def lower_first(text, tok):
+def lower_first(text, tok, titles=False):
     if not text or keeps_capital(tok):
         return text
+    if titles:
+        # Round 4: a capitalized run ("Wings for My Flight", "Operation NANOOK
+        # 2008") is a title or name; keep its first capital.
+        nxt = [t for t in tok.doc[tok.i + 1: tok.i + 4] if t.is_alpha]
+        if any(t.text[:1].isupper() for t in nxt):
+            return text
     return text[0].lower() + text[1:]
 
 

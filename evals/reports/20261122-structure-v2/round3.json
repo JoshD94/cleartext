@@ -1,0 +1,359 @@
+{
+ "panel": "rating-r3",
+ "arms": {
+  "passive_v3": {
+   "n": 60,
+   "good": 47,
+   "good_rate": 0.7833333333333333,
+   "good_ci95": [
+    0.6637997232345094,
+    0.8687695600460952
+   ],
+   "marks": {
+    "good": 47,
+    "meaning": 4,
+    "ungrammatical": 9
+   },
+   "per_rater_good_rate": [
+    0.75,
+    0.7833333333333333,
+    0.7833333333333333
+   ],
+   "unanimous_good": 45,
+   "by_rule": {
+    "agentive": {
+     "n": 60,
+     "good": 47,
+     "good_ci95": [
+      0.6637997232345094,
+      0.8687695600460952
+     ],
+     "marks": {
+      "good": 47,
+      "meaning": 4,
+      "ungrammatical": 9
+     }
+    }
+   },
+   "by_source": {
+    "news3": {
+     "n": 17,
+     "good": 13
+    },
+    "fedreg3": {
+     "n": 10,
+     "good": 9
+    },
+    "openfda3": {
+     "n": 11,
+     "good": 5
+    },
+    "goodwiki3": {
+     "n": 22,
+     "good": 20
+    }
+   },
+   "edits_per_100_sentences": 1.119005328596803,
+   "changed": 63,
+   "sentences": 5630
+  },
+  "appositive_v3": {
+   "n": 34,
+   "good": 24,
+   "good_rate": 0.7058823529411765,
+   "good_ci95": [
+    0.5383109006960254,
+    0.8316536940601198
+   ],
+   "marks": {
+    "ungrammatical": 6,
+    "good": 24,
+    "notsimpler": 1,
+    "meaning": 3
+   },
+   "per_rater_good_rate": [
+    0.6764705882352942,
+    0.6470588235294118,
+    0.7058823529411765
+   ],
+   "unanimous_good": 21,
+   "by_rule": {
+    "appositive": {
+     "n": 19,
+     "good": 16,
+     "good_ci95": [
+      0.6243452453548595,
+      0.9447952840464915
+     ],
+     "marks": {
+      "ungrammatical": 3,
+      "good": 16
+     }
+    },
+    "relative": {
+     "n": 15,
+     "good": 8,
+     "good_ci95": [
+      0.3011697987531101,
+      0.751904647673791
+     ],
+     "marks": {
+      "notsimpler": 1,
+      "good": 8,
+      "ungrammatical": 3,
+      "meaning": 3
+     }
+    }
+   },
+   "by_source": {
+    "fedreg3": {
+     "n": 15,
+     "good": 8
+    },
+    "openfda3": {
+     "n": 2,
+     "good": 2
+    },
+    "news3": {
+     "n": 15,
+     "good": 13
+    },
+    "goodwiki3": {
+     "n": 2,
+     "good": 1
+    }
+   },
+   "edits_per_100_sentences": 0.33747779751332146,
+   "changed": 19,
+   "sentences": 5630
+  },
+  "frames_v2": {
+   "n": 6,
+   "good": 5,
+   "good_rate": 0.8333333333333334,
+   "good_ci95": [
+    0.4364971749742326,
+    0.969946630588185
+   ],
+   "marks": {
+    "good": 5,
+    "meaning": 1
+   },
+   "per_rater_good_rate": [
+    0.8333333333333334,
+    0.8333333333333334,
+    0.8333333333333334
+   ],
+   "unanimous_good": 5,
+   "by_rule": {
+    "relative": {
+     "n": 6,
+     "good": 5,
+     "good_ci95": [
+      0.4364971749742326,
+      0.969946630588185
+     ],
+     "marks": {
+      "good": 5,
+      "meaning": 1
+     }
+    }
+   },
+   "by_source": {
+    "fedreg3": {
+     "n": 5,
+     "good": 4
+    },
+    "openfda3": {
+     "n": 1,
+     "good": 1
+    }
+   },
+   "edits_per_100_sentences": 0.0,
+   "changed": 0,
+   "sentences": 5630
+  },
+  "passive_recovered": {
+   "n": 30,
+   "good": 27,
+   "good_rate": 0.9,
+   "good_ci95": [
+    0.7437891726682571,
+    0.9654001115225814
+   ],
+   "marks": {
+    "good": 27,
+    "meaning": 2,
+    "ungrammatical": 1
+   },
+   "per_rater_good_rate": [
+    0.8,
+    0.8666666666666667,
+    0.9
+   ],
+   "unanimous_good": 23,
+   "by_rule": {
+    "recovered_we": {
+     "n": 30,
+     "good": 27,
+     "good_ci95": [
+      0.7437891726682571,
+      0.9654001115225814
+     ],
+     "marks": {
+      "good": 27,
+      "meaning": 2,
+      "ungrammatical": 1
+     }
+    }
+   },
+   "by_source": {
+    "fedreg3": {
+     "n": 28,
+     "good": 26
+    },
+    "news3": {
+     "n": 2,
+     "good": 1
+    }
+   },
+   "edits_per_100_sentences": 0.07104795737122557,
+   "changed": 4,
+   "sentences": 5630
+  },
+  "nominal": {
+   "n": 30,
+   "good": 23,
+   "good_rate": 0.7666666666666667,
+   "good_ci95": [
+    0.5907167369328042,
+    0.8820761191944214
+   ],
+   "marks": {
+    "ungrammatical": 6,
+    "good": 23,
+    "meaning": 1
+   },
+   "per_rater_good_rate": [
+    0.7666666666666667,
+    0.7666666666666667,
+    0.7666666666666667
+   ],
+   "unanimous_good": 23,
+   "by_rule": {
+    "table": {
+     "n": 28,
+     "good": 23,
+     "good_ci95": [
+      0.6440857505322257,
+      0.9212149810424002
+     ],
+     "marks": {
+      "ungrammatical": 4,
+      "good": 23,
+      "meaning": 1
+     }
+    },
+    "mined": {
+     "n": 2,
+     "good": 0,
+     "good_ci95": [
+      0.0,
+      0.6576197760453506
+     ],
+     "marks": {
+      "ungrammatical": 2
+     }
+    }
+   },
+   "by_source": {
+    "news3": {
+     "n": 3,
+     "good": 2
+    },
+    "fedreg3": {
+     "n": 24,
+     "good": 19
+    },
+    "openfda3": {
+     "n": 1,
+     "good": 0
+    },
+    "goodwiki3": {
+     "n": 2,
+     "good": 2
+    }
+   },
+   "edits_per_100_sentences": 0.17761989342806395,
+   "changed": 10,
+   "sentences": 5630
+  },
+  "fronted_split": {
+   "n": 30,
+   "good": 28,
+   "good_rate": 0.9333333333333333,
+   "good_ci95": [
+    0.7867654148312584,
+    0.9815229763754831
+   ],
+   "marks": {
+    "good": 28,
+    "meaning": 1,
+    "notsimpler": 1
+   },
+   "per_rater_good_rate": [
+    0.9333333333333333,
+    0.9333333333333333,
+    0.9333333333333333
+   ],
+   "unanimous_good": 28,
+   "by_rule": {
+    "split": {
+     "n": 30,
+     "good": 28,
+     "good_ci95": [
+      0.7867654148312584,
+      0.9815229763754831
+     ],
+     "marks": {
+      "good": 28,
+      "meaning": 1,
+      "notsimpler": 1
+     }
+    }
+   },
+   "by_source": {
+    "fedreg3": {
+     "n": 10,
+     "good": 9
+    },
+    "goodwiki3": {
+     "n": 7,
+     "good": 7
+    },
+    "openfda3": {
+     "n": 9,
+     "good": 9
+    },
+    "news3": {
+     "n": 4,
+     "good": 3
+    }
+   },
+   "edits_per_100_sentences": 0.42628774422735344,
+   "changed": 24,
+   "sentences": 5630
+  }
+ },
+ "agreement": {
+  "all_three": 0.91005291005291,
+  "pairwise": 0.9400352733686067
+ },
+ "cards": 189,
+ "key_sha256": "e2fe1045d1045dc1c4e033baa7f54e8824de7755d3ba0451927595ec2ad111d7",
+ "marks_sha256": [
+  "c8f9248bf985493d186dfa934b5605b511e2d9205fd17f88e3a39f25ba825864",
+  "97cc1ff32144a7587911784538623781f9bbec388506cf6448117d3e55903710",
+  "59c05fa126d0586fef839da164da1e4b6ff52e7192bb9978c372230b4de5946e"
+ ]
+}

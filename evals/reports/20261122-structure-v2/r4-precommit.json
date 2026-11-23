@@ -1,0 +1,65 @@
+{
+ "round": "4",
+ "written": "2026-11-22 20:24:20 EST",
+ "source_sha256": {
+  "models/src/cleartext/structure_v2/__init__.py": "600743932f06596722bdf8f1e2000d88c7b0e5f6ef529d8073ddaa5a86952040",
+  "models/src/cleartext/structure_v2/appositive.py": "cf76b9e33df4fccc4d675c91fb1e358f561f356f80739da7545942f5a6831fda",
+  "models/src/cleartext/structure_v2/common.py": "a14c621ca0fb96acb6c829240dbbc63f0d0ba3bf08e45ea02d8695cdcf09d7a6",
+  "models/src/cleartext/structure_v2/frames.py": "216e0cb403418aff5e910fff24e7b2e0588a4a93f5637112d667bb5a8da1a0ec",
+  "models/src/cleartext/structure_v2/fronted.py": "a76a971e758a897de0657a4b2339e9bf93a848f3a5eceb8c9421a1cab9b7d3df",
+  "models/src/cleartext/structure_v2/gate.py": "2e98d0e572bf54f0f50e60364b43243ec8660bb7993f31eb065fefd312c48ae7",
+  "models/src/cleartext/structure_v2/nominal.py": "a9b37a17086b90560c69d22cd56d0dc59ab8d1d0dee9b86513838e841202949f",
+  "models/src/cleartext/structure_v2/passive.py": "db7e16de726163b21f1c1bc83a955989cab74690af51fd5b0307fa6676b94b2e",
+  "models/src/cleartext/structure_v2/stage.py": "36cba9070c702d318d60674afc92cd3b92952e643a4ced8d50880b010943ceb7",
+  "evals/structure_v2.py": "d762786cdece5108a3921c5eccd7a927018cb533550cb515e3a9a940c444c655",
+  "evals/reports/20261122-structure-v2/RATER_BRIEF.md": "b26a7e59a2cdeb3b3fe018b17a69581b1fc0bac747c888d5ca7efaf30b462bfa",
+  "evals/reports/20261122-structure-v2/RATER_PROMPT.md": "349ac145d04b5c437d60a7a7e735cf7876700a95e44d3133af376769bee4c0ad",
+  "models/tests/test_structure_v2.py": "1e8cf323b1f3c6c70d6ff12e61aa34aaf5c2ecf13455cd29de7812ae1ae4f79c",
+  "evals/structure_v2_fetch.py": "ea001bf5e0a3f35bc222c7034ced19bdbb6705159be5570cf4fc2eb26eb349ce"
+ },
+ "inputs_sha256": {
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-D.json": "d67e49e3658cde37f63c3a40c5d4fa13253fffcdcd6b244d53a69c5d47d14d30",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-Dwide.json": "8315ba8bdb0a8ccd4893366d6d196ea41f790208bd1c4d810a04d9966590d0ef",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/pool-D-manifest.json": "15de1cccb8f0bb133b5dbec8d784d88323f957c4d1e8f1a931489d1e0bfda112",
+  "/home/joshuadirga/.local/state/cleartext/structure-20261122/download4/manifest.json": "9e40d67d6a150bfdaa9083db992a60ae22a6ee0c319ee6a4029c76e6c83fc4e9"
+ },
+ "thresholds": {
+  "arms": [
+   "passive_v4",
+   "nominal_v2"
+  ],
+  "cap": {
+   "passive_v4": 60,
+   "nominal_v2": 40
+  },
+  "rare_arm_wide_pool": "pool-Dwide",
+  "seed": 20261122,
+  "raters": 3,
+  "majority": "2 of 3, else most severe",
+  "kept": {
+   "min_items": 20,
+   "good_rate_min": 0.85,
+   "meaning_rate_max": 0.1,
+   "on": "round 4 alone"
+  },
+  "kept_before_round4": [
+   "passive_recovered",
+   "fronted_split"
+  ],
+  "dropped_by_round3": [
+   "nominal"
+  ],
+  "combined_order": [
+   "passive_v4",
+   "passive_recovered",
+   "nominal_v2",
+   "fronted_split"
+  ],
+  "dev_success_combined": {
+   "all_gates_and_over_edit": true,
+   "dnli_ci_low_min": -0.005,
+   "dfk_max": 0.0
+  },
+  "round3_code_commit": "a66af31"
+ }
+}

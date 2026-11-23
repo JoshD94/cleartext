@@ -153,8 +153,9 @@ def lookup(light, noun, mine=True):
 class Nominalization:
     op = "nominal"
 
-    def __init__(self, mine=True):
+    def __init__(self, mine=True, version=1):
         self.mine = mine
+        self.version = version  # 2 adds the round-3 skips
 
     def rewrite_sentence(self, sentence, context=()):
         if any(q in sentence for q in ('"', "“", "”")):
@@ -215,6 +216,21 @@ class Nominalization:
                 continue
             if drop_prep is None and noun.lemma_ not in NO_OBJECT_OK:
                 continue
+            if self.version >= 2:
+                # Round 3 failures: "make a statement regarding X" -> "state regarding X",
+                # "offered suggestions in response" -> "suggested in response",
+                # "provide documentation of X to Y" -> "document X to Y",
+                # "make payments ... more consistent", "has impacts on" (plural).
+                verb_after = [c for c in verb.children if c.i > noun.i]
+                if any(c.dep_ == "prep" and c.lower_ not in preps for c in verb_after + after):
+                    continue
+                if any(c.dep_ in ("oprd", "acomp", "ccomp", "xcomp", "advmod") for c in verb_after):
+                    continue
+                if any(t.lower_ in ("to", "regarding", "concerning") for t in sent if t.i > noun.i
+                       and t.head.i in {noun.i, verb.i} | {x.i for x in noun.subtree}) and "to" not in preps:
+                    continue
+                if noun.tag_ == "NNS" and noun.lemma_ in HAVE_ONLY:
+                    continue
             if noun.lemma_ in HAVE_ONLY and drop_prep is not None and any(
                     c.dep_ == "prep" for g in drop_prep.children if g.dep_ == "pobj" for c in g.children):
                 continue  # "an impact on the economy of more than $200 million": the amount is the impact's

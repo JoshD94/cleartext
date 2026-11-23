@@ -115,8 +115,11 @@ def run_pool_c(args):
     earlier panels."""
     state = outside_checkout(args.state)
     docs_used, texts_used, files = used_texts()
-    for f in ("pool-build.json", "pool-A.json", "pool-B.json", "pool-buildwide.json", "pool-Awide.json",
-              "pool-Bwide.json"):
+    earlier = ["pool-build.json", "pool-A.json", "pool-B.json", "pool-buildwide.json", "pool-Awide.json",
+               "pool-Bwide.json"]
+    if args.name == "D":
+        earlier += ["pool-C.json", "pool-Cwide.json"]
+    for f in earlier:
         for r in json.loads((state / f).read_text()):
             docs_used.add(r["doc"])
             texts_used.append(r["sentence"])
@@ -124,10 +127,10 @@ def run_pool_c(args):
     used = set()
     for t in texts_used:
         used |= grams(t)
-    rng = random.Random(SEED + 3)
+    rng = random.Random(SEED + (3 if args.name == "C" else 4))
     pool, wide, manifest = [], [], {"excluded_files": files, "sources": {}}
     for path in sorted(Path(args.download).glob("*.jsonl.gz")):
-        name = path.name.split(".")[0] + "3"
+        name = path.name.split(".")[0] + ("3" if args.name == "C" else "4")
         by_doc = defaultdict(list)
         for line in gzip.open(path, "rt"):
             r = json.loads(line)
@@ -157,14 +160,15 @@ def run_pool_c(args):
             if len(kept) >= args.per_source:
                 break
         pool += kept
-        stats["C_sentences"] = len(kept)
+        stats[f"{args.name}_sentences"] = len(kept)
         manifest["sources"][name] = {"sha256": sha(path), **stats}
         print(name, dict(stats), flush=True)
-    write_json(state / "pool-C.json", pool)
-    write_json(state / "pool-Cwide.json", wide)
-    manifest["pool_C_sha256"] = sha(state / "pool-C.json")
-    manifest["pool_Cwide_sha256"] = sha(state / "pool-Cwide.json")
-    write_json(state / "pool-C-manifest.json", manifest)
+    n = args.name
+    write_json(state / f"pool-{n}.json", pool)
+    write_json(state / f"pool-{n}wide.json", wide)
+    manifest[f"pool_{n}_sha256"] = sha(state / f"pool-{n}.json")
+    manifest[f"pool_{n}wide_sha256"] = sha(state / f"pool-{n}wide.json")
+    write_json(state / f"pool-{n}-manifest.json", manifest)
     print(len(pool), len(wide))
 
 
@@ -621,7 +625,8 @@ def run_score(args):
     todo = [(p["original"], f2[p["id"]]) for p in dev[:3]]
     for name in args.arms:
         rows = json.loads((state / f"dev-{name}.json").read_text())
-        todo += [(p["original"], rows[p["id"]]["output"]) for p in dev]
+        # Unchanged passages reuse F2's cached metrics (judge reads them).
+        todo += [(p["original"], rows[p["id"]]["output"]) for p in dev if rows[p["id"]]["output"] != f2[p["id"]]]
     with metrics_path.open("a") as f:
         for source, output in todo:
             if (source, output) in have:
@@ -768,6 +773,7 @@ def main(argv=None):
     p = sub.add_parser("pool-c")
     p.add_argument("--state", type=Path, required=True)
     p.add_argument("--download", type=Path, required=True)
+    p.add_argument("--name", default="C", choices=("C", "D"))
     p.add_argument("--per-source", type=int, default=1500)
     p.add_argument("--per-doc", type=int, default=40)
     p = sub.add_parser("apply")

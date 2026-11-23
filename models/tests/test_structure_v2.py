@@ -178,3 +178,36 @@ def test_round3_abstains(op, sentence):
 ])
 def test_round3_operations(op, before, after):
     assert run(op, before) == after
+
+
+@pytest.mark.parametrize("op, sentence", [
+    # Round 4 (failure types from the round-3 ratings).
+    ("passive_v4", "The current bill was passed in the House a year ago by a 420-3 vote."),
+    ("passive_v4", "Such events are infrequent if the drug is given by a slow infusion over 60 minutes."),
+    ("passive_v4", "Creatinine clearance is calculated by the Cockcroft-Gault formula: clearance can be estimated."),
+    ("passive_v4", "The nine members are named one third by the President, one third by the Senate."),
+    ("passive_v4", "Dosing for the Treatment of Hypotension in the Setting of Anesthesia Ephedrine sulfate injection "
+                   "should be administered by trained healthcare providers."),
+    ("nominal_v2", "The Church did not make a statement regarding this case."),
+    ("nominal_v2", "Many commenters offered suggestions in response to the request."),
+    ("nominal_v2", "To the extent that the rule has impacts on the environment, these are small."),
+])
+def test_round4_abstains(op, sentence):
+    assert run(op, sentence) == sentence
+
+
+@pytest.mark.parametrize("op, before, after", [
+    ("passive_v4", "After he was laid off by the station last year, he worked as a reporter.",
+     "After the station laid him off last year, he worked as a reporter."),
+    ("nominal_v2", "The agency will conduct an evaluation of the program next year.",
+     "The agency will evaluate the program next year."),
+])
+def test_round4_operations(op, before, after):
+    assert run(op, before) == after
+
+
+def test_titles_keep_their_capital():
+    from cleartext.structure_v2.common import lower_first
+    doc = parse("Wings for My Flight was published in 1991.")
+    assert lower_first("Wings for My Flight", doc[0], titles=True) == "Wings for My Flight"
+    assert lower_first("Wings for My Flight", doc[0]) == "wings for My Flight"

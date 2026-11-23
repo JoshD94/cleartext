@@ -223,7 +223,45 @@ def skip_reason(verb, subj, auxpass, agent, agent_obj, sent, version=2):
     reason = _skip_reason(verb, subj, auxpass, agent, agent_obj, sent)
     if reason is None and version >= 3:
         reason = _skip_reason_v3(verb, subj, agent, agent_obj, sent)
+    if reason is None and version >= 4:
+        reason = _skip_reason_v4(verb, subj, agent, agent_obj, sent)
     return reason
+
+
+# Round 4: instruments and procedures are means, not doers ("by a 420-3 vote",
+# "by a slow infusion", "by the Cockcroft-Gault formula").
+MEANS_V4 = {"vote", "votes", "infusion", "formula", "method", "means", "process", "route", "test", "equation",
+            "procedure", "technique", "injection", "instrument", "device", "margin", "majority", "ballot",
+            "referendum", "assay", "inhalation", "ingestion", "dialysis", "hemodialysis"}
+
+
+def _skip_reason_v4(verb, subj, agent, agent_obj, sent):
+    """Round-4 skips, one per failure type in the round-3 ratings."""
+    first = sent[0]
+    if subj.left_edge.i == sent.start:
+        caps = [t for t in list(subj.subtree)[:6] if t.text[:1].isupper() and t.is_alpha]
+        if len(caps) >= 3 and not first.ent_type_:
+            return "title-case run at the sentence start (heading or title)"
+        from nltk.corpus import wordnet as wn
+        from wordfreq import zipf_frequency
+        if (first.text[:1].isupper() and not first.ent_type_ and first.lower_ not in ("the", "a", "an")
+                and not wn.synsets(first.lower_) and zipf_frequency(first.lower_, "en") < 3.0
+                and first.pos_ != "DET"):
+            return "capitalized sentence-initial word of unknown type"
+    if any(t.lower_ == "by" for t in subj.subtree):
+        return "by-phrase inside the subject"
+    if sum(1 for t in sent if t.lower_ == "by") > 1:
+        return "more than one by-phrase in the sentence"
+    if any(t.lower_ in (":", ";") or t.text in (":", ";") for t in sent if t.i > verb.i):
+        return "colon or semicolon after the verb"
+    if agent is not None and agent_obj.lemma_.lower() in MEANS_V4:
+        return "means or procedure as the agent"
+    prev = sent.doc[subj.left_edge.i - 1] if subj.left_edge.i > sent.start else None
+    if prev is not None and prev.pos_ in ("ADJ", "DET", "NUM") and prev.i not in {t.i for t in subj.subtree}:
+        return "a modifier before the subject is not in its phrase (misparse)"
+    if any(t.dep_ == "relcl" and t.head.i == verb.i for t in sent):
+        return "relative clause attached to the verb (misparse)"
+    return None
 
 
 def _skip_reason_v3(verb, subj, agent, agent_obj, sent):
@@ -458,6 +496,8 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
             pn = {"I": "1sg", "he": "3sg", "she": "3sg"}.get(OBJ_TO_SUBJ[agent_toks[0].lower_], "pl")
         else:
             pn = number_of(agent_obj)
+            if version >= 4 and len(agent_obj.text) > 2 and agent_obj.text[:-1].isupper() and agent_obj.text[-1] == "s":
+                pn = "pl"  # plural acronyms ("LSLs", "ACOs")
             if version >= 3 and (agent_obj.lower_ in QUANTIFIER_PLURAL
                                  or any(t.lower_ == "both" for t in agent_obj.subtree)):
                 pn = "pl"  # "criticised by some" -> "some have"; "both the oral and parenteral ..." 
@@ -480,7 +520,7 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
         object_text = span_text(subj_toks, lambda t: SUBJ_TO_OBJ.get(t.lower_, t.text)
                                 if t.tag_ == "PRP" and t.lower_ in SUBJ_TO_OBJ and t.i in heads else t.text)
         if start:
-            object_text = lower_first(object_text, subj_toks[0])
+            object_text = lower_first(object_text, subj_toks[0], titles=version >= 4)
     group = _verb_group(verb, auxpass, auxes, pn)
     if group is None:
         return None
@@ -517,6 +557,10 @@ def convert_clause(sent, verb, subj, auxpass, new_subject=None, version=2):
             out.insert(subject_text)
         if t.i == verb.i:
             out.insert(" ".join(group))
+            if particle is not None and version >= 4 and subj.tag_ == "PRP":
+                out.insert(object_text)  # "laid him off", not "laid off him"
+                out.insert(particle.text)
+                continue
             if particle is not None:
                 out.insert(particle.text)
             out.insert(object_text)

@@ -25,6 +25,7 @@ OPS = {
     "passive": lambda: ActiveVoice(),
     "passive_we": lambda: ActiveVoice(agents=("we",)),
     "passive_v3": lambda: ActiveVoice(version=3),
+    "passive_v4": lambda: ActiveVoice(version=4),
     "passive_recovered": lambda: ActiveVoice(agents=("we",), kinds=("recovered_we",)),
     "appositive": lambda: AppositiveSplit(),
     "appositive_v2": lambda: AppositiveSplit(version=2),
@@ -36,6 +37,7 @@ OPS = {
     # usually a referential "it" ("It is a highway that links ..."), not a cleft.
     "frames_v2": lambda: EmptyFrames(rules=("existential",)),
     "nominal": lambda: Nominalization(),
+    "nominal_v2": lambda: Nominalization(version=2),
 }
 CONTEXT = 3  # preceding sentences an operation may read (agent recovery)
 
