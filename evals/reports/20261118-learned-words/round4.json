@@ -1,0 +1,76 @@
+{
+ "panel": "84 unused windows of test-set-v3 DEV documents (43 documents; no test document text kept), source text (no F2 output exists)",
+ "rater": "fresh blind subagent (claude-opus-5-5, not human); 76 round-4 swaps shuffled with the 47 round-3 swaps; 94% agreement with the round-3 rater on those 47",
+ "strict_checker": {
+  "threshold": 0.53,
+  "applied_rule": "fallback S2: best OOF F0.5",
+  "swords_test": {
+   "strict_auc": 0.7972679402285553,
+   "lenient_checker_auc_on_strict_label": 0.8091273304029355
+  }
+ },
+ "arms": {
+  "b_round3_stage": {
+   "swaps": 71,
+   "good": 44,
+   "notsimpler": 12,
+   "meaning": 15,
+   "good_rate": 0.62
+  },
+  "c_plus_target_floor": {
+   "swaps": 55,
+   "good": 35,
+   "notsimpler": 9,
+   "meaning": 11,
+   "good_rate": 0.636
+  },
+  "d_plus_strict_checker": {
+   "swaps": 27,
+   "good": 15,
+   "notsimpler": 6,
+   "meaning": 6,
+   "good_rate": 0.556
+  }
+ },
+ "round3_rerated": {
+  "arm_a": {
+   "swaps": 45,
+   "good_rate": 0.444
+  },
+  "arm_b": {
+   "swaps": 33,
+   "good_rate": 0.576
+  }
+ },
+ "pooled_r3_r4_by_margin": {
+  "<0.1": [
+   1,
+   14
+  ],
+  "0.1-0.3": [
+   12,
+   29
+  ],
+  "0.3-0.6": [
+   22,
+   35
+  ],
+  "0.6-1": [
+   18,
+   27
+  ],
+  ">=1": [
+   11,
+   18
+  ]
+ },
+ "verdict": "both round-4 hypotheses rejected; meaning errors (~25% of swaps, mostly broken verb frames, collocations and term senses) are not predicted by the checker score",
+ "job_ids": {
+  "strict_fit_refused": "1afb0ba6b4e8",
+  "strict_fit": "4080eeeeca6d",
+  "apply": [
+   "93aa477f020e",
+   "74d6a850f6ad"
+  ]
+ }
+}

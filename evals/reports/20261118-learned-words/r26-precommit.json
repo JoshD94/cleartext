@@ -1,0 +1,71 @@
+{
+ "thresholds": {
+  "f2": 0.8073942190361427,
+  "f2u_unseen": 0.8073942190361427,
+  "f": 0.7798879255919591,
+  "p50": 0.7368737066324393
+ },
+ "arms": [
+  "b",
+  "p50",
+  "f",
+  "f2"
+ ],
+ "go": false,
+ "f2_go": true,
+ "f_args": {
+  "prior": true,
+  "frame": true,
+  "lex": true,
+  "inter": false
+ },
+ "model_f2_sha256": "0b959d848e88f3ab51661977a2652dcd4c94293d6098565eab09fe1e1c638123",
+ "model_f_sha256": "b292da726ee09edc35223e97772381765b0672b6d00970b286c748dd0df233b6",
+ "model_p50_sha256": "9ad9e32bedd6cdbe9ca739063a0b32491d688ef542879679b55edfc2007dda59",
+ "model_qg_sha256": "0aad1785acad5408882f8680f1f49bf1649c964b5e085b5aac5c0acfaf854aad",
+ "pool_sha256": "a954026a55b2f990c802fbe83853f8bc5ba5f0e06a85734f1451d3d3d312933a",
+ "pair_lexical_sha256": "ac2c11e7d82e8e1eba222c634514fbd393bb02ebbd046dfcf9b3f04f4e7105b3",
+ "wc_lexicon_sha256": "7ad33674ec8ca2e8b594b02435c921fafa072d6b4cd14de0238fa2ca90212a83",
+ "sense_table_sha256": "443ef2bf23fee6e7d45a9df0c6d21371e38518af62ba63ad4ce678b7c14024e2",
+ "arm_s_model_sha256": "57418cc1969df9e5a02b3938b98d14282682fda80e270e15470d9967c8bdd86d",
+ "source_sha256": {
+  "evals/learned_words_r26.py": "f6fd74b95c1f4809eb08e9336bd43bdd404e30f3d2e9a2497fd298d041307278",
+  "evals/learned_words_r25.py": "cd41fc5a94a3f71997ba9736072172cb8e81b89b57f345e8b6f4158e28d3b918",
+  "evals/learned_words_r24.py": "b9b4b0e9085413d62173c584b3c1d36cebb01aeb57b749a5353f4e7fdbbaac45",
+  "models/src/cleartext/learned_words/depframe.py": "b10a2a8ddeb5e20b224736dcc487d03e8e45e17c73dfa77ad2f29a4abd4422f8",
+  "models/src/cleartext/learned_words/pairlex.py": "c7fc5026ca3fbf26a726b5720f6aab9dfb53b4e2abbc38487d5a38d05b15f304",
+  "evals/learned_words_r22.py": "cf722ed83c54ad5d35eab7e22518c9eb61b6a89e43631cfffc0431ccfd5ac62a",
+  "evals/learned_words_r21.py": "e4d4916ac37736612d7c49c2301bf6296c3956811c95f18d19e2f9fcce88c877",
+  "evals/learned_words_genre.py": "8777ff1e8727326a596398c69a22c85973839974990c5859efc8c1cdd936b509",
+  "models/src/cleartext/learned_words/realize.py": "c884dcf322686239dcf1955f3495e93f8f833151994661a819f9cb79bed53c7d",
+  "evals/learned_words_r20.py": "db877be77b24c77a235fa644d87a37dde5eb679c1b0c4490ae7cdbd90eb2078d",
+  "evals/learned_words_r19.py": "b910fd173832f24d5bac8c05187ebc26d6d37863c052deb33bc8be6c94ed2402",
+  "evals/learned_words_r18.py": "f6830a7465e821d8eedc0557ed9403b79d68014bb24e8710be35111a719bd55a",
+  "evals/learned_words_r17.py": "aa2467e299176b1c9736e569460c70eadda726072eb2ee7fcd2bccbfe689eb8c",
+  "evals/learned_words_r16.py": "e2b609fb7fde9c24c72416cd982a0cfa395553888e31ef2c4de40d50e176dabf",
+  "evals/learned_words_r15.py": "1c9e9776755fbe7be1b042bb9b0dce1deab4617d06382df60db22aa144204807",
+  "evals/learned_words_r14.py": "56a7995f1ac905df7a17039b2ae9c436d0be474d672d700fef9e49b6bc8006b2",
+  "evals/learned_words_r13.py": "59dd07fb672a0527bbfb430d0552d89ecabeea42b9609e2e77a479849f16544c",
+  "models/src/cleartext/learned_words/context_fit.py": "5a623ae85355ee33921b3f60397d1d223d0034be8bc4ce6eb3df4288145f5509",
+  "evals/learned_words_corpus.py": "27388105fc68005b172bef1d73f26fe14aa41dafea5faf6f3ec777a18379a442",
+  "evals/learned_words_r12.py": "0d66ed85accc8ad6db4f2d07b9a005c21b5688f1f7d26ddb3429b23c8dceef7d",
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400"
+ },
+ "panel_seed": 20261226,
+ "per_source": {
+  "news": 45,
+  "wiki": 55,
+  "openfda": 45
+ },
+ "written": "2026-11-22 21:26:35 EST",
+ "source_fix": {
+  "note": "apply crashed before the panel was built: the exclusion list read round 24's panel through F.PANEL, which window() repoints at round 26's own (absent) panel. Fixed by capturing round 24's panel path at import. No panel, swap or score existed; models, thresholds and arms are unchanged.",
+  "changed": {
+   "evals/learned_words_r26.py": "dcc872a81ce617e49a91f77a616d7aaf3ba53958063d7447fe23711c63bc45af"
+  },
+  "written": "2026-11-22 21:27:19 EST"
+ }
+}

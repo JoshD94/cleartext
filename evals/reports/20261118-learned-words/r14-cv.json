@@ -1,0 +1,205 @@
+{
+ "rows": 620,
+ "ref_rows": 233,
+ "ref_r12_rows": 107,
+ "grid": [
+  0.4,
+  0.45,
+  0.5,
+  0.55,
+  0.6
+ ],
+ "target_r12": 0.92,
+ "repeats": 10,
+ "extra": [
+  "ctx_cos",
+  "check"
+ ],
+ "passage_cv": {
+  "0.4": {
+   "m": {
+    "kept": 96.3,
+    "keep_share": 0.4133047210300429,
+    "good_rate": 0.9324607940023467,
+    "meaning": 6.5
+   },
+   "p": {
+    "kept": 94.5,
+    "keep_share": 0.4055793991416309,
+    "good_rate": 0.9269412022661117,
+    "meaning": 6.9
+   },
+   "m_r12": {
+    "kept": 39.3,
+    "keep_share": 0.36728971962616824,
+    "good_rate": 0.8673180507882122,
+    "meaning": 5.2
+   },
+   "p_r12": {
+    "kept": 39.2,
+    "keep_share": 0.3663551401869159,
+    "good_rate": 0.8517481325734304,
+    "meaning": 5.8
+   },
+   "paired_gain_m_vs_p": 0.005519591736235096,
+   "auc_m": 0.8967210567210568,
+   "auc_p": 0.8917404817404819
+  },
+  "0.45": {
+   "m": {
+    "kept": 108.0,
+    "keep_share": 0.46351931330472096,
+    "good_rate": 0.9232530569138842,
+    "meaning": 8.3
+   },
+   "p": {
+    "kept": 107.7,
+    "keep_share": 0.4622317596566524,
+    "good_rate": 0.9193373539717685,
+    "meaning": 8.7
+   },
+   "m_r12": {
+    "kept": 44.5,
+    "keep_share": 0.4158878504672897,
+    "good_rate": 0.8562260126943843,
+    "meaning": 6.4
+   },
+   "p_r12": {
+    "kept": 44.9,
+    "keep_share": 0.4196261682242991,
+    "good_rate": 0.8486943283750531,
+    "meaning": 6.8
+   },
+   "paired_gain_m_vs_p": 0.0039157029421158064,
+   "auc_m": 0.8967210567210568,
+   "auc_p": 0.8917404817404819
+  },
+  "0.5": {
+   "m": {
+    "kept": 118.7,
+    "keep_share": 0.5094420600858369,
+    "good_rate": 0.9181626721576885,
+    "meaning": 9.7
+   },
+   "p": {
+    "kept": 118.7,
+    "keep_share": 0.5094420600858369,
+    "good_rate": 0.9056145205884787,
+    "meaning": 11.2
+   },
+   "m_r12": {
+    "kept": 50.2,
+    "keep_share": 0.4691588785046729,
+    "good_rate": 0.8505016579281286,
+    "meaning": 7.5
+   },
+   "p_r12": {
+    "kept": 51.2,
+    "keep_share": 0.4785046728971962,
+    "good_rate": 0.8241213870163449,
+    "meaning": 9.0
+   },
+   "paired_gain_m_vs_p": 0.01254815156920972,
+   "auc_m": 0.8967210567210568,
+   "auc_p": 0.8917404817404819
+  },
+  "0.55": {
+   "m": {
+    "kept": 129.2,
+    "keep_share": 0.5545064377682403,
+    "good_rate": 0.904799466859713,
+    "meaning": 11.9
+   },
+   "p": {
+    "kept": 129.3,
+    "keep_share": 0.5549356223175966,
+    "good_rate": 0.89342623617971,
+    "meaning": 13.8
+   },
+   "m_r12": {
+    "kept": 55.2,
+    "keep_share": 0.5158878504672897,
+    "good_rate": 0.8367643571600356,
+    "meaning": 9.0
+   },
+   "p_r12": {
+    "kept": 56.2,
+    "keep_share": 0.525233644859813,
+    "good_rate": 0.8256865533063404,
+    "meaning": 9.8
+   },
+   "paired_gain_m_vs_p": 0.011373230680003043,
+   "auc_m": 0.8967210567210568,
+   "auc_p": 0.8917404817404819
+  },
+  "0.6": {
+   "m": {
+    "kept": 138.9,
+    "keep_share": 0.596137339055794,
+    "good_rate": 0.8806746761981413,
+    "meaning": 15.0
+   },
+   "p": {
+    "kept": 140.3,
+    "keep_share": 0.6021459227467811,
+    "good_rate": 0.8704439732538438,
+    "meaning": 17.9
+   },
+   "m_r12": {
+    "kept": 60.0,
+    "keep_share": 0.5607476635514018,
+    "good_rate": 0.8186735706039758,
+    "meaning": 10.5
+   },
+   "p_r12": {
+    "kept": 61.3,
+    "keep_share": 0.5728971962616822,
+    "good_rate": 0.8193934859367756,
+    "meaning": 11.1
+   },
+   "paired_gain_m_vs_p": 0.010230702944297676,
+   "auc_m": 0.8967210567210568,
+   "auc_p": 0.8917404817404819
+  }
+ },
+ "keep": 0.4,
+ "time_split_r12": {
+  "m": {
+   "kept": 39,
+   "keep_share": 0.3644859813084112,
+   "good_rate": 0.8717948717948718,
+   "meaning": 5,
+   "notsimpler": 0,
+   "auc": 0.8524822695035461
+  },
+  "p": {
+   "kept": 40,
+   "keep_share": 0.37383177570093457,
+   "good_rate": 0.85,
+   "meaning": 6,
+   "notsimpler": 0,
+   "auc": 0.8535460992907802
+  }
+ },
+ "lemma_cv_diagnostic": {
+  "m": 0.9027374141876431,
+  "p": 0.8625175123293876
+ },
+ "go_conditions": {
+  "keep_rule_met": false,
+  "cv_good_ge_0.90": true,
+  "cv_gain_vs_p_ge_0.02": false,
+  "time_split_gain_ge_0.03_keep_ge_0.35": false
+ },
+ "go": false,
+ "pool_sha256": "563af3a14983d4edad149e1857345c909a71b6e8ae30dbdc5fab29ad1df08f29",
+ "source_sha256": {
+  "evals/learned_words_r14.py": "56a7995f1ac905df7a17039b2ae9c436d0be474d672d700fef9e49b6bc8006b2",
+  "evals/learned_words_r13.py": "59dd07fb672a0527bbfb430d0552d89ecabeea42b9609e2e77a479849f16544c",
+  "evals/learned_words_r12.py": "0d66ed85accc8ad6db4f2d07b9a005c21b5688f1f7d26ddb3429b23c8dceef7d",
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400"
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "thresholds": {
+  "qg": 0.697840227433193,
+  "qg_tech": 0.7860820176117327,
+  "rg": 0.6555447139278686,
+  "rg_tech": 0.7751882906051026,
+  "p50": 0.7368737066324393,
+  "q50": 0.7759680750079674,
+  "s": 0.5127187962827388
+ },
+ "keep_genre": 0.4,
+ "model_qg_sha256": "0aad1785acad5408882f8680f1f49bf1649c964b5e085b5aac5c0acfaf854aad",
+ "model_rg_sha256": "5f0922ec8fee6b619ecceca53a97b6c4d025cd7a4d78939c176ecf36ae993bc0",
+ "model_q50_sha256": "57cea0a4f96bdfd3704e367bd515f385c78f92666a1c79a7e1274bd6738b3526",
+ "model_p50_sha256": "9ad9e32bedd6cdbe9ca739063a0b32491d688ef542879679b55edfc2007dda59",
+ "pool_sha256": "df86f443fdc928cd4050b39ff0706516ed4c17e76e269cb905adfefed0289902",
+ "sense_table_sha256": "443ef2bf23fee6e7d45a9df0c6d21371e38518af62ba63ad4ce678b7c14024e2",
+ "arm_s_model_sha256": "57418cc1969df9e5a02b3938b98d14282682fda80e270e15470d9967c8bdd86d",
+ "genre_corpus_sha256": {
+  "news": "fa7036c2b0d12979009f3581b84a4f3e8870611db5b33904efaab33aa0f53d19",
+  "wiki": "a79b2d908a9e0b0aa0ce0ffb40d23b58aa7ee8c5bd6b6b55e62836a207579aec"
+ },
+ "source_sha256": {
+  "evals/learned_words_r22.py": "cf722ed83c54ad5d35eab7e22518c9eb61b6a89e43631cfffc0431ccfd5ac62a",
+  "evals/learned_words_r21.py": "e4d4916ac37736612d7c49c2301bf6296c3956811c95f18d19e2f9fcce88c877",
+  "evals/learned_words_genre.py": "8777ff1e8727326a596398c69a22c85973839974990c5859efc8c1cdd936b509",
+  "models/src/cleartext/learned_words/realize.py": "c884dcf322686239dcf1955f3495e93f8f833151994661a819f9cb79bed53c7d",
+  "evals/learned_words_r20.py": "db877be77b24c77a235fa644d87a37dde5eb679c1b0c4490ae7cdbd90eb2078d",
+  "evals/learned_words_r19.py": "b910fd173832f24d5bac8c05187ebc26d6d37863c052deb33bc8be6c94ed2402",
+  "evals/learned_words_r18.py": "f6830a7465e821d8eedc0557ed9403b79d68014bb24e8710be35111a719bd55a",
+  "evals/learned_words_r17.py": "aa2467e299176b1c9736e569460c70eadda726072eb2ee7fcd2bccbfe689eb8c",
+  "evals/learned_words_r16.py": "e2b609fb7fde9c24c72416cd982a0cfa395553888e31ef2c4de40d50e176dabf",
+  "evals/learned_words_r15.py": "1c9e9776755fbe7be1b042bb9b0dce1deab4617d06382df60db22aa144204807",
+  "evals/learned_words_r14.py": "56a7995f1ac905df7a17039b2ae9c436d0be474d672d700fef9e49b6bc8006b2",
+  "evals/learned_words_r13.py": "59dd07fb672a0527bbfb430d0552d89ecabeea42b9609e2e77a479849f16544c",
+  "models/src/cleartext/learned_words/context_fit.py": "5a623ae85355ee33921b3f60397d1d223d0034be8bc4ce6eb3df4288145f5509",
+  "evals/learned_words_corpus.py": "27388105fc68005b172bef1d73f26fe14aa41dafea5faf6f3ec777a18379a442",
+  "evals/learned_words_r12.py": "0d66ed85accc8ad6db4f2d07b9a005c21b5688f1f7d26ddb3429b23c8dceef7d",
+  "evals/learned_words_r9.py": "90e2dd99465b1ef2aa77d791d7bdb89caeb56b935dad93d1e8f392de592f4471",
+  "evals/learned_words_stacker.py": "3de53e19e9546ecf31697318c4b73d41a5b7674e077b2d02538d0068f3c4e1a5",
+  "evals/learned_words_apply.py": "bfef3726ef1d2577e88f189593bcd5e17b5abf5c4422deac646c3c7f8bddccb7",
+  "models/src/cleartext/learned_words/senses.py": "be49f8a21e685d926e0fb553f887dfe62cb781aeb9f800378088147f07907400"
+ },
+ "panel_seed": 20261222,
+ "per_source": {
+  "news": 45,
+  "wiki": 60
+ },
+ "written": "2026-11-22 13:36:12 EST"
+}

@@ -1,0 +1,25 @@
+{
+ "best_arm": "p50",
+ "page": "/home/joshuadirga/Documents/cleartext-rating/rate-learned-swaps-r21.html",
+ "items": 100,
+ "best_arm_swaps": 61,
+ "arm_b_swaps": 173,
+ "arm_b_rejected_by_best": 113,
+ "best_by_domain": {
+  "openfda": 36,
+  "fedreg": 11,
+  "wiki": 8,
+  "news": 6
+ },
+ "page_by_domain": {
+  "openfda": 49,
+  "wiki": 15,
+  "fedreg": 17,
+  "news": 19
+ },
+ "page_groups": {
+  "best": 60,
+  "b_rejected": 40
+ },
+ "realized": 0
+}

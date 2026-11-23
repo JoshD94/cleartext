@@ -1,0 +1,800 @@
+{
+ "items": 166,
+ "raters": 3,
+ "passages": 134,
+ "sentences": 532,
+ "majority": {
+  "arm_b": {
+   "swaps": 135,
+   "good": 92,
+   "notsimpler": 26,
+   "meaning": 17,
+   "good_rate": 0.6814814814814815,
+   "good_ci95": [
+    0.5987995476087827,
+    0.7541206146480625
+   ],
+   "meaning_rate": 0.1259259259259259,
+   "per_100_sentences": 25.37593984962406,
+   "distinct_pairs": 83,
+   "unseen_pairs": {
+    "swaps": 35,
+    "good": 24
+   },
+   "by_domain": {
+    "rfc": {
+     "swaps": 42,
+     "good": 29
+    },
+    "fedreg": {
+     "swaps": 49,
+     "good": 28
+    },
+    "openfda": {
+     "swaps": 44,
+     "good": 35
+    }
+   }
+  },
+  "arm_s": {
+   "swaps": 103,
+   "good": 78,
+   "notsimpler": 8,
+   "meaning": 17,
+   "good_rate": 0.7572815533980582,
+   "good_ci95": [
+    0.6662106865111467,
+    0.829850772695754
+   ],
+   "meaning_rate": 0.1650485436893204,
+   "per_100_sentences": 19.360902255639097,
+   "distinct_pairs": 64,
+   "unseen_pairs": {
+    "swaps": 22,
+    "good": 19
+   },
+   "by_domain": {
+    "rfc": {
+     "swaps": 32,
+     "good": 25
+    },
+    "fedreg": {
+     "swaps": 35,
+     "good": 23
+    },
+    "openfda": {
+     "swaps": 36,
+     "good": 30
+    }
+   }
+  },
+  "arm_gs": {
+   "swaps": 57,
+   "good": 48,
+   "meaning": 8,
+   "notsimpler": 1,
+   "good_rate": 0.8421052631578947,
+   "good_ci95": [
+    0.7263657809571141,
+    0.9146430025068315
+   ],
+   "meaning_rate": 0.14035087719298245,
+   "per_100_sentences": 10.714285714285714,
+   "distinct_pairs": 31,
+   "unseen_pairs": {
+    "swaps": 9,
+    "good": 8
+   },
+   "by_domain": {
+    "rfc": {
+     "swaps": 19,
+     "good": 17
+    },
+    "fedreg": {
+     "swaps": 15,
+     "good": 12
+    },
+    "openfda": {
+     "swaps": 23,
+     "good": 19
+    }
+   }
+  },
+  "arm_p": {
+   "swaps": 72,
+   "good": 62,
+   "meaning": 8,
+   "notsimpler": 2,
+   "good_rate": 0.8611111111111112,
+   "good_ci95": [
+    0.7628660215842661,
+    0.922773521885281
+   ],
+   "meaning_rate": 0.1111111111111111,
+   "per_100_sentences": 13.533834586466165,
+   "distinct_pairs": 40,
+   "unseen_pairs": {
+    "swaps": 11,
+    "good": 11
+   },
+   "by_domain": {
+    "rfc": {
+     "swaps": 20,
+     "good": 19
+    },
+    "fedreg": {
+     "swaps": 24,
+     "good": 18
+    },
+    "openfda": {
+     "swaps": 28,
+     "good": 25
+    }
+   }
+  },
+  "arm_p40": {
+   "swaps": 52,
+   "good": 46,
+   "meaning": 6,
+   "good_rate": 0.8846153846153846,
+   "good_ci95": [
+    0.7702808110893794,
+    0.9460310424391726
+   ],
+   "meaning_rate": 0.11538461538461539,
+   "per_100_sentences": 9.774436090225564,
+   "distinct_pairs": 27,
+   "unseen_pairs": {
+    "swaps": 5,
+    "good": 5
+   },
+   "by_domain": {
+    "rfc": {
+     "swaps": 12,
+     "good": 12
+    },
+    "fedreg": {
+     "swaps": 15,
+     "good": 12
+    },
+    "openfda": {
+     "swaps": 25,
+     "good": 22
+    }
+   }
+  },
+  "arm_p50": {
+   "swaps": 71,
+   "good": 62,
+   "meaning": 8,
+   "notsimpler": 1,
+   "good_rate": 0.8732394366197183,
+   "good_ci95": [
+    0.7763068112503156,
+    0.9318554942054735
+   ],
+   "meaning_rate": 0.11267605633802817,
+   "per_100_sentences": 13.345864661654135,
+   "distinct_pairs": 41,
+   "unseen_pairs": {
+    "swaps": 11,
+    "good": 11
+   },
+   "by_domain": {
+    "rfc": {
+     "swaps": 18,
+     "good": 18
+    },
+    "fedreg": {
+     "swaps": 23,
+     "good": 17
+    },
+    "openfda": {
+     "swaps": 30,
+     "good": 27
+    }
+   }
+  }
+ },
+ "per_rater": [
+  {
+   "arm_b": {
+    "swaps": 135,
+    "good": 90,
+    "notsimpler": 28,
+    "meaning": 17,
+    "good_rate": 0.6666666666666666,
+    "good_ci95": [
+     0.5835063424706963,
+     0.7406040106223247
+    ],
+    "meaning_rate": 0.1259259259259259,
+    "per_100_sentences": 25.37593984962406,
+    "distinct_pairs": 83,
+    "unseen_pairs": {
+     "swaps": 35,
+     "good": 23
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 42,
+      "good": 29
+     },
+     "fedreg": {
+      "swaps": 49,
+      "good": 26
+     },
+     "openfda": {
+      "swaps": 44,
+      "good": 35
+     }
+    }
+   },
+   "arm_s": {
+    "swaps": 103,
+    "good": 77,
+    "notsimpler": 9,
+    "meaning": 17,
+    "good_rate": 0.7475728155339806,
+    "good_ci95": [
+     0.655819277626533,
+     0.8215228812329375
+    ],
+    "meaning_rate": 0.1650485436893204,
+    "per_100_sentences": 19.360902255639097,
+    "distinct_pairs": 64,
+    "unseen_pairs": {
+     "swaps": 22,
+     "good": 19
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 32,
+      "good": 25
+     },
+     "fedreg": {
+      "swaps": 35,
+      "good": 22
+     },
+     "openfda": {
+      "swaps": 36,
+      "good": 30
+     }
+    }
+   },
+   "arm_gs": {
+    "swaps": 57,
+    "good": 47,
+    "meaning": 8,
+    "notsimpler": 2,
+    "good_rate": 0.8245614035087719,
+    "good_ci95": [
+     0.7063240094940684,
+     0.9018125286640339
+    ],
+    "meaning_rate": 0.14035087719298245,
+    "per_100_sentences": 10.714285714285714,
+    "distinct_pairs": 31,
+    "unseen_pairs": {
+     "swaps": 9,
+     "good": 8
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 19,
+      "good": 17
+     },
+     "fedreg": {
+      "swaps": 15,
+      "good": 11
+     },
+     "openfda": {
+      "swaps": 23,
+      "good": 19
+     }
+    }
+   },
+   "arm_p": {
+    "swaps": 72,
+    "good": 62,
+    "meaning": 8,
+    "notsimpler": 2,
+    "good_rate": 0.8611111111111112,
+    "good_ci95": [
+     0.7628660215842661,
+     0.922773521885281
+    ],
+    "meaning_rate": 0.1111111111111111,
+    "per_100_sentences": 13.533834586466165,
+    "distinct_pairs": 40,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 11
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 20,
+      "good": 19
+     },
+     "fedreg": {
+      "swaps": 24,
+      "good": 18
+     },
+     "openfda": {
+      "swaps": 28,
+      "good": 25
+     }
+    }
+   },
+   "arm_p40": {
+    "swaps": 52,
+    "good": 46,
+    "meaning": 6,
+    "good_rate": 0.8846153846153846,
+    "good_ci95": [
+     0.7702808110893794,
+     0.9460310424391726
+    ],
+    "meaning_rate": 0.11538461538461539,
+    "per_100_sentences": 9.774436090225564,
+    "distinct_pairs": 27,
+    "unseen_pairs": {
+     "swaps": 5,
+     "good": 5
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 12,
+      "good": 12
+     },
+     "fedreg": {
+      "swaps": 15,
+      "good": 12
+     },
+     "openfda": {
+      "swaps": 25,
+      "good": 22
+     }
+    }
+   },
+   "arm_p50": {
+    "swaps": 71,
+    "good": 62,
+    "meaning": 8,
+    "notsimpler": 1,
+    "good_rate": 0.8732394366197183,
+    "good_ci95": [
+     0.7763068112503156,
+     0.9318554942054735
+    ],
+    "meaning_rate": 0.11267605633802817,
+    "per_100_sentences": 13.345864661654135,
+    "distinct_pairs": 41,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 11
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 18,
+      "good": 18
+     },
+     "fedreg": {
+      "swaps": 23,
+      "good": 17
+     },
+     "openfda": {
+      "swaps": 30,
+      "good": 27
+     }
+    }
+   }
+  },
+  {
+   "arm_b": {
+    "swaps": 135,
+    "good": 89,
+    "meaning": 20,
+    "notsimpler": 26,
+    "good_rate": 0.6592592592592592,
+    "good_ci95": [
+     0.5758915234643873,
+     0.7338139250467217
+    ],
+    "meaning_rate": 0.14814814814814814,
+    "per_100_sentences": 25.37593984962406,
+    "distinct_pairs": 83,
+    "unseen_pairs": {
+     "swaps": 35,
+     "good": 25
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 42,
+      "good": 31
+     },
+     "fedreg": {
+      "swaps": 49,
+      "good": 27
+     },
+     "openfda": {
+      "swaps": 44,
+      "good": 31
+     }
+    }
+   },
+   "arm_s": {
+    "swaps": 103,
+    "good": 79,
+    "meaning": 19,
+    "notsimpler": 5,
+    "good_rate": 0.7669902912621359,
+    "good_ci95": [
+     0.6766557331631357,
+     0.8381250263911952
+    ],
+    "meaning_rate": 0.18446601941747573,
+    "per_100_sentences": 19.360902255639097,
+    "distinct_pairs": 64,
+    "unseen_pairs": {
+     "swaps": 22,
+     "good": 19
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 32,
+      "good": 26
+     },
+     "fedreg": {
+      "swaps": 35,
+      "good": 23
+     },
+     "openfda": {
+      "swaps": 36,
+      "good": 30
+     }
+    }
+   },
+   "arm_gs": {
+    "swaps": 57,
+    "good": 49,
+    "meaning": 8,
+    "good_rate": 0.8596491228070176,
+    "good_ci95": [
+     0.7467529210410719,
+     0.9271281077287171
+    ],
+    "meaning_rate": 0.14035087719298245,
+    "per_100_sentences": 10.714285714285714,
+    "distinct_pairs": 31,
+    "unseen_pairs": {
+     "swaps": 9,
+     "good": 8
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 19,
+      "good": 18
+     },
+     "fedreg": {
+      "swaps": 15,
+      "good": 12
+     },
+     "openfda": {
+      "swaps": 23,
+      "good": 19
+     }
+    }
+   },
+   "arm_p": {
+    "swaps": 72,
+    "good": 62,
+    "meaning": 8,
+    "notsimpler": 2,
+    "good_rate": 0.8611111111111112,
+    "good_ci95": [
+     0.7628660215842661,
+     0.922773521885281
+    ],
+    "meaning_rate": 0.1111111111111111,
+    "per_100_sentences": 13.533834586466165,
+    "distinct_pairs": 40,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 11
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 20,
+      "good": 19
+     },
+     "fedreg": {
+      "swaps": 24,
+      "good": 18
+     },
+     "openfda": {
+      "swaps": 28,
+      "good": 25
+     }
+    }
+   },
+   "arm_p40": {
+    "swaps": 52,
+    "good": 46,
+    "meaning": 6,
+    "good_rate": 0.8846153846153846,
+    "good_ci95": [
+     0.7702808110893794,
+     0.9460310424391726
+    ],
+    "meaning_rate": 0.11538461538461539,
+    "per_100_sentences": 9.774436090225564,
+    "distinct_pairs": 27,
+    "unseen_pairs": {
+     "swaps": 5,
+     "good": 5
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 12,
+      "good": 12
+     },
+     "fedreg": {
+      "swaps": 15,
+      "good": 12
+     },
+     "openfda": {
+      "swaps": 25,
+      "good": 22
+     }
+    }
+   },
+   "arm_p50": {
+    "swaps": 71,
+    "good": 62,
+    "meaning": 8,
+    "notsimpler": 1,
+    "good_rate": 0.8732394366197183,
+    "good_ci95": [
+     0.7763068112503156,
+     0.9318554942054735
+    ],
+    "meaning_rate": 0.11267605633802817,
+    "per_100_sentences": 13.345864661654135,
+    "distinct_pairs": 41,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 11
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 18,
+      "good": 18
+     },
+     "fedreg": {
+      "swaps": 23,
+      "good": 17
+     },
+     "openfda": {
+      "swaps": 30,
+      "good": 27
+     }
+    }
+   }
+  },
+  {
+   "arm_b": {
+    "swaps": 135,
+    "good": 96,
+    "notsimpler": 24,
+    "meaning": 15,
+    "good_rate": 0.7111111111111111,
+    "good_ci95": [
+     0.6296510538586366,
+     0.780888726725857
+    ],
+    "meaning_rate": 0.1111111111111111,
+    "per_100_sentences": 25.37593984962406,
+    "distinct_pairs": 83,
+    "unseen_pairs": {
+     "swaps": 35,
+     "good": 25
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 42,
+      "good": 30
+     },
+     "fedreg": {
+      "swaps": 49,
+      "good": 29
+     },
+     "openfda": {
+      "swaps": 44,
+      "good": 37
+     }
+    }
+   },
+   "arm_s": {
+    "swaps": 103,
+    "good": 81,
+    "notsimpler": 7,
+    "meaning": 15,
+    "good_rate": 0.7864077669902912,
+    "good_ci95": [
+     0.6977157609952813,
+     0.8545035992539101
+    ],
+    "meaning_rate": 0.14563106796116504,
+    "per_100_sentences": 19.360902255639097,
+    "distinct_pairs": 64,
+    "unseen_pairs": {
+     "swaps": 22,
+     "good": 19
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 32,
+      "good": 25
+     },
+     "fedreg": {
+      "swaps": 35,
+      "good": 24
+     },
+     "openfda": {
+      "swaps": 36,
+      "good": 32
+     }
+    }
+   },
+   "arm_gs": {
+    "swaps": 57,
+    "good": 50,
+    "meaning": 5,
+    "notsimpler": 2,
+    "good_rate": 0.8771929824561403,
+    "good_ci95": [
+     0.7675331041107074,
+     0.939220169964925
+    ],
+    "meaning_rate": 0.08771929824561403,
+    "per_100_sentences": 10.714285714285714,
+    "distinct_pairs": 31,
+    "unseen_pairs": {
+     "swaps": 9,
+     "good": 8
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 19,
+      "good": 17
+     },
+     "fedreg": {
+      "swaps": 15,
+      "good": 13
+     },
+     "openfda": {
+      "swaps": 23,
+      "good": 20
+     }
+    }
+   },
+   "arm_p": {
+    "swaps": 72,
+    "good": 64,
+    "meaning": 6,
+    "notsimpler": 2,
+    "good_rate": 0.8888888888888888,
+    "good_ci95": [
+     0.7957685574140959,
+     0.9426124893992622
+    ],
+    "meaning_rate": 0.08333333333333333,
+    "per_100_sentences": 13.533834586466165,
+    "distinct_pairs": 40,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 11
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 20,
+      "good": 19
+     },
+     "fedreg": {
+      "swaps": 24,
+      "good": 19
+     },
+     "openfda": {
+      "swaps": 28,
+      "good": 26
+     }
+    }
+   },
+   "arm_p40": {
+    "swaps": 52,
+    "good": 48,
+    "meaning": 4,
+    "good_rate": 0.9230769230769231,
+    "good_ci95": [
+     0.8182618931787534,
+     0.9696811457026541
+    ],
+    "meaning_rate": 0.07692307692307693,
+    "per_100_sentences": 9.774436090225564,
+    "distinct_pairs": 27,
+    "unseen_pairs": {
+     "swaps": 5,
+     "good": 5
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 12,
+      "good": 12
+     },
+     "fedreg": {
+      "swaps": 15,
+      "good": 13
+     },
+     "openfda": {
+      "swaps": 25,
+      "good": 23
+     }
+    }
+   },
+   "arm_p50": {
+    "swaps": 71,
+    "good": 64,
+    "meaning": 6,
+    "notsimpler": 1,
+    "good_rate": 0.9014084507042254,
+    "good_ci95": [
+     0.8101907235136308,
+     0.951417793674671
+    ],
+    "meaning_rate": 0.08450704225352113,
+    "per_100_sentences": 13.345864661654135,
+    "distinct_pairs": 41,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 11
+    },
+    "by_domain": {
+     "rfc": {
+      "swaps": 18,
+      "good": 18
+     },
+     "fedreg": {
+      "swaps": 23,
+      "good": 18
+     },
+     "openfda": {
+      "swaps": 30,
+      "good": 28
+     }
+    }
+   }
+  }
+ ],
+ "yield_vs_b": {
+  "b": 1.0,
+  "s": 0.762962962962963,
+  "gs": 0.4222222222222222,
+  "p": 0.5333333333333333,
+  "p40": 0.3851851851851852,
+  "p50": 0.5259259259259259
+ },
+ "success": false,
+ "unanimous_share": 0.8698630136986302,
+ "pairwise_agreement": {
+  "1-2": 0.9041095890410958,
+  "1-3": 0.952054794520548,
+  "2-3": 0.8835616438356164
+ },
+ "consistency_with_old": [
+  19,
+  18,
+  19,
+  20
+ ]
+}

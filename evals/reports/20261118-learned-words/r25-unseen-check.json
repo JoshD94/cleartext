@@ -1,0 +1,8 @@
+{
+ "what": "arm f (round 24's model class), passage-grouped out-of-fold scores (5 repeats, mean), on arm-b rows of the 1,454-row pool whose pair was unseen in the training folds; Good rate by score cut-off. Development check after round 24; decides nothing.",
+ "recent_r17_r22": {"rows": 147, "base_good": 0.59, "cut": {"0.78": [29, 0.931], "0.74": [36, 0.889], "0.70": [41, 0.878], "0.66": [50, 0.86], "0.62": [59, 0.847], "0.58": [68, 0.838]}},
+ "r11_r13": {"rows": 66, "base_good": 0.39, "cut": {"0.78": [8, 0.75], "0.74": [13, 0.615], "0.70": [16, 0.625], "0.66": [24, 0.708]}},
+ "r3_r8": {"rows": 46, "base_good": 0.50, "cut": {"0.78": [6, 1.0], "0.74": [8, 1.0], "0.70": [14, 0.786], "0.66": [16, 0.75]}},
+ "all": {"rows": 259, "base_good": 0.53, "cut": {"0.78": [43, 0.907], "0.74": [57, 0.842], "0.70": [71, 0.803], "0.66": [90, 0.80]}},
+ "f_threshold": 0.7799
+}

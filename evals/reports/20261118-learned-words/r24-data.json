@@ -1,0 +1,54 @@
+{
+ "downloaded": "2026-11-22",
+ "location": "~/.local/state/cleartext/lexsimp-ext-20261122/raw (CLEARTEXT_LEXSIMP_EXT); read as data only (python -I)",
+ "files": {
+  "simpleppdbpp_xl.tsv.gz": {
+   "sha256": "cae6a3e94a3a8b35304843f12b97b5ba15e0df05da5a84d29fa7f7dc3ad46899",
+   "bytes": 262372601,
+   "url": "https://media.githubusercontent.com/media/mounicam/lexical_simplification/master/SimplePPDBpp/simpleppdbpp_xl.tsv.gz",
+   "note": "matches the Git LFS pointer oid in mounicam/lexical_simplification"
+  },
+  "wc_lexicon.tsv": {
+   "sha256": "7ad33674ec8ca2e8b594b02435c921fafa072d6b4cd14de0238fa2ca90212a83",
+   "url": "https://raw.githubusercontent.com/mounicam/lexical_simplification/master/word_complexity_lexicon/lexicon.tsv"
+  },
+  "LICENSE": {
+   "sha256": "4129878669d8a3ecaa387e690f396f95ed7ec38df59939ed320828fc4ce788db",
+   "url": "https://raw.githubusercontent.com/mounicam/lexical_simplification/master/LICENSE"
+  }
+ },
+ "derived": {
+  "sppdb-lexical.tsv": {
+   "sha256": "ac2c11e7d82e8e1eba222c634514fbd393bb02ebbd046dfcf9b3f04f4e7105b3",
+   "rules_read": 13159398,
+   "single_word_rules": 1629596,
+   "built_by": "cleartext.learned_words.pairlex.build"
+  }
+ },
+ "license": "MIT (Maddela and Xu 2018, A Word-Complexity Lexicon and A Neural Readability Ranking Model for Lexical Simplification, EMNLP)",
+ "use": "type-level pair features of arm f (round 24): learned inputs, never a veto",
+ "genre_extension": {
+  "news": {
+   "titles_listed": 22113,
+   "range": [
+    220,
+    520
+   ],
+   "documents": 300,
+   "sentences": 4002,
+   "dropped_v3_8gram_overlap": 0,
+   "sha256": "ddd50d73a20ec532c0f1a2f20b4b812a583a7c4880bb8c7684e7b6bd32a669c5"
+  },
+  "wiki": {
+   "titles_listed": 7034,
+   "range": [
+    220,
+    520
+   ],
+   "documents": 300,
+   "sentences": 4288,
+   "dropped_v3_8gram_overlap": 0,
+   "sha256": "473c5fdbbfc66c73b352b658972ef33a5a618a0e969eddbb37370812563e06c4"
+  }
+ }
+}

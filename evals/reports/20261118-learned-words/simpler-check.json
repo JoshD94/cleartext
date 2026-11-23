@@ -1,0 +1,425 @@
+{
+ "rule": "margin = smallest value in 0, 0.05, ..., 3 at\nwhich >= 80% of validation word pairs with predicted margin >= it are\n\"clearly simpler\" (observed gap >= 0.10 in the source's own units), with at\nleast 100 pairs, pooled over both sources with equal pair counts.",
+ "train_words": {
+  "complex": 3294,
+  "cwi": 6667
+ },
+ "margin": 1.6,
+ "validation": {
+  "complex": {
+   "words": 184,
+   "spearman_vs_rating": 0.6957335471118246,
+   "pair_auc_clear_pairs": 0.9328813211902114
+  },
+  "cwi": {
+   "words": 435,
+   "spearman_vs_rating": 0.4696460728237646,
+   "pair_auc_clear_pairs": 0.7962619554769845
+  }
+ },
+ "validation_grid": [
+  {
+   "margin": 0.0,
+   "pairs": 99541,
+   "precision": 0.4704292703509107
+  },
+  {
+   "margin": 0.05,
+   "pairs": 95368,
+   "precision": 0.47989891787601713
+  },
+  {
+   "margin": 0.1,
+   "pairs": 91315,
+   "precision": 0.4898976071839238
+  },
+  {
+   "margin": 0.15,
+   "pairs": 87321,
+   "precision": 0.4996163580352951
+  },
+  {
+   "margin": 0.2,
+   "pairs": 83421,
+   "precision": 0.509044485201568
+  },
+  {
+   "margin": 0.25,
+   "pairs": 79502,
+   "precision": 0.5196598827702448
+  },
+  {
+   "margin": 0.3,
+   "pairs": 75730,
+   "precision": 0.5288789119239403
+  },
+  {
+   "margin": 0.35,
+   "pairs": 72095,
+   "precision": 0.5377349330744157
+  },
+  {
+   "margin": 0.4,
+   "pairs": 68342,
+   "precision": 0.5478768546428258
+  },
+  {
+   "margin": 0.45,
+   "pairs": 64931,
+   "precision": 0.5576535091096703
+  },
+  {
+   "margin": 0.5,
+   "pairs": 61527,
+   "precision": 0.5680595510913907
+  },
+  {
+   "margin": 0.55,
+   "pairs": 58255,
+   "precision": 0.5780448030211999
+  },
+  {
+   "margin": 0.6,
+   "pairs": 55110,
+   "precision": 0.5859372164761386
+  },
+  {
+   "margin": 0.65,
+   "pairs": 51981,
+   "precision": 0.5956599526750159
+  },
+  {
+   "margin": 0.7,
+   "pairs": 48972,
+   "precision": 0.6046107980070244
+  },
+  {
+   "margin": 0.75,
+   "pairs": 45964,
+   "precision": 0.6135236271864938
+  },
+  {
+   "margin": 0.8,
+   "pairs": 43098,
+   "precision": 0.6218850062647918
+  },
+  {
+   "margin": 0.85,
+   "pairs": 40359,
+   "precision": 0.630144453529572
+  },
+  {
+   "margin": 0.9,
+   "pairs": 37804,
+   "precision": 0.6401703523436674
+  },
+  {
+   "margin": 0.95,
+   "pairs": 35361,
+   "precision": 0.6481717146008315
+  },
+  {
+   "margin": 1.0,
+   "pairs": 32918,
+   "precision": 0.6566012515948721
+  },
+  {
+   "margin": 1.05,
+   "pairs": 30609,
+   "precision": 0.6650004900519455
+  },
+  {
+   "margin": 1.1,
+   "pairs": 28497,
+   "precision": 0.6755798856019932
+  },
+  {
+   "margin": 1.15,
+   "pairs": 26376,
+   "precision": 0.687026084319078
+  },
+  {
+   "margin": 1.2,
+   "pairs": 24296,
+   "precision": 0.6969048403029305
+  },
+  {
+   "margin": 1.25,
+   "pairs": 22251,
+   "precision": 0.7086872500112354
+  },
+  {
+   "margin": 1.3,
+   "pairs": 20342,
+   "precision": 0.7191524923802969
+  },
+  {
+   "margin": 1.35,
+   "pairs": 18468,
+   "precision": 0.7328351743556422
+  },
+  {
+   "margin": 1.4,
+   "pairs": 16811,
+   "precision": 0.7468324311462733
+  },
+  {
+   "margin": 1.45,
+   "pairs": 15233,
+   "precision": 0.7588787500820587
+  },
+  {
+   "margin": 1.5,
+   "pairs": 13754,
+   "precision": 0.7746837283699287
+  },
+  {
+   "margin": 1.55,
+   "pairs": 12445,
+   "precision": 0.7877059059863399
+  },
+  {
+   "margin": 1.6,
+   "pairs": 11122,
+   "precision": 0.8052508541629203
+  },
+  {
+   "margin": 1.65,
+   "pairs": 9960,
+   "precision": 0.8204819277108434
+  },
+  {
+   "margin": 1.7,
+   "pairs": 8912,
+   "precision": 0.8349416517055656
+  },
+  {
+   "margin": 1.75,
+   "pairs": 8006,
+   "precision": 0.8458656007994004
+  },
+  {
+   "margin": 1.8,
+   "pairs": 7195,
+   "precision": 0.8599027102154274
+  },
+  {
+   "margin": 1.85,
+   "pairs": 6533,
+   "precision": 0.8703505280881678
+  },
+  {
+   "margin": 1.9,
+   "pairs": 5887,
+   "precision": 0.8802446067606591
+  },
+  {
+   "margin": 1.95,
+   "pairs": 5333,
+   "precision": 0.8886180386274142
+  },
+  {
+   "margin": 2.0,
+   "pairs": 4758,
+   "precision": 0.9041614123581336
+  },
+  {
+   "margin": 2.05,
+   "pairs": 4172,
+   "precision": 0.9216203259827421
+  },
+  {
+   "margin": 2.1,
+   "pairs": 3674,
+   "precision": 0.939575394665215
+  },
+  {
+   "margin": 2.15,
+   "pairs": 3238,
+   "precision": 0.9490426189005559
+  },
+  {
+   "margin": 2.2,
+   "pairs": 2849,
+   "precision": 0.9627939627939628
+  },
+  {
+   "margin": 2.25,
+   "pairs": 2470,
+   "precision": 0.9643724696356275
+  },
+  {
+   "margin": 2.3,
+   "pairs": 2139,
+   "precision": 0.9663394109396914
+  },
+  {
+   "margin": 2.35,
+   "pairs": 1824,
+   "precision": 0.9692982456140351
+  },
+  {
+   "margin": 2.4,
+   "pairs": 1496,
+   "precision": 0.9739304812834224
+  },
+  {
+   "margin": 2.45,
+   "pairs": 1259,
+   "precision": 0.9698173153296267
+  },
+  {
+   "margin": 2.5,
+   "pairs": 1062,
+   "precision": 0.975517890772128
+  },
+  {
+   "margin": 2.55,
+   "pairs": 898,
+   "precision": 0.9766146993318485
+  },
+  {
+   "margin": 2.6,
+   "pairs": 772,
+   "precision": 0.9883419689119171
+  },
+  {
+   "margin": 2.65,
+   "pairs": 680,
+   "precision": 0.9911764705882353
+  },
+  {
+   "margin": 2.7,
+   "pairs": 562,
+   "precision": 0.9893238434163701
+  },
+  {
+   "margin": 2.75,
+   "pairs": 421,
+   "precision": 0.997624703087886
+  },
+  {
+   "margin": 2.8,
+   "pairs": 335,
+   "precision": 1.0
+  },
+  {
+   "margin": 2.85,
+   "pairs": 232,
+   "precision": 1.0
+  },
+  {
+   "margin": 2.9,
+   "pairs": 159,
+   "precision": 1.0
+  },
+  {
+   "margin": 2.95,
+   "pairs": 117,
+   "precision": 1.0
+  },
+  {
+   "margin": 3.0,
+   "pairs": 84,
+   "precision": 1.0
+  }
+ ],
+ "test": {
+  "complex": {
+   "words": 367,
+   "spearman_vs_rating": 0.6526194610306366,
+   "pair_auc_clear_pairs": 0.9046538961439197
+  },
+  "cwi": {
+   "words": 461,
+   "spearman_vs_rating": 0.43600552172340457,
+   "pair_auc_clear_pairs": 0.7871981505476255
+  }
+ },
+ "test_pairs_at_margin": 11088,
+ "test_precision_at_margin": 0.7266414141414141,
+ "public_substitutions": {
+  "tsar_test_gold_2plus": {
+   "pairs": 1481,
+   "pass_share": 0.13977042538825118,
+   "median_margin": 0.813060978304359
+  },
+  "tsar_test_gold_1": {
+   "pairs": 1959,
+   "pass_share": 0.12149055640632976,
+   "median_margin": 0.6072447624709216
+  },
+  "nnseval_gold": {
+   "pairs": 1467,
+   "pass_share": 0.07498295841854125,
+   "median_margin": 0.3036058731146226
+  },
+  "swords_test_accepted": {
+   "pairs": 3579,
+   "pass_share": 0.0036322995250069852,
+   "median_margin": -0.30905768913788123
+  },
+  "swords_test_rejected": {
+   "pairs": 23951,
+   "pass_share": 0.0018370840465951317,
+   "median_margin": -0.644620038230417
+  }
+ },
+ "learned_stage_effect": {
+  "tsar_test": {
+   "without": {
+    "instances": 373,
+    "swaps": 36,
+    "coverage": 0.09651474530831099,
+    "precision": 0.9444444444444444,
+    "correct": 34,
+    "ci95": [
+     0.8185502589238879,
+     0.9846303362329331
+    ],
+    "precision_2plus": 0.8055555555555556
+   },
+   "with_margin": {
+    "instances": 373,
+    "swaps": 6,
+    "coverage": 0.0160857908847185,
+    "precision": 1.0,
+    "correct": 6,
+    "ci95": [
+     0.6096569663469354,
+     1.0
+    ],
+    "precision_2plus": 1.0
+   },
+   "removed": 30,
+   "removed_gold_correct": 28
+  },
+  "nnseval": {
+   "without": {
+    "instances": 239,
+    "swaps": 41,
+    "coverage": 0.17154811715481172,
+    "precision": 0.4634146341463415,
+    "correct": 19,
+    "ci95": [
+     0.32055999118185885,
+     0.6125378465402566
+    ]
+   },
+   "with_margin": {
+    "instances": 239,
+    "swaps": 2,
+    "coverage": 0.008368200836820083,
+    "precision": 1.0,
+    "correct": 2,
+    "ci95": [
+     0.3423719528896193,
+     1.0
+    ]
+   },
+   "removed": 39,
+   "removed_gold_correct": 17
+  }
+ },
+ "seconds": 73.6
+}

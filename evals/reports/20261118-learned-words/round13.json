@@ -1,0 +1,742 @@
+{
+ "items": 150,
+ "raters": 3,
+ "passages": 134,
+ "sentences": 530,
+ "majority": {
+  "arm_b": {
+   "swaps": 115,
+   "good": 76,
+   "notsimpler": 23,
+   "meaning": 16,
+   "good_rate": 0.6608695652173913,
+   "good_ci95": [
+    0.5703943230468682,
+    0.7409444674103453
+   ],
+   "meaning_rate": 0.1391304347826087,
+   "per_100_sentences": 21.69811320754717,
+   "distinct_pairs": 69,
+   "unseen_pairs": {
+    "swaps": 35,
+    "good": 21
+   },
+   "runner_up_swaps": {
+    "swaps": 0,
+    "good": 0
+   }
+  },
+  "arm_s": {
+   "swaps": 92,
+   "good": 70,
+   "meaning": 13,
+   "notsimpler": 9,
+   "good_rate": 0.7608695652173914,
+   "good_ci95": [
+    0.66437665131467,
+    0.8364497121851047
+   ],
+   "meaning_rate": 0.14130434782608695,
+   "per_100_sentences": 17.358490566037737,
+   "distinct_pairs": 52,
+   "unseen_pairs": {
+    "swaps": 21,
+    "good": 14
+   },
+   "runner_up_swaps": {
+    "swaps": 0,
+    "good": 0
+   }
+  },
+  "arm_gs": {
+   "swaps": 53,
+   "good": 44,
+   "meaning": 8,
+   "notsimpler": 1,
+   "good_rate": 0.8301886792452831,
+   "good_ci95": [
+    0.7077446317626587,
+    0.9080015822777624
+   ],
+   "meaning_rate": 0.1509433962264151,
+   "per_100_sentences": 10.0,
+   "distinct_pairs": 27,
+   "unseen_pairs": {
+    "swaps": 11,
+    "good": 8
+   },
+   "runner_up_swaps": {
+    "swaps": 2,
+    "good": 0
+   }
+  },
+  "arm_t": {
+   "swaps": 62,
+   "good": 53,
+   "meaning": 9,
+   "good_rate": 0.8548387096774194,
+   "good_ci95": [
+    0.7465637464683085,
+    0.92170676943653
+   ],
+   "meaning_rate": 0.14516129032258066,
+   "per_100_sentences": 11.69811320754717,
+   "distinct_pairs": 39,
+   "unseen_pairs": {
+    "swaps": 16,
+    "good": 12
+   },
+   "runner_up_swaps": {
+    "swaps": 0,
+    "good": 0
+   }
+  },
+  "arm_p": {
+   "swaps": 64,
+   "good": 57,
+   "meaning": 6,
+   "notsimpler": 1,
+   "good_rate": 0.890625,
+   "good_ci95": [
+    0.7910113670806147,
+    0.9459995524731696
+   ],
+   "meaning_rate": 0.09375,
+   "per_100_sentences": 12.075471698113208,
+   "distinct_pairs": 34,
+   "unseen_pairs": {
+    "swaps": 10,
+    "good": 7
+   },
+   "runner_up_swaps": {
+    "swaps": 0,
+    "good": 0
+   }
+  },
+  "arm_p65": {
+   "swaps": 83,
+   "good": 67,
+   "meaning": 10,
+   "notsimpler": 6,
+   "good_rate": 0.8072289156626506,
+   "good_ci95": [
+    0.7095641358590259,
+    0.8777120082930856
+   ],
+   "meaning_rate": 0.12048192771084337,
+   "per_100_sentences": 15.660377358490566,
+   "distinct_pairs": 47,
+   "unseen_pairs": {
+    "swaps": 21,
+    "good": 14
+   },
+   "runner_up_swaps": {
+    "swaps": 0,
+    "good": 0
+   }
+  },
+  "arm_pn": {
+   "swaps": 71,
+   "good": 60,
+   "meaning": 10,
+   "notsimpler": 1,
+   "good_rate": 0.8450704225352113,
+   "good_ci95": [
+    0.7434882267163929,
+    0.911227867006884
+   ],
+   "meaning_rate": 0.14084507042253522,
+   "per_100_sentences": 13.39622641509434,
+   "distinct_pairs": 38,
+   "unseen_pairs": {
+    "swaps": 11,
+    "good": 7
+   },
+   "runner_up_swaps": {
+    "swaps": 7,
+    "good": 3
+   }
+  },
+  "arm_p65n": {
+   "swaps": 94,
+   "good": 74,
+   "meaning": 14,
+   "notsimpler": 6,
+   "good_rate": 0.7872340425531915,
+   "good_ci95": [
+    0.694080201974153,
+    0.8578322769714081
+   ],
+   "meaning_rate": 0.14893617021276595,
+   "per_100_sentences": 17.735849056603772,
+   "distinct_pairs": 56,
+   "unseen_pairs": {
+    "swaps": 25,
+    "good": 17
+   },
+   "runner_up_swaps": {
+    "swaps": 11,
+    "good": 7
+   }
+  }
+ },
+ "per_rater": [
+  {
+   "arm_b": {
+    "swaps": 115,
+    "good": 74,
+    "notsimpler": 25,
+    "meaning": 16,
+    "good_rate": 0.6434782608695652,
+    "good_ci95": [
+     0.5525998775270227,
+     0.7250806653131948
+    ],
+    "meaning_rate": 0.1391304347826087,
+    "per_100_sentences": 21.69811320754717,
+    "distinct_pairs": 69,
+    "unseen_pairs": {
+     "swaps": 35,
+     "good": 21
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_s": {
+    "swaps": 92,
+    "good": 68,
+    "notsimpler": 11,
+    "meaning": 13,
+    "good_rate": 0.7391304347826086,
+    "good_ci95": [
+     0.6411118040346735,
+     0.8179790291734531
+    ],
+    "meaning_rate": 0.14130434782608695,
+    "per_100_sentences": 17.358490566037737,
+    "distinct_pairs": 52,
+    "unseen_pairs": {
+     "swaps": 21,
+     "good": 14
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_gs": {
+    "swaps": 53,
+    "good": 42,
+    "notsimpler": 3,
+    "meaning": 8,
+    "good_rate": 0.7924528301886793,
+    "good_ci95": [
+     0.6654199754433079,
+     0.8799552427067794
+    ],
+    "meaning_rate": 0.1509433962264151,
+    "per_100_sentences": 10.0,
+    "distinct_pairs": 27,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 8
+    },
+    "runner_up_swaps": {
+     "swaps": 2,
+     "good": 0
+    }
+   },
+   "arm_t": {
+    "swaps": 62,
+    "good": 53,
+    "notsimpler": 1,
+    "meaning": 8,
+    "good_rate": 0.8548387096774194,
+    "good_ci95": [
+     0.7465637464683085,
+     0.92170676943653
+    ],
+    "meaning_rate": 0.12903225806451613,
+    "per_100_sentences": 11.69811320754717,
+    "distinct_pairs": 39,
+    "unseen_pairs": {
+     "swaps": 16,
+     "good": 12
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_p": {
+    "swaps": 64,
+    "good": 58,
+    "meaning": 5,
+    "notsimpler": 1,
+    "good_rate": 0.90625,
+    "good_ci95": [
+     0.8101690141672233,
+     0.956322342168712
+    ],
+    "meaning_rate": 0.078125,
+    "per_100_sentences": 12.075471698113208,
+    "distinct_pairs": 34,
+    "unseen_pairs": {
+     "swaps": 10,
+     "good": 8
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_p65": {
+    "swaps": 83,
+    "good": 66,
+    "notsimpler": 7,
+    "meaning": 10,
+    "good_rate": 0.7951807228915663,
+    "good_ci95": [
+     0.6962433303733685,
+     0.86800237675317
+    ],
+    "meaning_rate": 0.12048192771084337,
+    "per_100_sentences": 15.660377358490566,
+    "distinct_pairs": 47,
+    "unseen_pairs": {
+     "swaps": 21,
+     "good": 14
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_pn": {
+    "swaps": 71,
+    "good": 61,
+    "meaning": 9,
+    "notsimpler": 1,
+    "good_rate": 0.8591549295774648,
+    "good_ci95": [
+     0.7597803803067411,
+     0.9216588192827919
+    ],
+    "meaning_rate": 0.1267605633802817,
+    "per_100_sentences": 13.39622641509434,
+    "distinct_pairs": 38,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 8
+    },
+    "runner_up_swaps": {
+     "swaps": 7,
+     "good": 3
+    }
+   },
+   "arm_p65n": {
+    "swaps": 94,
+    "good": 73,
+    "meaning": 14,
+    "notsimpler": 7,
+    "good_rate": 0.776595744680851,
+    "good_ci95": [
+     0.6824893271662207,
+     0.8489819488554307
+    ],
+    "meaning_rate": 0.14893617021276595,
+    "per_100_sentences": 17.735849056603772,
+    "distinct_pairs": 56,
+    "unseen_pairs": {
+     "swaps": 25,
+     "good": 17
+    },
+    "runner_up_swaps": {
+     "swaps": 11,
+     "good": 7
+    }
+   }
+  },
+  {
+   "arm_b": {
+    "swaps": 115,
+    "good": 78,
+    "notsimpler": 21,
+    "meaning": 16,
+    "good_rate": 0.6782608695652174,
+    "good_ci95": [
+     0.588312128684693,
+     0.7566849093895166
+    ],
+    "meaning_rate": 0.1391304347826087,
+    "per_100_sentences": 21.69811320754717,
+    "distinct_pairs": 69,
+    "unseen_pairs": {
+     "swaps": 35,
+     "good": 21
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_s": {
+    "swaps": 92,
+    "good": 70,
+    "meaning": 12,
+    "notsimpler": 10,
+    "good_rate": 0.7608695652173914,
+    "good_ci95": [
+     0.66437665131467,
+     0.8364497121851047
+    ],
+    "meaning_rate": 0.13043478260869565,
+    "per_100_sentences": 17.358490566037737,
+    "distinct_pairs": 52,
+    "unseen_pairs": {
+     "swaps": 21,
+     "good": 14
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_gs": {
+    "swaps": 53,
+    "good": 44,
+    "meaning": 8,
+    "notsimpler": 1,
+    "good_rate": 0.8301886792452831,
+    "good_ci95": [
+     0.7077446317626587,
+     0.9080015822777624
+    ],
+    "meaning_rate": 0.1509433962264151,
+    "per_100_sentences": 10.0,
+    "distinct_pairs": 27,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 8
+    },
+    "runner_up_swaps": {
+     "swaps": 2,
+     "good": 0
+    }
+   },
+   "arm_t": {
+    "swaps": 62,
+    "good": 53,
+    "meaning": 8,
+    "notsimpler": 1,
+    "good_rate": 0.8548387096774194,
+    "good_ci95": [
+     0.7465637464683085,
+     0.92170676943653
+    ],
+    "meaning_rate": 0.12903225806451613,
+    "per_100_sentences": 11.69811320754717,
+    "distinct_pairs": 39,
+    "unseen_pairs": {
+     "swaps": 16,
+     "good": 12
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_p": {
+    "swaps": 64,
+    "good": 57,
+    "meaning": 6,
+    "notsimpler": 1,
+    "good_rate": 0.890625,
+    "good_ci95": [
+     0.7910113670806147,
+     0.9459995524731696
+    ],
+    "meaning_rate": 0.09375,
+    "per_100_sentences": 12.075471698113208,
+    "distinct_pairs": 34,
+    "unseen_pairs": {
+     "swaps": 10,
+     "good": 7
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_p65": {
+    "swaps": 83,
+    "good": 67,
+    "meaning": 9,
+    "notsimpler": 7,
+    "good_rate": 0.8072289156626506,
+    "good_ci95": [
+     0.7095641358590259,
+     0.8777120082930856
+    ],
+    "meaning_rate": 0.10843373493975904,
+    "per_100_sentences": 15.660377358490566,
+    "distinct_pairs": 47,
+    "unseen_pairs": {
+     "swaps": 21,
+     "good": 14
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_pn": {
+    "swaps": 71,
+    "good": 60,
+    "meaning": 10,
+    "notsimpler": 1,
+    "good_rate": 0.8450704225352113,
+    "good_ci95": [
+     0.7434882267163929,
+     0.911227867006884
+    ],
+    "meaning_rate": 0.14084507042253522,
+    "per_100_sentences": 13.39622641509434,
+    "distinct_pairs": 38,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 7
+    },
+    "runner_up_swaps": {
+     "swaps": 7,
+     "good": 3
+    }
+   },
+   "arm_p65n": {
+    "swaps": 94,
+    "good": 74,
+    "meaning": 13,
+    "notsimpler": 7,
+    "good_rate": 0.7872340425531915,
+    "good_ci95": [
+     0.694080201974153,
+     0.8578322769714081
+    ],
+    "meaning_rate": 0.13829787234042554,
+    "per_100_sentences": 17.735849056603772,
+    "distinct_pairs": 56,
+    "unseen_pairs": {
+     "swaps": 25,
+     "good": 17
+    },
+    "runner_up_swaps": {
+     "swaps": 11,
+     "good": 7
+    }
+   }
+  },
+  {
+   "arm_b": {
+    "swaps": 115,
+    "good": 76,
+    "notsimpler": 23,
+    "meaning": 16,
+    "good_rate": 0.6608695652173913,
+    "good_ci95": [
+     0.5703943230468682,
+     0.7409444674103453
+    ],
+    "meaning_rate": 0.1391304347826087,
+    "per_100_sentences": 21.69811320754717,
+    "distinct_pairs": 69,
+    "unseen_pairs": {
+     "swaps": 35,
+     "good": 21
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_s": {
+    "swaps": 92,
+    "good": 70,
+    "meaning": 13,
+    "notsimpler": 9,
+    "good_rate": 0.7608695652173914,
+    "good_ci95": [
+     0.66437665131467,
+     0.8364497121851047
+    ],
+    "meaning_rate": 0.14130434782608695,
+    "per_100_sentences": 17.358490566037737,
+    "distinct_pairs": 52,
+    "unseen_pairs": {
+     "swaps": 21,
+     "good": 14
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_gs": {
+    "swaps": 53,
+    "good": 44,
+    "meaning": 8,
+    "notsimpler": 1,
+    "good_rate": 0.8301886792452831,
+    "good_ci95": [
+     0.7077446317626587,
+     0.9080015822777624
+    ],
+    "meaning_rate": 0.1509433962264151,
+    "per_100_sentences": 10.0,
+    "distinct_pairs": 27,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 8
+    },
+    "runner_up_swaps": {
+     "swaps": 2,
+     "good": 0
+    }
+   },
+   "arm_t": {
+    "swaps": 62,
+    "good": 53,
+    "meaning": 9,
+    "good_rate": 0.8548387096774194,
+    "good_ci95": [
+     0.7465637464683085,
+     0.92170676943653
+    ],
+    "meaning_rate": 0.14516129032258066,
+    "per_100_sentences": 11.69811320754717,
+    "distinct_pairs": 39,
+    "unseen_pairs": {
+     "swaps": 16,
+     "good": 12
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_p": {
+    "swaps": 64,
+    "good": 57,
+    "meaning": 6,
+    "notsimpler": 1,
+    "good_rate": 0.890625,
+    "good_ci95": [
+     0.7910113670806147,
+     0.9459995524731696
+    ],
+    "meaning_rate": 0.09375,
+    "per_100_sentences": 12.075471698113208,
+    "distinct_pairs": 34,
+    "unseen_pairs": {
+     "swaps": 10,
+     "good": 7
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_p65": {
+    "swaps": 83,
+    "good": 67,
+    "meaning": 10,
+    "notsimpler": 6,
+    "good_rate": 0.8072289156626506,
+    "good_ci95": [
+     0.7095641358590259,
+     0.8777120082930856
+    ],
+    "meaning_rate": 0.12048192771084337,
+    "per_100_sentences": 15.660377358490566,
+    "distinct_pairs": 47,
+    "unseen_pairs": {
+     "swaps": 21,
+     "good": 14
+    },
+    "runner_up_swaps": {
+     "swaps": 0,
+     "good": 0
+    }
+   },
+   "arm_pn": {
+    "swaps": 71,
+    "good": 60,
+    "meaning": 10,
+    "notsimpler": 1,
+    "good_rate": 0.8450704225352113,
+    "good_ci95": [
+     0.7434882267163929,
+     0.911227867006884
+    ],
+    "meaning_rate": 0.14084507042253522,
+    "per_100_sentences": 13.39622641509434,
+    "distinct_pairs": 38,
+    "unseen_pairs": {
+     "swaps": 11,
+     "good": 7
+    },
+    "runner_up_swaps": {
+     "swaps": 7,
+     "good": 3
+    }
+   },
+   "arm_p65n": {
+    "swaps": 94,
+    "good": 74,
+    "meaning": 14,
+    "notsimpler": 6,
+    "good_rate": 0.7872340425531915,
+    "good_ci95": [
+     0.694080201974153,
+     0.8578322769714081
+    ],
+    "meaning_rate": 0.14893617021276595,
+    "per_100_sentences": 17.735849056603772,
+    "distinct_pairs": 56,
+    "unseen_pairs": {
+     "swaps": 25,
+     "good": 17
+    },
+    "runner_up_swaps": {
+     "swaps": 11,
+     "good": 7
+    }
+   }
+  }
+ ],
+ "yield_vs_b": {
+  "b": 1.0,
+  "s": 0.8,
+  "gs": 0.4608695652173913,
+  "t": 0.5391304347826087,
+  "p": 0.5565217391304348,
+  "p65": 0.7217391304347827,
+  "pn": 0.6173913043478261,
+  "p65n": 0.8173913043478261
+ },
+ "success": false,
+ "replication_p": false,
+ "unanimous_share": 0.9153846153846154,
+ "pairwise_agreement": {
+  "1-2": 0.9153846153846154,
+  "1-3": 0.9461538461538461,
+  "2-3": 0.9692307692307692
+ },
+ "consistency_with_old": [
+  18,
+  19,
+  19,
+  20
+ ]
+}

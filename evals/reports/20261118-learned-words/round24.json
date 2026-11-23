@@ -1,0 +1,796 @@
+{
+ "items": 153,
+ "raters": 3,
+ "passages": 137,
+ "sentences": 563,
+ "sentences_by_domain": {
+  "news": 181,
+  "wiki": 207,
+  "openfda": 175
+ },
+ "majority": {
+  "arm_b": {
+   "swaps": 131,
+   "good": 99,
+   "meaning": 8,
+   "notsimpler": 24,
+   "good_rate": 0.7557251908396947,
+   "good_ci95": [
+    0.6755533419055781,
+    0.8213259594376275
+   ],
+   "meaning_rate": 0.061068702290076333,
+   "per_100_sentences": 23.268206039076375,
+   "distinct_pairs": 98,
+   "unseen_pairs": {
+    "swaps": 41,
+    "good": 28,
+    "meaning": 6
+   },
+   "well_rated_pairs": {
+    "swaps": 46,
+    "meaning": 1
+   },
+   "by_domain": {
+    "news": {
+     "swaps": 38,
+     "good": 29
+    },
+    "wiki": {
+     "swaps": 48,
+     "good": 32
+    },
+    "openfda": {
+     "swaps": 45,
+     "good": 38
+    }
+   }
+  },
+  "arm_p50": {
+   "swaps": 68,
+   "good": 64,
+   "meaning": 2,
+   "notsimpler": 2,
+   "good_rate": 0.9411764705882353,
+   "good_ci95": [
+    0.8582811003734307,
+    0.9768896085194669
+   ],
+   "meaning_rate": 0.029411764705882353,
+   "per_100_sentences": 12.078152753108348,
+   "distinct_pairs": 43,
+   "unseen_pairs": {
+    "swaps": 8,
+    "good": 7,
+    "meaning": 1
+   },
+   "well_rated_pairs": {
+    "swaps": 47,
+    "meaning": 1
+   },
+   "by_domain": {
+    "news": {
+     "swaps": 17,
+     "good": 16
+    },
+    "wiki": {
+     "swaps": 18,
+     "good": 16
+    },
+    "openfda": {
+     "swaps": 33,
+     "good": 32
+    }
+   }
+  },
+  "arm_qg": {
+   "swaps": 75,
+   "good": 69,
+   "meaning": 3,
+   "notsimpler": 3,
+   "good_rate": 0.92,
+   "good_ci95": [
+    0.8362501593344202,
+    0.9628203821056319
+   ],
+   "meaning_rate": 0.04,
+   "per_100_sentences": 13.321492007104796,
+   "distinct_pairs": 49,
+   "unseen_pairs": {
+    "swaps": 14,
+    "good": 13,
+    "meaning": 1
+   },
+   "well_rated_pairs": {
+    "swaps": 46,
+    "meaning": 1
+   },
+   "by_domain": {
+    "news": {
+     "swaps": 20,
+     "good": 17
+    },
+    "wiki": {
+     "swaps": 23,
+     "good": 21
+    },
+    "openfda": {
+     "swaps": 32,
+     "good": 31
+    }
+   }
+  },
+  "arm_f": {
+   "swaps": 72,
+   "good": 68,
+   "notsimpler": 2,
+   "meaning": 2,
+   "good_rate": 0.9444444444444444,
+   "good_ci95": [
+    0.8656779164279059,
+    0.9781861370730748
+   ],
+   "meaning_rate": 0.027777777777777776,
+   "per_100_sentences": 12.788632326820604,
+   "distinct_pairs": 46,
+   "unseen_pairs": {
+    "swaps": 7,
+    "good": 7,
+    "meaning": 0
+   },
+   "well_rated_pairs": {
+    "swaps": 48,
+    "meaning": 1
+   },
+   "by_domain": {
+    "news": {
+     "swaps": 21,
+     "good": 19
+    },
+    "wiki": {
+     "swaps": 19,
+     "good": 18
+    },
+    "openfda": {
+     "swaps": 32,
+     "good": 31
+    }
+   }
+  },
+  "arm_fg": {
+   "swaps": 75,
+   "good": 70,
+   "notsimpler": 3,
+   "meaning": 2,
+   "good_rate": 0.9333333333333333,
+   "good_ci95": [
+    0.8532474983062438,
+    0.9711903619096828
+   ],
+   "meaning_rate": 0.02666666666666667,
+   "per_100_sentences": 13.321492007104796,
+   "distinct_pairs": 49,
+   "unseen_pairs": {
+    "swaps": 9,
+    "good": 8,
+    "meaning": 0
+   },
+   "well_rated_pairs": {
+    "swaps": 48,
+    "meaning": 1
+   },
+   "by_domain": {
+    "news": {
+     "swaps": 22,
+     "good": 19
+    },
+    "wiki": {
+     "swaps": 21,
+     "good": 20
+    },
+    "openfda": {
+     "swaps": 32,
+     "good": 31
+    }
+   }
+  }
+ },
+ "per_rater": [
+  {
+   "arm_b": {
+    "swaps": 131,
+    "good": 99,
+    "meaning": 10,
+    "notsimpler": 22,
+    "good_rate": 0.7557251908396947,
+    "good_ci95": [
+     0.6755533419055781,
+     0.8213259594376275
+    ],
+    "meaning_rate": 0.07633587786259542,
+    "per_100_sentences": 23.268206039076375,
+    "distinct_pairs": 98,
+    "unseen_pairs": {
+     "swaps": 41,
+     "good": 28,
+     "meaning": 8
+    },
+    "well_rated_pairs": {
+     "swaps": 46,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 38,
+      "good": 28
+     },
+     "wiki": {
+      "swaps": 48,
+      "good": 33
+     },
+     "openfda": {
+      "swaps": 45,
+      "good": 38
+     }
+    }
+   },
+   "arm_p50": {
+    "swaps": 68,
+    "good": 64,
+    "meaning": 2,
+    "notsimpler": 2,
+    "good_rate": 0.9411764705882353,
+    "good_ci95": [
+     0.8582811003734307,
+     0.9768896085194669
+    ],
+    "meaning_rate": 0.029411764705882353,
+    "per_100_sentences": 12.078152753108348,
+    "distinct_pairs": 43,
+    "unseen_pairs": {
+     "swaps": 8,
+     "good": 7,
+     "meaning": 1
+    },
+    "well_rated_pairs": {
+     "swaps": 47,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 17,
+      "good": 16
+     },
+     "wiki": {
+      "swaps": 18,
+      "good": 16
+     },
+     "openfda": {
+      "swaps": 33,
+      "good": 32
+     }
+    }
+   },
+   "arm_qg": {
+    "swaps": 75,
+    "good": 69,
+    "meaning": 3,
+    "notsimpler": 3,
+    "good_rate": 0.92,
+    "good_ci95": [
+     0.8362501593344202,
+     0.9628203821056319
+    ],
+    "meaning_rate": 0.04,
+    "per_100_sentences": 13.321492007104796,
+    "distinct_pairs": 49,
+    "unseen_pairs": {
+     "swaps": 14,
+     "good": 13,
+     "meaning": 1
+    },
+    "well_rated_pairs": {
+     "swaps": 46,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 20,
+      "good": 17
+     },
+     "wiki": {
+      "swaps": 23,
+      "good": 21
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 31
+     }
+    }
+   },
+   "arm_f": {
+    "swaps": 72,
+    "good": 68,
+    "notsimpler": 2,
+    "meaning": 2,
+    "good_rate": 0.9444444444444444,
+    "good_ci95": [
+     0.8656779164279059,
+     0.9781861370730748
+    ],
+    "meaning_rate": 0.027777777777777776,
+    "per_100_sentences": 12.788632326820604,
+    "distinct_pairs": 46,
+    "unseen_pairs": {
+     "swaps": 7,
+     "good": 7,
+     "meaning": 0
+    },
+    "well_rated_pairs": {
+     "swaps": 48,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 21,
+      "good": 19
+     },
+     "wiki": {
+      "swaps": 19,
+      "good": 18
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 31
+     }
+    }
+   },
+   "arm_fg": {
+    "swaps": 75,
+    "good": 70,
+    "notsimpler": 3,
+    "meaning": 2,
+    "good_rate": 0.9333333333333333,
+    "good_ci95": [
+     0.8532474983062438,
+     0.9711903619096828
+    ],
+    "meaning_rate": 0.02666666666666667,
+    "per_100_sentences": 13.321492007104796,
+    "distinct_pairs": 49,
+    "unseen_pairs": {
+     "swaps": 9,
+     "good": 8,
+     "meaning": 0
+    },
+    "well_rated_pairs": {
+     "swaps": 48,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 22,
+      "good": 19
+     },
+     "wiki": {
+      "swaps": 21,
+      "good": 20
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 31
+     }
+    }
+   }
+  },
+  {
+   "arm_b": {
+    "swaps": 131,
+    "good": 100,
+    "notsimpler": 25,
+    "meaning": 6,
+    "good_rate": 0.7633587786259542,
+    "good_ci95": [
+     0.6837257351126099,
+     0.8279857841811392
+    ],
+    "meaning_rate": 0.04580152671755725,
+    "per_100_sentences": 23.268206039076375,
+    "distinct_pairs": 98,
+    "unseen_pairs": {
+     "swaps": 41,
+     "good": 28,
+     "meaning": 5
+    },
+    "well_rated_pairs": {
+     "swaps": 46,
+     "meaning": 0
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 38,
+      "good": 29
+     },
+     "wiki": {
+      "swaps": 48,
+      "good": 32
+     },
+     "openfda": {
+      "swaps": 45,
+      "good": 39
+     }
+    }
+   },
+   "arm_p50": {
+    "swaps": 68,
+    "good": 65,
+    "meaning": 1,
+    "notsimpler": 2,
+    "good_rate": 0.9558823529411765,
+    "good_ci95": [
+     0.8781260781761931,
+     0.984883654346468
+    ],
+    "meaning_rate": 0.014705882352941176,
+    "per_100_sentences": 12.078152753108348,
+    "distinct_pairs": 43,
+    "unseen_pairs": {
+     "swaps": 8,
+     "good": 7,
+     "meaning": 1
+    },
+    "well_rated_pairs": {
+     "swaps": 47,
+     "meaning": 0
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 17,
+      "good": 16
+     },
+     "wiki": {
+      "swaps": 18,
+      "good": 16
+     },
+     "openfda": {
+      "swaps": 33,
+      "good": 33
+     }
+    }
+   },
+   "arm_qg": {
+    "swaps": 75,
+    "good": 70,
+    "meaning": 2,
+    "notsimpler": 3,
+    "good_rate": 0.9333333333333333,
+    "good_ci95": [
+     0.8532474983062438,
+     0.9711903619096828
+    ],
+    "meaning_rate": 0.02666666666666667,
+    "per_100_sentences": 13.321492007104796,
+    "distinct_pairs": 49,
+    "unseen_pairs": {
+     "swaps": 14,
+     "good": 13,
+     "meaning": 1
+    },
+    "well_rated_pairs": {
+     "swaps": 46,
+     "meaning": 0
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 20,
+      "good": 17
+     },
+     "wiki": {
+      "swaps": 23,
+      "good": 21
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 32
+     }
+    }
+   },
+   "arm_f": {
+    "swaps": 72,
+    "good": 69,
+    "notsimpler": 2,
+    "meaning": 1,
+    "good_rate": 0.9583333333333334,
+    "good_ci95": [
+     0.8845053539454768,
+     0.98572945122741
+    ],
+    "meaning_rate": 0.013888888888888888,
+    "per_100_sentences": 12.788632326820604,
+    "distinct_pairs": 46,
+    "unseen_pairs": {
+     "swaps": 7,
+     "good": 7,
+     "meaning": 0
+    },
+    "well_rated_pairs": {
+     "swaps": 48,
+     "meaning": 0
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 21,
+      "good": 19
+     },
+     "wiki": {
+      "swaps": 19,
+      "good": 18
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 32
+     }
+    }
+   },
+   "arm_fg": {
+    "swaps": 75,
+    "good": 71,
+    "notsimpler": 3,
+    "meaning": 1,
+    "good_rate": 0.9466666666666667,
+    "good_ci95": [
+     0.8707382679518444,
+     0.9790669110399569
+    ],
+    "meaning_rate": 0.013333333333333334,
+    "per_100_sentences": 13.321492007104796,
+    "distinct_pairs": 49,
+    "unseen_pairs": {
+     "swaps": 9,
+     "good": 8,
+     "meaning": 0
+    },
+    "well_rated_pairs": {
+     "swaps": 48,
+     "meaning": 0
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 22,
+      "good": 19
+     },
+     "wiki": {
+      "swaps": 21,
+      "good": 20
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 32
+     }
+    }
+   }
+  },
+  {
+   "arm_b": {
+    "swaps": 131,
+    "good": 97,
+    "meaning": 8,
+    "notsimpler": 26,
+    "good_rate": 0.7404580152671756,
+    "good_ci95": [
+     0.659296706317605,
+     0.8079181591245138
+    ],
+    "meaning_rate": 0.061068702290076333,
+    "per_100_sentences": 23.268206039076375,
+    "distinct_pairs": 98,
+    "unseen_pairs": {
+     "swaps": 41,
+     "good": 26,
+     "meaning": 6
+    },
+    "well_rated_pairs": {
+     "swaps": 46,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 38,
+      "good": 29
+     },
+     "wiki": {
+      "swaps": 48,
+      "good": 31
+     },
+     "openfda": {
+      "swaps": 45,
+      "good": 37
+     }
+    }
+   },
+   "arm_p50": {
+    "swaps": 68,
+    "good": 65,
+    "meaning": 2,
+    "notsimpler": 1,
+    "good_rate": 0.9558823529411765,
+    "good_ci95": [
+     0.8781260781761931,
+     0.984883654346468
+    ],
+    "meaning_rate": 0.029411764705882353,
+    "per_100_sentences": 12.078152753108348,
+    "distinct_pairs": 43,
+    "unseen_pairs": {
+     "swaps": 8,
+     "good": 7,
+     "meaning": 1
+    },
+    "well_rated_pairs": {
+     "swaps": 47,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 17,
+      "good": 16
+     },
+     "wiki": {
+      "swaps": 18,
+      "good": 17
+     },
+     "openfda": {
+      "swaps": 33,
+      "good": 32
+     }
+    }
+   },
+   "arm_qg": {
+    "swaps": 75,
+    "good": 69,
+    "meaning": 3,
+    "notsimpler": 3,
+    "good_rate": 0.92,
+    "good_ci95": [
+     0.8362501593344202,
+     0.9628203821056319
+    ],
+    "meaning_rate": 0.04,
+    "per_100_sentences": 13.321492007104796,
+    "distinct_pairs": 49,
+    "unseen_pairs": {
+     "swaps": 14,
+     "good": 12,
+     "meaning": 1
+    },
+    "well_rated_pairs": {
+     "swaps": 46,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 20,
+      "good": 17
+     },
+     "wiki": {
+      "swaps": 23,
+      "good": 21
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 31
+     }
+    }
+   },
+   "arm_f": {
+    "swaps": 72,
+    "good": 68,
+    "notsimpler": 2,
+    "meaning": 2,
+    "good_rate": 0.9444444444444444,
+    "good_ci95": [
+     0.8656779164279059,
+     0.9781861370730748
+    ],
+    "meaning_rate": 0.027777777777777776,
+    "per_100_sentences": 12.788632326820604,
+    "distinct_pairs": 46,
+    "unseen_pairs": {
+     "swaps": 7,
+     "good": 7,
+     "meaning": 0
+    },
+    "well_rated_pairs": {
+     "swaps": 48,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 21,
+      "good": 19
+     },
+     "wiki": {
+      "swaps": 19,
+      "good": 18
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 31
+     }
+    }
+   },
+   "arm_fg": {
+    "swaps": 75,
+    "good": 70,
+    "notsimpler": 3,
+    "meaning": 2,
+    "good_rate": 0.9333333333333333,
+    "good_ci95": [
+     0.8532474983062438,
+     0.9711903619096828
+    ],
+    "meaning_rate": 0.02666666666666667,
+    "per_100_sentences": 13.321492007104796,
+    "distinct_pairs": 49,
+    "unseen_pairs": {
+     "swaps": 9,
+     "good": 8,
+     "meaning": 0
+    },
+    "well_rated_pairs": {
+     "swaps": 48,
+     "meaning": 1
+    },
+    "by_domain": {
+     "news": {
+      "swaps": 22,
+      "good": 19
+     },
+     "wiki": {
+      "swaps": 21,
+      "good": 20
+     },
+     "openfda": {
+      "swaps": 32,
+      "good": 31
+     }
+    }
+   }
+  }
+ ],
+ "yield_vs_b": {
+  "b": 1.0,
+  "p50": 0.5190839694656488,
+  "qg": 0.5725190839694656,
+  "f": 0.549618320610687,
+  "fg": 0.5725190839694656
+ },
+ "success_f": {
+  "good_ge_0.90": true,
+  "meaning_le_0.08": true,
+  "yield_ge_0.40": true
+ },
+ "success": true,
+ "secondary_f": {
+  "frame_errors_le_p50": true,
+  "unseen_swaps_ge_1.25x_p50": false,
+  "unseen_good_ge_0.90": true
+ },
+ "success_fg": {
+  "good_ge_0.90": true,
+  "meaning_le_0.08": true,
+  "yield_ge_0.40": true
+ },
+ "unanimous_share": 0.924812030075188,
+ "pairwise_agreement": {
+  "1-2": 0.9548872180451128,
+  "1-3": 0.9398496240601504,
+  "2-3": 0.9548872180451128
+ },
+ "consistency_with_old": [
+  16,
+  16,
+  17,
+  20
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "note": "Exploratory CV runs before ROUND21.md (scratch scripts, 3 repeats x 5 folds unless noted), on the same 1,259 rows. Formats: 'good@yield(kept/n)'; pairCV columns are Good at keeps of 20/30/40/50% of technical arm-b rows. Aggregates only.",
+ "variants_nested_cv_keep50": [
+  "base                                     pass all 0.924@0.51(422/827) seen 0.928@0.59(403/677) unseen 0.822@0.13(19/150) | pairCV 0.873@0.51(423/827) | lemmaCV 0.873@0.51(425/827)",
+  "rep                                      pass all 0.924@0.51(421/827) seen 0.927@0.59(402/677) unseen 0.854@0.12(18/150) | pairCV 0.873@0.52(432/827) | lemmaCV 0.871@0.51(422/827)",
+  "rep+fam                                  pass all 0.925@0.51(422/827) seen 0.928@0.60(404/677) unseen 0.855@0.12(18/150) | pairCV 0.878@0.52(430/827) | lemmaCV 0.880@0.51(418/827)",
+  "hier                                     pass all 0.929@0.52(426/827) seen 0.932@0.60(404/677) unseen 0.861@0.14(22/150) | pairCV 0.867@0.52(426/827) | lemmaCV 0.875@0.51(418/827)",
+  "rep+fam+seen                             pass all 0.923@0.51(419/827) seen 0.928@0.59(399/677) unseen 0.814@0.13(20/150) | pairCV 0.878@0.52(433/827) | lemmaCV 0.881@0.51(418/827)",
+  "hier+seen                                pass all 0.927@0.52(426/827) seen 0.931@0.59(403/677) unseen 0.837@0.15(23/150) | pairCV 0.868@0.51(425/827) | lemmaCV 0.876@0.50(415/827)",
+  "rep+fam+seen+ctx                         pass all 0.925@0.51(421/827) seen 0.931@0.59(401/677) unseen 0.812@0.13(20/150) | pairCV 0.881@0.52(430/827) | lemmaCV 0.884@0.50(415/827)",
+  "rep+fam+seen+ctx+x                       pass all 0.923@0.51(421/827) seen 0.929@0.59(402/677) unseen 0.779@0.12(18/150) | pairCV 0.890@0.51(422/827) | lemmaCV 0.893@0.50(411/827)",
+  "hier+seen+ctx+x                          pass all 0.928@0.51(424/827) seen 0.935@0.60(404/677) unseen 0.804@0.14(20/150) | pairCV 0.872@0.50(414/827) | lemmaCV 0.886@0.49(407/827)"
+ ],
+ "unseen_scorer_pair_cv": [
+  "U stack+cover                      pairCV AUC 0.818 20%:0.908 30%:0.892 40%:0.881 50%:0.874",
+  "U tgt                              pairCV AUC 0.816 20%:0.898 30%:0.887 40%:0.887 50%:0.872",
+  "U tgt+rep                          pairCV AUC 0.815 20%:0.904 30%:0.884 40%:0.887 50%:0.870",
+  "U tgt+rep+fam                      pairCV AUC 0.819 20%:0.906 30%:0.899 40%:0.894 50%:0.875",
+  "U tgt+rep+fam+ctx                  pairCV AUC 0.821 20%:0.908 30%:0.902 40%:0.897 50%:0.875",
+  "U tgt+rep+fam+ctx+x                pairCV AUC 0.807 20%:0.898 30%:0.887 40%:0.883 50%:0.869",
+  "U tgt+rep+fam+emb                  pairCV AUC 0.817 20%:0.902 30%:0.901 40%:0.898 50%:0.877",
+  "U all                              pairCV AUC 0.805 20%:0.898 30%:0.887 40%:0.884 50%:0.870",
+  "arm p (as is)                      pairCV AUC 0.817 20%:0.898 30%:0.901 40%:0.888 50%:0.870"
+ ],
+ "two_regime_passage_cv": [
+  "2reg U tgt+rep+fam+ctx+x           keep_u 0.20 all 0.923@0.51(421/827, meaning 31.0) seen 0.928@0.59(403/677, meaning 27.7) unseen 0.817@0.12(18/150, meaning 3.3)",
+  "2reg U all                         keep_u 0.20 all 0.923@0.51(421/827, meaning 31.0) seen 0.928@0.59(403/677, meaning 27.7) unseen 0.812@0.12(18/150, meaning 3.3)",
+  "2reg U tgt+rep+fam+ctx+x           keep_u 0.30 all 0.917@0.52(430/827, meaning 34.3) seen 0.928@0.59(403/677, meaning 27.7) unseen 0.758@0.18(27/150, meaning 6.7)",
+  "2reg U all                         keep_u 0.30 all 0.917@0.52(430/827, meaning 34.3) seen 0.928@0.59(403/677, meaning 27.7) unseen 0.758@0.18(27/150, meaning 6.7)",
+  "2reg U tgt+rep+fam+ctx+x           keep_u 0.40 all 0.911@0.53(441/827, meaning 38.0) seen 0.928@0.59(403/677, meaning 27.7) unseen 0.733@0.26(39/150, meaning 10.3)",
+  "2reg U all                         keep_u 0.40 all 0.911@0.53(441/827, meaning 37.7) seen 0.928@0.59(403/677, meaning 27.7) unseen 0.736@0.25(38/150, meaning 10.0)"
+ ],
+ "refit_31_features_pair_cv": [
+  "committed arm-s score AUC on ref 0.8111762456989933",
+  "U tgt+rep+fam+ctx            pairCV AUC 0.821 20%:0.908 30%:0.902 40%:0.897 50%:0.875",
+  "Lin31 + U feats              pairCV AUC 0.814 20%:0.894 30%:0.886 40%:0.884 50%:0.869",
+  "GBM 31 + U feats             pairCV AUC 0.782 20%:0.908 30%:0.883 40%:0.861 50%:0.832"
+ ],
+ "unseen_rows_top_share_precision": [
+  "p auc:0.747 base:0.493 n:150 top10%:0.795 top20%:0.764 top30%:0.744 top50%:0.684",
+  "q auc:0.724 top10%:0.749 top20%:0.809 top30%:0.737 top50%:0.658",
+  "U(leave-pair-out priors+ctx) auc:0.749 top10%:0.886 top20%:0.798 top30%:0.737 top50%:0.684",
+  "arm-s score auc:0.742 top10%:0.817 top20%:0.775 top30%:0.767 top50%:0.680"
+ ],
+ "context_feature_counts": {
+  "inside_quotes": "6 rows, 6 meaning",
+  "rep_stem_in_sentence": "30 rows: 14 good, 11 notsimpler, 5 meaning",
+  "article_mismatch_after_swap": "5 rows, 5 meaning"
+ }
+}

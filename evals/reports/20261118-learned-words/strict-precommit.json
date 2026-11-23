@@ -1,0 +1,11 @@
+{
+ "written": "2026-11-19 18:19:36 EST",
+ "strict_threshold": 0.53,
+ "applied_rule": "fallback S2: best OOF F0.5",
+ "target_floor": 0.1,
+ "strict_sha256": "c85a82a9071c8721e026c7756f4753dee71100cdcaecd35a031c3b849e4b0f51",
+ "source_sha256": {
+  "evals/learned_words_strict.py": "b75b40bde5d1a2af93b03655705ee152bbe95e6d88088a12039adead7f475a81"
+ },
+ "note": "written before any round-4 swap exists"
+}

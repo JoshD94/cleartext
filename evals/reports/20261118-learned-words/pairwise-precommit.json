@@ -1,0 +1,20 @@
+{
+ "written": "2026-11-20 17:30:35 EST",
+ "rule": "max out-of-fold balanced accuracy (ROUND6.md)",
+ "threshold": 0.31,
+ "oof": {
+  "t": 0.31,
+  "pos_pass": 0.6303373111678279,
+  "neg_pass": 0.4787348167629858,
+  "balanced_acc": 0.575801247202421
+ },
+ "oof_auc": 0.6101801454798237,
+ "pairs": 43394,
+ "positives": 14497,
+ "model_sha256": "b68e2ab07ba648b5f7ddd55d51a6455555db72de54b81c319c57938b83d0dd34",
+ "source_sha256": {
+  "models/src/cleartext/learned_words/pairwise.py": "6add4a8e181581bd64984b805bc0f99cdd9e622bab53727efb75aae8141b5614",
+  "evals/learned_words_pairwise.py": "19e3000e8996fe401e6db8ff33846dac5ae6974c8d8840fa088b0f3f948eab81"
+ },
+ "simpler_pkl_sha256": "b56d4de4f2c33d1fa02114f8c421b4c838fdc303c4403a914c1ccf3f5358ccf7"
+}
