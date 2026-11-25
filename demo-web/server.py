@@ -15,7 +15,6 @@ import hmac
 import json
 import multiprocessing as mp
 import os
-import queue
 import secrets
 import sys
 import threading
@@ -31,7 +30,7 @@ PER_IP_ACTIVE = 2
 RATE_WINDOW, RATE_MAX = 600.0, int(os.environ.get("DEMO_RATE_MAX", 12))
 IDLE_SECONDS = float(os.environ.get("DEMO_IDLE_SECONDS", 900))
 JOB_TTL = 900.0
-CACHE_MAX, CACHE_TTL = 32, 3600.0  # recent results, in memory only (example clicks come back at once)
+CACHE_MAX, CACHE_TTL = 32, 3600.0
 JOB_TIMEOUT = float(os.environ.get("DEMO_JOB_TIMEOUT", 900))
 THREADS = int(os.environ.get("DEMO_THREADS", 4))
 SECRET_FILE = Path(os.environ.get("DEMO_SECRET_FILE", Path.home() / ".config/cleartext-demo/secret"))
@@ -40,8 +39,6 @@ SECRET_FILE = Path(os.environ.get("DEMO_SECRET_FILE", Path.home() / ".config/cle
 def log(message):
     print(time.strftime("%Y-%m-%d %H:%M:%S"), message, file=sys.stderr, flush=True)
 
-
-# --- child process -------------------------------------------------------------------
 
 def child_main(conn, threads):
     """Loads the pipeline lazily and serves one text at a time over a pipe."""
@@ -63,7 +60,7 @@ def child_main(conn, threads):
                 conn.send({"event": "loaded", "seconds": round(time.monotonic() - t, 1)})
             trace = pipe.run(msg["text"], lambda s, done=None: conn.send({"event": "stage", "stage": s, "done": done}))
             conn.send({"event": "done", "trace": trace})
-        except Exception as exc:  # never echo the message: it may quote the text
+        except Exception as exc:
             conn.send({"event": "error", "kind": type(exc).__name__})
 
 
@@ -131,8 +128,6 @@ class Engine:
                 raise RuntimeError(msg["kind"])
 
 
-# --- jobs ------------------------------------------------------------------------------
-
 class Jobs:
     def __init__(self, engine, idle_seconds=IDLE_SECONDS):
         self.engine, self.idle_seconds = engine, idle_seconds
@@ -142,9 +137,8 @@ class Jobs:
         self.hits = {}
         self.last_work = time.monotonic()
         self.stats = {"done": 0, "failed": 0, "cold_seconds": [], "warm_seconds": []}
-        self.cache = {}  # text -> (time, trace); memory only
+        self.cache = {}
 
-    # Rate limits ------------------------------------------------------------------
     def _limited(self, ip, now):
         hits = [t for t in self.hits.get(ip, []) if now - t < RATE_WINDOW]
         self.hits[ip] = hits
@@ -209,7 +203,6 @@ class Jobs:
         for text in [t for t, (at, _) in self.cache.items() if now - at > CACHE_TTL]:
             del self.cache[text]
 
-    # Worker -----------------------------------------------------------------------
     def step(self):
         """Run the next job, or unload when idle. Returns True if a job ran."""
         with self.lock:
@@ -260,8 +253,6 @@ class Jobs:
                 self.wake.clear()
 
 
-# --- HTTP ------------------------------------------------------------------------------
-
 def read_secret():
     return SECRET_FILE.read_text().strip()
 
@@ -271,7 +262,7 @@ class Handler(BaseHTTPRequestHandler):
     jobs = None
     secret = ""
 
-    def log_message(self, fmt, *args):  # path only; job ids are random, bodies never logged
+    def log_message(self, fmt, *args):
         path = self.path.split("?")[0]
         if path.startswith("/api/jobs/"):
             return

@@ -11,7 +11,6 @@ t0 = time.monotonic(); pipe = DP.DemoPipeline(threads=4); load = time.monotonic(
 out = {"load_s": round(load, 1), "runs": []}
 for i, text in enumerate(texts):
     t = time.monotonic(); trace = pipe.run(text); dt = time.monotonic() - t
-    # Reference: the default pipeline called directly (stages 2-3 via DefaultAfterF2.__call__).
     ref_f2 = pipe.f2.predict(pipe.F2, text)["output"]
     ref, _ = pipe.after(ref_f2)
     out["runs"].append({"i": i, "seconds": round(dt, 1), "stage_seconds": trace["seconds"],

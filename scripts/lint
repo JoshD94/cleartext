@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+ruff_version=0.14.5
+typescript_version=5.9.3
+
+work=$(mktemp -d "${TMPDIR:-$HOME/.cache}/lint.XXXXXX")
+trap 'rm -rf -- "$work"' EXIT
+
+if [[ -e .git ]]; then
+  git ls-files --cached --others --exclude-standard >"$work/all"
+else
+  find . \( -name .git -o -name node_modules -o -name .venv -o -name __pycache__ -o -name .ruff_cache -o -name .evidence \) -prune -o -type f -print | sed 's|^\./||' >"$work/all"
+fi
+
+typescript_modules() {
+  local shared=$HOME/.config/agent-setup/tools/comment-check/node_modules
+  if [[ -f $shared/typescript/package.json ]]; then echo "$shared"; return; fi
+  local dir=${LINT_CACHE:-$HOME/.cache/repo-lint}/typescript-$typescript_version
+  [[ -f $dir/node_modules/typescript/package.json ]] ||
+    npm install --prefix "$dir" --no-audit --no-fund --loglevel=error "typescript@$typescript_version" >&2
+  echo "$dir/node_modules"
+}
+
+modules=$(typescript_modules)
+if [[ -e .git ]]; then
+  NODE_PATH=$modules node scripts/comment-check/check.mjs --all
+else
+  NODE_PATH=$modules node scripts/comment-check/check.mjs --files "$work/all"
+fi
+
+python=()
+while IFS= read -r file; do
+  [[ -f $file ]] || continue
+  if [[ $file == *.py ]]; then
+    python+=("$file")
+  elif [[ ${file##*/} != *.* ]] && head -n 1 "$file" | grep -aq '^#!.*python'; then
+    python+=("$file")
+  fi
+done <"$work/all"
+echo "ruff: ${#python[@]} Python files"
+uvx --quiet "ruff@$ruff_version" check --no-cache --force-exclude --config ruff.toml "${python[@]}"

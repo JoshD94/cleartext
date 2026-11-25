@@ -19,7 +19,6 @@ import matplotlib.pyplot as plt  # noqa: E402
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "figures"
 
-# Same reference palette as the v2 report (dataviz skill, light mode).
 BLUE, ORANGE, AQUA, RED = "#2a78d6", "#eb6834", "#1baf7a", "#c2362f"
 INK, INK2, MUTED, GRID, AXIS, SURFACE = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7", "#fcfcfb"
 plt.rcParams.update({
@@ -98,7 +97,7 @@ def curves(agg, prefix):
         for (value, name), x, y in zip(items, xs, ys):
             ax.scatter(x, y, s=18, color=BLUE if passes(agg, name) else MUTED, zorder=3)
             if same and abs(x - same[0]) < 1e-9 and abs(y - same[1]) < 1e-9:
-                continue  # identical to the incumbent: no label (listed in the table)
+                continue
             ax.annotate("none" if value is None else str(value).replace("_", " "), (x, y), xytext=(3, 3),
                         textcoords="offset points", fontsize=7, color=INK2)
         if inc in s:

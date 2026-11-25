@@ -21,7 +21,6 @@ import numpy as np  # noqa: E402
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "figures"
 
-# Reference palette (dataviz skill, light mode); the first three slots validate all-pairs.
 BLUE, ORANGE, AQUA = "#2a78d6", "#eb6834", "#1baf7a"
 INK, INK2, MUTED, GRID, AXIS, SURFACE = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7", "#fcfcfb"
 
@@ -60,13 +59,13 @@ def dots(ax, rows, title, xlabel, highlight="v2_winner", zero=None):
         lo, hi = ci["ci95"]
         ax.plot([lo, hi], [y, y], color=color, linewidth=2, solid_capstyle="round", zorder=2)
         ax.scatter([ci["mean"]], [y], s=48, color=color, edgecolor=SURFACE, linewidth=2, zorder=3)
-        right = max(hi, zero) if zero is not None else hi  # keep the label clear of the zero line
+        right = max(hi, zero) if zero is not None else hi
         ax.annotate(f"{ci['mean']:.{digits}f}", (right, y), xytext=(6, 0), textcoords="offset points", va="center",
                     color=INK2, fontsize=9)
     if zero is not None:
         ax.axvline(zero, color=MUTED, linewidth=1, zorder=1)
     ax.set_yticks(range(len(names)), [LABELS[n] for n in names])
-    if not ax.yaxis_inverted():  # shared y axes are flipped once, not once per panel
+    if not ax.yaxis_inverted():
         ax.invert_yaxis()
     ax.grid(axis="y", visible=False)
     ax.set_title(title, loc="left")
@@ -104,7 +103,6 @@ def fig_winner_deltas(agg):
 def fig_over_edit(agg):
     sec = agg["simple_control"]
     fig, axes = plt.subplots(1, 2, figsize=(11, 3.4), sharey=True)
-    # Both panels share rows: the source itself (rate 0, Δ 0) is the reference, not a row.
     dots(axes[0], {k: v["changed_token_rate"] for k, v in sec["ci"].items() if k != "original"},
          "Changed-token rate (gate ≤ 0.10)", "Mean rate, 95% CI", zero=0)
     axes[0].axvline(0.10, color=MUTED, linewidth=1, linestyle=(0, (4, 3)))
@@ -136,7 +134,7 @@ def fig_domains(agg):
     ax.axvline(0, color=MUTED, linewidth=1)
     lo = ax.get_xlim()[0]
     ax.set_xticks([t for t in ax.get_xticks() if lo <= t <= 0])
-    ax.set_xlim(lo, -lo * 0.3)  # room right of zero for the changed-passage counts
+    ax.set_xlim(lo, -lo * 0.3)
     ax.set_yticks(range(len(domains)), [f"{DOMAINS[d]} (n={by[d]['original']['n']})" for d in domains])
     ax.invert_yaxis()
     ax.grid(axis="y", visible=False)

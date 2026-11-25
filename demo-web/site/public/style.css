@@ -57,7 +57,6 @@ button, textarea { font: inherit; color: inherit; }
   :root { --r-card: 26px; --r-ctl: 20px; --r-inner: 14px; }
 }
 
-/* Header and page */
 .top { max-width: 760px; margin: 0 auto; padding: 18px 16px 0; height: 56px; display: flex; align-items: center; }
 .wordmark { font-weight: 650; font-size: 16px; letter-spacing: -0.01em; }
 .page { max-width: 760px; margin: 0 auto; padding: 20px 16px 24px; display: flex; flex-direction: column; gap: var(--gap); }
@@ -66,7 +65,6 @@ h1 { margin: 8px 0 4px; font-size: 24px; line-height: 1.2; font-weight: 600; let
 
 .card { background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow); padding: 16px; }
 
-/* Input */
 .input-card { display: flex; flex-direction: column; gap: 8px; }
 textarea {
   width: 100%; resize: vertical; min-height: 150px; max-height: 60vh;
@@ -82,7 +80,6 @@ textarea::placeholder { color: var(--muted); }
 .count { color: var(--muted); font-size: 13px; }
 .count.over { color: var(--ink); font-weight: 600; }
 
-/* Buttons: one height, one radius, one padding scale */
 .btn {
   height: 36px; padding: 0 14px; border: 0; border-radius: var(--r-ctl);
   background: var(--soft); color: var(--ink); cursor: pointer; white-space: nowrap;
@@ -96,13 +93,11 @@ textarea::placeholder { color: var(--muted); }
 .btn[disabled] { opacity: 0.5; cursor: default; transform: none; }
 .btn svg { width: 16px; height: 16px; }
 
-/* Status line */
 .status { display: flex; align-items: center; gap: 8px; color: var(--ink-2); padding: 0 4px; min-height: 22px; }
 .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex: none; }
 .dot.live { background: var(--accent); animation: pulse 1.4s ease-in-out infinite; }
 .status .time { color: var(--muted); margin-left: auto; }
 
-/* Steps */
 .steps { display: flex; flex-direction: column; gap: 12px; }
 .step { padding: 14px 16px; }
 .step.enter { animation: rise 260ms var(--ease) both; }
@@ -128,13 +123,11 @@ textarea::placeholder { color: var(--muted); }
 .swap .to { color: var(--ink); font-weight: 600; }
 .swap svg { width: 14px; height: 14px; color: var(--muted); }
 
-/* Skeleton: same boxes as a changed step */
 .skeleton { background: var(--soft); border-radius: 6px; animation: pulse 1.4s ease-in-out infinite; }
 .sk-line { height: 14px; margin: 6px 0; }
 .sk-tag { height: 28px; width: 132px; border-radius: var(--r-inner); }
 .sk-text { display: flex; flex-direction: column; gap: 4px; }
 
-/* Result */
 .result { display: flex; flex-direction: column; gap: 12px; animation: rise 260ms var(--ease) both; }
 .result-head { display: flex; align-items: center; gap: 10px; }
 .result-head h2 { margin: 0; font-size: 15px; font-weight: 600; }
@@ -150,7 +143,6 @@ textarea::placeholder { color: var(--muted); }
 .kept .tag svg { width: 14px; height: 14px; }
 .kept .tag.lost { color: var(--muted); }
 
-/* Notices and empty states */
 .notice { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: var(--r-ctl); background: var(--soft); color: var(--ink-2); }
 .notice svg { width: 16px; height: 16px; flex: none; margin-top: 2px; }
 .empty { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 40px 16px; color: var(--muted); }
@@ -175,7 +167,6 @@ svg.f { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: ro
   .step { padding: 14px; }
 }
 
-/* Segmented control: rounded track, the selected pill slides (header views, results system) */
 .top { justify-content: space-between; gap: 12px; }
 .seg { position: relative; display: inline-flex; padding: 3px; gap: 0; background: var(--soft); border-radius: var(--r-ctl); corner-shape: squircle; }
 .seg::before {
@@ -193,7 +184,6 @@ svg.f { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: ro
 .seg button[aria-selected="true"] { color: var(--ink); }
 .seg button .n { color: var(--muted); font-weight: 500; }
 
-/* Results */
 .sk-fig { width: 132px; height: 32px; }
 #r-compare { display: flex; flex-direction: column; gap: 8px; align-self: flex-start; }
 #r-compare h2 { margin: 0; font-size: 15px; font-weight: 600; }
@@ -203,7 +193,6 @@ svg.f { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: ro
 .r-table th:first-child, .r-table td:first-child { text-align: left; padding-left: 0; }
 .r-tools { display: flex; margin-top: 8px; }
 
-/* One text, changes highlighted by the step that made them */
 :root {
   --k-split: rgba(60, 111, 224, 0.16); --k-split-line: #3c6fe0;
   --k-structure: rgba(139, 92, 246, 0.17); --k-structure-line: #8b5cf6;

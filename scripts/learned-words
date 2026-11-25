@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Learned word-simplification study (evals/learned_words.py), run isolated
-# (python -I): downloaded data under CLEARTEXT_LEXSIMP_RAW is only parsed.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=${CLEARTEXT_PYTHON:-models/.venv/bin/python}

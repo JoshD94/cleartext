@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Focused, offline verification for the model/evaluation branch.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+scripts/lint
 python_bin=${CLEARTEXT_PYTHON:-models/.venv/bin/python}
 export PYTHONPATH="${CLEARTEXT_EVAL_DEPS:+$CLEARTEXT_EVAL_DEPS:}models/src:.:${PYTHONPATH:-}"
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false

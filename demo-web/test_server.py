@@ -101,7 +101,6 @@ def test_job_lifecycle_and_trace(api):
     assert all(i["item"] != "The" for i in kept["names"])
     assert {"item": "not", "kept": True} in kept["negations"]
     assert any(i["item"] == "Paris" for i in kept["names"])
-    # The submitted text is dropped from the job once it runs.
     assert jobs.jobs[body["id"]]["text"] is None
 
 
@@ -138,7 +137,6 @@ def test_limits(api, monkeypatch):
     assert call("/api/simplify", {"text": "x" * (SRV.MAX_CHARS + 1)})[0] == 413
     assert call("/api/simplify", {"text": "too short"})[1]["error"] == "too_short"
     assert call("/api/simplify", {"text": 5})[0] == 400
-    # Two active jobs per IP, then a polite refusal; another IP still gets in.
     assert call("/api/simplify", {"text": TEXT})[0] == 202
     assert call("/api/simplify", {"text": TEXT})[0] == 202
     assert call("/api/simplify", {"text": TEXT}) == (429, {"error": "active"})
@@ -159,7 +157,7 @@ def test_failure_hides_details_and_idle_unload(api):
     jobs.step()
     view = call(f"/api/jobs/{jid}")[1]
     assert view["status"] == "failed" and view["error"] == "failed" and "trace" not in view
-    assert jobs.step() is False and engine.stopped == 1  # idle_seconds=0: unloads at once
+    assert jobs.step() is False and engine.stopped == 1
 
 
 def test_no_text_in_logs(api, capsys):

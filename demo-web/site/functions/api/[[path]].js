@@ -1,6 +1,3 @@
-// Proxies /api/* to the demo backend's current Cloudflare quick tunnel.
-// The backend registers its tunnel URL here (POST /api/_register, shared secret);
-// the URL is kept in KV. When no backend answers, clients get {offline: true}.
 const TUNNEL = /^https:\/\/[a-z0-9-]+\.trycloudflare\.com$/;
 const ALLOWED = /^(health|simplify|jobs\/[A-Za-z0-9_-]{1,32})$/;
 

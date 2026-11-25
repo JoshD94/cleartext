@@ -27,7 +27,6 @@ plt.rcParams.update({
     "axes.facecolor": SURFACE, "savefig.facecolor": SURFACE, "legend.frameon": False,
 })
 ORDER = ["original", "rule_based", "nov9_t5", "incumbent", "F1", "F2"]
-# Label offsets (points) so the three systems near FK 13.7-14.1, NLI 0.986 stay legible.
 OFFSET = {"incumbent": (-130, -14), "nov9_t5": (-30, -16), "original": (-40, 8)}
 
 

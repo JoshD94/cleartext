@@ -1,11 +1,8 @@
-// Headless screenshots of the live demo for the erp-ui self-audit.
-// node shoot.mjs <base-url> <out-dir> states|offline
-// Needs the `playwright` package on NODE_PATH; run through the job queue.
 import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
 
-const { chromium } = createRequire(import.meta.url)("playwright"); // found via NODE_PATH
+const { chromium } = createRequire(import.meta.url)("playwright");
 const [base, out, mode = "states"] = process.argv.slice(2);
 fs.mkdirSync(out, { recursive: true });
 const VIEWS = { desktop: { width: 1440, height: 900 }, phone: { width: 390, height: 844, deviceScaleFactor: 3, isMobile: true, hasTouch: true } };
@@ -29,7 +26,6 @@ async function run(p, example, view, tag, captureRunning) {
     await p.waitForSelector("#status:not([hidden])");
     await p.waitForTimeout(2500);
     await shot(p, `${view}-running-${tag}`);
-    // Catch a later stage too, if it shows up before the result.
     await p.waitForFunction(() => /Untangling|Swapping/.test(document.querySelector("#status")?.textContent || "")
       || !document.querySelector("#result").hidden, null, { timeout: 600000 });
     if (await p.$("#result[hidden]")) await shot(p, `${view}-running-stage`);
@@ -49,8 +45,6 @@ if (mode === "offline") {
 } else {
   const examples = JSON.parse(fs.readFileSync(new URL("../site/public/examples.json", import.meta.url)));
   const [a, b, c] = (process.env.SHOOT_EXAMPLES || examples.map((e) => e.title).join("|")).split("|");
-  // Desktop: cold run of A (all three steps change), then B (a step changes nothing).
-  // Phone: C runs live (progress), then A and B come back from the server's memory.
   let p = await page("desktop");
   await shot(p, "desktop-empty");
   await run(p, a, "desktop", "all-three", true);

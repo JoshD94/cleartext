@@ -16,7 +16,6 @@ def no_bert(monkeypatch):
     """passive_v5's fluency floor needs BERT-base; these tests check the rules, so
     the fluency drop is fixed at 0 (test_round6_fluency_floor sets it)."""
     monkeypatch.setattr("cleartext.structure_v2.fluency.fluency_drop", lambda before, after: 0.0)
-    # passive_v6 decides an ambiguous shared helper by BERT; equal scores abstain.
     monkeypatch.setattr("cleartext.structure_v2.fluency.pll", lambda text: 0.0)
 
 
@@ -34,15 +33,12 @@ def run(op, sentence, context=()):
     ("It was decided by the board that the plant would close.", "The board decided that the plant would close."),
     ("An investigation into the cause of the incident has been launched by the UN.",
      "The UN has launched an investigation into the cause of the incident."),
-    # Plural agreement for a coordinated agent; hyphenated words kept intact.
     ("The pair are subsequently joined by family, friends and colleagues of Rebecca.",
      "Family, friends and colleagues of Rebecca subsequently join the pair."),
     ("Spain's tanks were replaced by Italian anti-tank vehicles.",
      "Italian anti-tank vehicles replaced Spain's tanks."),
-    # A manner adverb after the participle moves before the verb.
     ("The natural environment of the area has been shaped largely by the regional geology.",
      "The regional geology has largely shaped the natural environment of the area."),
-    # A sentence-final abbreviation keeps the sentence's period.
     ("It was released as the lead single on November 6, 1990, by Sire and Warner Bros.",
      "Sire and Warner Bros. released it as the lead single on November 6, 1990."),
 ])
@@ -60,7 +56,6 @@ def test_agentive_realization(before, after):
      "bracket, comma or list inside the agent"),
     ("The final year of the magazine, as it was titled by that time, included good material.",
      "time phrase, not an agent"),
-    # Round 2 (failure types from the round-1 ratings).
     ("Every year, there are up to 2,000 quakes that can be felt by people.",
      "relative pronoun subject (would become an object relative)"),
     ("Gandhi was 14 when his grandmother, Indira Gandhi, was assassinated by her security guards.",
@@ -83,13 +78,11 @@ def test_agentive_skips(sentence, reason):
 
 def test_recovered_we_needs_context_and_author_verb():
     s = "The samples were analyzed using mass spectrometry."
-    assert run("passive_recovered", s) == s  # no "we" in the context
+    assert run("passive_recovered", s) == s
     ctx = ["We collected blood from 40 volunteers in 2020."]
     assert run("passive_recovered", s, ctx) == "We analyzed the samples using mass spectrometry."
-    # Not an author action: the doer is someone else.
     other = "Most of the comments were directed at two issues."
     assert run("passive_recovered", other, ctx) == other
-    # Agentive passives are left to the agentive arm.
     assert run("passive_recovered", "The cake was eaten by John.", ctx) == "The cake was eaten by John."
 
 
@@ -132,7 +125,6 @@ def test_other_operations(op, before, after):
     ("frames", "It is important that you read the label before use."),
     ("nominal", "The agency made a careful assessment of the risks."),
     ("nominal", "Students take a test at the end of the year."),
-    # Round 2 (failure types from the round-1 ratings).
     ("frames_v2", "It is a state trunkline highway that links the two cities."),
     ("frames_v2", "There were also comments asking the agency to expand the data."),
     ("frames_v2", "There were 3 deaths attributed to the disease."),
@@ -150,7 +142,6 @@ def test_other_operations_abstain(op, sentence):
 
 
 def test_hard_checks_drop_an_edit():
-    # Repeating an anchor that contains a number changes the number count.
     s = "The trial has been adjourned until 16 October, which is when the court is expected to rule."
     out, accepted, rejected = StructureV2(ops=("appositive",)).rewrite_sentence(s)
     assert out == s and not accepted
@@ -164,7 +155,6 @@ def test_stage_passage_shape():
 
 
 @pytest.mark.parametrize("op, sentence", [
-    # Round 3 (failure types from the round-2 ratings).
     ("passive_v3", "Lidocaine HCl is metabolized rapidly by the liver."),
     ("passive_v3", "Elimination half-life was prolonged by about 60% in cirrhotic subjects."),
     ("passive_v3", "It is flanked by a statue of William Prescott to the south and an entrance building to the north."),
@@ -191,7 +181,6 @@ def test_round3_operations(op, before, after):
 
 
 @pytest.mark.parametrize("op, sentence", [
-    # Round 4 (failure types from the round-3 ratings).
     ("passive_v4", "The current bill was passed in the House a year ago by a 420-3 vote."),
     ("passive_v4", "Such events are infrequent if the drug is given by a slow infusion over 60 minutes."),
     ("passive_v4", "Creatinine clearance is calculated by the Cockcroft-Gault formula: clearance can be estimated."),
@@ -234,7 +223,6 @@ def test_kept_stage_on_a_passage():
 
 
 @pytest.mark.parametrize("sentence", [
-    # Structure v3, round 6 (passive_v5): failure types from the round 4-5 ratings.
     "The episode was watched by 19.9 million viewers, becoming the most watched show of the year.",
     "He was released by the Chargers after three seasons, compiling a 4-14 record as the starter.",
     "Risk assessments can be performed only by certified risk assessors.",
@@ -245,7 +233,6 @@ def test_kept_stage_on_a_passage():
     "The ships were attacked by American bombers that badly damaged the harbor.",
     "Initially, the mode supported four players, though it was cut to two by the game's release.",
     "The man was then subdued by passengers, pinned to the floor, then strapped into a seat.",
-    # Dev check on old pools.
     "Emtricitabine is eliminated by a combination of glomerular filtration and tubular secretion.",
     "The claim is not supported by explanation or analysis.",
     "The document was prepared by the Agency in order to be published within two months.",
@@ -293,18 +280,14 @@ def test_kept_v3_stage_on_a_passage():
     assert [e["op"] for e in edits] == ["passive", "appositive"]
 
 
-# Structure v4 (round 8): passive_v6 and nominal_v3.
 @pytest.mark.parametrize("before, after", [
-    # Coordination split: both halves complete clauses, each flipped when v5 allows it.
     ("The episode was written by Dan Greaney and directed by Mark Kirkland.",
      "Dan Greaney wrote the episode. Mark Kirkland directed the episode."),
     ("The cast and crew praised the episode.", "The cast and crew praised the episode."),
-    # The second of two clauses, with its own subject, flips in place.
     ("Tod was initially successful in his official role, but his methods were questioned by other members "
      "of the East India Company.",
      "Tod was initially successful in his official role, but other members of the East India Company "
      "questioned his methods."),
-    # Plain v5 shapes are unchanged.
     ("The rule was challenged by OSHA.", "OSHA challenged the rule."),
 ])
 def test_round8_passive_v6(before, after):
@@ -312,14 +295,10 @@ def test_round8_passive_v6(before, after):
 
 
 @pytest.mark.parametrize("sentence", [
-    # A fronted phrase scopes over both halves: no split.
     "In 1990, the bridge was designed by the city engineer and opened to traffic.",
-    # Rated v5 failures of rounds 6-7.
     "A man was hit by a tree whilst working on a construction site.",
     "The petition must be done by the petitioner within thirty days.",
-    # An indefinite subject cannot be repeated.
     "A new school was built by the council and opened in 1990.",
-    # Negation could scope over both halves.
     "The plan was not approved by the board and returned to the committee.",
 ])
 def test_round8_passive_v6_abstains(sentence):
@@ -351,7 +330,7 @@ def test_round8_nominal_v3_abstains(sentence):
 
 def test_round8_shared_helper_by_fluency(monkeypatch):
     s = "The obelisk was designed by Solomon Willard and erected between 1825 and 1843."
-    assert run("passive_v6", s) == s  # equal scores: abstain
+    assert run("passive_v6", s) == s
     monkeypatch.setattr("cleartext.structure_v2.fluency.pll", lambda t: 0.0 if "was erected" in t else -10.0)
     assert run("passive_v6", s) == ("Solomon Willard designed the obelisk. "
                                     "The obelisk was erected between 1825 and 1843.")
@@ -380,14 +359,12 @@ def test_kept_v4_extends_kept_v3():
     assert sorted(e["rule"] for e in edits) == ["agentive_split", "table"]
 
 
-# Round 10: passive_v7 = passive_v6 plus a skip for coordinated participles
-# that share one by-phrase (sentences written for the test, not rated items).
 @pytest.mark.parametrize("sentence", [
     "The album was recorded and mixed by Steve Albini.",
     "She was shot and wounded by a police officer.",
 ])
 def test_round10_passive_v7_skips_shared_participles(sentence):
-    assert run("passive_v6", sentence) != sentence  # v6 splits and drops the first participle's doer
+    assert run("passive_v6", sentence) != sentence
     assert run("passive_v7", sentence) == sentence
 
 

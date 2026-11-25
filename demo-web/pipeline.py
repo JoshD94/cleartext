@@ -26,8 +26,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STAGES = ("f2", "structure", "words")
 
-# Plain-language names for the trace. Structure v4 edits carry the operator family
-# ("passive" for passive_v5/passive_recovered/passive_v7, "appositive", "fronted", "nominal").
 STRUCTURE_OP_NAMES = {
     "passive": "Passive to active",
     "appositive": "Side note made its own sentence",
@@ -111,8 +109,6 @@ def generation_plan():
     plan.pop("reuse", None)
     return plan
 
-
-# --- trace helpers (pure; unit-tested) -------------------------------------------
 
 def fk_grade(text):
     try:
@@ -204,8 +200,6 @@ def build_trace(text, f2_result, after_structure, s_edits, final, w_edits, secon
     }
 
 
-# --- the pipeline ------------------------------------------------------------------
-
 class DemoPipeline:
     def __init__(self, threads=4):
         _ensure_paths()
@@ -235,7 +229,7 @@ class DemoPipeline:
         seconds = {}
         t = time.monotonic()
         progress("f2")
-        self.f2.decisions, self.f2.dirty = {}, set()  # = StudyGenerator.begin with an empty state
+        self.f2.decisions, self.f2.dirty = {}, set()
         f2_result = self.f2.predict(self.F2, text)
         seconds["f2"] = time.monotonic() - t
         t = time.monotonic()

@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# One bounded queue batch for the paper run (run from the repo root as the job cwd).
-# Freezes the plan on first use, then generates and scores paragraphs
-# (ensemble_study run), then scores sentences (paper_run score). Everything
-# resumes from per-paragraph checkpoints in $ST, which stays outside Git.
 set -euo pipefail
 ST=${PAPER_STATE:-$HOME/.local/state/cleartext/paper-run-20261116}
 HUB=$HOME/.cache/huggingface/hub
@@ -25,10 +21,6 @@ if [ ! -f "$ST/run1/plan.json" ]; then
     --nli "$HUB/models--MoritzLaurer--DeBERTa-v3-base-mnli-fever-anli/snapshots/6f5cf0a2b59cabb106aca4c287eed12e357e90eb" \
     --panel "paper=$ST/paragraphs.json"
 fi
-# The winner and T5 unchecked on every paragraph (finished work is skipped),
-# then sentence scores: those two everywhere, v7 words wherever its output
-# exists. v7 generation (design-paper.json) was stopped after 18 paragraphs:
-# about 30 min per paragraph on a loaded Yoga; see README.
 run_design() {
   left=$(( BUDGET - ($(date +%s) - start) ))
   [ "$left" -gt 60 ] || exit 0
