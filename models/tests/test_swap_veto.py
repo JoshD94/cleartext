@@ -18,9 +18,7 @@ def test_window_keeps_the_same_context_on_both_sides():
 
 def test_window_at_sentence_edges_and_shared_affixes():
     assert window_pair("Evaluated twice.", "Assessed twice.", 6) == ("Evaluated twice.", "Assessed twice.")
-    # A shared suffix ("ed.") is part of the changed word, not of the context.
     assert changed_region("It was evaluated.", "It was assessed.") == ("It was ", "evaluated.", "assessed.", "")
-    # An article change next to the swap stays inside the changed run.
     assert changed_region("Use a large one.", "Use an enormous one.")[1:3] == ("a large", "an enormous")
     assert window_pair("Same text.", "Same text.", 2) == ("Same text.", "Same text.")
 
@@ -80,6 +78,5 @@ def test_pipeline_skips_a_vetoed_swap_and_keeps_the_next(monkeypatch):
     assert result["output"] == "A convoluted and detailed plan."
     assert [(r["word"], r["passes"]) for r in log] == [("convoluted", False), ("intricate", True)]
     assert log[0]["window_before"] == "A convoluted and"
-    # Without the veto the pipeline's default output is unchanged.
     assert pipe.analyze("A convoluted and intricate plan.", structure=False, phrases=False)["output"] == \
         "A wrong and intricate plan."

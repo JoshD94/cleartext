@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Headless screenshots of the live demo (queue job). Usage: run-shoot <out-dir> [states|offline]
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
 export NODE_PATH=${PW_NODE_PATH:?set PW_NODE_PATH to a node_modules dir with playwright}

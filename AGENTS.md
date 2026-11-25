@@ -29,9 +29,18 @@ offline resources; Hugging Face refs/main must contain the exact revision with
 no trailing newline.
 Consult `models/README.md` and the relevant experiment manifest first.
 
+## Comments and lint
+
+No code comments. The one exception explains a weird, unconventional business
+decision and starts with `Why:`. `scripts/lint` (needs Node and `uvx`) runs the
+vendored comment check (`scripts/comment-check/`) and ruff (`ruff.toml`).
+Hash-bound sources keep their old comments and findings: they are listed by file as `legacy` in
+`.comment-check.json` and per-file ignores in `ruff.toml`. Never edit their
+bytes to satisfy lint.
+
 ## Verification
 
-Run `scripts/verify` for the focused offline checks on the model/eval branch.
+Run `scripts/verify` for lint plus the focused offline checks on the model/eval branch.
 It loads the local parser and mocked tiny tensors; it does not train or decode
 a production transformer. Estimate up to 2 GB RAM and follow Joshua's placement
 and resource rules before running it.

@@ -50,7 +50,7 @@ def pct(x):
     return "–" if x is None else f"{100 * x:.0f}%"
 
 
-ROWS = [  # (label, [(round, arm)], decision)
+ROWS = [
     ("Fronted because/although/after clause → split", [(1, "fronted_split"), (2, "fronted_split"), (3, "fronted_split")], "kept"),
     ("Passive → “we” from context", [(1, "passive_recovered"), (2, "passive_recovered"), (3, "passive_recovered")], "kept"),
     ("Passive → active, by-phrase (mine)", [(1, "passive"), (2, "passive"), (3, "passive_v3"), (4, "passive_v4"), (5, "passive_v4")], "not kept"),

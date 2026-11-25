@@ -41,7 +41,6 @@ SAFE = {"t5.waive": list(SOFT_CHECKS), "t5.passage": "passage"}
 
 
 def phase_a_structure():
-    # subject_groups / relative_attachments exist only in the passage-aware check.
     rows = [row(W, {"t5.waive": [c]}, "t5.waive", c) for c in SOFT_CHECKS
             if c not in ("subject_groups", "relative_attachments")]
     rows.append(row(W, {"t5.waive": list(SOFT_CHECKS)}, "t5.waive", "all_soft"))
@@ -97,8 +96,6 @@ def write(name, rows, note):
     print(f"{name}: {len(rows)} configs")
 
 
-# Phase B: components and their phase-A groups. A component's candidate is its
-# lowest-FK setting that passes all gates with a lower FK than the incumbent.
 COMPONENTS = {
     "t5_acceptance": ("t5.waive", "t5.passage", "t5.safe", "t5.min_words"),
     "t5_decoding": ("t5.decoding",),
@@ -109,7 +106,6 @@ COMPONENTS = {
     "words": ("w.threshold.v7", "w.threshold.contextual", "w.floor", "w.detector", "w.noun", "w.min_gain",
               "w.zipf_margin", "w.alpha", "w.max_edits", "w.veto", "w.veto.no_refill"),
 }
-# Phase-0 levels that count as a setting of a component.
 LEVEL_COMPONENT = {"phrases_crf": "finder", "phrases_simpleppdb": "finder", "passive_on": "passive",
                    "passive_agentive": "passive", "words_v7": "words", "words_contextual": "words",
                    "words_contextual_veto": "words"}

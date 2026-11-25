@@ -23,10 +23,8 @@ def split(text):
      "The store closed early .", "The workers went home .", 0),
     ("Bread and milk sold out , but the store stayed open .",
      "Bread and milk sold out .", "But the store stayed open .", 1),
-    # A copied subject of up to six words is allowed in front.
     ("Alice read the report and checked the figures .",
      "Alice read the report .", "Alice checked the figures .", 0),
-    # The person split somewhere else, or rewrote the halves.
     ("Alice left because Bob stayed and Carol sang .",
      "Alice left .", "Bob stayed and Carol sang .", None),
     ("The store closed early , and the workers went home .",

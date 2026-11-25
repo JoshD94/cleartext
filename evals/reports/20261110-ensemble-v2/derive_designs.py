@@ -61,7 +61,6 @@ def ablation(best):
     changes += [("negation", "on"), ("grammar", "on"), ("terms", "on")]
     rows = [{"remove_or_replace": f"{k}: {b[k]} -> {v}", "id": S.config_id({**b, k: v}),
              "config": S.normalize({**b, k: v})} for k, v in changes if b[k] != v]
-    # Stage chain in pipeline order: passive, structure, authored phrases, finder, words.
     off = S.normalize({"words": "off", "phrases": "off", "structure": "off"})
     steps, current = [("all stages off", dict(off))], dict(off)
     finder = b["phrases"].split("+")[-1] if b["phrases"] not in ("authored", "off") else None

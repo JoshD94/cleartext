@@ -7,7 +7,6 @@ const els = {
   status: $("status"), steps: $("steps"), result: $("result"), offline: $("offline"),
 };
 
-// Feather icons (1.75 stroke, round ends).
 const ICON = {
   split: '<path d="M16 3h5v5"/><path d="M8 3H3v5"/><path d="M12 22v-8.3a4 4 0 0 0-1.17-2.83L3 3"/><path d="m15 9 6-6"/>',
   shuffle: '<polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/>',
@@ -29,7 +28,6 @@ const STEPS = [
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
-// --- word diff (LCS over words, spaces and punctuation) ---------------------------------
 function tokens(s) { return s.match(/\s+|[\p{L}\p{N}'’-]+|[^\s\p{L}\p{N}]/gu) || []; }
 function diff(a, b) {
   const A = tokens(a), B = tokens(b), n = A.length, m = B.length;
@@ -48,11 +46,9 @@ function diff(a, b) {
   }
   while (i < n) push("del", A[i++]);
   while (j < m) push("add", B[j++]);
-  // Whitespace-only edits read as noise: fold them into the text.
   return out.map((p) => (p.t !== "same" && !p.s.trim() ? { t: p.t === "add" ? "same" : "skip", s: p.s } : p))
     .filter((p) => p.t !== "skip");
 }
-// Changes separated only by spaces read as one replacement: "<del>, and many</del><ins>. Many</ins>".
 function wordHTML(parts, kind = () => "") {
   const out = [];
   for (let k = 0; k < parts.length; k++) {
@@ -76,8 +72,6 @@ function wordHTML(parts, kind = () => "") {
   return out.join("");
 }
 
-// Sentences matched first; a changed run is shown word by word when that reads
-// cleanly (a split, a swap), else as the old sentence struck and the new one marked.
 function sentences(s) { return s.split(/(?<=[.!?]["”’)]?)\s+(?=["“(]?[\p{Lu}\p{N}])/u).filter(Boolean); }
 function diffHTML(a, b, kind = () => "", wordLevel = false) {
   const A = sentences(a), B = sentences(b), n = A.length, m = B.length, W = m + 1;
@@ -107,7 +101,6 @@ function diffHTML(a, b, kind = () => "", wordLevel = false) {
   return out.join(" ");
 }
 
-// --- rendering ----------------------------------------------------------------------------
 function changeCount(step) {
   if (step.key === "f2") return step.groups.reduce((n, g) => n + g.count, 0);
   return step.edits.length;
@@ -146,7 +139,6 @@ function stepHTML(s, state, step, lines) {
   return `${head}<div class="step-body"><p class="passage">${diffHTML(step.before, step.after)}</p><div class="tags">${tagsFor(step)}</div></div>`;
 }
 
-// Cards are created once per run (with the entry motion) and then updated in place.
 function renderSteps(progress, steps, lines) {
   const at = STEPS.findIndex((s) => s.key === progress);
   if (els.steps.children.length !== STEPS.length) {
@@ -199,7 +191,6 @@ function setNotice(text) {
   els.status.hidden = false;
 }
 
-// --- API ---------------------------------------------------------------------------------
 async function api(path, body) {
   const res = await fetch(`/api/${path}`, body ? { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) } : {});
   let data = {};
@@ -329,9 +320,6 @@ async function init() {
   setInterval(() => { if (offline && !busy) checkHealth(); }, 30000);
 }
 
-// --- views: "Try it" and "Results" ---------------------------------------------------------
-
-// Moves a segmented control's pill under its selected button.
 function placePill(seg, animate = true) {
   const on = seg.querySelector('[aria-selected="true"]');
   if (!on) return;
@@ -400,8 +388,6 @@ function renderResultsSummary() {
   requestAnimationFrame(() => placePill(seg, false));
 }
 
-// Which step made a change: a word swap, a structure rewrite, else a split.
-// The passive converter only rewrites passives.
 function kindFor(x) {
   if (system !== "default") return () => ' class="k-structure"';
   const lower = (t) => t.toLowerCase();

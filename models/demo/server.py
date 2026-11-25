@@ -33,7 +33,6 @@ RANKER = None
 if RANKER_PATH:
     from cleartext.structure.learning import RANKER_FEATURE_VERSION
 
-    # Trusted local artifact only. Never deserialize an uploaded/request-supplied path.
     with Path(RANKER_PATH).open("rb") as stream:
         RANKER = pickle.load(stream)
     if getattr(RANKER, "feature_version", None) != RANKER_FEATURE_VERSION:
@@ -43,14 +42,13 @@ if RANKER_PATH:
         )
 PIPE.analyze(
     "The technician will commence the installation.", structure=False, phrases=False
-)  # warm caches
+)
 DEFAULTS = {
     "decision": PIPE.decision_threshold,
     "hard": PIPE.detector["threshold"],
     "noun": PIPE.noun_threshold,
 }
-PAGE = HERE / "index.html"  # read per request so page edits apply without a restart
-# Short column label and full description for each safety check, in display order.
+PAGE = HERE / "index.html"
 CHECK_NAMES = {
     "code_literals": ("Code", "Code snippets are unchanged"),
     "numbers": ("Numbers", "Numbers are unchanged"),
@@ -105,16 +103,13 @@ def trace(text, opts, structure_details, pipeline_result=None):
     out = {}
     rollback = bool((pipeline_result or {}).get("literal_preservation", {}).get("blocked"))
     current = text
-    # 0. Negation: flatten "not un-" before structure sees the sentence
     neg = (pipeline_result or {}).get("negation", {"on": False})
     out["negation"] = neg
     if neg.get("on"):
         current = neg["after"]
-    # 1. Sentence structure
     out["structure"] = structure_details
     if structure_details["on"]:
         current = structure_details["after"]
-    # 2. Phrases: every inventory match, its difficulty before/after, and which one was applied
     matches = []
     for src, tgt in PHRASES:
         for m in re.finditer(
@@ -145,7 +140,6 @@ def trace(text, opts, structure_details, pipeline_result=None):
         current = pipeline_result["output"] if rollback else new
     else:
         out["phrases"] = {"on": False, "matches": matches, "inventory": len(PHRASES)}
-    # 3. Word difficulty and hard-word detection on every token
     doc = nlp()(current)
     original_doc = nlp()(text)
     spans = [
@@ -195,7 +189,6 @@ def trace(text, opts, structure_details, pipeline_result=None):
         "noun_threshold": PIPE.noun_threshold,
         "tokens": tokens,
     }
-    # 4-9. Per flagged word: meaning, candidates, fit, simplicity, decision, safety
     targets = []
     for t in words:
         h = hard[t.i]

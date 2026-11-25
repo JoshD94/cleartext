@@ -37,7 +37,6 @@ def splitter():
      "The server checks each request. But the server sends a response."),
     ("The report was reviewed, and the figures were checked.",
      "The report was reviewed. The figures were checked."),
-    # Scoped guards: negation and brackets on one side do not veto.
     ("The store closed, but the workers did not leave.",
      "The store closed. But the workers did not leave."),
     ("The store closed (early), and the workers went home.",
@@ -73,11 +72,9 @@ def test_actual_parser_splits_and_retains_source_details(splitter, source, expec
     "The server carefully checks requests and sends responses.",
     "Alice bought and read the book.",
     "Alice bought the book and read.",
-    # Known parser failure: QUIC is tagged as a participle. Keep the input.
     "The gateway uses Diffie-Hellman keys, and the client stores QUIC packets.",
     "The gateway uses Diffie-Hellman keys, and the client stores each response.",
     "The server checks requests but sends responses.",
-    # Known parser failure: the main predicate is mistaken for a noun phrase.
     "The server, which stores records, checks requests, and the client displays results.",
     "In 2025, Alice left and Bob stayed.",
     'Alice said "Bob left and Carol stayed."',
@@ -192,7 +189,6 @@ def test_length_policy_gates_original_clause_lengths():
     result = DependencyCompoundSplitter(9, 4).predict(source)
     assert result["output"] != source
     assert result["length_policy"] == {"min_sentence_words": 9, "min_clause_words": 4}
-    # Copied subjects do not inflate the original right-clause length.
     result = DependencyCompoundSplitter(min_clause_words=5).predict(
         "The server checks each request and sends a response.")
     assert result["accepted_count"] == 0
@@ -217,7 +213,7 @@ def test_diagnostics_separate_detection_from_acceptance(splitter):
     assert accepted["accepted"]
     for boundary in result["boundaries"]:
         assert source[boundary["offset"]:].startswith(boundary["connector"])
-    assert "score" not in result  # Checks/lengths are not calibrated confidence.
+    assert "score" not in result
 
 
 def test_passage_rollback_clears_boundary_acceptance(monkeypatch):
@@ -227,7 +223,6 @@ def test_passage_rollback_clears_boundary_acceptance(monkeypatch):
     def reject_passage(source, output):
         checks = validate(source, output)
         if "\n" in source and source != output:
-            # Override only the final passage check, after a sentence edit passed.
             checks["pass"] = False
             checks["failed"] = ["authored_passage_rejection"]
         return checks
@@ -281,10 +276,8 @@ class FixedTagger:
 
 
 @pytest.mark.parametrize("source,expected", [
-    # A modifier after the first verb does not block a copied subject.
     ("The team began training at the stadium in 2009 and began competing in 2012.",
      "The team began training at the stadium in 2009. The team began competing in 2012."),
-    # Only the subject's core noun phrase is copied, not its relative clause.
     ("The analyst, who joined in 2019, wrote the report and presented it in March.",
      "The analyst, who joined in 2019, wrote the report. The analyst presented it in March."),
 ])
@@ -305,7 +298,6 @@ def test_confident_tagger_relaxes_hand_written_vetoes(source, expected):
     "Cicak - Man is the first Malaysian movie and features almost 40% CGI footage.",
     'Alice said "Bob left and Carol stayed."',
     "The server checks `a and b`.",
-    # Held-out WikiSplit review failures (November 9).
     "He became the children's editor for the News Chronicle and from 1954 presented a music programme.",
     "James Curran was a native of The Liberties, an area which had experienced drug problems since the 1980s, and gave Curran a disgust for drugs.",
     "Shi Qian stole the hen and was caught by the Zhus but Yang Xiong and Shi Xiu escaped.",

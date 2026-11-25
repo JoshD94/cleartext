@@ -51,7 +51,7 @@ def register(url):
 
 
 def keep_registered(url, stop):
-    for _ in range(90):  # DNS for a new quick tunnel takes a few seconds to minutes
+    for _ in range(90):
         if stop.is_set() or reachable(url):
             break
         time.sleep(5)
