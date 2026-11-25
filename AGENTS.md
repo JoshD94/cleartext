@@ -34,7 +34,7 @@ Consult `models/README.md` and the relevant experiment manifest first.
 No code comments. The one exception explains a weird, unconventional business
 decision and starts with `Why:`. `scripts/lint` (needs Node and `uvx`) runs the
 vendored comment check (`scripts/comment-check/`) and ruff (`ruff.toml`).
-Hash-bound sources keep their old comments and findings: they are `legacy` in
+Hash-bound sources keep their old comments and findings: they are listed by file as `legacy` in
 `.comment-check.json` and per-file ignores in `ruff.toml`. Never edit their
 bytes to satisfy lint.
 
